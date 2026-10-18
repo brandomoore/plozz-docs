@@ -70,7 +70,7 @@ globalThis.fetch=async input=>{
   const state = () => {
     const value = {
       schemaVersion: 1, repository: 'brandomoore/Plozz', ref: 'main', commit: revision,
-      verifiedAt: '2026-10-18T00:00:00Z', contentHash: contentHash([page], root),
+      verifiedAt: new Date().toISOString(), contentHash: contentHash([page], root),
       sourceFiles: { 'README.md': blob }, review: { kind: 'independent-review', model: 'gpt-6.1-sol', reasoningEffort: 'high' },
     };
     save('source-state.json', value);
@@ -125,6 +125,30 @@ test('proposal application preserves deletion and rejects infrastructure files',
   result = f.run('apply-proposal.mjs', ['proposal']);
   assert.notEqual(result.status, 0);
   assert.match(result.stderr, /Unexpected proposal file/);
+});
+
+test('unchanged source receives a metadata-only recheck at 30 days', t => {
+  const f = fixture(t);
+  const state = f.state();
+  const age = days => new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
+  const recent = { ...state, verifiedAt: age(29) };
+  f.save('source-state.json', recent);
+  f.update({ liveVerifiedAt: recent.verifiedAt });
+  let result = f.run('source.mjs', ['plan']);
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(f.read('.docs-work/plan.json').mode, 'none');
+  const due = { ...state, verifiedAt: age(30) };
+  f.save('source-state.json', due);
+  f.update({ liveVerifiedAt: due.verifiedAt });
+  result = f.run('source.mjs', ['plan']);
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(f.read('.docs-work/plan.json').mode, 'metadata');
+  result = f.run('source.mjs', ['finalize']);
+  assert.equal(result.status, 0, result.stderr);
+  const refreshed = f.read('source-state.json');
+  assert.equal(refreshed.contentHash, state.contentHash);
+  assert.equal(refreshed.review.kind, 'unchanged-sources');
+  assert(Date.parse(refreshed.verifiedAt) > Date.now() - 60_000);
 });
 
 test('finalization requires a real matching review receipt or unchanged-content proof', t => {

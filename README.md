@@ -50,6 +50,10 @@ If deployment fails after the docs commit, the next run detects that Git and
 the live site differ and retries deployment without another rewrite. Runs are
 serialized only with other docs runs; app development is never locked.
 
+When app source stays unchanged for 30 days, a metadata-only recheck refreshes
+the verification date and repository activity without calling a model or
+rewriting guides. This also avoids a permanently idle public-repository schedule.
+
 The writer and reviewer use **`gpt-6.1-sol` at `high` effort**, the newest
 available Sol model when configured. The workflow selects it explicitly and
 does not fall back to another model/provider. The CLI is pinned to
@@ -77,8 +81,8 @@ Run a complete refresh manually:
 gh workflow run update-docs.yml --repo brandomoore/plozz-docs -f force=true
 ```
 
-GitHub schedules can be delayed, and scheduled workflows can be disabled after
-prolonged inactivity in public repositories. Monitor Actions failures.
+GitHub schedules can be delayed or disabled by repository/account policy.
+Monitor Actions failures.
 
 ## Hosting and recovery
 

@@ -22,7 +22,10 @@ if (positionals[0] === 'plan') {
   if (!/^[0-9a-f]{40}$/.test(commit.sha)) throw new Error('Invalid app commit response.');
   const force = values.force || process.env.DOCS_FORCE_REVIEW === 'true';
   const contentDrift = previous && previous.contentHash !== contentHash(pages);
-  let mode = previous?.commit === commit.sha && !force && !contentDrift ? 'none' : 'content';
+  const checkedAt = previous ? Date.parse(previous.verifiedAt) : null;
+  if (previous && !Number.isFinite(checkedAt)) throw new Error('Invalid source verification time.');
+  const recheckDue = previous && Date.now() - checkedAt >= 30 * 24 * 60 * 60 * 1000;
+  let mode = previous?.commit === commit.sha && !force && !contentDrift && !recheckDue ? 'none' : 'content';
   let changedFiles = [];
   let affected = pages.map(page => page.slug);
   if (previous && mode !== 'none' && !force && !contentDrift) {

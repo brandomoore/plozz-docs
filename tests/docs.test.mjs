@@ -20,6 +20,7 @@ test('citations stay inside public app source paths', () => {
   assert(validSourcePath('project.yml'));
   assert(validSourcePath('Config/Platforms.xcconfig'));
   assert(validSourcePath('NewApplication/Feature.swift'));
+  assert(validSourcePath('Sources/AppShell/AppState+CloudSync.swift'));
   for (const path of ['../secret', '/etc/passwd', 'Sources/../secret.md', 'Sources/.env', 'https://example.com/source', 'Sources/test.p8']) assert(!validSourcePath(path));
 });
 

@@ -29,7 +29,7 @@ export function classifyChanges(pages, comparison) {
 }
 
 function safeSourcePath(path) {
-  return typeof path === 'string' && path.length <= 512 && /^[a-zA-Z0-9_][a-zA-Z0-9_./ -]*$/.test(path)
+  return typeof path === 'string' && path.length <= 512 && /^[a-zA-Z0-9_][a-zA-Z0-9_./ +\-]*$/.test(path)
     && !path.replace(/\/$/, '').split('/').some(part => !part || part.startsWith('.'));
 }
 
