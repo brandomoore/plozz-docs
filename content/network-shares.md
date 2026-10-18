@@ -7,15 +7,17 @@ Add a network folder as a library without running a Jellyfin, Plex, Emby, or Sil
 1. Choose **Media Share** during setup. Later, use **Settings > Servers > Add Network Share** on iPhone/iPad, or **Settings > Servers > Add Server > Media Share** on Apple TV.
 2. Select a detected device, or choose **Enter an address manually**.
 3. Select SMB, NFS, WebDAV, SFTP, or FTP. Enter the address, any required port, and the credentials requested by the form.
-4. Connect, then select the share, export, or folder containing your media.
+4. Connect, then browse to the share, export, or folder containing your media.
 5. Give the library a name and choose its **Content**:
    - **Mixed (Automatic):** a common parent containing different kinds of media.
    - **Movies** or **TV Shows:** a dedicated library.
    - **Anime:** an anime-only root; Plozz identifies films and episodes.
    - **Personal Videos:** browse files without movie or TV matching.
-6. Confirm your selection and let Plozz scan while the app stays open.
+6. Confirm your selection with **Use This Folder** when shown, and leave Plozz open while it scans.
 
 If asked to approve a certificate or SSH host key, confirm that it matches your server before continuing.
+
+SFTP uses username-and-password sign-in, not SSH keys. Plain FTP and HTTP WebDAV send credentials unencrypted; prefer an encrypted connection.
 
 ## Find files and refresh
 

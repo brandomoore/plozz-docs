@@ -19,6 +19,8 @@ The player’s **Quality** control changes only the current video. Saved network
 
 These controls apply to Plex, Jellyfin, Emby, and Silo movies and episodes—not Apple TV, music, Live TV, or network shares. Limits include audio. Server conversion may change HDR or audio formats; available choices depend on the server. [Download quality](/downloads/) is separate.
 
+Silo conversion supports H.264 at 480p, 720p, 1080p, or 4K; unsupported conversion choices are unavailable.
+
 ## Apple TV height audio
 
 On tvOS 26 or later with compatible equipment, **Settings > Playback > Audio > TrueHD Atmos and DTS:X** controls height audio for supported tracks. Changes apply to new playback sessions.

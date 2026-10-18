@@ -27,4 +27,6 @@ Open **Settings > Help & Diagnostics**. Choose **Report a Problem** on iPhone/iP
 
 Include your app version/build from Settings, device and OS, provider, exact error, and steps to reproduce.
 
-If available, enable **Share Crash Reports** before sending diagnostics. Never post passwords, pairing codes, or private playlist URLs.
+On iPhone/iPad, open **Recent Activity**, choose **Refresh**, then **Copy** to include logs in your report.
+
+If **Share Crash Reports** is available, enable it to send logs. Choose **Send to Developer** on iPhone/iPad, or **Send Recent Activity to Developer** on Apple TV. Never post passwords, pairing codes, or private playlist URLs.

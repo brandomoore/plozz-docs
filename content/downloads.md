@@ -24,10 +24,14 @@ Open **Downloads > Download Settings**, or **Settings > Downloads**.
 
 Cellular and other expensive networks are blocked by default; Low Data Mode pauses downloads. Check these switches if a queued download will not start.
 
-Reduced-quality Plex copies keep one audio track; choose Original to preserve embedded tracks. Silo downloads require the server’s download permission.
+Reduced-quality Plex and Silo copies keep one audio track; choose Original to preserve embedded tracks. Silo downloads require the server’s download permission.
+
+Under **Notifications**, set the completion and failure switches, and allow system notifications when prompted. Batch notices summarize a season or show rather than each episode. Tapping a completion notice opens its downloaded title or batch without autoplaying.
 
 ## Pause, resume, or remove
 
 Use a download’s trailing menu for **Pause**, **Resume**, or **Remove**. The Downloads screen also offers Pause All and Resume All.
 
 Background progress depends on iOS and the transfer type. If a transfer pauses, reopen Plozz and resume it.
+
+On iOS/iPadOS 26 or later, a Live Activity can show progress when background processing is available. Cancellation or expiry pauses its active downloads without deleting partial files.

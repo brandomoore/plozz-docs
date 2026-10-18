@@ -5,17 +5,19 @@ Connect your own Jellyfin, Plex, Emby, or Silo account to browse and play its li
 ## Add a connection
 
 1. Choose your provider during first-run setup, or open **Settings > Servers > Add Server**.
-2. For Jellyfin, Emby, or Silo, select a discovered server or enter its address manually. Use the full address if it includes a custom port or a path.
+2. For Jellyfin, Emby, or Silo, select a discovered server or enter its full address, including any custom port or path.
 3. Complete the provider’s sign-in:
    - **Jellyfin:** approve the displayed Quick Connect code from Jellyfin on another device, or choose username-and-password sign-in.
    - **Plex:** follow the linking instructions, then select the server you want.
    - **Emby:** sign in with your server username and password.
    - **Silo:** use the address that opens Silo in a browser, approve the device, then choose a Silo profile. Enter its PIN if required.
-4. Complete the library choices for your Plozz profile.
+4. Choose libraries for your Plozz profile. Later, use **Settings > Libraries** to enable servers, choose who you watch as, and select libraries.
 
-If no servers are connected yet, the Apple TV button may say **Sign In to a Server** instead of Add Server.
+On Apple TV with no connections, choose **Sign In to a Server** instead.
 
-You can add more connections without signing out. Plozz can combine libraries while retaining access to individual libraries.
+Add more connections without signing out.
+
+Sign-ins are shared by profiles on this device. Turning off a server under **Libraries** affects only the active profile; removing it under **Servers** signs out its accounts for everyone on this device. **Remove Everywhere**, when offered, also removes it from your other iCloud devices.
 
 ## Keep identities separate
 

@@ -33,14 +33,15 @@
       "Sources/FeatureSettings/ServersAndLibrariesDetailView.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift",
-      "Sources/CoreModels/ProviderKind.swift"
+      "Sources/FeatureSettings/ServerDetailView.swift",
+      "Sources/FeatureSettings/MyLibrariesDetailView.swift"
     ],
     "watch": [
       "Sources/FeatureAuth/",
       "Sources/FeatureAuthCore/",
       "Sources/AppShell/AddAccountView.swift",
       "Sources/AppShelliOS/AddServerView.swift",
-      "Sources/FeatureSettings/ServersAndLibrariesDetailView.swift",
+      "Sources/FeatureSettings/ProfileLibrariesScope.swift",
       "Sources/ProviderSilo/"
     ]
   },
@@ -100,7 +101,7 @@
     "sources": [
       "Sources/FeaturePlayback/CustomPlayerContainer.swift",
       "Sources/FeaturePlayback/PlayerControls.swift",
-      "Sources/FeaturePlayback/PlayerViewModel.swift",
+      "Sources/CoreModels/StreamingQualitySupport.swift",
       "Sources/FeatureHomeCore/PlayerVersionSelection.swift",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
@@ -149,9 +150,11 @@
       "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift",
       "Sources/AppShelliOS/PlozziOSDownloadsModel.swift",
       "Sources/AppShelliOS/PlozziOSDownloadsView.swift",
-      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/MediaDownloads/DownloadNetworkPolicy.swift",
-      "Sources/ProviderSilo/SiloDownloads.swift"
+      "Sources/ProviderSilo/SiloDownloads.swift",
+      "Sources/AppShelliOS/PlozziOSDownloadNotifications.swift",
+      "Sources/AppShelliOS/PlozziOSDownloadNotificationNavigation.swift",
+      "Sources/AppShelliOS/PlozziOSDownloadActivity.swift"
     ],
     "watch": [
       "Sources/MediaDownloads/",
@@ -171,7 +174,7 @@
       "Sources/AppShell/SyncSetupSenderPicker.swift",
       "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift",
       "Sources/AppShelliOS/PlozziOSSyncSetupReceiveView.swift",
-      "Sources/FeatureSyncSetup/SyncSecrets.swift",
+      "Sources/FeatureSyncCloud/CloudConfigSyncService.swift",
       "Sources/CoreModels/PlaybackSettings.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/FeatureSettings/SettingsView.swift"
@@ -179,10 +182,10 @@
     "watch": [
       "Sources/FeatureProfiles/",
       "Sources/FeatureSyncSetup/",
+      "Sources/FeatureSyncCloud/",
       "Sources/AppShelliOS/PlozziOSSyncSetup",
       "Sources/FeatureSettings/SettingsView.swift",
-      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-      "Sources/CoreModels/PlaybackSettings.swift"
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift"
     ]
   },
   {
@@ -198,10 +201,10 @@
       "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift",
       "Sources/FeatureLiveTV/LiveTVSourcesView.swift",
       "Sources/FeatureLiveTV/LiveTVServerSetupView.swift",
-      "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+      "Sources/FeatureSettings/SendDiagnosticsCard.swift"
     ],
     "watch": [
-      "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
+      "Sources/FeatureSettings/SendDiagnosticsCard.swift",
       "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift",
       "Sources/CoreModels/AppLinks.swift",
       "Sources/FeatureAuth/",
