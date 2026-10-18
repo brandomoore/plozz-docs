@@ -1,12 +1,7 @@
 const search = document.querySelector('#guide-search');
-const links = [...document.querySelectorAll('.nav-shell nav a')];
-const groups = [...document.querySelectorAll('.nav-group')];
+const links = [...document.querySelectorAll('#docs-sidebar a[data-slug]')];
 const results = document.querySelector('#search-results');
 const searchStatus = document.querySelector('#search-status');
-const navigation = document.querySelector('.nav-shell');
-const compact = matchMedia('(max-width: 760px)');
-navigation.open = !compact.matches;
-compact.addEventListener('change', () => { navigation.open = !compact.matches; });
 const contentHash = document.body.dataset.contentHash;
 const normalize = value => value.toLowerCase().normalize('NFKD').replace(/\p{M}/gu, '');
 let indexRequest;
@@ -44,39 +39,165 @@ function loadIndex() {
   return indexRequest;
 }
 
+function renderMatches(matches) {
+  results.replaceChildren();
+  results.hidden = !matches.length;
+  for (const item of matches.slice(0, 12)) {
+    const li = document.createElement('li');
+    const anchor = document.createElement('a');
+    anchor.href = item.path;
+    const title = document.createElement('span');
+    title.textContent = item.title;
+    anchor.append(title);
+    if (item.snippet) {
+      const excerpt = document.createElement('p');
+      excerpt.textContent = item.snippet;
+      anchor.append(excerpt);
+    }
+    li.append(anchor);
+    results.append(li);
+  }
+}
+
+function clearSearch() {
+  ++searchGeneration;
+  search.value = '';
+  results.replaceChildren();
+  results.hidden = true;
+  searchStatus.hidden = true;
+}
+
 search?.addEventListener('input', async () => {
   const generation = ++searchGeneration;
   const query = search.value.trim();
   results.replaceChildren();
   results.hidden = !query;
   searchStatus.hidden = !query;
-  for (const link of links) link.hidden = false;
-  for (const group of groups) group.hidden = false;
   if (!query) return;
   searchStatus.textContent = 'Searching guides and settings…';
   try {
     const entries = await loadIndex();
     if (generation !== searchGeneration) return;
     const matches = rankPages(entries, query);
-    for (const item of matches.slice(0, 12)) {
-      const li = document.createElement('li');
-      const anchor = document.createElement('a');
-      anchor.href = item.path;
-      anchor.textContent = item.title;
-      const excerpt = document.createElement('p');
-      excerpt.textContent = item.snippet;
-      li.append(anchor, excerpt);
-      results.append(li);
-    }
+    renderMatches(matches);
     searchStatus.textContent = matches.length > 12
       ? `Showing 12 of ${matches.length} matches. Refine your search for fewer results.`
       : matches.length ? `${matches.length} matching ${matches.length === 1 ? 'guide' : 'guides'}.` : 'No matching guide. Try a feature, setting or symptom.';
   } catch {
     if (generation !== searchGeneration) return;
-    results.hidden = true;
     const terms = normalize(query).split(/\s+/);
-    for (const link of links) link.hidden = !terms.every(term => normalize(link.dataset.title).includes(term));
-    for (const group of groups) { group.hidden = ![...group.querySelectorAll('a')].some(link => !link.hidden); group.open = true; }
-    searchStatus.textContent = 'Full-text search is unavailable or updating. Showing title matches; reload to try again.';
+    const matches = links.filter(link => terms.every(term => normalize(link.dataset.title).includes(term)))
+      .map(link => ({ title: link.textContent, path: link.getAttribute('href') }));
+    renderMatches(matches);
+    searchStatus.textContent = `Full-text search is unavailable or updating. ${matches.length > 12 ? `Showing 12 of ${matches.length} title matches.` : matches.length ? 'Showing title matches.' : 'No matching titles.'} Reload to retry full-text search.`;
   }
 });
+
+function bindDialog(selector, openSelector, closeSelector, onOpen) {
+  const dialog = document.querySelector(selector);
+  if (!dialog || typeof dialog.showModal !== 'function') return null;
+  const open = () => {
+    for (const other of document.querySelectorAll('dialog[open]')) {
+      if (other !== dialog) other.close();
+    }
+    if (!dialog.open) dialog.showModal();
+    onOpen?.();
+  };
+  for (const trigger of document.querySelectorAll(openSelector)) trigger.addEventListener('click', event => {
+    event.preventDefault();
+    open();
+  });
+  dialog.querySelector(closeSelector).addEventListener('click', () => dialog.close());
+  let backdropPointer = false;
+  dialog.addEventListener('pointerdown', event => { backdropPointer = event.target === dialog; });
+  dialog.addEventListener('click', event => {
+    if (event.target === dialog && backdropPointer) dialog.close();
+    backdropPointer = false;
+  });
+  dialog.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && !event.isComposing) {
+      event.preventDefault();
+      dialog.close();
+      return;
+    }
+    if (event.key !== 'Tab' || event.metaKey || event.ctrlKey || event.altKey || event.isComposing) return;
+    const focusable = [...dialog.querySelectorAll('a[href], button, input, summary, [tabindex]')]
+      .filter(element => element.tabIndex >= 0 && !element.disabled && element.getClientRects().length);
+    const first = focusable[0];
+    const last = focusable.at(-1);
+    if (first && document.activeElement === (event.shiftKey ? first : last)) {
+      event.preventDefault();
+      (event.shiftKey ? last : first).focus();
+    }
+  });
+  return { dialog, open };
+}
+
+const searchModal = bindDialog('#docs-search-dialog', '[data-open-search]', '[data-close-search]', () => {
+  search.focus();
+  search.select();
+});
+const navigationModal = bindDialog('#docs-navigation-dialog', '[data-open-navigation]', '[data-close-navigation]');
+searchModal?.dialog.addEventListener('close', clearSearch);
+if (navigationModal) {
+  const compact = matchMedia('(max-width: 760px)');
+  compact.addEventListener('change', () => {
+    if (!compact.matches && navigationModal.dialog.open) navigationModal.dialog.close();
+  });
+  navigationModal.dialog.addEventListener('click', event => {
+    if (event.target.closest('a')) navigationModal.dialog.close();
+  });
+}
+
+document.addEventListener('keydown', event => {
+  if (event.defaultPrevented || event.isComposing || !searchModal) return;
+  const typing = event.target.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(event.target.tagName);
+  const command = (event.metaKey || event.ctrlKey) && !event.altKey && event.key.toLowerCase() === 'k';
+  const slash = event.key === '/' && !typing && !event.metaKey && !event.ctrlKey && !event.altKey;
+  if (command || slash) {
+    event.preventDefault();
+    searchModal.open();
+  }
+});
+
+searchModal?.dialog.addEventListener('keydown', event => {
+  if (!['ArrowDown', 'ArrowUp'].includes(event.key) || event.metaKey || event.ctrlKey || event.altKey || event.isComposing) return;
+  const matches = [...results.querySelectorAll('a')];
+  const index = matches.indexOf(document.activeElement);
+  if (!matches.length || (index < 0 && document.activeElement !== search)) return;
+  event.preventDefault();
+  const next = event.key === 'ArrowDown' ? Math.min(index + 1, matches.length - 1) : index - 1;
+  if (next < 0) search.focus();
+  else {
+    matches[next].focus();
+    matches[next].scrollIntoView({ block: 'nearest' });
+  }
+});
+
+const tocLinks = [...document.querySelectorAll('[data-toc-link]')];
+const headings = [...document.querySelectorAll('.article-prose h2[id]')];
+if (tocLinks.length && headings.length) {
+  let scheduled = false;
+  const updateSection = () => {
+    scheduled = false;
+    const threshold = document.querySelector('.site-header').getBoundingClientRect().bottom + 36;
+    let current = headings[0].id;
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top <= threshold) current = heading.id;
+    }
+    if (window.scrollY > 0 && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) current = headings.at(-1).id;
+    for (const link of tocLinks) {
+      if (link.hash === `#${current}`) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    }
+  };
+  const schedule = () => {
+    if (!scheduled) {
+      scheduled = true;
+      requestAnimationFrame(updateSection);
+    }
+  };
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule);
+  updateSection();
+}

@@ -14,7 +14,8 @@ export const pagePath = slug => slug === 'getting-started' ? '/' : `/${slug}/`;
 export const markdown = new MarkdownIt({ html: false, linkify: false, typographer: false });
 export const headingSlug = text => text.toLowerCase().normalize('NFKD').replace(/\p{M}/gu, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'section';
 markdown.core.ruler.after('inline', 'heading-identifiers', state => {
-  const used = new Set(['main', 'freshness', 'guide-search', 'no-guides', 'search-status', 'search-results', 'all-guides']);
+  const used = new Set(['main', 'freshness', 'guide-search', 'no-guides', 'search-status', 'search-results', 'all-guides',
+    'docs-sidebar', 'docs-search-dialog', 'docs-navigation-dialog']);
   for (let index = 0; index < state.tokens.length; index++) {
     const token = state.tokens[index];
     if (token.type !== 'heading_open') continue;

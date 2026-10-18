@@ -31,6 +31,9 @@ Keep guides short, accurate and useful to someone using the app.
   shows a simple article-update date in the footer. Source revisions and
   verification details stay in publishing metadata, not reader-facing banners.
 - Community links use `https://plozz.app/discord`. Never embed an invite.
+- The shared renderer owns topic cards, navigation, search and section rails.
+  Keep guide bodies presentation-independent; do not duplicate those controls
+  in Markdown. Layout-only changes must preserve article dates and source state.
 - Use the workflow's explicit model and effort. Do not delegate, invoke other
   AI services, or silently choose a fallback model.
 - A separate review session checks every proposed content change against the

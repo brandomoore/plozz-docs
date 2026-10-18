@@ -73,9 +73,18 @@ a permanently idle public-repository schedule.
 
 ## Reader experience and search
 
-Navigation groups related tasks, and the landing page links the full guide
-directory. Full-text search includes article sections and can link directly
-to an answer. Stable heading anchors make reference material useful without
+The dark, Manrope-based shell has a grouped sidebar, an icon-led guide
+directory and a desktop "On this page" rail that follows the reader's position.
+Narrow screens use a navigation drawer and an inline section list. Category
+cards link to real guides, not additional thin category pages.
+
+Header search opens with `/` or Command/Ctrl+K. Full-text results include
+article sections and link directly to an answer; arrow keys move through
+results, Enter opens one, and Escape closes the native dialog. Search loads
+on demand and checks the page's content revision before showing results.
+If the index is unavailable or updating, the dialog explains the problem and
+shows title-only matches. Navigation and the guide directory work without
+JavaScript. Stable heading anchors make reference material useful without
 creating a thin page for every setting.
 
 Each page has unique titles/descriptions, canonical and social metadata, and

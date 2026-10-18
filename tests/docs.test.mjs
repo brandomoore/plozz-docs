@@ -86,26 +86,27 @@ test('freshness distinguishes current, changed and unavailable app source', asyn
   assert.equal(unavailable.headers.get('Cache-Control'), 'no-store');
 });
 
-test('reader navigation reopens on desktop without polling technical source status', () => {
+test('mobile navigation closes when returning to desktop without source polling', () => {
   const script = readFileSync(new URL('../public/docs.js', import.meta.url), 'utf8');
-  const navigation = { open: true };
+  const navigation = { open: true, showModal() {}, close() { this.open = false; }, querySelector: () => ({ addEventListener() {} }), addEventListener() {} };
   const requests = [];
   let resize;
   const media = { matches: true, addEventListener: (_, callback) => { resize = callback; } };
   runInNewContext(script, {
     document: {
       body: { dataset: { contentHash: 'hash' } },
-      querySelector: selector => selector === '.nav-shell' ? navigation : null,
+      querySelector: selector => selector === '#docs-navigation-dialog' ? navigation : null,
       querySelectorAll: () => [],
+      addEventListener() {},
     },
     matchMedia: () => media,
     fetch: async url => { requests.push(url); return Response.json({}); },
   });
   assert.deepEqual(requests, []);
-  assert.equal(navigation.open, false);
+  assert.equal(navigation.open, true);
   media.matches = false;
   resize();
-  assert.equal(navigation.open, true);
+  assert.equal(navigation.open, false);
 });
 
 test('search keeps its version check without the removed freshness element', async () => {
@@ -117,6 +118,7 @@ test('search keeps its version check without the removed freshness element', asy
       body: { dataset: { contentHash: 'hash' } },
       querySelector: selector => selector === '.nav-shell' ? {} : null,
       querySelectorAll: () => [],
+      addEventListener() {},
     },
     matchMedia: () => ({ matches: false, addEventListener() {} }),
     fetch: async url => { requests.push(url); return Response.json({ contentHash: hash, entries: [] }); },
@@ -200,6 +202,7 @@ test('documentation search finds article text and links to the relevant section'
       body: { dataset: { contentHash: 'y' } },
       querySelector: selector => selector === '.nav-shell' ? {} : null,
       querySelectorAll: () => [],
+      addEventListener() {},
     },
     matchMedia: () => ({ matches: false, addEventListener() {} }),
     fetch: async () => Response.json({ status: 'current', documentedCommit: 'x', contentHash: 'y' }),
