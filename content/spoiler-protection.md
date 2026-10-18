@@ -6,7 +6,7 @@ Spoiler controls hide episode information; they are not parental controls or a f
 
 1. Select your Plozz profile.
 2. Open **Settings > Appearance > Spoiler Protection**.
-3. Enable **Hide spoilers for unwatched episodes**.
+3. Enable **Hide spoilers for unwatched episodes** on Apple TV, or **Protect unwatched episodes** on iPhone/iPad.
 4. Choose **Blur Thumbnail** or **Placeholder Art**.
 
 Blur keeps the real thumbnail but obscures it. Placeholder Art uses series artwork instead of loading the episode image.

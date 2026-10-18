@@ -27,17 +27,33 @@ Server configuration, account permissions, and subscription requirements still a
 
 Start a channel, open **Multiview**, and add channels. The limit is **four pictures**, with sound from one pane at a time. Your provider’s simultaneous-stream allowance or available tuners may impose a lower limit.
 
+Use **Favorite** in Multiview to save its channels and layout, then reopen it from **Favorite Multiviews** in the guide. Saving a layout does not reserve streams or tuners.
+
 ## Organize channels and listings
 
-Use a channel's menu to favorite it or change its channel preferences. Favorites and hidden-channel choices belong to the active profile.
+Press and hold a channel to **Add to Favorites**, **Remove from Favorites**, or **Hide channel**. Favorites and hidden-channel choices belong to the active profile.
 
 In **Manage channels**, review categories, countries/languages, and **Hidden channels**. Category **Show** overrides regional filtering; **Automatic** follows your country/language choices. Regional filtering uses playlist tags, not guesses from channel names. A country OR language match is sufficient; untagged channels can move to Hidden.
 
 Use **Show channel** for an individual exception. Resetting category/region visibility does not undo individually hidden channels or scan exclusions. If channels vanish, also check **Favorites only**, **With guide listings**, and the selected source.
 
-Under **Sources**, open a playlist's **Guide options** to review guide discovery and channel mappings. The guide-day range retains what the provider supplies; increasing it cannot create missing listings. Use **Refresh sources** after a source changes, or **Retry** for its displayed error.
+Under **Sources**, open a playlist's **Guide options**. For wrong listings, choose **Correct guide mapping** when offered, find the channel, select its guide source, then choose the correct station and regional feed. Corrections survive guide refreshes; **Use automatic matching** removes an override.
+
+The guide-day range retains what the provider supplies; increasing it cannot create missing listings. Use **Refresh sources** after a source changes, or **Retry** for its displayed error.
 
 On mobile, **Stop without Wi-Fi or Ethernet** stops Live TV after a network change is detected; brief cellular use can still occur during the transition.
+
+## Check unavailable channel links
+
+In **Sources**, select a playlist, open **Check channel availability**, then choose **Scan channels**. Scanning is optional and checks reachability, not playback-format support.
+
+Open **Scan results** to review reachable, unavailable, and uncertain links. Unavailable channels are hidden by the scan; uncertain results need another check. Use **Restore channel** or **Restore hidden channels** to undo scan exclusions. Other category, regional, or individual hiding rules still apply.
+
+## Stop unexpected channel previews
+
+On Apple TV, **Settings > Live TV > Guide > Auto preview** plays the focused channel as you browse. **Keep watching while browsing** keeps the watched channel instead of changing previews; it requires Auto preview.
+
+On both platforms, **Preview after watching** keeps a channel playing behind the guide after leaving full screen. Turn it off if you do not want that behavior. These controls are separate from [Home trailers](/home-and-navigation/#choose-the-hero).
 
 ## Make channels from your libraries
 

@@ -6,7 +6,7 @@ Choose the track you want in Plozz, then check your device and connected equipme
 
 Reveal playback controls and open **Audio** on Apple TV, or the **Audio** submenu in iPhone/iPad playback options.
 
-For future sessions, use **Settings > Playback** to set **Preferred audio language**. Choices include the original language, device language, or a specified language. You can set preferences separately for movies, TV shows, and anime.
+For future sessions, open **Settings > Playback > Audio** on Apple TV, or the **Tracks** section under Playback on iPhone/iPad, and set **Preferred audio language**. Choose original, device, or a specified language, with separate preferences for movies, TV shows, and anime.
 
 **Remember audio per series** reuses a series' previous selection. If a show keeps selecting the wrong track, check that preference as well as the general language setting. Choosing a language cannot supply a track absent from the selected file.
 
@@ -14,9 +14,13 @@ Alternate versions can contain different audio tracks. [Change versions](/playba
 
 ## Correct timing
 
-Where synchronization is supported, use the player's sync controls. On iPhone/iPad, open **Playback Sync** and adjust audio delay. Compare a clear lip movement after each small change.
+The current player does not offer an adjustable audio delay. **Playback Sync**, when shown on iPhone/iPad, can offer subtitle delay without an audio-delay control.
 
-A timing adjustment is not a solution for buffering or dropouts. If the problem changes over time, compare another title and the original source before saving a large offset.
+For lip-sync problems, compare another audio track, title, and output route to narrow down the cause. Buffering and dropouts need [playback troubleshooting](/troubleshooting/), not subtitle timing changes.
+
+## Keep audio playing on iPhone or iPad
+
+Enable **Settings > Playback > Background Audio** to continue video audio when locking the device or leaving Plozz. It is off by default. This does not download the video: streaming can keep using data. AirPlay and Picture in Picture have [separate requirements](/platform-controls/#airplay-and-picture-in-picture).
 
 ## TrueHD Atmos and DTS:X on Apple TV
 

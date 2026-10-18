@@ -4,7 +4,7 @@ A Plozz profile keeps preferences, libraries, Home layout, and trackers. A **ser
 
 ## Choose who is watching
 
-Use the profile header in **Settings** to switch. Open **Settings > Profiles** to add or manage profiles, including names and avatars.
+Use the profile header in **Settings** to switch. Open **Settings > Profiles** to add or manage profiles, including names and avatars. On iPhone/iPad, choose **Edit Profiles** or touch and hold a profile, then **Edit Profile**.
 
 Under each profile's **Libraries**, select included servers, the server user to watch as, and enabled libraries. Server sign-ins are shared on the device; each profile chooses which to use.
 

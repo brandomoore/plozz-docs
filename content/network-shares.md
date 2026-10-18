@@ -19,13 +19,15 @@ If asked to approve a certificate or SSH host key, confirm that it matches your 
 
 SFTP uses username-and-password sign-in, not SSH keys. Plain FTP and HTTP WebDAV send credentials unencrypted; prefer an encrypted connection.
 
-NFS uses the export's access rules rather than a Plozz username/password. WebDAV can offer a bearer-token sign-in as well as username/password. Grant only the folder access you intend to use.
+For FTPS, enter an `ftps://` address. Plozz uses implicit TLS, not explicit AUTH TLS.
+
+NFS requires **NFSv3** and uses the export's access rules rather than a Plozz username/password. WebDAV can offer bearer-token or username/password sign-in. Grant only the folder access you intend to use.
 
 ## Find files and refresh
 
 Recognized titles open their normal details. Use a title’s **Browse Files** action to inspect its original folders and files.
 
-Routine scans can skip unchanged folders. On Apple TV, open **Settings > Servers**, select the share, and choose **Scan now** to request a fresh scan.
+Routine scans can skip unchanged folders. Open **Settings > Servers** and select the share. On Apple TV, choose **Scan now**. On iPhone/iPad, open the share's sign-in row, then choose **Scan Now**. Keep Plozz open while it scans.
 
 Shares do not offer server-based streaming-quality controls; [offline downloads](/downloads/) use Original quality only.
 

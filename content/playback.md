@@ -14,11 +14,13 @@ Open **Audio** to select a track, or **Version** to choose among available files
 
 Version switching stays on the active server and account. It resumes at your current position, but different cuts can have different timelines.
 
-Use **Settings > Playback > Version selection** to choose whether Plozz asks each time or remembers your choice.
+Use **Settings > Playback > Version selection** to ask for every multi-version video, including autoplay, or remember a choice per movie or series. If a remembered version is unavailable, Plozz asks again.
 
 ## Autoplay and skipping
 
 Under **Settings > Playback**, set autoplay separately for the next episode and next playlist item. Both default to on. **Show Up Next card** controls the shortcut card separately: leaving the card on does not require automatic playback.
+
+Its lead-time setting controls when the card appears if credits cannot be detected.
 
 **Skip intros, credits & more** can show a button or skip automatically when markers exist. You can set different behavior for intros, credits, recaps, previews, and commercials.
 

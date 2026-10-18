@@ -5,7 +5,7 @@ Check the affected source before reporting a problem.
 ## Cannot connect or sign in
 
 1. Check that the server is reachable from this device’s network and that its saved address is correct.
-2. For custom ports or reverse-proxy paths, enter the full server address.
+2. Include custom ports or paths; review saved [connection addresses](/servers/#add-local-or-remote-addresses).
 3. If Jellyfin Quick Connect is unavailable, choose username-and-password sign-in.
 4. For Silo, use its browser address and complete device approval and any profile PIN.
 
@@ -25,9 +25,9 @@ For incorrect matches or missing scores, check [Metadata and ratings](/metadata-
 
 ## Playback or downloads fail
 
-Compare another title from that source. On iPhone/iPad, try lower [streaming quality](/streaming-quality/) on an eligible server; if Original works but conversion fails, check server conversion capability or permission.
+Compare another title from that source. On iPhone/iPad, try lower [streaming quality](/streaming-quality/) on an eligible server; if Maximum works but conversion fails, check server conversion capability or permission.
 
-For track-specific stutter on Apple TV, check [height-audio conversion](/audio/). For missing or mistimed captions, check the [selected track, style limits, and timing](/subtitles/).
+For Apple TV audio stutter, check [height-audio conversion](/audio/). For captions, check [track, style, and timing limits](/subtitles/).
 
 For downloads, inspect completion, storage, and network-policy status before removing anything; [Watch offline](/downloads/) explains pauses and version-specific copies.
 
@@ -39,7 +39,7 @@ Confirm the profile and account first. [Tracker Retry](/trackers/) is safer than
 
 Open **Settings > Help & Diagnostics**. Choose **Report a Problem** on iPhone/iPad; on Apple TV, scan the displayed code or follow its GitHub link. You can also ask in the [Plozz community](https://plozz.app/discord).
 
-Include your app version/build from Settings, device and OS, provider, exact error, and steps to reproduce.
+Include version/build, device and OS, provider, error, and reproduction steps. **Playback Diagnostics Overlay** shows codec, bitrate, buffer, and memory while reproducing playback failures.
 
 On iPhone/iPad, open **Recent Activity**, choose **Refresh**, then **Copy** to include logs in your report.
 

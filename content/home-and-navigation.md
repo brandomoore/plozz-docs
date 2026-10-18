@@ -6,7 +6,7 @@ Home rows, the large hero at the top, navigation shortcuts, and detail-page pres
 
 Open **Settings > Screens & Navigation > Customize Home > Rows on Home**.
 
-Choose whether to follow server Home arrangements or start with combined rows across libraries. With multiple servers, common rows can combine while other server rows stay visible. Plex supplies promoted Home rows, not another client's pinned-library layout.
+Choose **Match server** to follow server Home arrangements or **Combined rows** to start with rows across libraries. Choosing a preset replaces your custom arrangement after confirmation. With multiple servers, common rows can combine while other server rows stay visible. Plex supplies promoted Home rows, not another client's pinned-library layout.
 
 Press and hold a row for options, move rows to arrange them, or move one to **Hidden**. You can mix combined, individual-library, and server rows. Once you customize the arrangement, it no longer simply follows later server changes.
 

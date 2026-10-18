@@ -1,6 +1,6 @@
 # Subtitles
 
-Choose subtitles in the player, or save appearance and automatic-selection preferences in Settings.
+Select tracks in the player; save defaults in Settings.
 
 ## Choose a track
 
@@ -17,7 +17,7 @@ Second tracks require eligible text subtitles. An image-based primary disables t
 
 Open **Settings > Subtitles** and choose **Customize subtitle style**—under **Subtitle style** on Apple TV.
 
-Preview changes to text size, font, color, background, and position. In the player, choose **Style** on Apple TV, or **Appearance > Style** on iPhone/iPad.
+Preview text styling and position: 0% aligns to the bottom, 100% to the top; negative values can crop subtitles. In the player, choose **Style** on Apple TV, or **Appearance > Style** on iPhone/iPad.
 
 For a different Live TV appearance, enable **Use a separate style for Live TV** in Settings > Subtitles.
 
@@ -25,11 +25,13 @@ For a different Live TV appearance, enable **Use a separate style for Live TV** 
 
 Settings > Subtitles also controls when subtitles appear, preferred language, automatic downloads, and SDH preferences for captions with sound descriptions. Remembered per-series choices, including Off, can override automatic rules.
 
+On iPhone/iPad, **Preferred language code** accepts a code such as `en` for English; leave it blank to follow the device language.
+
 Where offered, set subtitle behavior separately for movies, TV shows, and anime. Forced-subtitle preferences are separate from SDH: forced tracks cover selected dialogue or signs, while SDH includes sound descriptions. Neither choice creates a track the file or subtitle service does not have.
 
 To stop reusing a series' choice, turn off **Remember subtitles per series** in **Settings > Subtitles** on Apple TV, or under **Tracks** in **Settings > Playback** on iPhone/iPad.
 
-For mistimed text, use the **Subtitle Sync** clock button on Apple TV or **Playback Sync > Subtitle Delay** in iPhone/iPad playback options, when available.
+For mistimed text, use the **Subtitle Sync** clock button on Apple TV or **Playback Sync > Subtitle Delay** in iPhone/iPad playback options. Timing controls appear only when Plozz can shift the selected track; some player-rendered embedded tracks do not allow it.
 
 ## Missing, wrong, or drifting subtitles
 

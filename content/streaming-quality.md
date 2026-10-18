@@ -10,25 +10,25 @@ For the active profile, open **Settings > Playback > Streaming quality** and cho
 - **Remote Wi-Fi / Ethernet**
 - **Cellular**
 
-Defaults are Original for local/remote connections and **720p · 2 Mbps** for cellular.
+Defaults are **Maximum** for local/remote connections and **720p · 2 Mbps** for cellular.
 
 Local versus remote depends on the connection to your source, not simply whether the device uses Wi-Fi.
 
-Choose **Original** to avoid requesting a reduced-quality server conversion. A lower quality asks the server to fit a resolution/bitrate limit. Limits include audio, not just the video track.
+Choose **Maximum** for original quality without a reduction limit. Lower limits can still play the original when reported resolution and bitrate fit; otherwise Plozz requests conversion. Bitrate limits include audio, not just video.
 
-Under **Advanced**, choose the transcoding codec or **Force transcoding**. Force transcoding can request conversion even at Original quality. Custom limits are available in the quality picker. Conversion depends on the provider, permissions, and server capacity.
+Under **Advanced**, choose the transcoding codec or **Force transcoding**. Force transcoding can request conversion even at Maximum. Custom limits are available in the quality picker. Conversion depends on the provider, permissions, and server capacity.
 
 ## Change one video
 
 Reveal the player's options and open **Quality**. This changes the current video without overwriting your saved network defaults.
 
-Quality changes can restart the stream around your current position. Server conversion may alter HDR, audio formats, or subtitle handling. If preserving a particular format matters, compare Original and inspect the resulting playback rather than relying only on a resolution label.
+Quality changes can restart the stream around your current position. Server conversion may alter HDR, audio formats, or subtitle handling. If preserving a particular format matters, compare Maximum and inspect the resulting playback rather than relying only on a resolution label.
 
 Silo currently converts to H.264 at 480p, 720p, 1080p, or 4K, with resolution limits based on video height. Unsupported conversion choices are unavailable.
 
 ## Buffering or unavailable choices
 
-If Original buffers, try a lower current-session limit on an eligible server. If the lower setting fails while Original plays, investigate conversion permission or server capacity rather than assuming the file is damaged.
+If Maximum buffers, try a lower current-session limit on an eligible server. If the lower setting fails while Maximum plays, investigate conversion permission or server capacity rather than assuming the file is damaged.
 
 Network shares have no media server performing these conversions. A hidden Quality control can therefore be expected for that source or platform.
 

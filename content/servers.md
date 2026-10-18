@@ -1,6 +1,6 @@
 # Connect a server
 
-Connect your own Jellyfin, Plex, Emby, or Silo account to browse and play its libraries in Plozz.
+Connect your own Jellyfin, Plex, Emby, or Silo account.
 
 ## Add a connection
 
@@ -17,7 +17,7 @@ On Apple TV with no connections, choose **Sign In to a Server** instead.
 
 Add more connections without signing out.
 
-Sign-ins are shared by profiles on this device. Turning off a server under **Libraries** affects only the active profile; removing it under **Servers** signs out its accounts for everyone on this device. **Remove Everywhere**, when offered, also removes it from your other iCloud devices.
+Sign-ins are shared by profiles on this device. Turning off a server under **Libraries** affects only the active profile; removing it under **Servers** signs out its accounts for everyone. **Remove Everywhere**, when offered, also removes it from your other iCloud devices.
 
 ## Keep identities separate
 
@@ -25,10 +25,18 @@ Plex Home users and Silo profiles determine server-side access and history. A Pl
 
 For another device, use [Profiles and sync](/profiles-and-sync/). For folders without a media server, use [Network shares](/network-shares/).
 
+## Add local or remote addresses
+
+In **Settings > Servers**, select the server, then **Connection addresses > Add or manage addresses**. Choose the sign-in if asked, enter another address for the same server, and choose **Verify and add address**.
+
+Only add trusted addresses: Plozz uses your sign-in there, and HTTP is unencrypted. Silo requires approval at the new address using the same account and profile.
+
+Addresses belong to this sign-in on this device. Plozz prefers a reachable local address and tries saved alternatives after connection failures. Plex also discovers its own addresses.
+
 ## Confirm access before changing settings
 
-Open an enabled library and play a short video. Seeing the server's name alone does not confirm that this device is signed in or that the selected user can access its media.
+Open an enabled library and play a video. A server name alone does not confirm sign-in or media access.
 
-If discovery finds nothing, enter the address manually; discovery is not proof of remote reachability. Test the address from the same network as the playback device. A remote connection still needs a server address reachable from outside your home.
+If discovery finds nothing, enter the address manually. Test it from the playback device's network; remote viewing needs an externally reachable address.
 
-For missing content, first check library selection and server-user permissions rather than removing the connection. For recurring sign-in errors, use [Troubleshooting](/troubleshooting/). Server networking and reverse-proxy administration remain the server owner's responsibility; the [Jellyfin networking guide](https://jellyfin.org/docs/general/post-install/networking/) explains that server-side setup.
+For missing content, check library selection and user permissions before removing connections. See [Troubleshooting](/troubleshooting/) for sign-in errors. Server networking remains the owner's responsibility; see the [Jellyfin networking guide](https://jellyfin.org/docs/general/post-install/networking/).

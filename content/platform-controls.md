@@ -4,7 +4,7 @@ Some controls depend on your device, operating system, and the active playback p
 
 ## Apple TV
 
-Use the remote to reveal and focus playback controls. **Settings > Playback > Skip Intervals** changes left/right jumps.
+Use the remote to reveal and focus playback controls. **Settings > Playback > Seeking > Skip Intervals** changes left/right jumps.
 
 **Seek without pausing** determines whether a playing video responds to scrubbing. When off, pause first, scrub to the position, then press Play. **Prevent Accidental Exit**, under Screens & Navigation's navigation settings, changes app-exit behavior rather than playback quality.
 
@@ -16,9 +16,13 @@ When Plozz is in the top row of the Apple TV Home Screen, Top Shelf can show con
 
 Tap the video to reveal controls. With a hardware keyboard, **Space** plays/pauses and **Left/Right** skip during eligible playback. Shortcuts yield while menus, sheets, or other player interactions are active.
 
-During supported local playback, double-tap the left/right side to skip, hold the picture for a temporary speed boost, or pinch to switch Fit/Fill. Vertical drags near the left edge adjust brightness; near the right edge, volume. VoiceOver suppresses conflicting side-tap and level-drag shortcuts.
+During supported local playback, double-tap the left/right side to skip, hold the picture for a temporary speed boost, or pinch to switch Fit/Fill. Vertical drags near the left edge adjust brightness; near the right edge, volume. VoiceOver disables hold, pinch, side-tap, and level-drag shortcuts.
 
-Playback options include speed, zoom, synchronization, versions, and quality only when the active session supports them. Fit preserves the whole picture; Fill can crop it.
+Turn off **Settings > Playback > Volume and brightness gestures** to disable vertical drags.
+
+On iPhone, **Settings > Playback > Player orientation** offers Auto, Landscape, or Portrait for full-screen playback. iPad follows system rotation. If changing orientation fails, use a full-screen window and retry.
+
+Playback options depend on session capabilities. Fit preserves the whole picture; Fill can crop it. [Background Audio](/audio/#keep-audio-playing-on-iphone-or-ipad) controls listening while locked or outside Plozz.
 
 ## AirPlay and Picture in Picture
 
