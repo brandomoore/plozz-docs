@@ -7,7 +7,7 @@ const navigation = document.querySelector('.nav-shell');
 const compact = matchMedia('(max-width: 760px)');
 navigation.open = !compact.matches;
 compact.addEventListener('change', () => { navigation.open = !compact.matches; });
-const status = document.querySelector('#freshness');
+const contentHash = document.body.dataset.contentHash;
 const normalize = value => value.toLowerCase().normalize('NFKD').replace(/\p{M}/gu, '');
 let indexRequest;
 let searchGeneration = 0;
@@ -29,10 +29,10 @@ function rankPages(entries, query) {
 
 function loadIndex() {
   if (!indexRequest) {
-    indexRequest = fetch(`/search-index.json?v=${status.dataset.contentHash}`).then(async response => {
+    indexRequest = fetch(`/search-index.json?v=${contentHash}`).then(async response => {
       if (!response.ok) throw new Error('Search index unavailable');
       const data = await response.json();
-      if (data.contentHash !== status.dataset.contentHash || !Array.isArray(data.entries) || !data.entries.every(entry =>
+      if (data.contentHash !== contentHash || !Array.isArray(data.entries) || !data.entries.every(entry =>
         typeof entry.title === 'string' && typeof entry.description === 'string' && typeof entry.text === 'string'
         && (entry.path === '/' || /^\/[a-z][a-z0-9-]{1,60}\/$/.test(entry.path))
         && Array.isArray(entry.sections) && entry.sections.every(section => /^[a-z0-9-]+$/.test(section.id) && typeof section.title === 'string' && typeof section.text === 'string'))) {
@@ -79,23 +79,4 @@ search?.addEventListener('input', async () => {
     for (const group of groups) { group.hidden = ![...group.querySelectorAll('a')].some(link => !link.hidden); group.open = true; }
     searchStatus.textContent = 'Full-text search is unavailable or updating. Showing title matches; reload to try again.';
   }
-});
-
-fetch('/freshness.json').then(async response => {
-  const result = await response.json();
-  if (!response.ok || !['current', 'behind'].includes(result.status)) throw new Error('Source check unavailable');
-  if (result.documentedCommit !== status.dataset.sourceCommit || result.contentHash !== status.dataset.contentHash) {
-    status.className = 'unknown';
-    status.textContent = 'Freshness data is updating. The source revision and check date above apply to this page.';
-    return;
-  }
-  if (result.status === 'behind') {
-    status.className = 'stale';
-    status.textContent = 'App code has changed since this check. Some details may lag until the next daily docs update; your installed beta may differ too.';
-  } else {
-    status.textContent = 'Matches the latest app main revision checked by this service. Your installed beta may differ.';
-  }
-}).catch(() => {
-  status.className = 'unknown';
-  status.textContent = 'Live freshness check unavailable. Use the source revision and check date above; your installed beta may differ.';
 });

@@ -230,6 +230,15 @@ test('built search metadata and sitemap dates describe article changes, not sour
   assert(html.includes('property="og:title"'));
   assert(html.includes('application/ld+json'));
   assert(html.includes('data-slug="getting-started"'));
+  assert(html.includes(`<body data-content-hash="${state.contentHash}">`));
+  const footer = html.slice(html.indexOf('<footer>'));
+  assert(footer.includes('Last updated <time datetime="2026-10-01T00:00:00Z">October 1, 2026</time>.'));
+  assert(!html.slice(0, html.indexOf('<footer>')).includes('Last updated'));
+  assert(!html.includes('source-status') && !html.includes('id="freshness"'));
+  assert(!html.includes('app source') && !html.includes('installed beta'));
+  assert(!readFileSync(resolve(f.root, 'dist/404.html'), 'utf8').includes('Last updated'));
+  assert.equal(f.read('dist/_source.json').verifiedAt, state.verifiedAt);
+  assert.equal(f.read('dist/_source.json').commit, state.commit);
   const sitemap = readFileSync(resolve(f.root, 'dist/sitemap.xml'), 'utf8');
   assert(sitemap.includes('<lastmod>2026-10-01</lastmod>'));
   assert(!sitemap.includes('2026-11-20'));

@@ -28,7 +28,8 @@ Keep guides short, accurate and useful to someone using the app.
 - A setting can belong in a section or need no additional prose. Record a
   source-backed reason for internal-code omissions; don't manufacture pages.
 - Do not embed app revisions or verification dates in guide bodies. The site
-  generates provenance from reviewed source-state metadata on every page.
+  shows a simple article-update date in the footer. Source revisions and
+  verification details stay in publishing metadata, not reader-facing banners.
 - Community links use `https://plozz.app/discord`. Never embed an invite.
 - Use the workflow's explicit model and effort. Do not delegate, invoke other
   AI services, or silently choose a fallback model.

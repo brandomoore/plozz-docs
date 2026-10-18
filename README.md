@@ -26,13 +26,15 @@ content hashes track real modification dates separately from source checks.
 
 While editing drafts, use `npm run check:content`. Full checks/builds reject
 unreviewed changes until the trusted pipeline finalizes their source state.
-The site generates source revisions and dates; don't hardcode them in guides.
+The site generates article-update dates; don't hardcode dates or source
+revisions in guides.
 
 The site tracks app `main`, not a promise that every installed TestFlight build
-has identical features. It displays the source revision and verification date.
-The freshness endpoint checks GitHub, cached for five minutes: new app commits
-produce a visible warning; unavailable or mismatched metadata never produces a
-false "up to date" claim.
+has identical features. Readers see a simple "Last updated" date in the footer,
+based on the article's meaningful changes rather than its latest source audit.
+Source revisions and verification details remain in publishing metadata. The
+freshness endpoint remains available for maintenance; reader pages do not poll
+it or display technical source-status banners.
 
 ## Daily cloud maintenance
 
@@ -136,7 +138,7 @@ Inspect the staged version and retain the previous version for rollback.
 Version activation doesn't synchronize routes or DNS. To recover a failed
 content deployment, rerun **Publish documentation** on current main. To restore
 older content, revert the intended docs change and publish that main commit.
-The source/freshness banner will accurately describe the restored content.
+The footer date and publishing metadata will accurately describe the restored content.
 
 ## Brand assets
 

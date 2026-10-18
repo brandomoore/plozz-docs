@@ -93,7 +93,7 @@ export function validatePages(pages, root = ROOT) {
     if (words > limit) throw new Error(`${page.slug}: ${words} words exceeds the ${limit}-word limit.`);
     if (/<\/?[a-z][^>]*>/i.test(body) || tokens.some(token => token.children?.some(child => child.type === 'image'))) throw new Error(`No raw HTML or images in guides: ${page.slug}`);
     if (/discord\.gg\/|discord\.com\/invite\//i.test(body)) throw new Error(`Use the stable Discord shortcut: ${page.slug}`);
-    if (body.includes(`github.com/${APP_REPO}/tree/`) || body.includes(`github.com/${APP_REPO}/blob/`)) throw new Error(`Keep app source citations in the manifest; the provenance banner is generated: ${page.slug}`);
+    if (body.includes(`github.com/${APP_REPO}/tree/`) || body.includes(`github.com/${APP_REPO}/blob/`)) throw new Error(`Keep app source citations in the manifest; publishing metadata records provenance: ${page.slug}`);
     if (/gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|-----BEGIN .*PRIVATE KEY-----/.test(body)) throw new Error(`Possible credential in guide: ${page.slug}`);
   }
   if (!slugs.has('getting-started')) throw new Error('Missing getting-started guide.');

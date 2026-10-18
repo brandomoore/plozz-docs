@@ -86,35 +86,47 @@ test('freshness distinguishes current, changed and unavailable app source', asyn
   assert.equal(unavailable.headers.get('Cache-Control'), 'no-store');
 });
 
-test('reader status never presents invalid or mismatched metadata as current; desktop navigation reopens', async () => {
+test('reader navigation reopens on desktop without polling technical source status', () => {
   const script = readFileSync(new URL('../public/docs.js', import.meta.url), 'utf8');
-  for (const [value, expected] of [
-    [{ status: 'current', documentedCommit: 'revision', contentHash: 'hash' }, 'Matches the latest'],
-    [{ status: 'behind', documentedCommit: 'revision', contentHash: 'hash' }, 'App code has changed'],
-    [{ status: 'current', documentedCommit: 'old', contentHash: 'hash' }, 'Freshness data is updating'],
-    [{ status: 'current', documentedCommit: 'revision', contentHash: 'old' }, 'Freshness data is updating'],
-    [{ status: 'invalid' }, 'Live freshness check unavailable'],
-    [{ status: 'unknown' }, 'Live freshness check unavailable'],
-  ]) {
-    const status = { dataset: { sourceCommit: 'revision', contentHash: 'hash' } };
-    const navigation = { open: true };
-    let resize;
-    const media = { matches: true, addEventListener: (_, callback) => { resize = callback; } };
-    runInNewContext(script, {
-      document: {
-        querySelector: selector => selector === '.nav-shell' ? navigation : selector === '#freshness' ? status : null,
-        querySelectorAll: () => [],
-      },
-      matchMedia: () => media,
-      fetch: async () => Response.json(value),
-    });
-    await new Promise(resolve => setImmediate(resolve));
-    assert(status.textContent.startsWith(expected), status.textContent);
-    assert.equal(navigation.open, false);
-    media.matches = false;
-    resize();
-    assert.equal(navigation.open, true);
-  }
+  const navigation = { open: true };
+  const requests = [];
+  let resize;
+  const media = { matches: true, addEventListener: (_, callback) => { resize = callback; } };
+  runInNewContext(script, {
+    document: {
+      body: { dataset: { contentHash: 'hash' } },
+      querySelector: selector => selector === '.nav-shell' ? navigation : null,
+      querySelectorAll: () => [],
+    },
+    matchMedia: () => media,
+    fetch: async url => { requests.push(url); return Response.json({}); },
+  });
+  assert.deepEqual(requests, []);
+  assert.equal(navigation.open, false);
+  media.matches = false;
+  resize();
+  assert.equal(navigation.open, true);
+});
+
+test('search keeps its version check without the removed freshness element', async () => {
+  const script = readFileSync(new URL('../public/docs.js', import.meta.url), 'utf8');
+  const requests = [];
+  let hash = 'old';
+  const context = createContext({
+    document: {
+      body: { dataset: { contentHash: 'hash' } },
+      querySelector: selector => selector === '.nav-shell' ? {} : null,
+      querySelectorAll: () => [],
+    },
+    matchMedia: () => ({ matches: false, addEventListener() {} }),
+    fetch: async url => { requests.push(url); return Response.json({ contentHash: hash, entries: [] }); },
+  });
+  runInContext(script, context);
+  await assert.rejects(() => context.loadIndex(), /another documentation revision/);
+  hash = 'hash';
+  assert.equal((await context.loadIndex()).length, 0);
+  await context.loadIndex();
+  assert.deepEqual(requests, ['/search-index.json?v=hash', '/search-index.json?v=hash']);
 });
 
 test('published assets stay in the managed origin and never inherit caller credentials', async () => {
@@ -185,7 +197,8 @@ test('documentation search finds article text and links to the relevant section'
   const script = readFileSync(new URL('../public/docs.js', import.meta.url), 'utf8');
   const context = createContext({
     document: {
-      querySelector: selector => selector === '.nav-shell' ? {} : selector === '#freshness' ? { dataset: { sourceCommit: 'x', contentHash: 'y' } } : null,
+      body: { dataset: { contentHash: 'y' } },
+      querySelector: selector => selector === '.nav-shell' ? {} : null,
       querySelectorAll: () => [],
     },
     matchMedia: () => ({ matches: false, addEventListener() {} }),
