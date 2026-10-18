@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { runInNewContext } from 'node:vm';
 import { escapeHtml, markdown, validatePages, validSourcePath, pagePath, classifyChanges } from '../tools/lib.mjs';
-import { freshness, publishedAsset, handleRequest, PAGES_ORIGIN } from '../worker/index.mjs';
+import { freshness, publishedAsset, handleRequest, PAGES_ORIGIN } from '../worker/handler.mjs';
 
 test('HTML and unsafe Markdown URLs are not executable', () => {
   assert.equal(escapeHtml('<script>"&'), '&lt;script&gt;&quot;&amp;');
@@ -160,4 +160,10 @@ test('front door preserves HEAD, 404, read-only methods and unavailable-source s
   const invalidRedirect = await handleRequest(new Request('https://docs.plozz.app/servers'), async () => new Response(null, { status: 302, headers: { Location: 'https://example.com/' } }));
   assert.equal(invalidRedirect.status, 503);
   assert.equal(invalidRedirect.headers.get('Location'), null);
+});
+
+test('Worker entry point exports only its HTTP handler', async () => {
+  const entry = await import('../worker/index.mjs');
+  assert.deepEqual(Object.keys(entry), ['default']);
+  assert.equal(typeof entry.default.fetch, 'function');
 });

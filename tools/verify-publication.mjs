@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { setTimeout as delay } from 'node:timers/promises';
 import { ROOT, SITE, readJson, validatePages, validateState } from './lib.mjs';
-import { PAGES_ORIGIN } from '../worker/index.mjs';
+import { PAGES_ORIGIN } from '../worker/handler.mjs';
 
 const state = validateState(readJson('source-state.json'), validatePages(readJson('content/pages.json')));
 const docsCommit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: ROOT, encoding: 'utf8' }).trim();
