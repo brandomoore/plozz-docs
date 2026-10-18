@@ -50,6 +50,8 @@ jobs:
           path: |
             .docs-work/plan.json
             .docs-work/tree.json
+            .docs-work/discovery.json
+            .docs-work/source-labels.json
             .docs-work/source/
           include-hidden-files: true
           retention-days: 7
@@ -58,7 +60,7 @@ jobs:
     needs: plan
     if: needs.plan.outputs.mode == 'content'
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 60
     permissions:
       contents: read
       copilot-requests: write
@@ -90,7 +92,7 @@ jobs:
     needs: [plan, write]
     if: needs.plan.outputs.mode == 'content'
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 60
     permissions:
       contents: read
       copilot-requests: write

@@ -1,6 +1,6 @@
 # Troubleshooting
 
-Check the affected source or connection before reporting a persistent problem.
+Check the affected source before reporting a problem.
 
 ## Cannot connect or sign in
 
@@ -13,13 +13,27 @@ After [syncing another device](/profiles-and-sync/), check **Settings > iCloud S
 
 ## Channels or listings are missing
 
-Open Live TV’s **Sources**, inspect the affected source’s error, and choose **Retry**. Refresh channels or sources after your provider changes a playlist.
+Open Live TV's **Sources**, inspect the affected source's error, and choose **Retry**. Refresh sources after your provider changes a playlist.
 
-Missing guide listings do not necessarily prevent channel playback. A connection added as **guide only** cannot play its channels.
+Check source selection, favorites/guide-only filters, and **Manage channels > Hidden channels**. Missing guide listings do not necessarily prevent playback; a connection added as **guide only** cannot play its channels. See [Live TV](/live-tv/) for guide mapping and Multiview stream limits.
+
+## A library, title, or picture is wrong
+
+Check the active profile, selected server user, enabled libraries, and browse filters. A hidden navigation shortcut does not disable the library. For shares, confirm files are readable and [scan the selected folder](/network-shares/).
+
+For incorrect matches or missing scores, check [Metadata and ratings](/metadata-and-ratings/). If the whole picture is warm or dark, compare with [Circadian Mode](/circadian-mode/) disabled before changing HDR settings.
 
 ## Playback or downloads fail
 
-Check [Playback and audio](/playback/) for quality and audio options, or [Watch offline](/downloads/) for paused transfers and network restrictions.
+Compare another title from that source. On iPhone/iPad, try lower [streaming quality](/streaming-quality/) on an eligible server; if Original works but conversion fails, check server conversion capability or permission.
+
+For track-specific stutter on Apple TV, check [height-audio conversion](/audio/). For missing or mistimed captions, check the [selected track, style limits, and timing](/subtitles/).
+
+For downloads, inspect completion, storage, and network-policy status before removing anything; [Watch offline](/downloads/) explains pauses and version-specific copies.
+
+## Sync or tracker settings keep changing
+
+Confirm the profile and account first. [Tracker Retry](/trackers/) is safer than repeatedly reconnecting. Read [sync recovery and reset effects](/profiles-and-sync/) before replacing or erasing cloud data.
 
 ## Report a problem
 
@@ -29,4 +43,4 @@ Include your app version/build from Settings, device and OS, provider, exact err
 
 On iPhone/iPad, open **Recent Activity**, choose **Refresh**, then **Copy** to include logs in your report.
 
-If **Share Crash Reports** is available, enable it to send logs. Choose **Send to Developer** on iPhone/iPad, or **Send Recent Activity to Developer** on Apple TV. Never post passwords, pairing codes, or private playlist URLs.
+Sending diagnostics requires a configured reporting endpoint and **Share Crash Reports** enabled. Choose **Send to Developer** on iPhone/iPad, or **Send Recent Activity to Developer** on Apple TV. An unavailable reporting control can be a build limitation. Never post passwords, API tokens, pairing codes, or private playlist URLs.

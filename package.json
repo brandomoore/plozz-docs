@@ -15,7 +15,8 @@
     "deploy:activate": "wrangler versions deploy --config wrangler.toml"
   },
   "dependencies": {
-    "markdown-it": "15.0.2"
+    "markdown-it": "15.0.2",
+    "tar-stream": "3.2.2"
   },
   "devDependencies": {
     "wrangler": "4.133.0"

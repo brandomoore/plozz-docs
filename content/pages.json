@@ -2,29 +2,37 @@
   {
     "slug": "getting-started",
     "title": "Get started",
-    "section": "Start here",
+    "seoTitle": "Get started with Plozz on Apple TV, iPhone, and iPad",
+    "description": "Install Plozz, connect your own media source, choose a profile, and find the guides for watching and personalizing your setup.",
+    "section": "Connect",
+    "kind": "overview",
     "file": "getting-started.md",
     "sources": [
       "README.md",
+      "project.yml",
       "Sources/AppShell/AddAccountView.swift",
       "Sources/AppShell/FirstRunProfileView.swift",
       "Sources/AppShelliOS/PlozziOSOnboardingView.swift",
       "Sources/AppShelliOS/PlozziOSFirstRunView.swift",
-      "Sources/CoreModels/ProviderKind.swift"
+      "Sources/CoreModels/ProviderKind.swift",
+      "Sources/CoreUI/ProfileSettingsCategory.swift"
     ],
     "watch": [
       "README.md",
+      "project.yml",
       "Sources/AppShell/AddAccountView.swift",
-      "Sources/AppShelliOS/AddServerView.swift",
-      "Sources/CoreModels/ProviderKind.swift",
       "Sources/AppShell/FirstRun",
-      "Sources/AppShelliOS/PlozziOSFirstRun"
+      "Sources/AppShelliOS/PlozziOSFirstRun",
+      "Sources/CoreModels/ProviderKind.swift"
     ]
   },
   {
     "slug": "servers",
     "title": "Connect a server",
-    "section": "Start here",
+    "seoTitle": "Connect Jellyfin, Plex, Emby, or Silo to Plozz",
+    "description": "Add a media server, complete its sign-in, select libraries and server users, and understand shared connection removal.",
+    "section": "Connect",
+    "kind": "guide",
     "file": "servers.md",
     "sources": [
       "Sources/FeatureAuth/AuthView.swift",
@@ -34,93 +42,204 @@
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift",
       "Sources/FeatureSettings/ServerDetailView.swift",
-      "Sources/FeatureSettings/MyLibrariesDetailView.swift"
+      "Sources/FeatureSettings/MyLibrariesDetailView.swift",
+      "Sources/CoreModels/ProviderKind.swift"
     ],
     "watch": [
       "Sources/FeatureAuth/",
       "Sources/FeatureAuthCore/",
-      "Sources/AppShell/AddAccountView.swift",
       "Sources/AppShelliOS/AddServerView.swift",
-      "Sources/FeatureSettings/ProfileLibrariesScope.swift",
-      "Sources/ProviderSilo/"
+      "Sources/FeatureSettings/Server",
+      "Sources/FeatureSettings/MyLibrariesDetailView.swift",
+      "Sources/ProviderSilo/SiloAuthentication.swift"
     ]
   },
   {
     "slug": "network-shares",
     "title": "Network shares",
-    "section": "Start here",
+    "seoTitle": "Add SMB, NFS, WebDAV, SFTP, or FTP libraries in Plozz",
+    "description": "Connect a network folder, choose its content type, scan files, and check authentication, matching, and share-specific limits.",
+    "section": "Connect",
+    "kind": "guide",
     "file": "network-shares.md",
     "sources": [
-      "Sources/CoreModels/MediaItemAction.swift",
       "Sources/AppShell/UnifiedAddShareView.swift",
       "Sources/AppShelliOS/PlozziOSUnifiedAddShareView.swift",
       "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift",
-      "Sources/AppShelliOS/PlozziOSDownloadsView.swift",
       "Sources/FeatureSettings/ServerDetailView.swift",
       "Sources/FeatureShareOnboarding/MediaShareTransportCatalog.swift",
-      "Sources/ProviderShare/ShareScanner.swift"
+      "Sources/ProviderShare/ShareScanner.swift",
+      "Sources/CoreModels/MediaItemAction.swift",
+      "Sources/CoreModels/MediaShareLibraryConfiguration.swift",
+      "Sources/MediaTransportSMB/SMBMediaTransport.swift",
+      "Sources/MediaTransportNFS/NFSMediaTransport.swift",
+      "Sources/MediaTransportWebDAV/WebDAVMediaTransport.swift",
+      "Sources/MediaTransportSFTP/SFTPMediaTransport.swift",
+      "Sources/MediaTransportFTP/FTPMediaTransport.swift"
     ],
     "watch": [
+      "Sources/FeatureShareOnboarding/",
+      "Sources/ProviderShare/",
       "Sources/AppShell/UnifiedAddShareView.swift",
       "Sources/AppShelliOS/PlozziOSUnifiedAddShareView.swift",
-      "Sources/ProviderShare/",
       "Sources/CoreModels/MediaShareLibraryConfiguration.swift",
-      "Sources/FeatureShareOnboarding/",
-      "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
+      "Sources/FeatureSettings/ServerDetailView.swift"
     ]
   },
   {
-    "slug": "live-tv",
-    "title": "IPTV and Live TV",
-    "section": "Watching",
-    "file": "live-tv.md",
+    "slug": "library",
+    "title": "Find and organize media",
+    "seoTitle": "Browse, search, and organize your media in Plozz",
+    "description": "Find titles, filter libraries, use Watchlist and watched actions, inspect extras, and recover missing library content.",
+    "section": "Library",
+    "kind": "guide",
+    "file": "library.md",
     "sources": [
-      "Sources/FeatureAuth/IPTVSignInView.swift",
-      "Sources/ProviderIPTV/IPTVProvider.swift",
-      "Sources/AppRuntime/AccountsProvidersModel.swift",
-      "Sources/FeatureLiveTV/LiveTVServerSetupView.swift",
-      "Sources/FeatureLiveTV/LiveTVSourcesView.swift",
-      "Sources/FeatureSettings/LiveTVSettingsView.swift",
-      "Sources/CoreModels/LiveTVMultiviewFavorite.swift",
-      "Sources/FeatureLiveTVCore/LiveTVMultiviewCoordinator.swift"
+      "Sources/FeatureHome/LibraryBrowseView.swift",
+      "Sources/FeatureSearch/SearchView.swift",
+      "Sources/AppShelliOS/PlozziOSSearchView.swift",
+      "Sources/AppShelliOS/PlozziOSLibraryView.swift",
+      "Sources/FeatureHome/WatchlistBrowseView.swift",
+      "Sources/AppRuntime/UniversalWatchlistRuntime.swift",
+      "Sources/FeatureWatchlistCore/WatchlistModel.swift",
+      "Sources/FeatureHome/DetailExtrasView.swift",
+      "Sources/AppShelliOS/PlozziOSExtrasSection.swift",
+      "Sources/CoreModels/MediaItemAction.swift",
+      "Sources/CoreModels/MediaItemActionCatalog.swift",
+      "Sources/FeatureSettings/MyLibrariesDetailView.swift"
     ],
     "watch": [
-      "Sources/FeatureLiveTV/",
-      "Sources/FeatureLiveTVCore/",
-      "Sources/ProviderIPTV/",
-      "Sources/CoreModels/LiveTVMultiviewFavorite.swift",
-      "Sources/FeatureSettings/LiveTVSettingsView.swift",
-      "Sources/FeatureAuthCore/IPTV"
+      "Sources/FeatureHome/Library",
+      "Sources/FeatureSearch",
+      "Sources/FeatureWatchlistCore/",
+      "Sources/CoreModels/MediaItemAction",
+      "Sources/AppRuntime/UniversalWatchlistRuntime.swift",
+      "Sources/AppShelliOS/PlozziOSLibraryView.swift"
+    ]
+  },
+  {
+    "slug": "home-and-navigation",
+    "title": "Home and navigation",
+    "seoTitle": "Customize Plozz Home rows, hero, and navigation",
+    "description": "Arrange Home rows, select hero sources, hide or reorder shortcuts, and choose trailer or theme-music detail backgrounds.",
+    "section": "Library",
+    "kind": "guide",
+    "file": "home-and-navigation.md",
+    "sources": [
+      "Sources/FeatureSettings/CustomizeHomeDetailView.swift",
+      "Sources/FeatureSettings/HomeRowsSettingsView.swift",
+      "Sources/FeatureSettings/HomeLayoutPicker.swift",
+      "Sources/FeatureSettings/HeroSettingsControls.swift",
+      "Sources/FeatureSettings/NavigationLibrariesDetailView.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/CoreModels/HomeLibraryVisibility.swift",
+      "Sources/CoreModels/HeroSettings.swift",
+      "Sources/AppRuntime/HeroDiscoveryRuntime.swift",
+      "Sources/ProviderTrailers/YouTubeTrailerProvider.swift"
+    ],
+    "watch": [
+      "Sources/FeatureSettings/CustomizeHomeDetailView.swift",
+      "Sources/FeatureSettings/HomeRowsSettingsView.swift",
+      "Sources/FeatureSettings/Hero",
+      "Sources/FeatureSettings/NavigationLibrariesDetailView.swift",
+      "Sources/CoreModels/HomeLibraryVisibility",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift"
     ]
   },
   {
     "slug": "playback",
-    "title": "Playback and audio",
-    "section": "Watching",
+    "title": "Player controls",
+    "seoTitle": "Use Plozz player controls, versions, autoplay, and skip markers",
+    "description": "Navigate the player, choose versions, configure autoplay and skip behavior, and understand resume rewind and chapter limits.",
+    "section": "Playback",
+    "kind": "guide",
     "file": "playback.md",
     "sources": [
       "Sources/FeaturePlayback/CustomPlayerContainer.swift",
       "Sources/FeaturePlayback/PlayerControls.swift",
-      "Sources/CoreModels/StreamingQualitySupport.swift",
+      "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
       "Sources/FeatureHomeCore/PlayerVersionSelection.swift",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-      "Sources/AppShelliOS/PlozziOSStreamingQuality.swift",
-      "Sources/FeatureSettings/PreferenceDetailViews.swift"
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/MetadataKit/CommunitySkipMarkers.swift",
+      "Sources/CoreModels/PlaybackSettings.swift"
     ],
     "watch": [
-      "Sources/FeaturePlayback/",
+      "Sources/FeaturePlayback/Player",
+      "Sources/FeatureHomeCore/PlayerVersionSelection.swift",
       "Sources/AppShelliOS/PlozziOSPlayer",
-      "Sources/AppShelliOS/PlozziOSStreamingQuality.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
-      "Sources/CoreModels/Playback",
-      "Sources/CoreModels/Streaming"
+      "Sources/CoreModels/PlaybackSettings.swift",
+      "Sources/MetadataKit/CommunitySkipMarkers.swift"
+    ]
+  },
+  {
+    "slug": "streaming-quality",
+    "title": "Streaming quality",
+    "seoTitle": "Set Plozz streaming quality for Wi-Fi and cellular",
+    "description": "Choose network-specific quality on iPhone or iPad, change one stream, and distinguish original playback from server conversion.",
+    "section": "Playback",
+    "kind": "guide",
+    "file": "streaming-quality.md",
+    "sources": [
+      "Sources/AppShelliOS/PlozziOSStreamingQuality.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
+      "Sources/CoreModels/StreamingQuality.swift",
+      "Sources/CoreModels/StreamingQualitySupport.swift",
+      "Sources/ProviderJellyfin/JellyfinStreamingQuality.swift",
+      "Sources/ProviderPlex/PlexStreamingQuality.swift",
+      "Sources/ProviderSilo/SiloStreamingQuality.swift",
+      "Sources/CoreModels/ProviderKind.swift",
+      "Sources/CoreModels/PlaybackReadAhead.swift",
+      "Sources/FeatureSettings/PlaybackReadAheadControl.swift",
+      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
+    ],
+    "watch": [
+      "Sources/AppShelliOS/PlozziOSStreamingQuality.swift",
+      "Sources/CoreModels/Streaming",
+      "Sources/ProviderJellyfin/JellyfinStreamingQuality.swift",
+      "Sources/ProviderPlex/PlexStreamingQuality.swift",
+      "Sources/ProviderSilo/SiloStreamingQuality.swift",
+      "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+    ]
+  },
+  {
+    "slug": "audio",
+    "title": "Audio tracks and output",
+    "seoTitle": "Plozz audio languages, sync, and Apple TV height audio",
+    "description": "Select audio tracks, set language preferences, adjust timing, and check TrueHD Atmos and DTS:X conversion requirements.",
+    "section": "Playback",
+    "kind": "guide",
+    "file": "audio.md",
+    "sources": [
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/FeaturePlayback/PlayerControls.swift",
+      "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
+      "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
+      "Sources/FeaturePlayback/PlaybackAudioOutputReader.swift",
+      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
+      "Sources/CoreModels/PlaybackSettings.swift"
+    ],
+    "watch": [
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/FeaturePlayback/PlaybackAudio",
+      "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
+      "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
+      "Sources/CoreModels/PlaybackSettings.swift"
     ]
   },
   {
     "slug": "subtitles",
     "title": "Subtitles",
-    "section": "Watching",
+    "seoTitle": "Choose, style, and synchronize subtitles in Plozz",
+    "description": "Select or search subtitles, use a second text track, set language and SDH preferences, and resolve timing or image-subtitle limits.",
+    "section": "Playback",
+    "kind": "guide",
     "file": "subtitles.md",
     "sources": [
       "Sources/FeaturePlayback/PlayerControls.swift",
@@ -130,11 +249,11 @@
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
-      "Sources/CoreUI/ProfileSettingsCategory.swift"
+      "Sources/FeaturePlayback/SubtitleStyleSettingsView.swift"
     ],
     "watch": [
       "Sources/FeaturePlayback/Subtitle",
-      "Sources/FeaturePlayback/PlayerControls",
+      "Sources/FeaturePlayback/PlayerControls.swift",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
@@ -142,9 +261,81 @@
     ]
   },
   {
+    "slug": "music",
+    "title": "Listen to music",
+    "seoTitle": "Play server music, playlists, and lyrics in Plozz on Apple TV",
+    "description": "Find eligible Plex, Jellyfin, or Emby music libraries, control album and playlist queues, show lyrics, and connect Last.fm.",
+    "section": "Playback",
+    "kind": "guide",
+    "file": "music.md",
+    "sources": [
+      "Sources/AppShell/MainTabView.swift",
+      "Sources/AppShell/MusicAvailabilityScope.swift",
+      "Sources/AppShell/AppState.swift",
+      "Sources/FeatureMusic/MusicAggregator.swift",
+      "Sources/FeatureMusic/MusicScreens.swift",
+      "Sources/FeatureMusic/MusicTabView.swift",
+      "Sources/FeatureMusic/AudioPlaybackController.swift",
+      "Sources/FeatureMusic/NowPlayingView.swift",
+      "Sources/FeatureMusic/MiniPlayerView.swift",
+      "Sources/ProviderPlex/PlexMusicProvider.swift",
+      "Sources/ProviderJellyfin/JellyfinMusicProvider.swift",
+      "Sources/CoreModels/ProviderKind.swift",
+      "Sources/LastFmService/LastFmScrobbler.swift",
+      "Sources/FeatureSettings/IntegrationsDetailView.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift"
+    ],
+    "watch": [
+      "Sources/FeatureMusic/",
+      "Sources/AppShell/MusicAvailabilityScope.swift",
+      "Sources/ProviderPlex/PlexMusicProvider.swift",
+      "Sources/ProviderJellyfin/JellyfinMusicProvider.swift",
+      "Sources/LastFmService/",
+      "Sources/AppShell/MainTabView.swift"
+    ]
+  },
+  {
+    "slug": "live-tv",
+    "title": "IPTV and Live TV",
+    "seoTitle": "Set up IPTV, guide listings, and library channels in Plozz",
+    "description": "Add IPTV or server TV, organize channels and guide data, use four-pane Multiview, and create channels from eligible libraries.",
+    "section": "Playback",
+    "kind": "reference",
+    "file": "live-tv.md",
+    "sources": [
+      "Sources/FeatureAuth/IPTVSignInView.swift",
+      "Sources/ProviderIPTV/IPTVProvider.swift",
+      "Sources/AppRuntime/AccountsProvidersModel.swift",
+      "Sources/FeatureLiveTV/LiveTVServerSetupView.swift",
+      "Sources/FeatureLiveTV/LiveTVSourcesView.swift",
+      "Sources/FeatureSettings/LiveTVSettingsView.swift",
+      "Sources/CoreModels/LiveTVMultiviewFavorite.swift",
+      "Sources/FeatureLiveTVCore/LiveTVMultiviewCoordinator.swift",
+      "Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift",
+      "Sources/FeatureLiveTV/LiveTVChannelPreferencesView.swift",
+      "Sources/FeatureLiveTV/LibraryChannelEditorView.swift",
+      "Sources/FeatureLiveTVCore/LibraryChannelService.swift",
+      "Sources/AppRuntime/LiveTVLibraryRuntime.swift",
+      "Sources/FeaturePlayback/LibraryChannelPlaybackSession.swift",
+      "Sources/ProviderJellyfin/JellyfinLibraryChannels.swift",
+      "Sources/ProviderPlex/PlexLibraryChannels.swift"
+    ],
+    "watch": [
+      "Sources/FeatureLiveTV/",
+      "Sources/FeatureLiveTVCore/",
+      "Sources/ProviderIPTV/",
+      "Sources/CoreModels/LiveTV",
+      "Sources/FeatureSettings/LiveTVSettingsView.swift",
+      "Sources/FeatureAuthCore/IPTV"
+    ]
+  },
+  {
     "slug": "downloads",
     "title": "Watch offline",
-    "section": "Watching",
+    "seoTitle": "Download videos for offline viewing in Plozz on iPhone and iPad",
+    "description": "Save and verify an offline copy, choose download quality and networks, manage storage, and understand background-transfer limits.",
+    "section": "Playback",
+    "kind": "guide",
     "file": "downloads.md",
     "sources": [
       "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift",
@@ -154,20 +345,174 @@
       "Sources/ProviderSilo/SiloDownloads.swift",
       "Sources/AppShelliOS/PlozziOSDownloadNotifications.swift",
       "Sources/AppShelliOS/PlozziOSDownloadNotificationNavigation.swift",
-      "Sources/AppShelliOS/PlozziOSDownloadActivity.swift"
+      "Sources/AppShelliOS/PlozziOSDownloadActivity.swift",
+      "Sources/MediaDownloads/DirectShareDownloadSource.swift"
     ],
     "watch": [
       "Sources/MediaDownloads/",
       "Sources/AppShelliOS/PlozziOSDownload",
       "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift",
       "Sources/AppShelliOS/SiloOfflineDownload.swift",
-      "Sources/ProviderSilo/Silo"
+      "Sources/ProviderSilo/SiloDownloads.swift",
+      "Sources/ProviderPlex/PlexDownloads.swift"
+    ]
+  },
+  {
+    "slug": "appearance",
+    "title": "Appearance and language",
+    "seoTitle": "Change Plozz themes, cards, artwork, and interface language",
+    "description": "Adjust card size and labels, choose library or online artwork, customize individual views, and separate app language from media languages.",
+    "section": "Personalize",
+    "kind": "guide",
+    "file": "appearance.md",
+    "sources": [
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/FeatureSettings/CardAppearanceControls.swift",
+      "Sources/FeatureSettings/ArtworkSettingsControls.swift",
+      "Sources/FeatureSettings/AppLanguagePicker.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/CoreModels/ArtworkSettings.swift",
+      "Sources/CoreModels/ThemeSettings.swift",
+      "Sources/CoreModels/TransparencyPreferenceStore.swift",
+      "Sources/CoreUI/ProfileSettingsCategory.swift"
+    ],
+    "watch": [
+      "Sources/FeatureSettings/CardAppearanceControls.swift",
+      "Sources/FeatureSettings/ArtworkSettingsControls.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/FeatureSettings/AppLanguagePicker.swift",
+      "Sources/CoreModels/ArtworkSettings.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+    ]
+  },
+  {
+    "slug": "spoiler-protection",
+    "title": "Spoiler protection",
+    "seoTitle": "Hide episode spoilers and change Continue Watching cards in Plozz",
+    "description": "Protect unwatched episode images and text, hide ratings separately, and choose Continue Watching artwork without changing watch history.",
+    "section": "Personalize",
+    "kind": "guide",
+    "file": "spoiler-protection.md",
+    "sources": [
+      "Sources/CoreModels/SpoilerSettings.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/FeatureSettings/CustomizeHomeDetailView.swift",
+      "Sources/FeatureSettings/ContinueWatchingArtworkPicker.swift",
+      "Sources/CoreUI/ContinueWatchingArtworkSwatch.swift",
+      "Sources/CoreUI/ContinueWatchingArtworkSource.swift",
+      "Sources/CoreUI/SpoilerRevealBox.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/AppShelliOS/PlozziOSHomeView.swift",
+      "Sources/AppShelliOS/PlozziOSPosterCard.swift"
+    ],
+    "watch": [
+      "Sources/CoreModels/Spoiler",
+      "Sources/FeatureSettings/CustomizeHomeDetailView.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/CoreUI/ContinueWatching",
+      "Sources/CoreUI/Spoiler",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+    ]
+  },
+  {
+    "slug": "circadian-mode",
+    "title": "Circadian Mode",
+    "seoTitle": "Schedule warm and dim playback with Plozz Circadian Mode",
+    "description": "Choose sunset-based or manual dimming, adjust warmth and fade, preview the schedule, and restore the normal app picture.",
+    "section": "Personalize",
+    "kind": "guide",
+    "file": "circadian-mode.md",
+    "sources": [
+      "Sources/FeatureSettings/NightShiftDetailView.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/CoreModels/NightShiftSettings.swift",
+      "Sources/CoreModels/NightShiftRegion.swift",
+      "Sources/CoreUI/NightShiftOverlay.swift"
+    ],
+    "watch": [
+      "Sources/FeatureSettings/NightShiftDetailView.swift",
+      "Sources/CoreModels/NightShift",
+      "Sources/CoreUI/NightShift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift"
+    ]
+  },
+  {
+    "slug": "metadata-and-ratings",
+    "title": "Metadata and ratings",
+    "seoTitle": "Configure Plozz metadata, artwork sources, and ratings",
+    "description": "Choose metadata priority, verify an optional TMDB token, understand rating availability, and troubleshoot incorrect matches or cached artwork.",
+    "section": "Personalize",
+    "kind": "guide",
+    "file": "metadata-and-ratings.md",
+    "sources": [
+      "Sources/FeatureSettings/MetadataSettingsDetailView.swift",
+      "Sources/AppShelliOS/PlozziOSMetadataSettingsView.swift",
+      "Sources/AppShell/MetadataSettingsWiring.swift",
+      "Sources/AppShelliOS/PlozziOSMetadataSettingsWiring.swift",
+      "Sources/CoreModels/MetadataProviderSettings.swift",
+      "Sources/MetadataKit/MetadataEnrichmentConfig.swift",
+      "Sources/MetadataKit/MetadataEnrichmentPipeline.swift",
+      "Sources/MetadataKit/TMDBKeyValidator.swift",
+      "Sources/RatingsService/RatingsServiceFactory.swift",
+      "Sources/RatingsService/RatingsServiceConfig.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/FeatureSettings/HeroSettingsControls.swift",
+      "Sources/CoreModels/MediaItemActionCatalog.swift",
+      "Sources/FeatureSettings/ArtworkSettingsControls.swift"
+    ],
+    "watch": [
+      "Sources/MetadataKit/",
+      "Sources/RatingsService/",
+      "Sources/FeatureSettings/MetadataSettingsDetailView.swift",
+      "Sources/AppShelliOS/PlozziOSMetadata",
+      "Sources/CoreModels/MetadataProviderSettings.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift"
+    ]
+  },
+  {
+    "slug": "profiles-and-locks",
+    "title": "Profiles, kids, and locks",
+    "seoTitle": "Set up Plozz profiles, Kids profiles, and parental PINs",
+    "description": "Separate Plozz profiles from server users, configure profile locks and Kids safeguards, and understand automatic sign-in and deletion.",
+    "section": "Accounts & sync",
+    "kind": "guide",
+    "file": "profiles-and-locks.md",
+    "sources": [
+      "Sources/FeatureSettings/ProfileDetailView.swift",
+      "Sources/FeatureSettings/ProfileSettingsDetailView.swift",
+      "Sources/FeatureProfiles/ProfileEditorView.swift",
+      "Sources/FeatureProfiles/ProfileLockSetupView.swift",
+      "Sources/FeatureProfiles/AutomaticSignInSettings.swift",
+      "Sources/AppRuntime/PlexHomeUsersModel.swift",
+      "Sources/AppShelliOS/PlozziOSAppModel.swift",
+      "Sources/FeatureSettings/ParentalPINDetailView.swift",
+      "Sources/FeatureSettings/GrownUpsUnlockView.swift",
+      "Sources/FeatureSettings/MyLibrariesDetailView.swift",
+      "Sources/CoreUI/ProfileLockCopy.swift",
+      "Sources/CoreModels/Profile.swift",
+      "Sources/AppShell/RootView.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/FeatureSettings/ProfileSeerrSetupView.swift",
+      "Sources/SeerService/SeerService.swift"
+    ],
+    "watch": [
+      "Sources/FeatureProfiles/",
+      "Sources/FeatureSettings/Profile",
+      "Sources/CoreModels/Profile",
+      "Sources/CoreUI/ProfileLockCopy.swift",
+      "Sources/FeatureSettings/ParentalPINDetailView.swift",
+      "Sources/AppShelliOS/PlozziOSParental"
     ]
   },
   {
     "slug": "profiles-and-sync",
     "title": "Profiles and sync",
-    "section": "Your setup",
+    "seoTitle": "Sync Plozz settings and set up another device safely",
+    "description": "Compare iCloud Sync, nearby setup, tracker credentials, and server history, with clear local-state and destructive-reset boundaries.",
+    "section": "Accounts & sync",
+    "kind": "guide",
     "file": "profiles-and-sync.md",
     "sources": [
       "Sources/CoreModels/ProviderKind.swift",
@@ -175,23 +520,128 @@
       "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift",
       "Sources/AppShelliOS/PlozziOSSyncSetupReceiveView.swift",
       "Sources/FeatureSyncCloud/CloudConfigSyncService.swift",
+      "Sources/FeatureSettings/SyncEraseDataView.swift",
+      "Sources/AppRuntime/TrackerTokenSyncBridge.swift",
       "Sources/CoreModels/PlaybackSettings.swift",
+      "Sources/CoreModels/PlaybackReadAhead.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-      "Sources/FeatureSettings/SettingsView.swift"
+      "Sources/FeatureSettings/SettingsView.swift",
+      "Sources/FeatureSettings/IntegrationsDetailView.swift",
+      "Sources/FeatureSyncSetup/BonjourPairingTransport.swift",
+      "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
     ],
     "watch": [
-      "Sources/FeatureProfiles/",
       "Sources/FeatureSyncSetup/",
       "Sources/FeatureSyncCloud/",
       "Sources/AppShelliOS/PlozziOSSyncSetup",
-      "Sources/FeatureSettings/SettingsView.swift",
-      "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+      "Sources/FeatureSettings/Sync",
+      "Sources/AppRuntime/TrackerTokenSyncBridge.swift",
+      "Sources/FeatureSettings/IntegrationsDetailView.swift"
+    ]
+  },
+  {
+    "slug": "trackers",
+    "title": "Tracking integrations",
+    "seoTitle": "Connect Plozz to Trakt, Simkl, anime trackers, and Last.fm",
+    "description": "Choose a profile-owned tracker, authorize the right account, understand media and build eligibility, and retry connection errors safely.",
+    "section": "Accounts & sync",
+    "kind": "guide",
+    "file": "trackers.md",
+    "sources": [
+      "Sources/FeatureSettings/IntegrationsDetailView.swift",
+      "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift",
+      "Sources/AppShelliOS/TrackerBrowserAuthorization.swift",
+      "Sources/AppShell/RealtimePlaybackScrobbler.swift",
+      "Sources/AppShelliOS/PlozziOSTrackerScrobbler.swift",
+      "Sources/TraktService/TraktScrobbler.swift",
+      "Sources/SimklService/SimklScrobbler.swift",
+      "Sources/AniListService/AniListScrobbler.swift",
+      "Sources/MALService/MALScrobbler.swift",
+      "Sources/LastFmService/LastFmScrobbler.swift",
+      "Sources/WetrakrService/WetrakrConfig.swift",
+      "Sources/WetrakrService/WetrakrScrobbler.swift",
+      "Sources/CoreModels/RuntimeFeatureFlags.swift",
+      "Sources/AppRuntime/TrackerTokenSyncBridge.swift"
+    ],
+    "watch": [
+      "Sources/FeatureSettings/IntegrationsDetailView.swift",
+      "Sources/AppShelliOS/PlozziOSTracker",
+      "Sources/CoreModels/RuntimeFeatureFlags.swift",
+      "Sources/TraktService/",
+      "Sources/AppRuntime/TrackerTokenSyncBridge.swift",
+      "Sources/AppShell/RealtimePlaybackScrobbler.swift"
+    ]
+  },
+  {
+    "slug": "media-requests",
+    "title": "Request movies and shows",
+    "seoTitle": "Request movies and TV seasons through Seerr in Plozz",
+    "description": "Connect Seerr, map Plozz profiles to request users, submit eligible titles or seasons, and resolve permission or relinking problems.",
+    "section": "Accounts & sync",
+    "kind": "guide",
+    "file": "media-requests.md",
+    "sources": [
+      "Sources/FeatureSettings/SeerDetailView.swift",
+      "Sources/FeatureSettings/ProfileSeerrSetupView.swift",
+      "Sources/AppShelliOS/PlozziOSSeerrSettingsView.swift",
+      "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
+      "Sources/AppShell/HomeTab.swift",
+      "Sources/SeerService/SeerService.swift",
+      "Sources/SeerService/SeerMapper.swift",
+      "Sources/CoreModels/SeerRequestIdentity.swift",
+      "Sources/CoreModels/MediaRequestActionResult.swift"
+    ],
+    "watch": [
+      "Sources/SeerService/",
+      "Sources/FeatureSettings/SeerDetailView.swift",
+      "Sources/FeatureSettings/ProfileSeerrSetupView.swift",
+      "Sources/AppShelliOS/PlozziOSSeerrSettingsView.swift",
+      "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
+      "Sources/CoreModels/SeerRequestIdentity.swift"
+    ]
+  },
+  {
+    "slug": "platform-controls",
+    "title": "Device and system controls",
+    "seoTitle": "Plozz remote, touch, AirPlay, and Picture in Picture controls",
+    "description": "Learn device-specific shortcuts, Apple TV display transitions and Top Shelf, plus AirPlay subtitle and Picture in Picture limitations.",
+    "section": "Help",
+    "kind": "reference",
+    "file": "platform-controls.md",
+    "sources": [
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/FeaturePlayback/PlayerControls.swift",
+      "Sources/FeaturePlayback/PlayerTouchGestureSurface.swift",
+      "Sources/FeaturePlayback/PlayerTouchGestureState.swift",
+      "Sources/AppShelliOS/PlozziOSPlayerKeyboardControls.swift",
+      "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
+      "Sources/AppShelliOS/PlozziOSPictureInPictureController.swift",
+      "Sources/FeaturePlayback/PlayerZoomSettings.swift",
+      "Sources/TopShelfKit/TopShelfSnapshot.swift",
+      "Sources/TopShelfKit/TopShelfPublisher.swift",
+      "Sources/AppShell/HomeTabRuntime.swift",
+      "Sources/FeaturePlayback/NativeSubtitleCueOutput.swift",
+      "Sources/FeaturePlayback/NativeVideoEngine.swift",
+      "Sources/FeaturePlayback/LiveChannelPlayerView.swift",
+      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
+      "Sources/FeatureSettings/ArtworkSettingsControls.swift"
+    ],
+    "watch": [
+      "Sources/FeaturePlayback/PlayerTouch",
+      "Sources/AppShelliOS/PlozziOSPlayer",
+      "Sources/AppShelliOS/PlozziOSPictureInPictureController.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/TopShelfKit/",
+      "Sources/AppShell/HomeTabRuntime.swift"
     ]
   },
   {
     "slug": "troubleshooting",
     "title": "Troubleshooting",
+    "seoTitle": "Troubleshoot Plozz connections, playback, libraries, and sync",
+    "description": "Start with symptom-specific checks, avoid unnecessary resets, and collect useful diagnostics without exposing private credentials.",
     "section": "Help",
+    "kind": "guide",
     "file": "troubleshooting.md",
     "sources": [
       "Sources/FeatureAuth/AuthView.swift",
@@ -201,12 +651,17 @@
       "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift",
       "Sources/FeatureLiveTV/LiveTVSourcesView.swift",
       "Sources/FeatureLiveTV/LiveTVServerSetupView.swift",
-      "Sources/FeatureSettings/SendDiagnosticsCard.swift"
+      "Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift",
+      "Sources/FeatureSettings/SendDiagnosticsCard.swift",
+      "Sources/FeatureSettings/MyLibrariesDetailView.swift",
+      "Sources/FeatureSettings/NightShiftDetailView.swift",
+      "Sources/AppShelliOS/PlozziOSStreamingQuality.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift"
     ],
     "watch": [
+      "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
       "Sources/FeatureSettings/SendDiagnosticsCard.swift",
       "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift",
-      "Sources/CoreModels/AppLinks.swift",
       "Sources/FeatureAuth/",
       "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift",
       "Sources/FeatureLiveTV/LiveTVSourcesView.swift"

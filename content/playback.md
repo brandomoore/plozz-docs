@@ -1,28 +1,35 @@
-# Playback and audio
+# Player controls
 
-Use player controls to choose audio or video versions without leaving your video.
+Reveal the controls to change playback without leaving the video. Options are shown only when the active session can use them.
+
+## Reach the controls
+
+On Apple TV, press **Up** from the scrub surface for Playback, Audio, and Subtitles. Press **Down** for the information area and available episode or playlist navigation. On iPhone/iPad, tap the video and open its options.
+
+Use the timeline to seek. Apple TV's **Seek without pausing** setting controls whether you must pause first; [device controls](/platform-controls/) explains remote, touch, and keyboard differences.
 
 ## Choose audio or a version
 
-1. On Apple TV, press **Up** to reach the playback controls. On iPhone or iPad, tap the video to reveal them.
-2. Open **Audio** to select a track, or **Version** to choose among available files or editions. On iPhone/iPad, both are in playback options.
+Open **Audio** to select a track, or **Version** to choose among available files or editions. On iPhone/iPad, both are in playback options.
 
 Version switching stays on the active server and account. It resumes at your current position, but different cuts can have different timelines.
 
 Use **Settings > Playback > Version selection** to choose whether Plozz asks each time or remembers your choice.
 
-## Limit streaming data
+## Autoplay and skipping
 
-On **iPhone and iPad only**, open **Settings > Playback** and set separate limits for **Local network**, **Remote Wi-Fi / Ethernet**, and **Cellular**.
+Under **Settings > Playback**, set autoplay separately for the next episode and next playlist item. Both default to on. **Show Up Next card** controls the shortcut card separately: leaving the card on does not require automatic playback.
 
-The player’s **Quality** control changes only the current video. Saved network defaults remain unchanged.
+**Skip intros, credits & more** can show a button or skip automatically when markers exist. You can set different behavior for intros, credits, recaps, previews, and commercials.
 
-These controls apply to Plex, Jellyfin, Emby, and Silo movies and episodes—not Apple TV, music, Live TV, or network shares. Limits include audio. Server conversion may change HDR or audio formats; available choices depend on the server. [Download quality](/downloads/) is separate.
+**Use community markers** is enabled by default. It looks up missing intro/credits markers using the title's IMDb or TMDB identifier, sending that identifier to IntroDB/TheIntroDB. Disable it to stop these lookups. Marker availability is not guaranteed.
 
-Silo conversion supports H.264 at 480p, 720p, 1080p, or 4K; unsupported conversion choices are unavailable.
+**Rewind on resume** starts a partially watched title before its saved position: five seconds by default, adjustable from zero to 60 seconds. This is intentional rewind, not necessarily lost progress.
 
-## Apple TV height audio
+## Speed, picture, and other navigation
 
-On tvOS 26 or later with compatible equipment, **Settings > Playback > Audio > TrueHD Atmos and DTS:X** controls height audio for supported tracks. Changes apply to new playback sessions.
+Use playback speed and zoom where offered. Fit keeps the full picture; Fill can crop it. Version changes preserve time, not scene identity, so alternate cuts may need manual adjustment.
 
-This uses lossy conversion, not original bitstream passthrough. If those tracks stutter, try turning it off; Dolby Digital Plus Atmos is unaffected.
+The current player exposes episode/playlist navigation rather than a chapter-selection menu. Do not confuse server intro markers with chapter browsing.
+
+For data limits, see [Streaming quality](/streaming-quality/). For languages, timing, or Apple TV height audio, see [Audio tracks and output](/audio/); for captions, see [Subtitles](/subtitles/). [AirPlay and Picture in Picture](/platform-controls/) have additional device and playback-path limitations.

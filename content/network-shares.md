@@ -19,6 +19,8 @@ If asked to approve a certificate or SSH host key, confirm that it matches your 
 
 SFTP uses username-and-password sign-in, not SSH keys. Plain FTP and HTTP WebDAV send credentials unencrypted; prefer an encrypted connection.
 
+NFS uses the export's access rules rather than a Plozz username/password. WebDAV can offer a bearer-token sign-in as well as username/password. Grant only the folder access you intend to use.
+
 ## Find files and refresh
 
 Recognized titles open their normal details. Use a title’s **Browse Files** action to inspect its original folders and files.
@@ -26,3 +28,11 @@ Recognized titles open their normal details. Use a title’s **Browse Files** ac
 Routine scans can skip unchanged folders. On Apple TV, open **Settings > Servers**, select the share, and choose **Scan now** to request a fresh scan.
 
 Shares do not offer server-based streaming-quality controls; [offline downloads](/downloads/) use Original quality only.
+
+## If files or matches are missing
+
+Confirm the selected root contains the files and that the share account can read them. Check **Browse Files** before treating a matching problem as a connection failure.
+
+Choose the content type deliberately: **Personal Videos** avoids movie/TV matching, while an incorrectly classified folder can produce poor catalogue results. A scan updates Plozz's catalogue; it does not rename or reorganize the files on your NAS.
+
+For wrong posters or descriptions after scanning, review [Metadata and ratings](/metadata-and-ratings/). A share has no media-server user enforcing maturity restrictions, so [Kids Profile](/profiles-and-locks/) alone is not a content-rating filter.

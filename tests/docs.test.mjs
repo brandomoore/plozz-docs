@@ -3,8 +3,9 @@ import { test } from 'node:test';
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { runInNewContext } from 'node:vm';
-import { escapeHtml, markdown, validatePages, validSourcePath, pagePath, classifyChanges } from '../tools/lib.mjs';
+import { runInNewContext, createContext, runInContext } from 'node:vm';
+import { escapeHtml, markdown, validatePages, validSourcePath, pagePath, pageAnchors, classifyChanges } from '../tools/lib.mjs';
+import { discoverSurfaces } from '../tools/source-discovery.mjs';
 import { freshness, publishedAsset, handleRequest, PAGES_ORIGIN } from '../worker/handler.mjs';
 
 test('HTML and unsafe Markdown URLs are not executable', () => {
@@ -34,14 +35,17 @@ test('guide limits reject oversized, unreferenced and malformed content', () => 
     assert.equal(pagePath(page.slug), '/');
     assert.throws(() => validatePages([{ ...page, sources: [] }], root));
     assert.throws(() => validatePages([{ ...page, file: '../escape.md' }], root));
-    writeFileSync(resolve(root, 'content/getting-started.md'), '# Get started\n\n' + 'word '.repeat(351));
-    assert.throws(() => validatePages([page], root), /350-word/);
+    writeFileSync(resolve(root, 'content/getting-started.md'), '# Get started\n\n' + 'word '.repeat(451));
+    assert.throws(() => validatePages([page], root), /450-word/);
     writeFileSync(resolve(root, 'content/getting-started.md'), '# Get started\n\n[missing](/missing/)\n');
     assert.throws(() => validatePages([page], root), /broken link/);
     writeFileSync(resolve(root, 'content/getting-started.md'), '# Get started\n\n![image][remote]\n\n[remote]: https://example.com/image.png\n');
     assert.throws(() => validatePages([page], root), /No raw HTML or images/);
     writeFileSync(resolve(root, 'content/getting-started.md'), '# Get started\n\n[anchor](#missing)\n');
     assert.throws(() => validatePages([page], root), /broken link/);
+    writeFileSync(resolve(root, 'content/getting-started.md'), '# Get started\n\n## Connect\n\n[Details](#connect)\n\n## Connect\n\nMore.\n\n## Search results\n\nUseful matches.\n');
+    assert.equal(validatePages([page], root).length, 1);
+    assert.deepEqual(pageAnchors(page, root), ['get-started', 'connect', 'connect-2', 'search-results-2']);
   } finally {
     rmSync(root, { recursive: true, force: true });
   }
@@ -167,4 +171,32 @@ test('Worker entry point exports only its HTTP handler', async () => {
   const entry = await import('../worker/index.mjs');
   assert.deepEqual(Object.keys(entry), ['default']);
   assert.equal(typeof entry.default.fetch, 'function');
+});
+
+test('live settings discovery handles grouped cases, values and comments without dropping controls', () => {
+  const result = discoverSurfaces(['Sources/FeatureHome/View.swift', 'Sources/FeatureHomeCore/Model.swift'], 'enum ProfileSettingsCategory: String {\n case playback, subtitles\n case appearance = "Appearance" // visible category\n}\n', null);
+  assert.deepEqual(result.modules, ['FeatureHome']);
+  assert.deepEqual(result.settingsCategories, ['appearance', 'playback', 'subtitles']);
+  assert.throws(() => discoverSurfaces([], 'enum Empty {}', null), /No profile-settings/);
+  assert.throws(() => discoverSurfaces([], 'case appearance = unknownExpression', null), /Unsupported settings-category/);
+});
+
+test('documentation search finds article text and links to the relevant section', () => {
+  const script = readFileSync(new URL('../public/docs.js', import.meta.url), 'utf8');
+  const context = createContext({
+    document: {
+      querySelector: selector => selector === '.nav-shell' ? {} : selector === '#freshness' ? { dataset: { sourceCommit: 'x', contentHash: 'y' } } : null,
+      querySelectorAll: () => [],
+    },
+    matchMedia: () => ({ matches: false, addEventListener() {} }),
+    fetch: async () => Response.json({ status: 'current', documentedCommit: 'x', contentHash: 'y' }),
+  });
+  runInContext(script, context);
+  const entries = [{ title: 'Appearance', description: 'Personalize the interface.', path: '/appearance/', text: 'Dim the interface at sunset.', sections: [{ id: 'scheduled-dimming', title: 'Scheduled dimming', text: 'Dim the interface at sunset.' }] }];
+  const matches = context.rankPages(entries, 'sunset');
+  assert.equal(matches.length, 1);
+  assert.equal(matches[0].path, '/appearance/#scheduled-dimming');
+  assert(matches[0].snippet.includes('sunset'));
+  assert.equal(context.rankPages(entries, 'unrelated').length, 0);
+  assert.doesNotMatch(script, /\.innerHTML\s*=/);
 });

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "sections": ["Connect", "Library", "Playback", "Personalize", "Accounts & sync", "Help"],
+  "areas": [
+    {"id":"connections","title":"Connect sources","question":"How do I connect each supported server or share, choose the right account, and confirm the connection?"},
+    {"id":"library","title":"Find and organize media","question":"How do I browse, search, filter, use watchlists and collections, find extras, and recover missing library content?"},
+    {"id":"home-navigation","title":"Home and navigation","question":"How do I choose Home rows, hero content, navigation and detail-page presentation, and which profile do changes affect?"},
+    {"id":"appearance","title":"Appearance and language","question":"Which theme, card, density, artwork, language and accessibility-related choices need explanation beyond their labels?"},
+    {"id":"spoilers","title":"Spoiler protection","question":"How do spoiler protection and Continue Watching artwork choices affect what I see?"},
+    {"id":"circadian","title":"Circadian mode","question":"How do automatic and custom dimming/tint schedules work, and how can I override them?"},
+    {"id":"playback","title":"Player controls","question":"How do remote and touch controls, versions, chapters, autoplay, skip actions, zoom and supported playback handoff work?"},
+    {"id":"quality","title":"Streaming quality","question":"How do network-specific quality limits, original playback and server conversion differ?"},
+    {"id":"audio","title":"Audio output","question":"What changes audio output, language and timing, and what are the real height-audio requirements and limitations?"},
+    {"id":"subtitles","title":"Subtitles","question":"How do I select, find, style, synchronize or use multiple subtitles, and which combinations are supported?"},
+    {"id":"music","title":"Music","question":"How do music libraries, queues, playback modes and eligible music tracking work?"},
+    {"id":"live-tv","title":"IPTV and Live TV","question":"How do source setup, guide data, channel operations, Multiview and library channels work, with their limits?"},
+    {"id":"offline","title":"Offline viewing","question":"What can I download, how do I confirm it is usable offline, and how do quality, storage and removal work?"},
+    {"id":"profiles","title":"Profiles and restrictions","question":"How do Plozz profiles differ from server users, and how do locks, kids settings and automatic sign-in affect access?"},
+    {"id":"sync","title":"Sync and device setup","question":"What synchronizes through iCloud, device transfer, server history or cross-server history, and what remains local?"},
+    {"id":"tracking","title":"Tracking integrations","question":"How do the available trackers connect, what media and data do they synchronize, and how do I recover connection problems?"},
+    {"id":"requests","title":"Media requests","question":"How do supported Seerr requests and permissions work without implying that Plozz supplies media?"},
+    {"id":"metadata","title":"Metadata and ratings","question":"How do metadata, artwork and rating sources, credentials, matching and refresh behavior affect displayed information?"},
+    {"id":"help","title":"Troubleshooting and diagnostics","question":"What safe checks distinguish connection, playback, subtitle and metadata problems, and what do resets or diagnostic exports affect?"},
+    {"id":"platforms","title":"Platform-specific behavior","question":"Which meaningful Apple TV, iPhone and iPad controls or integrations differ, including supported system features?"}
+  ]
+}

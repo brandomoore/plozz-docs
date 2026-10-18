@@ -65,7 +65,7 @@ const securityHeaders = {
   'Content-Security-Policy': "default-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'",
   'X-Plozz-Docs-Origin': 'github-pages',
 };
-const assets = new Set(['/docs.css', '/docs.js', '/logo.svg', '/manrope.woff2', '/font-license.txt', '/_source.json', '/sitemap.xml', '/robots.txt', '/404.html', '/index.html']);
+const assets = new Set(['/docs.css', '/docs.js', '/logo.svg', '/manrope.woff2', '/font-license.txt', '/_source.json', '/search-index.json', '/sitemap.xml', '/robots.txt', '/404.html', '/index.html']);
 
 export async function publishedAsset(path, { method = 'GET', version } = {}, request = fetch) {
   const url = new URL(`.${path}`, PAGES_ORIGIN);

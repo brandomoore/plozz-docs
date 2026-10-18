@@ -13,10 +13,16 @@ npm test
 npm run build
 ```
 
-Guides live in `content/`, with navigation and exact app-source citations in
-`content/pages.json`. Each guide is at most 350 words. `source-state.json`
-records the immutable app revision, source fingerprints, content hash and
-independent review provenance.
+Guides live in `content/`, with navigation, distinct search metadata and exact
+app-source citations in `content/pages.json`. `EDITORIAL.md` defines the
+reader-task baseline and when to use a page, section, external link or omission.
+Guides stay concise; focused reference can be longer when it is genuinely useful.
+`content/coverage.json` maps the required areas and live product surfaces to
+useful answers rather than treating article count as completeness.
+
+`source-state.json` records the immutable app revision, verified source-snapshot
+hash, coverage/policy hashes, and independent review provenance. Per-article
+content hashes track real modification dates separately from source checks.
 
 While editing drafts, use `npm run check:content`. Full checks/builds reject
 unreviewed changes until the trusted pipeline finalizes their source state.
@@ -34,12 +40,20 @@ false "up to date" claim.
 GitHub-hosted Ubuntu runners. It also supports a manual full review. No Mac,
 desktop Copilot app, personal token or Cloudflare deployment secret is needed.
 
-1. Compare current app `main` with the documented revision.
+1. Read current app `main` from GitHub and freeze its commit. Compare it with
+   the documented revision and the editorial coverage policy.
 2. If source and deployment are unchanged, stop without calling a model.
-3. For unrelated source changes, update verification metadata without rewriting
-   guides. Unassigned/new source areas and removed citations require review.
-4. A fresh Copilot CLI writing job updates affected guides using frozen source.
-5. A separate fresh review job checks the result against that same source.
+3. Download and fingerprint the complete product-source snapshot—not only the
+   files cited by existing guides. Include product Swift code, relevant
+   documentation/configuration, pinned dependencies and an English UI-label
+   projection. No app build is performed.
+4. Inventory product modules, settings surfaces and profile-settings categories.
+   For identical product inputs, metadata-only updates need no rewrite.
+   New/unmapped surfaces, missing coverage or policy changes require a baseline
+   review, including features that existed before the previous docs run.
+5. A fresh Copilot CLI writer updates useful guides and the coverage ledger.
+   A separate fresh reviewer checks factual accuracy, UI reachability,
+   applicability, completeness against the baseline and editorial/SEO quality.
 6. A non-AI job validates content, citations, word counts and scope, refuses a
    moved docs base, and commits only approved guides/state to this repo's `main`.
 7. The Pages workflow rebuilds that exact commit, refuses an outdated deployment,
@@ -52,7 +66,20 @@ serialized only with other docs runs; app development is never locked.
 
 When app source stays unchanged for 30 days, a metadata-only recheck refreshes
 the verification date and repository activity without calling a model or
-rewriting guides. This also avoids a permanently idle public-repository schedule.
+rewriting guides or changing their article-modification dates. This also avoids
+a permanently idle public-repository schedule.
+
+## Reader experience and search
+
+Navigation groups related tasks, and the landing page links the full guide
+directory. Full-text search includes article sections and can link directly
+to an answer. Stable heading anchors make reference material useful without
+creating a thin page for every setting.
+
+Each page has unique titles/descriptions, canonical and social metadata, and
+appropriate article/breadcrumb data. Sitemap and article dates change only
+when meaningful article content or metadata changes, not on every source audit.
+This helps discovery without promising rankings or manufacturing freshness.
 
 The writer and reviewer use **`gpt-6.1-sol` at `high` effort**, the newest
 available Sol model when configured. The workflow selects it explicitly and

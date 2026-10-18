@@ -1,7 +1,7 @@
 import { execFileSync } from 'node:child_process';
 import { writeFileSync, appendFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { ROOT, readJson, validatePages, validateState } from './lib.mjs';
+import { ROOT, readJson, validatePages, validateState, isContentPath } from './lib.mjs';
 
 const plan = readJson('.docs-work/plan.json');
 const pages = validatePages(readJson('content/pages.json'));
@@ -10,7 +10,7 @@ if (!/^[0-9a-f]{40}$/.test(plan.baseDocsHead ?? '')) throw new Error('Missing im
 if (!process.env.GH_TOKEN) throw new Error('Missing docs-repository publication token.');
 const run = (command, args) => execFileSync(command, args, { cwd: ROOT, encoding: 'utf8', timeout: 120_000 }).trim();
 const changed = execFileSync('git', ['status', '--porcelain', '--untracked-files=all'], { cwd: ROOT, encoding: 'utf8' }).split('\n').filter(Boolean).map(line => line.slice(3));
-if (changed.some(path => !/^(content\/(?:[a-z0-9-]+\.md|pages\.json)|source-state\.json)$/.test(path))) throw new Error('Publication contains non-documentation changes.');
+if (changed.some(path => !isContentPath(path) && path !== 'source-state.json')) throw new Error('Publication contains non-documentation changes.');
 run('git', ['fetch', 'origin', 'main']);
 if (run('git', ['rev-parse', 'origin/main']) !== plan.baseDocsHead) throw new Error('Docs main moved; retry against the new base instead of overwriting it.');
 if (changed.length) {
