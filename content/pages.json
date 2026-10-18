@@ -1,0 +1,212 @@
+[
+  {
+    "slug": "getting-started",
+    "title": "Get started",
+    "section": "Start here",
+    "file": "getting-started.md",
+    "sources": [
+      "README.md",
+      "Sources/AppShell/AddAccountView.swift",
+      "Sources/AppShell/FirstRunProfileView.swift",
+      "Sources/AppShelliOS/PlozziOSOnboardingView.swift",
+      "Sources/AppShelliOS/PlozziOSFirstRunView.swift",
+      "Sources/CoreModels/ProviderKind.swift"
+    ],
+    "watch": [
+      "README.md",
+      "Sources/AppShell/AddAccountView.swift",
+      "Sources/AppShelliOS/AddServerView.swift",
+      "Sources/CoreModels/ProviderKind.swift",
+      "Sources/AppShell/FirstRun",
+      "Sources/AppShelliOS/PlozziOSFirstRun"
+    ]
+  },
+  {
+    "slug": "servers",
+    "title": "Connect a server",
+    "section": "Start here",
+    "file": "servers.md",
+    "sources": [
+      "Sources/FeatureAuth/AuthView.swift",
+      "Sources/FeatureAuth/SiloSignInView.swift",
+      "Sources/AppShelliOS/AddServerView.swift",
+      "Sources/FeatureSettings/ServersAndLibrariesDetailView.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift",
+      "Sources/CoreModels/ProviderKind.swift"
+    ],
+    "watch": [
+      "Sources/FeatureAuth/",
+      "Sources/FeatureAuthCore/",
+      "Sources/AppShell/AddAccountView.swift",
+      "Sources/AppShelliOS/AddServerView.swift",
+      "Sources/FeatureSettings/ServersAndLibrariesDetailView.swift",
+      "Sources/ProviderSilo/"
+    ]
+  },
+  {
+    "slug": "network-shares",
+    "title": "Network shares",
+    "section": "Start here",
+    "file": "network-shares.md",
+    "sources": [
+      "Sources/CoreModels/MediaItemAction.swift",
+      "Sources/AppShell/UnifiedAddShareView.swift",
+      "Sources/AppShelliOS/PlozziOSUnifiedAddShareView.swift",
+      "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift",
+      "Sources/AppShelliOS/PlozziOSDownloadsView.swift",
+      "Sources/FeatureSettings/ServerDetailView.swift",
+      "Sources/FeatureShareOnboarding/MediaShareTransportCatalog.swift",
+      "Sources/ProviderShare/ShareScanner.swift"
+    ],
+    "watch": [
+      "Sources/AppShell/UnifiedAddShareView.swift",
+      "Sources/AppShelliOS/PlozziOSUnifiedAddShareView.swift",
+      "Sources/ProviderShare/",
+      "Sources/CoreModels/MediaShareLibraryConfiguration.swift",
+      "Sources/FeatureShareOnboarding/",
+      "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
+    ]
+  },
+  {
+    "slug": "live-tv",
+    "title": "IPTV and Live TV",
+    "section": "Watching",
+    "file": "live-tv.md",
+    "sources": [
+      "Sources/FeatureAuth/IPTVSignInView.swift",
+      "Sources/ProviderIPTV/IPTVProvider.swift",
+      "Sources/AppRuntime/AccountsProvidersModel.swift",
+      "Sources/FeatureLiveTV/LiveTVServerSetupView.swift",
+      "Sources/FeatureLiveTV/LiveTVSourcesView.swift",
+      "Sources/FeatureSettings/LiveTVSettingsView.swift",
+      "Sources/CoreModels/LiveTVMultiviewFavorite.swift",
+      "Sources/FeatureLiveTVCore/LiveTVMultiviewCoordinator.swift"
+    ],
+    "watch": [
+      "Sources/FeatureLiveTV/",
+      "Sources/FeatureLiveTVCore/",
+      "Sources/ProviderIPTV/",
+      "Sources/CoreModels/LiveTVMultiviewFavorite.swift",
+      "Sources/FeatureSettings/LiveTVSettingsView.swift",
+      "Sources/FeatureAuthCore/IPTV"
+    ]
+  },
+  {
+    "slug": "playback",
+    "title": "Playback and audio",
+    "section": "Watching",
+    "file": "playback.md",
+    "sources": [
+      "Sources/FeaturePlayback/CustomPlayerContainer.swift",
+      "Sources/FeaturePlayback/PlayerControls.swift",
+      "Sources/FeaturePlayback/PlayerViewModel.swift",
+      "Sources/FeatureHomeCore/PlayerVersionSelection.swift",
+      "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/AppShelliOS/PlozziOSStreamingQuality.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift"
+    ],
+    "watch": [
+      "Sources/FeaturePlayback/",
+      "Sources/AppShelliOS/PlozziOSPlayer",
+      "Sources/AppShelliOS/PlozziOSStreamingQuality.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/CoreModels/Playback",
+      "Sources/CoreModels/Streaming"
+    ]
+  },
+  {
+    "slug": "subtitles",
+    "title": "Subtitles",
+    "section": "Watching",
+    "file": "subtitles.md",
+    "sources": [
+      "Sources/FeaturePlayback/PlayerControls.swift",
+      "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
+      "Sources/FeaturePlayback/SubtitleTrackController.swift",
+      "Sources/FeaturePlayback/SubtitleStylePanel.swift",
+      "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/CoreUI/ProfileSettingsCategory.swift"
+    ],
+    "watch": [
+      "Sources/FeaturePlayback/Subtitle",
+      "Sources/FeaturePlayback/PlayerControls",
+      "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/CoreModels/Subtitle"
+    ]
+  },
+  {
+    "slug": "downloads",
+    "title": "Watch offline",
+    "section": "Watching",
+    "file": "downloads.md",
+    "sources": [
+      "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift",
+      "Sources/AppShelliOS/PlozziOSDownloadsModel.swift",
+      "Sources/AppShelliOS/PlozziOSDownloadsView.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/MediaDownloads/DownloadNetworkPolicy.swift",
+      "Sources/ProviderSilo/SiloDownloads.swift"
+    ],
+    "watch": [
+      "Sources/MediaDownloads/",
+      "Sources/AppShelliOS/PlozziOSDownload",
+      "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift",
+      "Sources/AppShelliOS/SiloOfflineDownload.swift",
+      "Sources/ProviderSilo/Silo"
+    ]
+  },
+  {
+    "slug": "profiles-and-sync",
+    "title": "Profiles and sync",
+    "section": "Your setup",
+    "file": "profiles-and-sync.md",
+    "sources": [
+      "Sources/CoreModels/ProviderKind.swift",
+      "Sources/AppShell/SyncSetupSenderPicker.swift",
+      "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift",
+      "Sources/AppShelliOS/PlozziOSSyncSetupReceiveView.swift",
+      "Sources/FeatureSyncSetup/SyncSecrets.swift",
+      "Sources/CoreModels/PlaybackSettings.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/FeatureSettings/SettingsView.swift"
+    ],
+    "watch": [
+      "Sources/FeatureProfiles/",
+      "Sources/FeatureSyncSetup/",
+      "Sources/AppShelliOS/PlozziOSSyncSetup",
+      "Sources/FeatureSettings/SettingsView.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/CoreModels/PlaybackSettings.swift"
+    ]
+  },
+  {
+    "slug": "troubleshooting",
+    "title": "Troubleshooting",
+    "section": "Help",
+    "file": "troubleshooting.md",
+    "sources": [
+      "Sources/FeatureAuth/AuthView.swift",
+      "Sources/FeatureAuth/SiloSignInView.swift",
+      "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
+      "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift",
+      "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift",
+      "Sources/FeatureLiveTV/LiveTVSourcesView.swift",
+      "Sources/FeatureLiveTV/LiveTVServerSetupView.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+    ],
+    "watch": [
+      "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
+      "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift",
+      "Sources/CoreModels/AppLinks.swift",
+      "Sources/FeatureAuth/",
+      "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift",
+      "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+    ]
+  }
+]

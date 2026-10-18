@@ -1,0 +1,17 @@
+name = "plozz-docs"
+account_id = "471672cb7947a45f5e43023a1f02d2f5"
+main = "worker/index.mjs"
+compatibility_date = "2026-08-18"
+workers_dev = false
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+html_handling = "auto-trailing-slash"
+not_found_handling = "404-page"
+run_worker_first = ["/freshness.json"]
+
+[[routes]]
+pattern = "docs.plozz.app"
+zone_id = "a08bbb1dcaf8513b89f47bba04280366"
+custom_domain = true
