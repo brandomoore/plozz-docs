@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync, mkdirSync, rmSync, copyFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { ROOT, SITE, readJson, readBaseline, validatePages, validateState, markdown, escapeHtml as e, pagePath, headingSlug } from './lib.mjs';
+import { ROOT, SITE, readJson, readBaseline, validatePages, validateState, markdown, escapeHtml as e, pagePath, headingSlug, sha256 } from './lib.mjs';
 
 const pages = validatePages(readJson('content/pages.json'));
 const state = validateState(readJson('source-state.json'), pages);
@@ -10,6 +10,8 @@ rmSync(output, { recursive: true, force: true });
 mkdirSync(output, { recursive: true });
 for (const file of ['docs.css', 'docs.js', 'logo.svg', 'manrope.woff2', 'font-license.txt']) copyFileSync(resolve(ROOT, 'public', file), resolve(output, file));
 const displayDate = new Intl.DateTimeFormat('en', { dateStyle: 'long', timeZone: 'UTC' });
+const cssVersion = sha256(readFileSync(resolve(ROOT, 'public/docs.css')));
+const scriptVersion = sha256(readFileSync(resolve(ROOT, 'public/docs.js')));
 const json = value => JSON.stringify(value).replaceAll('<', '\\u003c').replaceAll('>', '\\u003e');
 const plain = tokens => tokens.filter(token => token.type === 'inline').map(token =>
   (token.children ?? []).filter(child => ['text', 'code_inline', 'softbreak', 'hardbreak'].includes(child.type)).map(child => child.content || ' ').join('')).join(' ').replace(/\s+/g, ' ').trim();
@@ -60,14 +62,14 @@ ${page ? '' : '<meta name="robots" content="noindex,follow">'}
 <meta property="og:title" content="${e(title)}"><meta property="og:description" content="${e(description)}"><meta property="og:url" content="${canonical}">
 <meta property="og:image" content="https://plozz.app/og-image.png"><meta property="og:image:alt" content="Plozz media and IPTV player for Apple TV, iPhone and iPad">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${e(title)}"><meta name="twitter:description" content="${e(description)}"><meta name="twitter:image" content="https://plozz.app/og-image.png">
-<link rel="stylesheet" href="/docs.css"><link rel="preload" as="font" type="font/woff2" href="/manrope.woff2" crossorigin>
+<link rel="stylesheet" href="/docs.css?v=${cssVersion}"><link rel="preload" as="font" type="font/woff2" href="/manrope.woff2" crossorigin>
 <meta name="theme-color" content="#09090b">${structured.length ? `<script type="application/ld+json">${json(structured)}</script>` : ''}</head><body data-content-hash="${state.contentHash}">
 <a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="/"><img src="/logo.svg" alt="" width="30" height="30"><span>Plozz <small>docs</small></span></a><div class="header-links"><a href="https://plozz.app">Website</a><a href="https://plozz.app/discord">Discord</a></div></header>
 <div class="layout"><aside><details class="nav-shell" open><summary>Guides and search</summary><label for="guide-search">Search documentation</label><input id="guide-search" type="search" placeholder="A feature, setting or problem" autocomplete="off"><p id="search-status" role="status" hidden></p><ul id="search-results" hidden></ul><nav aria-label="Documentation">${navigation(page?.slug)}</nav><p id="no-guides" hidden>No matching guide.</p></details></aside>
 <main id="main">${page && page.slug !== 'getting-started' ? `<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Plozz docs</a><span aria-hidden="true">/</span><span>${e(page.title)}</span></nav>` : ''}
 <article>${content}</article>${page?.slug === 'getting-started' ? directory() : ''}<footer>${updatedAt ? `<p class="updated">Last updated <time datetime="${e(updatedAt)}">${displayDate.format(new Date(updatedAt))}</time>.</p>` : ''}<div class="footer-links"><a href="https://github.com/brandomoore/plozz-docs${page ? `/blob/main/content/${page.file}` : ''}">Documentation source</a><a href="https://github.com/brandomoore/plozz-docs/issues">Report a docs problem</a></div></footer></main></div>
-<script src="/docs.js" defer></script></body></html>`;
+<script src="/docs.js?v=${scriptVersion}" defer></script></body></html>`;
 }
 for (const page of data) {
   const destination = page.slug === 'getting-started' ? output : resolve(output, page.slug);
