@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { runInNewContext } from 'node:vm';
 import { escapeHtml, markdown, validatePages, validSourcePath, pagePath, classifyChanges } from '../tools/lib.mjs';
-import { freshness } from '../worker/index.mjs';
+import { freshness, publishedAsset, handleRequest, PAGES_ORIGIN } from '../worker/index.mjs';
 
 test('HTML and unsafe Markdown URLs are not executable', () => {
   assert.equal(escapeHtml('<script>"&'), '&lt;script&gt;&quot;&amp;');
@@ -110,4 +110,54 @@ test('reader status never presents invalid or mismatched metadata as current; de
     resize();
     assert.equal(navigation.open, true);
   }
+});
+
+test('published assets stay in the managed origin and never inherit caller credentials', async () => {
+  await publishedAsset('/servers/', { version: 'a'.repeat(40) }, async (url, options) => {
+    assert.equal(url.href, `${PAGES_ORIGIN}servers/?v=${'a'.repeat(40)}`);
+    assert.equal(options.method, 'GET');
+    assert.equal(options.redirect, 'manual');
+    assert.equal(options.headers, undefined);
+    return new Response('guide');
+  });
+  await assert.rejects(() => publishedAsset('/../outside/'), /Invalid docs asset path/);
+  const response = await handleRequest(new Request('https://docs.plozz.app/servers', {
+    headers: { Authorization: 'caller-credential', Cookie: 'private-cookie' },
+  }), async (path, options) => {
+    assert.equal(path, '/servers');
+    assert.equal(options.headers, undefined);
+    return new Response(null, { status: 301, headers: { Location: `${PAGES_ORIGIN}servers/` } });
+  });
+  assert.equal(response.status, 301);
+  assert.equal(response.headers.get('Location'), 'https://docs.plozz.app/servers/');
+  assert.equal(response.headers.get('X-Plozz-Docs-Origin'), 'github-pages');
+  assert.match(response.headers.get('Content-Security-Policy'), /connect-src 'self'/);
+});
+
+test('front door preserves HEAD, 404, read-only methods and unavailable-source status', async () => {
+  const head = await handleRequest(new Request('https://docs.plozz.app/', { method: 'HEAD' }), async () => new Response(null));
+  assert.equal(await head.text(), '');
+  const missing = await handleRequest(new Request('https://docs.plozz.app/not/a/guide'), async path => {
+    assert.equal(path, '/404.html');
+    return new Response('Page not found');
+  });
+  assert.equal(missing.status, 404);
+  const denied = await handleRequest(new Request('https://docs.plozz.app/', { method: 'POST' }), async () => { throw new Error('Should not forward a write'); });
+  assert.equal(denied.status, 405);
+  assert.equal(denied.headers.get('Allow'), 'GET, HEAD');
+  const source = { commit: 'a'.repeat(40), contentHash: 'b'.repeat(64), verifiedAt: '2026-10-18T00:00:00Z' };
+  const current = await handleRequest(new Request('https://docs.plozz.app/freshness.json'), async path => {
+    assert.equal(path, '/_source.json');
+    return Response.json(source);
+  }, async metadata => {
+    assert.deepEqual(metadata, source);
+    return Response.json({ status: 'current' });
+  });
+  assert.equal((await current.json()).status, 'current');
+  const unavailable = await handleRequest(new Request('https://docs.plozz.app/freshness.json'), async () => new Response('', { status: 404 }));
+  assert.equal(unavailable.status, 503);
+  assert.equal((await unavailable.json()).status, 'unknown');
+  const invalidRedirect = await handleRequest(new Request('https://docs.plozz.app/servers'), async () => new Response(null, { status: 302, headers: { Location: 'https://example.com/' } }));
+  assert.equal(invalidRedirect.status, 503);
+  assert.equal(invalidRedirect.headers.get('Location'), null);
 });

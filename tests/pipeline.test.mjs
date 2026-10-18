@@ -60,11 +60,7 @@ if(name==='gh') {
 globalThis.fetch=async input=>{
   const url=String(input), f=JSON.parse(fs.readFileSync('fixture.json'));
   if(url.startsWith('https://raw.githubusercontent.com/')) return new Response(f.source);
-  if(url.startsWith('https://docs.plozz.app/_source.json')) return Response.json({commit:f.liveCommit,contentHash:f.liveHash});
-  if(url.includes('api.cloudflare.com')) {
-    if(url.endsWith('/deployments')) return Response.json({success:true,result:{deployments:[{id:'deployment',versions:[{version_id:'old-version',percentage:100}]}]}});
-    if(url.includes('/versions/')) return Response.json({success:true,result:{resources:{bindings:[]}}});
-  }
+  if(url.startsWith('https://docs.plozz.app/_source.json')) return Response.json({commit:f.liveCommit,contentHash:f.liveHash,verifiedAt:f.liveVerifiedAt});
   throw Error('Unexpected network request: '+url);
 };`);
   const run = (name, args = [], extra = {}) => spawnSync(process.execPath, ['--import', resolve(root, 'preload.mjs'), resolve(root, 'tools', name), ...args], {
@@ -78,7 +74,7 @@ globalThis.fetch=async input=>{
       sourceFiles: { 'README.md': blob }, review: { kind: 'independent-review', model: 'gpt-6.1-sol', reasoningEffort: 'high' },
     };
     save('source-state.json', value);
-    update({ liveHash: value.contentHash });
+    update({ liveHash: value.contentHash, liveVerifiedAt: value.verifiedAt });
     return value;
   };
   const plan = () => save('.docs-work/plan.json', { repository: 'brandomoore/Plozz', commit: revision, mode: 'content', affected: ['getting-started'], changedFiles: [], baseDocsHead: docsRevision });
@@ -88,10 +84,15 @@ globalThis.fetch=async input=>{
 
 test('planner no-op, deployment recovery, metadata, changed source and removed citations', t => {
   const f = fixture(t);
-  f.state();
+  const state = f.state();
   let result = f.run('source.mjs', ['plan']);
   assert.equal(result.status, 0, result.stderr);
   assert.equal(f.read('.docs-work/plan.json').mode, 'none');
+  f.update({ liveVerifiedAt: '2026-10-17T00:00:00Z' });
+  result = f.run('source.mjs', ['plan']);
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(f.read('.docs-work/plan.json').mode, 'deploy');
+  f.update({ liveVerifiedAt: state.verifiedAt });
   f.update({ liveCommit: nextRevision });
   result = f.run('source.mjs', ['plan']);
   assert.equal(result.status, 0, result.stderr);
@@ -175,6 +176,7 @@ test('model jobs require credentials, explicit Sol, standalone approval and unch
   const calls = readFileSync(resolve(f.root, 'calls.jsonl'), 'utf8').trim().split('\n').map(JSON.parse);
   const modelCall = calls.find(call => call.name === 'copilot');
   assert(modelCall.args.includes('--no-auto-update'));
+  assert.equal(modelCall.args[modelCall.args.indexOf('--excluded-tools') + 1], 'task');
   assert.equal(modelCall.args[modelCall.args.indexOf('--reasoning-effort') + 1], 'high');
   f.update({ mutateProtected: true });
   result = f.run('run-agent.mjs', ['review'], { COPILOT_GITHUB_TOKEN: 'fixture' });
@@ -182,18 +184,21 @@ test('model jobs require credentials, explicit Sol, standalone approval and unch
   assert.match(result.stderr, /modified protected infrastructure/);
 });
 
-test('publisher preserves porcelain paths, refuses main races and requires cloud authentication', t => {
+test('publisher preserves porcelain paths and main races without Cloudflare credentials', t => {
   const f = fixture(t);
   f.state();
   f.plan();
   let result = f.run('publish.mjs');
   assert.notEqual(result.status, 0);
-  assert.match(result.stderr, /CLOUDFLARE_API_TOKEN/);
+  assert.match(result.stderr, /publication token/);
   f.update({ status: ' M content/getting-started.md\n' });
-  const env = { CLOUDFLARE_API_TOKEN: 'fixture', GH_TOKEN: 'fixture' };
+  const env = { GH_TOKEN: 'fixture' };
   result = f.run('publish.mjs', [], env);
   assert.equal(result.status, 0, result.stderr);
-  assert.equal(f.read('.docs-work/publication.json').verified, true);
+  assert.equal(f.read('.docs-work/publication.json').phase, 'committed');
+  assert.equal(f.read('.docs-work/publication.json').deployed, false);
+  const calls = readFileSync(resolve(f.root, 'calls.jsonl'), 'utf8').trim().split('\n').map(JSON.parse);
+  assert(!calls.some(call => call.name === 'wrangler'));
   f.update({ docsRevision: nextRevision });
   result = f.run('publish.mjs', [], env);
   assert.notEqual(result.status, 0);

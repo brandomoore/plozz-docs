@@ -30,4 +30,6 @@ Keep guides short, accurate and useful to someone using the app.
   and `npm run build`. Never bypass a failure or change source-state yourself.
 
 The daily cloud workflow is the publication owner. It writes only this
-repository and the `plozz-docs` Worker; it never blocks an app commit.
+repository and its GitHub Pages deployment; it never blocks an app commit.
+GitHub-managed authentication supplies the model and deployment jobs. Never
+request, copy, or persist personal account credentials for this workflow.

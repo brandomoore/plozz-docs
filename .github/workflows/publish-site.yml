@@ -1,0 +1,86 @@
+name: Publish documentation
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      revision:
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docs-site-publication
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      revision: ${{ steps.revision.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.revision || github.sha }}
+          persist-credentials: false
+      - id: revision
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run check && npm test && npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+          retention-days: 1
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.build.outputs.revision }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Refuse an outdated deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_REVISION: ${{ needs.build.outputs.revision }}
+        run: |
+          current=$(gh api "repos/$GITHUB_REPOSITORY/commits/main" --jq .sha)
+          if [ "$current" != "$EXPECTED_REVISION" ]; then
+            echo "::error::Docs main moved; a newer run must publish the latest revision."
+            exit 1
+          fi
+      - id: deployment
+        uses: actions/deploy-pages@v4
+      - run: node tools/verify-publication.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: deployed-docs
+          path: .docs-work/deployment.json
+          include-hidden-files: true
+          if-no-files-found: ignore
+          retention-days: 30

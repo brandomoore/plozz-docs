@@ -33,7 +33,7 @@ if (positionals[0] === 'plan') {
     const response = await fetch(`${SITE}/_source.json`, { headers: { 'Cache-Control': 'no-cache' }, signal: AbortSignal.timeout(15_000) });
     if (!response.ok) throw new Error(`Cannot verify deployed docs (HTTP ${response.status}).`);
     const deployed = await response.json();
-    if (deployed.commit !== previous.commit || deployed.contentHash !== previous.contentHash) mode = 'deploy';
+    if (deployed.commit !== previous.commit || deployed.contentHash !== previous.contentHash || deployed.verifiedAt !== previous.verifiedAt) mode = 'deploy';
   }
   let docsHead = null;
   try { docsHead = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim(); }

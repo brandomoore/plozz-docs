@@ -4,13 +4,6 @@ main = "worker/index.mjs"
 compatibility_date = "2026-08-18"
 workers_dev = false
 
-[assets]
-directory = "./dist"
-binding = "ASSETS"
-html_handling = "auto-trailing-slash"
-not_found_handling = "404-page"
-run_worker_first = ["/freshness.json"]
-
 [[routes]]
 pattern = "docs.plozz.app"
 zone_id = "a08bbb1dcaf8513b89f47bba04280366"

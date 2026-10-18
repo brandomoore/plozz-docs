@@ -7,7 +7,7 @@ const phase = process.argv[2];
 if (!['write', 'review'].includes(phase)) throw new Error('Choose write or review.');
 const model = process.env.DOCS_MODEL;
 if (!/^gpt-\d+(?:\.\d+)?-sol$/.test(model ?? '')) throw new Error('Set an explicit available GPT Sol model; automatic/provider fallbacks are forbidden.');
-if (!process.env.COPILOT_GITHUB_TOKEN) throw new Error('Configure the COPILOT_GITHUB_TOKEN repository secret with Copilot Requests permission.');
+if (!process.env.COPILOT_GITHUB_TOKEN) throw new Error('Missing COPILOT_GITHUB_TOKEN. Cloud jobs must grant copilot-requests: write and supply github.token.');
 const plan = readJson('.docs-work/plan.json');
 if (plan.mode !== 'content') throw new Error('No model work is needed for this source plan.');
 const tracked = execFileSync('git', ['ls-files', '-z'], { cwd: ROOT, encoding: 'utf8' }).split('\0').filter(Boolean);
@@ -34,6 +34,7 @@ delete env.CLOUDFLARE_API_TOKEN;
 const result = execFileSync('copilot', [
   '--model', model, '--reasoning-effort', 'high', '--allow-all-tools',
   '--no-auto-update',
+  '--excluded-tools', 'task',
   '--disable-builtin-mcps', '--secret-env-vars', 'COPILOT_GITHUB_TOKEN',
   '--silent', '--prompt', prompt,
 ], { cwd: ROOT, env, encoding: 'utf8', timeout: 25 * 60_000, maxBuffer: 8 * 1024 * 1024 });

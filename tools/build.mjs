@@ -7,7 +7,7 @@ const state = validateState(readJson('source-state.json'), pages);
 const output = resolve(ROOT, 'dist');
 rmSync(output, { recursive: true, force: true });
 mkdirSync(output, { recursive: true });
-for (const file of ['docs.css', 'docs.js', 'logo.svg', 'manrope.woff2', 'font-license.txt', '_headers']) copyFileSync(resolve(ROOT, 'public', file), resolve(output, file));
+for (const file of ['docs.css', 'docs.js', 'logo.svg', 'manrope.woff2', 'font-license.txt']) copyFileSync(resolve(ROOT, 'public', file), resolve(output, file));
 const date = new Date(state.verifiedAt).toISOString().slice(0, 10);
 const nav = pages.map(page => `<a href="${pagePath(page.slug)}" data-title="${e(page.title.toLowerCase())}">${e(page.title)}</a>`).join('');
 function shell(title, path, content, currentSlug = '') {
