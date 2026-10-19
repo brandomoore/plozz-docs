@@ -20,9 +20,9 @@ Under **Advanced**, choose the transcoding codec or **Force transcoding**. Force
 
 ## Change one video
 
-Reveal the player's options and open **Quality**. This changes the current video without overwriting your saved network defaults.
+Reveal the player's options, open **Quality**, choose a **Quality limit**, then **Apply**. This changes the current video without overwriting saved network defaults.
 
-Quality changes can restart the stream around your current position. Server conversion may alter HDR, audio formats, or subtitle handling. If preserving a particular format matters, compare Maximum and inspect the resulting playback rather than relying only on a resolution label.
+Quality changes briefly reload playback around your current position. Conversion may alter HDR, audio, or subtitles. During conversion, **Current stream** shows the resulting resolution, codecs, HDR, and audio channels where known. A selected limit is not a measurement; **Not available** means the current stream has not supplied that fact.
 
 Silo currently converts to H.264 at 480p, 720p, 1080p, or 4K, with resolution limits based on video height. Unsupported conversion choices are unavailable.
 

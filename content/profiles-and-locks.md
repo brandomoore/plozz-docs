@@ -25,7 +25,7 @@ For a PIN-protected Plex Home user, Plozz can offer to reuse that PIN. This is e
 
 Kids profiles disable external Discovery recommendations. They do **not** add an app-wide maturity filter: library content follows the connected server user's restrictions. This matters especially for network shares without server-user restrictions.
 
-Without a Parental PIN, restricted settings and profile switching remain available. The Parental PIN protects those actions; a Profile Lock protects entry into a particular profile. Removing the Parental PIN does not turn Kids profiles off.
+Without a Parental PIN, restricted settings and profile switching remain available, and Seerr's Kids admin-request block is not enforced. A Profile Lock instead protects entry into a particular profile. Removing the Parental PIN does not turn Kids profiles off.
 
 ## Before deleting or resetting
 

@@ -13,6 +13,8 @@ On iPhone and iPad, **Playlist file** can import an M3U from Files. That catalog
 
 A guide is optional: channels can play without programme listings. Plozz supplies neither channels nor an IPTV subscription.
 
+If import says the address is a video stream or web page, obtain the provider's direct M3U channel-list link instead. An XMLTV URL belongs in **Guide URL**, not the playlist field.
+
 ## Find on-demand titles
 
 If your IPTV provider supplies on-demand movies or shows, available **Movies** and **TV Shows** libraries appear separately from its live channels. Enable them under **Settings > Libraries**, then [browse them normally](/library/). A working channel guide does not guarantee that the provider also supplies an on-demand catalogue.

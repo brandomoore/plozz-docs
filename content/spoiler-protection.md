@@ -33,6 +33,6 @@ Open **Settings > Screens & Navigation > Customize Home > Continue Watching**:
 - **Logo & Artwork** identifies the title on its artwork, using series presentation for episodes.
 - **Thumbnail & Title** puts the title and details below the picture and follows spoiler masking.
 
-Both choices display artwork; neither means “no image.” The mobile picker appears only when the Continue Watching row is enabled. These choices do not mark episodes watched or remove them from the row.
+Both choices display artwork; neither means “no image.” If Continue Watching is absent from Customize Home, restore it with **Add section**. These choices do not mark episodes watched or remove them from the row.
 
 To clear an abandoned resume point instead, use [Remove from Continue Watching](/library/).

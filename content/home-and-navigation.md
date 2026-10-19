@@ -4,19 +4,23 @@ Home rows, the large hero at the top, navigation shortcuts, and detail-page pres
 
 ## Choose Home rows
 
-Open **Settings > Screens & Navigation > Customize Home > Rows on Home**.
+Open **Settings > Screens & Navigation > Customize Home**.
 
 Choose **Match server** to follow server Home arrangements or **Combined rows** to start with rows across libraries. Choosing a preset replaces your custom arrangement after confirmation. With multiple servers, common rows can combine while other server rows stay visible. Plex supplies promoted Home rows, not another client's pinned-library layout.
 
-Press and hold a row for options, move rows to arrange them, or move one to **Hidden**. You can mix combined, individual-library, and server rows. Once you customize the arrangement, it no longer simply follows later server changes.
+Choose **Add section** to add an available row. Open an existing section and choose **Remove section** to hide it from Home. Choose **Reorder**, move the sections, then **Done**. You can mix combined, individual-library, and server rows; the Hero stays pinned at the top.
 
-Hiding a row changes Home, not library access. However, on iPhone/iPad, **Customize Home > Libraries > Enabled** controls browsing too. Use **Settings > Libraries** to review the profile's enabled libraries.
+Adding, removing, or reordering sections saves a custom arrangement instead of continuing to follow server order.
+
+Open **Continue Watching** to set **Merge Next Up rows**, enabled by default. It includes next episodes in Continue Watching and removes their separate rows from the editor. Turn it off to arrange those rows separately.
+
+Removing a section changes Home, not library access. Use **Settings > Libraries** to enable or disable libraries. If available sections fail to load, check the displayed server error and choose **Retry**.
 
 ## Choose the hero
 
-On Apple TV, **Customize Home > Home Layout** offers **Showcase**, where the focused row title fills the background, or **Fullscreen Hero**, with an independent carousel above the rows. The **Hero** section appears only with Fullscreen Hero; mobile shows hero controls directly in Customize Home.
+Open **Hero** in Customize Home. On Apple TV, choose **Showcase**, where the focused row title fills the background, or **Fullscreen Hero**, with an independent carousel above the rows. Showcase has its own ratings and Discovery controls.
 
-Choose content sources such as Continue Watching, recently added titles, Watchlist, selected libraries, collections, or Discovery. Turn off **Show hero** if you prefer rows without the carousel; that switch does not disable Showcase.
+For Fullscreen Hero or mobile, choose sources such as Continue Watching, recently added titles, Watchlist, selected libraries, collections, or Discovery. Turn off **Show hero** for rows without the carousel; it does not disable Showcase.
 
 You can hide watched content, control automatic advancement, choose ratings, and enable a background trailer with its own mute choice. Discovery can recommend titles you do not own; a recommendation is not a playable copy. Discovery is unavailable in Kids profiles.
 

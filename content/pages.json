@@ -98,7 +98,7 @@
     "slug": "library",
     "title": "Find and organize media",
     "seoTitle": "Browse, search, and organize your media in Plozz",
-    "description": "Find titles, filter libraries, jump by letter on Apple TV, manage Watchlist and watched state, and recover missing content.",
+    "description": "Browse titles and collections, choose a server copy, manage Watchlist and watched state, and recover incomplete library results.",
     "section": "Library",
     "kind": "guide",
     "file": "library.md",
@@ -116,13 +116,19 @@
       "Sources/AppShelliOS/PlozziOSExtrasSection.swift",
       "Sources/CoreModels/MediaItemAction.swift",
       "Sources/CoreModels/MediaItemActionCatalog.swift",
-      "Sources/FeatureSettings/MyLibrariesDetailView.swift"
+      "Sources/FeatureSettings/MyLibrariesDetailView.swift",
+      "Sources/CoreUI/LibraryCollectionLoadingView.swift",
+      "Sources/ProviderJellyfin/JellyfinProvider+Collections.swift",
+      "Sources/FeatureHome/DetailHeroView.swift",
+      "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
+      "Sources/CoreUI/PlaybackSourceMenu.swift",
+      "Sources/WetrakrService/WetrakrWatchlistDestination.swift"
     ],
     "watch": [
       "Sources/FeatureHome/Library",
       "Sources/FeatureSearch",
       "Sources/FeatureWatchlistCore/",
-      "Sources/CoreModels/MediaItemAction",
+      "Sources/FeatureHomeCore/Library",
       "Sources/AppRuntime/UniversalWatchlistRuntime.swift",
       "Sources/AppShelliOS/PlozziOSLibraryView.swift"
     ]
@@ -131,29 +137,34 @@
     "slug": "home-and-navigation",
     "title": "Home and navigation",
     "seoTitle": "Customize Plozz Home rows, hero, and navigation",
-    "description": "Arrange Home rows, select hero sources, hide or reorder shortcuts, and choose trailer or theme-music detail backgrounds.",
+    "description": "Add, remove, or reorder Home sections, merge Next Up into Continue Watching, choose hero content, and arrange navigation.",
     "section": "Library",
     "kind": "guide",
     "file": "home-and-navigation.md",
     "sources": [
       "Sources/FeatureSettings/CustomizeHomeDetailView.swift",
       "Sources/FeatureSettings/HomeRowsSettingsView.swift",
+      "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
+      "Sources/FeatureSettings/ContinueWatchingNextUpControl.swift",
       "Sources/FeatureSettings/HomeLayoutPicker.swift",
       "Sources/FeatureSettings/HeroSettingsControls.swift",
       "Sources/FeatureSettings/NavigationLibrariesDetailView.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/CoreModels/HomeRowCustomization.swift",
       "Sources/CoreModels/HomeLibraryVisibility.swift",
+      "Sources/CoreModels/HomeSectionCatalog.swift",
+      "Sources/CoreModels/HomeSectionCatalogModel.swift",
+      "Sources/FeatureHomeCore/HomeAggregator.swift",
       "Sources/CoreModels/HeroSettings.swift",
       "Sources/AppRuntime/HeroDiscoveryRuntime.swift",
       "Sources/ProviderTrailers/YouTubeTrailerProvider.swift"
     ],
     "watch": [
-      "Sources/FeatureSettings/CustomizeHomeDetailView.swift",
-      "Sources/FeatureSettings/HomeRowsSettingsView.swift",
+      "Sources/FeatureSettings/Home",
       "Sources/FeatureSettings/Hero",
-      "Sources/FeatureSettings/NavigationLibrariesDetailView.swift",
-      "Sources/CoreModels/HomeLibraryVisibility",
+      "Sources/FeatureSettings/ContinueWatching",
+      "Sources/CoreModels/Home",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift"
     ]
   },
@@ -161,7 +172,7 @@
     "slug": "playback",
     "title": "Player controls",
     "seoTitle": "Use Plozz player controls, versions, autoplay, and skip markers",
-    "description": "Navigate the player, choose versions, configure autoplay and skip behavior, and understand resume rewind and chapter limits.",
+    "description": "Navigate the player, ask for versions or choose automatically, set series memory and autoplay, and understand skips and resume rewind.",
     "section": "Playback",
     "kind": "guide",
     "file": "playback.md",
@@ -173,6 +184,10 @@
       "Sources/FeatureHomeCore/PlaybackVersionChoiceModel.swift",
       "Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift",
       "Sources/FeatureHomeCore/DetailPlaybackSelection.swift",
+      "Sources/CoreModels/PlaybackVersionSelectionMode.swift",
+      "Sources/CoreModels/VersionPreferenceStore.swift",
+      "Sources/AppShell/PlayerPresentation.swift",
+      "Sources/AppShelliOS/PlozziOSPlayerView.swift",
       "Sources/FeaturePlayback/NextEpisodeCoordinator.swift",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
@@ -182,11 +197,11 @@
     ],
     "watch": [
       "Sources/FeaturePlayback/Player",
-      "Sources/FeatureHomeCore/PlayerVersionSelection.swift",
+      "Sources/FeatureHomeCore/PlaybackVersionChoice",
+      "Sources/FeatureHomeCore/DetailPlaybackSelection.swift",
       "Sources/AppShelliOS/PlozziOSPlayer",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
-      "Sources/CoreModels/PlaybackSettings.swift",
-      "Sources/MetadataKit/CommunitySkipMarkers.swift"
+      "Sources/CoreModels/Playback"
     ]
   },
   {
@@ -209,7 +224,9 @@
       "Sources/CoreModels/ProviderKind.swift",
       "Sources/CoreModels/PlaybackReadAhead.swift",
       "Sources/FeatureSettings/PlaybackReadAheadControl.swift",
-      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
+      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
+      "Sources/FeaturePlayback/CurrentStreamDetailsSection.swift",
+      "Sources/AppShelliOS/PlozziOSPlayerView.swift"
     ],
     "watch": [
       "Sources/AppShelliOS/PlozziOSStreamingQuality.swift",
@@ -332,7 +349,7 @@
       "Sources/FeatureLiveTV/LiveTVServerSetupView.swift",
       "Sources/FeatureLiveTV/LiveTVSourcesView.swift",
       "Sources/FeatureSettings/LiveTVSettingsView.swift",
-      "Sources/CoreModels/LiveTVMultiviewFavorite.swift",
+      "Sources/CoreNetworking/M3UPlaylistParser.swift",
       "Sources/FeatureLiveTVCore/LiveTVMultiviewCoordinator.swift",
       "Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift",
       "Sources/FeatureLiveTV/LiveTVGuideMappingView.swift",
@@ -426,6 +443,8 @@
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/FeatureSettings/CustomizeHomeDetailView.swift",
       "Sources/FeatureSettings/ContinueWatchingArtworkPicker.swift",
+      "Sources/FeatureSettings/HomeRowsSettingsView.swift",
+      "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
       "Sources/CoreUI/ContinueWatchingArtworkSwatch.swift",
       "Sources/CoreUI/ContinueWatchingArtworkSource.swift",
       "Sources/CoreUI/SpoilerRevealBox.swift",
@@ -435,7 +454,7 @@
     ],
     "watch": [
       "Sources/CoreModels/Spoiler",
-      "Sources/FeatureSettings/CustomizeHomeDetailView.swift",
+      "Sources/FeatureSettings/HomeSection",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/CoreUI/ContinueWatching",
       "Sources/CoreUI/Spoiler",
@@ -529,7 +548,9 @@
       "Sources/AppShell/RootView.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/FeatureSettings/ProfileSeerrSetupView.swift",
-      "Sources/SeerService/SeerService.swift"
+      "Sources/SeerService/SeerService.swift",
+      "Sources/CoreModels/ProfileStore.swift",
+      "Sources/AppShell/AppState.swift"
     ],
     "watch": [
       "Sources/FeatureProfiles/",
@@ -576,8 +597,8 @@
   {
     "slug": "trackers",
     "title": "Tracking integrations",
-    "seoTitle": "Connect Plozz to Trakt, Simkl, anime trackers, and Last.fm",
-    "description": "Choose a profile-owned tracker, authorize the right account, understand media and build eligibility, and retry connection errors safely.",
+    "seoTitle": "Connect Trakt, WeTrakr, and other trackers to Plozz",
+    "description": "Connect profile-owned video, anime, or music trackers, sync Watchlists, and recover service connections without unnecessary reconnects.",
     "section": "Accounts & sync",
     "kind": "guide",
     "file": "trackers.md",
@@ -594,6 +615,8 @@
       "Sources/LastFmService/LastFmScrobbler.swift",
       "Sources/WetrakrService/WetrakrConfig.swift",
       "Sources/WetrakrService/WetrakrScrobbler.swift",
+      "Sources/WetrakrService/WetrakrService.swift",
+      "Sources/WetrakrService/WetrakrWatchlistDestination.swift",
       "Sources/CoreModels/RuntimeFeatureFlags.swift",
       "Sources/AppRuntime/TrackerTokenSyncBridge.swift"
     ],
@@ -602,7 +625,7 @@
       "Sources/AppShelliOS/PlozziOSTracker",
       "Sources/CoreModels/RuntimeFeatureFlags.swift",
       "Sources/TraktService/",
-      "Sources/AppRuntime/TrackerTokenSyncBridge.swift",
+      "Sources/WetrakrService/",
       "Sources/AppShell/RealtimePlaybackScrobbler.swift"
     ]
   },
@@ -623,7 +646,10 @@
       "Sources/SeerService/SeerService.swift",
       "Sources/SeerService/SeerMapper.swift",
       "Sources/CoreModels/SeerRequestIdentity.swift",
-      "Sources/CoreModels/MediaRequestActionResult.swift"
+      "Sources/CoreModels/MediaRequestActionResult.swift",
+      "Sources/CoreModels/ProfileStore.swift",
+      "Sources/AppShell/AppState.swift",
+      "Sources/AppShelliOS/PlozziOSAppModel.swift"
     ],
     "watch": [
       "Sources/SeerService/",
@@ -676,7 +702,7 @@
     "slug": "troubleshooting",
     "title": "Troubleshooting",
     "seoTitle": "Troubleshoot Plozz connections, playback, libraries, and sync",
-    "description": "Start with symptom-specific checks, avoid unnecessary resets, and collect useful diagnostics without exposing private credentials.",
+    "description": "Check connection, library, playback, and sync symptoms, share error details safely, and distinguish local reports from diagnostic log uploads.",
     "section": "Help",
     "kind": "guide",
     "file": "troubleshooting.md",
@@ -691,16 +717,23 @@
       "Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift",
       "Sources/FeatureSettings/SendDiagnosticsCard.swift",
       "Sources/FeatureSettings/MyLibrariesDetailView.swift",
-      "Sources/FeatureSettings/NightShiftDetailView.swift",
+      "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift",
       "Sources/AppShelliOS/PlozziOSStreamingQuality.swift",
-      "Sources/FeatureSettings/PreferenceDetailViews.swift"
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/CoreUI/ContentStateView.swift",
+      "Sources/CoreUI/PlaybackFailureView.swift",
+      "Sources/CoreUI/PlaybackDiagnosticDetailsView.swift",
+      "Sources/CoreModels/PlaybackDiagnosticReport.swift",
+      "Sources/AppShelliOS/PlozziOSLibraryView.swift",
+      "Sources/FeaturePlayback/PlayerView.swift",
+      "Sources/FeaturePlayback/InfoPanelView.swift"
     ],
     "watch": [
       "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
       "Sources/FeatureSettings/SendDiagnosticsCard.swift",
       "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift",
-      "Sources/FeatureAuth/",
-      "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift",
+      "Sources/CoreUI/Playback",
+      "Sources/CoreModels/LibraryLoadDiagnostic.swift",
       "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
     ]
   }

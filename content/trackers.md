@@ -8,13 +8,14 @@ Trackers connect to the active **Plozz profile**, not to a particular media serv
 | --- | --- |
 | Trakt | Video scrobbling, watch history, and watchlist sync |
 | Simkl | Video scrobbling, watch history, and watchlist sync |
+| WeTrakr | Movie/episode scrobbling, watch history, and planning-list sync with Watchlist |
 | AniList | Identified anime progress and anime watchlist sync |
 | MyAnimeList | Identified anime progress and anime watchlist sync |
 | Last.fm | Eligible music listening on Apple TV |
 
 AniList and MyAnimeList do not treat every television episode as anime. Matching and usable identifiers matter; anime progress is submitted when playback stops at 80% or more.
 
-WeTrakr has implemented video/watchlist integration but is disabled by the production feature flag. Its settings row appears only in a configured build. Do not expect it just because another build or source listing mentions it.
+WeTrakr appears only when configured in the app build. Follow its browser or device-code connection instructions. Its planning list is used for [Watchlist](/library/), not as a source of playable videos.
 
 ## Connect the correct account
 
@@ -29,6 +30,8 @@ Connected watchlists can affect [Plozz's Watchlist](/library/). Scrobbling sends
 
 ## Recover a connection
 
-Read the displayed error and use **Retry** first when offered. For Trakt, **Reconnect** replaces this profile's connection across its Plozz devices; it does not affect other profiles. Avoid reconnecting repeatedly while a temporary network error is unresolved.
+Read the displayed error and use **Retry** first when offered. For Trakt or WeTrakr sync errors, open Plozz on your other devices and retry when instructed. Reconnecting either service replaces this profile's connection across its Plozz devices, not other profiles. Avoid repeated reconnects during network errors.
+
+If disconnecting WeTrakr reports that session revocation failed, remove Plozz from your connected apps on WeTrakr too.
 
 **Sync across all my servers** is a separate setting: it copies matching watch-state updates between servers. It is not a tracker sign-in or [iCloud configuration sync](/profiles-and-sync/).
