@@ -3,10 +3,10 @@
   "repository": "brandomoore/Plozz",
   "ref": "main",
   "commit": "ad94fbb43402ec69524e360dba8c662a311d62f1",
-  "verifiedAt": "2026-10-20T04:02:23.488Z",
+  "verifiedAt": "2026-10-20T04:37:35.931Z",
   "baselineReviewedAt": "2026-10-20T04:02:23.488Z",
-  "contentHash": "38476b66afe8af715610e41bf80f74d9d2b51d5295da778aadd4ecebd48d8f0b",
-  "coverageHash": "172706ff4284713d09035537526a8577805280ead8d3b98823d7722711b19cb7",
+  "contentHash": "cdc6f692f8c84fa51241e72251cdf879628fed46d26d6061a1a5632bab183ae4",
+  "coverageHash": "9a6112ea45ba564c7352508b7a3687342b8b88ea4f0e35b6af499db96ebf8350",
   "policyHash": "20d22a3d35856338a2f963340244187e95b6844582ab8d7751833ea09032431f",
   "sourceFiles": {
     "README.md": "76650496103c222554b7b26a771c78d89a540fde",
@@ -29,6 +29,8 @@
     "Sources/FeatureAuthCore/ServerAddressesModel.swift": "83e3bc3aafbe88d2def7cda999de244cd56af92c",
     "Sources/CoreUI/ServerAddressSettingsLink.swift": "c1a030e82515c07f499ca439752790dba9722f14",
     "Sources/CoreNetworking/ServerAddressResolver.swift": "564a845a6e0f8b01c268797cb76a625bbd60a1e9",
+    "Sources/FeatureDiscovery/ServerPickerView.swift": "dee41558a8564c296079bdce4f7347361bada26d",
+    "Sources/FeatureDiscoveryCore/ServerPickerViewModel.swift": "9f35de089bebef5e01a4ba63cdfd3f5467af1701",
     "Sources/AppShell/UnifiedAddShareView.swift": "43d9a46c02fb1a3f4cbae222cefbd0c95c02c6f5",
     "Sources/AppShelliOS/PlozziOSUnifiedAddShareView.swift": "bfe187c31688fd9745245555ca94cbfe835218de",
     "Sources/FeatureShareOnboarding/MediaShareTransportCatalog.swift": "8f423d20279725b4783d507a8fa556de668ec480",
@@ -121,8 +123,12 @@
     "Sources/FeaturePlayback/TrackMenuBuilder.swift": "6b31ca4d5cf73761407ca932938af42defbbd28e",
     "Sources/FeaturePlayback/SubtitleStylePanel.swift": "4a85c097d2c0ed1efc25aa98f603b529174f7ad4",
     "Sources/FeaturePlayback/SubtitleStyleSettingsView.swift": "563bf5497e30b9bd4584600aba025211819284f9",
+    "Sources/FeaturePlayback/SystemCaptionAppearance.swift": "19aa5d6817845c0c102f437a39966af33843a4d0",
+    "Sources/FeaturePlayback/SystemCaptionStyleConfirmation.swift": "ab884238434c209e65bdbe248571ca017db96fa4",
     "Sources/CoreModels/SubtitleBehavior.swift": "379188b5266c4dacfc0c70334fe062e50d07d6a6",
     "Sources/CoreModels/SubtitleStyle.swift": "86573e7a151edabc203aff49c532695e2933e694",
+    "App/Resources/Info.plist": "4a3e00316f5979fbf447a8ac998fa24e635cf3d5",
+    "Sources/CoreUI/NowPlayingSession.swift": "2a91c3143e27cc43e199196ad9735f3e34c4efaa",
     "Sources/AppShell/MusicAvailabilityScope.swift": "8ce80da9e94f60c963e84d93ced92db3915d8306",
     "Sources/AppShell/AppState.swift": "167a195292c18c8552fb64d06d273e3ff29bf728",
     "Sources/FeatureMusic/MusicAggregator.swift": "2a3a38b52a08f6577456ea420ff57035598c46e0",
@@ -154,8 +160,9 @@
     "Sources/FeatureLiveTVCore/LibraryChannelService.swift": "3b0fecd3527b969dded40d0845f025e8b5a03590",
     "Sources/AppRuntime/LiveTVLibraryRuntime.swift": "5d759e335f29501fbe708cedc5ead811e7519851",
     "Sources/FeaturePlayback/LibraryChannelPlaybackSession.swift": "7ec71584e1968ec86c711a82843305c974099642",
-    "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift": "606273d41376a727ca32e63fc2e8124228a1358f",
+    "Sources/FeatureLiveTV/LiveTVIdentityReviewView.swift": "b2fb0f269f24b49b8d95c66d7da1283031ee5762",
     "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift": "cc6c3864bae5af709ae394d50a57fcf0e89f56c1",
+    "Sources/CoreModels/SeriesDownloadPresentation.swift": "cf2dedeb63420329a7457273ce67abef6cbd1817",
     "Sources/AppShelliOS/PlozziOSDownloadsModel.swift": "175e7eac2e2230cfda46397845b0186f3d86f539",
     "Sources/AppShelliOS/PlozziOSAppModel.swift": "24b6b998773ee2e3878da070b766d29327c0c194",
     "Sources/AppShelliOS/PlozziOSDownloadsView.swift": "32308607a59f79e99a7ec47a476615ba6a0a977d",
@@ -188,13 +195,14 @@
     "Sources/AppShell/MetadataSettingsWiring.swift": "d7e71134c520bc863f234d6c30c3fdfb92d7e5aa",
     "Sources/AppShelliOS/PlozziOSMetadataSettingsWiring.swift": "cd54d28bc3a44828ed7f4dec111d2488fbc16c92",
     "Sources/AppRuntime/MediaShareRuntime.swift": "68e7f0042e808476e50c89322598f20c02ed493d",
-    "Sources/CoreModels/MetadataProviderSettings.swift": "39d22c8685e0b083172fc4aff72eba12d9b9d692",
     "Sources/MetadataKit/MetadataEnrichmentConfig.swift": "b80dd4a4d625cbcc02f2bef5bf5fc5d010994bc4",
-    "Sources/MetadataKit/MetadataEnrichmentPipeline.swift": "9584fe5c62d19fbf50894697359c61f7dc1b8e9d",
+    "Sources/ProviderShare/ShareLocalArtwork.swift": "b2f4c072ab8576a82b2b2d40a2f19f73c8786c40",
+    "Sources/ProviderShare/ShareNFOParser.swift": "be68ce126bf53fa9fd9f44fd771d9ddeb54fb155",
+    "Sources/ProviderShare/ShareMetadataPipeline.swift": "05bf5138b9b0ac9b02136192fb291d8d666749d2",
+    "Sources/ProviderShare/ShareCatalogReadProjection.swift": "58a48da0804d96d0521705c57e3f561193f668a5",
     "Sources/MetadataKit/TMDBKeyValidator.swift": "1d784c840421a920fcfdf00656ac227189920821",
     "Sources/RatingsService/RatingsServiceFactory.swift": "28554690cd265c5bce9a926b4a2ddaad4aa2d48f",
     "Sources/RatingsService/RatingsServiceConfig.swift": "332788d6693ef1b521a86ccd788453e0c281c777",
-    "Sources/CoreUI/DetailInformationSections.swift": "bb548ba2db4ee66b1867cea516274f848f46ebfd",
     "Sources/CoreUI/FamilyGuidanceViews.swift": "63d8e5418dac6cf0b188d6fe9bf71d3b3c67f180",
     "Sources/AppRuntime/FamilyGuidanceService.swift": "e1212a3b14179b3211c45dd756adbf18bf705226",
     "Sources/ProviderPlex/PlexCommonSenseMedia.swift": "1015db73a1656b87c880ca49e29bf5862cd2b7c9",
@@ -215,7 +223,7 @@
     "Sources/FeatureProfiles/ProfileLockSetupView.swift": "424976f71ad5ad1eb40ced973660c68c3b84f29f",
     "Sources/FeatureSettings/ParentalPINDetailView.swift": "a3859fa1aa9ed6711c20d8aee3115015e169bbc2",
     "Sources/FeatureSettings/GrownUpsUnlockView.swift": "751b4c22ca0dd196cda919b66b9e84aa960a83d3",
-    "Sources/CoreUI/ProfileLockCopy.swift": "84cdddfe2dae694a07252ad4feab5013ebdf7c5a",
+    "Sources/FeatureProfiles/ProfileActionsList.swift": "2249bbbed7309a1db06cf46f0739e807c878afd5",
     "Sources/CoreModels/Profile.swift": "032fafc8fd22c4d90f85f4123fccde2730eda455",
     "Sources/FeatureSettings/ProfileSeerrSetupView.swift": "0c5e3d6f447d63bd0f01d34d85fac0f64812619a",
     "Sources/SeerService/SeerService.swift": "ba514f8a7d05fdad7886cabbedf5b3fdada5c968",
@@ -252,7 +260,6 @@
     "Sources/SeerService/SeerMapper.swift": "0b1ed63278d5cffb7e3c8a3181105ba9a400b97a",
     "Sources/CoreModels/SeerRequestIdentity.swift": "17f3e3b2a41bc7cf3a70f6b704100425f04bb7ce",
     "Sources/CoreModels/MediaRequestActionResult.swift": "a2ff0bdd48379ba3002f00bb34e04d38238ed3a6",
-    "App/Resources/Info.plist": "4a3e00316f5979fbf447a8ac998fa24e635cf3d5",
     "Sources/CoreModels/LiveChannelGuideInfo.swift": "cd42ec954934b31b10d0e175be0c6c2641a6b6e9",
     "Sources/FeaturePlayback/PlayerTouchGestureSurface.swift": "8742168ab6d97bb02714650528ec84816f2312c3",
     "Sources/FeaturePlayback/PlayerTouchGestureState.swift": "d8c9086a746077d6b201f4a6ddfd812e8b83e1ff",
@@ -264,9 +271,9 @@
     "Sources/FeaturePlayback/NativeSubtitleCueOutput.swift": "794245133be62cf03273473be0f86364fb90ab1b",
     "Sources/FeaturePlayback/LiveChannelPlayerView.swift": "252c4f76818a878e1755723a3322f447ebd4a3df",
     "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift": "e99427d02b806968decc102ddd224a557ff2a1d7",
+    "Sources/FeatureSettings/SendDiagnosticsCard.swift": "18af1d4db97ab9946ac657a06d97e39de574fea3",
     "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift": "4c0eac9a62f42ce1e8cc93864d79ac17103bc834",
     "App/PlozziOS/Info.plist": "96121ccaf497b1b4a22b6fe1049914f7a47b50e5",
-    "Sources/FeatureSettings/SendDiagnosticsCard.swift": "18af1d4db97ab9946ac657a06d97e39de574fea3",
     "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift": "e4c8b0fb079421fb3290766ac3bbf1b21c53843e",
     "Sources/CoreUI/ContentStateView.swift": "243c9683da03563c220767f4c20ad533afc7daf3",
     "Sources/CoreUI/PlaybackFailureView.swift": "aee537d499cdbf06b8ba2cc353d793e6e1a285ca",
@@ -279,11 +286,20 @@
     "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift": "cc90c99c7511c3f0e9813fbe3911c3200c56d00c",
     "Sources/CoreNetworking/M3UPlaylistParser.swift": "0fb3f3f13710cf9b3c05b500c59d5cb77b0e72d7",
     "Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift": "7943e10a73eb052729123050f34ecd24104260b1",
+    "Sources/MetadataKit/MetadataEnrichmentPipeline.swift": "9584fe5c62d19fbf50894697359c61f7dc1b8e9d",
+    "Sources/CoreUI/DetailInformationSections.swift": "bb548ba2db4ee66b1867cea516274f848f46ebfd",
+    "Sources/ProviderShare/ShareProvider.swift": "396a4ef4398f61cbbee9f7e950998ac000ebb535",
+    "Sources/ProviderShare/ShareLocalMetadataAssociationPolicy.swift": "dc4c08cb26ece8632b07fe929d33ec9256b81840",
+    "Sources/ProviderShare/ShareMetadataWorkComposition.swift": "a0c82effaf88e59fa2a5329578cef7960a4f48c5",
     "Sources/CoreModels/LibraryLoadDiagnostic.swift": "45379ec86531f05561807d2b4bf102ebc361485c",
     "Sources/AniListService/AniListWatchlistDestination.swift": "75a92d2d1c8e56c50867b347f71f545f511073db",
-    "Sources/FeatureDiscovery/ServerPickerView.swift": "dee41558a8564c296079bdce4f7347361bada26d",
+    "Sources/FeatureDiscoveryCore/TailscaleDetector.swift": "e794507e8d3fa7fb24b6676dc9c7f7783d08f3c4",
     "Sources/FeatureLiveTV/LiveTVPrototypeStyle.swift": "4943637b340714876235a23c2a50298250a1944b",
     "Sources/FeatureLiveTV/LiveTVChannelPreferencesView.swift": "0609652c61c91dfbdc38b6546ff529baa465dbbf",
+    "Sources/FeatureLiveTVCore/LiveTVPrototypeImportModel.swift": "cee6dd8dd1c522a3c33b22b105fe2e085cdeb0ae",
+    "Sources/FeatureLiveTVCore/LiveTVIndexedCache.swift": "7249ae7e2520a9a7f41454de52e81c9e53152361",
+    "Sources/FeatureProfiles/ProfileLockPINView.swift": "2a4e9b01da67ba8d412f31fbfceed2b6ed9506f4",
+    "Sources/CoreUI/ProfileLockCopy.swift": "84cdddfe2dae694a07252ad4feab5013ebdf7c5a",
     "Sources/FeatureSyncCloud/CloudSyncErasure.swift": "be581e488ca7615e70f0517d4cb393ef32461df3",
     "Sources/FeatureSyncSetup/SyncPairingCrypto.swift": "a2dec1a8273675ad1f2ac6d71d41538b338a210e",
     "Sources/FeatureWatchlistCore/WatchlistReconciler.swift": "2fabbacecb8772efffc5c4d5334a77a369b1b258",
@@ -296,7 +312,6 @@
     "Sources/ProviderIPTV/IPTVCatalog.swift": "ac0fbee4c975316d0bbb5f2b6bd8623d4a9daa47",
     "Sources/ProviderJellyfin/JellyfinProvider.swift": "033acaa4c211499323fd2abbdd93e518ae56d3e7",
     "Sources/ProviderPlex/PlexProvider.swift": "0fb8505e4f6c49aa9146e1b89364ce0f170658c1",
-    "Sources/ProviderShare/ShareMetadataPipeline.swift": "05bf5138b9b0ac9b02136192fb291d8d666749d2",
     "Sources/ProviderSilo/SiloAuthentication.swift": "b62a60c35bc484eba645c2b9ed91ad83a99cd5d5",
     "Sources/SimklService/SimklWatchlistDestination.swift": "c998c1229d851a0b581d5067f29ac9aef75d2cda",
     "Sources/TopShelfKit/TopShelfSnapshot.swift": "b6b8440185497c874445c3b0c36893559ecb5cdd",
@@ -306,6 +321,7 @@
     "Sources/FeatureHomeCore/HomeViewModel.swift": "e4d8bc5207f71ab7477b9c9f53f803bf6c76b2d0",
     "TopShelf/TopShelf.entitlements": "36580d9ac969c43adc1197a87180ca2d9b5c68ba",
     "TopShelf/Info.plist": "191940f16714e9a54e79e28705143f1dbcdf6c73",
+    "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift": "606273d41376a727ca32e63fc2e8124228a1358f",
     "Sources/AppRuntime/WatchMutationFactory.swift": "ce419a6369ad2cf32f4bec253e1bbaa571acfd7f",
     "Sources/AppRuntime/WatchMutationApplier.swift": "9fda1b3d1b4f0f0951fa95cac7850c6cc66634ab",
     "Sources/AppShelliOS/PlozziOSPlayerVersions.swift": "9b9f8d7d1f2e3d5b518e5ce922bb50f88f9217e5",
@@ -324,16 +340,16 @@
   },
   "pages": {
     "getting-started": {
-      "contentHash": "1e2fc1416f84b11c26dee4439d2914212b0fd5535bd89e829b58377e1e0fff01",
-      "updatedAt": "2026-10-20T04:02:23.488Z"
+      "contentHash": "bac668fb14d8a61876c4158b9b8efe107f483d9eb270584430b14430b7dc3e54",
+      "updatedAt": "2026-10-20T04:37:35.931Z"
     },
     "servers": {
-      "contentHash": "5b4374cbcc30ca02ee542183bb0bbf5894a70aea340fbd99afab7edd26deed26",
-      "updatedAt": "2026-10-18T12:04:15.675Z"
+      "contentHash": "ea226cb5a692f4f4739564bfa3a74d37649bf11bd2951d0512cad9fe3ce8a297",
+      "updatedAt": "2026-10-20T04:37:35.931Z"
     },
     "network-shares": {
-      "contentHash": "944e3b881a8f7b4befad7eb27471921deefa15afbd4cf2041e07b2ac8a113ca3",
-      "updatedAt": "2026-10-18T12:04:15.675Z"
+      "contentHash": "1554ed620d5e2a09baa3ff757f15616e80c4be7979835d9c0c6ed9f16aee96ee",
+      "updatedAt": "2026-10-20T04:37:35.931Z"
     },
     "library": {
       "contentHash": "721e796e2c60cd5594a956cc83112ea63f3884aec2f8245d35098afc01096b4e",
@@ -360,20 +376,20 @@
       "updatedAt": "2026-10-18T12:04:15.675Z"
     },
     "subtitles": {
-      "contentHash": "85797537e28879644853b69d8a7f1ac4764166174432de29fa3cff3e7758250a",
-      "updatedAt": "2026-10-20T04:02:23.488Z"
+      "contentHash": "2570c10b8262b02052bcd141bfe97df4fc196d4dba0111f92d81e0ce514ecea2",
+      "updatedAt": "2026-10-20T04:37:35.931Z"
     },
     "music": {
-      "contentHash": "be4c0ac89592462a4fa5f7143ec0568c9cc9c9aae7a7b6d6b050cc7fbae7cd0c",
-      "updatedAt": "2026-10-18T11:24:31.505Z"
+      "contentHash": "18c6cac6b574bb7015ee5b7960f9bb81037d2fc65d04c5593af2513353cddf0c",
+      "updatedAt": "2026-10-20T04:37:35.931Z"
     },
     "live-tv": {
-      "contentHash": "265d3061b82c05f27f338a033f1c957bba3e904e5d0476fb9f0ff9de57593643",
-      "updatedAt": "2026-10-20T04:02:23.488Z"
+      "contentHash": "d72ffe98b26ce6d551fcab23378eeb27fb07a896ad5d5c7d15032fa05d48a403",
+      "updatedAt": "2026-10-20T04:37:35.931Z"
     },
     "downloads": {
-      "contentHash": "83fbda3f0f5a2e00eca4b4d981ede0950a24e6bc9093ee38bba44124927d20ab",
-      "updatedAt": "2026-10-20T04:02:23.488Z"
+      "contentHash": "e66712b9b03be8ba5a4c1024341c16a1e57166dc9be617cf334aab8434bbe68e",
+      "updatedAt": "2026-10-20T04:37:35.931Z"
     },
     "appearance": {
       "contentHash": "55dd652b473115b47bc0c54d876982b705544c54d446594371e4c60d12c80ef9",
@@ -388,16 +404,16 @@
       "updatedAt": "2026-10-18T11:24:31.505Z"
     },
     "metadata-and-ratings": {
-      "contentHash": "9ed057de203aaf8bf4310e34338d425e9cbeb5a8cd1d9c6a08fd1bc4c5d6eda6",
-      "updatedAt": "2026-10-18T12:04:15.675Z"
+      "contentHash": "72eef2eda5077d0a89e9377c7b2de93a541531caa5b98662975f5791a023f772",
+      "updatedAt": "2026-10-20T04:37:35.931Z"
     },
     "apple-tv-profiles": {
       "contentHash": "5a368c049c38d3e169416a6c1d55a769d2b4dd41215be9f664150cc44c9b2c1f",
       "updatedAt": "2026-10-20T04:02:23.488Z"
     },
     "profiles-and-locks": {
-      "contentHash": "016aaa27e1d85f5cc57ddb69cbb73ca1ad5bf3a04feadfbe0fafae9790c147bf",
-      "updatedAt": "2026-10-20T04:02:23.488Z"
+      "contentHash": "355e214bbfceea61b2431c8cd083a426c4c3fa51159a74f83865442b0297d775",
+      "updatedAt": "2026-10-20T04:37:35.931Z"
     },
     "profiles-and-sync": {
       "contentHash": "cc9072d6fcbf4288e1eca1cbfeb8e5d4dd6a340a3beab308dd2eb1de7277481b",
@@ -415,9 +431,13 @@
       "contentHash": "9819e3a1abf7b7b21897439380dbdbcc519fea7c7a271ac6b5d9f6df88705749",
       "updatedAt": "2026-10-20T04:02:23.488Z"
     },
+    "feedback-and-bugs": {
+      "contentHash": "5676179348635889ff1e6e252ef08fec50715b2136d4eb73ba578082d96db22d",
+      "updatedAt": "2026-10-20T04:37:35.931Z"
+    },
     "troubleshooting": {
-      "contentHash": "ac0337c3e963e00fb51788ad7a60f819c7eff4c976270b876e99b4b488c04862",
-      "updatedAt": "2026-10-20T04:02:23.488Z"
+      "contentHash": "5d0125af2b46755ad66f79e5bf06dbdb43c1b828addc0403a90870ff441a1ce9",
+      "updatedAt": "2026-10-20T04:37:35.931Z"
     }
   },
   "discovery": {

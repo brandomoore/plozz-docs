@@ -35,6 +35,6 @@ Playlist sources have separate [device-local parental approvals](/live-tv/#appro
 
 Deleting a Plozz profile removes its preferences and server selections, not the household's signed-in server accounts.
 
-For a forgotten Profile Lock PIN, use **Forgot PIN?**; prefer another authorized device over signing out and rebuilding your setup.
+There is no in-app forgotten-PIN reset. If this profile is already unlocked for editing on another device, remove its **Profile Lock** there; iCloud Sync must be enabled to carry the change here.
 
 See [Profiles and sync](/profiles-and-sync/) for what moves between devices.

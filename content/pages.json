@@ -47,11 +47,13 @@
       "Sources/FeatureAuthCore/ServerAddressesModel.swift",
       "Sources/CoreUI/ServerAddressSettingsLink.swift",
       "Sources/CoreNetworking/ServerAddressResolver.swift",
+      "Sources/FeatureDiscovery/ServerPickerView.swift",
+      "Sources/FeatureDiscoveryCore/ServerPickerViewModel.swift",
       "Sources/CoreModels/ProviderKind.swift"
     ],
     "watch": [
-      "Sources/FeatureAuth/",
-      "Sources/FeatureAuthCore/",
+      "Sources/FeatureAuth",
+      "Sources/FeatureDiscovery",
       "Sources/AppShelliOS/AddServerView.swift",
       "Sources/FeatureSettings/Server",
       "Sources/FeatureSettings/MyLibrariesDetailView.swift",
@@ -320,6 +322,8 @@
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/FeaturePlayback/SubtitleStyleSettingsView.swift",
+      "Sources/FeaturePlayback/SystemCaptionAppearance.swift",
+      "Sources/FeaturePlayback/SystemCaptionStyleConfirmation.swift",
       "Sources/CoreModels/SubtitleBehavior.swift",
       "Sources/CoreModels/SubtitleStyle.swift",
       "Sources/FeaturePlayback/PlayerViewModel.swift",
@@ -327,8 +331,7 @@
       "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
     ],
     "watch": [
-      "Sources/FeaturePlayback/Subtitle",
-      "Sources/FeaturePlayback/TrackMenuBuilder.swift",
+      "Sources/FeaturePlayback/",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
@@ -344,6 +347,8 @@
     "kind": "guide",
     "file": "music.md",
     "sources": [
+      "App/Resources/Info.plist",
+      "Sources/CoreUI/NowPlayingSession.swift",
       "Sources/AppShell/MainTabView.swift",
       "Sources/AppShell/MusicAvailabilityScope.swift",
       "Sources/AppShell/AppState.swift",
@@ -362,18 +367,18 @@
     ],
     "watch": [
       "Sources/FeatureMusic/",
-      "Sources/AppShell/MusicAvailabilityScope.swift",
+      "Sources/CoreUI/NowPlayingSession.swift",
+      "App/Resources/Info.plist",
       "Sources/ProviderPlex/PlexMusicProvider.swift",
       "Sources/ProviderJellyfin/JellyfinMusicProvider.swift",
-      "Sources/LastFmService/",
-      "Sources/AppShell/MainTabView.swift"
+      "Sources/LastFmService/"
     ]
   },
   {
     "slug": "live-tv",
     "title": "IPTV and Live TV",
     "seoTitle": "Set up IPTV, guide listings, and library channels in Plozz",
-    "description": "Connect IPTV or server TV, correct guide mappings, check unavailable channels, save Multiview layouts, and create library channels.",
+    "description": "Connect IPTV or server TV, restore channel identities, correct guides, check links, save Multiview layouts, and create library channels.",
     "section": "Playback",
     "kind": "reference",
     "file": "live-tv.md",
@@ -397,7 +402,7 @@
       "Sources/FeatureLiveTVCore/LibraryChannelService.swift",
       "Sources/AppRuntime/LiveTVLibraryRuntime.swift",
       "Sources/FeaturePlayback/LibraryChannelPlaybackSession.swift",
-      "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift"
+      "Sources/FeatureLiveTV/LiveTVIdentityReviewView.swift"
     ],
     "watch": [
       "Sources/FeatureLiveTV/",
@@ -418,6 +423,8 @@
     "file": "downloads.md",
     "sources": [
       "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift",
+      "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
+      "Sources/CoreModels/SeriesDownloadPresentation.swift",
       "Sources/AppShelliOS/PlozziOSDownloadsModel.swift",
       "Sources/AppShelliOS/PlozziOSAppModel.swift",
       "Sources/AppShelliOS/PlozziOSDownloadsView.swift",
@@ -432,8 +439,8 @@
     "watch": [
       "Sources/MediaDownloads/",
       "Sources/AppShelliOS/PlozziOSDownload",
-      "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift",
-      "Sources/AppShelliOS/PlozziOSAppModel.swift",
+      "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
+      "Sources/CoreModels/SeriesDownload",
       "Sources/AppShelliOS/SiloOfflineDownload.swift",
       "Sources/ProviderSilo/SiloDownloads.swift"
     ]
@@ -525,7 +532,7 @@
     "slug": "metadata-and-ratings",
     "title": "Metadata and ratings",
     "seoTitle": "Configure Plozz metadata, artwork sources, and ratings",
-    "description": "Choose metadata priority, verify a TMDB token, check ratings and Plex family-guidance eligibility, and troubleshoot incorrect matches.",
+    "description": "Choose metadata priority, use local NFO files and artwork for shares, verify a TMDB token, and check ratings, family guidance, and incorrect matches.",
     "section": "Personalize",
     "kind": "guide",
     "file": "metadata-and-ratings.md",
@@ -535,21 +542,21 @@
       "Sources/AppShell/MetadataSettingsWiring.swift",
       "Sources/AppShelliOS/PlozziOSMetadataSettingsWiring.swift",
       "Sources/AppRuntime/MediaShareRuntime.swift",
-      "Sources/CoreModels/MetadataProviderSettings.swift",
       "Sources/MetadataKit/MetadataEnrichmentConfig.swift",
-      "Sources/MetadataKit/MetadataEnrichmentPipeline.swift",
+      "Sources/ProviderShare/ShareScanner.swift",
+      "Sources/ProviderShare/ShareLocalArtwork.swift",
+      "Sources/ProviderShare/ShareNFOParser.swift",
+      "Sources/ProviderShare/ShareMetadataPipeline.swift",
+      "Sources/ProviderShare/ShareCatalogReadProjection.swift",
       "Sources/MetadataKit/TMDBKeyValidator.swift",
       "Sources/RatingsService/RatingsServiceFactory.swift",
       "Sources/RatingsService/RatingsServiceConfig.swift",
-      "Sources/CoreUI/DetailInformationSections.swift",
       "Sources/CoreUI/FamilyGuidanceViews.swift",
       "Sources/AppRuntime/FamilyGuidanceService.swift",
       "Sources/ProviderPlex/PlexCommonSenseMedia.swift",
       "Sources/ProviderPlex/PlexClient.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
-      "Sources/FeatureSettings/HeroSettingsControls.swift",
-      "Sources/CoreModels/MediaItemActionCatalog.swift",
-      "Sources/FeatureSettings/ArtworkSettingsControls.swift"
+      "Sources/CoreModels/MediaItemActionCatalog.swift"
     ],
     "watch": [
       "Sources/MetadataKit/",
@@ -557,7 +564,7 @@
       "Sources/FeatureSettings/Metadata",
       "Sources/AppShelliOS/PlozziOSMetadata",
       "Sources/CoreUI/FamilyGuidance",
-      "Sources/ProviderPlex/PlexCommonSenseMedia"
+      "Sources/ProviderShare/Share"
     ]
   },
   {
@@ -609,7 +616,7 @@
       "Sources/FeatureSettings/ParentalPINDetailView.swift",
       "Sources/FeatureSettings/GrownUpsUnlockView.swift",
       "Sources/FeatureSettings/MyLibrariesDetailView.swift",
-      "Sources/CoreUI/ProfileLockCopy.swift",
+      "Sources/FeatureProfiles/ProfileActionsList.swift",
       "Sources/CoreModels/Profile.swift",
       "Sources/AppShell/RootView.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
@@ -771,6 +778,27 @@
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/TopShelfKit/",
       "TopShelf/"
+    ]
+  },
+  {
+    "slug": "feedback-and-bugs",
+    "title": "Feedback and bug reports",
+    "seoTitle": "Send Plozz feedback, report bugs, or request features",
+    "description": "Use Discord or GitHub to share Plozz feedback, report a bug, or request a feature, with useful diagnostic details and safe sharing guidance.",
+    "section": "Help",
+    "kind": "guide",
+    "file": "feedback-and-bugs.md",
+    "sources": [
+      "README.md",
+      "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
+      "Sources/FeatureSettings/SendDiagnosticsCard.swift",
+      "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift"
+    ],
+    "watch": [
+      "README.md",
+      "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
+      "Sources/FeatureSettings/SendDiagnosticsCard.swift",
+      "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift"
     ]
   },
   {

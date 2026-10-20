@@ -38,7 +38,7 @@ Confirm the profile/account. Prefer [Tracker Retry](/trackers/) to repeated reco
 
 On a playback, library, or Live TV error, open **Details** when offered. On iPhone/iPad, **Share details** exports the report; Apple TV displays it onscreen. It excludes server addresses, credentials, account names, and media titles.
 
-Open **Settings > Help & Diagnostics > Report a Problem**; on Apple TV, scan its code or follow the GitHub link. Include version/build, device/OS, provider, error, and reproduction steps. The [community](https://plozz.app/discord) can also help.
+Open **Settings > Help & Diagnostics > Report a Problem**; on Apple TV, scan its code or follow the GitHub link. See [Feedback and bug reports](/feedback-and-bugs/) for Discord, GitHub, feature requests, and what to include.
 
 **Playback Diagnostics Overlay**, or **Playback Info** in the player's Info card, shows codec, bitrate, buffer, and memory.
 

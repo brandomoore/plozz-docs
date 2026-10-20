@@ -19,6 +19,8 @@ Use previous/next, play/pause, Shuffle, and Repeat. Repeat cycles through Off, t
 
 Return to browsing while music continues, then select the mini-player to reopen Now Playing. Under **Screens & Navigation**, Apple TV also offers music-player presentation choices.
 
+Music can continue while the Apple TV screensaver is showing. Open Apple TV Control Center's **Now Playing** card to control the current session; available transport controls follow the queue.
+
 ## Lyrics and listening history
 
 The lyrics button controls the synchronized lyrics panel when usable lyrics are found. Plozz checks the music provider and can use an online lyrics fallback. Not every track has synchronized lyrics; a missing panel is not proof that playback failed.

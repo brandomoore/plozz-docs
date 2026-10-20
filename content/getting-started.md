@@ -26,4 +26,4 @@ Use [player controls](/playback/) for versions and autoplay, [audio settings](/a
 
 Apple TV can [play music](/music/) from eligible server libraries. Optional [trackers](/trackers/) and [Seerr requests](/media-requests/) use their own accounts and requirements.
 
-Need help? Start with [Troubleshooting](/troubleshooting/) or the [Plozz community](https://plozz.app/discord).
+Need help? Start with [Troubleshooting](/troubleshooting/). To share feedback, report a bug, or suggest a feature through Discord or GitHub, see [Feedback and bug reports](/feedback-and-bugs/).

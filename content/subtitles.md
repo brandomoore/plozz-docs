@@ -7,7 +7,7 @@ Select tracks in the player; save defaults in Settings.
 1. Reveal the playback controls and open **Subtitles**.
 2. Select a listed track, or **Off**.
 3. For two tracks with a movie or episode, select a primary text track, then another under **Style > Dual Subtitles** on Apple TV, or **Dual Subtitles** if shown directly. On iPhone/iPad, use **Second Track**. Choose its **Off** option to remove only the second track.
-4. If supported by the connected server, choose **Download subtitles…** on Apple TV or **Search for Subtitles** on iPhone/iPad, then select a result.
+4. Where supported, choose **Download subtitles…** on Apple TV or **Search for Subtitles** on iPhone/iPad, then select a result.
 
 Search needs configured server subtitle services; shares use subtitles already with your media.
 
@@ -16,6 +16,8 @@ Plozzigen can decode embedded second text tracks; Apple's native playback path n
 ## Change appearance
 
 Open **Settings > Subtitles** and choose **Customize subtitle style**—under **Subtitle style** on Apple TV.
+
+In Style, **Match Apple TV Subtitle Style** (**Match Device Subtitle Style** on mobile) replaces your custom look after confirmation. Editing a control stops matching. Placement and dual-subtitle settings remain Plozz-specific.
 
 For position, 0% is the bottom, 100% the top; negative values can crop text. In the player, choose **Style** on Apple TV, or **Appearance > Style** on iPhone/iPad.
 
@@ -39,4 +41,4 @@ Check the selected video version, subtitle language, and remembered series choic
 
 A steady timing offset may be correctable with delay. Increasing drift can mean the subtitle belongs to another release or cut; try another matching track instead of repeatedly increasing the offset.
 
-For missing style/second-track controls, check the primary's format. External playback has separate [AirPlay limitations](/platform-controls/#airplay-and-picture-in-picture).
+External playback has separate [AirPlay limitations](/platform-controls/#airplay-and-picture-in-picture).

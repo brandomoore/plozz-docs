@@ -31,6 +31,8 @@ Routine scans can skip unchanged folders. Open **Settings > Servers** and select
 
 Shares do not offer server-based streaming-quality controls; [offline downloads](/downloads/) use Original quality only.
 
+For NFO sidecars and local artwork, see [Metadata and ratings](/metadata-and-ratings/#use-local-metadata-for-network-shares).
+
 ## If files or matches are missing
 
 Confirm the selected root contains the files and that the share account can read them. Check **Browse Files** before treating a matching problem as a connection failure.

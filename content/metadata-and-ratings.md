@@ -1,6 +1,6 @@
 # Metadata and ratings
 
-Plozz combines information from your libraries with configured online sources. A metadata preference changes descriptions or images; it does not grant access to a missing movie.
+Plozz combines library information with online sources. Metadata choices do not grant access to missing media.
 
 ## Choose information sources
 
@@ -10,7 +10,7 @@ These controls are **shared by all profiles**, unlike each profile's [artwork pr
 
 - **Recommended** lets Plozz choose sources for individual fields.
 - **Custom** lets you reorder sources by priority. Move a source below **Disabled** to turn it off.
-- Returning to Recommended uses the recommended policy without requiring you to manually rebuild the list.
+- Returning to Recommended restores its policy without rebuilding the list.
 
 Enabled does not guarantee a result: source coverage, matching identifiers, credentials, and temporary outages still matter.
 
@@ -18,7 +18,13 @@ Enabled does not guarantee a result: source coverage, matching identifiers, cred
 
 **Your Own TMDB Key** accepts a **TMDB v4 API Read Access Token**, saved on this device. Save it, then use **Verify Key** to check authentication. You can replace or remove it later.
 
-This is optional and puts TMDB lookups under your account's rate limit. It is not a Jellyfin, Plex, or Seerr credential. Never include it in a public problem report.
+This optional token uses your TMDB rate limit. It is not a media-server credential; never post it publicly.
+
+## Use local metadata for network shares
+
+For movie/TV shares, keep each movie/show in an unambiguous folder. Supported NFO sidecars and named images such as `poster.jpg` and `fanart.jpg` can supply local details and artwork. Match the video's filename (`Movie.mkv`/`Movie.nfo`), or use `tvshow.nfo` at the show's root.
+
+[Rescan](/network-shares/#find-files-and-refresh) after changes and let metadata work finish. Malformed or ambiguous sidecars may be ignored; artwork preferences still control which images win.
 
 ## Understand scores and age information
 

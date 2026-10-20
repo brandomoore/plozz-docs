@@ -48,8 +48,8 @@
     },
     "offline-background": {
       "documents": [{"slug":"downloads","anchor":"save-a-video"},{"slug":"downloads","anchor":"pause-resume-or-remove"}],
-      "sources": ["Sources/AppShelliOS/PlozziOSDownloadsModel.swift","Sources/AppShelliOS/PlozziOSDownloadsView.swift","Sources/AppShelliOS/PlozziOSDownloadActivity.swift","Sources/AppShelliOS/PlozziOSBackgroundHTTPDownloadEngine.swift","Sources/MediaDownloads/DirectShareDownloadSource.swift","App/PlozziOS/Info.plist"],
-      "answer": "On iPhone/iPad, start an eligible movie/episode download, choose its quality, wait for completed status in Downloads and test that version's video, audio and subtitles offline. Eligible HTTP transfers use background sessions; in-process/share transfers need foreground execution unless the OS grants continued processing. iOS/iPadOS 26 Live Activities can be declined; cancellation/expiry pauses active work without deleting partial files. All received bytes still require offline validation. Network, speed, source and storage limits remain; Apple TV has no downloads."
+      "sources": ["Sources/AppShelliOS/PlozziOSDownloadsModel.swift","Sources/AppShelliOS/PlozziOSDownloadsView.swift","Sources/AppShelliOS/PlozziOSItemDetailView.swift","Sources/CoreModels/SeriesDownloadPresentation.swift","Sources/AppShelliOS/PlozziOSDownloadActivity.swift","Sources/AppShelliOS/PlozziOSBackgroundHTTPDownloadEngine.swift","Sources/MediaDownloads/DirectShareDownloadSource.swift","App/PlozziOS/Info.plist"],
+      "answer": "On iPhone/iPad, start an eligible movie/episode download, or open a show's Manage Seasons to download all available episodes or choose a season/episode. Choose quality, wait for completed status in Downloads and test that version's video, audio and subtitles offline. Eligible HTTP transfers use background sessions; in-process/share transfers need foreground execution unless the OS grants continued processing. iOS/iPadOS 26 Live Activities can be declined; cancellation/expiry pauses active work without deleting partial files. All received bytes still require offline validation. Network, speed, source and storage limits remain; Apple TV has no downloads."
     },
     "cross-server-history": {
       "documents": [{"slug":"profiles-and-sync","anchor":"keep-watch-history-separate"}],
@@ -71,7 +71,7 @@
     "App/PlozziOS/Info.plist": {"areas":["connections","offline","audio","sync","platforms"],"sources":["App/PlozziOS/Info.plist","Sources/AppShelliOS/PlozziOSDownloadsModel.swift","Sources/FeatureSyncSetup/SyncSetupService.swift","Sources/AppShelliOS/PlozziOSDownloadActivity.swift","Sources/AppShelliOS/PlozziOSSyncSetupSendView.swift"],"summary":"Local Network permission supports discovery/pairing; Camera is used for setup QR scanning with code entry as an alternative. Background audio, processing and download task identifiers support the documented route- and OS-dependent background behavior, not guaranteed execution."},
     "App/PlozziOS/PlozziOS.branded.entitlements": {"omitReason":"Side-by-side development builds intentionally omit canonical cloud and associated-domain capabilities; these internal provisioning variants are not consumer setup features.","sources":["App/PlozziOS/PlozziOS.branded.entitlements"]},
     "App/PlozziOS/PlozziOS.entitlements": {"areas":["sync"],"sources":["App/PlozziOS/PlozziOS.entitlements","Sources/FeatureSyncSetup/SyncSetupService.swift","Sources/AppShelliOS/PlozziOSAppModel+KeychainSync.swift","Sources/AppShelliOS/PlozziOSRootView.swift"],"summary":"CloudKit/presence and pairing universal links are wired; supported mobile credentials use a separate synchronizable Keychain path rather than making all CloudKit server descriptors authenticated."},
-    "App/Resources/Info.plist": {"areas":["connections","sync","live-tv","platforms"],"sources":["App/Resources/Info.plist","Sources/AppShell/AppState.swift","Sources/AppShell/MainTabView.swift","Sources/CoreModels/LiveChannelGuideInfo.swift","Sources/FeaturePlayback/LiveChannelPlayerView.swift"],"summary":"The declared Guide-button activity is consumed by MainTabView only when Live TV is an enabled destination, then opens the full-screen channel player's guide. Discovery/pairing and background audio remain separate system capabilities."},
+    "App/Resources/Info.plist": {"areas":["connections","sync","live-tv","music","platforms"],"sources":["App/Resources/Info.plist","Sources/AppShell/AppState.swift","Sources/AppShell/MainTabView.swift","Sources/CoreModels/LiveChannelGuideInfo.swift","Sources/FeaturePlayback/LiveChannelPlayerView.swift","Sources/FeatureMusic/AudioPlaybackController.swift","Sources/CoreUI/NowPlayingSession.swift"],"summary":"The declared Guide-button activity is consumed by MainTabView only when Live TV is an enabled destination, then opens the full-screen channel player's guide. Background audio is wired through the music controller and shared Now Playing session for screensaver listening and Control Center transport controls; this is distinct from discovery/pairing and mobile video Background Audio."},
     "App/Resources/Plozz.branded.entitlements": {"omitReason":"Empty entitlements belong to internal side-by-side development builds; production Apple TV user management and Top Shelf use the canonical entitlements instead.","sources":["App/Resources/Plozz.branded.entitlements","App/Resources/Plozz.entitlements"]},
     "App/Resources/Plozz.entitlements": {"areas":["profiles","sync","platforms"],"sources":["App/Resources/Plozz.entitlements","Sources/CoreModels/ProfileStore.swift","Sources/AppRuntime/AutomaticSignInStore.swift","Sources/CoreSecureStore/Keychain.swift","Sources/AppShell/SystemProfileBridge.swift"]},
     "TopShelf/ContentProvider.swift": {"areas":["platforms"],"sources":["TopShelf/ContentProvider.swift","Sources/AppShell/HomeTab.swift"]},
@@ -94,13 +94,15 @@
         "Sources/FeatureAuthCore/ServerAddressesModel.swift",
         "Sources/CoreUI/ServerAddressSettingsLink.swift",
         "Sources/CoreNetworking/ServerAddressResolver.swift",
+        "Sources/FeatureDiscovery/ServerPickerView.swift",
+        "Sources/FeatureDiscoveryCore/ServerPickerViewModel.swift",
         "Sources/AppShelliOS/AddServerView.swift",
         "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift",
         "Sources/FeatureShareOnboarding/MediaShareTransportCatalog.swift",
         "Sources/AppRuntime/MediaShareTransportComposition.swift",
         "Sources/CoreModels/ProviderKind.swift"
       ],
-      "summary": "Connect supported media servers, approved Silo devices, IPTV accounts, or wired share transports; distinguish shared sign-ins from profile library selection. Manage verified local/remote addresses per sign-in and device, with trust, HTTP and Silo approval limits, then confirm actual access."
+      "summary": "Connect supported media servers, approved Silo devices, IPTV accounts, or wired share transports; distinguish shared sign-ins from profile library selection. Compare Silo approval codes. Manage verified local/remote addresses per sign-in and device, with trust, HTTP and Silo approval limits, then confirm actual access. Tailscale needs a connection on the playback device and manual server IP/MagicDNS entry, not LAN discovery."
     },
     "library": {
       "documents": [
@@ -263,6 +265,8 @@
       "sources": [
         "Sources/FeaturePlayback/SubtitleTrackController.swift",
         "Sources/FeaturePlayback/SubtitleStylePanel.swift",
+        "Sources/FeaturePlayback/SystemCaptionAppearance.swift",
+        "Sources/FeaturePlayback/SystemCaptionStyleConfirmation.swift",
         "Sources/FeatureSettings/PreferenceDetailViews.swift",
         "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
         "Sources/AppShelliOS/PlozziOSSettingsView.swift",
@@ -272,7 +276,7 @@
         "Sources/FeaturePlayback/NativeVideoEngine.swift",
         "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
       ],
-      "summary": "Select/search tracks, distinguish forced/SDH and per-content policies, enter mobile language codes or follow device language, style text or Live TV, and manage second tracks. Explain embedded Plozzigen versus separately fetchable native text-track eligibility, image-primary dual-mode exclusion, secondary Off, track-dependent timing controls and wireless AirPlay limits."
+      "summary": "Select/search tracks, distinguish forced/SDH and per-content policies, enter mobile language codes or follow device language, style text or Live TV, and manage second tracks. Matching the device caption style replaces custom appearance after confirmation; a custom edit exits matching while placement/dual controls remain Plozz-specific. Explain embedded Plozzigen versus separately fetchable native text-track eligibility, image-primary dual-mode exclusion, secondary Off, track-dependent timing controls and wireless AirPlay limits."
     },
     "music": {
       "documents": [
@@ -285,15 +289,19 @@
         "Sources/FeatureMusic/MusicAggregator.swift",
         "Sources/FeatureMusic/MusicScreens.swift",
         "Sources/FeatureMusic/NowPlayingView.swift",
+        "Sources/FeatureMusic/AudioPlaybackController.swift",
+        "Sources/CoreUI/NowPlayingSession.swift",
+        "App/Resources/Info.plist",
         "Sources/ProviderPlex/PlexMusicProvider.swift",
         "Sources/ProviderJellyfin/JellyfinMusicProvider.swift",
         "Sources/LastFmService/LastFmScrobbler.swift"
       ],
-      "summary": "Find Apple TV music from supported server libraries, start album/playlist sessions, use shuffle/repeat and mini-player controls, understand synchronized lyrics availability and Last.fm eligibility without promising mobile music or downloads."
+      "summary": "Find Apple TV music from supported server libraries, start album/playlist sessions, use shuffle/repeat and mini-player controls, continue listening through the screensaver and use Control Center Now Playing transport controls. Trace the background-audio declaration through the controller and shared system-command session. Explain synchronized lyrics availability and Last.fm eligibility without promising mobile music or downloads."
     },
     "live-tv": {
       "documents": [
-        { "slug": "live-tv" }
+        { "slug": "live-tv" },
+        { "slug": "live-tv", "anchor": "organize-channels-and-listings" }
       ],
       "sources": [
         "Sources/FeatureAuth/IPTVSignInView.swift",
@@ -302,7 +310,7 @@
         "Sources/FeatureLiveTV/LiveTVSourcesView.swift",
         "Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift",
         "Sources/FeatureLiveTV/LiveTVGuideMappingView.swift",
-        "Sources/FeatureLiveTV/LiveTVChannelScanViews.swift",
+        "Sources/FeatureLiveTV/LiveTVIdentityReviewView.swift",
         "Sources/FeatureLiveTVCore/LiveTVChannelScanCoordinator.swift",
         "Sources/FeatureSettings/LiveTVSettingsView.swift",
         "Sources/FeatureLiveTV/LiveTVPrototypeView.swift",
@@ -317,7 +325,7 @@
         "Sources/CoreModels/LiveTVSourceApproval.swift",
         "Sources/FeatureLiveTV/LiveTVProgramSearchView.swift"
       ],
-      "summary": "Set up IPTV or server channels and distinguish direct M3U catalogues from web pages, single-stream HLS and XMLTV. Explain device-local account file imports separately from encrypted source-copy sync. Find on-demand libraries, correct guide mappings, favorite/hide channels and run per-playlist reachability checks. Channels/Programs search tunes live, not from programme start. Kids playlist-source PIN approvals grant the whole source locally, not ratings-based filtering or server-account authorization. Retain four-pane/provider Multiview limits, previews/cellular policy and original-file library-channel schedule/history limits."
+      "summary": "Set up IPTV or server channels and distinguish direct M3U catalogues from web pages, single-stream HLS and XMLTV. Advanced options contains playlist authentication and provider request headers. Explain device-local account file imports separately from encrypted source-copy sync. Find on-demand libraries, correct guide mappings, favorite/hide channels and run per-playlist reachability checks. Review channel identities restores a saved channel only after same-station/feed confirmation; favorites, hidden state and guide corrections follow that identity, otherwise the separate entry remains playable. Channels/Programs search tunes live, not from programme start. Kids playlist-source PIN approvals grant the whole source locally, not ratings-based filtering or server-account authorization. Retain four-pane/provider Multiview limits, previews/cellular policy and original-file library-channel schedule/history limits."
     },
     "offline": {
       "documents": [
@@ -325,6 +333,8 @@
       ],
       "sources": [
         "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift",
+        "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
+        "Sources/CoreModels/SeriesDownloadPresentation.swift",
         "Sources/AppShelliOS/PlozziOSDownloadsModel.swift",
         "Sources/AppShelliOS/PlozziOSDownloadsView.swift",
         "Sources/MediaDownloads/DownloadNetworkPolicy.swift",
@@ -334,7 +344,7 @@
         "Sources/MediaDownloads/DirectShareDownloadSource.swift",
         "App/PlozziOS/Info.plist"
       ],
-      "summary": "Download and test a validated, completed mobile copy offline. Distinguish background HTTP from in-process/share execution and fallible iOS 26 continued processing; receiving every byte is not completed offline validation. Retain quality/network policy, provider preparation, all-audio/subtitle limits, speed caps and uncapped background behavior. Reduced Jellyfin/Emby copies require Full Speed; cover storage/removal and notification permission."
+      "summary": "Download and test a validated, completed mobile copy offline. Use Manage Seasons for all available episodes or a season/episode selection; unavailable catalogue placeholders cannot download. Distinguish background HTTP from in-process/share execution and fallible iOS 26 continued processing; receiving every byte is not completed offline validation. Retain quality/network policy, provider preparation, all-audio/subtitle limits, speed caps and uncapped background behavior. Reduced Jellyfin/Emby copies require Full Speed; cover storage/removal and notification permission."
     },
     "profiles": {
       "documents": [
@@ -351,7 +361,7 @@
         "Sources/AppRuntime/PlexHomeUsersModel.swift",
         "Sources/AppShelliOS/PlozziOSAppModel.swift",
         "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-        "Sources/CoreUI/ProfileLockCopy.swift",
+        "Sources/FeatureProfiles/ProfileActionsList.swift",
         "Sources/CoreModels/Profile.swift",
         "Sources/FeatureSettings/ParentalPINDetailView.swift",
         "Sources/FeatureSettings/ProfileSeerrSetupView.swift",
@@ -361,7 +371,7 @@
         "Sources/CoreModels/LiveTVSourceApproval.swift",
         "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift"
       ],
-      "summary": "Separate app profiles/server users/Apple TV system users, mobile editing/switching, profile locks/Plex PIN reuse and automatic startup trust. A household PIN enforces Kids settings/switching and Seerr admin-request gates. Kids playlist sources separately require a valid parental PIN approval: whole-source, local-only, and tied to source/profile identity, not ratings filtering. Explain recovery without erasing first and shared household versus system-user-local state."
+      "summary": "Separate app profiles/server users/Apple TV system users, mobile editing/switching, profile locks/Plex PIN reuse and automatic startup trust. A household PIN enforces Kids settings/switching and Seerr admin-request gates. Kids playlist sources separately require a valid parental PIN approval: whole-source, local-only, and tied to source/profile identity, not ratings filtering. No forgotten-PIN reset control is wired: the unused ProfileLockCopy strings are not a recovery workflow. Removing a lock on another device requires already-unlocked editing access and sync to propagate. Preserve shared household versus system-user-local distinctions."
     },
     "sync": {
       "documents": [
@@ -434,6 +444,7 @@
     "metadata": {
       "documents": [
         { "slug": "metadata-and-ratings" },
+        { "slug": "metadata-and-ratings", "anchor": "use-local-metadata-for-network-shares" },
         { "slug": "appearance", "anchor": "choose-artwork" }
       ],
       "sources": [
@@ -448,18 +459,30 @@
         "Sources/ProviderPlex/PlexCommonSenseMedia.swift",
         "Sources/AppShell/MetadataSettingsWiring.swift",
         "Sources/AppShelliOS/PlozziOSMetadataSettingsWiring.swift",
-        "Sources/AppRuntime/MediaShareRuntime.swift",
+        "Sources/ProviderShare/ShareProvider.swift",
+        "Sources/ProviderShare/ShareScanner.swift",
+        "Sources/ProviderShare/ShareNFOParser.swift",
+        "Sources/ProviderShare/ShareLocalMetadataAssociationPolicy.swift",
+        "Sources/ProviderShare/ShareLocalArtwork.swift",
+        "Sources/ProviderShare/ShareMetadataPipeline.swift",
+        "Sources/ProviderShare/ShareMetadataWorkComposition.swift",
+        "Sources/ProviderShare/ShareCatalogReadProjection.swift",
         "Sources/CoreModels/ArtworkSettings.swift"
       ],
-      "summary": "Explain shared provider priorities/disablement, device-local TMDB credential verification, per-profile artwork choices, source/build-dependent ratings and informational ages. Explain Plex movie/show family-guidance tiles and viewing-account Plex Pass requirements for detailed guidance. Scope cache budgets/clearing to lookup data and derived artwork, not downloaded video storage or matching repair."
+      "summary": "Explain shared provider priorities/disablement, device-local TMDB credential verification, per-profile artwork choices, source/build-dependent ratings and informational ages. Movie/TV shares can use matching video-stem NFO files, show-root tvshow.nfo and recognized local poster/fanart files; rescan and metadata work are required, malformed/ambiguous associations are not guaranteed, and artwork preferences still apply. Explain Plex movie/show family-guidance tiles and viewing-account Plex Pass requirements for detailed guidance. Scope cache budgets/clearing to lookup data and derived artwork, not downloaded video storage or matching repair."
     },
     "help": {
       "documents": [
         { "slug": "troubleshooting" },
+        { "slug": "feedback-and-bugs", "anchor": "choose-where-to-post" },
+        { "slug": "feedback-and-bugs", "anchor": "report-a-bug" },
+        { "slug": "feedback-and-bugs", "anchor": "suggest-an-improvement" },
+        { "slug": "feedback-and-bugs", "anchor": "share-safely" },
         { "slug": "profiles-and-sync", "anchor": "recover-sync-without-erasing-your-setup" },
         { "slug": "metadata-and-ratings", "anchor": "wrong-or-missing-information" }
       ],
       "sources": [
+        "README.md",
         "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
         "Sources/FeatureSettings/SendDiagnosticsCard.swift",
         "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift",
@@ -475,13 +498,14 @@
         "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift",
         "Sources/AppShelliOS/PlozziOSLibraryView.swift"
       ],
-      "summary": "Offer connection/library/playback/subtitle/guide/sync symptom entry points, non-destructive checks, reset/cache scope and interrupted collection recovery. Error Details can be displayed on Apple TV or exported through Share details on mobile without requiring crash reporting. Separate these allowlisted local reports from endpoint/consent-dependent log upload, and expose Playback Info as the in-player telemetry entry point."
+      "summary": "Offer symptom entry points, non-destructive checks, reset/cache scope and collection recovery. Explain Discord conversation versus tracked GitHub bugs and feature requests, mobile Send Feedback email, duplicate searches, reproduction/version/device/source details, and safe public sharing. Diagnostic uploads do not file an issue or Discord post. Error Details can be displayed on Apple TV or exported through Share details on mobile without crash reporting; separate those local reports from endpoint/consent-dependent log upload. Expose Playback Info as the in-player telemetry entry point."
     },
     "platforms": {
       "documents": [
         { "slug": "platform-controls" },
         { "slug": "audio", "anchor": "truehd-atmos-and-dts-x-on-apple-tv" },
         { "slug": "music", "anchor": "find-your-library" },
+        { "slug": "music", "anchor": "control-a-listening-session" },
         { "slug": "downloads" }
       ],
       "sources": [
@@ -500,9 +524,11 @@
         "Sources/TopShelfKit/TopShelfPublisher.swift",
         "App/Resources/Info.plist",
         "Sources/CoreModels/LiveChannelGuideInfo.swift",
-        "Sources/AppShell/MainTabView.swift"
+        "Sources/AppShell/MainTabView.swift",
+        "Sources/FeatureMusic/AudioPlaybackController.swift",
+        "Sources/CoreUI/NowPlayingSession.swift"
       ],
-      "summary": "Explain remote/touch/keyboard differences, VoiceOver suppression, optional volume/brightness gestures, iPhone orientation versus system-driven iPad rotation, TV transitions and Top Shelf. Trace the OS Guide activity into enabled Live TV and the full-screen player's guide. Distinguish live-window seeking/Go Live from library-channel Jump to now, without promising recording/restart. Scope wireless subtitle loss to locally remuxed AirPlay and exclude Multiview from external presentation."
+      "summary": "Explain remote/touch/keyboard differences, VoiceOver suppression, optional volume/brightness gestures, iPhone orientation versus system-driven iPad rotation, TV transitions and Top Shelf. Trace the OS Guide activity into enabled Live TV and the full-screen player's guide, and music background audio into screensaver listening and Control Center Now Playing commands. Distinguish live-window seeking/Go Live from library-channel Jump to now, without promising recording/restart. Scope wireless subtitle loss to locally remuxed AirPlay and exclude Multiview from external presentation."
     }
   },
   "modules": {
@@ -516,7 +542,8 @@
     },
     "FeatureDiscovery": {
       "areas": ["connections"],
-      "sources": ["Sources/FeatureDiscovery/ServerPickerView.swift"]
+      "sources": ["Sources/FeatureDiscovery/ServerPickerView.swift","Sources/FeatureDiscoveryCore/ServerPickerViewModel.swift","Sources/FeatureDiscoveryCore/TailscaleDetector.swift"],
+      "summary": "Use LAN discovery or manual entry; Tailscale is an externally configured connection requiring the server's IP/MagicDNS address, not a Plozz-managed VPN or discoverable LAN server."
     },
     "FeatureHome": {
       "areas": ["library", "home-navigation", "spoilers", "metadata"],
@@ -553,13 +580,17 @@
         "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift",
         "Sources/CoreModels/LiveTVSourceApproval.swift",
         "Sources/FeatureLiveTV/LiveTVProgramSearchView.swift",
-        "Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift"
+        "Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift",
+        "Sources/FeatureLiveTV/LiveTVIdentityReviewView.swift",
+        "Sources/FeatureLiveTVCore/LiveTVPrototypeImportModel.swift",
+        "Sources/FeatureLiveTVCore/LiveTVIndexedCache.swift"
       ],
-      "summary": "Cover reachable channel menus, previews, Multiviews, guide search/correction, local Kids playlist approvals and channel checks. The playlist detail's SettingsPageLink reaches scanning; its global Sources destination is nested under library-channel management and unreliable. Source-copy import exists for legacy/fallback flows and syncs differently from current IPTV-account file imports; do not invent a universal alternate import procedure. Personal channel-label/preferences and unavailable-favorite recovery helpers have no prototype presentation route, so omit them as unusable controls."
+      "summary": "Cover reachable channel menus, previews, Multiviews, guide search/correction, source-scoped channel-identity review, local Kids playlist approvals and channel checks. Guide options reaches Review channel identities; confirmed historical identity is applied by the durable cache/import model and reuses saved preferences only when the old entry is absent. The playlist detail's SettingsPageLink reaches scanning; its global Sources destination is nested under library-channel management and unreliable. Source-copy import exists for legacy/fallback flows and syncs differently from current IPTV-account file imports; do not invent a universal alternate import procedure. Personal channel-label/preferences and the separate unavailable-favorite recovery helper have no prototype presentation route, so omit them as unusable controls without confusing them with the reachable identity review."
     },
     "FeatureMusic": {
       "areas": ["music", "platforms"],
-      "sources": ["Sources/FeatureMusic/MusicScreens.swift", "Sources/FeatureMusic/AudioPlaybackController.swift", "Sources/FeatureMusic/NowPlayingView.swift"]
+      "sources": ["Sources/FeatureMusic/MusicScreens.swift", "Sources/FeatureMusic/AudioPlaybackController.swift", "Sources/FeatureMusic/NowPlayingView.swift", "Sources/CoreUI/NowPlayingSession.swift", "App/Resources/Info.plist"],
+      "summary": "Cover Apple TV server-library listening, queue controls, lyrics and Last.fm in the music guide, including screensaver/background listening and the wired Control Center Now Playing transport session."
     },
     "FeaturePlayback": {
       "areas": ["playback", "audio", "subtitles", "platforms"],
@@ -567,6 +598,8 @@
         "Sources/FeaturePlayback/PlayerControls.swift",
         "Sources/FeaturePlayback/PlayerTouchGestureSurface.swift",
         "Sources/FeaturePlayback/SubtitleTrackController.swift",
+        "Sources/FeaturePlayback/SystemCaptionAppearance.swift",
+        "Sources/FeaturePlayback/SystemCaptionStyleConfirmation.swift",
         "Sources/FeaturePlayback/PlayerViewModel.swift",
         "Sources/FeaturePlayback/NativeVideoEngine.swift",
         "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
@@ -579,11 +612,12 @@
         "Sources/FeaturePlayback/TrackMenuBuilder.swift",
         "Sources/FeaturePlayback/LiveChannelPlayerView.swift"
       ],
-      "summary": "Use task sections for player preferences, dual-text-track eligibility and live rewind/Go Live. Audio-delay and Dialog Enhance scaffolding is capability-gated, but neither wired Native nor Plozzigen engine advertises those capabilities; do not promise them. Subtitle overlay timing is independently supported where exposed, while native second tracks require fetchable text delivery and image primaries exclude dual mode."
+      "summary": "Use task sections for player preferences, dual-text-track eligibility, confirmed system-caption-style replacement and live rewind/Go Live. Audio-delay and Dialog Enhance scaffolding is capability-gated, but neither wired Native nor Plozzigen engine advertises those capabilities; do not promise them. Subtitle overlay timing is independently supported where exposed, while native second tracks require fetchable text delivery and image primaries exclude dual mode."
     },
     "FeatureProfiles": {
       "areas": ["profiles"],
-      "sources": ["Sources/FeatureProfiles/ProfileEditorView.swift", "Sources/FeatureProfiles/ProfileLockSetupView.swift", "Sources/FeatureProfiles/AutomaticSignInSettings.swift"]
+      "sources": ["Sources/FeatureProfiles/ProfileEditorView.swift", "Sources/FeatureProfiles/ProfileLockSetupView.swift", "Sources/FeatureProfiles/AutomaticSignInSettings.swift", "Sources/FeatureProfiles/ProfileLockPINView.swift", "Sources/FeatureProfiles/ProfileActionsList.swift", "Sources/CoreUI/ProfileLockCopy.swift"],
+      "summary": "Cover profile setup, entry/edit authorization, Kids restrictions and device-local automatic sign-in. The Forgot PIN strings in ProfileLockCopy have no presentation call site; both the shared entry PIN screen and management actions lack a reset control. Do not promise recovery from unused labels; another device must already have unlocked editing access before removing a synced lock."
     },
     "FeatureSearch": {
       "areas": ["library"],
@@ -685,7 +719,8 @@
     },
     "ProviderShare": {
       "areas": ["connections", "library", "metadata"],
-      "sources": ["Sources/ProviderShare/ShareScanner.swift", "Sources/ProviderShare/ShareMetadataPipeline.swift"]
+      "sources": ["Sources/ProviderShare/ShareScanner.swift", "Sources/ProviderShare/ShareMetadataPipeline.swift", "Sources/ProviderShare/ShareLocalArtwork.swift", "Sources/ProviderShare/ShareNFOParser.swift", "Sources/ProviderShare/ShareLocalMetadataAssociationPolicy.swift", "Sources/ProviderShare/ShareCatalogReadProjection.swift"],
+      "summary": "Cover share connection/scanning and movie/TV local NFO/artwork association in existing guides. Personal Videos deliberately bypasses catalogue matching. Local metadata precedence and ambiguous-folder rejection are implemented in scanner/enrichment/projection, not inferred from NFO filenames alone."
     },
     "ProviderSilo": {
       "areas": ["connections", "quality", "offline", "sync"],
@@ -766,8 +801,8 @@
     },
     "subtitles": {
       "areas": ["subtitles"],
-      "sources": ["Sources/CoreUI/ProfileSettingsCategory.swift", "Sources/FeatureSettings/PreferenceDetailViews.swift", "Sources/AppShelliOS/PlozziOSSettingsView.swift", "Sources/CoreModels/SubtitleBehavior.swift"],
-      "summary": "Combine language codes/device fallback, per-content policies, SDH/search, remembered series choices and text/image styling limits rather than separate pages per preference."
+      "sources": ["Sources/CoreUI/ProfileSettingsCategory.swift", "Sources/FeatureSettings/PreferenceDetailViews.swift", "Sources/AppShelliOS/PlozziOSSettingsView.swift", "Sources/CoreModels/SubtitleBehavior.swift", "Sources/FeaturePlayback/SystemCaptionAppearance.swift", "Sources/FeaturePlayback/SystemCaptionStyleConfirmation.swift"],
+      "summary": "Combine language codes/device fallback, per-content policies, SDH/search, remembered series choices and text/image styling limits rather than separate pages per preference. Explain matching device caption appearance, replacement confirmation and leaving matching through custom edits."
     },
     "trackers": {
       "areas": ["tracking", "music", "sync"],
