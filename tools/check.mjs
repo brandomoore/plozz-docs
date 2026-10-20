@@ -1,4 +1,4 @@
-import { readJson, validatePages, validateSeo, validateCoverage, validateState, ROOT } from './lib.mjs';
+import { readJson, validatePages, validateSeo, validateCoverage, validateState, guideWordCount, ROOT } from './lib.mjs';
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { parseArgs } from 'node:util';
@@ -12,7 +12,7 @@ if (values['content-only']) {
 }
 const state = values['content-only'] ? null : validateState(readJson('source-state.json'), pages);
 for (const page of pages) {
-  const words = readFileSync(resolve(ROOT, 'content', page.file), 'utf8').trim().split(/\s+/).length;
+  const words = guideWordCount(readFileSync(resolve(ROOT, 'content', page.file), 'utf8'));
   console.log(`${page.slug}: ${words} words, ${page.sources.length} source references`);
 }
 console.log(state

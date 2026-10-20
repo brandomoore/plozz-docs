@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { ROOT, readJson, markdown, pagePath, escapeHtml } from '../tools/lib.mjs';
+import { diagramReferences, diagramText } from '../tools/diagrams.mjs';
 
 test('the shared design preserves every guide, anchor, article date and source record', () => {
   const before = readFileSync(resolve(ROOT, 'source-state.json'), 'utf8');
@@ -11,6 +12,7 @@ test('the shared design preserves every guide, anchor, article date and source r
   assert.equal(result.status, 0, result.stderr);
   const pages = readJson('content/pages.json');
   const state = JSON.parse(before);
+  const search = readJson('dist/search-index.json');
   let sharedSocialImage;
   for (const path of ['404.html', ...pages.map(page => page.slug === 'getting-started' ? 'index.html' : `${page.slug}/index.html`)]) {
     const html = readFileSync(resolve(ROOT, 'dist', path), 'utf8');
@@ -51,11 +53,24 @@ test('the shared design preserves every guide, anchor, article date and source r
     for (const [, links] of resources) {
       assert.match(links, /href="https:\/\/plozz\.app\/discord"><span><svg class="brand-icon" data-brand="discord"/);
       assert.match(links, /href="https:\/\/github\.com\/brandomoore\/Plozz"><span><svg class="brand-icon" data-brand="github"/);
-      assert.equal([...links.matchAll(/aria-hidden="true" focusable="false"/g)].length, 2);
+      assert.equal([...links.matchAll(/class="brand-icon"[^>]+aria-hidden="true" focusable="false"/g)].length, 2);
+    }
+    if (page.platforms) {
+      const labels = html.match(/<ul class="platform-labels"[^>]+>([\s\S]*?)<\/ul>/)?.[1];
+      assert(labels, `Missing platform scope in ${page.slug}`);
+      for (const platform of page.platforms) assert(labels.includes(escapeHtml(platform)));
+    } else assert.doesNotMatch(html, /class="platform-labels"/);
+    for (const id of diagramReferences(tokens)) {
+      assert(html.includes(`data-diagram="${id}"`), `Missing diagram in ${page.slug}`);
+      assert(search.entries.find(entry => entry.slug === page.slug).text.includes(diagramText(id)), `Unsearchable diagram in ${page.slug}`);
     }
   }
   const feedback = readFileSync(resolve(ROOT, 'dist/feedback-and-bugs/index.html'), 'utf8');
   assert.match(feedback, /<ul class="service-options" role="list">/);
+  const profiles = readFileSync(resolve(ROOT, 'dist/apple-tv-profiles/index.html'), 'utf8');
+  assert.match(profiles, /class="doc-callout callout-important" role="note"/);
+  assert.match(profiles, /class="procedure" role="list"/);
+  assert.match(profiles, /class="settings-path">Settings &gt; Profiles/);
   const home = readFileSync(resolve(ROOT, 'dist/index.html'), 'utf8');
   assert.equal([...home.matchAll(/class="topic-card"/g)].length, 6);
   for (const page of pages.slice(1)) assert(home.includes(`href="${pagePath(page.slug)}"`));

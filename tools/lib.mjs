@@ -3,7 +3,8 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import MarkdownIt from 'markdown-it';
-import { installVisuals } from './visuals.mjs';
+import { installVisuals, platformIcons } from './visuals.mjs';
+import { diagrams, diagramReferences, diagramText } from './diagrams.mjs';
 
 export const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 export const APP_REPO = 'brandomoore/Plozz';
@@ -36,22 +37,40 @@ export const readCoverage = (root = ROOT) => {
 export const readBaseline = (root = ROOT) => JSON.parse(readFileSync(resolve(root, 'config/documentation-baseline.json'), 'utf8'));
 export const baselineHash = (root = ROOT) => sha256(JSON.stringify({
   policy: readBaseline(root), editorial: readFileSync(resolve(root, 'EDITORIAL.md'), 'utf8'),
+  diagrams,
 }));
 export const coverageHash = (root = ROOT) => sha256(JSON.stringify(readCoverage(root)));
 export const isContentFilename = name => /^(?:[a-z][a-z0-9-]{1,60}\.md|pages\.json|coverage\.json)$/.test(name);
 export const isContentPath = path => path.startsWith('content/') && isContentFilename(path.slice(8));
+const diagramMaterial = content => {
+  const ids = diagramReferences(markdown.parse(content, {}));
+  return ids.length ? { diagrams: Object.fromEntries(ids.map(id => [id, diagrams[id]])) } : {};
+};
 export const contentHash = (pages, root = ROOT) => sha256(JSON.stringify({
-  pages: pages.map(page => ({ ...page, content: readFileSync(resolve(root, 'content', page.file), 'utf8') })),
+  pages: pages.map(page => {
+    const content = readFileSync(resolve(root, 'content', page.file), 'utf8');
+    return { ...page, content, ...diagramMaterial(content) };
+  }),
   coverage: readCoverage(root),
 }));
 export const pageMaterialHash = (page, root = ROOT) => sha256(JSON.stringify({
   slug: page.slug, title: page.title, seoTitle: page.seoTitle, description: page.description,
   section: page.section, kind: page.kind ?? 'guide', content: readFileSync(resolve(root, 'content', page.file), 'utf8'),
+  ...(page.platforms ? { platforms: page.platforms } : {}),
+  ...diagramMaterial(readFileSync(resolve(root, 'content', page.file), 'utf8')),
   directory: page.slug === 'getting-started' ? JSON.parse(readFileSync(resolve(root, 'content/pages.json'), 'utf8'))
     .map(({ slug, title, description, section }) => ({ slug, title, description, section })) : undefined,
 }));
 export const pageAnchors = (page, root = ROOT) => markdown.parse(readFileSync(resolve(root, 'content', page.file), 'utf8'), {})
   .filter(token => token.type === 'heading_open').map(token => token.attrGet('id'));
+export const guideWordCount = (body, tokens = markdown.parse(body, {})) => body.trim().split(/\s+/).length
+  + tokens.filter(token => token.type === 'fence' && token.info.trim() === 'plozz-diagram')
+    .reduce((count, token) => count + diagramText(token.content.trim()).split(/\s+/).length, 0);
+export const plainText = tokens => tokens.flatMap(token => {
+  if (token.type === 'fence' && token.info.trim() === 'plozz-diagram') return [diagramText(token.content.trim())];
+  return token.type === 'inline' ? [(token.children ?? []).filter(child => ['text', 'code_inline', 'softbreak', 'hardbreak'].includes(child.type))
+    .map(child => child.content || ' ').join('')] : [];
+}).join(' ').replace(/\s+/g, ' ').trim();
 
 export function classifyChanges(pages, comparison) {
   const files = comparison.files ?? [];
@@ -85,12 +104,19 @@ export function validatePages(pages, root = ROOT) {
     if (!['Connect', 'Library', 'Playback', 'Personalize', 'Accounts & sync', 'Help', 'Start here', 'Watching', 'Your setup'].includes(page.section)) throw new Error(`Unknown navigation section: ${page.slug}`);
     if (!Array.isArray(page.sources) || page.sources.length < 1 || page.sources.length > 20 || !page.sources.every(validSourcePath)) throw new Error(`Invalid source references: ${page.slug}`);
     if (!Array.isArray(page.watch) || page.watch.length > 6 || !page.watch.every(safeSourcePath)) throw new Error(`Invalid source watch prefixes: ${page.slug}`);
+    if (page.platforms !== undefined && (!Array.isArray(page.platforms) || !page.platforms.length
+      || page.platforms.some(platform => !Object.hasOwn(platformIcons, platform)) || new Set(page.platforms).size !== page.platforms.length)) {
+      throw new Error(`Invalid guide platforms: ${page.slug}`);
+    }
     const body = readFileSync(resolve(root, 'content', page.file), 'utf8');
     if (Buffer.byteLength(body) > 32_000) throw new Error(`Guide too large: ${page.slug}`);
     const tokens = markdown.parse(body, {});
     const h1 = tokens.flatMap((token, index) => token.type === 'heading_open' && token.tag === 'h1' ? [tokens[index + 1].content] : []);
     if (h1.length !== 1 || h1[0] !== page.title) throw new Error(`Guide needs one matching H1: ${page.slug}`);
-    const words = body.trim().split(/\s+/).length;
+    for (const id of diagramReferences(tokens)) {
+      if (!diagrams[id].sources.every(path => page.sources.includes(path))) throw new Error(`Missing diagram source references for ${id}: ${page.slug}`);
+    }
+    const words = guideWordCount(body, tokens);
     const limit = { guide: 450, reference: 900, overview: 350 }[page.kind ?? 'guide'];
     if (!limit) throw new Error(`Unknown page kind: ${page.slug}`);
     if (words > limit) throw new Error(`${page.slug}: ${words} words exceeds the ${limit}-word limit.`);

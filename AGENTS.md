@@ -39,7 +39,10 @@ Keep guides short, accurate and useful to someone using the app.
 - The shared renderer owns topic cards, navigation, search and section rails.
   Keep guide bodies presentation-independent; do not duplicate those controls
   in Markdown. `tools/visuals.mjs` supplies approved service marks and option
-  layouts from ordinary labeled links. Layout-only changes must preserve
+  layouts from ordinary labeled links. Use the safe steps, callouts, platform
+  labels and approved diagrams documented in `README.md#guide-components`.
+  Verify diagram labels/captions and their required source citations as prose;
+  the diagram catalogue remains protected infrastructure. Layout-only changes must preserve
   article dates and source state.
 - Use the workflow's explicit model and effort. Do not delegate, invoke other
   AI services, or silently choose a fallback model.

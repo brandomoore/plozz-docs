@@ -86,12 +86,23 @@ Writers and independent reviewers must assess each changed guide for:
 - **Hierarchy:** make choices easy to compare without turning every paragraph
   into a card. A short unordered list of distinct services, each introduced by
   a bold link naming the service, uses the shared option layout. Keep steps
-  numbered only when order matters; keep secondary links quiet.
+  numbered only when order matters; ordinary top-level ordered lists receive
+  the shared procedure treatment. Prefer short, bold action leads for longer
+  steps. Keep secondary links quiet.
+- **Context and consequences:** label a platform-specific guide with its
+  verified `platforms` metadata. Use a Note for a relevant exception, a Tip
+  for optional help, Important for an authorization/prerequisite decision,
+  and Warning for destructive consequences. Do not put routine paragraphs
+  in callouts or rely on color alone. Keep exact Settings paths in bold.
 - **Useful imagery:** consider a real screenshot for a hard-to-find control,
   an annotated crop for a visual distinction, or a diagram for a relationship
   that prose makes difficult to follow. State what the image helps the reader
   do. No stock decoration, made-up app screenshots, AI-rendered controls or
   imagery added just to fill space. Do not add an image to every page.
+  Approved `plozz-diagram` blocks explain relationships using readable text
+  and decorative icons, not simulated app screens. Verify their labels and
+  captions against the frozen source just like prose; include their required
+  source references. Their text counts toward the guide's word budget.
 - **Consistency and accessibility:** preserve the existing Plozz palette,
   typography, spacing and icon style. Keep visible text labels, useful alt
   text for meaningful images, decorative icons hidden from assistive
@@ -110,6 +121,9 @@ report: guide and section, reader benefit, proposed visual, source/platform
 evidence and privacy/rights checks needed. Do not silently skip the visual
 assessment because an asset is unavailable. A maintainer reviews and adds
 approved assets and shared rendering outside the automated content pass.
+The authoring syntax and approved diagram catalogue are described in
+`README.md#guide-components`; do not invent new diagram identifiers or modify
+the catalogue in a content-only pass.
 
 Both passes include a short assessment under `## Visual quality` before any
 approval line: components used, specific asset requests, or why more imagery
@@ -120,6 +134,14 @@ dates when only the shared presentation changes.
 
 ## Benchmark
 
+- [Webflow's Designer Extension tutorial](https://developers.webflow.com/apps/docs/designer-extensions/build-a-designer-extension):
+  clear procedure hierarchy and explicit prerequisites.
+- [Square's setup guide](https://developer.squareup.com/docs/get-started/create-account-and-application):
+  purposeful illustrations and notes that separate exceptions from the task.
+- [Vercel's getting-started guide](https://vercel.com/docs/getting-started-with-vercel):
+  restrained secondary information and scannable steps. Borrow these structural
+  lessons, not branding, copied artwork, promotional banners or developer-only
+  controls that do not help a Plozz reader.
 - [Infuse server connections](https://support.firecore.com/hc/en-us/articles/360006462093-Streaming-from-Plex-Emby-and-Jellyfin)
   and [subtitles](https://support.firecore.com/hc/en-us/articles/215090967-Using-Subtitles):
   task-focused steps, platform differences, surrounding decisions and limitations.

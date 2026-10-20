@@ -89,11 +89,54 @@ cards link to real guides, not additional thin category pages.
 Recognizable service marks accompany named Discord and GitHub links in both
 navigation layouts and articles. A short, unordered list of distinct services
 introduced by bold links naming each service becomes a responsive option group;
-ordinary prose, secondary links and ordered steps keep their usual layout.
+ordinary prose and secondary links remain quiet.
 Authors use normal Markdown, not inline SVG or page-specific components. The
 renderer owns the icons, spacing, accessible labels and mobile behavior.
 `EDITORIAL.md` owns the visual-quality checklist and the review path for new
 imagery; missing assets are surfaced rather than invented or hotlinked.
+
+### Guide components
+
+Use semantic Markdown rather than page-specific HTML:
+
+- Top-level ordered lists render as numbered procedures, retaining their
+  original start value, nested lists and reading order. Start longer steps
+  with a short **bold action**; nested lists keep ordinary markers.
+- Bold paths beginning with `Settings >` receive a subtle shared treatment.
+- GitHub-style blockquotes beginning with `[!NOTE]`, `[!TIP]`, `[!IMPORTANT]`
+  or `[!WARNING]` render as labeled, static notes. Put the marker on its own
+  quoted line and the explanation below it. Ordinary quotations remain
+  quotations; empty or unknown callouts fail validation.
+- Optional `platforms` in `content/pages.json` accepts a unique, nonempty
+  selection of `Apple TV`, `iPhone`, and `iPad`. Use it only when it describes
+  the guide's actual scope; retain narrower platform/provider exceptions in
+  the prose. An absent label does not promise every feature on every platform.
+- A fenced block with language `plozz-diagram` and one approved identifier
+  renders an original explanatory figure. The catalogue in
+  `tools/diagrams.mjs` currently contains `apple-tv-profiles` and
+  `combined-libraries`. These are schematic relationships, not screenshots.
+  Each use requires the catalogue's app-source citations in the page manifest.
+
+For example:
+
+~~~~markdown
+> [!TIP]
+> Play a completed download without a network before travelling.
+
+```plozz-diagram
+combined-libraries
+```
+~~~~
+
+Diagram labels are real, wrapping HTML text, remain available to screen readers
+and full-text search, and count toward word limits. Arrows and icons are
+decorative. No remote assets, raster text, new runtime JavaScript or fabricated
+app controls are involved. Diagram facts/captions participate in source-review
+hashes and the dates of guides that use them; changing only shared layout/CSS
+does not change article dates. Maintainers own new diagram definitions; the
+content bot may select and verify existing ones, not invent or alter them.
+
+### Navigation and search
 
 Header search opens with `/` or Command/Ctrl+K. Full-text results include
 article sections and link directly to an answer; arrow keys move through
