@@ -3,11 +3,11 @@
   "repository": "brandomoore/Plozz",
   "ref": "main",
   "commit": "ad94fbb43402ec69524e360dba8c662a311d62f1",
-  "verifiedAt": "2026-10-20T04:37:35.931Z",
-  "baselineReviewedAt": "2026-10-20T04:02:23.488Z",
-  "contentHash": "cdc6f692f8c84fa51241e72251cdf879628fed46d26d6061a1a5632bab183ae4",
-  "coverageHash": "9a6112ea45ba564c7352508b7a3687342b8b88ea4f0e35b6af499db96ebf8350",
-  "policyHash": "20d22a3d35856338a2f963340244187e95b6844582ab8d7751833ea09032431f",
+  "verifiedAt": "2026-10-20T05:04:12.886Z",
+  "baselineReviewedAt": "2026-10-20T05:04:12.886Z",
+  "contentHash": "8490bb2709ea81fa6556e21cb09b6d90f71313e9707e6fe6d3f7f2a860b93d1e",
+  "coverageHash": "f41116b8fcc5d82441bd62c3dfeb161e1486d21da95082fc2aa0eaf6563b76fe",
+  "policyHash": "f0c3b151821ceb6119fc6cf057746ad427b435814a1f85cad21c1098b214cac1",
   "sourceFiles": {
     "README.md": "76650496103c222554b7b26a771c78d89a540fde",
     "project.yml": "18d9a8af18a6c87454632fd4327771bf0f715e42",
@@ -79,6 +79,7 @@
     "Sources/FeatureSettings/ContinueWatchingNextUpControl.swift": "2b64abcdc118349b0b17989df14c793d9cc0db40",
     "Sources/FeatureSettings/HomeLayoutPicker.swift": "8ccff2c730ee4c16dddc329f5593ba52ac5517dc",
     "Sources/FeatureSettings/HeroSettingsControls.swift": "181db87bb64d42bd31ff9a28582af2601480b879",
+    "Sources/CoreUI/LiftableReorderList.swift": "fed22a497d2434d725f4c83bf1d58de135aa5174",
     "Sources/FeatureSettings/PreferenceDetailViews.swift": "df63059a8ad2266b855121b75e3253ab66d121f0",
     "Sources/CoreModels/HomeRowCustomization.swift": "9f0223da2f4fd512edc2feb4e30a9ce4faff6c7f",
     "Sources/CoreModels/HomeLibraryVisibility.swift": "f8cab3e96c34bd75e10aabcc709cdbbbcd7b1fec",
@@ -248,7 +249,10 @@
     "Sources/AppShell/RealtimePlaybackScrobbler.swift": "69fa454c93a02e0c908034c3d72a826fbfda6810",
     "Sources/AppShelliOS/PlozziOSTrackerScrobbler.swift": "ca705c42f1f5b137c49eb119815bc84d30c35406",
     "Sources/TraktService/TraktScrobbler.swift": "158bc07cc8b2887b97a0e9a97308409babd674b0",
+    "Sources/TraktService/TraktClient.swift": "9b5be1c2d382c1456759e9e391574998de65ee95",
+    "Sources/TraktService/TraktWatchlistDestination.swift": "ddce979a15afe322c021683417caf45502a43a6b",
     "Sources/SimklService/SimklScrobbler.swift": "0741cb6ce1d4a8705b473b69207b0b3bca17e7d2",
+    "Sources/SimklService/SimklClient.swift": "df4526651245cb7c78ac317486f1c3f54ae76c6e",
     "Sources/AniListService/AniListScrobbler.swift": "807cf0f76a50d2c4d1b95a623e1866f9495c456c",
     "Sources/MALService/MALScrobbler.swift": "7f3ba005eb1d7976e3044b6c85b87a91a7e65421",
     "Sources/WetrakrService/WetrakrConfig.swift": "7595dac104396781fc5d427d25dbcdacac1801b8",
@@ -315,7 +319,6 @@
     "Sources/ProviderSilo/SiloAuthentication.swift": "b62a60c35bc484eba645c2b9ed91ad83a99cd5d5",
     "Sources/SimklService/SimklWatchlistDestination.swift": "c998c1229d851a0b581d5067f29ac9aef75d2cda",
     "Sources/TopShelfKit/TopShelfSnapshot.swift": "b6b8440185497c874445c3b0c36893559ecb5cdd",
-    "Sources/TraktService/TraktWatchlistDestination.swift": "ddce979a15afe322c021683417caf45502a43a6b",
     "Sources/TraktService/TraktAuthService.swift": "46b55348f2da7959a86c8babf207f74f732f5423",
     "Sources/CoreUI/WetrakrWatchlistLink.swift": "c7f991166ff4c62541053ab20145731740ee48ad",
     "Sources/FeatureHomeCore/HomeViewModel.swift": "e4d8bc5207f71ab7477b9c9f53f803bf6c76b2d0",
@@ -360,8 +363,8 @@
       "updatedAt": "2026-10-20T04:02:23.488Z"
     },
     "home-and-navigation": {
-      "contentHash": "587d9e2e0518a643d3c1ef145fc0cacd4ec58898293f53336e9bbdea102e993f",
-      "updatedAt": "2026-10-20T04:02:23.488Z"
+      "contentHash": "8c104b4e706caabb8f714c0cc543ba0cfb81fed4dda5760d24968377239775a4",
+      "updatedAt": "2026-10-20T05:04:12.886Z"
     },
     "playback": {
       "contentHash": "0c65ade959056489ed631f1a8c297f3d447d05561e8dc3788cd5dafa319fa277",
@@ -388,8 +391,8 @@
       "updatedAt": "2026-10-20T04:37:35.931Z"
     },
     "downloads": {
-      "contentHash": "e66712b9b03be8ba5a4c1024341c16a1e57166dc9be617cf334aab8434bbe68e",
-      "updatedAt": "2026-10-20T04:37:35.931Z"
+      "contentHash": "832f2600db5f78f6f6f27c0d80172d60a9677160a1553be5f7f6d021b7f208c8",
+      "updatedAt": "2026-10-20T05:04:12.886Z"
     },
     "appearance": {
       "contentHash": "55dd652b473115b47bc0c54d876982b705544c54d446594371e4c60d12c80ef9",
@@ -420,8 +423,8 @@
       "updatedAt": "2026-10-20T04:02:23.488Z"
     },
     "trackers": {
-      "contentHash": "ad7cb1f050d1dd3281c80ebbc7b77f05d8c4a3f2351a27983e2f612565cb1b0d",
-      "updatedAt": "2026-10-19T16:00:37.443Z"
+      "contentHash": "796bb868b6c50f885996d80dd293e95dc7cb53c576ad95460120d3ca9aa28967",
+      "updatedAt": "2026-10-20T05:04:12.886Z"
     },
     "media-requests": {
       "contentHash": "11d866c45750c7c2d1f2f79afedd9563b2294250962706583988d93c73b95924",

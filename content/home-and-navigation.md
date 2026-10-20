@@ -32,7 +32,7 @@ For the Continue Watching card choices, see [Spoiler protection](/spoiler-protec
 
 ## Arrange shortcuts and details
 
-Under **Screens & Navigation**, open **Navigation > Hide or Reorder Navigation** to arrange destinations and library shortcuts. Hidden shortcuts do not change access. Compact mobile layouts put some destinations in **More**.
+Under **Screens & Navigation > Navigation > Hide or Reorder Navigation**, hold an item to hide, show, or move it. On mobile, drag to reorder. Hiding changes shortcuts, not access; compact mobile layouts use **More** for overflow.
 
 Open **Detail Page** to choose artwork, a trailer, or theme music behind a title's header. Trailer and theme music do not play together; this choice is separate from Home trailers. Review-score and age-recommendation display controls are here too.
 

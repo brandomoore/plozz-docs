@@ -147,10 +147,11 @@
         "Sources/FeatureHomeCore/HomeAggregator.swift",
         "Sources/FeatureSettings/HeroSettingsControls.swift",
         "Sources/FeatureSettings/NavigationLibrariesDetailView.swift",
+        "Sources/CoreUI/LiftableReorderList.swift",
         "Sources/FeatureSettings/PreferenceDetailViews.swift",
         "Sources/AppShelliOS/PlozziOSSettingsView.swift"
       ],
-      "summary": "Use the shared Customize Home section editor: Add section, Remove section, Reorder/Done, pinned Hero, presets with replacement confirmation, source-load Retry and default-on Next Up merging. Editing saves a custom arrangement rather than following server order. Library availability belongs to Libraries on both platforms; removing a Home section never disables browsing. Explain Apple TV Showcase versus Fullscreen Hero and mobile's Hero subpage, then navigation and detail presentation."
+      "summary": "Use the shared Customize Home section editor: Add section, Remove section, Reorder/Done, pinned Hero, presets with replacement confirmation, source-load Retry and default-on Next Up merging. Editing saves a custom arrangement rather than following server order. Library availability belongs to Libraries on both platforms; removing a Home section never disables browsing. Explain Apple TV Showcase versus Fullscreen Hero and mobile's Hero subpage, navigation hold-to-hide/show/move and mobile drag reordering, then detail presentation."
     },
     "appearance": {
       "documents": [
@@ -344,7 +345,7 @@
         "Sources/MediaDownloads/DirectShareDownloadSource.swift",
         "App/PlozziOS/Info.plist"
       ],
-      "summary": "Download and test a validated, completed mobile copy offline. Use Manage Seasons for all available episodes or a season/episode selection; unavailable catalogue placeholders cannot download. Distinguish background HTTP from in-process/share execution and fallible iOS 26 continued processing; receiving every byte is not completed offline validation. Retain quality/network policy, provider preparation, all-audio/subtitle limits, speed caps and uncapped background behavior. Reduced Jellyfin/Emby copies require Full Speed; cover storage/removal and notification permission."
+      "summary": "Download and test a validated, completed mobile copy offline. Use Manage Seasons for all available episodes or a season/episode selection; unavailable catalogue placeholders cannot download. Distinguish background HTTP from in-process/share execution and fallible iOS 26 continued processing; receiving every byte is not completed offline validation. Retain quality/network policy, provider preparation, all-audio/subtitle limits, speed caps and uncapped background behavior. Reduced Jellyfin/Emby copies require Download Speed > Limit > Unlimited, despite the error message calling this Full Speed; cover storage/removal and notification permission."
     },
     "profiles": {
       "documents": [
@@ -411,18 +412,22 @@
         "Sources/FeatureSettings/IntegrationsDetailView.swift",
         "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift",
         "Sources/TraktService/TraktScrobbler.swift",
+        "Sources/TraktService/TraktClient.swift",
+        "Sources/TraktService/TraktWatchlistDestination.swift",
         "Sources/SimklService/SimklScrobbler.swift",
+        "Sources/SimklService/SimklClient.swift",
         "Sources/AniListService/AniListScrobbler.swift",
         "Sources/MALService/MALScrobbler.swift",
         "Sources/LastFmService/LastFmScrobbler.swift",
         "Sources/WetrakrService/WetrakrConfig.swift",
         "Sources/CoreModels/RuntimeFeatureFlags.swift",
         "Sources/WetrakrService/WetrakrService.swift",
+        "Sources/WetrakrService/WetrakrScrobbler.swift",
         "Sources/WetrakrService/WetrakrWatchlistDestination.swift",
         "Sources/AppShell/RealtimePlaybackScrobbler.swift",
         "Sources/AppShelliOS/PlozziOSTrackerScrobbler.swift"
       ],
-      "summary": "Connect profile-owned video/anime/music trackers and check media/account/build eligibility. WeTrakr is enabled by the production flag but still requires configured client credentials; its settings, both playback fan-outs and planning-list destination are wired. Document its authorization, Watchlist behavior, Retry/profile-wide Reconnect and failed-revocation recovery without promising the row in an unconfigured build."
+      "summary": "Connect profile-owned video/anime/music trackers and check media/account/build eligibility. Distinguish outbound playback-to-history scrobbling from readable/writable Watchlists: Plozz does not import a tracker's complete watch history into media servers. WeTrakr is enabled by the production flag but still requires configured client credentials; its settings, both playback fan-outs and planning-list destination are wired. Document its authorization, Watchlist behavior, Retry/profile-wide Reconnect and failed-revocation recovery without promising the row in an unconfigured build."
     },
     "requests": {
       "documents": [

@@ -6,12 +6,14 @@ Trackers connect to the active **Plozz profile**, not to a particular media serv
 
 | Service | Purpose in Plozz |
 | --- | --- |
-| Trakt | Video scrobbling, watch history, and watchlist sync |
-| Simkl | Video scrobbling, watch history, and watchlist sync |
-| WeTrakr | Movie/episode scrobbling, watch history, and planning-list sync with Watchlist |
+| Trakt | Video scrobbling to watch history and watchlist sync |
+| Simkl | Video scrobbling to watch history and watchlist sync |
+| WeTrakr | Movie/episode scrobbling to watch history and planning-list sync with Watchlist |
 | AniList | Identified anime progress and anime watchlist sync |
 | MyAnimeList | Identified anime progress and anime watchlist sync |
 | Last.fm | Eligible music listening on Apple TV |
+
+Scrobbling sends playback activity to the tracker; it does not import that service's full watch history into your media servers.
 
 AniList and MyAnimeList do not treat every television episode as anime. Matching and usable identifiers matter; anime progress is submitted when playback stops at 80% or more.
 
