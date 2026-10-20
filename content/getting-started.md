@@ -16,6 +16,8 @@ Already use Plozz elsewhere? Choose **Set up from another device** during setup,
 
 Select your profile before changing **Settings**. [Customize Home and navigation](/home-and-navigation/) to choose rows and shortcuts, or adjust [cards, artwork, and language](/appearance/).
 
+On Apple TV, [remember a different Plozz profile for each system user](/apple-tv-profiles/) or [browse several libraries together](/combined-libraries/).
+
 Use [Spoiler protection](/spoiler-protection/) to hide unwatched episode information and [Circadian Mode](/circadian-mode/) for scheduled dimming. For children, configure [server restrictions and a Parental PIN](/profiles-and-locks/); hiding a row is not access control.
 
 ## While watching

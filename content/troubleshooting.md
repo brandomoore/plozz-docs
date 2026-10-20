@@ -4,7 +4,7 @@ Check the affected source before reporting a problem.
 
 ## Cannot connect or sign in
 
-1. Test the saved address from this device's network, including custom ports/paths; review [connection addresses](/servers/#add-local-or-remote-addresses).
+1. For local sources, allow Plozz Local Network access in device settings. Test the address, including ports/paths; review [connection addresses](/servers/#add-local-or-remote-addresses).
 2. If Jellyfin Quick Connect is unavailable, choose username/password sign-in.
 3. For Silo, use its browser address and complete approval and any profile PIN.
 

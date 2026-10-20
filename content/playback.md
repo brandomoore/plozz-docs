@@ -29,7 +29,7 @@ Its lead time controls when it appears without a credits marker.
 
 **Skip intros, credits & more** can show a button or skip automatically when markers exist. You can set different behavior for intros, credits, recaps, previews, and commercials.
 
-**Use community markers** is enabled by default. It looks up missing intro/credits markers using the title's IMDb or TMDB identifier, sending that identifier to IntroDB/TheIntroDB. Disable it to stop these lookups. Marker availability is not guaranteed.
+**Use community markers** is enabled by default. It fills missing server markers through IntroDB/TheIntroDB. Lookups send IMDb, TMDB, or TVDB identifiers and applicable episode numbers, ordering, episode name, and runtime, not video files. Disable it to stop community lookups; server markers remain separate. Coverage, matching, and availability vary.
 
 **Rewind on resume** (**Resume rewind** on iPhone/iPad) starts before the saved position: five seconds by default, adjustable from zero to 60 seconds. This is not necessarily lost progress.
 

@@ -1,6 +1,6 @@
 # Device and system controls
 
-Some controls depend on your device, operating system, and the active playback path. A missing button does not always mean a missing setting.
+Controls depend on your device, operating system, and playback path.
 
 ## Apple TV
 
@@ -10,7 +10,19 @@ Use the remote to reveal and focus playback controls. **Settings > Playback > Se
 
 **Fade on display changes** covers HDR/Dolby Vision and frame-rate transitions. If your Apple TV does not match dynamic range or frame rate, turning those fades off can avoid unnecessary transition delays. Plozz's toggles do not turn the television's matching features on.
 
-When Plozz is in the top row of the Apple TV Home Screen, Top Shelf can show content from its published library snapshot. It is not a live server browser. Its artwork preference is separate under [Appearance > Artwork](/appearance/).
+Each Apple TV user can [automatically open their remembered Plozz profile](/apple-tv-profiles/).
+
+## Live TV remote controls and rewind
+
+On Apple TV, a remote's **Guide** button opens Live TV when that destination is enabled. During full-screen channel playback, it opens the guide over the picture.
+
+For a channel with a usable rewind window, reveal controls and use the timeline to seek within that window. **Go Live** returns to the current broadcast. This is not a recording or a promise to restart any guide program. Scheduled library channels use **Jump to now** instead.
+
+## Launch from Apple TV Top Shelf
+
+Put Plozz in the Home Screen's top row. Top Shelf shows up to three Continue Watching and three Recently Added cards from Plozz's saved snapshot, not live server browsing.
+
+Selecting or playing a card opens Plozz, opens the title's page, and requests playback. Normal profile and playback authorization still apply. An unavailable server or removed title can prevent playback; open Plozz and check access. Artwork follows [Appearance > Artwork](/appearance/).
 
 ## iPhone and iPad
 
@@ -32,4 +44,4 @@ Controls can be restricted while video is playing elsewhere. The locally remuxed
 
 Live TV permits external presentation only for an authorized, single-channel session. Multiview disables AirPlay and Picture in Picture.
 
-For reliable travel viewing, use [completed offline downloads](/downloads/) rather than assuming an external presentation session stores the video. For Apple TV height-audio requirements, see [Audio tracks and output](/audio/).
+For travel, use [completed downloads](/downloads/); external presentation does not save video. See [Audio](/audio/) for Apple TV height-audio requirements.

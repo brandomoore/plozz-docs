@@ -1,6 +1,6 @@
 # Watch offline
 
-On iPhone and iPad, download movies and episodes so you can watch without a server connection.
+Download movies and episodes on iPhone/iPad, not Apple TV.
 
 ## Save a video
 
@@ -10,8 +10,6 @@ On iPhone and iPad, download movies and episodes so you can watch without a serv
 4. Open the saved movie or episode from Downloads to watch it.
 
 Before travelling, disconnect from the network and play the completed copy from Downloads. Check its audio and subtitles.
-
-Apple TV does not support offline downloads.
 
 ## Choose quality and networks
 
@@ -36,8 +34,8 @@ Use a download’s trailing menu for **Pause**, **Resume**, or **Remove**. The D
 
 Removing a download deletes its on-device copy, not the original on your server. Check free device storage before large batches; changing Default Quality affects new downloads, not files already saved.
 
-Background progress depends on iOS and the transfer type. If a transfer pauses, reopen Plozz and resume it.
+Eligible HTTP transfers can continue in the background; in-process transfers, including shares, need Plozz active unless iOS grants continued execution. Reopen Plozz to resume paused work.
 
-On iOS/iPadOS 26 or later, a Live Activity can show progress when background processing is available. Cancellation or expiry pauses its active downloads without deleting partial files.
+On iOS/iPadOS 26 or later, downloads can request continued processing with a Live Activity. The system can decline it. Cancellation or expiry pauses its active downloads without deleting partial files. Receiving all bytes still requires offline validation before completion.
 
 If a saved title will not play, confirm that the selected version finished downloading. A Seerr request or a server's preparation progress is not a completed offline copy.

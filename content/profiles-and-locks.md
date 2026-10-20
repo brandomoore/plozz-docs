@@ -10,6 +10,8 @@ Under each profile's **Libraries**, select included servers, the server user to 
 
 **Automatically Sign In** restores the last-used profile's previously authorized session on this device, including verified Profile Lock or Plex PIN access. Finish unlocking before enabling it. Turn it off if you want a PIN prompt on later launches; switching profiles still checks their locks.
 
+Each Apple TV user can remember a different Plozz profile. Follow [Apple TV users and automatic sign-in](/apple-tv-profiles/) to set this up.
+
 ## Lock a profile
 
 Open a profile's management settings and choose **Profile Lock**. Enter and confirm a four-digit PIN. An existing lock offers change or removal after authorization.
@@ -27,10 +29,12 @@ Kids profiles disable external Discovery recommendations. They do **not** add an
 
 Without a Parental PIN, restricted settings and profile switching remain available, and Seerr's Kids admin-request block is not enforced. A Profile Lock instead protects entry into a particular profile. Removing the Parental PIN does not turn Kids profiles off.
 
+Playlist sources have separate [device-local parental approvals](/live-tv/#approve-playlist-sources-for-kids).
+
 ## Before deleting or resetting
 
 Deleting a Plozz profile removes its preferences and server selections, not the household's signed-in server accounts.
 
-For a forgotten Profile Lock PIN, use **Forgot PIN?** and prefer recovery from another authorized signed-in device where possible. Signing out and setting up again has broader consequences; do not treat it as the first troubleshooting step.
+For a forgotten Profile Lock PIN, use **Forgot PIN?**; prefer another authorized device over signing out and rebuilding your setup.
 
 See [Profiles and sync](/profiles-and-sync/) for what moves between devices.

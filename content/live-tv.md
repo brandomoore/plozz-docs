@@ -1,7 +1,5 @@
 # IPTV and Live TV
 
-Use Live TV to watch channels from your own IPTV provider or an authorized media server.
-
 ## Add IPTV
 
 1. Choose **IPTV** during first-run setup, or open **Sources > IPTV provider** in Live TV.
@@ -9,7 +7,7 @@ Use Live TV to watch channels from your own IPTV provider or an authorized media
 3. Open **Advanced options** to add an XMLTV **Guide URL** if your provider supplies one. Playlist-declared guides can load automatically; Xtream can supply its own listings.
 4. Choose **Connect**, wait for the import to finish, and open **Live TV**.
 
-On iPhone and iPad, **Playlist file** can import an M3U from Files. That catalogue stays on the importing device; import a replacement to update it. Use a playlist URL for other devices.
+On iPhone/iPad, IPTV sign-in's **Playlist file** imports an M3U from Files. That account catalogue stays local; import a replacement to update it. [Live TV source sync](/profiles-and-sync/#sync-live-tv-deliberately) has a different scope.
 
 A guide is optional: channels can play without programme listings. Plozz supplies neither channels nor an IPTV subscription.
 
@@ -17,7 +15,7 @@ If import says the address is a video stream or web page, obtain the provider's 
 
 ## Find on-demand titles
 
-If your IPTV provider supplies on-demand movies or shows, available **Movies** and **TV Shows** libraries appear separately from its live channels. Enable them under **Settings > Libraries**, then [browse them normally](/library/). A working channel guide does not guarantee that the provider also supplies an on-demand catalogue.
+If supplied by your IPTV provider, **Movies** and **TV Shows** libraries appear separately from channels. Enable them under **Settings > Libraries**, then [browse normally](/library/). Channel access does not guarantee an on-demand catalogue.
 
 ## Use a connected server
 
@@ -25,11 +23,19 @@ In **Sources > Media server**, select a connected Jellyfin, Emby, or Plex server
 
 Server configuration, account permissions, and subscription requirements still apply. Native Silo Live TV is not offered.
 
+## Search the guide
+
+Open Live TV's **Search**, choose **Channels** or **Programs**, and enter a name. Program results cover retained guide listings, not an on-demand archive. **Watch channel** tunes live, not the selected program from its beginning.
+
+## Approve playlist sources for Kids
+
+For a Kids profile's playlist source, set a [Parental PIN](/profiles-and-locks/), open **Sources**, select the playlist, and choose **Approve this source**. Approval allows every channel in that source, not age-filtered programs. It stays on this device; choose **Revoke source approval** there to undo it. Changed sources or profile identities can require approval again.
+
 ## Watch several channels
 
 Start a channel, open **Multiview**, and add channels. The limit is **four pictures**, with sound from one pane at a time. Your provider’s simultaneous-stream allowance or available tuners may impose a lower limit.
 
-Use **Favorite** in Multiview to save its channels and layout, then reopen it from **Favorite Multiviews** in the guide. Saving a layout does not reserve streams or tuners.
+Use **Favorite** to save the channels/layout, then reopen it from **Favorite Multiviews**. Saving does not reserve streams or tuners.
 
 ## Organize channels and listings
 
@@ -41,7 +47,7 @@ Use **Show channel** for an individual exception. Resetting category/region visi
 
 Under **Sources**, open a playlist's **Guide options**. For wrong listings, choose **Correct guide mapping** when offered, find the channel, select its guide source, then choose the correct station and regional feed. Corrections survive guide refreshes; **Use automatic matching** removes an override.
 
-The guide-day range retains what the provider supplies; increasing it cannot create missing listings. Use **Refresh sources** after a source changes, or **Retry** for its displayed error.
+The guide-day range cannot create missing listings. Use **Refresh sources** after changes, or **Retry** for a source error.
 
 On mobile, **Stop without Wi-Fi or Ethernet** stops Live TV after a network change is detected; brief cellular use can still occur during the transition.
 
@@ -59,7 +65,7 @@ On both platforms, **Preview after watching** keeps a channel playing behind the
 
 ## Make channels from your libraries
 
-Open **Sources > Plozz channels** for the automatic lineup and optional custom channels. Custom channels use accessible **Plex, Jellyfin, or Emby** libraries, not arbitrary IPTV URLs or Silo libraries.
+Open **Sources > Plozz channels**. **Enable Plozz channels** controls the automatic lineup; **Create custom channel** uses accessible **Plex, Jellyfin, or Emby** libraries, not IPTV URLs or Silo libraries.
 
 Choose the libraries, movies/episodes, ordering, and optional matching rules. Select **Preview schedule**, inspect matches, then **Save channel**. Invalid or missing durations can exclude titles. Empty title, genre, or rating rules allow all accessible matches; review the preview carefully.
 
@@ -67,4 +73,4 @@ Changes begin after already-published programs. Schedules remain device-local un
 
 **Update watch history** can mark a library-channel program watched after 90% viewing. It does not write resume progress, and these channels use original files only.
 
-Live TV is experimental. For setup or playback failures, start with [Troubleshooting](/troubleshooting/) rather than removing all sources.
+Live TV is experimental. For errors, see [Troubleshooting](/troubleshooting/).
