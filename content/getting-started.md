@@ -4,19 +4,20 @@ Plozz plays media from your own sources on Apple TV, iPhone, and iPad.
 
 ## Set up Plozz
 
-1. Join the [Plozz TestFlight beta](https://testflight.apple.com/join/EKfReNMu) and install it on a device running tvOS, iOS, or iPadOS 18 or later.
-2. Open Plozz and choose your source: Jellyfin, Plex, Emby, Silo, IPTV, or **Media Share**.
-3. [Connect your server](/servers/), [choose a network folder](/network-shares/), or [add your IPTV service](/live-tv/). Plozz supplies no movies, channels, or subscriptions.
-4. Complete the profile, library, and appearance choices shown. A [Plozz profile](/profiles-and-locks/) keeps your app preferences; it is separate from your server account.
-5. [Browse or search your libraries](/library/) and choose a movie or episode to play; for channels, open **Live TV**.
+1. **Install Plozz.** Join the [TestFlight beta](https://testflight.apple.com/join/EKfReNMu) on a device running tvOS, iOS, or iPadOS 18 or later.
+2. **Choose a source.** Open Plozz and choose Jellyfin, Plex, Emby, Silo, IPTV, or **Media Share**.
+3. **Connect your media.** [Connect a server](/servers/), [choose a network folder](/network-shares/), or [add an IPTV service](/live-tv/). Plozz supplies no movies, channels, or subscriptions.
+4. **Make it yours.** Complete the profile, library, and appearance choices shown. A [Plozz profile](/profiles-and-locks/) keeps your app preferences; it is separate from your server account.
+5. **Start watching.** [Browse or search](/library/) and choose a movie or episode to play; for channels, open **Live TV**.
 
-Already use Plozz elsewhere? Choose **Set up from another device** during setup, then follow [Profiles and sync](/profiles-and-sync/). Silo still requires approval for each device.
+> [!TIP]
+> Already use Plozz elsewhere? Choose **Set up from another device** during setup, then follow [Profiles and sync](/profiles-and-sync/). Silo still requires approval for each device.
 
 ## Make the setup yours
 
 Select your profile before changing **Settings**. [Customize Home and navigation](/home-and-navigation/) to choose rows and shortcuts, or adjust [cards, artwork, and language](/appearance/).
 
-On Apple TV, [remember a different Plozz profile for each system user](/apple-tv-profiles/) or [browse several libraries together](/combined-libraries/).
+On Apple TV, use [automatic profile sign-in](/apple-tv-profiles/) for each system user or [browse libraries together](/combined-libraries/).
 
 Use [Spoiler protection](/spoiler-protection/) to hide unwatched episode information and [Circadian Mode](/circadian-mode/) for scheduled dimming. For children, configure [server restrictions and a Parental PIN](/profiles-and-locks/); hiding a row is not access control.
 

@@ -15,7 +15,8 @@ Connect your own Jellyfin, Plex, Emby, or Silo account.
 
 On Apple TV with no connections, choose **Sign In to a Server** instead.
 
-Sign-ins are shared by profiles on this device. Turning off a server under **Libraries** affects only the active profile; removing it under **Servers** signs out its accounts for everyone. **Remove Everywhere**, when offered, also removes it from your other iCloud devices.
+> [!WARNING]
+> Sign-ins are shared by profiles on this device. Turning off a server under **Libraries** affects only the active profile; removing it under **Servers** signs out its accounts for everyone. **Remove Everywhere**, when offered, also removes it from your other iCloud devices.
 
 ## Keep identities separate
 

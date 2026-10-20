@@ -11,7 +11,8 @@ Download movies and episodes on iPhone/iPad, not Apple TV.
 
 For a show, open **Manage Seasons**, then choose **Download All Available Episodes**, a season, or an episode. Only available library files can download.
 
-Before travelling, play the completed copy from Downloads without a network. Check audio and subtitles.
+> [!TIP]
+> Before travelling, play the completed copy from Downloads without a network. Check audio and subtitles.
 
 ## Choose quality and networks
 

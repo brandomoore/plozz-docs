@@ -3,11 +3,11 @@
   "repository": "brandomoore/Plozz",
   "ref": "main",
   "commit": "ad94fbb43402ec69524e360dba8c662a311d62f1",
-  "verifiedAt": "2026-10-20T05:04:12.886Z",
-  "baselineReviewedAt": "2026-10-20T05:04:12.886Z",
-  "contentHash": "8490bb2709ea81fa6556e21cb09b6d90f71313e9707e6fe6d3f7f2a860b93d1e",
-  "coverageHash": "f41116b8fcc5d82441bd62c3dfeb161e1486d21da95082fc2aa0eaf6563b76fe",
-  "policyHash": "f0c3b151821ceb6119fc6cf057746ad427b435814a1f85cad21c1098b214cac1",
+  "verifiedAt": "2026-10-20T05:44:34.406Z",
+  "baselineReviewedAt": "2026-10-20T05:44:34.406Z",
+  "contentHash": "060bddf7d045cc55ea6615b1c56158ba05cbccb2bba6e2ffbbc3925154534cee",
+  "coverageHash": "bc0236d7cacfa6b469d236cea3595bdadeb2bbede7dfcbb300907dd3727514aa",
+  "policyHash": "bb17026896f5fc0dbc681bf05d873efaf958667863200a3875433944fd7d46cc",
   "sourceFiles": {
     "README.md": "76650496103c222554b7b26a771c78d89a540fde",
     "project.yml": "18d9a8af18a6c87454632fd4327771bf0f715e42",
@@ -105,6 +105,7 @@
     "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift": "520b602009fda8326ca59a3d1b677ad64e67ab5e",
     "Sources/MetadataKit/CommunitySkipMarkers.swift": "a1fd56ae0ded2f2e400f4cf863d3daf726eacdf6",
     "Sources/CoreModels/PlaybackSettings.swift": "e21b610787ecf723e6672ec2ae95027b210d7a37",
+    "Sources/FeaturePlayback/CastPanelView.swift": "8f250d3db79320ad33e199a37c5c22f89a58ef99",
     "Sources/AppShelliOS/PlozziOSStreamingQuality.swift": "9bbc95d202360620d49551a2796a2b450d86dbb0",
     "Sources/CoreModels/StreamingQuality.swift": "9a051575e4e87c154baedc1d70073ae332c5caf6",
     "Sources/CoreModels/StreamingQualitySupport.swift": "3952b7f4fc12facc4db3288df9a4b130e21ba354",
@@ -177,6 +178,7 @@
     "Sources/FeatureSettings/CardAppearanceControls.swift": "259e3529b0cb9547233f81a6db7ff53a0b861c22",
     "Sources/FeatureSettings/ArtworkSettingsControls.swift": "9bc2ef62cc3d331d7833b94bbf0c4109b063b3ec",
     "Sources/FeatureSettings/AppLanguagePicker.swift": "e9fc76fea358ff713b7c2c445a0aa6a0357c8430",
+    "Sources/CoreModels/AppLanguage.swift": "132dbd149fde9144e8b593a0b99925ac19aea21d",
     "Sources/CoreModels/ArtworkSettings.swift": "6e1dc444405465b978c21b1a9607877300dbc338",
     "Sources/CoreModels/ThemeSettings.swift": "475595e2429817613bc69bcd43d1b862300358a9",
     "Sources/CoreModels/TransparencyPreferenceStore.swift": "66ea4e599b9924b550a8987e9c63de61d1ad0b89",
@@ -343,12 +345,12 @@
   },
   "pages": {
     "getting-started": {
-      "contentHash": "bac668fb14d8a61876c4158b9b8efe107f483d9eb270584430b14430b7dc3e54",
-      "updatedAt": "2026-10-20T04:37:35.931Z"
+      "contentHash": "7f4ba00acf7fa806242750e5311a9d0552bfc81f1363a55aef043254578952dd",
+      "updatedAt": "2026-10-20T05:44:34.406Z"
     },
     "servers": {
-      "contentHash": "ea226cb5a692f4f4739564bfa3a74d37649bf11bd2951d0512cad9fe3ce8a297",
-      "updatedAt": "2026-10-20T04:37:35.931Z"
+      "contentHash": "74a303893694fdf2e434d9f75a235da2183bfed03d87dbf7d6f4faa68cae602d",
+      "updatedAt": "2026-10-20T05:44:34.406Z"
     },
     "network-shares": {
       "contentHash": "1554ed620d5e2a09baa3ff757f15616e80c4be7979835d9c0c6ed9f16aee96ee",
@@ -359,16 +361,16 @@
       "updatedAt": "2026-10-20T04:02:23.488Z"
     },
     "combined-libraries": {
-      "contentHash": "37b27ea2eaf95bc56b728f2d9ce56ef140ae6966ea34fbc2db30b5b983a00490",
-      "updatedAt": "2026-10-20T04:02:23.488Z"
+      "contentHash": "98b47f4bf99b52916238df6e223175c5ca6edd205d3d183434c1f7bb6a5b0bfe",
+      "updatedAt": "2026-10-20T05:44:34.406Z"
     },
     "home-and-navigation": {
       "contentHash": "8c104b4e706caabb8f714c0cc543ba0cfb81fed4dda5760d24968377239775a4",
       "updatedAt": "2026-10-20T05:04:12.886Z"
     },
     "playback": {
-      "contentHash": "0c65ade959056489ed631f1a8c297f3d447d05561e8dc3788cd5dafa319fa277",
-      "updatedAt": "2026-10-20T04:02:23.488Z"
+      "contentHash": "1cec40396ff1d5f14348704bf28cfa116ee26a61a56281f82aa1f4d0badd8e78",
+      "updatedAt": "2026-10-20T05:44:34.406Z"
     },
     "streaming-quality": {
       "contentHash": "17b74ed8d73f6370126dddbd8acef71fd496c66fd638aac78087c6048639d16e",
@@ -383,20 +385,20 @@
       "updatedAt": "2026-10-20T04:37:35.931Z"
     },
     "music": {
-      "contentHash": "18c6cac6b574bb7015ee5b7960f9bb81037d2fc65d04c5593af2513353cddf0c",
-      "updatedAt": "2026-10-20T04:37:35.931Z"
+      "contentHash": "b7941a8e58ac15ca21ef9bd2d7d93742efe9f93eff589608572b1bd994cca90a",
+      "updatedAt": "2026-10-20T05:44:34.406Z"
     },
     "live-tv": {
       "contentHash": "d72ffe98b26ce6d551fcab23378eeb27fb07a896ad5d5c7d15032fa05d48a403",
       "updatedAt": "2026-10-20T04:37:35.931Z"
     },
     "downloads": {
-      "contentHash": "832f2600db5f78f6f6f27c0d80172d60a9677160a1553be5f7f6d021b7f208c8",
-      "updatedAt": "2026-10-20T05:04:12.886Z"
+      "contentHash": "09b5e7a9cb28b3d7c6f197458ba7b4979ef264823b8258840cd19cd319614a96",
+      "updatedAt": "2026-10-20T05:44:34.406Z"
     },
     "appearance": {
-      "contentHash": "55dd652b473115b47bc0c54d876982b705544c54d446594371e4c60d12c80ef9",
-      "updatedAt": "2026-10-18T11:24:31.505Z"
+      "contentHash": "0dd6c277a93c78ca8fb96515097ab1a360cd4ef52f0755f91192501bdbb0c77e",
+      "updatedAt": "2026-10-20T05:44:34.406Z"
     },
     "spoiler-protection": {
       "contentHash": "338393725ff3d9f7fddf2c471b9bd0b7f778e968134f0576f5277fa7c8cd10d0",
@@ -411,8 +413,8 @@
       "updatedAt": "2026-10-20T04:37:35.931Z"
     },
     "apple-tv-profiles": {
-      "contentHash": "5a368c049c38d3e169416a6c1d55a769d2b4dd41215be9f664150cc44c9b2c1f",
-      "updatedAt": "2026-10-20T04:02:23.488Z"
+      "contentHash": "d44a361796889ce50abd1aa62c1caf36f43718f605fe026ec5bc9098d566b01b",
+      "updatedAt": "2026-10-20T05:44:34.406Z"
     },
     "profiles-and-locks": {
       "contentHash": "355e214bbfceea61b2431c8cd083a426c4c3fa51159a74f83865442b0297d775",

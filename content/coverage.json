@@ -161,11 +161,12 @@
         "Sources/FeatureSettings/CardAppearanceControls.swift",
         "Sources/FeatureSettings/ArtworkSettingsControls.swift",
         "Sources/FeatureSettings/AppLanguagePicker.swift",
+        "Sources/CoreModels/AppLanguage.swift",
         "Sources/CoreModels/ArtworkSettings.swift",
         "Sources/CoreModels/ThemeSettings.swift",
         "Sources/AppShelliOS/PlozziOSSettingsView.swift"
       ],
-      "summary": "Group themes, card density, labels, focus emphasis and watched indicators; explain solid versus system-controlled Liquid Glass, artwork presets and per-view scopes, saved download images, and app-language versus media-language choices."
+      "summary": "Group themes, card density, labels, focus emphasis and watched indicators; explain solid versus system-controlled Liquid Glass, artwork presets and per-view scopes, saved download images, System language selection, and interface language versus media languages, server metadata and device-region formatting."
     },
     "spoilers": {
       "documents": [
@@ -199,6 +200,7 @@
     "playback": {
       "documents": [
         { "slug": "playback" },
+        { "slug": "playback", "anchor": "explore-the-cast" },
         { "slug": "platform-controls", "anchor": "airplay-and-picture-in-picture" }
       ],
       "sources": [
@@ -216,9 +218,12 @@
         "Sources/CoreModels/PlaybackVersionSelectionMode.swift",
         "Sources/CoreModels/VersionPreferenceStore.swift",
         "Sources/AppShell/PlayerPresentation.swift",
-        "Sources/AppShelliOS/PlozziOSPlayerView.swift"
+        "Sources/AppShelliOS/PlozziOSPlayerView.swift",
+        "Sources/FeaturePlayback/CastPanelView.swift",
+        "Sources/AppShell/MainTabViewSupport.swift",
+        "Sources/AppShell/MainTabView.swift"
       ],
-      "summary": "Use controls and same-account versions, the first-use Ask every time/Choose automatically decision, and independent series-version memory. Automatic selection falls back to a device recommendation when the remembered type is missing, not another prompt; ask mode still applies to autoplay. Retain autoplay/community-marker defaults, independent Up Next cards, lead time, skips, resume rewind, speed, zoom, external presentation and absence of a chapter picker."
+      "summary": "Use controls and same-account versions, the first-use Ask every time/Choose automatically decision, and independent series-version memory. Automatic selection falls back to a device recommendation when the remembered type is missing, not another prompt; ask mode still applies to autoplay. Retain autoplay/community-marker defaults, independent Up Next cards, lead time, skips, resume rewind, speed, zoom, external presentation and absence of a chapter picker. In-player Cast opens available biographies and credits; See more and credit-title navigation end playback on both shells, and credits need not be playable library copies."
     },
     "quality": {
       "documents": [
@@ -615,9 +620,12 @@
         "Sources/CoreUI/PlaybackDiagnosticDetailsView.swift",
         "Sources/FeaturePlayback/CurrentStreamDetailsSection.swift",
         "Sources/FeaturePlayback/TrackMenuBuilder.swift",
-        "Sources/FeaturePlayback/LiveChannelPlayerView.swift"
+        "Sources/FeaturePlayback/LiveChannelPlayerView.swift",
+        "Sources/FeaturePlayback/CastPanelView.swift",
+        "Sources/AppShell/MainTabViewSupport.swift",
+        "Sources/AppShelliOS/PlozziOSPlayerView.swift"
       ],
-      "summary": "Use task sections for player preferences, dual-text-track eligibility, confirmed system-caption-style replacement and live rewind/Go Live. Audio-delay and Dialog Enhance scaffolding is capability-gated, but neither wired Native nor Plozzigen engine advertises those capabilities; do not promise them. Subtitle overlay timing is independently supported where exposed, while native second tracks require fetchable text delivery and image primaries exclude dual mode."
+      "summary": "Use task sections for player preferences, dual-text-track eligibility, confirmed system-caption-style replacement and live rewind/Go Live. Audio-delay and Dialog Enhance scaffolding is capability-gated, but neither wired Native nor Plozzigen engine advertises those capabilities; do not promise them. Subtitle overlay timing is independently supported where exposed, while native second tracks require fetchable text delivery and image primaries exclude dual mode. Cover the Cast panel's biography/credits and deliberate page-navigation handoff, which ends playback rather than playing a credit or keeping the current video open."
     },
     "FeatureProfiles": {
       "areas": ["profiles"],
@@ -781,8 +789,8 @@
     },
     "language": {
       "areas": ["appearance"],
-      "sources": ["Sources/CoreUI/ProfileSettingsCategory.swift", "Sources/FeatureSettings/AppLanguagePicker.swift", "Sources/AppShelliOS/PlozziOSSettingsView.swift"],
-      "summary": "Use the appearance guide to distinguish interface language from audio, subtitles and library metadata rather than a separate picker guide."
+      "sources": ["Sources/CoreUI/ProfileSettingsCategory.swift", "Sources/FeatureSettings/AppLanguagePicker.swift", "Sources/CoreModels/AppLanguage.swift", "Sources/AppShelliOS/PlozziOSSettingsView.swift"],
+      "summary": "Use the appearance guide to explain System language selection and distinguish interface language from audio, subtitles, server-supplied metadata and device-region date/number formatting rather than a separate picker guide."
     },
     "libraries": {
       "areas": ["connections", "library", "profiles", "music"],

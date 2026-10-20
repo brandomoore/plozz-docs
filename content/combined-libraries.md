@@ -2,6 +2,10 @@
 
 On Apple TV, **All Libraries** brings enabled video libraries into one grid, including libraries from different connected servers. It does not move media or combine server accounts.
 
+```plozz-diagram
+combined-libraries
+```
+
 ## Open All Libraries on Apple TV
 
 1. Enable the libraries you want under **Settings > Libraries** for the active Plozz profile.
@@ -21,7 +25,8 @@ On Apple TV, sort a library's **Browse** view by name, then scroll a few rows do
 
 A deep jump can need more loading, especially with Silo or combined libraries. Wait for the destination to load. If a jump fails, select the letter again. If the index fails to load, change to another sort and back to name to rebuild it; an error does not mean that letter has no titles.
 
-On iPhone and iPad, use the available library views, filters, scrolling, or **Search**. The current mobile interface does not expose Apple TV's All Libraries destination or letter rail.
+> [!NOTE]
+> On iPhone and iPad, use the available library views, filters, scrolling, or **Search**. The current mobile interface does not expose Apple TV's All Libraries destination or letter rail.
 
 ## Results are missing
 

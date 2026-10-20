@@ -137,6 +137,7 @@
   },
   {
     "slug": "combined-libraries",
+    "platforms": ["Apple TV"],
     "title": "Browse libraries together",
     "seoTitle": "Browse All Libraries and jump by letter in Plozz on Apple TV",
     "description": "Browse video libraries from several servers together, choose a server copy, use Apple TV letter navigation, and understand mobile differences.",
@@ -209,7 +210,7 @@
     "slug": "playback",
     "title": "Player controls",
     "seoTitle": "Use Plozz player controls, versions, autoplay, and skip markers",
-    "description": "Navigate the player, ask for versions or choose automatically, set series memory and autoplay, and understand skips and resume rewind.",
+    "description": "Use player controls, choose versions, set autoplay and skips, and explore cast biographies and credits. Learn which actions end playback.",
     "section": "Playback",
     "kind": "guide",
     "file": "playback.md",
@@ -230,7 +231,10 @@
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/MetadataKit/CommunitySkipMarkers.swift",
-      "Sources/CoreModels/PlaybackSettings.swift"
+      "Sources/CoreModels/PlaybackSettings.swift",
+      "Sources/FeaturePlayback/CastPanelView.swift",
+      "Sources/AppShell/MainTabViewSupport.swift",
+      "Sources/AppShell/MainTabView.swift"
     ],
     "watch": [
       "Sources/FeaturePlayback/Player",
@@ -341,6 +345,7 @@
   },
   {
     "slug": "music",
+    "platforms": ["Apple TV"],
     "title": "Listen to music",
     "seoTitle": "Play server music, playlists, and lyrics in Plozz on Apple TV",
     "description": "Find eligible Plex, Jellyfin, or Emby music libraries, control album and playlist queues, show lyrics, and connect Last.fm.",
@@ -416,6 +421,7 @@
   },
   {
     "slug": "downloads",
+    "platforms": ["iPhone", "iPad"],
     "title": "Watch offline",
     "seoTitle": "Download videos for offline viewing in Plozz on iPhone and iPad",
     "description": "Save and verify an offline copy, choose download quality and networks, manage storage, and understand background-transfer limits.",
@@ -459,6 +465,7 @@
       "Sources/FeatureSettings/CardAppearanceControls.swift",
       "Sources/FeatureSettings/ArtworkSettingsControls.swift",
       "Sources/FeatureSettings/AppLanguagePicker.swift",
+      "Sources/CoreModels/AppLanguage.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/CoreModels/ArtworkSettings.swift",
       "Sources/CoreModels/ThemeSettings.swift",
@@ -570,6 +577,7 @@
   },
   {
     "slug": "apple-tv-profiles",
+    "platforms": ["Apple TV"],
     "title": "Apple TV users and automatic sign-in",
     "seoTitle": "Automatically sign in to a Plozz profile for each Apple TV user",
     "description": "Set a remembered Plozz profile for each Apple TV system user, enable automatic sign-in, and understand shared accounts and PIN protection.",

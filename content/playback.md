@@ -1,18 +1,18 @@
 # Player controls
 
-Reveal the controls to change playback without leaving the video. Options depend on the active session.
+Control the current video and choose what plays next.
 
 ## Reach the controls
 
 On Apple TV, press **Up** from the scrub surface for Playback, Audio, and Subtitles. Press **Down** for the information area and available episode or playlist navigation. On iPhone/iPad, tap the video and open its options.
 
-Use the timeline to seek. Apple TV's **Seek without pausing** controls whether you must pause first; [device controls](/platform-controls/) explains remote, touch, and keyboard differences.
+Use the timeline to seek. See [device controls](/platform-controls/) for **Seek without pausing**, remote, touch, and keyboard behavior.
 
 ## Choose audio or a version
 
 Open **Audio** for tracks or **Version** for files and editions. On iPhone/iPad, both are in playback options.
 
-Version switching stays on the active server/account and resumes at your current position. Different cuts can have different timelines.
+Versions stay on the active server/account and keep your position. Different cuts can have different timelines.
 
 The first multi-version video asks how to choose. Change this later in **Settings > Playback > Version selection**:
 
@@ -38,5 +38,9 @@ Its lead time controls when it appears without a credits marker.
 Use playback speed and zoom where offered. Fit keeps the full picture; Fill can crop it.
 
 Episode/playlist navigation is available, but there is no chapter picker. Intro markers are not chapter browsing.
+
+## Explore the cast
+
+Open **Cast** below the timeline and select a person for available biography and credits. **See more** opens their full page; selecting a credit opens its title page. Both actions end playback. A credit does not guarantee a playable library copy.
 
 See [Streaming quality](/streaming-quality/), [Audio](/audio/), or [Subtitles](/subtitles/) for their settings. [AirPlay and Picture in Picture](/platform-controls/#airplay-and-picture-in-picture) have additional limits.
