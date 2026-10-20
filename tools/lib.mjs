@@ -3,6 +3,7 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import MarkdownIt from 'markdown-it';
+import { installVisuals } from './visuals.mjs';
 
 export const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 export const APP_REPO = 'brandomoore/Plozz';
@@ -12,6 +13,7 @@ export const readJson = path => JSON.parse(readFileSync(resolve(ROOT, path), 'ut
 export const escapeHtml = value => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
 export const pagePath = slug => slug === 'getting-started' ? '/' : `/${slug}/`;
 export const markdown = new MarkdownIt({ html: false, linkify: false, typographer: false });
+installVisuals(markdown);
 export const headingSlug = text => text.toLowerCase().normalize('NFKD').replace(/\p{M}/gu, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'section';
 markdown.core.ruler.after('inline', 'heading-identifiers', state => {
   const used = new Set(['main', 'freshness', 'guide-search', 'no-guides', 'search-status', 'search-results', 'all-guides',

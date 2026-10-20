@@ -60,7 +60,10 @@ desktop Copilot app, personal token or Cloudflare deployment secret is needed.
    review, including features that existed before the previous docs run.
 5. A fresh Copilot CLI writer updates useful guides and the coverage ledger.
    A separate fresh reviewer checks factual accuracy, UI reachability,
-   applicability, completeness against the baseline and editorial/SEO quality.
+   applicability, completeness against the baseline and editorial/SEO/visual
+   quality. Both assessments appear in the Actions job summary and the
+   `write-assessment`/`review-assessment` artifacts, including concrete requests
+   for useful imagery that needs maintainer-approved assets.
 6. A non-AI job validates content, citations, word counts and scope, refuses a
    moved docs base, and commits only approved guides/state to this repo's `main`.
 7. The Pages workflow rebuilds that exact commit, refuses an outdated deployment,
@@ -82,6 +85,15 @@ The dark, Manrope-based shell has a grouped sidebar, an icon-led guide
 directory and a desktop "On this page" rail that follows the reader's position.
 Narrow screens use a navigation drawer and an inline section list. Category
 cards link to real guides, not additional thin category pages.
+
+Recognizable service marks accompany named Discord and GitHub links in both
+navigation layouts and articles. A short, unordered list of distinct services
+introduced by bold links naming each service becomes a responsive option group;
+ordinary prose, secondary links and ordered steps keep their usual layout.
+Authors use normal Markdown, not inline SVG or page-specific components. The
+renderer owns the icons, spacing, accessible labels and mobile behavior.
+`EDITORIAL.md` owns the visual-quality checklist and the review path for new
+imagery; missing assets are surfaced rather than invented or hotlinked.
 
 Header search opens with `/` or Command/Ctrl+K. Full-text results include
 article sections and link directly to an answer; arrow keys move through
@@ -159,6 +171,15 @@ The footer date and publishing metadata will accurately describe the restored co
 The logo is the canonical Plozz mark also used by plozz.app. Manrope is bundled
 under the SIL Open Font License in `public/font-license.txt`. Reader pages make
 no third-party font or analytics requests.
+
+The monochrome Discord and GitHub paths in `tools/visuals.mjs` come from
+[Simple Icons 13.21.0](https://github.com/simple-icons/simple-icons/tree/13.21.0/icons)
+under [CC0](https://github.com/simple-icons/simple-icons/blob/13.21.0/LICENSE.md).
+Their original geometry is preserved. These service marks identify link
+destinations, not endorsement; trademark rights remain with their owners.
+Review the [Discord](https://discord.com/branding) and
+[GitHub](https://github.com/logos) brand guidance before replacing them.
+Icons are bundled inline, so displaying them never contacts another service.
 
 Social previews reuse the website's content-versioned image URL. When that
 artwork changes, update `socialImage` in `tools/build.mjs` to match the live

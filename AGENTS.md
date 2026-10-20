@@ -3,7 +3,9 @@
 Keep guides short, accurate and useful to someone using the app.
 
 - `EDITORIAL.md` owns the reader-task baseline, page-versus-section decisions
-  and search/discoverability standards. Read it before writing or reviewing.
+  and search/discoverability and visual-quality standards. Read it before
+  writing or reviewing, including the required visual assessment and asset
+  request process.
 - This repository is independent from `brandomoore/Plozz`. Read app source only
   from the immutable commit in the supplied source plan (normally
   `.docs-work/plan.json`). Never edit, build, test,
@@ -36,7 +38,9 @@ Keep guides short, accurate and useful to someone using the app.
 - Community links use `https://plozz.app/discord`. Never embed an invite.
 - The shared renderer owns topic cards, navigation, search and section rails.
   Keep guide bodies presentation-independent; do not duplicate those controls
-  in Markdown. Layout-only changes must preserve article dates and source state.
+  in Markdown. `tools/visuals.mjs` supplies approved service marks and option
+  layouts from ordinary labeled links. Layout-only changes must preserve
+  article dates and source state.
 - Use the workflow's explicit model and effort. Do not delegate, invoke other
   AI services, or silently choose a fallback model.
 - A separate review session checks every proposed content change against the

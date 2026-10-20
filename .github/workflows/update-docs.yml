@@ -83,6 +83,13 @@ jobs:
         env:
           COPILOT_GITHUB_TOKEN: ${{ github.token }}
       - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: write-assessment
+          path: .docs-work/write-response.txt
+          include-hidden-files: true
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
         with:
           name: proposed-content
           path: content/
@@ -119,6 +126,13 @@ jobs:
       - run: npm run agent:review
         env:
           COPILOT_GITHUB_TOKEN: ${{ github.token }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: review-assessment
+          path: .docs-work/review-response.txt
+          include-hidden-files: true
+          retention-days: 7
       - uses: actions/upload-artifact@v4
         with:
           name: reviewed-content

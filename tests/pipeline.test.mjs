@@ -25,7 +25,7 @@ function fixture(t) {
   const root = mkdtempSync(resolve(ROOT, '.docs-work/pipeline-test-'));
   t.after(() => rmSync(root, { recursive: true, force: true }));
   for (const path of ['tools', 'content', 'public', 'bin', 'config', '.docs-work', 'node_modules/.bin']) mkdirSync(resolve(root, path), { recursive: true });
-  for (const name of ['lib.mjs', 'source.mjs', 'source-discovery.mjs', 'apply-proposal.mjs', 'run-agent.mjs', 'publish.mjs', 'build.mjs', 'check.mjs']) copyFileSync(resolve(ROOT, 'tools', name), resolve(root, 'tools', name));
+  for (const name of ['lib.mjs', 'visuals.mjs', 'source.mjs', 'source-discovery.mjs', 'apply-proposal.mjs', 'run-agent.mjs', 'publish.mjs', 'build.mjs', 'check.mjs']) copyFileSync(resolve(ROOT, 'tools', name), resolve(root, 'tools', name));
   for (const name of ['docs.css', 'docs.js', 'logo.svg', 'manrope.woff2', 'font-license.txt']) copyFileSync(resolve(ROOT, 'public', name), resolve(root, 'public', name));
   const save = (path, value) => writeFileSync(resolve(root, path), typeof value === 'string' ? value : JSON.stringify(value));
   save('package.json', { type: 'module' });
@@ -398,12 +398,21 @@ test('model jobs require credentials, explicit Sol, standalone approval and unch
   result = f.run('run-agent.mjs', ['review'], { DOCS_MODEL: 'auto', COPILOT_GITHUB_TOKEN: 'fixture' });
   assert.notEqual(result.status, 0);
   assert.match(result.stderr, /explicit available GPT Sol/);
-  f.update({ agentResponse: 'NOTDOCS_REVIEW_APPROVED' });
+  f.update({ agentResponse: '## Visual quality\nApproved marks.\nNOTDOCS_REVIEW_APPROVED' });
   result = f.run('run-agent.mjs', ['review'], { COPILOT_GITHUB_TOKEN: 'fixture' });
   assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /did not approve publication/);
   assert(!existsSync(resolve(f.root, '.docs-work/review.json')));
-  f.update({ agentResponse: 'Checked all guides.\nDOCS_REVIEW_APPROVED' });
-  result = f.run('run-agent.mjs', ['review'], { COPILOT_GITHUB_TOKEN: 'fixture', GH_TOKEN: 'fixture', CLOUDFLARE_API_TOKEN: 'fixture' });
+  for (const agentResponse of ['DOCS_REVIEW_APPROVED', '## Visual quality\n\nDOCS_REVIEW_APPROVED']) {
+    f.update({ agentResponse });
+    result = f.run('run-agent.mjs', ['review'], { COPILOT_GITHUB_TOKEN: 'fixture' });
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /required Visual quality assessment/);
+    assert(!existsSync(resolve(f.root, '.docs-work/review.json')));
+  }
+  f.update({ agentResponse: '## Visual quality\n\nApproved marks; no <img> needed.\nDOCS_REVIEW_APPROVED' });
+  const summaryPath = resolve(f.root, '.docs-work/summary.md');
+  result = f.run('run-agent.mjs', ['review'], { COPILOT_GITHUB_TOKEN: 'fixture', GH_TOKEN: 'fixture', CLOUDFLARE_API_TOKEN: 'fixture', GITHUB_STEP_SUMMARY: summaryPath });
   assert.equal(result.status, 0, result.stderr);
   assert.equal(f.read('.docs-work/review.json').model, 'gpt-6.1-sol');
   const calls = readFileSync(resolve(f.root, 'calls.jsonl'), 'utf8').trim().split('\n').map(JSON.parse);
@@ -411,10 +420,18 @@ test('model jobs require credentials, explicit Sol, standalone approval and unch
   assert(modelCall.args.includes('--no-auto-update'));
   assert.equal(modelCall.args[modelCall.args.indexOf('--excluded-tools') + 1], 'task');
   assert.equal(modelCall.args[modelCall.args.indexOf('--reasoning-effort') + 1], 'high');
+  assert.match(modelCall.args[modelCall.args.indexOf('--prompt') + 1], /Visual quality checklist/);
+  assert.match(readFileSync(summaryPath, 'utf8'), /Approved marks; no &lt;img&gt; needed/);
+  assert.doesNotMatch(readFileSync(summaryPath, 'utf8'), /<img>/);
+  f.update({ agentResponse: '## Visual quality\nApproved service options; no further imagery needed.' });
+  result = f.run('run-agent.mjs', ['write'], { COPILOT_GITHUB_TOKEN: 'fixture' });
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(readFileSync(resolve(f.root, '.docs-work/write-response.txt'), 'utf8'), /Approved service options/);
   f.update({ mutateProtected: true });
   result = f.run('run-agent.mjs', ['review'], { COPILOT_GITHUB_TOKEN: 'fixture' });
   assert.notEqual(result.status, 0);
   assert.match(result.stderr, /modified protected infrastructure/);
+  assert.match(readFileSync(resolve(f.root, '.docs-work/review-response.txt'), 'utf8'), /Visual quality/);
 });
 
 test('publisher preserves porcelain paths and main races without Cloudflare credentials', t => {

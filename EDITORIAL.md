@@ -74,6 +74,50 @@ recheck must not reset an unchanged article's sitemap or structured-data date.
 Do not promise rankings, invent search volumes, fake expertise or copy another
 product's instructions and present them as Plozz behavior.
 
+## Visual quality
+
+Visual polish is part of a useful manual, not an optional finishing pass.
+Writers and independent reviewers must assess each changed guide for:
+
+- **Recognition:** use recognizable service marks for named destinations such
+  as Discord and GitHub, not a generic external-link arrow alone. Use the
+  shared, approved icon set rather than emoji, guessed logos or inline SVG.
+  Ordinary labeled Markdown links receive these marks automatically.
+- **Hierarchy:** make choices easy to compare without turning every paragraph
+  into a card. A short unordered list of distinct services, each introduced by
+  a bold link naming the service, uses the shared option layout. Keep steps
+  numbered only when order matters; keep secondary links quiet.
+- **Useful imagery:** consider a real screenshot for a hard-to-find control,
+  an annotated crop for a visual distinction, or a diagram for a relationship
+  that prose makes difficult to follow. State what the image helps the reader
+  do. No stock decoration, made-up app screenshots, AI-rendered controls or
+  imagery added just to fill space. Do not add an image to every page.
+- **Consistency and accessibility:** preserve the existing Plozz palette,
+  typography, spacing and icon style. Keep visible text labels, useful alt
+  text for meaningful images, decorative icons hidden from assistive
+  technology, legible contrast, keyboard focus and narrow-screen layouts.
+  Instructions must remain usable without an image.
+- **Trust and maintenance:** new artwork needs a verified source, permission
+  to use it, local delivery, dimensions and a clear owner. Screenshots must
+  reflect the stated platform and current implementation and exclude account
+  details, personal media, server addresses, tokens and pairing codes.
+
+The automated writer's content-only boundary still applies. It cannot add
+assets, change CSS, embed HTML/SVG/images in guides or fetch arbitrary artwork.
+Use the existing shared components now. When useful imagery or a missing icon
+needs new renderer support, include a concrete asset request in the final
+report: guide and section, reader benefit, proposed visual, source/platform
+evidence and privacy/rights checks needed. Do not silently skip the visual
+assessment because an asset is unavailable. A maintainer reviews and adds
+approved assets and shared rendering outside the automated content pass.
+
+Both passes include a short assessment under `## Visual quality` before any
+approval line: components used, specific asset requests, or why more imagery
+would not help. The runner rejects a missing or empty assessment. The independent
+reviewer must check this against the guide and available shared components,
+not simply repeat the writer's assessment. Preserve correct prose and article
+dates when only the shared presentation changes.
+
 ## Benchmark
 
 - [Infuse server connections](https://support.firecore.com/hc/en-us/articles/360006462093-Streaming-from-Plex-Emby-and-Jellyfin)

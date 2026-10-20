@@ -46,7 +46,16 @@ test('the shared design preserves every guide, anchor, article date and source r
     assert.doesNotMatch(html, /id="freshness"|class="source-status"/);
     assert.match(html, /id="docs-search-dialog"[^>]+aria-label="Search documentation"/);
     assert.match(html, /id="docs-navigation-dialog"[^>]+aria-label="Browse guides"/);
+    const resources = [...html.matchAll(/<div class="sidebar-resources">([\s\S]*?)<\/div>/g)];
+    assert.equal(resources.length, 2, `Missing desktop/mobile resources in ${page.slug}`);
+    for (const [, links] of resources) {
+      assert.match(links, /href="https:\/\/plozz\.app\/discord"><span><svg class="brand-icon" data-brand="discord"/);
+      assert.match(links, /href="https:\/\/github\.com\/brandomoore\/Plozz"><span><svg class="brand-icon" data-brand="github"/);
+      assert.equal([...links.matchAll(/aria-hidden="true" focusable="false"/g)].length, 2);
+    }
   }
+  const feedback = readFileSync(resolve(ROOT, 'dist/feedback-and-bugs/index.html'), 'utf8');
+  assert.match(feedback, /<ul class="service-options" role="list">/);
   const home = readFileSync(resolve(ROOT, 'dist/index.html'), 'utf8');
   assert.equal([...home.matchAll(/class="topic-card"/g)].length, 6);
   for (const page of pages.slice(1)) assert(home.includes(`href="${pagePath(page.slug)}"`));

@@ -1,6 +1,7 @@
 import { readFileSync, writeFileSync, mkdirSync, rmSync, copyFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { ROOT, SITE, readJson, readBaseline, validatePages, validateState, markdown, escapeHtml as e, pagePath, headingSlug, sha256 } from './lib.mjs';
+import { brandIcon } from './visuals.mjs';
 
 const pages = validatePages(readJson('content/pages.json'));
 const state = validateState(readJson('source-state.json'), pages);
@@ -73,7 +74,7 @@ function directory() {
   }).join('')}</div></section>`;
 }
 function resources() {
-  return `<div class="sidebar-resources"><p>Resources</p><a href="https://plozz.app/formats">Formats & compatibility${icon('external')}</a><a href="https://plozz.app/discord">Discord community${icon('external')}</a><a href="https://github.com/brandomoore/Plozz">GitHub project${icon('external')}</a></div>`;
+  return `<div class="sidebar-resources"><p>Resources</p><a href="https://plozz.app/formats"><span>${icon('library')}Formats & compatibility</span>${icon('external')}</a><a href="https://plozz.app/discord"><span>${brandIcon('discord')}Discord community</span>${icon('external')}</a><a href="https://github.com/brandomoore/Plozz"><span>${brandIcon('github')}GitHub project</span>${icon('external')}</a></div>`;
 }
 function contents(page, rail = false) {
   const links = page.sections.map(section => `<li><a href="#${section.id}" data-toc-link>${e(section.title)}</a></li>`).join('');
