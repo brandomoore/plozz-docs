@@ -1,6 +1,22 @@
 {
   "schemaVersion": 1,
+  "fullAuditIntervalDays": 30,
   "sections": ["Connect", "Library", "Playback", "Personalize", "Accounts & sync", "Help"],
+  "capabilities": [
+    {"id":"apple-tv-user-sign-in","question":"How can each Apple TV system user automatically open their own remembered Plozz profile, and what stays shared or requires authorization?","sources":["App/Resources/Plozz.entitlements","Sources/CoreModels/ProfileStore.swift","Sources/AppRuntime/AutomaticSignInStore.swift","Sources/AppRuntime/PlexHomeUsersModel.swift","Sources/AppShell/ProfileFlowModel.swift","Sources/FeatureSettings/ProfileDetailView.swift"]},
+    {"id":"combined-library-browsing","question":"Which platforms let me browse enabled libraries from several sources together and choose among copies without changing server ownership?","sources":["Sources/CoreModels/AllLibrariesBrowse.swift","Sources/AppShell/MainTabViewSupport.swift","Sources/FeatureHomeCore/LibraryBrowseViewModel.swift"]},
+    {"id":"continue-watching-retention","question":"Do older Continue Watching or Next Up titles expire or hit an app-imposed count limit, and what server or removal rules still apply?","sources":["Sources/CoreModels/ContinueWatchingPolicy.swift","Sources/FeatureHomeCore/HomeAggregator.swift"]},
+    {"id":"alphabet-navigation","question":"Which platforms actually expose letter navigation, and what are the combined-library, loading and recovery limits?","sources":["Sources/FeatureHome/LibraryBrowseView.swift","Sources/CoreUI/LibraryAlphabetMenu.swift","Sources/FeatureHomeCore/LibraryAlphabetState.swift","Sources/AppShelliOS/PlozziOSLibraryView.swift"]},
+    {"id":"top-shelf","question":"What can I open or play from Apple TV Top Shelf, and what happens when authorization or content is unavailable?","sources":["TopShelf/ContentProvider.swift","Sources/TopShelfKit/TopShelfPublisher.swift","Sources/AppShell/HomeTab.swift"]},
+    {"id":"community-skip-markers","question":"Can intro and credits skipping work without server markers, and what lookup, privacy, and availability limits apply?","sources":["Sources/MetadataKit/CommunitySkipMarkers.swift","Sources/CoreModels/PlaybackSettings.swift"]},
+    {"id":"dual-subtitles","question":"How do I show two subtitle tracks, and which track types or playback paths prevent it?","sources":["Sources/FeaturePlayback/PlayerOptionsPanel.swift","Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"]},
+    {"id":"height-audio","question":"How do I get TrueHD Atmos or DTS:X height audio on Apple TV, and how does rendered output differ from bitstream passthrough?","sources":["Sources/AppShell/PlaybackEngineComposition.swift","Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"]},
+    {"id":"library-channels","question":"How do I turn my own supported libraries into scheduled channels and check their schedule and watch-history behavior?","sources":["Sources/FeatureLiveTV/README.md"]},
+    {"id":"offline-background","question":"How do I finish and use offline downloads, including background progress, completion checks, and platform limits?","sources":["Sources/MediaDownloads/README.md"]},
+    {"id":"cross-server-history","question":"How does cross-server watch-history sync differ from profile sync and tracker scrobbling, and how can I control it?","sources":["Sources/FeatureSettings/IntegrationsDetailView.swift"]},
+    {"id":"version-selection","question":"How do I choose editions before or during playback and remember a version for later episodes?","sources":["Sources/FeatureHomeCore/PlaybackVersionChoiceModel.swift","Sources/CoreModels/VersionPreferenceStore.swift"]},
+    {"id":"device-setup","question":"How can an existing device help set up another one without promising that iCloud copies every server credential?","sources":["Sources/FeatureSyncSetup/README.md"]}
+  ],
   "areas": [
     {"id":"connections","title":"Connect sources","question":"How do I connect each supported server or share, choose the right account, and confirm the connection?"},
     {"id":"library","title":"Find and organize media","question":"How do I browse, search, filter, use watchlists and collections, find extras, and recover missing library content?"},

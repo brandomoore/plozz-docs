@@ -33,8 +33,9 @@ function fixture(t) {
   save('EDITORIAL.md', 'Write useful, source-verified guides without padding.');
   save('content/pages.json', [page]);
   save('content/getting-started.md', '# Get started\n\nInstall Plozz.\n');
-  save('config/documentation-baseline.json', { schemaVersion: 1, sections: ['Connect'], areas: [{ id: 'setup', title: 'Get started' }] });
+  save('config/documentation-baseline.json', { schemaVersion: 1, fullAuditIntervalDays: 30, sections: ['Connect'], capabilities: [], areas: [{ id: 'setup', title: 'Get started' }] });
   save('content/coverage.json', { schemaVersion: 1,
+    capabilities: {}, systemIntegrations: {},
     areas: { setup: { documents: [{ slug: page.slug }], sources: ['README.md'] } },
     modules: { FeatureSettings: { areas: ['setup'], sources: [settingsPath] } },
     settingsCategories: { playback: { areas: ['setup'], sources: [categoryPath] } },
@@ -95,6 +96,7 @@ globalThis.fetch=async input=>{
     const value = {
       schemaVersion: 2, repository: 'brandomoore/Plozz', ref: 'main', commit: revision,
       verifiedAt: new Date().toISOString(), contentHash: contentHash([page], root),
+      baselineReviewedAt: new Date(Date.now() - 1000).toISOString(),
       coverageHash: coverageHash(root), policyHash: baselineHash(root), discovery,
       sourceFiles, review: { kind: 'independent-review', model: 'gpt-6.1-sol', reasoningEffort: 'high', coverageReviewed: true },
       pages: { [page.slug]: { contentHash: pageMaterialHash(page, root), updatedAt: new Date().toISOString() } },
@@ -157,29 +159,107 @@ test('proposal application preserves deletion and rejects infrastructure files',
   assert.match(result.stderr, /Unexpected proposal file/);
 });
 
-test('unchanged source receives a metadata-only recheck at 30 days', t => {
+test('unchanged source receives an independent full coverage audit at 30 days', t => {
   const f = fixture(t);
   const state = f.state();
   const age = days => new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
-  const recent = { ...state, verifiedAt: age(29) };
+  const recent = { ...state, baselineReviewedAt: age(29), verifiedAt: age(29) };
   f.save('source-state.json', recent);
   f.update({ liveVerifiedAt: recent.verifiedAt });
   let result = f.run('source.mjs', ['plan']);
   assert.equal(result.status, 0, result.stderr);
   assert.equal(f.read('.docs-work/plan.json').mode, 'none');
-  const due = { ...state, verifiedAt: age(30) };
+  const due = { ...state, baselineReviewedAt: age(30), verifiedAt: age(30) };
   f.save('source-state.json', due);
   f.update({ liveVerifiedAt: due.verifiedAt });
   result = f.run('source.mjs', ['plan']);
   assert.equal(result.status, 0, result.stderr);
-  assert.equal(f.read('.docs-work/plan.json').mode, 'metadata');
+  assert.equal(f.read('.docs-work/plan.json').mode, 'content');
+  assert.equal(f.read('.docs-work/plan.json').baselineRequired, true);
+  result = f.run('source.mjs', ['finalize']);
+  assert.notEqual(result.status, 0, 'A quiet month cannot waive independent coverage review.');
+  const auditPlan = f.read('.docs-work/plan.json');
+  f.save('.docs-work/plan.json', { ...auditPlan, mode: 'metadata' });
+  result = f.run('source.mjs', ['finalize']);
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /full coverage audit requires independent content review/);
+  f.save('.docs-work/plan.json', auditPlan);
+  f.review();
   result = f.run('source.mjs', ['finalize']);
   assert.equal(result.status, 0, result.stderr);
   const refreshed = f.read('source-state.json');
   assert.equal(refreshed.contentHash, state.contentHash);
-  assert.equal(refreshed.review.kind, 'unchanged-sources');
+  assert.equal(refreshed.review.kind, 'independent-review');
   assert.equal(refreshed.pages[page.slug].updatedAt, state.pages[page.slug].updatedAt);
   assert(Date.parse(refreshed.verifiedAt) > Date.now() - 60_000);
+  assert.equal(refreshed.baselineReviewedAt, refreshed.verifiedAt);
+  f.save('source-state.json', { ...refreshed, baselineReviewedAt: age(31) });
+  result = f.run('source.mjs', ['plan']);
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(f.read('.docs-work/plan.json').baselineRequired, true, 'Recent incremental verification must not postpone the full audit.');
+});
+
+test('topic coverage cannot substitute for an explicit capability answer', t => {
+  const f = fixture(t);
+  f.state();
+  const policy = f.read('config/documentation-baseline.json');
+  f.save('config/documentation-baseline.json', { ...policy, capabilities: [
+    { id: 'system-user-sign-in', question: 'How does system-user sign-in work?', sources: ['README.md'] },
+  ] });
+  let result = f.run('source.mjs', ['plan']);
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(f.read('.docs-work/plan.json').baselineRequired, true);
+  f.review();
+  result = f.run('source.mjs', ['finalize']);
+  assert.notEqual(result.status, 0, 'Mapped modules and a Profiles topic alone must not pass.');
+  const coverage = f.read('content/coverage.json');
+  const record = {
+    documents: [{ slug: page.slug }], sources: ['README.md'],
+    answer: 'Each system user must choose a profile and enable trusted startup separately.',
+  };
+  f.save('content/coverage.json', { ...coverage, capabilities: { 'system-user-sign-in': record } });
+  f.review();
+  result = f.run('source.mjs', ['finalize']);
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /specific answer section/);
+  f.save('content/getting-started.md', '# Get started\n\n## System users\n\nChoose a profile and enable sign-in for this system user.\n');
+  record.documents[0].anchor = 'system-users';
+  f.save('content/coverage.json', { ...coverage, capabilities: { 'system-user-sign-in': {
+    ...record, sources: ['Sources/CoreUI/ProfileSettingsCategory.swift'],
+  } } });
+  f.review();
+  result = f.run('source.mjs', ['finalize']);
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /Missing capability implementation evidence/);
+  f.save('content/coverage.json', { ...coverage, capabilities: { 'system-user-sign-in': record } });
+  f.review();
+  result = f.run('source.mjs', ['finalize']);
+  assert.equal(result.status, 0, result.stderr);
+});
+
+test('new system integrations require classification and immutable evidence', t => {
+  const f = fixture(t);
+  f.state();
+  const path = 'App/Resources/Plozz.entitlements';
+  f.update({ revision: nextRevision, files: [{ filename: path }], sourceMap: {
+    ...sourceMap, [path]: '<plist><dict><key>com.apple.developer.user-management</key></dict></plist>',
+  } });
+  let result = f.run('source.mjs', ['plan']);
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(f.read('.docs-work/plan.json').baselineRequired, true);
+  assert(existsSync(resolve(f.root, '.docs-work/source', path)));
+  f.review();
+  result = f.run('source.mjs', ['finalize']);
+  assert.notEqual(result.status, 0);
+  const coverage = f.read('content/coverage.json');
+  f.save('content/coverage.json', { ...coverage, systemIntegrations: { [path]: {
+    areas: ['setup'], sources: [path],
+  } } });
+  f.review();
+  result = f.run('source.mjs', ['finalize']);
+  assert.equal(result.status, 0, result.stderr);
+  assert(f.read('source-state.json').sourceFiles[path]);
+  assert.deepEqual(f.read('source-state.json').discovery.systemSurfaces, [path]);
 });
 
 test('complete discovery includes uncited code and rejects changed archive bytes', t => {
@@ -273,6 +353,14 @@ test('finalization requires a real matching review receipt or unchanged-content 
   result = f.run('source.mjs', ['plan']);
   assert.equal(result.status, 0, result.stderr);
   assert.equal(f.read('.docs-work/plan.json').mode, 'metadata');
+  const auditTime = f.read('source-state.json').baselineReviewedAt;
+  result = f.run('source.mjs', ['finalize']);
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(f.read('source-state.json').baselineReviewedAt, auditTime);
+  result = f.run('source.mjs', ['plan', '--force']);
+  assert.equal(result.status, 0, result.stderr);
+  const metadataPlan = f.read('.docs-work/plan.json');
+  f.save('.docs-work/plan.json', { ...metadataPlan, mode: 'metadata', baselineRequired: false });
   f.save('content/getting-started.md', '# Get started\n\nA changed draft.\n');
   result = f.run('source.mjs', ['finalize']);
   assert.notEqual(result.status, 0);

@@ -15,7 +15,8 @@ export function productInputs(tree, pages) {
   return tree.filter(file => file.type === 'blob' && validSourcePath(file.path)
     && !/(?:^|\/)(?:AGENTS[^/]*|CLAUDE[^/]*)\.md$/.test(file.path)
     && (cited.has(file.path) || file.path === LABELS
-      || /^(?:App|Sources)\/.*\.swift$/.test(file.path)
+      || /^(?:App|Sources|TopShelf)\/.*\.swift$/.test(file.path)
+      || /^(?:App|TopShelf)\/.*\.(?:entitlements|plist)$/.test(file.path)
       || /^Sources\/.*\.(?:md|json|plist)$/.test(file.path)
       || /^docs\/.*\.md$/.test(file.path)
       || /^(?:README\.md|Package\.swift|Package\.resolved|project\.yml)$/.test(file.path)
@@ -45,7 +46,10 @@ export function discoverSurfaces(paths, categorySource, labelsHash) {
   const settingsSurfaces = paths.filter(path =>
     /^Sources\/FeatureSettings\/.*\.swift$/.test(path)
     || /^Sources\/AppShelliOS\/.*Settings.*\.swift$/.test(path)).sort();
-  const result = { modules, settingsCategories, settingsSurfaces, labelsHash };
+  const systemSurfaces = paths.filter(path =>
+    /^(?:App|TopShelf)\/.*\.(?:entitlements|plist)$/.test(path)
+    || /^TopShelf\/.*\.swift$/.test(path)).sort();
+  const result = { modules, settingsCategories, settingsSurfaces, systemSurfaces, labelsHash };
   return { ...result, structureHash: sha256(JSON.stringify(result)) };
 }
 

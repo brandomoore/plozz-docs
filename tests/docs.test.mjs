@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { runInNewContext, createContext, runInContext } from 'node:vm';
 import { escapeHtml, markdown, validatePages, validSourcePath, pagePath, pageAnchors, classifyChanges } from '../tools/lib.mjs';
-import { discoverSurfaces } from '../tools/source-discovery.mjs';
+import { discoverSurfaces, productInputs } from '../tools/source-discovery.mjs';
 import { freshness, publishedAsset, handleRequest, PAGES_ORIGIN } from '../worker/handler.mjs';
 
 test('HTML and unsafe Markdown URLs are not executable', () => {
@@ -22,6 +22,7 @@ test('citations stay inside public app source paths', () => {
   assert(validSourcePath('Config/Platforms.xcconfig'));
   assert(validSourcePath('NewApplication/Feature.swift'));
   assert(validSourcePath('Sources/AppShell/AppState+CloudSync.swift'));
+  assert(validSourcePath('App/Resources/Plozz.entitlements'));
   for (const path of ['../secret', '/etc/passwd', 'Sources/../secret.md', 'Sources/.env', 'https://example.com/source', 'Sources/test.p8']) assert(!validSourcePath(path));
 });
 
@@ -66,12 +67,27 @@ test('source impact is incremental and new/unassigned features cannot be silentl
   const newRoot = classifyChanges(pages, { status: 'ahead', files: [{ filename: 'NewApplication/Feature.swift' }] });
   assert.equal(newRoot.mode, 'content');
   assert.deepEqual(newRoot.affected, ['servers', 'playback']);
+  const entitlement = classifyChanges(pages, { status: 'ahead', files: [{ filename: 'App/Resources/Plozz.entitlements' }] });
+  assert.equal(entitlement.mode, 'content');
+  assert.deepEqual(entitlement.affected, ['servers', 'playback']);
   const truncated = classifyChanges(pages, { status: 'ahead', files: Array.from({ length: 300 }, () => ({ filename: 'Tests/Test.swift' })) });
   assert.equal(truncated.mode, 'content');
   assert.deepEqual(truncated.affected, ['servers', 'playback']);
   const rewritten = classifyChanges(pages, { status: 'diverged', files: [] });
   assert.equal(rewritten.mode, 'content');
   assert.deepEqual(rewritten.affected, ['servers', 'playback']);
+});
+
+test('uncited Apple capabilities and extension entry points are product inputs', () => {
+  const paths = [
+    'App/Resources/Plozz.entitlements', 'App/PlozziOS/PlozziOS.entitlements',
+    'TopShelf/ContentProvider.swift', 'TopShelf/Info.plist', 'TopShelf/TopShelf.entitlements',
+    'App/Resources/Info.plist', 'Tests/ExampleTests.swift', 'AGENTS.md',
+  ];
+  const inputs = productInputs(paths.map(path => ({ path, type: 'blob' })), []);
+  assert.deepEqual(inputs.map(file => file.path), paths.slice(0, 6));
+  const discovery = discoverSurfaces(inputs.map(file => file.path), 'enum Category {\n case playback\n}', null);
+  assert.deepEqual(discovery.systemSurfaces, paths.slice(0, 6).sort());
 });
 
 test('freshness distinguishes current, changed and unavailable app source', async () => {

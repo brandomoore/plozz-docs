@@ -47,9 +47,12 @@ desktop Copilot app, personal token or Cloudflare deployment secret is needed.
 2. If source and deployment are unchanged, stop without calling a model.
 3. Download and fingerprint the complete product-source snapshot—not only the
    files cited by existing guides. Include product Swift code, relevant
-   documentation/configuration, pinned dependencies and an English UI-label
+   documentation/configuration, Apple entitlements, app metadata, Top Shelf
+   extension entry points, pinned dependencies and an English UI-label
    projection. No app build is performed.
-4. Inventory product modules, settings surfaces and profile-settings categories.
+4. Inventory product modules, settings surfaces, profile-settings categories
+   and system integrations. Require a source-backed answer section for each
+   named capability question, not only a mention of its broad topic.
    For identical product inputs, metadata-only updates need no rewrite.
    New/unmapped surfaces, missing coverage or policy changes require a baseline
    review, including features that existed before the previous docs run.
@@ -66,10 +69,10 @@ If deployment fails after the docs commit, the next run detects that Git and
 the live site differ and retries deployment without another rewrite. Runs are
 serialized only with other docs runs; app development is never locked.
 
-When app source stays unchanged for 30 days, a metadata-only recheck refreshes
-the verification date and repository activity without calling a model or
-rewriting guides or changing their article-modification dates. This also avoids
-a permanently idle public-repository schedule.
+A full independent coverage audit runs at least every 30 days, including when
+app source is unchanged. Its separate `baselineReviewedAt` clock is not reset
+by incremental source checks. This catches older omissions instead of simply
+refreshing metadata; unchanged articles still retain their modification dates.
 
 ## Reader experience and search
 

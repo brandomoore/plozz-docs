@@ -23,8 +23,11 @@ Keep guides short, accurate and useful to someone using the app.
   prefixes for the feature's owners. New feature areas need explicit review.
 - Audit existing omissions, not only newly added features. The complete product
   source snapshot, English UI-label projection and discovered module/category
-  inventory are inputs. Cover every baseline reader-task area; classify every
-  discovered module and settings category in `content/coverage.json`.
+  inventory are inputs. Cover every baseline reader-task area and named
+  capability question with a useful answer section; classify every discovered
+  module, settings category and system integration in `content/coverage.json`.
+  Trace operating-system behavior through entitlements and extension entry
+  points as well as app UI. Broad topic mentions are not workflow coverage.
 - A setting can belong in a section or need no additional prose. Record a
   source-backed reason for internal-code omissions; don't manufacture pages.
 - Do not embed app revisions or verification dates in guide bodies. The site

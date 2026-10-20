@@ -56,7 +56,7 @@ export function classifyChanges(pages, comparison) {
   const complete = ['ahead', 'identical'].includes(comparison.status) && files.length < 300;
   const changedFiles = files.flatMap(file => [file.filename, file.previous_filename].filter(Boolean))
     .filter(path => !/^(Tests\/|UITests\/|\.github\/|tools\/|scripts\/|fastlane\/)/.test(path)
-      && /\.(swift|md|json|plist|ya?ml|xcstrings|xcconfig|resolved)$/.test(path));
+      && validSourcePath(path));
   const owns = (page, path) => page.sources.includes(path) || page.watch.some(prefix => path.startsWith(prefix));
   let affected = pages.filter(page => changedFiles.some(path => owns(page, path))).map(page => page.slug);
   if (!complete || changedFiles.some(path => !pages.some(page => owns(page, path)))) affected = pages.map(page => page.slug);
@@ -69,7 +69,7 @@ function safeSourcePath(path) {
 }
 
 export function validSourcePath(path) {
-  return safeSourcePath(path) && /\.(md|swift|json|plist|ya?ml|xcconfig|xcstrings|resolved)$/.test(path);
+  return safeSourcePath(path) && /\.(md|swift|json|plist|entitlements|ya?ml|xcconfig|xcstrings|resolved)$/.test(path);
 }
 
 export function validatePages(pages, root = ROOT) {
@@ -129,7 +129,8 @@ export function validateSeo(pages, root = ROOT) {
 export function validateCoverage(pages, discovery, root = ROOT) {
   const coverage = readCoverage(root);
   const policy = readBaseline(root);
-  if (coverage?.schemaVersion !== 1 || !coverage.areas || !coverage.modules || !coverage.settingsCategories) throw new Error('Missing the product coverage ledger.');
+  if (coverage?.schemaVersion !== 1 || !coverage.areas || !coverage.modules || !coverage.settingsCategories
+    || !coverage.capabilities || !coverage.systemIntegrations) throw new Error('Missing the product coverage ledger.');
   if (Object.keys(coverage.areas).some(id => !policy.areas.some(area => area.id === id))) throw new Error('Unknown baseline coverage area.');
   const sourceRefs = record => {
     if (!Array.isArray(record?.sources) || !record.sources.length || record.sources.length > 20 || !record.sources.every(path => validSourcePath(path) && discovery.files?.[path])) throw new Error('Coverage decisions need existing immutable source evidence.');
@@ -143,6 +144,18 @@ export function validateCoverage(pages, discovery, root = ROOT) {
       if (!page || (link.anchor && !pageAnchors(page, root).includes(link.anchor))) throw new Error(`Broken coverage link for ${area.id}`);
     }
   }
+  for (const capability of policy.capabilities ?? []) {
+    const record = coverage.capabilities[capability.id];
+    sourceRefs(record);
+    if (typeof record.answer !== 'string' || record.answer.trim().length < 40) throw new Error(`Missing reader-task answer: ${capability.id}`);
+    if (!Array.isArray(record.documents) || !record.documents.length) throw new Error(`Undocumented capability: ${capability.id}`);
+    for (const link of record.documents) {
+      const page = pages.find(page => page.slug === link.slug);
+      if (!page || !link.anchor || !pageAnchors(page, root).includes(link.anchor)) throw new Error(`Capability needs a specific answer section: ${capability.id}`);
+    }
+    if (!(capability.sources ?? []).every(path => record.sources.includes(path))) throw new Error(`Missing capability implementation evidence: ${capability.id}`);
+  }
+  if (Object.keys(coverage.capabilities).some(id => !(policy.capabilities ?? []).some(capability => capability.id === id))) throw new Error('Unknown baseline capability.');
   const mappedAreas = record => Array.isArray(record?.areas) && record.areas.length > 0 && record.areas.every(id => policy.areas.some(area => area.id === id));
   if (!Array.isArray(discovery.modules) || !Array.isArray(discovery.settingsCategories)) throw new Error('Missing discovered product surfaces.');
   for (const name of discovery.modules) {
@@ -159,6 +172,15 @@ export function validateCoverage(pages, discovery, root = ROOT) {
     if (!mappedAreas(record)) throw new Error(`Unmapped live settings category: ${name}`);
   }
   if (Object.keys(coverage.settingsCategories).some(name => !discovery.settingsCategories.includes(name))) throw new Error('Coverage contains retired or unknown settings categories.');
+  if (!Array.isArray(discovery.systemSurfaces)) throw new Error('Missing discovered system integrations.');
+  for (const path of discovery.systemSurfaces) {
+    const record = coverage.systemIntegrations[path];
+    sourceRefs(record);
+    if (!record.sources.includes(path)) throw new Error(`System integration evidence must include its implementation: ${path}`);
+    const omitted = typeof record.omitReason === 'string' && record.omitReason.trim().length >= 30;
+    if (mappedAreas(record) === omitted) throw new Error(`Classify system integration ${path}: documented areas or a justified internal-code omission.`);
+  }
+  if (Object.keys(coverage.systemIntegrations).some(path => !discovery.systemSurfaces.includes(path))) throw new Error('Coverage contains retired or unknown system integrations.');
   return coverage;
 }
 
@@ -166,6 +188,7 @@ export function validateState(state, pages, root = ROOT) {
   validateSeo(pages, root);
   if (state.repository !== APP_REPO || state.ref !== 'main' || !/^[0-9a-f]{40}$/.test(state.commit)) throw new Error('Invalid app source state.');
   if (!Number.isFinite(Date.parse(state.verifiedAt))) throw new Error('Invalid source verification time.');
+  if (!Number.isFinite(Date.parse(state.baselineReviewedAt)) || Date.parse(state.baselineReviewedAt) > Date.parse(state.verifiedAt)) throw new Error('Missing or invalid full coverage review time.');
   if (state.contentHash !== contentHash(pages, root)) throw new Error('Content changed after source review; finalize the reviewed proposal.');
   if (state.policyHash !== baselineHash(root) || state.coverageHash !== coverageHash(root)) throw new Error('Coverage baseline changed after review.');
   validateCoverage(pages, { ...state.discovery, files: state.sourceFiles }, root);

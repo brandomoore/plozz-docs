@@ -19,9 +19,24 @@ Use the smallest treatment that helps a reader finish a real task:
 These are coverage obligations, not one-page-per-area instructions. Several
 areas can share a good guide, and one area may need distinct procedures.
 
-`content/coverage.json` maps these areas, discovered product modules and
-profile-settings categories to guides or justified internal-code exclusions.
-A passing freshness check does not prove coverage. Review both independently.
+`content/coverage.json` maps these areas, discovered product modules,
+profile-settings categories and system integrations to guides or justified
+internal-code exclusions. Entitlements and extension entry points are product
+evidence too, not just build configuration.
+
+The baseline's named capability questions require a specific answer section,
+source evidence and a concise answer in the ledger. Mentioning "profiles" does
+not document Apple TV user-specific sign-in; mentioning "library" does not
+explain combined browsing or each platform's letter navigation. The reviewer
+must read the linked section and verify the complete workflow, not just its
+heading or the ledger's claim. These questions are a minimum: full audits must
+also look for important unlisted workflows across modules and system features.
+A passing freshness or structural coverage check does not prove useful content.
+Review both independently.
+
+A full independent coverage audit is due every 30 days even when app source
+is unchanged. Incremental source checks do not reset that clock. Fix existing
+omissions during that audit instead of only refreshing verification metadata.
 
 ## Useful answers
 

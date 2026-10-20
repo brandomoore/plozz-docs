@@ -4,7 +4,7 @@ import { execFileSync } from 'node:child_process';
 import { parseArgs } from 'node:util';
 import {
   ROOT, APP_REPO, SITE, readJson, validatePages, validateSeo, validateCoverage, validateState,
-  validSourcePath, contentHash, coverageHash, baselineHash, pageMaterialHash, sha256, classifyChanges, readCoverage,
+  validSourcePath, contentHash, coverageHash, baselineHash, pageMaterialHash, sha256, classifyChanges, readCoverage, readBaseline,
 } from './lib.mjs';
 import { downloadSnapshot } from './source-discovery.mjs';
 
@@ -27,11 +27,15 @@ if (positionals[0] === 'plan') {
   const baselineDrift = !previous?.discovery || previous.policyHash !== baselineHash() || !readCoverage();
   const checkedAt = previous ? Date.parse(previous.verifiedAt) : null;
   if (previous && !Number.isFinite(checkedAt)) throw new Error('Invalid source verification time.');
-  const recheckDue = previous && Date.now() - checkedAt >= 30 * 24 * 60 * 60 * 1000;
-  let mode = previous?.commit === commit.sha && !force && !contentDrift && !baselineDrift && !recheckDue ? 'none' : 'content';
+  const auditDays = readBaseline().fullAuditIntervalDays;
+  if (!Number.isInteger(auditDays) || auditDays < 1 || auditDays > 90) throw new Error('Invalid full coverage audit interval.');
+  const reviewedAt = previous?.baselineReviewedAt ? Date.parse(previous.baselineReviewedAt) : null;
+  if (reviewedAt !== null && !Number.isFinite(reviewedAt)) throw new Error('Invalid full coverage review time.');
+  const baselineDue = reviewedAt === null || Date.now() - reviewedAt >= auditDays * 24 * 60 * 60 * 1000;
+  let mode = previous?.commit === commit.sha && !force && !contentDrift && !baselineDrift && !baselineDue ? 'none' : 'content';
   let changedFiles = [], affected = pages.map(page => page.slug);
-  if (previous && !contentDrift && !baselineDrift) validateState(previous, pages);
-  if (previous && mode !== 'none' && !force && !contentDrift && !baselineDrift) {
+  if (previous && !contentDrift && !baselineDrift && reviewedAt !== null) validateState(previous, pages);
+  if (previous && mode !== 'none' && !force && !contentDrift && !baselineDrift && !baselineDue) {
     ({ mode, affected, changedFiles } = classifyChanges(pages, api(`repos/${APP_REPO}/compare/${previous.commit}...${commit.sha}`)));
   }
   if (mode === 'none') {
@@ -46,7 +50,7 @@ if (positionals[0] === 'plan') {
   const plan = {
     schemaVersion: 2, repository: APP_REPO, ref: 'main', commit: commit.sha,
     plannedAt: new Date().toISOString(), mode, affected, changedFiles, missingSources: [],
-    baselineRequired: baselineDrift || force, policyHash: baselineHash(),
+    baselineRequired: baselineDrift || baselineDue || force, policyHash: baselineHash(),
     baseDocsHead: docsHead, baseStateHash: stateHash(), baseContentHash: contentHash(pages),
     sourceDirectory: '.docs-work/source', discoveryFile: '.docs-work/discovery.json', labelsFile: '.docs-work/source-labels.json',
   };
@@ -85,6 +89,7 @@ if (positionals[0] === 'plan') {
   const coverage = validateCoverage(pages, discovery);
   let review;
   if (plan.mode === 'metadata') {
+    if (plan.baselineRequired) throw new Error('A full coverage audit requires independent content review.');
     if (contentHash(pages) !== plan.baseContentHash) throw new Error('Metadata-only update cannot change guides.');
     if (previous?.discovery?.snapshotHash !== discovery.snapshotHash) throw new Error('Metadata-only updates require identical product inputs.');
     review = { kind: 'unchanged-sources', coverageReviewed: true };
@@ -99,7 +104,8 @@ if (positionals[0] === 'plan') {
   }
   const references = new Set([
     ...pages.flatMap(page => page.sources),
-    ...[...Object.values(coverage.areas), ...Object.values(coverage.modules), ...Object.values(coverage.settingsCategories)].flatMap(record => record.sources),
+    ...[...Object.values(coverage.areas), ...Object.values(coverage.modules), ...Object.values(coverage.settingsCategories),
+      ...Object.values(coverage.capabilities), ...Object.values(coverage.systemIntegrations)].flatMap(record => record.sources),
   ]);
   const sourceFiles = {};
   for (const path of references) {
@@ -114,9 +120,10 @@ if (positionals[0] === 'plan') {
   }));
   save(stateFile, {
     schemaVersion: 2, repository: APP_REPO, ref: 'main', commit: plan.commit, verifiedAt: now,
+    baselineReviewedAt: plan.baselineRequired ? now : previous?.baselineReviewedAt,
     contentHash: contentHash(pages), coverageHash: coverageHash(), policyHash: baselineHash(),
     sourceFiles, review, pages: pageHistory,
-    discovery: { snapshotHash: discovery.snapshotHash, structureHash: discovery.structureHash, fileCount: discovery.fileCount, modules: discovery.modules, settingsCategories: discovery.settingsCategories },
+    discovery: { snapshotHash: discovery.snapshotHash, structureHash: discovery.structureHash, fileCount: discovery.fileCount, modules: discovery.modules, settingsCategories: discovery.settingsCategories, systemSurfaces: discovery.systemSurfaces },
   });
   console.log(`Recorded content and coverage review against live app revision ${plan.commit}.`);
 } else throw new Error('Usage: node tools/source.mjs plan [--commit SHA] [--force] | finalize');
