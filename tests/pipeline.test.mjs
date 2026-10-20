@@ -25,7 +25,7 @@ function fixture(t) {
   const root = mkdtempSync(resolve(ROOT, '.docs-work/pipeline-test-'));
   t.after(() => rmSync(root, { recursive: true, force: true }));
   for (const path of ['tools', 'content', 'public', 'bin', 'config', '.docs-work', 'node_modules/.bin']) mkdirSync(resolve(root, path), { recursive: true });
-  for (const name of ['lib.mjs', 'source.mjs', 'source-discovery.mjs', 'apply-proposal.mjs', 'run-agent.mjs', 'publish.mjs', 'build.mjs']) copyFileSync(resolve(ROOT, 'tools', name), resolve(root, 'tools', name));
+  for (const name of ['lib.mjs', 'source.mjs', 'source-discovery.mjs', 'apply-proposal.mjs', 'run-agent.mjs', 'publish.mjs', 'build.mjs', 'check.mjs']) copyFileSync(resolve(ROOT, 'tools', name), resolve(root, 'tools', name));
   for (const name of ['docs.css', 'docs.js', 'logo.svg', 'manrope.woff2', 'font-license.txt']) copyFileSync(resolve(ROOT, 'public', name), resolve(root, 'public', name));
   const save = (path, value) => writeFileSync(resolve(root, path), typeof value === 'string' ? value : JSON.stringify(value));
   save('package.json', { type: 'module' });
@@ -157,6 +157,28 @@ test('proposal application preserves deletion and rejects infrastructure files',
   result = f.run('apply-proposal.mjs', ['proposal']);
   assert.notEqual(result.status, 0);
   assert.match(result.stderr, /Unexpected proposal file/);
+});
+
+test('draft checks reject invalid coverage before independent review can approve it', t => {
+  const f = fixture(t);
+  let result = f.run('check.mjs', ['--content-only']);
+  assert.equal(result.status, 0, result.stderr);
+  const coverage = f.read('content/coverage.json');
+  const invalid = structuredClone(coverage);
+  invalid.areas.setup.sources = Array(21).fill('README.md');
+  f.save('content/coverage.json', invalid);
+  result = f.run('check.mjs', ['--content-only']);
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /Coverage decisions need existing immutable source evidence/);
+  invalid.areas.setup.sources = ['Sources/MissingImplementation.swift'];
+  f.save('content/coverage.json', invalid);
+  result = f.run('check.mjs', ['--content-only']);
+  assert.notEqual(result.status, 0);
+  f.save('content/coverage.json', coverage);
+  rmSync(resolve(f.root, '.docs-work/discovery.json'));
+  result = f.run('check.mjs', ['--content-only']);
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /Run source:plan before validating draft source coverage/);
 });
 
 test('unchanged source receives an independent full coverage audit at 30 days', t => {

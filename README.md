@@ -24,8 +24,10 @@ useful answers rather than treating article count as completeness.
 hash, coverage/policy hashes, and independent review provenance. Per-article
 content hashes track real modification dates separately from source checks.
 
-While editing drafts, use `npm run check:content`. Full checks/builds reject
-unreviewed changes until the trusted pipeline finalizes their source state.
+Before editing drafts, run `npm run source:plan` to freeze source evidence.
+Use `npm run check:content` to validate both draft pages and the coverage ledger
+against that inventory. Full checks/builds reject unreviewed changes until the
+trusted pipeline finalizes their source state.
 The site generates article-update dates; don't hardcode dates or source
 revisions in guides.
 
