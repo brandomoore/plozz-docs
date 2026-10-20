@@ -154,3 +154,9 @@ The footer date and publishing metadata will accurately describe the restored co
 The logo is the canonical Plozz mark also used by plozz.app. Manrope is bundled
 under the SIL Open Font License in `public/font-license.txt`. Reader pages make
 no third-party font or analytics requests.
+
+Social previews reuse the website's content-versioned image URL. When that
+artwork changes, update `socialImage` in `tools/build.mjs` to match the live
+website's `og:image`; both Open Graph and Twitter use it. Never use the bare
+`/og-image.png` URL: chat services can retain its older artwork even after the
+image is replaced. Existing messages may retain their cached preview.

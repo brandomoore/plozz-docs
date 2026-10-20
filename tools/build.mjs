@@ -12,6 +12,8 @@ for (const file of ['docs.css', 'docs.js', 'logo.svg', 'manrope.woff2', 'font-li
 const displayDate = new Intl.DateTimeFormat('en', { dateStyle: 'long', timeZone: 'UTC' });
 const cssVersion = sha256(readFileSync(resolve(ROOT, 'public/docs.css')));
 const scriptVersion = sha256(readFileSync(resolve(ROOT, 'public/docs.js')));
+// Match plozz.app's content-versioned image URL, not the cached legacy URL.
+const socialImage = 'https://plozz.app/og-image.png?v=783203ae33600ae4';
 const json = value => JSON.stringify(value).replaceAll('<', '\\u003c').replaceAll('>', '\\u003e');
 const plain = tokens => tokens.filter(token => token.type === 'inline').map(token =>
   (token.children ?? []).filter(child => ['text', 'code_inline', 'softbreak', 'hardbreak'].includes(child.type)).map(child => child.content || ' ').join('')).join(' ').replace(/\s+/g, ' ').trim();
@@ -119,8 +121,8 @@ ${page ? '' : '<meta name="robots" content="noindex,follow">'}
 <link rel="canonical" href="${canonical}"><link rel="icon" href="/logo.svg" type="image/svg+xml">
 <meta property="og:type" content="${page ? 'article' : 'website'}"><meta property="og:site_name" content="Plozz docs">
 <meta property="og:title" content="${e(title)}"><meta property="og:description" content="${e(description)}"><meta property="og:url" content="${canonical}">
-<meta property="og:image" content="https://plozz.app/og-image.png"><meta property="og:image:alt" content="Plozz media and IPTV player for Apple TV, iPhone and iPad">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${e(title)}"><meta name="twitter:description" content="${e(description)}"><meta name="twitter:image" content="https://plozz.app/og-image.png">
+<meta property="og:image" content="${socialImage}"><meta property="og:image:alt" content="Plozz media and IPTV player for Apple TV, iPhone and iPad">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${e(title)}"><meta name="twitter:description" content="${e(description)}"><meta name="twitter:image" content="${socialImage}">
 <link rel="stylesheet" href="/docs.css?v=${cssVersion}"><link rel="preload" as="font" type="font/woff2" href="/manrope.woff2" crossorigin>
 <meta name="theme-color" content="#09090b">${structured.length ? `<script type="application/ld+json">${json(structured)}</script>` : ''}</head><body data-content-hash="${state.contentHash}">
 <a class="skip" href="#main">Skip to content</a>

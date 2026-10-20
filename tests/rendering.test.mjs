@@ -11,6 +11,15 @@ test('the shared design preserves every guide, anchor, article date and source r
   assert.equal(result.status, 0, result.stderr);
   const pages = readJson('content/pages.json');
   const state = JSON.parse(before);
+  let sharedSocialImage;
+  for (const path of ['404.html', ...pages.map(page => page.slug === 'getting-started' ? 'index.html' : `${page.slug}/index.html`)]) {
+    const html = readFileSync(resolve(ROOT, 'dist', path), 'utf8');
+    const socialImage = html.match(/<meta property="og:image" content="([^"]+)">/)?.[1];
+    assert.match(socialImage ?? '', /^https:\/\/plozz\.app\/og-image\.png\?v=[a-f0-9]{16}$/, `Unversioned social image in ${path}`);
+    sharedSocialImage ??= socialImage;
+    assert.equal(socialImage, sharedSocialImage, `Inconsistent social image in ${path}`);
+    assert.equal(html.match(/<meta name="twitter:image" content="([^"]+)">/)?.[1], socialImage, `Twitter image mismatch in ${path}`);
+  }
   for (const page of pages) {
     const html = readFileSync(resolve(ROOT, 'dist', page.slug === 'getting-started' ? '' : page.slug, 'index.html'), 'utf8');
     const tokens = markdown.parse(readFileSync(resolve(ROOT, 'content', page.file), 'utf8'), {});
