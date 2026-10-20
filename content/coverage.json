@@ -68,10 +68,10 @@
     }
   },
   "systemIntegrations": {
-    "App/PlozziOS/Info.plist": {"areas":["connections","offline","audio","sync","platforms"],"sources":["App/PlozziOS/Info.plist","Sources/AppShelliOS/PlozziOSDownloadsModel.swift","Sources/FeatureSyncSetup/SyncSetupService.swift","Sources/AppShelliOS/PlozziOSDownloadActivity.swift","Sources/AppShelliOS/PlozziOSSyncSetupSendView.swift"],"summary":"Local Network permission supports discovery/pairing; Camera is used for setup QR scanning with code entry as an alternative. Background audio, processing and download task identifiers support the documented route- and OS-dependent background behavior, not guaranteed execution."},
+    "App/PlozziOS/Info.plist": {"areas":["connections","offline","audio","sync","platforms","playback"],"sources":["App/PlozziOS/Info.plist","Sources/AppShelliOS/PlozziOSDownloadsModel.swift","Sources/FeatureSyncSetup/SyncSetupService.swift","Sources/AppShelliOS/PlozziOSDownloadActivity.swift","Sources/AppShelliOS/PlozziOSSyncSetupSendView.swift","Sources/AppShelliOS/PlozziOSRootView.swift","Sources/AppShelliOS/PlozziOSPlayerView.swift","Sources/AppShelliOS/PlozziOSAppModel.swift","Sources/AppRuntime/ExternalPlaybackRuntime.swift","Sources/CoreModels/ExternalPlayer.swift"],"summary":"Local Network permission supports discovery/pairing; Camera is used for setup QR scanning with code entry as an alternative. Background audio, processing and download task identifiers support documented route- and OS-dependent behavior, not guaranteed execution. External-app query schemes support Infuse/VLC availability; the registered return URL is routed by the mobile root through validated external playback receipts into authorized viewer-owned watch mutations, not accepted as arbitrary progress."},
     "App/PlozziOS/PlozziOS.branded.entitlements": {"omitReason":"Side-by-side development builds intentionally omit canonical cloud and associated-domain capabilities; these internal provisioning variants are not consumer setup features.","sources":["App/PlozziOS/PlozziOS.branded.entitlements"]},
     "App/PlozziOS/PlozziOS.entitlements": {"areas":["sync"],"sources":["App/PlozziOS/PlozziOS.entitlements","Sources/FeatureSyncSetup/SyncSetupService.swift","Sources/AppShelliOS/PlozziOSAppModel+KeychainSync.swift","Sources/AppShelliOS/PlozziOSRootView.swift"],"summary":"CloudKit/presence and pairing universal links are wired; supported mobile credentials use a separate synchronizable Keychain path rather than making all CloudKit server descriptors authenticated."},
-    "App/Resources/Info.plist": {"areas":["connections","sync","live-tv","music","platforms"],"sources":["App/Resources/Info.plist","Sources/AppShell/AppState.swift","Sources/AppShell/MainTabView.swift","Sources/CoreModels/LiveChannelGuideInfo.swift","Sources/FeaturePlayback/LiveChannelPlayerView.swift","Sources/FeatureMusic/AudioPlaybackController.swift","Sources/CoreUI/NowPlayingSession.swift"],"summary":"The declared Guide-button activity is consumed by MainTabView only when Live TV is an enabled destination, then opens the full-screen channel player's guide. Background audio is wired through the music controller and shared Now Playing session for screensaver listening and Control Center transport controls; this is distinct from discovery/pairing and mobile video Background Audio."},
+    "App/Resources/Info.plist": {"areas":["connections","sync","live-tv","music","platforms","playback"],"sources":["App/Resources/Info.plist","Sources/AppShell/AppState.swift","Sources/AppShell/MainTabView.swift","Sources/CoreModels/LiveChannelGuideInfo.swift","Sources/FeaturePlayback/LiveChannelPlayerView.swift","Sources/FeatureMusic/AudioPlaybackController.swift","Sources/CoreUI/NowPlayingSession.swift","Sources/AppShell/RootView.swift","Sources/AppShell/PlayerPresentation.swift","Sources/AppRuntime/ExternalPlaybackRuntime.swift","Sources/CoreModels/ExternalPlayer.swift"],"summary":"The declared Guide-button activity is consumed by MainTabView only when Live TV is enabled, then opens the full-screen channel player's guide. Background audio uses the music controller and Now Playing session for screensaver listening and Control Center commands. External-app query schemes detect Native Player/Infuse/VLC; RootView routes the registered callback into nonce-, URL-, age- and authorization-validated receipts before AppState writes viewer-owned progress. External handoff is separate from AirPlay and Apple's in-app native engine."},
     "App/Resources/Plozz.branded.entitlements": {"omitReason":"Empty entitlements belong to internal side-by-side development builds; production Apple TV user management and Top Shelf use the canonical entitlements instead.","sources":["App/Resources/Plozz.branded.entitlements","App/Resources/Plozz.entitlements"]},
     "App/Resources/Plozz.entitlements": {"areas":["profiles","sync","platforms"],"sources":["App/Resources/Plozz.entitlements","Sources/CoreModels/ProfileStore.swift","Sources/AppRuntime/AutomaticSignInStore.swift","Sources/CoreSecureStore/Keychain.swift","Sources/AppShell/SystemProfileBridge.swift"]},
     "TopShelf/ContentProvider.swift": {"areas":["platforms"],"sources":["TopShelf/ContentProvider.swift","Sources/AppShell/HomeTab.swift"]},
@@ -142,6 +142,7 @@
         "Sources/FeatureSettings/HomeRowsSettingsView.swift",
         "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
         "Sources/FeatureSettings/ContinueWatchingNextUpControl.swift",
+        "Sources/CoreModels/HomeLibraryVisibilityStore.swift",
         "Sources/CoreModels/HomeSectionCatalogModel.swift",
         "Sources/CoreModels/HomeRowCustomization.swift",
         "Sources/FeatureHomeCore/HomeAggregator.swift",
@@ -151,7 +152,7 @@
         "Sources/FeatureSettings/PreferenceDetailViews.swift",
         "Sources/AppShelliOS/PlozziOSSettingsView.swift"
       ],
-      "summary": "Use the shared Customize Home section editor: Add section, Remove section, Reorder/Done, pinned Hero, presets with replacement confirmation, source-load Retry and default-on Next Up merging. Editing saves a custom arrangement rather than following server order. Library availability belongs to Libraries on both platforms; removing a Home section never disables browsing. Explain Apple TV Showcase versus Fullscreen Hero and mobile's Hero subpage, navigation hold-to-hide/show/move and mobile drag reordering, then detail presentation."
+      "summary": "Use the shared Customize Home section editor: Add section, Remove section, Reorder/Done, pinned Apple TV Home layout/mobile Hero entry, presets with replacement confirmation, source-load Retry and default-on Next Up merging. Presets never edit the server. Editing saves a custom arrangement rather than following server order. Library availability is separate; removing a Home section never disables browsing. Explain Apple TV Showcase versus Fullscreen Hero, navigation hold-to-hide/show/move and mobile drag reordering, then detail presentation; link independent Continue Watching artwork, playback details and labels."
     },
     "appearance": {
       "documents": [
@@ -163,10 +164,13 @@
         "Sources/FeatureSettings/AppLanguagePicker.swift",
         "Sources/CoreModels/AppLanguage.swift",
         "Sources/CoreModels/ArtworkSettings.swift",
+        "Sources/CoreModels/CardCaptionSettings.swift",
+        "Sources/CoreUI/ContinueWatchingArtworkSwatch.swift",
+        "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
         "Sources/CoreModels/ThemeSettings.swift",
         "Sources/AppShelliOS/PlozziOSSettingsView.swift"
       ],
-      "summary": "Group themes, card density, labels, focus emphasis and watched indicators; explain solid versus system-controlled Liquid Glass, artwork presets and per-view scopes, saved download images, System language selection, and interface language versus media languages, server metadata and device-region formatting."
+      "summary": "Group themes, card density, labels, focus emphasis and watched indicators. Explain label presets replacing per-view overrides, Home/Recommended Mixed hiding captions in Showcase or on series artwork, and Continue Watching's separate Follow Appearance/On/Off control in Customize Home. Distinguish cover labels from Browse labels on collection/playlist members. Retain solid versus system-controlled Liquid Glass, artwork scopes and saved download images, System language, and interface/media/server-language and device-region boundaries."
     },
     "spoilers": {
       "documents": [
@@ -177,12 +181,19 @@
         "Sources/FeatureSettings/PreferenceDetailViews.swift",
         "Sources/FeatureSettings/CustomizeHomeDetailView.swift",
         "Sources/CoreUI/ContinueWatchingArtworkSwatch.swift",
+        "Sources/CoreUI/ContinueWatchingArtworkSource.swift",
+        "Sources/CoreUI/ContinueWatchingPresentation.swift",
+        "Sources/CoreUI/PosterCardView.swift",
+        "Sources/CoreModels/HomeLibraryVisibility.swift",
+        "Sources/CoreModels/CardCaptionSettings.swift",
+        "Sources/FeatureHome/HomeView.swift",
+        "Sources/AppShelliOS/PlozziOSHomeView.swift",
         "Sources/CoreUI/SpoilerRevealBox.swift",
         "Sources/AppShelliOS/PlozziOSSettingsView.swift",
         "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
         "Sources/FeatureSettings/HomeRowsSettingsView.swift"
       ],
-      "summary": "Identify platform-specific spoiler-toggle labels, explain blur versus placeholder, different in-progress image/text treatment, independent hidden ratings and reveal, plus both Continue Watching artwork choices. Restore an absent Continue Watching section through Add section before configuring its cards."
+      "summary": "Identify platform-specific spoiler-toggle labels, blur versus placeholder, in-progress image/text treatment, and independent hidden ratings and reveal. Continue Watching offers Artwork + logo, Thumbnail and Poster: only Thumbnail uses episode stills and their masking. Playback details independently selects Detailed or Progress only; Labels independently follows Appearance or forces On/Off. Neither changes history or row membership. Restore an absent Continue Watching section through Add section before configuring its cards."
     },
     "circadian": {
       "documents": [
@@ -201,12 +212,12 @@
       "documents": [
         { "slug": "playback" },
         { "slug": "playback", "anchor": "explore-the-cast" },
-        { "slug": "platform-controls", "anchor": "airplay-and-picture-in-picture" }
+        { "slug": "platform-controls", "anchor": "airplay-and-picture-in-picture" },
+        { "slug": "external-players" }
       ],
       "sources": [
         "Sources/FeaturePlayback/PlayerControls.swift",
         "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
-        "Sources/FeatureHomeCore/PlayerVersionSelection.swift",
         "Sources/FeatureHomeCore/PlaybackVersionChoiceModel.swift",
         "Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift",
         "Sources/FeatureHomeCore/DetailPlaybackSelection.swift",
@@ -215,22 +226,27 @@
         "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
         "Sources/MetadataKit/CommunitySkipMarkers.swift",
         "Sources/CoreModels/PlaybackSettings.swift",
-        "Sources/CoreModels/PlaybackVersionSelectionMode.swift",
         "Sources/CoreModels/VersionPreferenceStore.swift",
+        "Sources/CoreModels/ExternalPlayer.swift",
+        "Sources/CoreModels/ExternalPlayerSettingsModel.swift",
+        "Sources/FeatureSettings/ExternalPlayerSettingsView.swift",
+        "Sources/AppRuntime/ExternalPlaybackRuntime.swift",
         "Sources/AppShell/PlayerPresentation.swift",
         "Sources/AppShelliOS/PlozziOSPlayerView.swift",
         "Sources/FeaturePlayback/CastPanelView.swift",
         "Sources/AppShell/MainTabViewSupport.swift",
         "Sources/AppShell/MainTabView.swift"
       ],
-      "summary": "Use controls and same-account versions, the first-use Ask every time/Choose automatically decision, and independent series-version memory. Automatic selection falls back to a device recommendation when the remembered type is missing, not another prompt; ask mode still applies to autoplay. Retain autoplay/community-marker defaults, independent Up Next cards, lead time, skips, resume rewind, speed, zoom, external presentation and absence of a chapter picker. In-player Cast opens available biographies and credits; See more and credit-title navigation end playback on both shells, and credits need not be playable library copies."
+      "summary": "Use controls and same-account versions, first-use Ask every time/Choose automatically and independent series memory; automatic mode can fall back to recommendations while ask mode also applies to autoplay. Retain autoplay/community-marker defaults, Up Next, skips, resume rewind, speed, zoom and no chapter picker. Cast page navigation ends playback and credits need not be playable. The focused external-player task covers Advanced settings, device-wide choice, platform-specific installed apps, direct Plex/Jellyfin/Emby video only, conversion/offline/source fallback, trusted token-bearing links, SRT-only handoff, no Plozz controls, custom templates, and authorized 24-hour progress returns. Native Player/Infuse support resume/returns; VLC/custom do not."
     },
     "quality": {
       "documents": [
-        { "slug": "streaming-quality" }
+        { "slug": "streaming-quality" },
+        { "slug": "external-players", "anchor": "what-stays-in-plozz" }
       ],
       "sources": [
         "Sources/AppShelliOS/PlozziOSStreamingQuality.swift",
+        "Sources/AppRuntime/ExternalPlaybackRuntime.swift",
         "Sources/CoreModels/StreamingQuality.swift",
         "Sources/CoreModels/StreamingQualitySupport.swift",
         "Sources/ProviderJellyfin/JellyfinStreamingQuality.swift",
@@ -241,7 +257,7 @@
         "Sources/FeaturePlayback/CurrentStreamDetailsSection.swift",
         "Sources/AppShelliOS/PlozziOSPlayerView.swift"
       ],
-      "summary": "Set profile-owned mobile defaults or apply a one-session Quality limit, identify Maximum as original quality, and distinguish limits from forced conversion. Current stream reports active rendition facts during conversion, never substituted limit values; Not available is not evidence of a codec or resolution. Retain provider/platform and Silo limits, fitting-original behavior, and device-wide unsynced Video buffer storage."
+      "summary": "Set profile-owned mobile defaults or apply a one-session Quality limit, identify Maximum as original quality, and distinguish limits from forced conversion. Current stream reports active rendition facts during conversion, never substituted limit values; Not available is not codec/resolution evidence. Retain provider/platform and Silo limits, fitting-original behavior, and device-wide unsynced Video buffer. External handoff stays in Plozz when mobile quality policy is below Maximum or forces conversion, even when an individual original might fit the limit."
     },
     "audio": {
       "documents": [
@@ -266,10 +282,12 @@
     "subtitles": {
       "documents": [
         { "slug": "subtitles" },
-        { "slug": "platform-controls", "anchor": "airplay-and-picture-in-picture" }
+        { "slug": "platform-controls", "anchor": "airplay-and-picture-in-picture" },
+        { "slug": "external-players", "anchor": "what-stays-in-plozz" }
       ],
       "sources": [
         "Sources/FeaturePlayback/SubtitleTrackController.swift",
+        "Sources/AppRuntime/ExternalPlaybackRuntime.swift",
         "Sources/FeaturePlayback/SubtitleStylePanel.swift",
         "Sources/FeaturePlayback/SystemCaptionAppearance.swift",
         "Sources/FeaturePlayback/SystemCaptionStyleConfirmation.swift",
@@ -282,7 +300,7 @@
         "Sources/FeaturePlayback/NativeVideoEngine.swift",
         "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
       ],
-      "summary": "Select/search tracks, distinguish forced/SDH and per-content policies, enter mobile language codes or follow device language, style text or Live TV, and manage second tracks. Matching the device caption style replaces custom appearance after confirmation; a custom edit exits matching while placement/dual controls remain Plozz-specific. Explain embedded Plozzigen versus separately fetchable native text-track eligibility, image-primary dual-mode exclusion, secondary Off, track-dependent timing controls and wireless AirPlay limits."
+      "summary": "Select/search tracks, distinguish forced/SDH and per-content policies, enter mobile language codes or follow device language, style text or Live TV, and manage second tracks. Matching device caption style replaces custom appearance after confirmation; custom edits exit matching while placement/dual controls remain Plozz-specific. Explain embedded Plozzigen versus fetchable native text, image-primary exclusion, secondary Off, timing and AirPlay limits. External apps receive only eligible fetchable SRT sidecars, not Plozz styling/dual-subtitle guarantees; custom templates receive no subtitle links."
     },
     "music": {
       "documents": [
@@ -382,7 +400,9 @@
     "sync": {
       "documents": [
         { "slug": "profiles-and-sync" },
-        { "slug": "trackers", "anchor": "recover-a-connection" }
+        { "slug": "trackers", "anchor": "recover-a-connection" },
+        { "slug": "external-players", "anchor": "choose-a-trusted-player" },
+        { "slug": "external-players", "anchor": "return-watch-progress" }
       ],
       "sources": [
         "Sources/FeatureSyncCloud/CloudConfigSyncService.swift",
@@ -398,15 +418,15 @@
         "Sources/CoreUI/LiveTVPortableSyncSettings.swift",
         "Sources/AppRuntime/LiveTVSourceSyncBridge.swift",
         "Sources/AppRuntime/LiveTVPortableSyncBridge+Composition.swift",
-        "Sources/FeatureSyncCloud/LiveTVCloudSyncSchema.swift",
+        "Sources/CoreModels/ProfileSettingsSnapshot.swift",
+        "Sources/CoreModels/ExternalPlayerSettingsModel.swift",
         "Sources/FeatureAuth/IPTVSignInView.swift",
-        "Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift",
         "Sources/FeatureLiveTV/LiveTVPortablePendingSources.swift",
         "Sources/CoreModels/LiveTVSourceApproval.swift",
         "App/PlozziOS/Info.plist",
         "App/PlozziOS/PlozziOS.entitlements"
       ],
-      "summary": "Distinguish CloudKit configuration, encrypted tracker tokens, mobile iCloud Keychain adoption, provider-limited nearby transfer and Silo approval. Explain same-network/Local Network/Camera requirements, conditional code comparison, device-local downloads/startup/buffer and separate cross-server history. Live TV addresses/source copies sync encrypted per profile; account-imported M3U files and Kids approvals stay local, and schedules need snapshots. Do not advertise legacy/fallback source-copy import as the current account importer. Cover reload/reset/erase, re-upload prevention and mobile-only erasure of Keychain logins."
+      "summary": "Distinguish CloudKit configuration, encrypted tracker tokens, mobile Keychain adoption, provider-limited nearby transfer and Silo approval. Explain network/permission/code-verification requirements, separate cross-server history, and local downloads/startup/buffer. External-player selection is device-wide, not profile-owned or transferable; returned progress remains scoped to the original authorized viewer/server identity. Live TV source copies sync encrypted per profile; account-imported M3U files and Kids approvals stay local, schedules need snapshots, and legacy source-copy import is not the current account importer. Cover reload/reset/erase, re-upload prevention and mobile-only erasure of Keychain logins."
     },
     "tracking": {
       "documents": [
@@ -489,7 +509,9 @@
         { "slug": "feedback-and-bugs", "anchor": "suggest-an-improvement" },
         { "slug": "feedback-and-bugs", "anchor": "share-safely" },
         { "slug": "profiles-and-sync", "anchor": "recover-sync-without-erasing-your-setup" },
-        { "slug": "metadata-and-ratings", "anchor": "wrong-or-missing-information" }
+        { "slug": "metadata-and-ratings", "anchor": "wrong-or-missing-information" },
+        { "slug": "external-players", "anchor": "what-stays-in-plozz" },
+        { "slug": "external-players", "anchor": "return-watch-progress" }
       ],
       "sources": [
         "README.md",
@@ -506,9 +528,10 @@
         "Sources/FeaturePlayback/InfoPanelView.swift",
         "Sources/FeaturePlayback/PlayerView.swift",
         "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift",
-        "Sources/AppShelliOS/PlozziOSLibraryView.swift"
+        "Sources/AppShelliOS/PlozziOSLibraryView.swift",
+        "Sources/AppRuntime/ExternalPlaybackRuntime.swift"
       ],
-      "summary": "Offer symptom entry points, non-destructive checks, reset/cache scope and collection recovery. Explain Discord conversation versus tracked GitHub bugs and feature requests, mobile Send Feedback email, duplicate searches, reproduction/version/device/source details, and safe public sharing. Diagnostic uploads do not file an issue or Discord post. Error Details can be displayed on Apple TV or exported through Share details on mobile without crash reporting; separate those local reports from endpoint/consent-dependent log upload. Expose Playback Info as the in-player telemetry entry point."
+      "summary": "Offer symptom entry points, non-destructive checks, reset/cache scope and collection recovery. Explain Discord versus tracked GitHub reports, mobile email, duplicates, reproduction/device/source details and safe sharing. Uploading diagnostics does not file an issue. Local Error Details/Share details need no crash consent; distinguish endpoint/consent-dependent uploads and Playback Info telemetry. External-player fallback and return-progress sections explain unsupported sources, quality policy, invalid/expired returns and automatic retry in the original authorized context rather than resetting progress or credentials."
     },
     "platforms": {
       "documents": [
@@ -516,7 +539,8 @@
         { "slug": "audio", "anchor": "truehd-atmos-and-dts-x-on-apple-tv" },
         { "slug": "music", "anchor": "find-your-library" },
         { "slug": "music", "anchor": "control-a-listening-session" },
-        { "slug": "downloads" }
+        { "slug": "downloads" },
+        { "slug": "external-players" }
       ],
       "sources": [
         "Sources/FeaturePlayback/PlayerTouchGestureSurface.swift",
@@ -536,9 +560,11 @@
         "Sources/CoreModels/LiveChannelGuideInfo.swift",
         "Sources/AppShell/MainTabView.swift",
         "Sources/FeatureMusic/AudioPlaybackController.swift",
-        "Sources/CoreUI/NowPlayingSession.swift"
+        "Sources/CoreUI/NowPlayingSession.swift",
+        "Sources/CoreModels/ExternalPlayer.swift",
+        "Sources/AppRuntime/ExternalPlaybackRuntime.swift"
       ],
-      "summary": "Explain remote/touch/keyboard differences, VoiceOver suppression, optional volume/brightness gestures, iPhone orientation versus system-driven iPad rotation, TV transitions and Top Shelf. Trace the OS Guide activity into enabled Live TV and the full-screen player's guide, and music background audio into screensaver listening and Control Center Now Playing commands. Distinguish live-window seeking/Go Live from library-channel Jump to now, without promising recording/restart. Scope wireless subtitle loss to locally remuxed AirPlay and exclude Multiview from external presentation."
+      "summary": "Explain remote/touch/keyboard differences, VoiceOver suppression, optional level gestures, iPhone versus iPad orientation, TV transitions and Top Shelf. Trace the OS Guide activity into enabled Live TV/full-screen guide, and music background audio into screensaver/Now Playing commands. Distinguish live seeking/Go Live from library-channel Jump to now without promising recordings. Scope wireless subtitle loss to remuxed AirPlay and exclude Multiview. External app handoff differs from AirPlay/PiP and in-app native playback: Native Player is Apple TV-only; Infuse/VLC are offered on both platforms with direct-video and authorized-return limits."
     }
   },
   "modules": {
@@ -623,7 +649,8 @@
         "Sources/FeaturePlayback/LiveChannelPlayerView.swift",
         "Sources/FeaturePlayback/CastPanelView.swift",
         "Sources/AppShell/MainTabViewSupport.swift",
-        "Sources/AppShelliOS/PlozziOSPlayerView.swift"
+        "Sources/AppShelliOS/PlozziOSPlayerView.swift",
+        "Sources/AppRuntime/ExternalPlaybackRuntime.swift"
       ],
       "summary": "Use task sections for player preferences, dual-text-track eligibility, confirmed system-caption-style replacement and live rewind/Go Live. Audio-delay and Dialog Enhance scaffolding is capability-gated, but neither wired Native nor Plozzigen engine advertises those capabilities; do not promise them. Subtitle overlay timing is independently supported where exposed, while native second tracks require fetchable text delivery and image primaries exclude dual mode. Cover the Cast panel's biography/credits and deliberate page-navigation handoff, which ends playback rather than playing a credit or keeping the current video open."
     },
@@ -648,9 +675,13 @@
         "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
         "Sources/FeatureSettings/HomeRowsSettingsView.swift",
         "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
-        "Sources/FeatureSettings/ContinueWatchingNextUpControl.swift"
+        "Sources/FeatureSettings/ContinueWatchingNextUpControl.swift",
+        "Sources/FeatureSettings/CardAppearanceControls.swift",
+        "Sources/CoreModels/CardCaptionSettings.swift",
+        "Sources/FeatureSettings/ExternalPlayerSettingsView.swift",
+        "Sources/CoreModels/ExternalPlayerSettingsModel.swift"
       ],
-      "summary": "Group settings by reader task and retain consequential platform/provider limits. The shared Home editor and Next Up merge control belong in Home/navigation, not new pages per section. Self-explanatory sort and Recently watched choices remain within existing tasks; preview, gesture and network-use consequences receive prose."
+      "summary": "Group settings by task with platform/provider limits. Home editing/Next Up stay in Home/navigation; three Continue Watching artwork modes, independent Playback details/Labels and label-preset replacement belong in spoiler/appearance sections, not pages per toggle. External player needs a focused task because device-wide selection, token sharing, direct-source eligibility and progress callbacks have distinct consequences. Low-risk sort and Recently watched choices remain within existing tasks."
     },
     "FeatureShareOnboarding": {
       "areas": ["connections"],
@@ -804,13 +835,13 @@
     },
     "playback": {
       "areas": ["playback", "quality", "audio", "platforms", "sync"],
-      "sources": ["Sources/CoreUI/ProfileSettingsCategory.swift", "Sources/FeatureSettings/PreferenceDetailViews.swift", "Sources/AppShelliOS/PlozziOSSettingsView.swift", "Sources/CoreModels/PlaybackSettings.swift"],
-      "summary": "Cover ask-versus-automatic versions with independent series memory, autoplay/skips, quality defaults, audio policy, background listening, orientation/gestures and history scope in existing tasks, retaining platform/provider gates. Missing remembered version types fall back automatically in automatic mode."
+      "sources": ["Sources/CoreUI/ProfileSettingsCategory.swift", "Sources/FeatureSettings/PreferenceDetailViews.swift", "Sources/AppShelliOS/PlozziOSSettingsView.swift", "Sources/CoreModels/PlaybackSettings.swift", "Sources/FeatureSettings/ExternalPlayerSettingsView.swift", "Sources/CoreModels/ExternalPlayerSettingsModel.swift", "Sources/AppRuntime/ExternalPlaybackRuntime.swift"],
+      "summary": "Cover version mode/series memory, autoplay/skips, quality, audio, background listening, orientation/gestures and history with platform/provider gates. Missing remembered versions fall back automatically in automatic mode. Advanced > External player is device-wide rather than profile-owned; its focused guide explains platform apps, custom templates, direct-play fallback, access-token sharing and authorized progress returns."
     },
     "screensNavigation": {
       "areas": ["home-navigation", "music", "platforms"],
-      "sources": ["Sources/CoreUI/ProfileSettingsCategory.swift", "Sources/FeatureSettings/PreferenceDetailViews.swift", "Sources/FeatureSettings/CustomizeHomeDetailView.swift", "Sources/FeatureSettings/HomeRowsSettingsView.swift", "Sources/FeatureSettings/HomeSectionSettingsViews.swift", "Sources/FeatureSettings/ContinueWatchingNextUpControl.swift", "Sources/AppShelliOS/PlozziOSSettingsView.swift"],
-      "summary": "Group Home section add/remove/reorder and preset replacement, default Next Up merging, the pinned Hero subpage, details, navigation visibility and exit behavior. Library availability is separate on both platforms; link music eligibility instead of implying every platform has that tab."
+      "sources": ["Sources/CoreUI/ProfileSettingsCategory.swift", "Sources/FeatureSettings/PreferenceDetailViews.swift", "Sources/FeatureSettings/CustomizeHomeDetailView.swift", "Sources/FeatureSettings/HomeRowsSettingsView.swift", "Sources/FeatureSettings/HomeSectionSettingsViews.swift", "Sources/FeatureSettings/ContinueWatchingNextUpControl.swift", "Sources/AppShelliOS/PlozziOSSettingsView.swift", "Sources/CoreUI/ContinueWatchingArtworkSwatch.swift", "Sources/CoreModels/HomeLibraryVisibility.swift"],
+      "summary": "Group Home section add/remove/reorder and preset replacement, default Next Up merging, the pinned Apple TV Home layout/mobile Hero entry, details, navigation and exit behavior. Continue Watching independently chooses Artwork + logo/Thumbnail/Poster, Detailed/Progress only and Follow Appearance/On/Off labels. Library availability is separate; link music eligibility rather than implying every platform has that tab."
     },
     "subtitles": {
       "areas": ["subtitles"],

@@ -18,6 +18,8 @@ Choose **Maximum** for original quality without a reduction limit. Lower limits 
 
 Under **Advanced**, choose the transcoding codec or **Force transcoding**. Force transcoding can request conversion even at Maximum. Custom limits are available in the quality picker. Conversion depends on the provider, permissions, and server capacity.
 
+Using an [external player](/external-players/)? A mobile limit below Maximum, or Force transcoding, keeps playback in Plozz even if the original fits.
+
 ## Change one video
 
 Reveal the player's options, open **Quality**, choose a **Quality limit**, then **Apply**. This changes the current video without overwriting saved network defaults.

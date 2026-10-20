@@ -45,3 +45,7 @@ Controls can be restricted while video is playing elsewhere. The locally remuxed
 Live TV permits external presentation only for an authorized, single-channel session. Multiview disables AirPlay and Picture in Picture.
 
 For travel, use [completed downloads](/downloads/); external presentation does not save video. See [Audio](/audio/) for Apple TV height-audio requirements.
+
+## Open another player app
+
+To use Infuse, VLC, or Apple TV's Native Player app instead, follow [Use another video player](/external-players/). This sends an eligible video link to another app on this device, not an AirPlay receiver. It is a device-wide choice with separate source, privacy, and returned-progress limits.

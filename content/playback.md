@@ -37,10 +37,10 @@ Its lead time controls when it appears without a credits marker.
 
 Use playback speed and zoom where offered. Fit keeps the full picture; Fill can crop it.
 
-Episode/playlist navigation is available, but there is no chapter picker. Intro markers are not chapter browsing.
+Episode/playlist navigation is available, but not a chapter picker. Intro markers are not chapters.
 
 ## Explore the cast
 
 Open **Cast** below the timeline and select a person for available biography and credits. **See more** opens their full page; selecting a credit opens its title page. Both actions end playback. A credit does not guarantee a playable library copy.
 
-See [Streaming quality](/streaming-quality/), [Audio](/audio/), or [Subtitles](/subtitles/) for their settings. [AirPlay and Picture in Picture](/platform-controls/#airplay-and-picture-in-picture) have additional limits.
+See [Streaming quality](/streaming-quality/), [Audio](/audio/), [Subtitles](/subtitles/), [AirPlay/Picture in Picture](/platform-controls/#airplay-and-picture-in-picture), or [external players](/external-players/) for settings and limits.

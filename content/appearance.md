@@ -10,7 +10,13 @@ On Apple TV, card focus appearance changes how the selected card is emphasized. 
 
 In **Theme**, set **Liquid Glass** to Off for solid backgrounds, or follow the system's Reduce Transparency preference. This is separate from card size.
 
-Labels can be customized by view. A collection cover and the titles inside that collection are separate surfaces: titles inside collections and playlists use the **Browse** label choice.
+Under **Labels**, choose **App default**, **Show labels everywhere**, or **Hide labels everywhere**. Selecting a preset replaces per-view label overrides.
+
+Use **Customize by view** for exceptions. **Mixed**, offered for Home rows and Recommended, hides labels in Showcase and on series artwork but shows them elsewhere.
+
+Continue Watching's [Customize Home editor](/spoiler-protection/#change-continue-watching-cards) has separate **Labels** controls: **Follow Appearance** follows its Home rows or Recommended context; **On** or **Off** overrides labels across artwork styles.
+
+A collection cover and its contents are separate surfaces: titles inside collections and playlists use **Browse**.
 
 ## Choose artwork
 

@@ -189,6 +189,7 @@
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/CoreModels/HomeRowCustomization.swift",
       "Sources/CoreModels/HomeLibraryVisibility.swift",
+      "Sources/CoreModels/HomeLibraryVisibilityStore.swift",
       "Sources/CoreModels/HomeSectionCatalog.swift",
       "Sources/CoreModels/HomeSectionCatalogModel.swift",
       "Sources/FeatureHomeCore/HomeAggregator.swift",
@@ -246,6 +247,42 @@
     ]
   },
   {
+    "slug": "external-players",
+    "title": "Use another video player",
+    "seoTitle": "Use Infuse, VLC, or Native Player with Plozz",
+    "description": "Choose an external video player, check supported sources, protect server access links, and understand resume, returned progress, and fallback limits.",
+    "section": "Playback",
+    "kind": "guide",
+    "file": "external-players.md",
+    "sources": [
+      "Sources/CoreModels/ExternalPlayer.swift",
+      "Sources/CoreModels/ExternalPlayerSettingsModel.swift",
+      "Sources/CoreModels/ProfileSettingsSnapshot.swift",
+      "Sources/CoreModels/StreamingQuality.swift",
+      "Sources/FeatureSettings/ExternalPlayerSettingsView.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/AppRuntime/ExternalPlaybackRuntime.swift",
+      "Sources/AppRuntime/ExternalPlayerSupport.swift",
+      "Sources/AppShell/PlayerPresentation.swift",
+      "Sources/AppShell/AppState.swift",
+      "Sources/AppShell/RootView.swift",
+      "Sources/AppShelliOS/PlozziOSPlayerView.swift",
+      "Sources/AppShelliOS/PlozziOSAppModel.swift",
+      "Sources/AppShelliOS/PlozziOSRootView.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "App/Resources/Info.plist",
+      "App/PlozziOS/Info.plist"
+    ],
+    "watch": [
+      "Sources/CoreModels/ExternalPlayer",
+      "Sources/AppRuntime/ExternalPlay",
+      "Sources/FeatureSettings/ExternalPlayerSettingsView.swift",
+      "Sources/AppShell/PlayerPresentation.swift",
+      "Sources/AppShelliOS/PlozziOSPlayerView.swift",
+      "Sources/AppShelliOS/PlozziOSRootView.swift"
+    ]
+  },
+  {
     "slug": "streaming-quality",
     "title": "Streaming quality",
     "seoTitle": "Set Plozz streaming quality for Wi-Fi and cellular",
@@ -255,6 +292,7 @@
     "file": "streaming-quality.md",
     "sources": [
       "Sources/AppShelliOS/PlozziOSStreamingQuality.swift",
+      "Sources/AppRuntime/ExternalPlaybackRuntime.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
       "Sources/CoreModels/StreamingQuality.swift",
@@ -333,14 +371,16 @@
       "Sources/CoreModels/SubtitleStyle.swift",
       "Sources/FeaturePlayback/PlayerViewModel.swift",
       "Sources/FeaturePlayback/NativeVideoEngine.swift",
-      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
+      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
+      "Sources/AppRuntime/ExternalPlaybackRuntime.swift"
     ],
     "watch": [
       "Sources/FeaturePlayback/",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
-      "Sources/CoreModels/Subtitle"
+      "Sources/CoreModels/Subtitle",
+      "Sources/AppRuntime/ExternalPlaybackRuntime.swift"
     ]
   },
   {
@@ -468,16 +508,19 @@
       "Sources/CoreModels/AppLanguage.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/CoreModels/ArtworkSettings.swift",
+      "Sources/CoreModels/CardCaptionSettings.swift",
       "Sources/CoreModels/ThemeSettings.swift",
       "Sources/CoreModels/TransparencyPreferenceStore.swift",
-      "Sources/CoreUI/ProfileSettingsCategory.swift"
+      "Sources/CoreUI/ProfileSettingsCategory.swift",
+      "Sources/CoreUI/ContinueWatchingArtworkSwatch.swift",
+      "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
     ],
     "watch": [
       "Sources/FeatureSettings/CardAppearanceControls.swift",
       "Sources/FeatureSettings/ArtworkSettingsControls.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
-      "Sources/FeatureSettings/AppLanguagePicker.swift",
-      "Sources/CoreModels/ArtworkSettings.swift",
+      "Sources/CoreModels/CardCaptionSettings.swift",
+      "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift"
     ]
   },
@@ -498,7 +541,12 @@
       "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
       "Sources/CoreUI/ContinueWatchingArtworkSwatch.swift",
       "Sources/CoreUI/ContinueWatchingArtworkSource.swift",
+      "Sources/CoreUI/ContinueWatchingPresentation.swift",
+      "Sources/CoreUI/PosterCardView.swift",
       "Sources/CoreUI/SpoilerRevealBox.swift",
+      "Sources/CoreModels/HomeLibraryVisibility.swift",
+      "Sources/CoreModels/CardCaptionSettings.swift",
+      "Sources/FeatureHome/HomeView.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/AppShelliOS/PlozziOSHomeView.swift",
       "Sources/AppShelliOS/PlozziOSPosterCard.swift"
@@ -660,12 +708,12 @@
       "Sources/AppShell/SyncSetupSenderPicker.swift",
       "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift",
       "Sources/FeatureSyncSetup/SyncSetupService.swift",
-      "Sources/FeatureSyncSetup/SyncSetupCoordinator.swift",
       "Sources/FeatureSyncSetup/SyncSetupPairingModel.swift",
       "Sources/FeatureSyncCloud/CloudConfigSyncService.swift",
       "Sources/FeatureSettings/SyncEraseDataView.swift",
       "Sources/AppRuntime/TrackerTokenSyncBridge.swift",
-      "Sources/CoreModels/PlaybackSettings.swift",
+      "Sources/CoreModels/ProfileSettingsSnapshot.swift",
+      "Sources/CoreModels/ExternalPlayerSettingsModel.swift",
       "Sources/FeatureSettings/IntegrationsDetailView.swift",
       "Sources/FeatureSyncSetup/BonjourPairingTransport.swift",
       "Sources/CoreUI/LiveTVPortableSyncSettings.swift",
@@ -756,8 +804,8 @@
   {
     "slug": "platform-controls",
     "title": "Device and system controls",
-    "seoTitle": "Plozz remote, touch, AirPlay, and Picture in Picture controls",
-    "description": "Use touch, keyboard, Top Shelf and remote Guide controls; understand live rewind, iPhone orientation, AirPlay, and Picture in Picture limits.",
+    "seoTitle": "Plozz remote, touch, external player, AirPlay, and Picture in Picture controls",
+    "description": "Use touch, keyboard, Top Shelf and remote Guide controls; check live rewind, orientation, external players, AirPlay, and Picture in Picture limits.",
     "section": "Help",
     "kind": "reference",
     "file": "platform-controls.md",
@@ -767,17 +815,17 @@
       "Sources/CoreModels/LiveChannelGuideInfo.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/FeaturePlayback/PlayerTouchGestureSurface.swift",
-      "Sources/FeaturePlayback/PlayerTouchGestureState.swift",
+      "Sources/CoreModels/ExternalPlayer.swift",
       "Sources/AppShelliOS/PlozziOSPlayerKeyboardControls.swift",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
       "Sources/AppShelliOS/PlozziOSPictureInPictureController.swift",
       "Sources/AppShelliOS/PlozziOSPlayerOrientation.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-      "Sources/CoreModels/PlaybackSettings.swift",
+      "Sources/CoreModels/ExternalPlayerSettingsModel.swift",
       "Sources/TopShelfKit/TopShelfPublisher.swift",
       "Sources/AppShell/HomeTab.swift",
       "TopShelf/ContentProvider.swift",
-      "Sources/FeaturePlayback/NativeSubtitleCueOutput.swift",
+      "Sources/AppRuntime/ExternalPlaybackRuntime.swift",
       "Sources/FeaturePlayback/NativeVideoEngine.swift",
       "Sources/FeaturePlayback/LiveChannelPlayerView.swift",
       "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",

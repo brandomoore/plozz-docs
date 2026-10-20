@@ -6,9 +6,9 @@ Home rows, hero content, navigation, and detail-page choices belong to the activ
 
 Open **Settings > Screens & Navigation > Customize Home**.
 
-Choose **Match server** to follow server Home arrangements or **Combined rows** to start with rows across libraries. Choosing a preset replaces your custom arrangement after confirmation. With multiple servers, common rows can combine while other server rows stay visible. Plex supplies promoted Home rows, not another client's pinned-library layout.
+Choose **Match server** to follow server Home arrangements or **Combined rows** for cross-library rows. A preset replaces your custom arrangement after confirmation. Multiple servers can combine common rows while retaining other server rows. Plex supplies promoted Home rows, not another client's pinned-library layout. Neither preset changes the server.
 
-Choose **Add section** to add an available row. Open an existing section and choose **Remove section** to hide it from Home. Choose **Reorder**, move the sections, then **Done**. You can mix combined, individual-library, and server rows; the Hero stays pinned at the top.
+Choose **Add section** for an available row. Open a section and choose **Remove section** to hide it. Choose **Reorder**, move sections, then **Done**. Mix combined, individual-library, and server rows; the Home layout/Hero entry stays pinned.
 
 Editing sections saves a custom arrangement instead of following server order.
 
@@ -22,13 +22,13 @@ Open **Continue Watching** in Customize Home to set **Merge Next Up rows**, enab
 
 ## Choose the hero
 
-Open **Hero** in Customize Home. On Apple TV, choose **Showcase**, where the focused row title fills the background, or **Fullscreen Hero**, with an independent carousel above the rows. Showcase has its own ratings and Discovery controls.
+Open the pinned **Home layout** entry on Apple TV, or **Hero** on mobile. Apple TV offers **Showcase**, where the focused row title fills the background, or **Fullscreen Hero**, an independent carousel above the rows. Showcase has separate ratings and Discovery controls.
 
 For Fullscreen Hero or mobile, choose sources such as Continue Watching, recently added titles, Watchlist, selected libraries, collections, or Discovery. Turn off **Show hero** for rows without the carousel; it does not disable Showcase.
 
 Choose watched-content visibility, advancement, ratings, and background trailers with separate muting. Discovery can suggest unowned titles, not playable copies, and is unavailable in Kids profiles.
 
-For the Continue Watching card choices, see [Spoiler protection](/spoiler-protection/).
+For Continue Watching's artwork, playback details, and labels, see [Spoiler protection](/spoiler-protection/#change-continue-watching-cards).
 
 ## Arrange shortcuts and details
 

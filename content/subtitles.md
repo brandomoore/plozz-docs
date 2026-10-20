@@ -41,4 +41,4 @@ Check the selected video version, subtitle language, and remembered series choic
 
 A steady timing offset may be correctable with delay. Increasing drift can mean the subtitle belongs to another release or cut; try another matching track instead of repeatedly increasing the offset.
 
-External playback has separate [AirPlay limitations](/platform-controls/#airplay-and-picture-in-picture).
+Check separate [AirPlay](/platform-controls/#airplay-and-picture-in-picture) and [external-player subtitle limits](/external-players/#what-stays-in-plozz).

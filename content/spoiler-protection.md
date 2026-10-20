@@ -30,9 +30,12 @@ To hide scores entirely in a header, use the review-score controls in [Home and 
 
 Open **Settings > Screens & Navigation > Customize Home > Continue Watching**:
 
-- **Logo & Artwork** identifies the title on its artwork, using series presentation for episodes.
-- **Thumbnail & Title** puts the title and details below the picture and follows spoiler masking.
+- **Artwork + logo:** wide movie or series artwork, not an episode still.
+- **Thumbnail:** episode stills or movie artwork; episode images follow spoiler masking.
+- **Poster:** upright movie or show posters, never episode thumbnails.
 
-Both choices display artwork; neither means “no image.” If Continue Watching is absent from Customize Home, restore it with **Add section**. These choices do not mark episodes watched or remove them from the row.
+**Playback details** is separate: **Detailed** shows the play icon, progress, and playback information; **Progress only** keeps the progress bar without playback text. **Labels** independently controls text below the artwork: **Follow Appearance**, **On**, or **Off**. Hiding labels does not hide detailed playback information.
+
+All three choices show artwork. If Continue Watching is absent, restore it with **Add section**. These are profile presentation choices, not changes to watched state or row membership.
 
 To clear an abandoned resume point instead, use [Remove from Continue Watching](/library/).
