@@ -38,4 +38,4 @@ Open **Settings > Screens & Navigation > Customize Home > Continue Watching**:
 
 All three choices show artwork. If Continue Watching is absent, restore it with **Add section**. These are profile presentation choices, not changes to watched state or row membership.
 
-To clear an abandoned resume point instead, use [Remove from Continue Watching](/library/).
+To remove an abandoned title from the row instead, use [Remove from Continue Watching](/library/).

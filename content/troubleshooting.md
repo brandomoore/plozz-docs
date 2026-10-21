@@ -18,13 +18,15 @@ Check source selection, favorites/guide-only filters, and **Manage channels > Hi
 
 ## A library, title, or picture is wrong
 
-Check profile, server user, enabled libraries, and browse filters. A hidden shortcut does not disable its library. For shares, confirm readability and [scan the folder](/network-shares/). An interrupted [collection check](/library/#browse-a-library) can leave an incomplete list; choose **Try Again**.
+Check profile, server user, enabled libraries, and browse filters. A hidden shortcut does not disable its library. For shares, confirm readability and [scan the folder](/network-shares/). Incomplete [library](/library/#browse-a-library) or Continue Watching results offer **Details** and **Try Again** where available.
 
 For wrong matches or scores, check [Metadata and ratings](/metadata-and-ratings/). Compare a warm/dark picture with [Circadian Mode](/circadian-mode/) disabled before changing HDR settings.
 
 ## Playback or downloads fail
 
 Compare another title. On iPhone/iPad, try lower [streaming quality](/streaming-quality/) where supported. If Maximum works but conversion fails, check server capability/permission.
+
+Select **No streams found** on a title's details to recheck the source without starting playback, or choose another accessible copy.
 
 For Apple TV audio stutter, check [height-audio conversion](/audio/). For captions, check [track, style, and timing limits](/subtitles/).
 
@@ -40,8 +42,8 @@ On a playback, library, or Live TV error, open **Details** when offered. On iPho
 
 Open **Settings > Help & Diagnostics > Report a Problem**; on Apple TV, scan its code or follow the GitHub link. See [Feedback and bug reports](/feedback-and-bugs/) for Discord, GitHub, feature requests, and what to include.
 
-**Playback Diagnostics Overlay**, or **Playback Info** in the player's Info card, shows codec, bitrate, buffer, and memory.
+**Playback Diagnostics Overlay**, or **Playback Info** in the player's Info card, shows the engine, delivery, codecs, bitrate, buffer, and memory.
 
-On iPhone/iPad, open **Recent Activity**, choose **Refresh**, then **Copy** to include logs in your report.
+In mobile **Recent Activity**, choose **Refresh**, then **Copy** for logs.
 
 Log upload requires a configured reporting endpoint and **Share Crash Reports** enabled: choose **Send to Developer** on mobile or **Send Recent Activity to Developer** on Apple TV. This is separate from Share details. Never post passwords, tokens, pairing codes, or private playlist URLs.

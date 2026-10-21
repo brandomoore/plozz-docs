@@ -1,39 +1,40 @@
 # Streaming quality
 
-On **iPhone and iPad**, quality limits apply to Plex, Jellyfin, Emby, and Silo movies and episodes. These controls do not apply to Apple TV, network shares, music, or Live TV.
+Streaming-quality limits apply to Plex, Jellyfin, Emby, and Silo movies/episodes on **iPhone and iPad**, not Apple TV, shares, music, or Live TV.
 
 ## Save network-specific limits
 
-For the active profile, open **Settings > Playback > Streaming quality** and choose separate defaults for:
-
-- **Local network**
-- **Remote Wi-Fi / Ethernet**
-- **Cellular**
-
-Defaults are **Maximum** for local/remote connections and **720p · 2 Mbps** for cellular.
+Open **Settings > Playback > Streaming quality** for this profile. Set **Local network**, **Remote Wi-Fi / Ethernet**, and **Cellular** separately. Defaults are **Maximum** for local/remote connections and **720p · 2 Mbps** for cellular.
 
 Local versus remote depends on the connection to your source, not simply whether the device uses Wi-Fi.
 
-Choose **Maximum** for original quality without a reduction limit. Lower limits can still play the original when reported resolution and bitrate fit; otherwise Plozz requests conversion. Bitrate limits include audio, not just video.
+**Maximum** means original quality without reduction. Lower limits can still play originals whose reported resolution/bitrate fit; otherwise Plozz requests conversion. Bitrate includes audio.
 
-Under **Advanced**, choose the transcoding codec or **Force transcoding**. Force transcoding can request conversion even at Maximum. Custom limits are available in the quality picker. Conversion depends on the provider, permissions, and server capacity.
+Under **Advanced**, choose the transcoding codec or **Force transcoding**, which can request conversion even at Maximum. The quality picker offers custom limits. Conversion needs provider support, permission, and server capacity.
 
-Using an [external player](/external-players/)? A mobile limit below Maximum, or Force transcoding, keeps playback in Plozz even if the original fits.
+A limit below Maximum or Force transcoding prevents [external-player handoff](/external-players/), even if the original fits.
 
 ## Change one video
 
 Reveal the player's options, open **Quality**, choose a **Quality limit**, then **Apply**. This changes the current video without overwriting saved network defaults.
 
-Quality changes briefly reload playback around your current position. Conversion may alter HDR, audio, or subtitles. During conversion, **Current stream** shows the resulting resolution, codecs, HDR, and audio channels where known. A selected limit is not a measurement; **Not available** means the current stream has not supplied that fact.
+Playback briefly reloads around your position. Conversion may alter HDR, audio, or subtitles. **Current stream** reports converted resolution, codecs, HDR, and audio channels where known. A limit is not a measurement; **Not available** means the stream supplied no fact.
 
-Silo currently converts to H.264 at 480p, 720p, 1080p, or 4K, with resolution limits based on video height. Unsupported conversion choices are unavailable.
+Silo converts to H.264 at 480p, 720p, 1080p, or 4K, limited by video height. Unsupported choices are unavailable.
 
 ## Buffering or unavailable choices
 
-If Maximum buffers, try a lower current-session limit on an eligible server. If the lower setting fails while Maximum plays, investigate conversion permission or server capacity rather than assuming the file is damaged.
+If Maximum buffers, try a lower session limit. If only conversion fails, check server permission and capacity.
 
-Network shares have no media server performing these conversions. A hidden Quality control can therefore be expected for that source or platform.
+Shares have no server converting video; a missing Quality control can be expected.
 
-**Video buffer**, also in Playback settings, changes device read-ahead, not stream quality. Larger buffers use more storage and are unavailable with Apple's native player. This device-wide preference is not transferred or synced with profiles.
+**Video buffer** in Playback changes read-ahead, not quality. Larger buffers use storage and are unavailable with Apple's native player. This device-wide preference does not transfer or sync.
 
-[Download quality](/downloads/) is independent: changing streaming defaults does not shrink an existing offline copy. For detailed codec/container information, use the [Plozz format reference](https://plozz.app/formats), not a generic player-engine compatibility list.
+[Download quality](/downloads/) is independent; streaming defaults do not shrink saved copies. See [Plozz formats](https://plozz.app/formats) for codec/container support.
+
+## Try Dolby Vision FEL
+
+On Apple TV, iPhone, and iPad, **Settings > Playback > Advanced > Dolby Vision FEL (experimental)** requests full enhancement-layer decoding for eligible seekable Dolby Vision Profile 7 videos. It defaults off, is profile-scoped, and affects new built-in on-demand sessions, not live streams or external players. File/hardware eligibility still applies; enabling it does not prove the route or display used FEL.
+
+> [!IMPORTANT]
+> FEL adds GPU/memory load and may stutter. Its playback path loses Dolby Atmos objects and DTS:X height audio. Turn it off and restart playback to compare.

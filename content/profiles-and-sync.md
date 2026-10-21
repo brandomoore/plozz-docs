@@ -18,7 +18,7 @@ iCloud Sync carries profiles, preferences, server details, watchlist state, supp
 
 With sync and iCloud Keychain available, iPhone/iPad can automatically adopt supported Jellyfin, Plex, Emby, share, and Seerr credentials. Apple TV does not use this iCloud Keychain path; use nearby setup or sign in there. **Silo requires approval on each device**, regardless of sync.
 
-Downloads, automatic sign-in, [Video buffer](/streaming-quality/), and the [external-player choice](/external-players/) remain device-local. The player choice applies across Plozz profiles, not per viewer.
+Downloads, automatic sign-in, [Video buffer](/streaming-quality/), [Top Shelf preferences](/platform-controls/#launch-from-apple-tv-top-shelf), and the [external-player choice](/external-players/) remain device-local. The player choice applies across Plozz profiles, not per viewer.
 
 ## Sync Live TV deliberately
 
@@ -42,10 +42,17 @@ When verification codes are shown, approve only a match. Same-iCloud-account pai
 
 Your server stores history for its selected user. **Sync across all my servers** under Trackers, also exposed in mobile Playback as **Sync watch state across servers**, copies watched-state and resume updates to matching accessible copies on other servers. It defaults to on; Apple TV enables the control with multiple servers. Turn it off for independent server histories. [Tracker scrobbling](/trackers/) sends activity to external services instead; it is not iCloud configuration sync.
 
+## Understand sync data sizes
+
+Open **Settings > iCloud Sync > Troubleshooting** and inspect **Sync Data on This Device**. **Refresh Breakdown** updates the snapshot; if it fails, retry without resetting your setup.
+
+Counts include pending uploads and exclude pending deletions. Sizes measure encoded local sync data, not your iCloud storage usage or downloaded videos. Plozz Channels schedules include the library catalogue needed to align devices; downloaded IPTV guides are excluded. iCloud Keychain logins and Trakt's shared sign-in records are stored separately and excluded too.
+
 ## Recover sync without erasing your setup
 
 Check the iCloud account and **Needs sign-in** entries first. Use **Sync Now** before destructive actions.
 
 On iPhone/iPad, **Reload From iCloud** retries loading cloud data. **Reset Sync** replaces iCloud data with this device's copy; choose the device with the setup you intend to keep.
 
-**Erase Sync Data** removes synced profiles, settings, servers, watchlist, Live TV sources, and tracker sign-ins from iCloud, and clears the listed local setup while leaving sync off. Turn off sync on other devices first to prevent re-upload. On iPhone/iPad it also removes Plozz's iCloud Keychain server logins; Apple TV's erase screen warns that this additional step requires iPhone/iPad. Read the confirmation rather than using erase as a connection repair.
+> [!WARNING]
+> **Erase Sync Data** removes synced profiles, settings, servers, watchlist, Live TV sources, and tracker sign-ins from iCloud, and clears the listed local setup while leaving sync off. Turn off sync on other devices first to prevent re-upload. On iPhone/iPad it also removes Plozz's iCloud Keychain server logins; Apple TV's erase screen warns that this additional step requires iPhone/iPad. Read the confirmation rather than using erase as a connection repair.

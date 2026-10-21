@@ -28,7 +28,7 @@ Plozz's controls, subtitle styling, skip markers, and autoplay do not operate in
 
 **VLC** and custom players do not receive resume positions or return watch progress. Returning to Plozz alone cannot recover their position.
 
-Accepted returns follow normal [watch-history sync rules](/profiles-and-sync/#keep-watch-history-separate); Plozz does not track the external session live.
+Accepted returns follow [watch-history sync rules](/profiles-and-sync/#keep-watch-history-separate). Unfinished returns can send paused progress to connected Trakt; completed watches use normal history reporting. Plozz does not track the external session live.
 
 Invalid, failed, or expired results leave saved progress unchanged; callbacks expire after 24 hours. If Plozz reports it could not save returned progress, restore the original authorized profile and return to Plozz; it retries automatically. Starting another video supersedes the previous handoff.
 

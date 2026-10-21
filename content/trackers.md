@@ -15,6 +15,8 @@ Trackers connect to the active **Plozz profile**, not to a particular media serv
 
 Scrobbling sends playback activity to the tracker; it does not import that service's full watch history into your media servers.
 
+Supported [external-player returns](/external-players/#return-watch-progress) can send unfinished progress to Trakt after you return. Marking a title unwatched in Plozz does not delete its Trakt history.
+
 AniList and MyAnimeList do not treat every television episode as anime. Matching and usable identifiers matter; anime progress is submitted when playback stops at 80% or more.
 
 WeTrakr appears only when configured in the app build. Follow its browser or device-code connection instructions. Its planning list is used for [Watchlist](/library/), not as a source of playable videos.

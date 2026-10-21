@@ -2,7 +2,7 @@
 
 Start in a library to browse what your connected account can access. **Search** finds movies, shows, and episodes across your available sources.
 
-With [Seerr](/media-requests/), **Not in Your Library** search results are requestable titles, not playable copies. Request permissions still apply.
+With [Seerr](/media-requests/), **Not in Your Library** results are requestable, not playable; request permissions apply.
 
 ## Browse a library
 
@@ -29,7 +29,7 @@ Watchlist combines Plozz's saved titles with supported connected-server and [tra
 
 **Mark as Watched**, **Mark as Unwatched**, and **Mark Watched Up to Here** change history where supported. The last action includes earlier episodes: use it carefully.
 
-**Remove from Continue Watching**, when offered, clears the resume point without claiming you finished the title. It is not the same as removing a Watchlist entry.
+**Remove from Continue Watching** dismisses a title while preserving its position where supported; otherwise it clears resume. It does not mark it watched or remove its Watchlist entry. [Cross-server history settings](/profiles-and-sync/#keep-watch-history-separate) govern matching copies.
 
 ## A title or library is missing
 

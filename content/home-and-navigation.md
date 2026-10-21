@@ -18,15 +18,15 @@ Removing a section changes Home, not access. Use **Settings > Libraries** to ena
 
 Continue Watching has no app-imposed title-count limit or age expiry. Older unfinished titles and next episodes remain eligible; recency changes their order, not membership. Plozz can only show what your sources return, and watched state, removal, disabled libraries, or access changes can still remove entries.
 
-Open **Continue Watching** in Customize Home to set **Merge Next Up rows**, enabled by default. It folds next episodes into Continue Watching and hides their separate rows from the editor. Turn it off to arrange those rows separately.
+In **Customize Home > Continue Watching**, **Merge Next Up rows** defaults on, folding source-supplied next episodes into Continue Watching and hiding their separate editor rows. Turn it off to arrange those separately. Removing Continue Watching suspends merging.
 
 ## Choose the hero
 
 Open the pinned **Home layout** entry on Apple TV, or **Hero** on mobile. Apple TV offers **Showcase**, where the focused row title fills the background, or **Fullscreen Hero**, an independent carousel above the rows. Showcase has separate ratings and Discovery controls.
 
-For Fullscreen Hero or mobile, choose sources such as Continue Watching, recently added titles, Watchlist, selected libraries, collections, or Discovery. Turn off **Show hero** for rows without the carousel; it does not disable Showcase.
+For Fullscreen Hero or mobile, open **Hero content sources** for Continue Watching, recently added titles, Watchlist, libraries, collections, or Discovery. Turn off **Show hero** to hide this carousel, not Showcase.
 
-Choose watched-content visibility, advancement, ratings, and background trailers with separate muting. Discovery can suggest unowned titles, not playable copies, and is unavailable in Kids profiles.
+Choose watched-content visibility, advancement, ratings, and separately muted trailers. Enable Discovery, then open **Discovery providers** to choose catalogues. Seerr is needed only to request unowned titles; Discovery is unavailable in Kids profiles.
 
 For Continue Watching's artwork, playback details, and labels, see [Spoiler protection](/spoiler-protection/#change-continue-watching-cards).
 

@@ -20,9 +20,17 @@ For a channel with a usable rewind window, reveal controls and use the timeline 
 
 ## Launch from Apple TV Top Shelf
 
-Put Plozz in the Home Screen's top row. Top Shelf shows up to three Continue Watching and three Recently Added cards from Plozz's saved snapshot, not live server browsing.
+1. Put Plozz in the Apple TV Home Screen's top row.
+2. From an adult Plozz profile, open **Settings > Everyone > Top Shelf**. **Show Top Shelf** is on by default.
+3. Choose **Posters** or **Full Screen**, then set separate **Continue Watching** and **Recently Added** counts: four each by default, adjustable from one to 20.
 
-Selecting or playing a card opens Plozz, opens the title's page, and requests playback. Normal profile and playback authorization still apply. An unavailable server or removed title can prevent playback; open Plozz and check access. Artwork follows [Appearance > Artwork](/appearance/).
+Posters is the default; selecting a poster requests playback. With Full Screen, swipe up on the Home Screen to expand the shelf. Continue Watching comes first, followed by Recently Added; repeated entries from the same source appear once. **Play** requests playback; **More Info** opens the title or series page without starting it. Known descriptions and format badges can appear; they are not measurements of your current output.
+
+These preferences are shared by Plozz profiles on this Apple TV and do not sync. Turning Show Top Shelf off clears its media without forgetting your layout or counts.
+
+Top Shelf uses Plozz's saved Home snapshot, not live server browsing. Short feeds are not padded. Counts do not limit Continue Watching inside Plozz. Normal profile authorization and source access still apply; for unavailable content, open Plozz and check the original connection.
+
+Artwork follows [Appearance > Artwork](/appearance/); full-screen episode text and ratings respect [spoiler settings](/spoiler-protection/).
 
 ## iPhone and iPad
 
@@ -32,7 +40,7 @@ During supported local playback, double-tap the left/right side to skip, hold th
 
 Turn off **Settings > Playback > Volume and brightness gestures** to disable vertical drags.
 
-On iPhone, **Settings > Playback > Player orientation** offers Auto, Landscape, or Portrait for full-screen playback. iPad follows system rotation. If changing orientation fails, use a full-screen window and retry.
+On iPhone, **Settings > Playback > Player orientation** offers Auto, Landscape, or Portrait for video and Live TV playback in a full-screen window. iPad follows system rotation. If changing orientation fails, use a full-screen window and retry.
 
 Playback options depend on session capabilities. Fit preserves the whole picture; Fill can crop it. [Background Audio](/audio/#keep-audio-playing-on-iphone-or-ipad) controls listening while locked or outside Plozz.
 

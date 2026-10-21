@@ -4,14 +4,14 @@
 
 1. Choose **IPTV** during first-run setup, or open **Sources > IPTV provider** in Live TV.
 2. Choose **Playlist URL** for an M3U address, or **Xtream account** for your server, username, and password.
-3. Open **Advanced options** to add an XMLTV **Guide URL** if your provider supplies one. Playlist-declared guides can load automatically; Xtream can supply its own listings. It also contains playlist authentication and provider-specified request headers.
+3. Enter your provider's XMLTV address in **EPG URL (optional)**. Playlist-declared guides or Xtream listings can load automatically. **Advanced options** adds guide URLs, playlist authentication, and separate playlist/stream and guide headers. Guide headers apply only to the first guide URL's server; leave them empty to use playlist credentials.
 4. Choose **Connect**, wait for import, then open **Live TV**.
 
 On iPhone/iPad, IPTV sign-in's **Playlist file** imports an M3U from Files. That account catalogue stays local; import a replacement to update it. [Live TV source sync](/profiles-and-sync/#sync-live-tv-deliberately) has a different scope.
 
 Channels can play without guide listings. Plozz supplies no channels or IPTV subscription.
 
-If import says the address is a video stream or web page, obtain the provider's direct M3U channel-list link instead. An XMLTV URL belongs in **Guide URL**, not the playlist field.
+For video-stream or web-page import errors, obtain the provider's direct M3U channel-list link. XMLTV belongs in the EPG field, not the playlist field. Prefer HTTPS.
 
 ## Find on-demand titles
 
@@ -49,7 +49,7 @@ Under **Sources**, open a playlist's **Guide options**. For wrong listings, choo
 
 When **Review channel identities** appears in Guide options, select a saved channel and confirm **Restore saved identity** only for the same station/feed. This reuses favorites, hidden state, and guide corrections; otherwise leave the playable entry separate.
 
-Use **Refresh sources** after changes or **Retry** for errors. A longer guide range cannot create missing listings.
+Use **Refresh sources** after changes or **Retry** for errors. Longer guide ranges cannot create listings.
 
 On mobile, **Stop without Wi-Fi or Ethernet** stops Live TV after a network change is detected; brief cellular use can still occur during the transition.
 
@@ -75,4 +75,4 @@ Changes start after published programs. Sharing a schedule requires its catalogu
 
 **Update watch history** can mark a library-channel program watched after 90% viewing. It does not write resume progress, and these channels use original files only.
 
-Live TV is experimental. For errors, see [Troubleshooting](/troubleshooting/).
+Live TV is experimental. See [Troubleshooting](/troubleshooting/).

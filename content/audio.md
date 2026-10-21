@@ -1,22 +1,31 @@
 # Audio tracks and output
 
-Choose the track you want in Plozz, then check your device and connected equipment for the actual output. A multichannel track label alone does not prove that speakers are receiving height audio.
+Choose a track in Plozz, then check your equipment's actual output. A multichannel label alone does not prove height audio.
 
 ## Select a language or track
 
 Reveal playback controls and open **Audio** on Apple TV, or the **Audio** submenu in iPhone/iPad playback options.
 
-For future sessions, open **Settings > Playback > Audio** on Apple TV, or the **Tracks** section under Playback on iPhone/iPad, and set **Preferred audio language**. Choose original, device, or a specified language, with separate preferences for movies, TV shows, and anime.
+For future sessions, set **Preferred audio language** in **Settings > Playback > Audio** on Apple TV, or Playback's **Tracks** section on iPhone/iPad. Choose original, device, or a language, separately for movies, TV shows, and anime.
 
-**Remember audio per series** reuses a series' previous selection. If a show keeps selecting the wrong track, check that preference as well as the general language setting. Choosing a language cannot supply a track absent from the selected file.
+**Remember audio per series** reuses previous selections. For a wrong track, check this and the language preference. Neither can supply missing tracks.
 
-Alternate versions can contain different audio tracks. [Change versions](/playback/) if the expected language or mix belongs to another file.
+Alternate versions can contain different languages or mixes; [change versions](/playback/) if needed.
+
+## Improve dialogue on Apple TV
+
+In the player's **Audio** menu, **Reduce Loud Sounds** and **Enhance Dialogue** appear when tvOS reports support for the current output, for video and Live TV. Enhance Dialogue can offer **Enhance More**, **Enhance**, and **Off**, or a toggle on outputs without levels.
+
+> [!IMPORTANT]
+> These change Apple TV-wide settings, not this Plozz profile. Their audible effect depends on the content and playback route; availability does not guarantee processing on every route.
+
+If a change fails, try Apple TV Settings instead.
 
 ## Correct timing
 
-The current player does not offer an adjustable audio delay. **Playback Sync**, when shown on iPhone/iPad, can offer subtitle delay without an audio-delay control.
+The player has no adjustable audio delay. Mobile **Playback Sync** can offer subtitle delay without audio delay.
 
-For lip-sync problems, compare another audio track, title, and output route to narrow down the cause. Buffering and dropouts need [playback troubleshooting](/troubleshooting/), not subtitle timing changes.
+For lip-sync problems, compare another track, title, and output route. For buffering or dropouts, use [playback troubleshooting](/troubleshooting/), not subtitle timing.
 
 ## Keep audio playing on iPhone or iPad
 
@@ -30,4 +39,4 @@ This uses **lossy conversion**, not original TrueHD/DTS:X bitstream passthrough.
 
 If these tracks stutter or seeking is slow, turn it off and restart playback. Those tracks can still play without height positioning; Dolby Digital Plus Atmos is unaffected by this switch.
 
-Server [quality conversion](/streaming-quality/) may change the audio before it reaches the player. For the detailed supported-format list, see [Plozz formats](https://plozz.app/formats).
+[Dolby Vision FEL playback](/streaming-quality/#try-dolby-vision-fel) loses Atmos objects and DTS:X height audio. Server [quality conversion](/streaming-quality/) can also change audio. See [Plozz formats](https://plozz.app/formats) for supported formats.
