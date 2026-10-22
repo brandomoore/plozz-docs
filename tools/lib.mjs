@@ -93,6 +93,13 @@ export function validSourcePath(path) {
   return safeSourcePath(path) && /\.(md|swift|json|plist|entitlements|ya?ml|xcconfig|xcstrings|resolved)$/.test(path);
 }
 
+export function validateEditorialScope(text, label) {
+  const normalized = text.normalize('NFKC').replace(/[*_`]/g, '').replace(/[\u2010-\u2015]/g, '-');
+  if (/height[\s-]*(?:channels?|audio|rendering|positioning)|\bheights\b|overhead (?:audio|effects)|TrueHD[\s-]*Atmos|DTS[\s:-]*X\b|Apple Positional Audio|\bAPAC\b|Dolby MAT|object[\s-]*audio/iu.test(normalized)) {
+    throw new Error(`Content outside editorial scope: ${label}. Follow EDITORIAL.md.`);
+  }
+}
+
 export function validatePages(pages, root = ROOT) {
   if (!Array.isArray(pages) || pages.length < 1 || pages.length > 60) throw new Error('Expected 1–60 focused documentation pages.');
   const slugs = new Set();
@@ -111,6 +118,7 @@ export function validatePages(pages, root = ROOT) {
     const body = readFileSync(resolve(root, 'content', page.file), 'utf8');
     if (Buffer.byteLength(body) > 32_000) throw new Error(`Guide too large: ${page.slug}`);
     const tokens = markdown.parse(body, {});
+    validateEditorialScope([body, plainText(tokens), page.title, page.seoTitle, page.description].join('\n'), page.slug);
     const h1 = tokens.flatMap((token, index) => token.type === 'heading_open' && token.tag === 'h1' ? [tokens[index + 1].content] : []);
     if (h1.length !== 1 || h1[0] !== page.title) throw new Error(`Guide needs one matching H1: ${page.slug}`);
     for (const id of diagramReferences(tokens)) {
@@ -159,6 +167,11 @@ export function validateCoverage(pages, discovery, root = ROOT) {
   const policy = readBaseline(root);
   if (coverage?.schemaVersion !== 1 || !coverage.areas || !coverage.modules || !coverage.settingsCategories
     || !coverage.capabilities || !coverage.systemIntegrations) throw new Error('Missing the product coverage ledger.');
+  for (const section of ['areas', 'modules', 'settingsCategories', 'capabilities', 'systemIntegrations']) {
+    for (const [id, record] of Object.entries(coverage[section])) {
+      validateEditorialScope([record.summary, record.answer, record.omitReason].join('\n'), `${section}/${id}`);
+    }
+  }
   if (Object.keys(coverage.areas).some(id => !policy.areas.some(area => area.id === id))) throw new Error('Unknown baseline coverage area.');
   const sourceRefs = record => {
     if (!Array.isArray(record?.sources) || !record.sources.length || record.sources.length > 20 || !record.sources.every(path => validSourcePath(path) && discovery.files?.[path])) throw new Error('Coverage decisions need existing immutable source evidence.');

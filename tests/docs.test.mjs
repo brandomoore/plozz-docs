@@ -4,7 +4,7 @@ import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'nod
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { runInNewContext, createContext, runInContext } from 'node:vm';
-import { escapeHtml, markdown, validatePages, validSourcePath, pagePath, pageAnchors, classifyChanges } from '../tools/lib.mjs';
+import { escapeHtml, markdown, validatePages, validateEditorialScope, validSourcePath, pagePath, pageAnchors, classifyChanges } from '../tools/lib.mjs';
 import { discoverSurfaces, productInputs } from '../tools/source-discovery.mjs';
 import { freshness, publishedAsset, handleRequest, PAGES_ORIGIN } from '../worker/handler.mjs';
 
@@ -26,6 +26,17 @@ test('citations stay inside public app source paths', () => {
   for (const path of ['../secret', '/etc/passwd', 'Sources/../secret.md', 'Sources/.env', 'https://example.com/source', 'Sources/test.p8']) assert(!validSourcePath(path));
 });
 
+test('editorial scope rejects excluded audio copy without blocking ordinary formats', () => {
+  for (const text of ['Height channels', 'height-audio', 'height positioning', 'TrueHD **Atmos**',
+    'DTS:X', 'DTS-X', 'Apple Positional Audio', 'APAC', 'Dolby MAT', 'object–audio', 'overhead effects']) {
+    assert.throws(() => validateEditorialScope(text, 'test'), /outside editorial scope/);
+  }
+  for (const text of ['Dolby Digital Plus Atmos (E-AC-3 JOC)', 'TrueHD and DTS-HD MA channel playback',
+    'Video height', 'Enhance Dialogue', 'Background Audio']) {
+    assert.doesNotThrow(() => validateEditorialScope(text, 'test'));
+  }
+});
+
 test('guide limits reject oversized, unreferenced and malformed content', () => {
   const root = mkdtempSync(resolve(tmpdir(), 'plozz-docs-test-'));
   mkdirSync(resolve(root, 'content'));
@@ -33,6 +44,12 @@ test('guide limits reject oversized, unreferenced and malformed content', () => 
   try {
     writeFileSync(resolve(root, 'content/getting-started.md'), '# Get started\n\nInstall Plozz.\n');
     assert.equal(validatePages([page], root).length, 1);
+    for (const field of ['seoTitle', 'description']) {
+      assert.throws(() => validatePages([{ ...page, [field]: 'TrueHD Atmos' }], root), /outside editorial scope/);
+    }
+    writeFileSync(resolve(root, 'content/getting-started.md'), '# Get started\n\nHeight-channel rendering.\n');
+    assert.throws(() => validatePages([page], root), /outside editorial scope/);
+    writeFileSync(resolve(root, 'content/getting-started.md'), '# Get started\n\nInstall Plozz.\n');
     assert.equal(pagePath(page.slug), '/');
     assert.throws(() => validatePages([{ ...page, sources: [] }], root));
     assert.throws(() => validatePages([{ ...page, file: '../escape.md' }], root));

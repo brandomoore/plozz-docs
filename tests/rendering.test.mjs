@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { ROOT, readJson, markdown, pagePath, escapeHtml } from '../tools/lib.mjs';
+import { ROOT, readJson, markdown, pagePath, escapeHtml, validateEditorialScope } from '../tools/lib.mjs';
 import { diagramReferences, diagramText } from '../tools/diagrams.mjs';
 
 test('the shared design preserves every guide, anchor, article date and source record', () => {
@@ -13,9 +13,12 @@ test('the shared design preserves every guide, anchor, article date and source r
   const pages = readJson('content/pages.json');
   const state = JSON.parse(before);
   const search = readJson('dist/search-index.json');
+  validateEditorialScope(JSON.stringify(search), 'search index');
   let sharedSocialImage;
   for (const path of ['404.html', ...pages.map(page => page.slug === 'getting-started' ? 'index.html' : `${page.slug}/index.html`)]) {
     const html = readFileSync(resolve(ROOT, 'dist', path), 'utf8');
+    validateEditorialScope(html, path);
+    assert.doesNotMatch(html, /\bredact(?:ed|ion)\b|patent|removed for legal reasons/i, path);
     const socialImage = html.match(/<meta property="og:image" content="([^"]+)">/)?.[1];
     assert.match(socialImage ?? '', /^https:\/\/plozz\.app\/og-image\.png\?v=[a-f0-9]{16}$/, `Unversioned social image in ${path}`);
     sharedSocialImage ??= socialImage;

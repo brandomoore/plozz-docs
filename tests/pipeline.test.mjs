@@ -193,6 +193,16 @@ test('draft checks reject invalid coverage before independent review can approve
   assert.match(result.stderr, /Run source:plan before validating draft source coverage/);
 });
 
+test('draft coverage cannot reintroduce topics outside editorial scope', t => {
+  const f = fixture(t);
+  const coverage = f.read('content/coverage.json');
+  coverage.areas.setup.summary = 'Enable height-channel rendering.';
+  f.save('content/coverage.json', coverage);
+  const result = f.run('check.mjs', ['--content-only']);
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /outside editorial scope: areas\/setup/);
+});
+
 test('unchanged source receives an independent full coverage audit at 30 days', t => {
   const f = fixture(t);
   const state = f.state();

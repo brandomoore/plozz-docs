@@ -38,6 +38,19 @@ A full independent coverage audit is due every 30 days even when app source
 is unchanged. Incremental source checks do not reset that clock. Fix existing
 omissions during that audit instead of only refreshing verification metadata.
 
+## Editorial scope
+
+Do not document height-channel rendering, TrueHD Atmos, DTS:X, Apple Positional
+Audio/APAC, Dolby MAT, or the related settings and availability. This applies
+to prose, search metadata, diagrams, cross-links and coverage answers even
+when app or engine source still contains the feature. Do not add explanations
+or notices about this scope decision. Ordinary channel-based audio and
+E-AC-3 JOC playback are separate and may be documented with verified limits.
+
+This explicit scope takes precedence over general instructions to fill coverage
+gaps. Writers and reviewers must not reintroduce an excluded topic or propose a
+new capability obligation for it. Draft validation enforces this boundary.
+
 ## Useful answers
 
 - Lead with the answer or the task, not introductory marketing.
