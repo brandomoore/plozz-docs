@@ -37,4 +37,4 @@ Shares have no server converting video; a missing Quality control can be expecte
 On Apple TV, iPhone, and iPad, **Settings > Playback > Advanced > Dolby Vision FEL (experimental)** requests full enhancement-layer decoding for eligible seekable Dolby Vision Profile 7 videos. It defaults off, is profile-scoped, and affects new built-in on-demand sessions, not live streams or external players. File/hardware eligibility still applies; enabling it does not prove the route or display used FEL.
 
 > [!IMPORTANT]
-> FEL adds GPU/memory load and may stutter. Its playback path loses Dolby Atmos objects and DTS:X height audio. Turn it off and restart playback to compare.
+> FEL adds GPU/memory load and may stutter. Turn it off and restart playback to compare.

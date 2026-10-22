@@ -36,11 +36,6 @@
       "sources": ["Sources/FeaturePlayback/PlayerOptionsPanel.swift","Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift","Sources/FeaturePlayback/PlayerViewModel.swift","Sources/FeaturePlayback/TrackMenuBuilder.swift","Sources/FeaturePlayback/SubtitleTrackController.swift","Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"],
       "answer": "Select a primary text subtitle, then a different text track through Apple TV Style > Dual Subtitles (or the direct Dual Subtitles control) or mobile Second Track; its Off removes only the second line. Plozzigen can decode embedded second text tracks, while the native sidecar path requires a fetchable delivery source. Image primaries disable dual mode and images are never eligible second tracks. Locally remuxed wireless AirPlay has no selectable subtitles."
     },
-    "height-audio": {
-      "documents": [{"slug":"audio","anchor":"truehd-atmos-and-dts-x-on-apple-tv"}],
-      "sources": ["Sources/AppShell/PlaybackEngineComposition.swift","Sources/EnginePlozzigen/PlozzigenVideoEngine.swift","Sources/FeatureSettings/PreferenceDetailViews.swift","Sources/CoreModels/PlaybackSettings.swift"],
-      "answer": "On tvOS 26+, Settings > Playback > Audio > TrueHD Atmos and DTS:X defaults on for supported movie/episode soundtracks and compatible audio equipment. Plozz requests rendered spatial output using lossy conversion, not untouched TrueHD/DTS:X bitstream passthrough. It applies to new sessions. Disable and restart for stutter/slow seeking; ordinary playback remains without height positioning and Dolby Digital Plus Atmos is unaffected by this switch. The separate experimental Dolby Vision FEL playback route loses Atmos objects and DTS:X height audio."
-    },
     "library-channels": {
       "documents": [{"slug":"live-tv","anchor":"make-channels-from-your-libraries"}],
       "sources": ["Sources/FeatureLiveTV/LibraryChannelEditorView.swift","Sources/FeatureLiveTVCore/LibraryChannelService.swift","Sources/FeatureLiveTV/LiveTVPrototypeView.swift","Sources/AppRuntime/LiveTVLibraryRuntime.swift","Sources/FeaturePlayback/LibraryChannelPlaybackSession.swift","Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift"],
@@ -167,6 +162,7 @@
         "Sources/FeatureSettings/ArtworkSettingsControls.swift",
         "Sources/FeatureSettings/AppLanguagePicker.swift",
         "Sources/CoreModels/AppLanguage.swift",
+        "Sources/CoreUI/AppLanguageScope.swift",
         "Sources/CoreModels/ArtworkSettings.swift",
         "Sources/CoreModels/CardCaptionSettings.swift",
         "Sources/CoreUI/ContinueWatchingArtworkSwatch.swift",
@@ -174,7 +170,7 @@
         "Sources/CoreModels/ThemeSettings.swift",
         "Sources/AppShelliOS/PlozziOSSettingsView.swift"
       ],
-      "summary": "Group themes, card density, labels, focus emphasis and watched indicators. Explain label presets replacing per-view overrides, Home/Recommended Mixed hiding captions in Showcase or on series artwork, and Continue Watching's separate Follow Appearance/On/Off control in Customize Home. Distinguish cover labels from Browse labels on collection/playlist members. Retain solid versus system-controlled Liquid Glass, artwork scopes and saved download images, System language, and interface/media/server-language and device-region boundaries."
+      "summary": "Group themes, card density, labels, focus emphasis and watched indicators. Explain label presets replacing per-view overrides, Home/Recommended Mixed hiding captions in Showcase or on series artwork, and Continue Watching's separate Follow Appearance/On/Off control in Customize Home. Distinguish cover labels from Browse labels on collection/playlist members. Retain solid versus system-controlled Liquid Glass, artwork scopes and saved download images, System language, and interface/media/server-language and device-region boundaries. System-drawn player controls and permission prompts retain the device language rather than the profile's override."
     },
     "spoilers": {
       "documents": [
@@ -269,7 +265,7 @@
         "Sources/FeaturePlayback/CurrentStreamDetailsSection.swift",
         "Sources/AppShelliOS/PlozziOSPlayerView.swift"
       ],
-      "summary": "Set profile-owned mobile defaults or apply a one-session Quality limit, identify Maximum as original quality, and distinguish limits from forced conversion. Current stream reports active rendition facts during conversion, never substituted limit values; Not available is not codec/resolution evidence. Retain provider/platform and Silo limits, fitting-original behavior, and device-wide unsynced Video buffer. External handoff stays in Plozz when mobile quality policy is below Maximum or forces conversion, even when an individual original might fit the limit. Advanced > Dolby Vision FEL (experimental) is separately profile-owned, default-off and applied to eligible new built-in on-demand sessions on TV/mobile. Explain seekable Profile 7/file/hardware limits, GPU/memory/stutter costs, loss of Atmos objects and DTS:X height audio, and disabling/restarting to compare without claiming a successful display output from the toggle alone."
+      "summary": "Set profile-owned mobile defaults or apply a one-session Quality limit, identify Maximum as original quality, and distinguish limits from forced conversion. Current stream reports active rendition facts during conversion, never substituted limit values; Not available is not codec/resolution evidence. Retain provider/platform and Silo limits, fitting-original behavior, and device-wide unsynced Video buffer. External handoff stays in Plozz when mobile quality policy is below Maximum or forces conversion, even when an individual original might fit the limit. Advanced > Dolby Vision FEL (experimental) is separately profile-owned, default-off and applied to eligible new built-in on-demand sessions on TV/mobile. Explain seekable Profile 7/file/hardware limits, GPU/memory/stutter costs, and disabling/restarting to compare without claiming a successful display output from the toggle alone."
     },
     "audio": {
       "documents": [
@@ -295,7 +291,7 @@
         "Sources/AppShelliOS/PlozziOSPlaybackEngineComposition.swift",
         "Sources/CoreModels/PlaybackSettings.swift"
       ],
-      "summary": "Select tracks and language policy, explain remembered series choices and lack of adjustable audio delay in wired engines, and enable opt-in mobile Background Audio with network-use consequences. State tvOS 26 equipment requirements and lossy height-audio conversion rather than bitstream passthrough, with FEL's separate audio tradeoff. In video/Live TV Audio, tvOS-supported Reduce Loud Sounds and Enhance Dialogue change system-wide settings, not profiles. Explain Enhance More/Enhance/Off versus binary-only output support, route/content-dependent effect and Apple TV Settings recovery for a failed change. Do not confuse this system bridge with unused engine-local Dialog Enhance capabilities."
+      "summary": "Select tracks and language policy, explain remembered series choices and lack of adjustable audio delay in wired engines, and enable opt-in mobile Background Audio with network-use consequences. In video/Live TV Audio, tvOS-supported Reduce Loud Sounds and Enhance Dialogue change system-wide settings, not profiles. Explain Enhance More/Enhance/Off versus binary-only output support, route/content-dependent effect and Apple TV Settings recovery for a failed change. Do not confuse this system bridge with unused engine-local Dialog Enhance capabilities."
     },
     "subtitles": {
       "documents": [
@@ -388,7 +384,7 @@
         "Sources/MediaDownloads/DirectShareDownloadSource.swift",
         "App/PlozziOS/Info.plist"
       ],
-      "summary": "Download and test a validated, completed mobile copy offline. Use Manage Seasons for all available episodes or a season/episode selection; unavailable catalogue placeholders cannot download. Distinguish background HTTP from in-process/share execution and fallible iOS 26 continued processing; receiving every byte is not completed offline validation. Retain quality/network policy, provider preparation, all-audio/subtitle limits, speed caps and uncapped background behavior. Reduced Jellyfin/Emby copies require Download Speed > Limit > Unlimited, despite the error message calling this Full Speed; cover storage/removal and notification permission."
+      "summary": "Download and test a validated, completed mobile copy offline. Use Manage Seasons for all available episodes or a season/episode selection; unavailable catalogue placeholders cannot download. Distinguish background HTTP from in-process/share execution and fallible iOS 26 continued processing; receiving every byte is not completed offline validation. Retain quality/network policy, provider preparation, all-audio/subtitle limits, speed caps and uncapped background behavior. Reduced Jellyfin/Emby copies require Download Speed > Limit > Unlimited, despite the error message calling this Full Speed. Explain storage and notification permission; Cancel Active Downloads deletes unfinished copies but preserves completed ones, while Delete All Downloads removes this profile's saved movies and episodes. Pausing preserves work for resumption; server originals are not removed."
     },
     "profiles": {
       "documents": [
@@ -565,7 +561,7 @@
     "platforms": {
       "documents": [
         { "slug": "platform-controls" },
-        { "slug": "audio", "anchor": "truehd-atmos-and-dts-x-on-apple-tv" },
+        { "slug": "audio", "anchor": "improve-dialogue-on-apple-tv" },
         { "slug": "music", "anchor": "find-your-library" },
         { "slug": "music", "anchor": "control-a-listening-session" },
         { "slug": "downloads" },
@@ -682,7 +678,7 @@
         "Sources/AppShell/MainTabViewSupport.swift",
         "Sources/AppShelliOS/PlozziOSPlayerView.swift"
       ],
-      "summary": "Use task sections for player preferences, dual-text-track eligibility, confirmed system-caption-style replacement and live rewind/Go Live. Audio-delay and engine-local Dialog Enhance scaffolding is capability-gated, but neither wired engine advertises it. Separately, the reachable tvOS system-audio bridge supports output-gated Reduce Loud Sounds and Enhance Dialogue/levels for VOD and Live TV; explain global scope, uncertain per-route processing and failure recovery. Experimental FEL is a default-off profile preference for new eligible on-demand sessions with stated resource/audio tradeoffs, not a generic upstream compatibility promise. Subtitle overlay timing is independently supported where exposed, while native second tracks require fetchable text delivery and image primaries exclude dual mode. Cover the Cast panel's biography/credits and deliberate page-navigation handoff, which ends playback rather than playing a credit or keeping the current video open."
+      "summary": "Use task sections for player preferences, dual-text-track eligibility, confirmed system-caption-style replacement and live rewind/Go Live. Audio-delay and engine-local Dialog Enhance scaffolding is capability-gated, but neither wired engine advertises it. Separately, the reachable tvOS system-audio bridge supports output-gated Reduce Loud Sounds and Enhance Dialogue/levels for VOD and Live TV; explain global scope, uncertain per-route processing and failure recovery. Experimental FEL is a default-off profile preference for new eligible on-demand sessions with stated resource costs, not a generic upstream compatibility promise. Subtitle overlay timing is independently supported where exposed, while native second tracks require fetchable text delivery and image primaries exclude dual mode. Cover the Cast panel's biography/credits and deliberate page-navigation handoff, which ends playback rather than playing a credit or keeping the current video open."
     },
     "FeatureProfiles": {
       "areas": ["profiles"],
@@ -747,7 +743,7 @@
     "MediaDownloads": {
       "areas": ["offline"],
       "sources": ["Sources/MediaDownloads/DownloadNetworkPolicy.swift", "Sources/MediaDownloads/DirectShareDownloadSource.swift", "Sources/AppShelliOS/PlozziOSDownloadsModel.swift", "Sources/AppShelliOS/PlozziOSDownloadActivity.swift", "Sources/AppShelliOS/PlozziOSBackgroundHTTPDownloadEngine.swift"],
-      "summary": "Explain network/speed limits, provider copies and offline validation. Background HTTP sessions differ from in-process share work; continued processing/Live Activities remain an OS decision, and all bytes received is not a validated completed copy."
+      "summary": "Explain network/speed limits, provider copies and offline validation. Background HTTP sessions differ from in-process share work; continued processing/Live Activities remain an OS decision, and all bytes received is not a validated completed copy. Distinguish pause/resume from destructive bulk cancellation of unfinished copies and profile-scoped deletion of all saved downloads."
     },
     "MediaTransportCore": {
       "omitReason": "Internal file-system capability and bounded-read contracts expose no independent reader setting or procedure. Protocol selection, authentication, scanning and download limits are documented under connections and offline viewing instead.",
@@ -858,8 +854,8 @@
     },
     "language": {
       "areas": ["appearance"],
-      "sources": ["Sources/CoreUI/ProfileSettingsCategory.swift", "Sources/FeatureSettings/AppLanguagePicker.swift", "Sources/CoreModels/AppLanguage.swift", "Sources/AppShelliOS/PlozziOSSettingsView.swift"],
-      "summary": "Use the appearance guide to explain System language selection and distinguish interface language from audio, subtitles, server-supplied metadata and device-region date/number formatting rather than a separate picker guide."
+      "sources": ["Sources/CoreUI/ProfileSettingsCategory.swift", "Sources/FeatureSettings/AppLanguagePicker.swift", "Sources/CoreModels/AppLanguage.swift", "Sources/CoreUI/AppLanguageScope.swift", "Sources/AppShelliOS/PlozziOSSettingsView.swift"],
+      "summary": "Use the appearance guide to explain System language selection and distinguish interface language from audio, subtitles, server-supplied metadata and device-region date/number formatting rather than a separate picker guide. System-drawn player controls and permission prompts keep the device language."
     },
     "libraries": {
       "areas": ["connections", "library", "profiles", "music"],
@@ -874,7 +870,7 @@
     "playback": {
       "areas": ["playback", "quality", "audio", "platforms", "sync"],
       "sources": ["Sources/CoreUI/ProfileSettingsCategory.swift", "Sources/FeatureSettings/PreferenceDetailViews.swift", "Sources/AppShelliOS/PlozziOSSettingsView.swift", "Sources/CoreModels/PlaybackSettings.swift", "Sources/FeatureSettings/ExternalPlayerSettingsView.swift", "Sources/CoreModels/ExternalPlayerSettingsModel.swift", "Sources/AppRuntime/ExternalPlaybackRuntime.swift"],
-      "summary": "Cover version mode/series memory, autoplay/skips, quality, audio, background listening, orientation/gestures and history with platform/provider gates. Missing remembered versions fall back automatically in automatic mode. Advanced > External player is device-wide rather than profile-owned; its focused guide explains platform apps, custom templates, direct-play fallback, access-token sharing and authorized progress returns. Advanced > Dolby Vision FEL is separately profile-scoped and default-off; document eligibility, new-session behavior and resource/height-audio costs in streaming quality."
+      "summary": "Cover version mode/series memory, autoplay/skips, quality, audio, background listening, orientation/gestures and history with platform/provider gates. Missing remembered versions fall back automatically in automatic mode. Advanced > External player is device-wide rather than profile-owned; its focused guide explains platform apps, custom templates, direct-play fallback, access-token sharing and authorized progress returns. Advanced > Dolby Vision FEL is separately profile-scoped and default-off; document eligibility, new-session behavior and resource costs in streaming quality."
     },
     "screensNavigation": {
       "areas": ["home-navigation", "music", "platforms"],

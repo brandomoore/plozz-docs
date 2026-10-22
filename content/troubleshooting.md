@@ -28,7 +28,7 @@ Compare another title. On iPhone/iPad, try lower [streaming quality](/streaming-
 
 Select **No streams found** on a title's details to recheck the source without starting playback, or choose another accessible copy.
 
-For Apple TV audio stutter, check [height-audio conversion](/audio/). For captions, check [track, style, and timing limits](/subtitles/).
+For audio, check [track selection and timing](/audio/). For captions, check [track, style, and timing limits](/subtitles/).
 
 Check download completion, storage, and network policy before removing files; [Watch offline](/downloads/) explains pauses and version-specific copies.
 

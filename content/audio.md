@@ -1,6 +1,6 @@
 # Audio tracks and output
 
-Choose a track in Plozz, then check your equipment's actual output. A multichannel label alone does not prove height audio.
+Choose a track in Plozz, then check your equipment's actual output. See [Plozz formats](https://plozz.app/formats) for supported formats.
 
 ## Select a language or track
 
@@ -30,13 +30,3 @@ For lip-sync problems, compare another track, title, and output route. For buffe
 ## Keep audio playing on iPhone or iPad
 
 Enable **Settings > Playback > Background Audio** to continue video audio when locking the device or leaving Plozz. It is off by default. This does not download the video: streaming can keep using data. AirPlay and Picture in Picture have [separate requirements](/platform-controls/#airplay-and-picture-in-picture).
-
-## TrueHD Atmos and DTS:X on Apple TV
-
-On **tvOS 26 or later**, **Settings > Playback > Audio > TrueHD Atmos and DTS:X** enables height positioning from supported tracks on compatible equipment. It defaults to on.
-
-This uses **lossy conversion**, not original TrueHD/DTS:X bitstream passthrough. Changes apply to new playback sessions. The option cannot add missing height information or make incompatible equipment support it.
-
-If these tracks stutter or seeking is slow, turn it off and restart playback. Those tracks can still play without height positioning; Dolby Digital Plus Atmos is unaffected by this switch.
-
-[Dolby Vision FEL playback](/streaming-quality/#try-dolby-vision-fel) loses Atmos objects and DTS:X height audio. Server [quality conversion](/streaming-quality/) can also change audio. See [Plozz formats](https://plozz.app/formats) for supported formats.

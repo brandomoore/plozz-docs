@@ -34,6 +34,6 @@ These profile presentation choices are separate from the shared [Metadata Provid
 
 Open **Settings > Language** to change the app interface language. This is separate from [audio language](/audio/) and [subtitle language](/subtitles/).
 
-**System** follows the device's language choices. Changing Plozz's language does not translate server-supplied titles or descriptions; dates and numbers still follow the device's region.
+**System** follows the device's language choices. Changing Plozz's language does not translate server-supplied titles or descriptions; dates and numbers still follow the device's region. System-drawn player controls and permission prompts keep the device's language.
 
 For hidden episode information, use [Spoiler protection](/spoiler-protection/). For a picture that dims or warms on a schedule, use [Circadian Mode](/circadian-mode/). Home layout and navigation choices live under [Screens & Navigation](/home-and-navigation/).

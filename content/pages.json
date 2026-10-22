@@ -327,8 +327,8 @@
   {
     "slug": "audio",
     "title": "Audio tracks and output",
-    "seoTitle": "Plozz audio languages, background listening, and Apple TV height audio",
-    "description": "Choose audio tracks, adjust supported Apple TV dialogue controls, enable mobile background listening, and check timing and height-audio limits.",
+    "seoTitle": "Plozz audio tracks, dialogue controls, and background listening",
+    "description": "Choose audio tracks, adjust supported Apple TV dialogue controls, enable mobile background listening, and troubleshoot timing.",
     "section": "Playback",
     "kind": "guide",
     "file": "audio.md",
@@ -521,6 +521,7 @@
       "Sources/FeatureSettings/ArtworkSettingsControls.swift",
       "Sources/FeatureSettings/AppLanguagePicker.swift",
       "Sources/CoreModels/AppLanguage.swift",
+      "Sources/CoreUI/AppLanguageScope.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/CoreModels/ArtworkSettings.swift",
       "Sources/CoreModels/CardCaptionSettings.swift",
