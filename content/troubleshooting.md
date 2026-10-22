@@ -42,7 +42,7 @@ On a playback, library, or Live TV error, open **Details** when offered. On iPho
 
 Open **Settings > Help & Diagnostics > Report a Problem**; on Apple TV, scan its code or follow the GitHub link. See [Feedback and bug reports](/feedback-and-bugs/) for Discord, GitHub, feature requests, and what to include.
 
-**Playback Diagnostics Overlay**, or **Playback Info** in the player's Info card, shows the engine, delivery, codecs, bitrate, buffer, and memory.
+Use [Playback Info or the diagnostics overlay](/platform-controls/#read-playback-information) to inspect engine, delivery, and measured stream/buffer facts.
 
 In mobile **Recent Activity**, choose **Refresh**, then **Copy** for logs.
 

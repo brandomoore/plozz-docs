@@ -1,6 +1,8 @@
 # Metadata and ratings
 
-Plozz combines library information with online sources. Metadata choices do not grant access to missing media.
+Plozz combines library and online metadata, without granting media access.
+
+For regional release dates and watch offers, see [Release & Availability](/media-requests/#read-release-and-availability-information).
 
 ## Choose information sources
 

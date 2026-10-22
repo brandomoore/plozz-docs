@@ -4,9 +4,9 @@ Open **Settings > Appearance** after selecting the Plozz profile you want to cus
 
 ## Make cards easier to read
 
-Choose a theme and whether to use gradient backgrounds. In **Cards**, adjust card style, labels, watched indicators, and unwatched-episode counts. **Display Size** changes card size, column count, and spacing across the app; it is not a video-resolution setting.
+Choose a theme and gradient backgrounds. In **Cards**, adjust style, labels, watched indicators, and unwatched-episode counts. **Display Size** changes card size, columns, and spacing, not video resolution.
 
-On Apple TV, card focus appearance changes how the selected card is emphasized. If a grid feels crowded or the selected title is difficult to recognize, try a larger display size and clearer labels before hiding content.
+On Apple TV, focus appearance emphasizes the selected card. For crowded grids or hard-to-recognize titles, try larger cards and clearer labels before hiding content.
 
 In **Theme**, set **Liquid Glass** to Off for solid backgrounds, or follow the system's Reduce Transparency preference. This is separate from card size.
 
@@ -17,6 +17,10 @@ Use **Customize by view** for exceptions. **Mixed**, offered for Home rows and R
 Continue Watching's [Customize Home editor](/spoiler-protection/#change-continue-watching-cards) has separate **Labels** controls: **Follow Appearance** follows its Home rows or Recommended context; **On** or **Off** overrides labels across artwork styles.
 
 A collection cover and its contents are separate surfaces: titles inside collections and playlists use **Browse**.
+
+## Resize title logos
+
+Under **Settings > Screens & Navigation**, adjust **Logo size** separately in **Customize Home > Home layout** (mobile **Hero**) and **Detail Page**. Apple TV remembers distinct Showcase and Fullscreen Hero sizes. Library Recommended headers have a [separate control](/customize-libraries/#adjust-the-apple-tv-library-header).
 
 ## Choose artwork
 

@@ -7,7 +7,7 @@ With [Seerr](/media-requests/), **Not in Your Library** results are requestable,
 ## Browse a library
 
 1. Open the library from navigation. On Apple TV, [All Libraries](/combined-libraries/) combines enabled video libraries.
-2. Use **Browse** for the catalogue rather than recommendations.
+2. Use **Browse** for the catalogue. [Customize library pages](/customize-libraries/) to arrange tabs and Recommended rows.
 3. Open the filter and sort controls. Available fields depend on the source; clear filters if a title disappears.
 4. Open a show, choose its season, and select an episode. Collections and playlists appear when the source supplies them.
 
@@ -19,7 +19,7 @@ Press and hold a card on Apple TV, or touch and hold on iPhone/iPad, for actions
 
 Scroll down details for cast, related titles, and **Extras** exposed by the source. Where offered, use the server/version selector to choose a playable copy; on Apple TV, open the header's **More actions** button.
 
-When schedule metadata is available, show details can display upcoming air dates and unaired episode placeholders. These are release information, not playable files or a promise that your server will add them.
+Show details can display upcoming air dates and unaired placeholders when schedule metadata exists. These are release information, not playable files or promised server additions.
 
 ## Save titles and manage history
 

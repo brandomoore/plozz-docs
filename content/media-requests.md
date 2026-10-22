@@ -1,6 +1,6 @@
 # Request movies and shows
 
-Plozz can send requests to your own **Seerr** server, including compatible Overseerr/Jellyseerr installations. Seerr and its server-side services supply the request workflow; Plozz supplies no media.
+Plozz sends requests to your own **Seerr** server, including compatible Overseerr/Jellyseerr installations. Plozz supplies no media.
 
 ## Connect Seerr
 
@@ -15,16 +15,29 @@ The server connection is shared across Plozz profiles. The acting user is chosen
 
 ## Make a request
 
-Open an eligible movie or show's details from discovery or search and choose **Request** when offered. For shows, use the available season selection, choose the seasons you want, and confirm the request identity.
+Open an eligible movie or show's details from discovery or search and choose **Request** when offered. Review the request identity and season selection.
 
-A request is not an offline download to your device. Pending approval, requested, downloading, and available states describe the server's workflow. Playback still requires an accessible copy in a connected library.
+A request is not an offline download to your device. Pending approval, requested, downloading, and available states describe the server's workflow. Playback requires an [accessible library copy](/library/).
 
-Plozz submits standard requests, not a separate 4K-request choice. The Seerr user's defaults and server configuration determine processing.
+Requests use Seerr defaults, not a separate 4K-request choice.
+
+## Request missing seasons
+
+With Seerr connected, open a TMDB-matched library show's details:
+
+1. **Apple TV:** enter the season row, then open **Request Seasons** or its current-status button. **iPhone/iPad:** tap the download-arrow **Manage Seasons** button.
+2. Select a requestable season or **Request All Missing** with its count.
+
+Use **Refresh Status** or the refresh control to recheck progress; failed or declined requests need attention in Seerr. Mobile download actions save existing episodes, not requested seasons.
+
+## Read release and availability information
+
+For a title outside your libraries, open details and inspect **Release & Availability** when present. Movie release dates and **Streaming**, **Rent**, or **Buy** listings use your device's region and available TMDB data, with JustWatch attribution for watch offers.
+
+Seerr is not required to read this information. A listed service does not make the title playable in Plozz or grant a subscription; missing listings do not prove unavailability.
 
 ## A request will not go through
 
 Check **Settings > Seerr** and test or retry the connection. If the profile says **Relink required**, choose a user from the currently connected Seerr server; a mapping from another server cannot be reused.
 
 Permission, quota, approval, and server-configuration failures must be resolved by the Seerr administrator. Do not switch a restricted user to Admin simply to bypass an error.
-
-For a title already in your libraries, start with [finding media](/library/) rather than requesting another copy.

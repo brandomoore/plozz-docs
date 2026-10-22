@@ -6,13 +6,11 @@ Home rows, hero content, navigation, and detail-page choices belong to the activ
 
 Open **Settings > Screens & Navigation > Customize Home**.
 
-Choose **Match server** to follow server Home arrangements or **Combined rows** for cross-library rows. A preset replaces your custom arrangement after confirmation. Multiple servers can combine common rows while retaining other server rows. Plex supplies promoted Home rows, not another client's pinned-library layout. Neither preset changes the server.
+Choose **Match server** for server Home arrangements or **Combined rows** for cross-library rows. Presets replace custom arrangements after confirmation, never editing the server. Multiple servers can combine common rows while retaining others. Plex supplies promoted Home rows, not another client's pinned-library layout.
 
-Choose **Add section** for an available row. Open a section and choose **Remove section** to hide it. Choose **Reorder**, move sections, then **Done**. Mix combined, individual-library, and server rows; the Home layout/Hero entry stays pinned.
+Choose **Add section** for an available row, or open a section and choose **Remove section**. Choose **Reorder**, move sections, then **Done**. Mix combined, individual-library, and server rows; Home layout/Hero stays pinned. Editing saves a custom arrangement instead of following server order.
 
-Editing sections saves a custom arrangement instead of following server order.
-
-Removing a section changes Home, not access. Use **Settings > Libraries** to enable libraries. If sections fail to load, check the server error and choose **Retry**.
+Removing sections changes Home, not access. Enable libraries under **Settings > Libraries**. For loading errors, check the server and choose **Retry**.
 
 ## Keep older Continue Watching titles
 
@@ -28,12 +26,12 @@ For Fullscreen Hero or mobile, open **Hero content sources** for Continue Watchi
 
 Choose watched-content visibility, advancement, ratings, and separately muted trailers. Enable Discovery, then open **Discovery providers** to choose catalogues. Seerr is needed only to request unowned titles; Discovery is unavailable in Kids profiles.
 
-For Continue Watching's artwork, playback details, and labels, see [Spoiler protection](/spoiler-protection/#change-continue-watching-cards).
+For Continue Watching's artwork, details, labels, and selection action, see [Spoiler protection](/spoiler-protection/#change-continue-watching-cards).
 
 ## Arrange shortcuts and details
 
-Under **Screens & Navigation > Navigation > Hide or Reorder Navigation**, hold an item to hide, show, or move it. On mobile, drag to reorder. Hiding changes shortcuts, not access; compact mobile layouts use **More** for overflow.
+Under **Screens & Navigation > Navigation > Hide or Reorder Navigation**, hold an item to hide, show, or move it; on mobile, drag to reorder. Unused Home, Search, or Watchlist shortcuts can hide automatically; choose **Show** to retain one. Hiding never changes access. Compact mobile layouts use **More** for overflow.
 
 Open **Detail Page** to choose artwork, a trailer, or theme music behind a title's header. Trailer and theme music do not play together; this choice is separate from Home trailers. Review-score and age-recommendation display controls are here too.
 
-Use [Appearance](/appearance/) for cards and artwork sources.
+Use [Customize library pages](/customize-libraries/) for library tabs/rows, or [Appearance](/appearance/) for cards, artwork, and logo sizes.

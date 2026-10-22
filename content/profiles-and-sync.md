@@ -16,6 +16,8 @@ For server users, Kids profiles, locks, and automatic sign-in, see [Profiles, ki
 
 iCloud Sync carries profiles, preferences, server details, watchlist state, supported Live TV configuration, and tracker sign-ins. It does not transfer downloaded videos or universally authorize media servers.
 
+[Library tab order and Recommended-row layouts](/customize-libraries/) are transferable profile preferences too. They do not make an unsupported tab or inaccessible library available on another device.
+
 With sync and iCloud Keychain available, iPhone/iPad can automatically adopt supported Jellyfin, Plex, Emby, share, and Seerr credentials. Apple TV does not use this iCloud Keychain path; use nearby setup or sign in there. **Silo requires approval on each device**, regardless of sync.
 
 Downloads, automatic sign-in, [Video buffer](/streaming-quality/), [Top Shelf preferences](/platform-controls/#launch-from-apple-tv-top-shelf), and the [external-player choice](/external-players/) remain device-local. The player choice applies across Plozz profiles, not per viewer.

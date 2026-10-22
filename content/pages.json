@@ -136,6 +136,41 @@
     ]
   },
   {
+    "slug": "customize-libraries",
+    "platforms": ["Apple TV", "iPhone", "iPad"],
+    "title": "Customize library pages",
+    "seoTitle": "Arrange Plozz library tabs and Recommended rows",
+    "description": "Reorder or hide library tabs and Recommended rows, restore hidden content, and adjust Apple TV library logos without changing access or Home.",
+    "section": "Library",
+    "kind": "guide",
+    "file": "customize-libraries.md",
+    "sources": [
+      "Sources/FeatureSettings/SettingsView.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/FeatureSettings/LibraryPresentationSettingsView.swift",
+      "Sources/CoreUI/LiftableReorderList.swift",
+      "Sources/CoreModels/LibraryPresentationSettings.swift",
+      "Sources/CoreModels/ProfileSettingsSnapshot.swift",
+      "Sources/AppRuntime/LibraryPresentationLoader.swift",
+      "Sources/AppShell/ProfileSettingsModel.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsModel.swift",
+      "Sources/AppShelliOS/PlozziOSLibraryRoute.swift",
+      "Sources/FeatureHomeCore/LibraryBrowseViewModel.swift",
+      "Sources/FeatureHome/LibraryBrowseView.swift",
+      "Sources/AppShelliOS/PlozziOSLibraryView.swift",
+      "Sources/FeatureSettings/HeroLogoSizeControl.swift"
+    ],
+    "watch": [
+      "Sources/FeatureSettings/LibraryPresentationSettingsView.swift",
+      "Sources/CoreModels/LibraryPresentation",
+      "Sources/AppRuntime/LibraryPresentationLoader.swift",
+      "Sources/FeatureHomeCore/LibraryBrowseViewModel.swift",
+      "Sources/FeatureHome/LibraryBrowseView.swift",
+      "Sources/AppShelliOS/PlozziOSLibrary"
+    ]
+  },
+  {
     "slug": "combined-libraries",
     "platforms": ["Apple TV"],
     "title": "Browse libraries together",
@@ -187,24 +222,24 @@
       "Sources/CoreUI/LiftableReorderList.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-      "Sources/CoreModels/HomeRowCustomization.swift",
       "Sources/CoreModels/HomeLibraryVisibility.swift",
       "Sources/CoreModels/HomeLibraryVisibilityStore.swift",
-      "Sources/CoreModels/HomeSectionCatalog.swift",
       "Sources/CoreModels/HomeSectionCatalogModel.swift",
       "Sources/FeatureHomeCore/HomeAggregator.swift",
       "Sources/CoreModels/ContinueWatchingPolicy.swift",
-      "Sources/CoreModels/HeroSettings.swift",
-      "Sources/AppRuntime/HeroDiscoveryRuntime.swift",
-      "Sources/ProviderTrailers/YouTubeTrailerProvider.swift"
+      "Sources/CoreModels/NavigationContentAvailability.swift",
+      "Sources/CoreModels/NavigationLibraryLayout.swift",
+      "Sources/AppShell/MainTabView.swift",
+      "Sources/AppShelliOS/PlozziOSRootView.swift",
+      "Sources/AppRuntime/HeroDiscoveryRuntime.swift"
     ],
     "watch": [
       "Sources/FeatureSettings/Home",
       "Sources/FeatureSettings/Hero",
-      "Sources/FeatureSettings/ContinueWatching",
       "Sources/CoreModels/Home",
-      "Sources/AppRuntime/HeroDiscoveryRuntime.swift",
-      "Sources/CoreModels/ContinueWatchingPolicy.swift"
+      "Sources/CoreModels/Navigation",
+      "Sources/FeatureSettings/NavigationLibrariesDetailView.swift",
+      "Sources/AppRuntime/HeroDiscoveryRuntime.swift"
     ]
   },
   {
@@ -511,7 +546,7 @@
     "slug": "appearance",
     "title": "Appearance and language",
     "seoTitle": "Change Plozz themes, cards, artwork, and interface language",
-    "description": "Adjust card size and labels, choose library or online artwork, customize individual views, and separate app language from media languages.",
+    "description": "Adjust cards, labels, and title logos, choose library or online artwork, customize individual views, and separate app language from media languages.",
     "section": "Personalize",
     "kind": "guide",
     "file": "appearance.md",
@@ -529,7 +564,11 @@
       "Sources/CoreModels/TransparencyPreferenceStore.swift",
       "Sources/CoreUI/ProfileSettingsCategory.swift",
       "Sources/CoreUI/ContinueWatchingArtworkSwatch.swift",
-      "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+      "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
+      "Sources/FeatureSettings/HeroSettingsControls.swift",
+      "Sources/FeatureSettings/HeroLogoSizeControl.swift",
+      "Sources/CoreModels/HeroSettings.swift",
+      "Sources/CoreModels/DetailPageSettings.swift"
     ],
     "watch": [
       "Sources/FeatureSettings/CardAppearanceControls.swift",
@@ -537,14 +576,14 @@
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/CoreModels/CardCaptionSettings.swift",
       "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
-      "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+      "Sources/FeatureSettings/Hero"
     ]
   },
   {
     "slug": "spoiler-protection",
     "title": "Spoiler protection",
     "seoTitle": "Hide episode spoilers and change Continue Watching cards in Plozz",
-    "description": "Protect unwatched episode images and text, hide ratings separately, and choose Continue Watching artwork without changing watch history.",
+    "description": "Protect unwatched episode images and text, hide ratings, and choose Continue Watching artwork or whether selecting a Home card plays it.",
     "section": "Personalize",
     "kind": "guide",
     "file": "spoiler-protection.md",
@@ -561,6 +600,9 @@
       "Sources/CoreUI/PosterCardView.swift",
       "Sources/CoreUI/SpoilerRevealBox.swift",
       "Sources/CoreModels/HomeLibraryVisibility.swift",
+      "Sources/CoreModels/HomeLibraryVisibilityStore.swift",
+      "Sources/FeatureHomeCore/HomeRow.swift",
+      "Sources/CoreUI/MediaRowView.swift",
       "Sources/CoreModels/CardCaptionSettings.swift",
       "Sources/FeatureHome/HomeView.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
@@ -572,8 +614,8 @@
       "Sources/FeatureSettings/HomeSection",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/CoreUI/ContinueWatching",
-      "Sources/CoreUI/Spoiler",
-      "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+      "Sources/CoreModels/HomeLibraryVisibility",
+      "Sources/CoreUI/Spoiler"
     ]
   },
   {
@@ -791,7 +833,7 @@
     "slug": "media-requests",
     "title": "Request movies and shows",
     "seoTitle": "Request movies and TV seasons through Seerr in Plozz",
-    "description": "Connect Seerr, map Plozz profiles to request users, submit eligible titles or seasons, and resolve permission or relinking problems.",
+    "description": "Connect Seerr, map request users, request missing seasons of library shows, interpret regional availability, and resolve permissions or relinking.",
     "section": "Accounts & sync",
     "kind": "guide",
     "file": "media-requests.md",
@@ -804,54 +846,62 @@
       "Sources/SeerService/SeerService.swift",
       "Sources/SeerService/SeerMapper.swift",
       "Sources/CoreModels/SeerRequestIdentity.swift",
-      "Sources/CoreModels/MediaRequestActionResult.swift",
+      "Sources/CoreModels/SeasonRequestPresentation.swift",
+      "Sources/CoreModels/SeriesDownloadPresentation.swift",
+      "Sources/CoreUI/SeasonRequestMenuContent.swift",
+      "Sources/FeatureHome/SeriesDetailView.swift",
+      "Sources/CoreUI/DetailInformationSections.swift",
+      "Sources/FeatureHome/ItemDetailView.swift",
+      "Sources/FeatureHomeCore/ItemDetailViewModel.swift",
+      "Sources/MetadataKit/ExternalTitleMetadataResolver.swift",
+      "Sources/MetadataKit/TMDbMetadataProvider.swift",
       "Sources/CoreModels/ProfileStore.swift",
       "Sources/AppShell/AppState.swift",
       "Sources/AppShelliOS/PlozziOSAppModel.swift"
     ],
     "watch": [
       "Sources/SeerService/",
-      "Sources/FeatureSettings/SeerDetailView.swift",
-      "Sources/FeatureSettings/ProfileSeerrSetupView.swift",
       "Sources/AppShelliOS/PlozziOSSeerrSettingsView.swift",
       "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
-      "Sources/CoreModels/SeerRequestIdentity.swift"
+      "Sources/CoreUI/DetailInformationSections.swift",
+      "Sources/FeatureHome/SeriesDetailView.swift",
+      "Sources/MetadataKit/TMDbMetadataProvider.swift"
     ]
   },
   {
     "slug": "platform-controls",
     "title": "Device and system controls",
     "seoTitle": "Use Plozz device controls, Apple TV Top Shelf, AirPlay, and PiP",
-    "description": "Configure Apple TV Top Shelf layouts and counts, use remote or touch controls, and check orientation, AirPlay, and Picture in Picture limits.",
+    "description": "Use Apple TV Top Shelf and remote or touch controls, interpret Playback Info, and check orientation, AirPlay, and Picture in Picture limits.",
     "section": "Help",
     "kind": "reference",
     "file": "platform-controls.md",
     "sources": [
-      "App/Resources/Info.plist",
-      "Sources/AppShell/MainTabView.swift",
       "Sources/CoreModels/LiveChannelGuideInfo.swift",
-      "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/FeaturePlayback/PlayerTouchGestureSurface.swift",
       "Sources/AppShelliOS/PlozziOSPlayerKeyboardControls.swift",
-      "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
       "Sources/AppShelliOS/PlozziOSPictureInPictureController.swift",
       "Sources/AppShelliOS/PlozziOSPlayerOrientation.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/TopShelfKit/TopShelfPublisher.swift",
       "Sources/TopShelfKit/TopShelfContentBuilder.swift",
       "Sources/CoreModels/TopShelfSettings.swift",
-      "Sources/FeatureSettings/SettingsView.swift",
       "Sources/FeatureSettings/TopShelfSettingsView.swift",
       "Sources/AppShell/HomeTab.swift",
       "TopShelf/ContentProvider.swift",
       "Sources/FeaturePlayback/NativeVideoEngine.swift",
       "Sources/FeaturePlayback/LiveChannelPlayerView.swift",
+      "Sources/AppShelliOS/PlozziOSLivePresentationControls.swift",
+      "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
+      "Sources/FeaturePlayback/InfoPanelView.swift",
+      "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift",
+      "Sources/CoreModels/PlaybackDiagnostics.swift",
       "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
     ],
     "watch": [
-      "Sources/FeaturePlayback/PlayerTouch",
       "Sources/AppShelliOS/PlozziOSPlayer",
-      "Sources/AppShelliOS/PlozziOSPictureInPictureController.swift",
+      "Sources/AppShelliOS/PlozziOSLivePresentationControls.swift",
+      "Sources/FeaturePlayback/PlaybackDiagnostics",
       "Sources/TopShelfKit/",
       "Sources/FeatureSettings/TopShelf",
       "TopShelf/"

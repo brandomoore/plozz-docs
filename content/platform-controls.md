@@ -50,9 +50,17 @@ On iPhone/iPad, use the player's **AirPlay** route picker for an available recei
 
 Controls can be restricted while video is playing elsewhere. The locally remuxed wireless AirPlay path does not expose selectable subtitle tracks; native streams can behave differently. Check captions on the receiving screen rather than assuming local subtitles will follow the video.
 
-Live TV permits external presentation only for an authorized, single-channel session. Multiview disables AirPlay and Picture in Picture.
+Live TV permits external presentation only for an authorized, single-channel session. On supported paths it can enter Picture in Picture when you leave Plozz. Multiview disables AirPlay and Picture in Picture.
 
 For travel, use [completed downloads](/downloads/); external presentation does not save video.
+
+## Read playback information
+
+Enable **Settings > Help & Diagnostics > Playback Diagnostics Overlay**, or open **Playback Info** in the player's Info card.
+
+**Network throughput** measures transfer speed, not the video's encoded bitrate. **Buffer** reports media ahead of playback; player and engine buffers can differ. **Seekable** describes the player's available seeking range, not a completed download.
+
+With Plozzigen, **AVPlayer time** and **AVPlayer window** describe its internal system player; the window need not span the full source timeline. Missing values mean no measurement was supplied. Live sessions can also report **Behind live** and **Rewind window**; neither promises a recording.
 
 ## Open another player app
 
