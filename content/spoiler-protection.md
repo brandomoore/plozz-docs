@@ -20,6 +20,8 @@ Protection treats episode images and text differently:
 
 The result depends on the watched state supplied to Plozz. If information is hidden unexpectedly, check the active server user and episode history before marking anything watched.
 
+The [Chapters](/playback/#jump-to-a-chapter) panel follows the same episode text and image rules.
+
 ## Hide scores separately
 
 **Hide ratings until watched** works independently of episode spoiler protection. Both protections are off by default. It hides external ratings for unfinished movies, episodes, shows, and seasons, including in-progress items. Press or tap a blurred rating to reveal it.

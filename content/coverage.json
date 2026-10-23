@@ -28,8 +28,8 @@
     },
     "community-skip-markers": {
       "documents": [{"slug":"playback","anchor":"autoplay-and-skipping"}],
-      "sources": ["Sources/MetadataKit/CommunitySkipMarkers.swift","Sources/CoreModels/PlaybackSettings.swift","Sources/FeaturePlayback/PlayerViewModel.swift","Sources/FeatureSettings/PreferenceDetailViews.swift"],
-      "answer": "Settings > Playback > Skip intros, credits & more controls marker actions; Use community markers defaults on and fills missing server markers through IntroDB/TheIntroDB. Requests send movie/series IMDb, TMDB or TVDB IDs plus applicable episode coordinates, ordering, episode name and runtime, not video files. Matching and database availability limit coverage. Turning this off stops community requests, not server-provided markers."
+      "sources": ["Sources/MetadataKit/CommunitySkipMarkers.swift","Sources/CoreModels/PlaybackSettings.swift","Sources/FeaturePlayback/PlayerViewModel.swift","Sources/FeatureSettings/PreferenceDetailViews.swift","Sources/FeatureSettings/SkipMarkerSettingsControl.swift"],
+      "answer": "Settings > Playback > Skip intros, credits & more has Enable skipping, button/automatic behavior, movie/TV/anime eligibility, a 0-30-second automatic delay and optional per-marker rules including Off. These actions need markers. With skipping enabled, Use community markers (default on) checks IntroDB/TheIntroDB when server intro or credits markers are missing, filling missing marker kinds without replacing server markers. Requests send movie/series IMDb, TMDB or TVDB IDs plus applicable episode coordinates, ordering, episode name and runtime, not video files. Matching and database availability limit coverage. Turning this off stops community requests, not server-provided markers."
     },
     "dual-subtitles": {
       "documents": [{"slug":"subtitles","anchor":"choose-a-track"},{"slug":"platform-controls","anchor":"airplay-and-picture-in-picture"}],
@@ -39,7 +39,7 @@
     "library-channels": {
       "documents": [{"slug":"live-tv","anchor":"make-channels-from-your-libraries"}],
       "sources": ["Sources/FeatureLiveTV/LibraryChannelEditorView.swift","Sources/FeatureLiveTVCore/LibraryChannelService.swift","Sources/FeatureLiveTV/LiveTVPrototypeView.swift","Sources/AppRuntime/LiveTVLibraryRuntime.swift","Sources/FeaturePlayback/LibraryChannelPlaybackSession.swift","Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift"],
-      "answer": "Open Live TV Sources > Plozz channels; enable the automatic lineup or Create custom channel. Choose accessible Plex/Jellyfin/Emby libraries, movies/episodes, order and rules, then Preview schedule and Save channel. Missing/invalid durations exclude titles; blank rules allow all matches. Changes start after published programs. Cross-device schedules need catalogue snapshots. Update watch history can mark 90%-viewed programs watched without resume writes; playback uses original files, not IPTV or Silo sources."
+      "answer": "Open Live TV Sources > Plozz channels; enable the automatic lineup or Create custom channel. Automatic channels are not individually editable; Retry Plozz channels recovers preparation errors and Refresh Plozz channels rebuilds prepared lineups. For custom channels choose accessible Plex/Jellyfin/Emby libraries, movies/episodes, order and rules, then Preview schedule and Save channel. Missing/invalid durations exclude titles; blank rules allow all matches. Changes start after published programs. Cross-device schedules need catalogue snapshots. Update watch history can mark 90%-viewed programs watched without resume writes; playback uses original files, not IPTV or Silo sources."
     },
     "offline-background": {
       "documents": [{"slug":"downloads","anchor":"save-a-video"},{"slug":"downloads","anchor":"pause-resume-or-remove"}],
@@ -79,6 +79,7 @@
       "documents": [
         { "slug": "getting-started", "anchor": "set-up-plozz" },
         { "slug": "servers" },
+        { "slug": "servers", "anchor": "restore-a-saved-sign-in" },
         { "slug": "network-shares" },
         { "slug": "live-tv", "anchor": "add-iptv" }
       ],
@@ -95,9 +96,13 @@
         "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift",
         "Sources/FeatureShareOnboarding/MediaShareTransportCatalog.swift",
         "Sources/AppRuntime/MediaShareTransportComposition.swift",
-        "Sources/CoreModels/ProviderKind.swift"
+        "Sources/CoreModels/ProviderKind.swift",
+        "Sources/FeatureAuth/AccountReauthenticationView.swift",
+        "Sources/FeatureAuthCore/AccountReauthenticationModel.swift",
+        "Sources/FeatureSettings/ServerDetailView.swift",
+        "Sources/AppRuntime/AccountsProvidersModel.swift"
       ],
-      "summary": "Connect supported media servers, approved Silo devices, IPTV accounts, or wired share transports; distinguish shared sign-ins from profile library selection. Compare Silo approval codes. Manage verified local/remote addresses per sign-in and device, with trust, HTTP and Silo approval limits, then confirm actual access. Tailscale needs a connection on the playback device and manual server IP/MagicDNS entry, not LAN discovery."
+      "summary": "Connect supported media servers, approved Silo devices, IPTV accounts, or wired share transports; distinguish shared sign-ins from profile library selection. Compare Silo approval codes. Restore saved Jellyfin/Plex/Emby/Silo credentials through Settings > Servers > Sign In Again, opening the account row first on mobile. The same account/server/profile is required; cancellation or failed verification leaves the connection intact. Retry reachability before reauthenticating an offline server. Manage verified local/remote addresses per sign-in and device, with trust, HTTP and Silo approval limits, then confirm actual access. Tailscale needs a connection on the playback device and manual server IP/MagicDNS entry, not LAN discovery."
     },
     "library": {
       "documents": [
@@ -211,9 +216,10 @@
         "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
         "Sources/FeatureSettings/HomeRowsSettingsView.swift",
         "Sources/FeatureHomeCore/HomeRow.swift",
-        "Sources/CoreUI/MediaRowView.swift"
+        "Sources/CoreUI/MediaRowView.swift",
+        "Sources/FeaturePlayback/PlayerChapterPanel.swift"
       ],
-      "summary": "Identify platform-specific spoiler-toggle labels, blur versus placeholder, in-progress image/text treatment, and independent hidden ratings and reveal. Continue Watching offers Artwork + logo, Thumbnail and Poster: only Thumbnail uses episode stills and their masking. Playback details independently selects Detailed or Progress only; Labels independently follows Appearance or forces On/Off. Neither changes history or row membership. Restore an absent Continue Watching section through Add section before configuring its cards. Home selection independently defaults to Play or can Open detail page, using Center button action on TV and When tapping an item on mobile; TV Play/Pause remains direct playback."
+      "summary": "Identify platform-specific spoiler-toggle labels, blur versus placeholder, in-progress image/text treatment, and independent hidden ratings and reveal. Chapter names/images follow the same episode spoiler rules. Continue Watching offers Artwork + logo, Thumbnail and Poster: only Thumbnail uses episode stills and their masking. Playback details independently selects Detailed or Progress only; Labels independently follows Appearance or forces On/Off. Neither changes history or row membership. Restore an absent Continue Watching section through Add section before configuring its cards. Home selection independently defaults to Play or can Open detail page, using Center button action on TV and When tapping an item on mobile; TV Play/Pause remains direct playback."
     },
     "circadian": {
       "documents": [
@@ -231,6 +237,7 @@
     "playback": {
       "documents": [
         { "slug": "playback" },
+        { "slug": "playback", "anchor": "jump-to-a-chapter" },
         { "slug": "playback", "anchor": "explore-the-cast" },
         { "slug": "platform-controls", "anchor": "airplay-and-picture-in-picture" },
         { "slug": "external-players" }
@@ -239,30 +246,31 @@
         "Sources/FeaturePlayback/PlayerControls.swift",
         "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
         "Sources/FeatureHomeCore/PlaybackVersionChoiceModel.swift",
-        "Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift",
+        "Sources/FeaturePlayback/PlayerChapterPanel.swift",
         "Sources/FeatureHomeCore/DetailPlaybackSelection.swift",
-        "Sources/FeaturePlayback/NextEpisodeCoordinator.swift",
+        "Sources/FeaturePlayback/PlayerTouchCardStrip.swift",
         "Sources/FeatureSettings/PreferenceDetailViews.swift",
         "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
         "Sources/MetadataKit/CommunitySkipMarkers.swift",
         "Sources/CoreModels/PlaybackSettings.swift",
-        "Sources/CoreModels/VersionPreferenceStore.swift",
+        "Sources/FeaturePlayback/PlayerViewModel.swift",
         "Sources/CoreModels/ExternalPlayer.swift",
-        "Sources/CoreModels/ExternalPlayerSettingsModel.swift",
-        "Sources/FeatureSettings/ExternalPlayerSettingsView.swift",
+        "Sources/FeaturePlayback/NativeVideoEngine.swift",
+        "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
         "Sources/AppRuntime/ExternalPlaybackRuntime.swift",
-        "Sources/AppShell/PlayerPresentation.swift",
+        "Sources/CoreModels/MediaChapter.swift",
         "Sources/AppShelliOS/PlozziOSPlayerView.swift",
         "Sources/FeaturePlayback/CastPanelView.swift",
         "Sources/AppShell/MainTabViewSupport.swift",
-        "Sources/AppShell/MainTabView.swift"
+        "Sources/FeatureSettings/SkipMarkerSettingsControl.swift"
       ],
-      "summary": "Use controls and same-account versions, first-use Ask every time/Choose automatically and independent series memory; automatic mode can fall back to recommendations while ask mode also applies to autoplay. Retain autoplay/community-marker defaults, Up Next, skips, resume rewind, speed, zoom and no chapter picker. Cast page navigation ends playback and credits need not be playable. The focused external-player task covers Advanced settings, device-wide choice, platform-specific installed apps, direct Plex/Jellyfin/Emby video only, conversion/offline/source fallback, trusted token-bearing links, SRT-only handoff, no Plozz controls, custom templates, and authorized 24-hour progress returns. Native Player/Infuse support resume/returns; VLC/custom do not."
+      "summary": "Use controls and same-account versions, first-use Ask every time/Choose automatically and independent series memory; automatic mode can fall back to recommendations while ask mode also applies to autoplay. Retain autoplay/community-marker defaults, Up Next, content/marker-specific skipping, automatic delay, resume rewind, speed and zoom. The Chapters tab below the timeline seeks to usable server chapters or playback-path-dependent file fallback, including shares/local downloads; mobile tabs scroll horizontally. Missing images do not remove chapters and intro/credits markers are separate. Cast page navigation ends playback and credits need not be playable. The focused external-player task covers Advanced settings, device-wide choice, platform-specific installed apps, direct Plex/Jellyfin/Emby video only, conversion/offline/source fallback, trusted token-bearing links, SRT-only handoff, no Plozz controls, custom templates, and authorized 24-hour progress returns. Native Player/Infuse support resume/returns; VLC/custom do not."
     },
     "quality": {
       "documents": [
         { "slug": "streaming-quality" },
         { "slug": "streaming-quality", "anchor": "try-dolby-vision-fel" },
+        { "slug": "platform-controls", "anchor": "live-tv-remote-controls-and-rewind" },
         { "slug": "external-players", "anchor": "what-stays-in-plozz" }
       ],
       "sources": [
@@ -283,9 +291,11 @@
         "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
         "docs/playback-engines.md",
         "Sources/FeaturePlayback/CurrentStreamDetailsSection.swift",
-        "Sources/AppShelliOS/PlozziOSPlayerView.swift"
+        "Sources/AppShelliOS/PlozziOSPlayerView.swift",
+        "Sources/CoreModels/LivePlaybackBuffer.swift",
+        "Sources/FeaturePlayback/LiveChannelPlayerView.swift"
       ],
-      "summary": "Set profile-owned mobile defaults or apply a one-session Quality limit, identify Maximum as original quality, and distinguish limits from forced conversion. Current stream reports active rendition facts during conversion, never substituted limit values; Not available is not codec/resolution evidence. Retain provider/platform and Silo limits, fitting-original behavior, and device-wide unsynced Video buffer. External handoff stays in Plozz when mobile quality policy is below Maximum or forces conversion, even when an individual original might fit the limit. Advanced > Dolby Vision FEL (experimental) is separately profile-owned, default-off and applied to eligible new built-in on-demand sessions on TV/mobile. Explain seekable Profile 7/file/hardware limits, GPU/memory/stutter costs, and disabling/restarting to compare without claiming a successful display output from the toggle alone."
+      "summary": "Set profile-owned mobile defaults or apply a one-session Quality limit, identify Maximum as original quality, and distinguish limits from forced conversion. Current stream reports active rendition facts during conversion, never substituted limit values; Not available is not codec/resolution evidence. Retain provider/platform and Silo limits and fitting-original behavior. Device-local Video buffer is temporary read-ahead sampled for new sessions, not quality or offline downloads; space/path limits and sustained slow throughput still apply. Separate local Live TV buffer requests cushion behind live with delay/tuning tradeoffs, applies on new channel loads, and remains respected by Go Live without adding DVR capability. External handoff stays in Plozz when mobile quality policy is below Maximum or forces conversion, even when an individual original might fit the limit. Advanced > Dolby Vision FEL (experimental) is separately profile-owned, default-off and applied to eligible new built-in on-demand sessions on TV/mobile. Explain seekable Profile 7/file/hardware limits, GPU/memory/stutter costs, and disabling/restarting to compare without claiming a successful display output from the toggle alone."
     },
     "audio": {
       "documents": [
@@ -309,9 +319,10 @@
         "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
         "Sources/AppShell/PlaybackEngineComposition.swift",
         "Sources/AppShelliOS/PlozziOSPlaybackEngineComposition.swift",
-        "Sources/CoreModels/PlaybackSettings.swift"
+        "Sources/CoreModels/PlaybackSettings.swift",
+        "Sources/FeaturePlayback/SeriesTrackMemory.swift"
       ],
-      "summary": "Select tracks and language policy, explain remembered series choices and lack of adjustable audio delay in wired engines, and enable opt-in mobile Background Audio with network-use consequences. In video/Live TV Audio, tvOS-supported Reduce Loud Sounds and Enhance Dialogue change system-wide settings, not profiles. Explain Enhance More/Enhance/Off versus binary-only output support, route/content-dependent effect and Apple TV Settings recovery for a failed change. Do not confuse this system bridge with unused engine-local Dialog Enhance capabilities."
+      "summary": "Select tracks and language policy; Remember audio language per series stores a normalized language, not a track, codec or mix, and can follow matched series across servers. Manual selection is still needed for a particular same-language commentary/mix. Explain lack of adjustable audio delay in wired engines and opt-in mobile Background Audio with network-use consequences. In video/Live TV Audio, tvOS-supported Reduce Loud Sounds and Enhance Dialogue change system-wide settings, not profiles. Explain Enhance More/Enhance/Off versus binary-only output support, route/content-dependent effect and Apple TV Settings recovery for a failed change. Do not confuse this system bridge with unused engine-local Dialog Enhance capabilities."
     },
     "subtitles": {
       "documents": [
@@ -361,12 +372,13 @@
     "live-tv": {
       "documents": [
         { "slug": "live-tv" },
-        { "slug": "live-tv", "anchor": "organize-channels-and-listings" }
+        { "slug": "live-tv", "anchor": "organize-channels-and-listings" },
+        { "slug": "platform-controls", "anchor": "live-tv-remote-controls-and-rewind" }
       ],
       "sources": [
         "Sources/FeatureAuth/IPTVSignInView.swift",
         "Sources/FeatureAuthCore/IPTVAuthViewModel.swift",
-        "Sources/CoreModels/IPTVCredential.swift",
+        "Sources/CoreModels/LiveTVMobileNetworkPolicy.swift",
         "Sources/ProviderIPTV/IPTVProvider.swift",
         "Sources/FeatureLiveTV/LiveTVServerSetupView.swift",
         "Sources/FeatureLiveTV/LiveTVSourcesView.swift",
@@ -376,16 +388,16 @@
         "Sources/FeatureLiveTVCore/LiveTVChannelScanCoordinator.swift",
         "Sources/FeatureSettings/LiveTVSettingsView.swift",
         "Sources/FeatureLiveTV/LiveTVPrototypeView.swift",
-        "Sources/FeatureLiveTV/LiveTVMultiviewGuideActions.swift",
+        "Sources/AppShelliOS/PlozziOSLiveTVDestination.swift",
         "Sources/FeatureLiveTV/LibraryChannelEditorView.swift",
         "Sources/FeatureLiveTVCore/LiveTVMultiviewCoordinator.swift",
         "Sources/FeatureLiveTVCore/LibraryChannelService.swift",
-        "Sources/CoreNetworking/M3UPlaylistParser.swift",
+        "Sources/CoreModels/LivePlaybackBuffer.swift",
         "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift",
-        "Sources/CoreModels/LiveTVSourceApproval.swift",
+        "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
         "Sources/FeatureLiveTV/LiveTVProgramSearchView.swift"
       ],
-      "summary": "Set up IPTV or server channels and distinguish direct M3U catalogues from web pages, single-stream HLS and XMLTV. The main sign-in form exposes EPG URL (optional); Advanced options adds guides, playlist authentication and separate playlist/stream versus guide headers. Guide headers are scoped to the first guide URL's server, with empty fields following playlist credentials. Prefer HTTPS. Explain device-local account file imports separately from encrypted source-copy sync. Find on-demand libraries, correct guide mappings, favorite/hide channels and run per-playlist reachability checks. Review channel identities restores a saved channel only after same-station/feed confirmation; favorites, hidden state and guide corrections follow that identity, otherwise the separate entry remains playable. Channels/Programs search tunes live, not from programme start. Kids playlist-source PIN approvals grant the whole source locally, not ratings-based filtering or server-account authorization. Retain four-pane/provider Multiview limits, previews/cellular policy and original-file library-channel schedule/history limits."
+      "summary": "Set up IPTV or server channels and distinguish direct M3U catalogues from web pages, single-stream HLS and XMLTV. The main sign-in form exposes EPG URL (optional); Advanced options adds guides, playlist authentication and separate playlist/stream versus guide headers. Guide headers are scoped to the first guide URL's server, with empty fields following playlist credentials. Prefer HTTPS. Explain device-local account file imports separately from encrypted source-copy sync. Find on-demand libraries, correct guide mappings, favorite/hide channels and run per-playlist reachability checks. Review channel identities restores a saved channel only after same-station/feed confirmation; favorites, hidden state and guide corrections follow that identity, otherwise the separate entry remains playable. Channels/Programs search tunes live, not from programme start. Kids playlist-source PIN approvals grant the whole source locally, not ratings-based filtering or server-account authorization. Retain four-pane/provider Multiview limits, previews and original-file library-channel schedule/history limits. Mobile Settings > Live TV > Stop without Wi-Fi or Ethernet gates detected network changes, not every request; brief cellular use remains possible. Low Data Mode independently pauses Live TV even on Wi-Fi; use an unrestricted connection. Automatic-lineup Retry/Refresh is distinct from custom-channel editing. Live TV buffer is a local new-load cushion with latency/tuning costs, respected by Go Live, not a recording or a buffer for scheduled library files."
     },
     "offline": {
       "documents": [
@@ -454,8 +466,8 @@
         "Sources/CoreUI/LiveTVPortableSyncSettings.swift",
         "Sources/AppRuntime/LiveTVSourceSyncBridge.swift",
         "Sources/CoreModels/ProfileSettingsSnapshot.swift",
-        "Sources/CoreModels/LibraryPresentationSettings.swift",
-        "Sources/CoreModels/TopShelfSettings.swift",
+        "Sources/CoreModels/LivePlaybackBuffer.swift",
+        "Sources/CoreModels/CrashReportingSettings.swift",
         "Sources/CoreModels/SyncDataInventory.swift",
         "Sources/FeatureSettings/SyncDataBreakdown.swift",
         "Sources/FeatureAuth/IPTVSignInView.swift",
@@ -464,7 +476,7 @@
         "App/PlozziOS/Info.plist",
         "App/PlozziOS/PlozziOS.entitlements"
       ],
-      "summary": "Distinguish CloudKit configuration, encrypted tracker tokens, mobile Keychain adoption, provider-limited nearby transfer and Silo approval. Explain network/permission/code-verification requirements, separate cross-server history, and local downloads/startup/buffer/Top Shelf preferences. External-player selection is device-wide, not profile-owned or transferable; returned progress remains scoped to the original authorized viewer/server identity. Live TV source copies sync encrypted per profile; account-imported M3U files and Kids approvals stay local, schedules need snapshots, and legacy source-copy import is not the current account importer. In iCloud Sync > Troubleshooting, Refresh Breakdown updates encoded local payload/count snapshots, not iCloud storage: include pending uploads/catalogue schedules, exclude pending deletions/downloaded IPTV guides and separately stored Keychain/Trakt sign-in records. Cover reload/reset/erase, re-upload prevention and mobile-only erasure of Keychain logins. Library tab/Recommended-row presentation is on the transferable profile-settings allow-list; copying it does not grant library access or make unsupported modes available."
+      "summary": "Distinguish CloudKit configuration, encrypted tracker tokens, mobile Keychain adoption, provider-limited nearby transfer and Silo approval. Explain network/permission/code-verification requirements, separate cross-server history, and local downloads/startup/Video buffer/Live TV buffer/Top Shelf preferences. Diagnostics consent is neither synced nor transferred and is not a Plozz-profile preference. External-player selection is device-wide, not profile-owned or transferable; returned progress remains scoped to the original authorized viewer/server identity. Live TV source copies sync encrypted per profile; account-imported M3U files and Kids approvals stay local, schedules need snapshots, and legacy source-copy import is not the current account importer. In iCloud Sync > Troubleshooting, Refresh Breakdown updates encoded local payload/count snapshots, not iCloud storage: include pending uploads/catalogue schedules, exclude pending deletions/downloaded IPTV guides and separately stored Keychain/Trakt sign-in records. Cover reload/reset/erase, re-upload prevention and mobile-only erasure of Keychain logins. Library tab/Recommended-row presentation is on the transferable profile-settings allow-list; copying it does not grant library access or make unsupported modes available."
     },
     "tracking": {
       "documents": [
@@ -563,6 +575,8 @@
         { "slug": "customize-libraries", "anchor": "arrange-recommended-rows" },
         { "slug": "feedback-and-bugs", "anchor": "choose-where-to-post" },
         { "slug": "feedback-and-bugs", "anchor": "report-a-bug" },
+        { "slug": "feedback-and-bugs", "anchor": "choose-diagnostics-sharing" },
+        { "slug": "servers", "anchor": "restore-a-saved-sign-in" },
         { "slug": "feedback-and-bugs", "anchor": "suggest-an-improvement" },
         { "slug": "feedback-and-bugs", "anchor": "share-safely" },
         { "slug": "profiles-and-sync", "anchor": "recover-sync-without-erasing-your-setup" },
@@ -575,29 +589,30 @@
         "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
         "Sources/FeatureSettings/SendDiagnosticsCard.swift",
         "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift",
-        "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift",
+        "Sources/FeatureSettings/CrashReportingConsentView.swift",
         "Sources/CoreUI/PlaybackFailureView.swift",
         "Sources/CoreUI/PlaybackDiagnosticDetailsView.swift",
         "Sources/CoreModels/PlaybackDiagnosticReport.swift",
         "Sources/CoreModels/LibraryLoadDiagnostic.swift",
         "Sources/FeatureHomeCore/ItemDetailViewModel.swift",
-        "Sources/FeatureHome/HomeView.swift",
-        "Sources/FeatureHome/LibraryBrowseView.swift",
+        "Sources/CoreModels/CrashReportingSettings.swift",
+        "Sources/CrashReporting/SentryCrashReporter.swift",
         "Sources/FeatureHome/DetailHeroView.swift",
         "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
-        "Sources/AppShelliOS/PlozziOSHomeView.swift",
-        "Sources/FeaturePlayback/InfoPanelView.swift",
+        "Sources/CrashReporting/CrashRedaction.swift",
+        "Sources/CrashReporting/CrashDiagnostics.swift",
         "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift",
-        "Sources/CoreModels/PlaybackDiagnostics.swift",
-        "Sources/AppShelliOS/PlozziOSLibraryView.swift",
+        "Sources/FeatureAuthCore/AccountReauthenticationModel.swift",
+        "Sources/AppRuntime/PlexHomeUsersModel.swift",
         "Sources/AppRuntime/ExternalPlaybackRuntime.swift"
       ],
-      "summary": "Offer symptom entry points, non-destructive checks, reset/cache scope and incomplete library/Continue Watching Details/Try Again recovery. No streams found on details is an explicit source-inventory result: select it to recheck without starting playback, or choose another accessible copy; do not infer it from a timeout. Explain Discord versus tracked GitHub reports, mobile email, duplicates, reproduction/device/source details and safe sharing. Uploading diagnostics does not file an issue. Local Error Details/Share details need no crash consent; distinguish endpoint/consent-dependent uploads and Playback Info's engine/delivery/stream telemetry. External-player fallback and return-progress sections explain unsupported sources, quality policy, invalid/expired returns and automatic retry in the original authorized context rather than resetting progress or credentials. Explain measured Network throughput versus encoded bitrate, player/engine buffers, internal AVPlayer time/window and absent samples without mistaking these for downloaded media or a recording. No visible rows has a layout recovery rather than server-reset advice."
+      "summary": "Offer symptom entry points, non-destructive checks, reset/cache scope and incomplete library/Continue Watching Details/Try Again recovery. No streams found on details is an explicit source-inventory result: select it to recheck without starting playback, or choose another accessible copy; do not infer it from a timeout. Restore saved provider credentials without deleting shared connections; failed Plex Home access may need the original Plex account reauthenticated before retrying the intended Home user, not a PIN reset. Explain Discord versus tracked GitHub reports, mobile email, duplicates, reproduction/device/source details and safe sharing. Help improve Plozz? offers Share Diagnostics/Don't Share before setup/startup; reporting defaults off until current consent, and either choice continues. Share Crash Reports is not profile-owned or transferred; uploads also need a configured endpoint. Automatic Sentry crash/freeze/failure diagnostics exclude identity/server/media/history data, but an optional manual message is sent as written. Recent-log upload is a separate action and does not file an issue. Local Error Details/Share details need no crash consent. External-player fallback and authorized-return sections retain retry and quality limits. Playback Info distinguishes transfer speed, encoded bitrate, buffers, seekable window and temporary cache from downloads/recordings. No visible rows has layout recovery rather than server-reset advice."
     },
     "platforms": {
       "documents": [
         { "slug": "platform-controls" },
         { "slug": "platform-controls", "anchor": "read-playback-information" },
+        { "slug": "platform-controls", "anchor": "live-tv-remote-controls-and-rewind" },
         { "slug": "audio", "anchor": "improve-dialogue-on-apple-tv" },
         { "slug": "music", "anchor": "find-your-library" },
         { "slug": "music", "anchor": "control-a-listening-session" },
@@ -613,20 +628,20 @@
         "Sources/AppShelliOS/PlozziOSLivePresentationControls.swift",
         "Sources/FeaturePlayback/LiveChannelPresentationContext.swift",
         "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift",
-        "Sources/CoreModels/PlaybackDiagnostics.swift",
+        "Sources/CoreModels/LivePlaybackBuffer.swift",
         "Sources/FeaturePlayback/LiveChannelPlayerView.swift",
-        "Sources/FeatureSettings/PreferenceDetailViews.swift",
-        "Sources/TopShelfKit/TopShelfPublisher.swift",
-        "Sources/TopShelfKit/TopShelfContentBuilder.swift",
+        "Sources/FeatureSettings/PlaybackReadAheadControl.swift",
+        "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
+        "Sources/AppShell/LiveTVShellDestination.swift",
         "Sources/CoreModels/TopShelfSettings.swift",
         "Sources/FeatureSettings/TopShelfSettingsView.swift",
-        "Sources/AppShell/HomeTab.swift",
+        "Sources/AppShelliOS/PlozziOSLiveTVDestination.swift",
         "TopShelf/ContentProvider.swift",
         "Sources/CoreModels/LiveChannelGuideInfo.swift",
         "Sources/FeatureMusic/AudioPlaybackController.swift",
         "Sources/CoreUI/NowPlayingSession.swift"
       ],
-      "summary": "Explain remote/touch/keyboard differences, VoiceOver suppression, optional level gestures, iPhone full-window video/Live TV orientation versus iPad system rotation, and TV transitions. Top Shelf's adult Everyone entry controls local shared visibility, Posters/Full Screen, 1-20 counts defaulting to four, and native swipe-up/Play/More Info; saved source-scoped snapshots retain access and spoiler limits, not live browsing or guaranteed output from format badges. Trace the OS Guide activity into enabled Live TV/full-screen guide, and music background audio into screensaver/Now Playing commands. Distinguish live seeking/Go Live from library-channel Jump to now without promising recordings. Scope wireless subtitle loss to remuxed AirPlay and exclude Multiview. External app handoff differs from AirPlay/PiP and in-app native playback: Native Player is Apple TV-only; Infuse/VLC are offered on both platforms with direct-video and authorized-return limits."
+      "summary": "Explain remote/touch/keyboard differences, VoiceOver suppression, optional level gestures, iPhone full-window video/Live TV orientation versus iPad system rotation, and TV transitions. Top Shelf's adult Everyone entry controls local shared visibility, Posters/Full Screen, 1-20 counts defaulting to four, and native swipe-up/Play/More Info; saved source-scoped snapshots retain access and spoiler limits, not live browsing or guaranteed output from format badges. Trace the OS Guide activity into enabled Live TV/full-screen guide, and music background audio into screensaver/Now Playing commands. Distinguish live seeking/Go Live from library-channel Jump to now without promising recordings. Settings > Playback > Live TV buffer defaults Automatic with 10/20/30/45-second options sampled at new stream loads, not scheduled library files; the local cushion can add delay/slow tuning and remains respected by Go Live without creating rewind capability. Playback cache is temporary use/budget, not downloaded video storage. Scope wireless subtitle loss to remuxed AirPlay and exclude Multiview. External app handoff differs from AirPlay/PiP and in-app native playback: Native Player is Apple TV-only; Infuse/VLC are offered on both platforms with direct-video and authorized-return limits."
     }
   },
   "modules": {
@@ -636,7 +651,8 @@
     },
     "FeatureAuth": {
       "areas": ["connections", "help"],
-      "sources": ["Sources/FeatureAuth/AuthView.swift", "Sources/FeatureAuth/SiloSignInView.swift", "Sources/FeatureAuth/ServerAddressesView.swift", "Sources/FeatureAuthCore/ServerAddressesModel.swift", "Sources/CoreNetworking/ServerAddressResolver.swift"]
+      "sources": ["Sources/FeatureAuth/AuthView.swift", "Sources/FeatureAuth/SiloSignInView.swift", "Sources/FeatureAuth/ServerAddressesView.swift", "Sources/FeatureAuthCore/ServerAddressesModel.swift", "Sources/CoreNetworking/ServerAddressResolver.swift", "Sources/FeatureAuth/AccountReauthenticationView.swift", "Sources/FeatureAuthCore/AccountReauthenticationModel.swift", "Sources/FeatureAuth/PlexAccountRecoveryView.swift", "Sources/AppRuntime/AccountsProvidersModel.swift", "Sources/AppShell/RootView.swift", "Sources/AppShelliOS/PlozziOSRootView.swift", "Sources/FeatureSettings/ServerDetailView.swift", "Sources/AppShelliOS/PlozziOSSettingsView.swift"],
+      "summary": "Keep provider sign-in and verified alternate addresses in the server task. Saved-account Sign In Again is wired in both shells for Jellyfin/Plex/Emby/Silo, validates the original account/server/profile and replaces credentials without deleting the saved connection; cancellation/failure preserves it. Network retry and IPTV/share connection editing remain separate. Plex Home recovery reauthenticates the original Plex account before the intended user's normal access/PIN checks, not a PIN reset."
     },
     "FeatureDiscovery": {
       "areas": ["connections"],
@@ -669,10 +685,10 @@
         "Sources/FeatureLiveTV/LibraryChannelEditorView.swift",
         "Sources/FeatureLiveTV/LiveTVPrototypeView.swift",
         "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift",
-        "Sources/FeatureLiveTV/LiveTVPrototypeStyle.swift",
+        "Sources/CoreModels/LiveTVMobileNetworkPolicy.swift",
         "Sources/FeatureLiveTV/LiveTVPrototypeBrowse.swift",
         "Sources/FeatureLiveTV/LiveTVChannelPreferencesView.swift",
-        "Sources/FeatureLiveTV/LiveTVMultiviewGuideActions.swift",
+        "Sources/AppShelliOS/PlozziOSLiveTVDestination.swift",
         "Sources/FeatureLiveTV/LiveTVGuideMappingView.swift",
         "Sources/FeatureLiveTV/LiveTVChannelScanViews.swift",
         "Sources/FeatureLiveTVCore/LiveTVChannelScanCoordinator.swift",
@@ -683,9 +699,10 @@
         "Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift",
         "Sources/FeatureLiveTV/LiveTVIdentityReviewView.swift",
         "Sources/FeatureLiveTVCore/LiveTVPrototypeImportModel.swift",
-        "Sources/FeatureLiveTVCore/LiveTVIndexedCache.swift"
+        "Sources/FeatureLiveTVCore/LiveTVIndexedCache.swift",
+        "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift"
       ],
-      "summary": "Cover reachable channel menus, previews, Multiviews, guide search/correction, source-scoped channel-identity review, local Kids playlist approvals and channel checks. Guide options reaches Review channel identities; confirmed historical identity is applied by the durable cache/import model and reuses saved preferences only when the old entry is absent. The playlist detail's SettingsPageLink reaches scanning; its global Sources destination is nested under library-channel management and unreliable. Source-copy import exists for legacy/fallback flows and syncs differently from current IPTV-account file imports; do not invent a universal alternate import procedure. Personal channel-label/preferences and the separate unavailable-favorite recovery helper have no prototype presentation route, so omit them as unusable controls without confusing them with the reachable identity review."
+      "summary": "Cover reachable channel menus, previews, Multiviews, guide search/correction, source-scoped channel-identity review, local Kids playlist approvals and channel checks. The mobile destination wires the network policy into playback eligibility: Wi-Fi-only enforcement follows detected changes, while Low Data Mode independently pauses live playback until an unrestricted connection is available. Automatic library channels offer preparation Retry and ready-state Refresh, but no individual editing; custom channels retain their separate editor. Guide options reaches Review channel identities; confirmed historical identity is applied by the durable cache/import model and reuses saved preferences only when the old entry is absent. The playlist detail's SettingsPageLink reaches scanning; its global Sources destination is nested under library-channel management and unreliable. Source-copy import exists for legacy/fallback flows and syncs differently from current IPTV-account file imports; do not invent a universal alternate import procedure. Personal channel-label/preferences and the separate unavailable-favorite recovery helper have no prototype presentation route, so omit them as unusable controls without confusing them with the reachable identity review."
     },
     "FeatureMusic": {
       "areas": ["music", "platforms"],
@@ -702,21 +719,21 @@
         "Sources/FeaturePlayback/PlayerViewModel.swift",
         "Sources/FeaturePlayback/NativeVideoEngine.swift",
         "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
-        "Sources/AppShell/PlaybackEngineComposition.swift",
-        "Sources/AppShelliOS/PlozziOSPlaybackEngineComposition.swift",
+        "Sources/FeaturePlayback/PlayerChapterPanel.swift",
+        "Sources/FeaturePlayback/PlayerTouchCardStrip.swift",
         "Sources/FeaturePlayback/SystemPlaybackAudio.swift",
         "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
-        "Sources/FeatureSettings/ExternalPlayerSettingsView.swift",
+        "Sources/FeaturePlayback/SeriesTrackMemory.swift",
         "Sources/CoreModels/PlaybackSettings.swift",
         "Sources/FeaturePlayback/LiveChannelPlayerView.swift",
         "Sources/FeaturePlayback/CastPanelView.swift",
         "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift",
         "Sources/CoreModels/PlaybackDiagnostics.swift",
         "Sources/FeaturePlayback/PlayerScreenshotHook.swift",
-        "Sources/AppShell/MainTabViewSupport.swift",
+        "Sources/CoreModels/LivePlaybackBuffer.swift",
         "Sources/AppShelliOS/PlozziOSPlayerView.swift"
       ],
-      "summary": "Use task sections for player preferences, dual-text-track eligibility, confirmed system-caption-style replacement and live rewind/Go Live. Audio-delay and engine-local Dialog Enhance scaffolding is capability-gated, but neither wired engine advertises it. Separately, the reachable tvOS system-audio bridge supports output-gated Reduce Loud Sounds and Enhance Dialogue/levels for VOD and Live TV; explain global scope, uncertain per-route processing and failure recovery. Experimental FEL is a default-off profile preference for new eligible on-demand sessions with stated resource costs, not a generic upstream compatibility promise. Subtitle overlay timing is independently supported where exposed, while native second tracks require fetchable text delivery and image primaries exclude dual mode. Cover the Cast panel's biography/credits and deliberate page-navigation handoff, which ends playback rather than playing a credit or keeping the current video open. Playback Info has measured throughput and distinct player-window/buffer facts. PlayerScreenshotHook and LiveChannelScreenshotHook only preselect panels for the internal capture rig; they expose no reader setting or screenshot procedure."
+      "summary": "Use task sections for player preferences, dual-text-track eligibility, confirmed system-caption-style replacement and live rewind/Go Live. Chapters is conditional on usable provider chapters or engine/file fallback, with horizontal mobile tabs, position seeking, unchanged play/pause intent and episode-spoiler-aware names/images; missing thumbnails are not missing chapters. Series audio memory stores language rather than an exact track/mix. Independent local Live TV buffer is sampled per new stream, adds latency/tuning tradeoffs, and remains respected by Go Live; scheduled library files stay automatic. Audio-delay and engine-local Dialog Enhance scaffolding is capability-gated, but neither wired engine advertises it. Separately, the reachable tvOS system-audio bridge supports output-gated Reduce Loud Sounds and Enhance Dialogue/levels for VOD and Live TV; explain global scope, uncertain per-route processing and failure recovery. Experimental FEL is a default-off profile preference for new eligible on-demand sessions with stated resource costs, not a generic upstream compatibility promise. Subtitle overlay timing is independently supported where exposed, while native second tracks require fetchable text delivery and image primaries exclude dual mode. Cover the Cast panel's biography/credits and deliberate page-navigation handoff, which ends playback rather than playing a credit or keeping the current video open. Playback Info has measured throughput, distinct player-window/buffer facts and temporary Playback cache use/budget. PlayerScreenshotHook and LiveChannelScreenshotHook only preselect panels for the internal capture rig; they expose no reader setting or screenshot procedure."
     },
     "FeatureProfiles": {
       "areas": ["profiles"],
@@ -741,17 +758,17 @@
         "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
         "Sources/FeatureSettings/ContinueWatchingNextUpControl.swift",
         "Sources/FeatureSettings/LibraryPresentationSettingsView.swift",
-        "Sources/FeatureSettings/HeroLogoSizeControl.swift",
-        "Sources/CoreModels/LibraryPresentationSettings.swift",
+        "Sources/FeatureSettings/SkipMarkerSettingsControl.swift",
+        "Sources/FeatureSettings/PlaybackReadAheadControl.swift",
         "Sources/FeatureSettings/CardAppearanceControls.swift",
         "Sources/FeatureSettings/ExternalPlayerSettingsView.swift",
-        "Sources/CoreModels/ExternalPlayerSettingsModel.swift",
+        "Sources/FeatureSettings/CrashReportingConsentView.swift",
         "Sources/FeatureSettings/TopShelfSettingsView.swift",
         "Sources/CoreModels/TopShelfSettings.swift",
         "Sources/FeatureSettings/SyncDataBreakdown.swift",
         "Sources/CoreModels/SyncDataInventory.swift"
       ],
-      "summary": "Group settings by task with platform/provider limits. Home editing/Next Up stay in Home/navigation; three Continue Watching artwork modes, independent Playback details/Labels and label-preset replacement belong in spoiler/appearance sections, not pages per toggle. External player needs a focused task because device-wide selection, token sharing, direct-source eligibility and progress callbacks have distinct consequences. FEL tradeoffs belong in streaming quality, device-only Top Shelf layout/counts in platform controls, and encoded sync-data sizes in sync troubleshooting. Low-risk sort and Recently watched choices remain within existing tasks. Customize Libraries warrants one task for shared tab layout, per-library rows, platform-specific header size and recovery, not pages per control. Home selection action and independent logo sizes fit existing spoiler/appearance sections."
+      "summary": "Group settings by task with platform/provider limits. Home editing/Next Up stay in Home/navigation; three Continue Watching artwork modes, independent Playback details/Labels and label-preset replacement belong in spoiler/appearance sections, not pages per toggle. Skip enablement, content categories, per-marker rules and automatic delay belong in playback; independent local Video/Live TV buffers belong in quality/system controls. Saved-account recovery belongs in servers, and optional startup diagnostics consent/privacy and manual logs in feedback, not new toggle pages. External player needs a focused task because device-wide selection, token sharing, direct-source eligibility and progress callbacks have distinct consequences. FEL tradeoffs belong in streaming quality, device-only Top Shelf layout/counts in platform controls, and encoded sync-data sizes in sync troubleshooting. Low-risk sort and Recently watched choices remain within existing tasks. Customize Libraries warrants one task for shared tab layout, per-library rows, platform-specific header size and recovery, not pages per control. Home selection action and independent logo sizes fit existing spoiler/appearance sections."
     },
     "FeatureShareOnboarding": {
       "areas": ["connections"],
@@ -903,13 +920,13 @@
     },
     "liveTV": {
       "areas": ["live-tv", "profiles", "sync"],
-      "sources": ["Sources/CoreUI/ProfileSettingsCategory.swift", "Sources/FeatureSettings/LiveTVSettingsView.swift", "Sources/AppShelliOS/PlozziOSSettingsView.swift", "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift", "Sources/CoreUI/LiveTVPortableSyncSettings.swift"],
-      "summary": "Keep guide previews, favorites/hidden channels, search and mobile cellular policy in the Live TV reference. Explain local whole-source Kids approval and source-configuration sync separately; straightforward ordering/filter choices need no individual pages."
+      "sources": ["Sources/CoreUI/ProfileSettingsCategory.swift", "Sources/FeatureSettings/LiveTVSettingsView.swift", "Sources/AppShelliOS/PlozziOSSettingsView.swift", "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift", "Sources/CoreUI/LiveTVPortableSyncSettings.swift", "Sources/CoreModels/LiveTVMobileNetworkPolicy.swift", "Sources/AppShelliOS/PlozziOSLiveTVDestination.swift"],
+      "summary": "Keep guide previews, favorites/hidden channels, search and mobile cellular policy in the Live TV reference. Distinguish the Wi-Fi-only setting's detected-transition limit from the independent Low Data Mode pause, which also applies on Wi-Fi. Explain local whole-source Kids approval and source-configuration sync separately; straightforward ordering/filter choices need no individual pages."
     },
     "playback": {
       "areas": ["playback", "quality", "audio", "platforms", "sync"],
-      "sources": ["Sources/CoreUI/ProfileSettingsCategory.swift", "Sources/FeatureSettings/PreferenceDetailViews.swift", "Sources/AppShelliOS/PlozziOSSettingsView.swift", "Sources/CoreModels/PlaybackSettings.swift", "Sources/FeatureSettings/ExternalPlayerSettingsView.swift", "Sources/CoreModels/ExternalPlayerSettingsModel.swift", "Sources/AppRuntime/ExternalPlaybackRuntime.swift"],
-      "summary": "Cover version mode/series memory, autoplay/skips, quality, audio, background listening, orientation/gestures and history with platform/provider gates. Missing remembered versions fall back automatically in automatic mode. Advanced > External player is device-wide rather than profile-owned; its focused guide explains platform apps, custom templates, direct-play fallback, access-token sharing and authorized progress returns. Advanced > Dolby Vision FEL is separately profile-scoped and default-off; document eligibility, new-session behavior and resource costs in streaming quality."
+      "sources": ["Sources/CoreUI/ProfileSettingsCategory.swift", "Sources/FeatureSettings/PreferenceDetailViews.swift", "Sources/AppShelliOS/PlozziOSSettingsView.swift", "Sources/CoreModels/PlaybackSettings.swift", "Sources/FeatureSettings/ExternalPlayerSettingsView.swift", "Sources/CoreModels/ExternalPlayerSettingsModel.swift", "Sources/AppRuntime/ExternalPlaybackRuntime.swift", "Sources/FeatureSettings/SkipMarkerSettingsControl.swift", "Sources/FeatureSettings/PlaybackReadAheadControl.swift", "Sources/CoreModels/LivePlaybackBuffer.swift", "Sources/FeaturePlayback/SeriesTrackMemory.swift"],
+      "summary": "Cover version mode/series memory, autoplay/skips, quality, audio, background listening, orientation/gestures and history with platform/provider gates. Skip settings distinguish enablement, content categories, button/automatic delay and per-marker Off; community requests remain separately controllable. Remember audio language per series stores language, not exact commentary/mix. Video buffer is temporary read-ahead, while independent local Live TV buffer requests a live-edge cushion; both are new-load choices, not offline downloads. Missing remembered versions fall back automatically in automatic mode. Advanced > External player is device-wide rather than profile-owned; its focused guide explains platform apps, custom templates, direct-play fallback, access-token sharing and authorized progress returns. Advanced > Dolby Vision FEL is separately profile-scoped and default-off; document eligibility, new-session behavior and resource costs in streaming quality."
     },
     "screensNavigation": {
       "areas": ["library", "home-navigation", "appearance", "spoilers", "music", "platforms"],

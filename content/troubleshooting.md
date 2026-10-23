@@ -1,12 +1,14 @@
 # Troubleshooting
 
-Check the affected source before reporting a problem.
+Use narrow checks before resetting your setup.
 
 ## Cannot connect or sign in
 
-1. For local sources, allow Plozz Local Network access in device settings. Test the address, including ports/paths; review [connection addresses](/servers/#add-local-or-remote-addresses).
-2. If Jellyfin Quick Connect is unavailable, choose username/password sign-in.
-3. For Silo, use its browser address and complete approval and any profile PIN.
+1. For local sources, allow Local Network access in device settings. Test the address, including ports/paths; review [connection addresses](/servers/#add-local-or-remote-addresses).
+2. If Jellyfin Quick Connect is unavailable, use username/password. For expired logins, use [Sign In Again](/servers/#restore-a-saved-sign-in), not account removal.
+3. For Silo, complete browser approval and any profile PIN.
+
+If a Plex Home check fails, choose **Try Again** or **Sign In Again** when offered. Relink the original Plex account, then retry the intended Home user; this does not reset its PIN.
 
 After [device sync](/profiles-and-sync/), check **Settings > iCloud Sync** for **Needs sign-in** entries. A synced entry is not an authenticated connection.
 
@@ -40,10 +42,10 @@ Confirm the profile/account. Prefer [Tracker Retry](/trackers/) to repeated reco
 
 On a playback, library, or Live TV error, open **Details** when offered. On iPhone/iPad, **Share details** exports the report; Apple TV displays it onscreen. It excludes server addresses, credentials, account names, and media titles.
 
-Open **Settings > Help & Diagnostics > Report a Problem**; on Apple TV, scan its code or follow the GitHub link. See [Feedback and bug reports](/feedback-and-bugs/) for Discord, GitHub, feature requests, and what to include.
+Open **Settings > Help & Diagnostics > Report a Problem**; on Apple TV, scan its code. See [Feedback and bug reports](/feedback-and-bugs/) for destinations and what to include.
 
 Use [Playback Info or the diagnostics overlay](/platform-controls/#read-playback-information) to inspect engine, delivery, and measured stream/buffer facts.
 
-In mobile **Recent Activity**, choose **Refresh**, then **Copy** for logs.
+In mobile **Recent Activity**, use **Refresh**, then **Copy** for logs.
 
-Log upload requires a configured reporting endpoint and **Share Crash Reports** enabled: choose **Send to Developer** on mobile or **Send Recent Activity to Developer** on Apple TV. This is separate from Share details. Never post passwords, tokens, pairing codes, or private playlist URLs.
+Local error details do not require [diagnostics-sharing consent](/feedback-and-bugs/#choose-diagnostics-sharing); log uploads do. Never post passwords, tokens, pairing codes, or private playlist URLs.

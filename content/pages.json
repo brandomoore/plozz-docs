@@ -15,7 +15,10 @@
       "Sources/AppShelliOS/PlozziOSOnboardingView.swift",
       "Sources/AppShelliOS/PlozziOSFirstRunView.swift",
       "Sources/CoreModels/ProviderKind.swift",
-      "Sources/CoreUI/ProfileSettingsCategory.swift"
+      "Sources/CoreUI/ProfileSettingsCategory.swift",
+      "Sources/FeatureSettings/CrashReportingConsentView.swift",
+      "Sources/AppShell/RootView.swift",
+      "Sources/AppShelliOS/PlozziOSRootView.swift"
     ],
     "watch": [
       "README.md",
@@ -30,7 +33,7 @@
     "slug": "servers",
     "title": "Connect a server",
     "seoTitle": "Connect Jellyfin, Plex, Emby, or Silo to Plozz",
-    "description": "Connect a media server, select libraries and server users, manage trusted local or remote addresses, and understand shared sign-ins.",
+    "description": "Connect a media server, restore an expired sign-in, select libraries and server users, and manage trusted local or remote addresses.",
     "section": "Connect",
     "kind": "guide",
     "file": "servers.md",
@@ -49,7 +52,12 @@
       "Sources/CoreNetworking/ServerAddressResolver.swift",
       "Sources/FeatureDiscovery/ServerPickerView.swift",
       "Sources/FeatureDiscoveryCore/ServerPickerViewModel.swift",
-      "Sources/CoreModels/ProviderKind.swift"
+      "Sources/CoreModels/ProviderKind.swift",
+      "Sources/FeatureAuth/AccountReauthenticationView.swift",
+      "Sources/FeatureAuthCore/AccountReauthenticationModel.swift",
+      "Sources/AppRuntime/AccountsProvidersModel.swift",
+      "Sources/AppShell/RootView.swift",
+      "Sources/AppShelliOS/PlozziOSRootView.swift"
     ],
     "watch": [
       "Sources/FeatureAuth",
@@ -245,24 +253,17 @@
   {
     "slug": "playback",
     "title": "Player controls",
-    "seoTitle": "Use Plozz player controls, versions, autoplay, and skip markers",
-    "description": "Use player controls, choose versions, set autoplay and skips, and explore cast biographies and credits. Learn which actions end playback.",
+    "seoTitle": "Use Plozz chapters, player controls, versions, and skip markers",
+    "description": "Jump to chapters, choose versions, set autoplay and skip behavior, and explore cast biographies and credits. See when chapters are available.",
     "section": "Playback",
     "kind": "guide",
     "file": "playback.md",
     "sources": [
-      "Sources/FeaturePlayback/CustomPlayerContainer.swift",
       "Sources/FeaturePlayback/PlayerControls.swift",
       "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
-      "Sources/FeatureHomeCore/PlayerVersionSelection.swift",
       "Sources/FeatureHomeCore/PlaybackVersionChoiceModel.swift",
-      "Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift",
       "Sources/FeatureHomeCore/DetailPlaybackSelection.swift",
-      "Sources/CoreModels/PlaybackVersionSelectionMode.swift",
-      "Sources/CoreModels/VersionPreferenceStore.swift",
-      "Sources/AppShell/PlayerPresentation.swift",
-      "Sources/AppShelliOS/PlozziOSPlayerView.swift",
-      "Sources/FeaturePlayback/NextEpisodeCoordinator.swift",
+      "Sources/FeaturePlayback/SeekScrubCoordinator.swift",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
@@ -270,12 +271,19 @@
       "Sources/CoreModels/PlaybackSettings.swift",
       "Sources/FeaturePlayback/CastPanelView.swift",
       "Sources/AppShell/MainTabViewSupport.swift",
-      "Sources/AppShell/MainTabView.swift"
+      "Sources/FeaturePlayback/PlayerChapterPanel.swift",
+      "Sources/FeaturePlayback/PlayerTouchCardStrip.swift",
+      "Sources/FeaturePlayback/PlayerViewModel.swift",
+      "Sources/FeaturePlayback/NativeVideoEngine.swift",
+      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
+      "Sources/ProviderPlex/PlexProvider.swift",
+      "Sources/ProviderJellyfin/JellyfinProvider.swift",
+      "Sources/FeatureSettings/SkipMarkerSettingsControl.swift"
     ],
     "watch": [
       "Sources/FeaturePlayback/Player",
       "Sources/FeatureHomeCore/PlaybackVersionChoice",
-      "Sources/FeatureHomeCore/DetailPlaybackSelection.swift",
+      "Sources/CoreModels/MediaChapter.swift",
       "Sources/AppShelliOS/PlozziOSPlayer",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/CoreModels/Playback"
@@ -384,14 +392,15 @@
       "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
       "Sources/AppShell/PlaybackEngineComposition.swift",
       "Sources/AppShelliOS/PlozziOSPlaybackEngineComposition.swift",
-      "Sources/CoreModels/PlaybackSettings.swift"
+      "Sources/CoreModels/PlaybackSettings.swift",
+      "Sources/FeaturePlayback/SeriesTrackMemory.swift"
     ],
     "watch": [
       "Sources/FeaturePlayback/PlaybackAudio",
       "Sources/FeaturePlayback/SystemPlaybackAudio.swift",
       "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
       "Sources/FeaturePlayback/Player",
-      "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
+      "Sources/FeaturePlayback/SeriesTrackMemory.swift",
       "Sources/CoreModels/PlaybackSettings.swift"
     ]
   },
@@ -481,7 +490,7 @@
     "sources": [
       "Sources/FeatureAuth/IPTVSignInView.swift",
       "Sources/FeatureAuthCore/IPTVAuthViewModel.swift",
-      "Sources/CoreModels/IPTVCredential.swift",
+      "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift",
       "Sources/ProviderIPTV/IPTVProvider.swift",
       "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift",
       "Sources/FeatureLiveTV/LiveTVServerSetupView.swift",
@@ -493,10 +502,10 @@
       "Sources/FeatureLiveTV/LiveTVGuideMappingView.swift",
       "Sources/FeatureLiveTVCore/LiveTVChannelScanCoordinator.swift",
       "Sources/FeatureLiveTV/LiveTVPrototypeView.swift",
-      "Sources/FeatureLiveTV/LiveTVMultiviewGuideActions.swift",
+      "Sources/CoreModels/LiveTVMobileNetworkPolicy.swift",
       "Sources/FeatureLiveTV/LibraryChannelEditorView.swift",
       "Sources/FeatureLiveTVCore/LibraryChannelService.swift",
-      "Sources/AppRuntime/LiveTVLibraryRuntime.swift",
+      "Sources/AppShelliOS/PlozziOSLiveTVDestination.swift",
       "Sources/FeaturePlayback/LibraryChannelPlaybackSession.swift",
       "Sources/FeatureLiveTV/LiveTVIdentityReviewView.swift"
     ],
@@ -505,8 +514,8 @@
       "Sources/FeatureLiveTVCore/",
       "Sources/ProviderIPTV/",
       "Sources/CoreModels/LiveTV",
-      "Sources/FeatureAuth/IPTVSignInView.swift",
-      "Sources/FeatureAuthCore/IPTV"
+      "Sources/AppShelliOS/PlozziOSLiveTV",
+      "Sources/FeaturePlayback/LiveTVMobileNetwork"
     ]
   },
   {
@@ -600,7 +609,7 @@
       "Sources/CoreUI/PosterCardView.swift",
       "Sources/CoreUI/SpoilerRevealBox.swift",
       "Sources/CoreModels/HomeLibraryVisibility.swift",
-      "Sources/CoreModels/HomeLibraryVisibilityStore.swift",
+      "Sources/FeaturePlayback/PlayerChapterPanel.swift",
       "Sources/FeatureHomeCore/HomeRow.swift",
       "Sources/CoreUI/MediaRowView.swift",
       "Sources/CoreModels/CardCaptionSettings.swift",
@@ -768,9 +777,9 @@
       "Sources/FeatureSyncSetup/SyncSetupPairingModel.swift",
       "Sources/FeatureSyncCloud/CloudConfigSyncService.swift",
       "Sources/FeatureSettings/SyncEraseDataView.swift",
-      "Sources/AppRuntime/TrackerTokenSyncBridge.swift",
+      "Sources/CoreModels/LivePlaybackBuffer.swift",
       "Sources/CoreModels/ProfileSettingsSnapshot.swift",
-      "Sources/CoreModels/TopShelfSettings.swift",
+      "Sources/CoreModels/CrashReportingSettings.swift",
       "Sources/CoreModels/SyncDataInventory.swift",
       "Sources/FeatureSettings/SyncDataBreakdown.swift",
       "Sources/FeatureSettings/SettingsView.swift",
@@ -872,7 +881,7 @@
     "slug": "platform-controls",
     "title": "Device and system controls",
     "seoTitle": "Use Plozz device controls, Apple TV Top Shelf, AirPlay, and PiP",
-    "description": "Use Apple TV Top Shelf and remote or touch controls, interpret Playback Info, and check orientation, AirPlay, and Picture in Picture limits.",
+    "description": "Use Apple TV Top Shelf and device controls, tune live buffering, interpret Playback Info, and check AirPlay and Picture in Picture limits.",
     "section": "Help",
     "kind": "reference",
     "file": "platform-controls.md",
@@ -883,8 +892,8 @@
       "Sources/AppShelliOS/PlozziOSPictureInPictureController.swift",
       "Sources/AppShelliOS/PlozziOSPlayerOrientation.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-      "Sources/TopShelfKit/TopShelfPublisher.swift",
-      "Sources/TopShelfKit/TopShelfContentBuilder.swift",
+      "Sources/CoreModels/LivePlaybackBuffer.swift",
+      "Sources/FeatureSettings/PlaybackReadAheadControl.swift",
       "Sources/CoreModels/TopShelfSettings.swift",
       "Sources/FeatureSettings/TopShelfSettingsView.swift",
       "Sources/AppShell/HomeTab.swift",
@@ -911,7 +920,7 @@
     "slug": "feedback-and-bugs",
     "title": "Feedback and bug reports",
     "seoTitle": "Send Plozz feedback, report bugs, or request features",
-    "description": "Use Discord or GitHub to share Plozz feedback, report a bug, or request a feature, with useful diagnostic details and safe sharing guidance.",
+    "description": "Send feedback through Discord or GitHub, choose optional diagnostics sharing, and understand automatic reports, recent logs, and message privacy.",
     "section": "Help",
     "kind": "guide",
     "file": "feedback-and-bugs.md",
@@ -919,13 +928,22 @@
       "README.md",
       "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
       "Sources/FeatureSettings/SendDiagnosticsCard.swift",
-      "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift"
+      "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift",
+      "Sources/FeatureSettings/CrashReportingConsentView.swift",
+      "Sources/CoreModels/CrashReportingSettings.swift",
+      "Sources/CrashReporting/SentryCrashReporter.swift",
+      "Sources/CrashReporting/CrashRedaction.swift",
+      "Sources/CrashReporting/CrashDiagnostics.swift",
+      "Sources/AppShell/RootView.swift",
+      "Sources/AppShelliOS/PlozziOSRootView.swift"
     ],
     "watch": [
       "README.md",
       "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
       "Sources/FeatureSettings/SendDiagnosticsCard.swift",
-      "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift"
+      "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift",
+      "Sources/FeatureSettings/CrashReportingConsentView.swift",
+      "Sources/CrashReporting/"
     ]
   },
   {
@@ -946,17 +964,17 @@
       "Sources/CoreUI/PlaybackDiagnosticDetailsView.swift",
       "Sources/CoreModels/PlaybackDiagnosticReport.swift",
       "Sources/CoreModels/LibraryLoadDiagnostic.swift",
-      "Sources/FeatureHome/HomeView.swift",
+      "Sources/FeatureAuth/PlexAccountRecoveryView.swift",
       "Sources/FeatureHome/LibraryBrowseView.swift",
-      "Sources/FeatureHome/SeriesDetailView.swift",
+      "Sources/AppRuntime/PlexHomeUsersModel.swift",
       "Sources/FeatureHome/DetailHeroView.swift",
       "Sources/FeatureHomeCore/ItemDetailViewModel.swift",
       "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
-      "Sources/AppShelliOS/PlozziOSHomeView.swift",
+      "Sources/AppShelliOS/PlozziOSPlexPINView.swift",
       "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift",
       "Sources/AppShelliOS/PlozziOSLibraryView.swift",
       "Sources/FeaturePlayback/PlayerView.swift",
-      "Sources/FeaturePlayback/InfoPanelView.swift"
+      "Sources/AppShell/RootView.swift"
     ],
     "watch": [
       "Sources/CoreUI/Playback",

@@ -20,7 +20,7 @@ iCloud Sync carries profiles, preferences, server details, watchlist state, supp
 
 With sync and iCloud Keychain available, iPhone/iPad can automatically adopt supported Jellyfin, Plex, Emby, share, and Seerr credentials. Apple TV does not use this iCloud Keychain path; use nearby setup or sign in there. **Silo requires approval on each device**, regardless of sync.
 
-Downloads, automatic sign-in, [Video buffer](/streaming-quality/), [Top Shelf preferences](/platform-controls/#launch-from-apple-tv-top-shelf), and the [external-player choice](/external-players/) remain device-local. The player choice applies across Plozz profiles, not per viewer.
+Downloads, automatic sign-in, [Video buffer](/streaming-quality/), [Live TV buffer](/platform-controls/#live-tv-remote-controls-and-rewind), [Top Shelf preferences](/platform-controls/#launch-from-apple-tv-top-shelf), and the [external-player choice](/external-players/) remain device-local. The player choice applies across Plozz profiles, not per viewer. [Diagnostics consent](/feedback-and-bugs/#choose-diagnostics-sharing) is neither synced nor transferred.
 
 ## Sync Live TV deliberately
 

@@ -28,7 +28,9 @@ If Maximum buffers, try a lower session limit. If only conversion fails, check s
 
 Shares have no server converting video; a missing Quality control can be expected.
 
-**Video buffer** in Playback changes read-ahead, not quality. Larger buffers use storage and are unavailable with Apple's native player. This device-wide preference does not transfer or sync.
+**Video buffer** in Playback changes temporary read-ahead, not quality or offline downloads. Larger buffers use more storage; actual duration depends on the video and free space. It is unavailable with Apple's native player. Start a new playback session after changing it. This device-wide preference does not transfer or sync.
+
+A filled buffer can bridge brief interruptions, not fix a source that stays too slow. [Live TV buffer](/platform-controls/#live-tv-remote-controls-and-rewind) is separate.
 
 [Download quality](/downloads/) is independent; streaming defaults do not shrink saved copies. See [Plozz formats](https://plozz.app/formats) for codec/container support.
 

@@ -8,7 +8,9 @@ Reveal playback controls and open **Audio** on Apple TV, or the **Audio** submen
 
 For future sessions, set **Preferred audio language** in **Settings > Playback > Audio** on Apple TV, or Playback's **Tracks** section on iPhone/iPad. Choose original, device, or a language, separately for movies, TV shows, and anime.
 
-**Remember audio per series** reuses previous selections. For a wrong track, check this and the language preference. Neither can supply missing tracks.
+**Remember audio language per series** remembers the language, not a particular track or mix. It can follow a matched series across servers. To choose a different commentary or surround track in the same language, select it in the player; series memory does not preserve that exact track.
+
+For a wrong language, check series memory and the language preference. Neither can supply missing tracks.
 
 Alternate versions can contain different languages or mixes; [change versions](/playback/) if needed.
 

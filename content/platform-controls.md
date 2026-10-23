@@ -18,17 +18,19 @@ On Apple TV, a remote's **Guide** button opens Live TV when that destination is 
 
 For a channel with a usable rewind window, reveal controls and use the timeline to seek within that window. **Go Live** returns to the current broadcast. This is not a recording or a promise to restart any guide program. Scheduled library channels use **Jump to now** instead.
 
+**Settings > Playback > Live TV buffer** defaults to **Automatic**. Choose 10, 20, 30, or 45 seconds to request a cushion behind live for new channel loads. More buffering can reduce interruptions but adds delay and may slow tuning. **Go Live** respects the cushion. It is device-local, independent of Video buffer, and cannot create a rewind window or affect scheduled library playback.
+
 ## Launch from Apple TV Top Shelf
 
 1. Put Plozz in the Apple TV Home Screen's top row.
 2. From an adult Plozz profile, open **Settings > Everyone > Top Shelf**. **Show Top Shelf** is on by default.
 3. Choose **Posters** or **Full Screen**, then set separate **Continue Watching** and **Recently Added** counts: four each by default, adjustable from one to 20.
 
-Posters is the default; selecting a poster requests playback. With Full Screen, swipe up on the Home Screen to expand the shelf. Continue Watching comes first, followed by Recently Added; repeated entries from the same source appear once. **Play** requests playback; **More Info** opens the title or series page without starting it. Known descriptions and format badges can appear; they are not measurements of your current output.
+Posters is the default; selecting a poster requests playback. With Full Screen, swipe up on the Home Screen to expand the shelf. Continue Watching comes first, followed by Recently Added; repeated entries from the same source appear once. **Play** requests playback; **More Info** opens the title or series page without starting it. Format badges describe source files, not current output.
 
 These preferences are shared by Plozz profiles on this Apple TV and do not sync. Turning Show Top Shelf off clears its media without forgetting your layout or counts.
 
-Top Shelf uses Plozz's saved Home snapshot, not live server browsing. Short feeds are not padded. Counts do not limit Continue Watching inside Plozz. Normal profile authorization and source access still apply; for unavailable content, open Plozz and check the original connection.
+Top Shelf uses a saved Home snapshot, not live browsing. Short feeds are not padded; counts do not limit Plozz's Continue Watching. Finish any profile/PIN prompt first. If **Unable to Open Title** appears, check the original connection in Plozz.
 
 Artwork follows [Appearance > Artwork](/appearance/); full-screen episode text and ratings respect [spoiler settings](/spoiler-protection/).
 
@@ -58,10 +60,10 @@ For travel, use [completed downloads](/downloads/); external presentation does n
 
 Enable **Settings > Help & Diagnostics > Playback Diagnostics Overlay**, or open **Playback Info** in the player's Info card.
 
-**Network throughput** measures transfer speed, not the video's encoded bitrate. **Buffer** reports media ahead of playback; player and engine buffers can differ. **Seekable** describes the player's available seeking range, not a completed download.
+**Network throughput** measures transfer speed, not encoded bitrate. **Buffer** reports media ahead; player/engine buffers can differ. **Seekable** is the seeking range, not a completed download. **Playback cache**, when shown, reports temporary use/budget, not saved videos.
 
 With Plozzigen, **AVPlayer time** and **AVPlayer window** describe its internal system player; the window need not span the full source timeline. Missing values mean no measurement was supplied. Live sessions can also report **Behind live** and **Rewind window**; neither promises a recording.
 
 ## Open another player app
 
-To use Infuse, VLC, or Apple TV's Native Player app instead, follow [Use another video player](/external-players/). This sends an eligible video link to another app on this device, not an AirPlay receiver. It is a device-wide choice with separate source, privacy, and returned-progress limits.
+For Infuse, VLC, or Apple TV's Native Player app, follow [Use another video player](/external-players/). This sends a video link to another app on this device, not an AirPlay receiver. It is a device-wide choice with source, privacy, and returned-progress limits.

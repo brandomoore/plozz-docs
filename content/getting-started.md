@@ -10,6 +10,8 @@ Plozz plays media from your own sources on Apple TV, iPhone, and iPad.
 4. **Make it yours.** Complete the profile, library, and appearance choices shown. A [Plozz profile](/profiles-and-locks/) keeps your app preferences; it is separate from your server account.
 5. **Start watching.** [Browse or search](/library/) and choose a movie or episode to play; for channels, open **Live TV**.
 
+If **Help improve Plozz?** appears, choose **Share Diagnostics** or **Don't Share**. Both continue setup; you can change [diagnostics sharing](/feedback-and-bugs/#choose-diagnostics-sharing) later.
+
 > [!TIP]
 > Already use Plozz elsewhere? Choose **Set up from another device** during setup, then follow [Profiles and sync](/profiles-and-sync/). Silo still requires approval for each device.
 

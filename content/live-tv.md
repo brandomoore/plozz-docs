@@ -9,9 +9,9 @@
 
 On iPhone/iPad, IPTV sign-in's **Playlist file** imports an M3U from Files. That account catalogue stays local; import a replacement to update it. [Live TV source sync](/profiles-and-sync/#sync-live-tv-deliberately) has a different scope.
 
-Channels can play without guide listings. Plozz supplies no channels or IPTV subscription.
+Channels work without listings. Plozz supplies no channels or subscription.
 
-For video-stream or web-page import errors, obtain the provider's direct M3U channel-list link. XMLTV belongs in the EPG field, not the playlist field. Prefer HTTPS.
+For video-stream/web-page import errors, use the provider's direct M3U channel-list link. XMLTV belongs in EPG, not the playlist field. Prefer HTTPS.
 
 ## Find on-demand titles
 
@@ -25,7 +25,7 @@ Server configuration, account permissions, and subscription requirements still a
 
 ## Search the guide
 
-Open Live TV's **Search**, choose **Channels** or **Programs**, and enter a name. Program results cover retained guide listings, not an on-demand archive. **Watch channel** tunes live, not the selected program from its beginning.
+Open Live TV's **Search**, choose **Channels** or **Programs**, and enter a name. Results cover retained listings, not an archive. **Watch channel** tunes live, not from the selected program's beginning.
 
 ## Approve playlist sources for Kids
 
@@ -35,7 +35,7 @@ For a Kids profile's playlist source, set a [Parental PIN](/profiles-and-locks/)
 
 Start a channel, open **Multiview**, and add channels. The limit is **four pictures**, with sound from one pane at a time. Your provider’s simultaneous-stream allowance or available tuners may impose a lower limit.
 
-Use **Favorite** to save channels/layout; reopen from **Favorite Multiviews**. This reserves no streams or tuners.
+Use **Favorite** to save channels/layout; reopen from **Favorite Multiviews**. This reserves no capacity.
 
 ## Organize channels and listings
 
@@ -49,9 +49,9 @@ Under **Sources**, open a playlist's **Guide options**. For wrong listings, choo
 
 When **Review channel identities** appears in Guide options, select a saved channel and confirm **Restore saved identity** only for the same station/feed. This reuses favorites, hidden state, and guide corrections; otherwise leave the playable entry separate.
 
-Use **Refresh sources** after changes or **Retry** for errors. Longer guide ranges cannot create listings.
+Use **Refresh sources** after changes or **Retry** for errors. Longer ranges cannot create listings.
 
-On mobile, **Stop without Wi-Fi or Ethernet** stops Live TV after a network change is detected; brief cellular use can still occur during the transition.
+On mobile, **Stop without Wi-Fi or Ethernet** in **Settings > Live TV** stops playback after detected network changes; brief cellular use remains possible. Low Data Mode pauses Live TV even on Wi-Fi; use an unrestricted connection.
 
 ## Check unavailable channel links
 
@@ -63,16 +63,18 @@ Open **Scan results** to review reachable, unavailable, and uncertain links. Una
 
 On Apple TV, **Settings > Live TV > Guide > Auto preview** plays the focused channel as you browse. **Keep watching while browsing** keeps the watched channel instead of changing previews; it requires Auto preview.
 
-On both platforms, **Preview after watching** keeps a channel playing behind the guide after leaving full screen. Turn it off if you do not want that behavior. These controls are separate from [Home trailers](/home-and-navigation/#choose-the-hero).
+On both platforms, **Preview after watching** keeps a channel behind the guide after leaving full screen. These controls are separate from [Home trailers](/home-and-navigation/#choose-the-hero).
 
 ## Make channels from your libraries
 
-Open **Sources > Plozz channels**. **Enable Plozz channels** controls the automatic lineup; **Create custom channel** uses accessible **Plex, Jellyfin, or Emby** libraries, not IPTV URLs or Silo libraries.
+In **Sources > Plozz channels**, **Enable Plozz channels** manages the automatic lineup. **Create custom channel** uses accessible **Plex, Jellyfin, or Emby** libraries, not IPTV or Silo.
+
+Automatic-lineup errors offer **Retry Plozz channels**; **Refresh Plozz channels** rebuilds prepared channels. Automatic channels are not editable.
 
 Choose the libraries, movies/episodes, ordering, and optional matching rules. Select **Preview schedule**, inspect matches, then **Save channel**. Invalid or missing durations can exclude titles. Empty title, genre, or rating rules allow all accessible matches; review the preview carefully.
 
-Changes start after published programs. Sharing a schedule requires its catalogue snapshot; saving a recipe alone does not reproduce it elsewhere.
+Changes start after published programs. Sharing a schedule requires its catalogue snapshot, not just its recipe.
 
 **Update watch history** can mark a library-channel program watched after 90% viewing. It does not write resume progress, and these channels use original files only.
 
-Live TV is experimental. See [Troubleshooting](/troubleshooting/).
+Live TV is experimental; see [controls and buffering](/platform-controls/#live-tv-remote-controls-and-rewind) or [Troubleshooting](/troubleshooting/).
