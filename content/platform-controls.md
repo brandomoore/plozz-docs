@@ -1,14 +1,16 @@
 # Device and system controls
 
-Controls depend on your device, operating system, and playback path.
+Controls depend on device and playback path.
 
 ## Apple TV
 
-Use the remote to reveal and focus playback controls. **Settings > Playback > Seeking > Skip Intervals** changes left/right jumps.
+Use the remote to reveal playback controls. **Settings > Playback > Seeking > Skip Intervals** changes left/right jumps.
 
 **Seek without pausing** determines whether a playing video responds to scrubbing. When off, pause first, scrub to the position, then press Play. **Prevent Accidental Exit**, under Screens & Navigation's navigation settings, changes app-exit behavior rather than playback quality.
 
-**Fade on display changes** covers HDR/Dolby Vision and frame-rate transitions. If your Apple TV does not match dynamic range or frame rate, turning those fades off can avoid unnecessary transition delays. Plozz's toggles do not turn the television's matching features on.
+In the same navigation settings, **Zoom when opening titles** enables cinematic artwork transitions. It defaults off, respects Reduce Motion, and stays local to this profile on this Apple TV.
+
+**Fade on display changes** covers HDR/Dolby Vision and frame-rate transitions, not TV matching settings. If matching is off on Apple TV, disabling fades can avoid needless delays.
 
 Each Apple TV user can [automatically open their remembered Plozz profile](/apple-tv-profiles/).
 
@@ -44,7 +46,7 @@ Turn off **Settings > Playback > Volume and brightness gestures** to disable ver
 
 On iPhone, **Settings > Playback > Player orientation** offers Auto, Landscape, or Portrait for video and Live TV playback in a full-screen window. iPad follows system rotation. If changing orientation fails, use a full-screen window and retry.
 
-Playback options depend on session capabilities. Fit preserves the whole picture; Fill can crop it. [Background Audio](/audio/#keep-audio-playing-on-iphone-or-ipad) controls listening while locked or outside Plozz.
+Fit preserves the picture; Fill can crop it. [Background Audio](/audio/#keep-audio-playing-on-iphone-or-ipad) controls listening while locked or outside Plozz.
 
 ## AirPlay and Picture in Picture
 

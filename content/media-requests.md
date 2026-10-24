@@ -19,7 +19,9 @@ Open an eligible movie or show's details from discovery or search and choose **R
 
 A request is not an offline download to your device. Pending approval, requested, downloading, and available states describe the server's workflow. Playback requires an [accessible library copy](/library/).
 
-Requests use Seerr defaults, not a separate 4K-request choice.
+Requests use Seerr defaults, not a separate 4K choice.
+
+**Requested · Unreleased** means an approved request has a known future release date, not that downloading will start that day. Pending approval and reported download activity have separate states.
 
 ## Request missing seasons
 
@@ -28,7 +30,7 @@ With Seerr connected, open a TMDB-matched library show's details:
 1. **Apple TV:** enter the season row, then open **Request Seasons** or its current-status button. **iPhone/iPad:** tap the download-arrow **Manage Seasons** button.
 2. Select a requestable season or **Request All Missing** with its count.
 
-Use **Refresh Status** or the refresh control to recheck progress; failed or declined requests need attention in Seerr. Mobile download actions save existing episodes, not requested seasons.
+Use **Refresh Status** or refresh to recheck progress; failed or declined requests need attention in Seerr. Mobile downloads save existing episodes, not requested seasons.
 
 ## Read release and availability information
 

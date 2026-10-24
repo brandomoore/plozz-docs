@@ -75,6 +75,6 @@ Choose the libraries, movies/episodes, ordering, and optional matching rules. Se
 
 Changes start after published programs. Sharing a schedule requires its catalogue snapshot, not just its recipe.
 
-**Update watch history** can mark a library-channel program watched after 90% viewing. It does not write resume progress, and these channels use original files only.
+**Update watch history** defaults off per device. When enabled, it can mark programs watched after 90% viewing, without resume writes. Channels use original files only.
 
 Live TV is experimental; see [controls and buffering](/platform-controls/#live-tv-remote-controls-and-rewind) or [Troubleshooting](/troubleshooting/).

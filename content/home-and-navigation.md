@@ -1,37 +1,45 @@
 # Home and navigation
 
-Home rows, hero content, navigation, and detail-page choices belong to the active Plozz profile.
+Customize Home, navigation, and details for the active Plozz profile.
 
 ## Choose Home rows
 
 Open **Settings > Screens & Navigation > Customize Home**.
 
-Choose **Match server** for server Home arrangements or **Combined rows** for cross-library rows. Presets replace custom arrangements after confirmation, never editing the server. Multiple servers can combine common rows while retaining others. Plex supplies promoted Home rows, not another client's pinned-library layout.
+Choose **Match server** for server arrangements or **Combined rows** for cross-library rows. Presets replace custom arrangements after confirmation, never editing the server. Multiple servers can combine common rows while retaining others. Plex supplies promoted rows, not another client's pinned-library layout.
 
-Choose **Add section** for an available row, or open a section and choose **Remove section**. Choose **Reorder**, move sections, then **Done**. Mix combined, individual-library, and server rows; Home layout/Hero stays pinned. Editing saves a custom arrangement instead of following server order.
+Use **Add section**, or open a section and choose **Remove section**. Choose **Reorder**, move sections, then **Done**. Mix combined, library, and server rows; Home layout/Hero stays pinned. Editing saves a custom arrangement instead of following server order.
 
-Removing sections changes Home, not access. Enable libraries under **Settings > Libraries**. For loading errors, check the server and choose **Retry**.
+Removing sections changes Home, not access. An unavailable section stays saved; check its source and **Retry**. **No titles to show** means an empty result, not a connection error.
+
+## Add a collection section
+
+1. Choose **Add section > Create section**, then an available source and collection.
+2. Select **Posters**, **Landscape**, or **Featured**.
+3. Optionally enter a **Section name**, then **Add to Home**.
+
+The preview may omit titles. Reopen to change **Content** or the name, then **Save changes**. It remains tied to that server user; changing users does not grant access.
 
 ## Keep older Continue Watching titles
 
-Continue Watching has no app-imposed title-count limit or age expiry. Older unfinished titles and next episodes remain eligible; recency changes their order, not membership. Plozz can only show what your sources return, and watched state, removal, disabled libraries, or access changes can still remove entries.
+Continue Watching has no app-imposed count limit or age expiry. Recency orders titles, not membership. Account-wide Continue Watching and server Next Up ignore library browsing switches; disabling a library does not clear that history. Sources still determine results; watched state, dismissal, excluded servers, and server-user permissions still apply.
 
-In **Customize Home > Continue Watching**, **Merge Next Up rows** defaults on, folding source-supplied next episodes into Continue Watching and hiding their separate editor rows. Turn it off to arrange those separately. Removing Continue Watching suspends merging.
+In **Customize Home > Continue Watching**, **Merge Next Up rows** defaults on, folding next episodes into Continue Watching. Turn it off to arrange separate Next Up rows. Removing Continue Watching suspends merging.
 
 ## Choose the hero
 
-Open the pinned **Home layout** entry on Apple TV, or **Hero** on mobile. Apple TV offers **Showcase**, where the focused row title fills the background, or **Fullscreen Hero**, an independent carousel above the rows. Showcase has separate ratings and Discovery controls.
+Open **Home layout** on Apple TV, or **Hero** on mobile. Apple TV offers **Showcase**, where the focused title fills the background, or **Fullscreen Hero**, a separate carousel. Showcase has separate ratings and Discovery controls.
 
-For Fullscreen Hero or mobile, open **Hero content sources** for Continue Watching, recently added titles, Watchlist, libraries, collections, or Discovery. Turn off **Show hero** to hide this carousel, not Showcase.
+For the carousel, **Hero content sources** selects Continue Watching, recently added titles, Watchlist, libraries, collections, or Discovery. **Show hero** hides the carousel, not Showcase.
 
-Choose watched-content visibility, advancement, ratings, and separately muted trailers. Enable Discovery, then open **Discovery providers** to choose catalogues. Seerr is needed only to request unowned titles; Discovery is unavailable in Kids profiles.
+Choose watched visibility, advancement, ratings, and muted trailers. Enable Discovery, then choose **Discovery providers**. Seerr is needed for requests, not Discovery; Kids profiles exclude Discovery.
 
-For Continue Watching's artwork, details, labels, and selection action, see [Spoiler protection](/spoiler-protection/#change-continue-watching-cards).
+For Continue Watching cards/actions, see [Spoiler protection](/spoiler-protection/#change-continue-watching-cards).
 
 ## Arrange shortcuts and details
 
-Under **Screens & Navigation > Navigation > Hide or Reorder Navigation**, hold an item to hide, show, or move it; on mobile, drag to reorder. Unused Home, Search, or Watchlist shortcuts can hide automatically; choose **Show** to retain one. Hiding never changes access. Compact mobile layouts use **More** for overflow.
+Under **Screens & Navigation > Navigation > Hide or Reorder Navigation**, hold to hide/show/move; mobile uses dragging to reorder. Unused Home, Search, or Watchlist shortcuts can hide automatically; **Show** retains one. Compact mobile layouts use **More**.
 
-Open **Detail Page** to choose artwork, a trailer, or theme music behind a title's header. Trailer and theme music do not play together; this choice is separate from Home trailers. Review-score and age-recommendation display controls are here too.
+**Detail Page** chooses artwork or trailers independently of Home, plus [theme music on Apple TV](/audio/#control-detail-page-music). Review-score and age-recommendation controls are here.
 
-Use [Customize library pages](/customize-libraries/) for library tabs/rows, or [Appearance](/appearance/) for cards, artwork, and logo sizes.
+Use [Customize library pages](/customize-libraries/) for tabs/rows and [Appearance](/appearance/) for cards, logos, and text size.

@@ -6,7 +6,7 @@ Download movies and episodes on iPhone/iPad, not Apple TV.
 
 1. Open a movie or episode’s detail page and choose its download button.
 2. If prompted, choose **Download Original** or a smaller copy.
-3. Open **Downloads** and wait for completion, not just preparing or downloading.
+3. Open **Downloads** and wait for completion, not preparing, downloading, or **Finishing**.
 4. Open the saved movie or episode from Downloads to watch it.
 
 For a show, open **Manage Seasons**, then choose **Download All Available Episodes**, a season, or an episode. Only available library files can download.
@@ -35,13 +35,13 @@ Under **Notifications**, set completion/failure switches and allow system notifi
 
 Use a download’s trailing menu for **Pause**, **Resume**, or **Remove**. The Downloads screen also offers Pause All and Resume All.
 
-Removing a download deletes its on-device copy, not the server original. Check free storage before large batches.
+Removal deletes the on-device copy, not the server original. Check **Storage** in Download Settings for download use and available device space before large batches.
 
 > [!WARNING]
 > In Download Settings, **Cancel Active Downloads** deletes unfinished copies but keeps completed downloads. **Delete All Downloads** removes this profile's saved movies and episodes. Pause instead to resume later.
 
-Eligible HTTP transfers can continue in the background; in-process transfers, including shares, need Plozz active unless iOS grants continued execution. Reopen Plozz to resume paused work.
+Eligible HTTP transfers can continue in the background; in-process/share transfers need Plozz active unless iOS grants continued execution. Reopen Plozz to resume.
 
-On iOS/iPadOS 26 or later, downloads can request continued processing with a Live Activity. The system can decline it. Cancellation or expiry pauses its active downloads without deleting partial files. Receiving all bytes still requires offline validation before completion.
+On iOS/iPadOS 26 or later, downloads can request continued processing with a Live Activity; the system can decline. Cancellation or expiry pauses its downloads without deleting partial files. Receiving all bytes still requires offline validation before completion.
 
 For offline failures, check that this version finished downloading.

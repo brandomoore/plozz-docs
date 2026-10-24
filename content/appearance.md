@@ -1,12 +1,12 @@
 # Appearance and language
 
-Open **Settings > Appearance** after selecting the Plozz profile you want to customize. These presentation choices do not change anyone else's server permissions.
+Open **Settings > Appearance** for the profile you want to customize. Presentation choices do not change server permissions.
 
 ## Make cards easier to read
 
 Choose a theme and gradient backgrounds. In **Cards**, adjust style, labels, watched indicators, and unwatched-episode counts. **Display Size** changes card size, columns, and spacing, not video resolution.
 
-On Apple TV, focus appearance emphasizes the selected card. For crowded grids or hard-to-recognize titles, try larger cards and clearer labels before hiding content.
+On Apple TV, focus appearance emphasizes the selected card. Try larger cards and clearer labels before hiding content.
 
 In **Theme**, set **Liquid Glass** to Off for solid backgrounds, or follow the system's Reduce Transparency preference. This is separate from card size.
 
@@ -16,11 +16,13 @@ Use **Customize by view** for exceptions. **Mixed**, offered for Home rows and R
 
 Continue Watching's [Customize Home editor](/spoiler-protection/#change-continue-watching-cards) has separate **Labels** controls: **Follow Appearance** follows its Home rows or Recommended context; **On** or **Off** overrides labels across artwork styles.
 
-A collection cover and its contents are separate surfaces: titles inside collections and playlists use **Browse**.
+A collection cover and its contents are separate: titles inside collections/playlists use **Browse**. Contextual **Card labels** under Customize Home, Customize Libraries, and Detail Page edit these same preferences.
 
 ## Resize title logos
 
-Under **Settings > Screens & Navigation**, adjust **Logo size** separately in **Customize Home > Home layout** (mobile **Hero**) and **Detail Page**. Apple TV remembers distinct Showcase and Fullscreen Hero sizes. Library Recommended headers have a [separate control](/customize-libraries/#adjust-the-apple-tv-library-header).
+Under **Settings > Screens & Navigation**, adjust **Logo size** and **Text size** in **Customize Home > Home layout** (mobile **Hero**) and **Detail Page**. Apple TV remembers separate Showcase/Fullscreen Hero sizes; [library Recommended headers](/customize-libraries/#adjust-the-apple-tv-library-header) are independent too.
+
+Text size scales title text, descriptions, and metadata, not cards or menus. On Apple TV, Detail Page sizing also changes episode titles/synopses. The center position is the default; constrained headers may fit smaller without changing your saved choice.
 
 ## Choose artwork
 
@@ -30,14 +32,14 @@ In **Artwork**, start with a preset:
 - **Prefer my library's artwork:** use library images first, with online fallback when missing.
 - **Prefer artwork from metadata providers:** use online images first, falling back to the library. Extra lookups can make browsing slower.
 
-Customize individual views only when needed. Home's Watchlist row and the separate Watchlist page have different artwork scopes. Artwork saved with a download is selected when downloaded; existing copies keep their saved images.
+Customize views only when needed. Home's Watchlist row and Watchlist page have different artwork scopes. Downloads keep the images chosen when saved.
 
-These profile presentation choices are separate from the shared [Metadata Providers](/metadata-and-ratings/) configuration. A preference cannot create artwork that neither source supplies.
+These choices differ from shared [Metadata Providers](/metadata-and-ratings/). Preferences cannot create missing artwork.
 
 ## Change language or nighttime appearance
 
-Open **Settings > Language** to change the app interface language. This is separate from [audio language](/audio/) and [subtitle language](/subtitles/).
+**Settings > Language** changes interface language, separately from [audio](/audio/) and [subtitle language](/subtitles/).
 
 **System** follows the device's language choices. Changing Plozz's language does not translate server-supplied titles or descriptions; dates and numbers still follow the device's region. System-drawn player controls and permission prompts keep the device's language.
 
-For hidden episode information, use [Spoiler protection](/spoiler-protection/). For a picture that dims or warms on a schedule, use [Circadian Mode](/circadian-mode/). Home layout and navigation choices live under [Screens & Navigation](/home-and-navigation/).
+Use [Spoiler protection](/spoiler-protection/) for episode information, [Circadian Mode](/circadian-mode/) for scheduled dimming, or [Screens & Navigation](/home-and-navigation/) for Home layouts and shortcuts.

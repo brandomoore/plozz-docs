@@ -32,3 +32,9 @@ For lip-sync problems, compare another track, title, and output route. For buffe
 ## Keep audio playing on iPhone or iPad
 
 Enable **Settings > Playback > Background Audio** to continue video audio when locking the device or leaving Plozz. It is off by default. This does not download the video: streaming can keep using data. AirPlay and Picture in Picture have [separate requirements](/platform-controls/#airplay-and-picture-in-picture).
+
+## Control detail-page music
+
+On **Apple TV**, open **Settings > Screens & Navigation > Detail Page > Background**. Choose **Theme music**, then Low, Medium, or High volume, when music is available for the title. Choose **Off** for static artwork without theme music or trailers. This does not disable Home trailers or change a video's audio track.
+
+The iPhone/iPad setting does not currently start detail-page music.

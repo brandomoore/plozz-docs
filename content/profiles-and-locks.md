@@ -1,12 +1,12 @@
 # Profiles, kids, and locks
 
-A Plozz profile keeps preferences, libraries, Home layout, and trackers. A **server user** determines server-side access and history. Creating a Plozz profile does not create a Jellyfin user, Plex Home user, or Silo profile.
+A Plozz profile keeps preferences, libraries, Home layout, and trackers. A **server user** determines server access and history. Creating a Plozz profile does not create server users.
 
 ## Choose who is watching
 
 Use the profile header in **Settings** to switch. Open **Settings > Profiles** to add or manage profiles, including names and avatars. On iPhone/iPad, choose **Edit Profiles** or touch and hold a profile, then **Edit Profile**.
 
-Under each profile's **Libraries**, select included servers, the server user to watch as, and enabled libraries. Server sign-ins are shared on the device; each profile chooses which to use.
+Under each profile's **Libraries**, select servers, server users, and libraries. Sign-ins are shared on the device; each profile chooses which to use. Disabling a library hides browsing/discovery, not account-wide Continue Watching or Next Up; enforce content restrictions on the server.
 
 **Automatically Sign In** restores the last-used profile's previously authorized session on this device, including verified Profile Lock or Plex PIN access. Finish unlocking before enabling it. Turn it off if you want a PIN prompt on later launches; switching profiles still checks their locks.
 
@@ -37,4 +37,4 @@ Deleting a Plozz profile removes its preferences and server selections, not the 
 
 There is no in-app forgotten-PIN reset. If this profile is already unlocked for editing on another device, remove its **Profile Lock** there; iCloud Sync must be enabled to carry the change here.
 
-See [Profiles and sync](/profiles-and-sync/) for what moves between devices.
+See [Profiles and sync](/profiles-and-sync/) for transferable settings.

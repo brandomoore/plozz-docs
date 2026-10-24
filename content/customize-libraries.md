@@ -24,6 +24,10 @@ Only enabled, supported video libraries appear in this editor. Network shares ha
 
 ## Adjust the Apple TV library header
 
-Under **Recommended Page**, change **Logo size** for library Recommended headers. It is independent of Home's Showcase/Hero and Detail Page logo sizes; **Reset** restores its default.
+Under **Recommended Page**, adjust **Logo size** and **Text size** for library headers. Text size scales descriptions and metadata, not cards or menus. These are independent of Home's Showcase/Hero and Detail Page sizes; the center marker identifies the default.
+
+## Adjust card labels
+
+**Card labels** in Customize Libraries changes labels for Recommended, Browse, collections, and playlists across this profile's libraries. These are the same [per-view Appearance choices](/appearance/#make-cards-easier-to-read), not extra overrides. Continue Watching shares its label setting with Home.
 
 These preferences belong to the profile and can travel through [iCloud Sync](/profiles-and-sync/#sync-settings). To enable libraries for this profile, use **Settings > Libraries**. To arrange the app's main shortcuts instead, use [Navigation](/home-and-navigation/#arrange-shortcuts-and-details).

@@ -148,7 +148,7 @@
     "platforms": ["Apple TV", "iPhone", "iPad"],
     "title": "Customize library pages",
     "seoTitle": "Arrange Plozz library tabs and Recommended rows",
-    "description": "Reorder or hide library tabs and Recommended rows, restore hidden content, and adjust Apple TV library logos without changing access or Home.",
+    "description": "Reorder or hide library tabs and Recommended rows, restore hidden rows, and adjust Apple TV library logos and text without changing access or Home.",
     "section": "Library",
     "kind": "guide",
     "file": "customize-libraries.md",
@@ -167,7 +167,9 @@
       "Sources/FeatureHomeCore/LibraryBrowseViewModel.swift",
       "Sources/FeatureHome/LibraryBrowseView.swift",
       "Sources/AppShelliOS/PlozziOSLibraryView.swift",
-      "Sources/FeatureSettings/HeroLogoSizeControl.swift"
+      "Sources/FeatureSettings/HeroLogoSizeControl.swift",
+      "Sources/CoreModels/CardCaptionSettings.swift",
+      "Sources/CoreModels/HeroTextSize.swift"
     ],
     "watch": [
       "Sources/FeatureSettings/LibraryPresentationSettingsView.swift",
@@ -215,7 +217,7 @@
     "slug": "home-and-navigation",
     "title": "Home and navigation",
     "seoTitle": "Customize Plozz Home rows, hero, and navigation",
-    "description": "Arrange Home rows and hero content, choose Discovery providers, keep older Continue Watching titles, merge Next Up, and customize navigation.",
+    "description": "Arrange Home rows, add collection sections, choose hero sources and navigation, and understand Continue Watching independently of library browsing.",
     "section": "Library",
     "kind": "guide",
     "file": "home-and-navigation.md",
@@ -227,16 +229,16 @@
       "Sources/FeatureSettings/HomeLayoutPicker.swift",
       "Sources/FeatureSettings/HeroSettingsControls.swift",
       "Sources/FeatureSettings/NavigationLibrariesDetailView.swift",
-      "Sources/CoreUI/LiftableReorderList.swift",
+      "Sources/FeatureSettings/CollectionSectionSettingsView.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/CoreModels/HomeLibraryVisibility.swift",
-      "Sources/CoreModels/HomeLibraryVisibilityStore.swift",
-      "Sources/CoreModels/HomeSectionCatalogModel.swift",
+      "Sources/CoreModels/HeroCollectionSelection.swift",
+      "Sources/CoreModels/CollectionPreviewLoader.swift",
       "Sources/FeatureHomeCore/HomeAggregator.swift",
       "Sources/CoreModels/ContinueWatchingPolicy.swift",
       "Sources/CoreModels/NavigationContentAvailability.swift",
-      "Sources/CoreModels/NavigationLibraryLayout.swift",
+      "Sources/CoreModels/HomeSectionIssue.swift",
       "Sources/AppShell/MainTabView.swift",
       "Sources/AppShelliOS/PlozziOSRootView.swift",
       "Sources/AppRuntime/HeroDiscoveryRuntime.swift"
@@ -246,7 +248,7 @@
       "Sources/FeatureSettings/Hero",
       "Sources/CoreModels/Home",
       "Sources/CoreModels/Navigation",
-      "Sources/FeatureSettings/NavigationLibrariesDetailView.swift",
+      "Sources/FeatureSettings/Collection",
       "Sources/AppRuntime/HeroDiscoveryRuntime.swift"
     ]
   },
@@ -371,36 +373,38 @@
     "slug": "audio",
     "title": "Audio tracks and output",
     "seoTitle": "Plozz audio tracks, dialogue controls, and background listening",
-    "description": "Choose audio tracks, adjust supported Apple TV dialogue controls, enable mobile background listening, and troubleshoot timing.",
+    "description": "Choose audio tracks, adjust Apple TV dialogue and detail-page music, enable mobile background listening, and troubleshoot timing.",
     "section": "Playback",
     "kind": "guide",
     "file": "audio.md",
     "sources": [
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-      "Sources/FeaturePlayback/PlayerControls.swift",
+      "Sources/AppShell/MainTabView.swift",
       "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
       "Sources/FeaturePlayback/SystemPlaybackAudio.swift",
       "Sources/FeaturePlayback/PlayerControlsModel.swift",
       "Sources/FeaturePlayback/LiveChannelPlayerView.swift",
       "Sources/FeaturePlayback/LiveChannelTransport.swift",
-      "Sources/FeatureSettings/ExternalPlayerSettingsView.swift",
+      "Sources/FeatureHome/ItemDetailView.swift",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
-      "Sources/FeaturePlayback/PlaybackAudioOutputReader.swift",
+      "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
       "Sources/FeaturePlayback/NativeVideoEngine.swift",
       "Sources/FeaturePlayback/PlayerViewModel.swift",
       "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
-      "Sources/AppShell/PlaybackEngineComposition.swift",
+      "Sources/FeatureHome/ThemeMusicPlayback.swift",
       "Sources/AppShelliOS/PlozziOSPlaybackEngineComposition.swift",
       "Sources/CoreModels/PlaybackSettings.swift",
-      "Sources/FeaturePlayback/SeriesTrackMemory.swift"
+      "Sources/FeaturePlayback/SeriesTrackMemory.swift",
+      "Sources/CoreModels/HeroBackgroundSettings.swift",
+      "Sources/CoreModels/ThemeMusicSettings.swift"
     ],
     "watch": [
-      "Sources/FeaturePlayback/PlaybackAudio",
+      "Sources/FeatureHome/ThemeMusic",
       "Sources/FeaturePlayback/SystemPlaybackAudio.swift",
       "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
       "Sources/FeaturePlayback/Player",
-      "Sources/FeaturePlayback/SeriesTrackMemory.swift",
+      "Sources/CoreModels/ThemeMusic",
       "Sources/CoreModels/PlaybackSettings.swift"
     ]
   },
@@ -489,7 +493,7 @@
     "file": "live-tv.md",
     "sources": [
       "Sources/FeatureAuth/IPTVSignInView.swift",
-      "Sources/FeatureAuthCore/IPTVAuthViewModel.swift",
+      "Sources/CoreModels/LibraryChannelHistorySettings.swift",
       "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift",
       "Sources/ProviderIPTV/IPTVProvider.swift",
       "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift",
@@ -512,7 +516,7 @@
     "watch": [
       "Sources/FeatureLiveTV/",
       "Sources/FeatureLiveTVCore/",
-      "Sources/ProviderIPTV/",
+      "Sources/CoreModels/LibraryChannelHistorySettings.swift",
       "Sources/CoreModels/LiveTV",
       "Sources/AppShelliOS/PlozziOSLiveTV",
       "Sources/FeaturePlayback/LiveTVMobileNetwork"
@@ -540,7 +544,8 @@
       "Sources/AppShelliOS/PlozziOSDownloadNotificationNavigation.swift",
       "Sources/AppShelliOS/PlozziOSDownloadActivity.swift",
       "Sources/AppShelliOS/PlozziOSBackgroundHTTPDownloadEngine.swift",
-      "Sources/MediaDownloads/DirectShareDownloadSource.swift"
+      "Sources/MediaDownloads/DirectShareDownloadSource.swift",
+      "Sources/MediaDownloads/DownloadStorageCapacity.swift"
     ],
     "watch": [
       "Sources/MediaDownloads/",
@@ -555,7 +560,7 @@
     "slug": "appearance",
     "title": "Appearance and language",
     "seoTitle": "Change Plozz themes, cards, artwork, and interface language",
-    "description": "Adjust cards, labels, and title logos, choose library or online artwork, customize individual views, and separate app language from media languages.",
+    "description": "Adjust cards, labels, title logos and text size, choose artwork sources, customize individual views, and separate app language from media languages.",
     "section": "Personalize",
     "kind": "guide",
     "file": "appearance.md",
@@ -571,13 +576,15 @@
       "Sources/CoreModels/CardCaptionSettings.swift",
       "Sources/CoreModels/ThemeSettings.swift",
       "Sources/CoreModels/TransparencyPreferenceStore.swift",
-      "Sources/CoreUI/ProfileSettingsCategory.swift",
-      "Sources/CoreUI/ContinueWatchingArtworkSwatch.swift",
+      "Sources/FeatureHome/FocusHeroHomeView.swift",
+      "Sources/CoreUI/EpisodeColumnCard.swift",
       "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
       "Sources/FeatureSettings/HeroSettingsControls.swift",
       "Sources/FeatureSettings/HeroLogoSizeControl.swift",
       "Sources/CoreModels/HeroSettings.swift",
-      "Sources/CoreModels/DetailPageSettings.swift"
+      "Sources/CoreModels/DetailPageSettings.swift",
+      "Sources/FeatureSettings/LibraryPresentationSettingsView.swift",
+      "Sources/CoreModels/HeroTextSize.swift"
     ],
     "watch": [
       "Sources/FeatureSettings/CardAppearanceControls.swift",
@@ -655,7 +662,7 @@
     "slug": "metadata-and-ratings",
     "title": "Metadata and ratings",
     "seoTitle": "Configure Plozz metadata, artwork sources, and ratings",
-    "description": "Choose metadata priority, use local NFO files and artwork for shares, verify a TMDB token, and check ratings, family guidance, and incorrect matches.",
+    "description": "Choose metadata sources, use local NFO files, verify a TMDB token, hide classification badges, and distinguish review scores from family guidance.",
     "section": "Personalize",
     "kind": "guide",
     "file": "metadata-and-ratings.md",
@@ -664,20 +671,20 @@
       "Sources/AppShelliOS/PlozziOSMetadataSettingsView.swift",
       "Sources/AppShell/MetadataSettingsWiring.swift",
       "Sources/AppShelliOS/PlozziOSMetadataSettingsWiring.swift",
-      "Sources/AppRuntime/MediaShareRuntime.swift",
-      "Sources/MetadataKit/MetadataEnrichmentConfig.swift",
+      "Sources/CoreModels/ContentRatingSettings.swift",
+      "Sources/CoreUI/MediaBadgeView.swift",
       "Sources/ProviderShare/ShareScanner.swift",
       "Sources/ProviderShare/ShareLocalArtwork.swift",
       "Sources/ProviderShare/ShareNFOParser.swift",
       "Sources/ProviderShare/ShareMetadataPipeline.swift",
-      "Sources/ProviderShare/ShareCatalogReadProjection.swift",
+      "Sources/FeatureSettings/ContentRatingToggle.swift",
       "Sources/MetadataKit/TMDBKeyValidator.swift",
       "Sources/RatingsService/RatingsServiceFactory.swift",
       "Sources/RatingsService/RatingsServiceConfig.swift",
       "Sources/CoreUI/FamilyGuidanceViews.swift",
       "Sources/AppRuntime/FamilyGuidanceService.swift",
       "Sources/ProviderPlex/PlexCommonSenseMedia.swift",
-      "Sources/ProviderPlex/PlexClient.swift",
+      "Sources/TopShelfKit/TopShelfPublisher.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/CoreModels/MediaItemActionCatalog.swift"
     ],
@@ -686,7 +693,7 @@
       "Sources/RatingsService/",
       "Sources/FeatureSettings/Metadata",
       "Sources/AppShelliOS/PlozziOSMetadata",
-      "Sources/CoreUI/FamilyGuidance",
+      "Sources/CoreModels/ContentRating",
       "Sources/ProviderShare/Share"
     ]
   },
@@ -738,9 +745,9 @@
       "Sources/AppRuntime/PlexHomeUsersModel.swift",
       "Sources/AppShelliOS/PlozziOSAppModel.swift",
       "Sources/FeatureSettings/ParentalPINDetailView.swift",
-      "Sources/FeatureSettings/GrownUpsUnlockView.swift",
+      "Sources/CoreModels/HomeLibraryVisibility.swift",
       "Sources/FeatureSettings/MyLibrariesDetailView.swift",
-      "Sources/FeatureProfiles/ProfileActionsList.swift",
+      "Sources/FeatureHomeCore/HomeAggregator.swift",
       "Sources/CoreModels/Profile.swift",
       "Sources/AppShell/RootView.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
@@ -865,7 +872,7 @@
       "Sources/MetadataKit/ExternalTitleMetadataResolver.swift",
       "Sources/MetadataKit/TMDbMetadataProvider.swift",
       "Sources/CoreModels/ProfileStore.swift",
-      "Sources/AppShell/AppState.swift",
+      "Sources/CoreModels/HeroCTA.swift",
       "Sources/AppShelliOS/PlozziOSAppModel.swift"
     ],
     "watch": [
@@ -886,14 +893,14 @@
     "kind": "reference",
     "file": "platform-controls.md",
     "sources": [
-      "Sources/CoreModels/LiveChannelGuideInfo.swift",
+      "Sources/AppShell/MainTabView.swift",
       "Sources/FeaturePlayback/PlayerTouchGestureSurface.swift",
       "Sources/AppShelliOS/PlozziOSPlayerKeyboardControls.swift",
       "Sources/AppShelliOS/PlozziOSPictureInPictureController.swift",
       "Sources/AppShelliOS/PlozziOSPlayerOrientation.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/CoreModels/LivePlaybackBuffer.swift",
-      "Sources/FeatureSettings/PlaybackReadAheadControl.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/CoreModels/TopShelfSettings.swift",
       "Sources/FeatureSettings/TopShelfSettingsView.swift",
       "Sources/AppShell/HomeTab.swift",
@@ -901,10 +908,10 @@
       "Sources/FeaturePlayback/NativeVideoEngine.swift",
       "Sources/FeaturePlayback/LiveChannelPlayerView.swift",
       "Sources/AppShelliOS/PlozziOSLivePresentationControls.swift",
-      "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
+      "Sources/CoreModels/NavigationStyleSettingsStore.swift",
       "Sources/FeaturePlayback/InfoPanelView.swift",
       "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift",
-      "Sources/CoreModels/PlaybackDiagnostics.swift",
+      "Sources/CoreUI/DetailNavigationTransition.swift",
       "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
     ],
     "watch": [
@@ -913,7 +920,7 @@
       "Sources/FeaturePlayback/PlaybackDiagnostics",
       "Sources/TopShelfKit/",
       "Sources/FeatureSettings/TopShelf",
-      "TopShelf/"
+      "Sources/CoreModels/NavigationStyleSettingsStore.swift"
     ]
   },
   {
@@ -935,10 +942,12 @@
       "Sources/CrashReporting/CrashRedaction.swift",
       "Sources/CrashReporting/CrashDiagnostics.swift",
       "Sources/AppShell/RootView.swift",
-      "Sources/AppShelliOS/PlozziOSRootView.swift"
+      "Sources/AppShelliOS/PlozziOSRootView.swift",
+      "Sources/CoreModels/PlaybackDiagnosticJournal.swift",
+      "Sources/CoreModels/LiveTVSourceDiagnostics.swift"
     ],
     "watch": [
-      "README.md",
+      "Sources/CoreModels/PlaybackDiagnostic",
       "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
       "Sources/FeatureSettings/SendDiagnosticsCard.swift",
       "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift",
