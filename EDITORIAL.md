@@ -40,7 +40,7 @@ omissions during that audit instead of only refreshing verification metadata.
 
 ## Editorial scope
 
-Do not document height-channel rendering, TrueHD Atmos, DTS:X, Apple Positional
+Do not document Dolby Vision, height-channel rendering, TrueHD Atmos, DTS:X, Apple Positional
 Audio/APAC, Dolby MAT, or the related settings and availability. This applies
 to prose, search metadata, diagrams, cross-links and coverage answers even
 when app or engine source still contains the feature. Do not add explanations

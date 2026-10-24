@@ -95,7 +95,7 @@ export function validSourcePath(path) {
 
 export function validateEditorialScope(text, label) {
   const normalized = text.normalize('NFKC').replace(/[*_`]/g, '').replace(/[\u2010-\u2015]/g, '-');
-  if (/height[\s-]*(?:channels?|audio|rendering|positioning)|\bheights\b|overhead (?:audio|effects)|TrueHD[\s-]*Atmos|DTS[\s:-]*X\b|Apple Positional Audio|\bAPAC\b|Dolby MAT|object[\s-]*audio/iu.test(normalized)) {
+  if (/Dolby[\s-]*Vision|height[\s-]*(?:channels?|audio|rendering|positioning)|\bheights\b|overhead (?:audio|effects)|TrueHD[\s-]*Atmos|DTS[\s:-]*X\b|Apple Positional Audio|\bAPAC\b|Dolby MAT|object[\s-]*audio/iu.test(normalized)) {
     throw new Error(`Content outside editorial scope: ${label}. Follow EDITORIAL.md.`);
   }
 }

@@ -27,7 +27,7 @@ test('citations stay inside public app source paths', () => {
 });
 
 test('editorial scope rejects excluded audio copy without blocking ordinary formats', () => {
-  for (const text of ['Height channels', 'height-audio', 'height positioning', 'TrueHD **Atmos**',
+  for (const text of ['Dolby Vision', 'Dolby **Vision**', 'Height channels', 'height-audio', 'height positioning', 'TrueHD **Atmos**',
     'DTS:X', 'DTS-X', 'Apple Positional Audio', 'APAC', 'Dolby MAT', 'object–audio', 'overhead effects']) {
     assert.throws(() => validateEditorialScope(text, 'test'), /outside editorial scope/);
   }
