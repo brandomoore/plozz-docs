@@ -10,7 +10,7 @@ Use the remote to reveal playback controls. **Settings > Playback > Seeking > Sk
 
 In the same navigation settings, **Zoom when opening titles** enables cinematic artwork transitions. It defaults off, respects Reduce Motion, and stays local to this profile on this Apple TV.
 
-**Fade on display changes** covers HDR/Dolby Vision and frame-rate transitions, not TV matching settings. If matching is off on Apple TV, disabling fades can avoid needless delays.
+**Fade on display changes** covers dynamic-range and frame-rate transitions, not TV matching settings. If matching is off on Apple TV, disabling fades can avoid needless delays.
 
 Each Apple TV user can [automatically open their remembered Plozz profile](/apple-tv-profiles/).
 

@@ -29,7 +29,7 @@ Reduced Plex, Jellyfin, and Emby copies use your profile's preferred audio langu
 
 **Download Speed > Limit** affects downloads, not playback. Reduced-quality Jellyfin/Emby downloads cannot be capped: choose Original or set **Limit** to **Unlimited**. With a cap, background downloads pause by default; **Continue at Full Speed** temporarily removes the cap.
 
-Under **Notifications**, set completion/failure switches and allow system notifications. Batch notices summarize a season or show. Tapping a completion notice opens the title or batch without autoplaying.
+Under **Notifications**, set completion/failure switches and allow system notifications. Batch notices summarize a season or show. Tapping a completion notice opens the title or batch without autoplaying; unlock the owning profile if asked.
 
 ## Pause, resume, or remove
 
@@ -43,5 +43,3 @@ Removal deletes the on-device copy, not the server original. Check **Storage** i
 Eligible HTTP transfers can continue in the background; in-process/share transfers need Plozz active unless iOS grants continued execution. Reopen Plozz to resume.
 
 On iOS/iPadOS 26 or later, downloads can request continued processing with a Live Activity; the system can decline. Cancellation or expiry pauses its downloads without deleting partial files. Receiving all bytes still requires offline validation before completion.
-
-For offline failures, check that this version finished downloading.

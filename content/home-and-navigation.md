@@ -22,9 +22,9 @@ The preview may omit titles. Reopen to change **Content** or the name, then **Sa
 
 ## Keep older Continue Watching titles
 
-Continue Watching has no app-imposed count limit or age expiry. Recency orders titles, not membership. Account-wide Continue Watching and server Next Up ignore library browsing switches; disabling a library does not clear that history. Sources still determine results; watched state, dismissal, excluded servers, and server-user permissions still apply.
+Continue Watching and its merged Next Up titles have no app-imposed count limit or age expiry. Separate Next Up rows show up to 20 titles. Account-wide Continue Watching and Next Up ignore library browsing switches; disabling a library does not clear that history. Sources, watched state, dismissal, excluded servers, and server-user permissions still apply.
 
-In **Customize Home > Continue Watching**, **Merge Next Up rows** defaults on, folding next episodes into Continue Watching. Turn it off to arrange separate Next Up rows. Removing Continue Watching suspends merging.
+In **Customize Home > Continue Watching**, **Merge Next Up rows** defaults on. Turn it off to arrange separate Next Up rows. Removing Continue Watching suspends merging.
 
 ## Choose the hero
 
