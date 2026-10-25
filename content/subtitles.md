@@ -1,13 +1,13 @@
 # Subtitles
 
-Select tracks in the player; save defaults in Settings.
+Select player tracks; save defaults in Settings.
 
 ## Choose a track
 
-1. Reveal the playback controls and open **Subtitles**.
+1. Reveal controls and open **Subtitles**; in mobile portrait, open the ellipsis **Playback options** menu first.
 2. Select a listed track, or **Off**.
-3. For two tracks with a movie or episode, select a primary text track, then another under **Style > Dual Subtitles** on Apple TV, or **Dual Subtitles** if shown directly. On iPhone/iPad, use **Second Track**. Choose its **Off** option to remove only the second track.
-4. Where supported, choose **Download subtitles…** on Apple TV or **Search for Subtitles** on iPhone/iPad, then select a result.
+3. For two tracks with a movie or episode, select primary text, then **Style > Dual Subtitles** on Apple TV, or **Dual Subtitles** if shown directly. On iPhone/iPad, use **Advanced… > Second Track**. Its **Off** removes only the second track.
+4. Where supported, choose **Download subtitles…** on Apple TV or **Search & Download…** on iPhone/iPad, then select a result.
 
 Search requires server subtitle services; shares use existing subtitles.
 
@@ -19,7 +19,7 @@ Open **Settings > Subtitles** and choose **Customize subtitle style**—under **
 
 In Style, **Match Apple TV Subtitle Style** (**Match Device Subtitle Style** on mobile) replaces your custom look after confirmation. Editing a control stops matching. Placement and dual-subtitle settings remain Plozz-specific.
 
-For position, 0% is the bottom, 100% the top; negative values can crop text. In the player, choose **Style** on Apple TV, or **Appearance > Style** on iPhone/iPad.
+For position, 0% is bottom, 100% top; negative values can crop text. In the player, choose **Style** on Apple TV, or **Subtitles > Advanced… > Appearance > Style** on iPhone/iPad.
 
 **Use a separate style for Live TV** in **Settings > Subtitles** separates channel appearance.
 
@@ -31,9 +31,9 @@ On iPhone/iPad, **Preferred language code** accepts a code such as `en` for Engl
 
 Set movie, TV, and anime rules where offered. Forced tracks cover selected dialogue/signs; SDH includes sound descriptions. **Prefer SDH** allows regular fallback; **Only SDH** leaves automatic subtitles off if unavailable and excludes non-SDH search/download results. Neither creates missing tracks.
 
-To stop reusing a series' choice, turn off **Remember subtitles per series** in **Settings > Subtitles** on Apple TV, or under **Tracks** in **Settings > Playback** on iPhone/iPad.
+Disable **Remember subtitles per series** in **Settings > Subtitles** on Apple TV, or **Settings > Playback**, under **Tracks**, on iPhone/iPad to stop reusing choices.
 
-For mistimed text, use the **Subtitle Sync** clock button on Apple TV or **Playback Sync > Subtitle Delay** in iPhone/iPad playback options. Timing controls appear only when Plozz can shift the selected track; some player-rendered embedded tracks do not allow it.
+For mistimed text, use the **Subtitle Sync** clock button on Apple TV or **Subtitles > Advanced… > Subtitle Delay** on iPhone/iPad. Timing controls appear only when Plozz can shift the track; some player-rendered embedded tracks cannot shift.
 
 ## Missing, wrong, or drifting subtitles
 

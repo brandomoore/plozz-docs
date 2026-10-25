@@ -61,7 +61,7 @@ Open **Scan results** to review reachable, unavailable, and uncertain links. Una
 
 ## Stop unexpected channel previews
 
-On Apple TV, **Settings > Live TV > Guide > Auto preview** plays the focused channel as you browse. **Keep watching while browsing** keeps the watched channel instead of changing previews; it requires Auto preview.
+On Apple TV, **Settings > Live TV > Guide preferences > Auto preview** plays the focused channel as you browse. **Keep watching while browsing** keeps the watched channel instead of changing previews; it requires Auto preview.
 
 On both platforms, **Preview after watching** keeps a channel behind the guide after leaving full screen. These controls are separate from [Home trailers](/home-and-navigation/#choose-the-hero).
 
@@ -71,10 +71,10 @@ In **Sources > Plozz channels**, **Enable Plozz channels** manages the automatic
 
 Automatic-lineup errors offer **Retry Plozz channels**; **Refresh Plozz channels** rebuilds prepared channels. Automatic channels are not editable.
 
-Choose the libraries, movies/episodes, ordering, and optional matching rules. Select **Preview schedule**, inspect matches, then **Save channel**. Invalid or missing durations can exclude titles. Empty title, genre, or rating rules allow all accessible matches; review the preview carefully.
+Choose libraries, movies/episodes, ordering, and optional matching rules. Select **Preview schedule**, inspect matches, then **Save channel**. Invalid or missing durations can exclude titles. Empty title, genre, or rating rules allow all accessible matches; review the preview carefully.
 
 Changes start after published programs. Sharing a schedule requires its catalogue snapshot, not just its recipe.
 
-**Update watch history** defaults off per device. When enabled, it can mark programs watched after 90% viewing, without resume writes. Channels use original files only.
+**Update watch history** defaults off for this profile/device. Enabling it can mark programs watched after 90% viewing, without resume writes. Channels use original files only.
 
 Live TV is experimental; see [controls and buffering](/platform-controls/#live-tv-remote-controls-and-rewind) or [Troubleshooting](/troubleshooting/).

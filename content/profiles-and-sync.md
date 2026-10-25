@@ -20,7 +20,11 @@ iCloud Sync carries profiles, preferences, server details, watchlist state, supp
 
 With sync and iCloud Keychain available, iPhone/iPad can automatically adopt supported Jellyfin, Plex, Emby, share, and Seerr credentials. Apple TV does not use this iCloud Keychain path; use nearby setup or sign in there. **Silo requires approval on each device**, regardless of sync.
 
-Downloads, automatic sign-in, [Video buffer](/streaming-quality/), [Live TV buffer](/platform-controls/#live-tv-remote-controls-and-rewind), [Apple TV title zoom](/platform-controls/#apple-tv), [Top Shelf preferences](/platform-controls/#launch-from-apple-tv-top-shelf), and the [external-player choice](/external-players/) remain device-local. The player choice applies across Plozz profiles, not per viewer. [Diagnostics consent](/feedback-and-bugs/#choose-diagnostics-sharing) is neither synced nor transferred.
+## Keep device-specific choices local
+
+For each profile, **Display Size**, navigation style, and the main shortcut arrangement stay local. Apple TV's **Prevent Accidental Exit** and [title zoom](/platform-controls/#apple-tv) do too. Unlike library-tab order, none sync or transfer; set them on each device.
+
+Downloads, automatic sign-in, [Video buffer](/streaming-quality/), [Live TV buffer](/platform-controls/#live-tv-remote-controls-and-rewind), [Top Shelf preferences](/platform-controls/#launch-from-apple-tv-top-shelf), and the [external-player choice](/external-players/) also remain device-local. The player choice applies across Plozz profiles, not per viewer. [Diagnostics consent](/feedback-and-bugs/#choose-diagnostics-sharing) is neither synced nor transferred.
 
 ## Sync Live TV deliberately
 
@@ -54,7 +58,7 @@ Counts include pending uploads and exclude pending deletions. Sizes measure enco
 
 Check the iCloud account and **Needs sign-in** entries first. Use **Sync Now** before destructive actions.
 
-On iPhone/iPad, **Reload From iCloud** retries loading cloud data. **Reset Sync** replaces iCloud data with this device's copy; choose the device with the setup you intend to keep.
+On Apple TV, iPhone, or iPad, open **Settings > iCloud Sync > Troubleshooting**. **Reload From iCloud** retries loading shared settings. **Reset Sync** replaces iCloud data with this device's copy; choose the device with the setup you intend to keep.
 
 > [!WARNING]
 > **Erase Sync Data** removes synced profiles, settings, servers, watchlist, Live TV sources, and tracker sign-ins from iCloud, and clears the listed local setup while leaving sync off. Turn off sync on other devices first to prevent re-upload. On iPhone/iPad it also removes Plozz's iCloud Keychain server logins; Apple TV's erase screen warns that this additional step requires iPhone/iPad. Read the confirmation rather than using erase as a connection repair.

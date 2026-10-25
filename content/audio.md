@@ -25,7 +25,7 @@ If a change fails, try Apple TV Settings instead.
 
 ## Correct timing
 
-The player has no adjustable audio delay. Mobile **Playback Sync** can offer subtitle delay without audio delay.
+The player has no adjustable audio delay. [Subtitle delay](/subtitles/#set-automatic-choices) is separate.
 
 For lip-sync problems, compare another track, title, and output route. For buffering or dropouts, use [playback troubleshooting](/troubleshooting/), not subtitle timing.
 
@@ -35,6 +35,8 @@ Enable **Settings > Playback > Background Audio** to continue video audio when l
 
 ## Control detail-page music
 
-On **Apple TV**, open **Settings > Screens & Navigation > Detail Page > Background**. Choose **Theme music**, then Low, Medium, or High volume, when music is available for the title. Choose **Off** for static artwork without theme music or trailers. This does not disable Home trailers or change a video's audio track.
+On Apple TV, iPhone, or iPad, open **Settings > Screens & Navigation > Detail Page > Background** and choose **Theme music**.
 
-The iPhone/iPad setting does not currently start detail-page music.
+Adjust **Theme music volume** from 0% to 100%. Changing it can start a preview; use **Play preview** or **Stop preview** to compare levels. Leaving the page stops the preview. If no title theme is found, the preview uses a generated sample, not proof that your titles have music.
+
+Available title music fades in while browsing details and pauses outside the app. It does not play alongside trailers or full video playback. Choose **Off** for static detail artwork without music or trailers; Home trailers and video audio tracks are independent.

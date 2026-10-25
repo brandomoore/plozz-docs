@@ -4,7 +4,7 @@ Download movies and episodes on iPhone/iPad, not Apple TV.
 
 ## Save a video
 
-1. Open a movie or episode’s detail page and choose its download button.
+1. Open movie or episode details, select the server/version if offered, then choose the download button.
 2. If prompted, choose **Download Original** or a smaller copy.
 3. Open **Downloads** and wait for completion, not preparing, downloading, or **Finishing**.
 4. Open the saved movie or episode from Downloads to watch it.
@@ -40,6 +40,6 @@ Removal deletes the on-device copy, not the server original. Check **Storage** i
 > [!WARNING]
 > In Download Settings, **Cancel Active Downloads** deletes unfinished copies but keeps completed downloads. **Delete All Downloads** removes this profile's saved movies and episodes. Pause instead to resume later.
 
-Eligible HTTP transfers can continue in the background; in-process/share transfers need Plozz active unless iOS grants continued execution. Reopen Plozz to resume.
+Eligible HTTP transfers may continue in the background; in-process/share transfers need Plozz active unless iOS grants execution. Profile switching pauses transfers; return to their profile to resume.
 
-On iOS/iPadOS 26 or later, downloads can request continued processing with a Live Activity; the system can decline. Cancellation or expiry pauses its downloads without deleting partial files. Receiving all bytes still requires offline validation before completion.
+On iOS/iPadOS 26 or later, downloads can request continued processing with a Live Activity; the system can decline. Cancellation or expiry pauses its downloads without deleting partial files. Completion still requires offline validation.

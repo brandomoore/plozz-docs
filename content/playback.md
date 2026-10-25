@@ -1,31 +1,31 @@
 # Player controls
 
-Choose what plays and what happens next.
+Choose what plays and happens next.
 
 ## Reach the controls
 
-On Apple TV, press **Up** from the scrub surface for Playback, Audio, and Subtitles; **Down** reaches information and navigation tabs. On iPhone/iPad, tap the video.
+On Apple TV, press **Up** from the scrub surface for Playback, Audio, and Subtitles; **Down** reaches information/navigation tabs. On iPhone/iPad, tap the video: portrait uses the ellipsis **Playback options** menu; landscape separates controls.
 
-Use the timeline to seek. See [device controls](/platform-controls/) for **Seek without pausing**, remote, touch, and keyboard behavior.
+Use the timeline to seek. See [device controls](/platform-controls/) for **Seek without pausing**, touch, and keyboard behavior.
 
 ## Choose audio or a version
 
 Open **Audio** for tracks or **Version** for files/editions; on iPhone/iPad, use playback options.
 
-Versions keep your server/account and position; different cuts can have different timelines.
+Versions keep your server/account and position; cuts can have different timelines.
 
-The first multi-version video asks your preference. Change it in **Settings > Playback > Version selection**:
+The first multi-version video asks your preference. Change **Settings > Playback > Version selection**:
 
 - **Ask every time:** choose before multi-version videos, including autoplay.
 - **Choose automatically:** use a remembered or device-recommended version without the picker.
 
-**Remember series version choices** (Apple TV: **Remember per series**) reuses your selected version type for later episodes. Turn it off to ignore series choices. Automatic mode uses the best available version if no match remains.
+**Remember series version choices** (Apple TV: **Remember per series**) reuses your version type for later episodes. Disable it to ignore series choices. Automatic mode chooses a fallback if unmatched.
 
 ## Autoplay and skipping
 
 Under **Settings > Playback**, next-episode and next-playlist-item autoplay default on. **Show Up Next card** is independent of autoplay.
 
-Its lead time controls appearance without a credits marker.
+Its lead time applies without a credits marker.
 
 In **Skip intros, credits & more**, turn on **Enable skipping**, choose **Show skip button** or **Skip automatically**, and select movies, TV shows, or anime under **Enable for**. Skipping needs markers. Automatic **Skip after** ranges from **Immediately** to 30 seconds. **Set each marker separately** gives intros, credits, recaps, previews, and commercials independent behavior, including Off.
 
@@ -37,13 +37,13 @@ With skipping enabled, **Use community markers** (default on) checks IntroDB/The
 
 Open **Chapters** below the timeline; mobile tabs scroll horizontally. Choose a chapter to jump there and close the panel; paused playback stays paused.
 
-The tab appears only with usable chapters. Plex, Jellyfin, and Emby can supply them; otherwise, Plozz can read file chapters where supported, including shares and local downloads. Missing images do not prevent use. Intro/credits markers are separate.
+The tab needs usable chapters. Plex, Jellyfin, and Emby can supply them; otherwise, Plozz can read supported file chapters, including shares/downloads. Missing images do not prevent use. Intro/credits markers are separate.
 
 ## Speed, picture, and other navigation
 
-Use playback speed and zoom where offered. Fit keeps the full picture; Fill can crop it.
+Adjust speed where offered. **Zoom Mode** (Apple TV) or **Video** (mobile) offers **Normal** (full picture), **Crop** (cropped edges), **Stretch** (changed proportions), and **Custom** (50%-200%). Zoom lasts this session.
 
-Use **Episodes** or **Playlist** for available sequence navigation.
+Use **Episodes** or **Playlist** for sequence navigation.
 
 ## Explore the cast
 

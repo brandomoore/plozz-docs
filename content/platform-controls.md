@@ -16,7 +16,7 @@ Each Apple TV user can [automatically open their remembered Plozz profile](/appl
 
 ## Live TV remote controls and rewind
 
-On Apple TV, a remote's **Guide** button opens Live TV when that destination is enabled. During full-screen channel playback, it opens the guide over the picture.
+On Apple TV, a remote's **Guide** button opens enabled Live TV; during full-screen channel playback, it opens the guide over the picture.
 
 For a channel with a usable rewind window, reveal controls and use the timeline to seek within that window. **Go Live** returns to the current broadcast. This is not a recording or a promise to restart any guide program. Scheduled library channels use **Jump to now** instead.
 
@@ -28,7 +28,7 @@ For a channel with a usable rewind window, reveal controls and use the timeline 
 2. From an adult Plozz profile, open **Settings > Everyone > Top Shelf**. **Show Top Shelf** is on by default.
 3. Choose **Posters** or **Full Screen**, then set separate **Continue Watching** and **Recently Added** counts: four each by default, adjustable from one to 20.
 
-Posters is the default; selecting a poster requests playback. With Full Screen, swipe up on the Home Screen to expand the shelf. Continue Watching comes first, followed by Recently Added; repeated entries from the same source appear once. **Play** requests playback; **More Info** opens the title or series page without starting it. Format badges describe source files, not current output.
+Posters is the default; selecting one requests playback. With Full Screen, swipe up to expand the shelf. Continue Watching precedes Recently Added; same-source repeats appear once. **Play** requests playback; **More Info** opens title/series details without starting it. Format badges describe source files, not current output.
 
 These preferences are shared by Plozz profiles on this Apple TV and do not sync. Turning Show Top Shelf off clears its media without forgetting your layout or counts.
 
@@ -40,13 +40,13 @@ Artwork follows [Appearance > Artwork](/appearance/); full-screen episode text a
 
 Tap the video to reveal controls. With a hardware keyboard, **Space** plays/pauses and **Left/Right** skip during eligible playback. Shortcuts yield while menus, sheets, or other player interactions are active.
 
-During supported local playback, double-tap the left/right side to skip, hold the picture for a temporary speed boost, or pinch to switch Fit/Fill. Vertical drags near the left edge adjust brightness; near the right edge, volume. VoiceOver disables hold, pinch, side-tap, and level-drag shortcuts.
+During supported local playback, double-tap the left/right side to skip, hold the picture for a temporary speed boost, or pinch to switch Normal/Crop. Vertical drags near the left edge adjust brightness; near the right edge, volume. VoiceOver disables hold, pinch, side-tap, and level-drag shortcuts.
 
 Turn off **Settings > Playback > Volume and brightness gestures** to disable vertical drags.
 
 On iPhone, **Settings > Playback > Player orientation** offers Auto, Landscape, or Portrait for video and Live TV playback in a full-screen window. iPad follows system rotation. If changing orientation fails, use a full-screen window and retry.
 
-Fit preserves the picture; Fill can crop it. [Background Audio](/audio/#keep-audio-playing-on-iphone-or-ipad) controls listening while locked or outside Plozz.
+[Zoom modes](/playback/#speed-picture-and-other-navigation) change presentation, not quality. [Background Audio](/audio/#keep-audio-playing-on-iphone-or-ipad) controls listening while locked or outside Plozz.
 
 ## AirPlay and Picture in Picture
 
@@ -61,6 +61,8 @@ For travel, use [completed downloads](/downloads/); external presentation does n
 ## Read playback information
 
 Enable **Settings > Help & Diagnostics > Playback Diagnostics Overlay**, or open **Playback Info** in the player's Info card.
+
+During conversion, video/audio facts describe the current stream; original-file details appear separately. Neither reports your physical speaker layout.
 
 **Network throughput** measures transfer speed, not encoded bitrate. **Buffer** reports media ahead; player/engine buffers can differ. **Seekable** is the seeking range, not a completed download. **Playback cache**, when shown, reports temporary use/budget, not saved videos.
 

@@ -16,9 +16,9 @@ A limit below Maximum or Force transcoding prevents [external-player handoff](/e
 
 ## Change one video
 
-Reveal the player's options, open **Quality**, choose a **Quality limit**, then **Apply**. This changes the current video without overwriting saved network defaults.
+Reveal playback controls, open **Video > Quality** (under the ellipsis **Playback options** menu in portrait), choose a **Quality limit**, then **Apply**. This changes the current video without overwriting saved network defaults.
 
-Playback briefly reloads around your position. Conversion may alter HDR, audio, or subtitles. **Current stream** reports converted resolution, codecs, HDR, and audio channels where known. A limit is not a measurement; **Not available** means the stream supplied no fact.
+Playback briefly reloads around your position. Conversion may alter HDR, audio, or subtitles. **Current stream** reports converted resolution, codecs, HDR, and audio channels where known. **Declared stream bitrate**, when shown, is advertised by the stream, not measured network speed. A limit is not a measurement; **Not available** means the stream supplied no fact.
 
 Silo converts to H.264 at 480p, 720p, 1080p, or 4K, limited by video height. Unsupported choices are unavailable.
 

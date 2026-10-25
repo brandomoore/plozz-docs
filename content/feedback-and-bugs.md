@@ -1,6 +1,6 @@
 # Feedback and bug reports
 
-Use Discord for help/discussion, or GitHub for tracked bugs and feature requests.
+Use Discord for help, or GitHub for tracked bugs and feature requests.
 
 ## Choose where to post
 
@@ -13,16 +13,16 @@ On iPhone/iPad, **Settings > Help & Diagnostics > Send Feedback** opens an email
 
 ## Report a bug
 
-Explain what happened and what you expected instead. Include:
+Explain actual versus expected behavior. Include:
 
-- Steps to reproduce, if you can reproduce it.
+- Steps to reproduce.
 - Plozz version and build, device model, and operating-system version.
-- The affected media source, such as Plex, Jellyfin, Silo, IPTV, or a network share. Say if it affects several sources or happens before setup.
-- The error message, whether it happens every time, and the last working build if known.
+- Affected sources, whether several fail, or whether it happens before setup.
+- Error message, frequency, and last working build if known.
 
 In Plozz, **Settings > Help & Diagnostics > Report a Problem** provides the reporting link. On Apple TV, scan its code with your phone.
 
-For error details or logs, follow [Report a problem](/troubleshooting/#report-a-problem). Diagnostic uploads do not post a GitHub issue or Discord message.
+For logs, follow [Report a problem](/troubleshooting/#report-a-problem). Uploads do not post an issue or Discord message.
 
 ## Choose diagnostics sharing
 
@@ -30,13 +30,21 @@ When **Help improve Plozz?** appears, choose **Share Diagnostics** or **Don't Sh
 
 Change it in **Settings > Help & Diagnostics > Share Crash Reports**. This is not a per-profile preference and is neither synced nor transferred. Builds without a reporting endpoint cannot upload.
 
-Sharing sends technical crash, freeze, and failure diagnostics through Sentry, including app/device information and timing or memory measurements. Automatic reports exclude logins, server addresses, media titles, and viewing history.
+Sharing sends technical crash, freeze, and failure diagnostics through Sentry, including app/device information, screen categories, and performance measurements. Automatic reports exclude logins, server addresses, media titles, and viewing history.
 
 With sharing enabled, logs require **Send to Developer** on mobile, or **Send Recent Activity to Developer** on Apple TV. This includes bounded, locally retained playback/source diagnostics, which can survive a restart. Send soon after reproducing the problem. Your optional message is included; exclude secrets and personal details.
 
+**Submitted** means accepted for delivery, not confirmed receipt. If submission fails, check sharing and retry.
+
+Read the [Privacy Policy](https://plozz.app/privacy/) from the consent screen or Settings; Apple TV shows a code to scan.
+
+## Diagnose Apple TV Home stutter
+
+Enable **Settings > Help & Diagnostics > Home Performance Overlay**, reproduce scrolling stutter, and report FPS, hitches, and thermal state. Turn it off afterward.
+
 ## Suggest an improvement
 
-Choose **Feature request** on GitHub. Describe what you are trying to do, what gets in the way, and the behavior you would like. Mention your device, affected sources, and any workaround you have tried. You do not need to propose code.
+Choose **Feature request** on GitHub. Describe your task, obstacle, desired behavior, device, affected sources, and attempted workarounds. No code proposal is needed.
 
 ## Share safely
 

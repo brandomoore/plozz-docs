@@ -40,6 +40,6 @@ For Continue Watching cards/actions, see [Spoiler protection](/spoiler-protectio
 
 Under **Screens & Navigation > Navigation > Hide or Reorder Navigation**, hold to hide/show/move; mobile uses dragging to reorder. Unused Home, Search, or Watchlist shortcuts can hide automatically; **Show** retains one. Compact mobile layouts use **More**.
 
-**Detail Page** chooses artwork or trailers independently of Home, plus [theme music on Apple TV](/audio/#control-detail-page-music). Review-score and age-recommendation controls are here.
+**Detail Page** chooses artwork, trailers, or [theme music and its volume preview](/audio/#control-detail-page-music) independently of Home. Review-score and age-recommendation controls are here.
 
 Use [Customize library pages](/customize-libraries/) for tabs/rows and [Appearance](/appearance/) for cards, logos, and text size.
