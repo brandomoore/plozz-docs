@@ -11,7 +11,7 @@ Plozz sends requests to your own **Seerr** server, including compatible Overseer
 
 The server connection is shared across Plozz profiles. The acting user is chosen separately for each profile.
 
-**Admin — unrestricted** is not a harmless display choice: an unlinked profile requests as the administrator, without per-user quota or approval restrictions. For Kids profiles, set a household [Parental PIN](/profiles-and-locks/#set-up-a-kids-profile-safely) and link a restricted Seerr user. Plozz blocks unrestricted admin requests only while that PIN enforces Kids restrictions.
+**Admin — unrestricted** is not a harmless display choice: an unlinked profile requests as the administrator, without per-user quota or approval restrictions. For Kids profiles, set a household [Parental PIN](/parental-controls/) and link a restricted Seerr user. Plozz blocks unrestricted admin requests only while that PIN enforces Kids restrictions.
 
 ## Make a request
 

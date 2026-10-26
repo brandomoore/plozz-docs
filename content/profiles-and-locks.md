@@ -20,16 +20,7 @@ For a PIN-protected Plex Home user, Plozz can offer to reuse that PIN. This is e
 
 ## Set up a Kids profile safely
 
-1. Add a Kids profile or enable **Kids Profile** in an existing profile's management settings.
-2. Choose a suitably restricted server user and libraries.
-3. Create a household **Parental PIN** to protect restricted settings and leaving Kids profiles.
-4. If using [Seerr requests](/media-requests/), map the profile to a restricted Seerr user.
-
-Kids profiles disable external Discovery recommendations. They do **not** add an app-wide maturity filter: library content follows the connected server user's restrictions. This matters especially for network shares without server-user restrictions.
-
-Without a Parental PIN, restricted settings and profile switching remain available, and Seerr's Kids admin-request block is not enforced. A Profile Lock instead protects entry into a particular profile. Removing the Parental PIN does not turn Kids profiles off.
-
-Playlist sources have separate [device-local parental approvals](/live-tv/#approve-playlist-sources-for-kids).
+Follow [Parental controls](/parental-controls/) for Kids profile setup, the household Parental PIN, source restrictions, playlist approvals, and checks on each device.
 
 ## Before deleting or resetting
 

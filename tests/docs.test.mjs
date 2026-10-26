@@ -95,6 +95,28 @@ test('source impact is incremental and new/unassigned features cannot be silentl
   assert.deepEqual(rewritten.affected, ['servers', 'playback']);
 });
 
+test('parental-controls URL stays source-watched with a working legacy entry point', () => {
+  const pages = JSON.parse(readFileSync(new URL('../content/pages.json', import.meta.url), 'utf8'));
+  const baseline = JSON.parse(readFileSync(new URL('../config/documentation-baseline.json', import.meta.url), 'utf8'));
+  const coverage = JSON.parse(readFileSync(new URL('../content/coverage.json', import.meta.url), 'utf8'));
+  const page = pages.find(page => page.slug === 'parental-controls');
+  const capability = baseline.capabilities.find(capability => capability.id === 'parental-controls');
+  assert(page, 'Keep the published age-suitability URL');
+  assert(capability, 'Keep parental controls in recurring source review');
+  assert.equal(pagePath(page.slug), '/parental-controls/');
+  assert(coverage.capabilities[capability.id].documents.some(link => link.slug === page.slug));
+  for (const path of capability.sources) {
+    assert(page.sources.includes(path), `Missing parental-controls evidence: ${path}`);
+    const changed = classifyChanges(pages, { status: 'ahead', files: [{ filename: path }] });
+    assert(changed.affected.includes(page.slug), `Source changes must trigger review: ${path}`);
+  }
+  const previous = pages.find(page => page.slug === 'profiles-and-locks');
+  assert(pageAnchors(previous).includes('set-up-a-kids-profile-safely'));
+  const legacy = readFileSync(new URL(`../content/${previous.file}`, import.meta.url), 'utf8')
+    .split('## Set up a Kids profile safely\n')[1]?.split('\n## ')[0];
+  assert(legacy?.includes('(/parental-controls/)'), 'Keep the old anchor linked to the canonical guide');
+});
+
 test('uncited Apple capabilities and extension entry points are product inputs', () => {
   const paths = [
     'App/Resources/Plozz.entitlements', 'App/PlozziOS/PlozziOS.entitlements',

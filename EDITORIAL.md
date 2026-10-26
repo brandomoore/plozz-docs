@@ -73,6 +73,13 @@ stay short; reorganize the answer.
 
 ## Search and discoverability
 
+`/parental-controls/` is the stable, dedicated age-suitability entry point used
+outside the docs. Keep its setup and material limitations source-checked through
+the named parental-controls capability. Maintain the
+`/profiles-and-locks/#set-up-a-kids-profile-safely` section as a link to it rather
+than a second copy of the procedure. Do not hardcode an App Store age rating,
+imply age verification, or promise universal content filtering.
+
 Each page needs a distinct reader question, descriptive title and unique
 description. Mention platforms and providers where they change the answer,
 not as repeated keyword lists. Keep the marketing site responsible for

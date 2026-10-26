@@ -769,6 +769,45 @@
     ]
   },
   {
+    "slug": "parental-controls",
+    "title": "Parental controls",
+    "seoTitle": "Plozz parental controls: Kids profiles, PINs, and content limits",
+    "description": "Set up Kids profiles and a Parental PIN in Plozz, restrict connected media sources, and understand Discovery, playlist approvals, and content-filtering limits.",
+    "section": "Accounts & sync",
+    "kind": "guide",
+    "platforms": ["Apple TV", "iPhone", "iPad"],
+    "file": "parental-controls.md",
+    "sources": [
+      "Sources/FeatureSettings/ProfileDetailView.swift",
+      "Sources/FeatureSettings/ProfileSettingsDetailView.swift",
+      "Sources/FeatureSettings/ParentalPINDetailView.swift",
+      "Sources/FeatureSettings/SettingsView.swift",
+      "Sources/AppShelliOS/PlozziOSParentalPINSettingsView.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/AppShelliOS/PlozziOSAppModel.swift",
+      "Sources/AppShell/AppState.swift",
+      "Sources/CoreModels/Profile.swift",
+      "Sources/CoreModels/ProfileStore.swift",
+      "Sources/CoreModels/ParentalPIN.swift",
+      "Sources/CoreModels/HeroSettings.swift",
+      "Sources/CoreModels/HomeLibraryVisibility.swift",
+      "Sources/FeatureHomeCore/HomeAggregator.swift",
+      "Sources/CoreModels/LiveTVSourceApproval.swift",
+      "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift",
+      "Sources/FeatureSettings/ProfileSeerrSetupView.swift",
+      "Sources/SeerService/SeerService.swift",
+      "Sources/FeatureProfiles/AutomaticSignInSettings.swift"
+    ],
+    "watch": [
+      "Sources/FeatureProfiles/",
+      "Sources/FeatureSettings/Profile",
+      "Sources/FeatureSettings/Parental",
+      "Sources/AppShelliOS/PlozziOSParental",
+      "Sources/FeatureLiveTV/LiveTVSourceApproval",
+      "Sources/SeerService/"
+    ]
+  },
+  {
     "slug": "profiles-and-sync",
     "title": "Profiles and sync",
     "seoTitle": "Sync Plozz settings and set up another device safely",

@@ -21,7 +21,7 @@ Select your profile before changing **Settings**. [Customize Home and navigation
 
 On Apple TV, use [automatic profile sign-in](/apple-tv-profiles/) for each system user or [browse libraries together](/combined-libraries/).
 
-Use [Spoiler protection](/spoiler-protection/) to hide unwatched episode information and [Circadian Mode](/circadian-mode/) for scheduled dimming. For children, configure [server restrictions and a Parental PIN](/profiles-and-locks/); hiding a row is not access control.
+Use [Spoiler protection](/spoiler-protection/) to hide unwatched episode information and [Circadian Mode](/circadian-mode/) for scheduled dimming. For children, configure [parental controls](/parental-controls/); hiding a row is not access control.
 
 ## While watching
 

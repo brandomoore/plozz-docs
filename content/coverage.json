@@ -1,6 +1,16 @@
 {
   "schemaVersion": 1,
   "capabilities": {
+    "parental-controls": {
+      "documents": [
+        {"slug":"parental-controls","anchor":"set-up-a-kids-profile"},
+        {"slug":"parental-controls","anchor":"what-the-controls-do"},
+        {"slug":"parental-controls","anchor":"choose-suitable-media-sources"},
+        {"slug":"parental-controls","anchor":"check-each-device"}
+      ],
+      "sources": ["Sources/CoreModels/ParentalPIN.swift","Sources/CoreModels/ProfileStore.swift","Sources/CoreModels/LiveTVSourceApproval.swift","Sources/CoreModels/HeroSettings.swift","Sources/FeatureSettings/SettingsView.swift","Sources/AppShelliOS/PlozziOSSettingsView.swift","Sources/SeerService/SeerService.swift","Sources/CoreModels/HomeLibraryVisibility.swift","Sources/FeatureHomeCore/HomeAggregator.swift"],
+      "answer": "The stable parental-controls guide is the age-suitability entry point. Combine a Kids Profile, restricted server identity and household Parental PIN; Kids profiles disable external Discovery but do not add an app-wide maturity filter. The PIN protects restricted settings and leaving Kids profiles, unlike an individual Profile Lock. Library hiding is not account-wide access control, network shares have no server maturity filter, and playlist approval is whole-source and device-local. Use a restricted Seerr user and check content and automatic sign-in on each device."
+    },
     "apple-tv-user-sign-in": {
       "documents": [{"slug":"apple-tv-profiles","anchor":"set-up-each-apple-tv-user"},{"slug":"apple-tv-profiles","anchor":"what-stays-shared"},{"slug":"apple-tv-profiles","anchor":"keep-authorization-deliberate"}],
       "sources": ["App/Resources/Plozz.entitlements","Sources/CoreModels/ProfileStore.swift","Sources/AppRuntime/AutomaticSignInStore.swift","Sources/AppRuntime/PlexHomeUsersModel.swift","Sources/AppShell/ProfileFlowModel.swift","Sources/FeatureSettings/ProfileDetailView.swift"],
@@ -433,6 +443,7 @@
     },
     "profiles": {
       "documents": [
+        { "slug": "parental-controls" },
         { "slug": "profiles-and-locks" },
         { "slug": "servers", "anchor": "keep-identities-separate" },
         { "slug": "apple-tv-profiles" },

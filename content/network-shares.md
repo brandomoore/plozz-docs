@@ -39,4 +39,4 @@ Confirm the selected root contains the files and that the share account can read
 
 Choose the content type deliberately: **Personal Videos** avoids movie/TV matching, while an incorrectly classified folder can produce poor catalogue results. A scan updates Plozz's catalogue; it does not rename or reorganize the files on your NAS.
 
-For wrong posters or descriptions after scanning, review [Metadata and ratings](/metadata-and-ratings/). A share has no media-server user enforcing maturity restrictions, so [Kids Profile](/profiles-and-locks/) alone is not a content-rating filter.
+For wrong posters or descriptions after scanning, review [Metadata and ratings](/metadata-and-ratings/). A share has no media-server user enforcing maturity restrictions, so [Kids Profile](/parental-controls/) alone is not a content-rating filter.

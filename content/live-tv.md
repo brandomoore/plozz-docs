@@ -29,7 +29,7 @@ Open Live TV's **Search**, choose **Channels** or **Programs**, and enter a name
 
 ## Approve playlist sources for Kids
 
-For a Kids profile's playlist source, set a [Parental PIN](/profiles-and-locks/), open **Sources**, select the playlist, and choose **Approve this source**. Approval allows every channel in that source, not age-filtered programs. It stays on this device; choose **Revoke source approval** there to undo it. Changed sources or profile identities can require approval again.
+For a Kids profile's playlist source, set a [Parental PIN](/parental-controls/), open **Sources**, select the playlist, and choose **Approve this source**. Approval allows every channel in that source, not age-filtered programs. It stays on this device; choose **Revoke source approval** there to undo it. Changed sources or profile identities can require approval again.
 
 ## Watch several channels
 
