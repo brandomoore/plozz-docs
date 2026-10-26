@@ -1,6 +1,6 @@
 # Feedback and bug reports
 
-Use Discord for help, or GitHub for tracked bugs and feature requests.
+Use Discord for help, GitHub for tracked bugs/features.
 
 ## Choose where to post
 
@@ -9,7 +9,7 @@ Use Discord for help, or GitHub for tracked bugs and feature requests.
 
 [Search existing issues](https://github.com/brandomoore/Plozz/issues) before opening a duplicate.
 
-On iPhone/iPad, **Settings > Help & Diagnostics > Send Feedback** opens an email instead. Use GitHub for a tracked report.
+Mobile **Settings > Help & Diagnostics > Send Feedback** opens email, not a tracked issue.
 
 ## Report a bug
 
@@ -20,7 +20,7 @@ Explain actual versus expected behavior. Include:
 - Affected sources, whether several fail, or whether it happens before setup.
 - Error message, frequency, and last working build if known.
 
-In Plozz, **Settings > Help & Diagnostics > Report a Problem** provides the reporting link. On Apple TV, scan its code with your phone.
+**Settings > Help & Diagnostics > Report a Problem** provides the link; scan its code on Apple TV.
 
 For logs, follow [Report a problem](/troubleshooting/#report-a-problem). Uploads do not post an issue or Discord message.
 
@@ -32,7 +32,7 @@ Change it in **Settings > Help & Diagnostics > Share Crash Reports**. This is no
 
 Sharing sends technical crash, freeze, and failure diagnostics through Sentry, including app/device information, screen categories, and performance measurements. Automatic reports exclude logins, server addresses, media titles, and viewing history.
 
-With sharing enabled, logs require **Send to Developer** on mobile, or **Send Recent Activity to Developer** on Apple TV. This includes bounded, locally retained playback/source diagnostics, which can survive a restart. Send soon after reproducing the problem. Your optional message is included; exclude secrets and personal details.
+With sharing enabled, use **Send to Developer** on mobile, or **Send Recent Activity to Developer** on Apple TV, to submit filtered activity, connection, library-load, and playback evidence, not the free-form messages displayed in Recent Activity. Playback/source evidence can survive restarts; send soon after reproducing. Your optional message is sent as written: exclude secrets/personal details.
 
 **Submitted** means accepted for delivery, not confirmed receipt. If submission fails, check sharing and retry.
 

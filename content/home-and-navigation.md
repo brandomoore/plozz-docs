@@ -24,7 +24,7 @@ The preview may omit titles. Reopen to change **Content** or the name, then **Sa
 
 Continue Watching and its merged Next Up titles have no app-imposed count limit or age expiry. Separate Next Up rows show up to 20 titles. Account-wide Continue Watching and Next Up ignore library browsing switches; disabling a library does not clear that history. Sources, watched state, dismissal, excluded servers, and server-user permissions still apply.
 
-In **Customize Home > Continue Watching**, **Merge Next Up rows** defaults on. Turn it off to arrange separate Next Up rows. Removing Continue Watching suspends merging.
+In **Customize Home > Continue Watching**, **Include Next Up** defaults on. Turn it off to arrange separate Next Up rows. Removing Continue Watching suspends merging.
 
 ## Choose the hero
 
@@ -32,7 +32,7 @@ Open **Home layout** on Apple TV, or **Hero** on mobile. Apple TV offers **Showc
 
 For the carousel, **Hero content sources** selects Continue Watching, recently added titles, Watchlist, libraries, collections, or Discovery. **Show hero** hides the carousel, not Showcase.
 
-Choose watched visibility, advancement, ratings, and muted trailers. Enable Discovery, then choose **Discovery providers**. Seerr is needed for requests, not Discovery; Kids profiles exclude Discovery.
+Choose watched visibility, advancement, ratings, and muted [server-trailer previews](/library/#watch-a-trailer). Enable Discovery, then choose **Discovery providers**. Seerr enables requests, not Discovery; Kids profiles exclude Discovery.
 
 For Continue Watching cards/actions, see [Spoiler protection](/spoiler-protection/#change-continue-watching-cards).
 

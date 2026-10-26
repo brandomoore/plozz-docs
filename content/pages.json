@@ -106,9 +106,10 @@
   },
   {
     "slug": "library",
+    "platforms": ["Apple TV", "iPhone", "iPad"],
     "title": "Find and organize media",
     "seoTitle": "Browse, search, and organize your media in Plozz",
-    "description": "Browse titles and collections, choose a server copy, manage Watchlist and watched state, and recover incomplete library results.",
+    "description": "Browse titles and collections, watch server or YouTube trailers, choose a copy, manage Watchlist and history, and recover incomplete results.",
     "section": "Library",
     "kind": "guide",
     "file": "library.md",
@@ -116,31 +117,31 @@
       "Sources/FeatureHome/LibraryBrowseView.swift",
       "Sources/FeatureHomeCore/LibraryBrowseViewModel.swift",
       "Sources/FeatureSearch/SearchView.swift",
-      "Sources/AppShelliOS/PlozziOSSearchView.swift",
       "Sources/AppShelliOS/PlozziOSLibraryView.swift",
-      "Sources/FeatureHome/WatchlistBrowseView.swift",
       "Sources/AppRuntime/UniversalWatchlistRuntime.swift",
       "Sources/FeatureWatchlistCore/WatchlistModel.swift",
       "Sources/FeatureHome/DetailExtrasView.swift",
-      "Sources/AppShelliOS/PlozziOSExtrasSection.swift",
       "Sources/CoreModels/MediaItemActionCatalog.swift",
-      "Sources/AppRuntime/MediaItemActionCoordinator.swift",
       "Sources/AppRuntime/WatchMutationApplier.swift",
-      "Sources/FeatureSettings/MyLibrariesDetailView.swift",
-      "Sources/CoreUI/LibraryCollectionLoadingView.swift",
-      "Sources/FeatureHomeCore/SeriesUpcoming.swift",
       "Sources/FeatureHome/SeriesDetailView.swift",
       "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
-      "Sources/CoreUI/PlaybackSourceMenu.swift",
-      "Sources/WetrakrService/WetrakrWatchlistDestination.swift"
+      "Sources/WetrakrService/WetrakrWatchlistDestination.swift",
+      "Sources/CoreModels/MediaItem+Trailer.swift",
+      "Sources/CoreUI/YouTubeTrailerOpening.swift",
+      "Sources/FeatureHome/DetailHeroView.swift",
+      "Sources/FeatureHomeCore/ItemDetailViewModel.swift",
+      "Sources/FeatureHomeCore/FastHeroTrailerResolver.swift",
+      "Sources/MetadataKit/DetailMetadataResolver.swift",
+      "Sources/AppShell/HomeTab.swift",
+      "Sources/AppShell/SearchTab.swift"
     ],
     "watch": [
-      "Sources/FeatureHome/Library",
-      "Sources/FeatureHome/SeriesDetailView.swift",
+      "Sources/FeatureHome",
       "Sources/FeatureWatchlistCore/",
       "Sources/AppRuntime/WatchMutation",
-      "Sources/FeatureHomeCore/Library",
-      "Sources/AppShelliOS/PlozziOSLibraryView.swift"
+      "Sources/CoreUI/YouTubeTrailerOpening.swift",
+      "Sources/MetadataKit/DetailMetadataResolver.swift",
+      "Sources/MetadataKit/TMDbMetadataProvider.swift"
     ]
   },
   {
@@ -238,10 +239,10 @@
       "Sources/FeatureHomeCore/HomeAggregator.swift",
       "Sources/CoreModels/ContinueWatchingPolicy.swift",
       "Sources/CoreModels/NavigationContentAvailability.swift",
-      "Sources/CoreModels/HomeSectionIssue.swift",
       "Sources/AppShell/MainTabView.swift",
       "Sources/AppShelliOS/PlozziOSRootView.swift",
-      "Sources/AppRuntime/HeroDiscoveryRuntime.swift"
+      "Sources/AppRuntime/HeroDiscoveryRuntime.swift",
+      "Sources/FeatureHomeCore/FastHeroTrailerResolver.swift"
     ],
     "watch": [
       "Sources/FeatureSettings/Home",
@@ -302,7 +303,6 @@
     "sources": [
       "Sources/CoreModels/ExternalPlayer.swift",
       "Sources/CoreModels/ExternalPlayerSettingsModel.swift",
-      "Sources/CoreModels/ProfileSettingsSnapshot.swift",
       "Sources/CoreModels/StreamingQuality.swift",
       "Sources/FeatureSettings/ExternalPlayerSettingsView.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
@@ -319,7 +319,8 @@
       "Sources/AppShelliOS/PlozziOSRootView.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "App/Resources/Info.plist",
-      "App/PlozziOS/Info.plist"
+      "App/PlozziOS/Info.plist",
+      "Sources/CoreUI/YouTubeTrailerOpening.swift"
     ],
     "watch": [
       "Sources/CoreModels/ExternalPlayer",
@@ -731,9 +732,10 @@
   },
   {
     "slug": "profiles-and-locks",
+    "platforms": ["Apple TV", "iPhone", "iPad"],
     "title": "Profiles, kids, and locks",
     "seoTitle": "Set up Plozz profiles, choose server users, and manage profile locks",
-    "description": "Choose server users for Plozz profiles, add another sign-in, configure profile locks and Kids safeguards, and understand automatic sign-in.",
+    "description": "Import Plex Home profiles, choose server users, add sign-ins, configure profile locks and Kids safeguards, and understand automatic sign-in.",
     "section": "Accounts & sync",
     "kind": "guide",
     "file": "profiles-and-locks.md",
@@ -745,8 +747,6 @@
       "Sources/FeatureProfiles/AutomaticSignInSettings.swift",
       "Sources/AppRuntime/PlexHomeUsersModel.swift",
       "Sources/AppShelliOS/PlozziOSAppModel.swift",
-      "Sources/FeatureSettings/ParentalPINDetailView.swift",
-      "Sources/CoreModels/HomeLibraryVisibility.swift",
       "Sources/FeatureSettings/MyLibrariesDetailView.swift",
       "Sources/FeatureSettings/ServerUserDetailView.swift",
       "Sources/FeatureSettings/PlexLinkedUserDetailView.swift",
@@ -757,15 +757,17 @@
       "Sources/AppShell/RootView.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/CoreModels/ProfileStore.swift",
-      "Sources/AppShell/AppState.swift"
+      "Sources/CoreUI/PlexHomeOnboardingView.swift",
+      "Sources/AppShell/ProfileFlowModel.swift",
+      "Sources/AppShelliOS/PlozziOSPlexUserSelectionView.swift"
     ],
     "watch": [
       "Sources/FeatureProfiles/",
       "Sources/FeatureSettings/Profile",
       "Sources/CoreModels/Profile",
-      "Sources/FeatureSettings/ServerUserDetailView.swift",
-      "Sources/FeatureSettings/PlexLinkedUserDetailView.swift",
-      "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
+      "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift",
+      "Sources/CoreUI/PlexHomeOnboardingView.swift",
+      "Sources/AppRuntime/PlexHomeUsersModel.swift"
     ]
   },
   {
@@ -973,7 +975,6 @@
     "kind": "guide",
     "file": "feedback-and-bugs.md",
     "sources": [
-      "README.md",
       "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
       "Sources/FeatureSettings/SendDiagnosticsCard.swift",
       "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift",
@@ -982,25 +983,26 @@
       "Sources/CrashReporting/SentryCrashReporter.swift",
       "Sources/CrashReporting/CrashRedaction.swift",
       "Sources/CrashReporting/CrashDiagnostics.swift",
-      "Sources/AppShell/RootView.swift",
       "Sources/AppShelliOS/PlozziOSRootView.swift",
       "Sources/CoreModels/PlaybackDiagnosticJournal.swift",
       "Sources/CoreModels/LiveTVSourceDiagnostics.swift",
-      "Sources/CoreUI/SettingsCopy.swift",
       "Sources/FeatureSettings/PrivacyPolicyLink.swift",
-      "Sources/FeatureSettings/SettingsAboutSection.swift",
       "Sources/CoreModels/AppLinks.swift",
       "Sources/FeatureHome/HomePerfOverlay.swift",
       "Sources/FeatureHome/HomeView.swift",
-      "Sources/AppShell/MainTabView.swift"
+      "Sources/AppShell/MainTabView.swift",
+      "Sources/FeatureSettings/RecentActivityDetailView.swift",
+      "Sources/CoreNetworking/PlozzLog.swift",
+      "Sources/CoreNetworking/PlaybackPreparationDiagnostics.swift",
+      "Sources/CoreModels/LibraryDiagnosticJournal.swift"
     ],
     "watch": [
-      "Sources/CoreModels/PlaybackDiagnostic",
       "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
       "Sources/FeatureSettings/SendDiagnosticsCard.swift",
-      "Sources/FeatureHome/HomePerf",
-      "Sources/FeatureSettings/CrashReportingConsentView.swift",
-      "Sources/CrashReporting/"
+      "Sources/CrashReporting/",
+      "Sources/FeatureSettings/RecentActivityDetailView.swift",
+      "Sources/CoreNetworking/PlozzLog.swift",
+      "Sources/CoreNetworking/PlaybackPreparationDiagnostics.swift"
     ]
   },
   {
@@ -1024,14 +1026,14 @@
       "Sources/FeatureAuth/PlexAccountRecoveryView.swift",
       "Sources/FeatureHome/LibraryBrowseView.swift",
       "Sources/AppRuntime/PlexHomeUsersModel.swift",
-      "Sources/FeatureHome/DetailHeroView.swift",
       "Sources/FeatureHomeCore/ItemDetailViewModel.swift",
       "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
       "Sources/AppShelliOS/PlozziOSPlexPINView.swift",
       "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift",
       "Sources/AppShelliOS/PlozziOSLibraryView.swift",
       "Sources/FeaturePlayback/PlayerView.swift",
-      "Sources/AppShell/RootView.swift"
+      "Sources/AppShell/RootView.swift",
+      "Sources/CoreNetworking/PlozzLog.swift"
     ],
     "watch": [
       "Sources/CoreUI/Playback",

@@ -16,7 +16,7 @@ Plozz can open eligible Plex, Jellyfin, or Emby movies and episodes in another i
 
 ## What stays in Plozz
 
-Handoff requires directly accessible HTTP/HTTPS video without server conversion or a separate audio stream. Silo, IPTV, network shares, offline copies, music, trailers, and live channels stay in Plozz.
+Handoff requires directly accessible HTTP/HTTPS video without server conversion or a separate audio stream. Silo, IPTV, shares, offline copies, music, and live channels stay in Plozz. [Online trailers open YouTube separately](/library/#watch-a-trailer).
 
 On iPhone/iPad, a saved streaming-quality limit below **Maximum**, or **Force transcoding**, also keeps playback in Plozz. If the selected app cannot open or preparation fails, Plozz tries its built-in player automatically.
 
