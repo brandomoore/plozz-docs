@@ -125,18 +125,18 @@
       "Sources/AppShelliOS/PlozziOSExtrasSection.swift",
       "Sources/CoreModels/MediaItemActionCatalog.swift",
       "Sources/AppRuntime/MediaItemActionCoordinator.swift",
-      "Sources/AppRuntime/WatchMutationFactory.swift",
       "Sources/AppRuntime/WatchMutationApplier.swift",
       "Sources/FeatureSettings/MyLibrariesDetailView.swift",
       "Sources/CoreUI/LibraryCollectionLoadingView.swift",
       "Sources/FeatureHomeCore/SeriesUpcoming.swift",
+      "Sources/FeatureHome/SeriesDetailView.swift",
       "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
       "Sources/CoreUI/PlaybackSourceMenu.swift",
       "Sources/WetrakrService/WetrakrWatchlistDestination.swift"
     ],
     "watch": [
       "Sources/FeatureHome/Library",
-      "Sources/FeatureSearch",
+      "Sources/FeatureHome/SeriesDetailView.swift",
       "Sources/FeatureWatchlistCore/",
       "Sources/AppRuntime/WatchMutation",
       "Sources/FeatureHomeCore/Library",
@@ -372,20 +372,18 @@
   {
     "slug": "audio",
     "title": "Audio tracks and output",
-    "seoTitle": "Plozz audio tracks, dialogue controls, and background listening",
-    "description": "Choose audio tracks, adjust Apple TV dialogue, preview detail-page music, enable mobile background listening, and troubleshoot timing.",
+    "seoTitle": "Plozz audio tracks, output compatibility, and dialogue controls",
+    "description": "Choose audio languages and lossless or compressed output, adjust Apple TV dialogue, use mobile background audio, and preview detail-page music.",
     "section": "Playback",
     "kind": "guide",
     "file": "audio.md",
     "sources": [
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-      "Sources/AppShell/MainTabView.swift",
       "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
       "Sources/FeaturePlayback/SystemPlaybackAudio.swift",
       "Sources/FeatureSettings/ThemeMusicVolumeControl.swift",
       "Sources/FeatureHomeCore/ThemeMusicController.swift",
-      "Sources/FeaturePlayback/LiveChannelTransport.swift",
       "Sources/FeatureHome/ItemDetailView.swift",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
       "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
@@ -393,19 +391,21 @@
       "Sources/FeatureHomeCore/ThemeMusicPreviewResolver.swift",
       "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
       "Sources/FeatureHomeCore/ThemeMusicPlayback.swift",
-      "Sources/AppShelliOS/PlozziOSRootView.swift",
       "Sources/CoreModels/PlaybackSettings.swift",
       "Sources/FeaturePlayback/SeriesTrackMemory.swift",
+      "Sources/FeatureSettings/LosslessAudioControl.swift",
+      "Sources/CoreModels/LosslessAudioSettings.swift",
+      "Sources/CoreModels/ProfileSettingsSnapshot.swift",
       "Sources/CoreModels/HeroBackgroundSettings.swift",
       "Sources/CoreModels/ThemeMusicSettings.swift"
     ],
     "watch": [
       "Sources/FeatureHomeCore/ThemeMusic",
       "Sources/FeaturePlayback/SystemPlaybackAudio.swift",
-      "Sources/FeatureSettings/ThemeMusic",
       "Sources/FeaturePlayback/Player",
-      "Sources/CoreModels/ThemeMusic",
-      "Sources/CoreModels/PlaybackSettings.swift"
+      "Sources/FeatureSettings/LosslessAudioControl.swift",
+      "Sources/CoreModels/LosslessAudioSettings.swift",
+      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
     ]
   },
   {
@@ -732,8 +732,8 @@
   {
     "slug": "profiles-and-locks",
     "title": "Profiles, kids, and locks",
-    "seoTitle": "Set up Plozz profiles, Kids profiles, and parental PINs",
-    "description": "Separate Plozz profiles from server users, configure profile locks and Kids safeguards, and understand automatic sign-in and deletion.",
+    "seoTitle": "Set up Plozz profiles, choose server users, and manage profile locks",
+    "description": "Choose server users for Plozz profiles, add another sign-in, configure profile locks and Kids safeguards, and understand automatic sign-in.",
     "section": "Accounts & sync",
     "kind": "guide",
     "file": "profiles-and-locks.md",
@@ -748,24 +748,24 @@
       "Sources/FeatureSettings/ParentalPINDetailView.swift",
       "Sources/CoreModels/HomeLibraryVisibility.swift",
       "Sources/FeatureSettings/MyLibrariesDetailView.swift",
+      "Sources/FeatureSettings/ServerUserDetailView.swift",
+      "Sources/FeatureSettings/PlexLinkedUserDetailView.swift",
+      "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift",
+      "Sources/AppShelliOS/PlozziOSPlexHomeUserSettingsView.swift",
       "Sources/FeatureHomeCore/HomeAggregator.swift",
       "Sources/CoreModels/Profile.swift",
       "Sources/AppShell/RootView.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-      "Sources/FeatureSettings/ProfileSeerrSetupView.swift",
-      "Sources/SeerService/SeerService.swift",
       "Sources/CoreModels/ProfileStore.swift",
-      "Sources/AppShell/AppState.swift",
-      "Sources/CoreModels/LiveTVSourceApproval.swift",
-      "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift"
+      "Sources/AppShell/AppState.swift"
     ],
     "watch": [
       "Sources/FeatureProfiles/",
       "Sources/FeatureSettings/Profile",
       "Sources/CoreModels/Profile",
-      "Sources/CoreUI/ProfileLockCopy.swift",
-      "Sources/FeatureSettings/ParentalPINDetailView.swift",
-      "Sources/AppShelliOS/PlozziOSParental"
+      "Sources/FeatureSettings/ServerUserDetailView.swift",
+      "Sources/FeatureSettings/PlexLinkedUserDetailView.swift",
+      "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
     ]
   },
   {
@@ -781,6 +781,7 @@
       "Sources/FeatureSettings/ProfileDetailView.swift",
       "Sources/FeatureSettings/ProfileSettingsDetailView.swift",
       "Sources/FeatureSettings/ParentalPINDetailView.swift",
+      "Sources/CoreUI/ProfileLockCopy.swift",
       "Sources/FeatureSettings/SettingsView.swift",
       "Sources/AppShelliOS/PlozziOSParentalPINSettingsView.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
@@ -824,7 +825,7 @@
       "Sources/FeatureSyncSetup/SyncSetupPairingModel.swift",
       "Sources/FeatureSyncCloud/CloudConfigSyncService.swift",
       "Sources/FeatureSettings/SyncEraseDataView.swift",
-      "Sources/CoreModels/LivePlaybackBuffer.swift",
+      "Sources/CoreModels/LosslessAudioSettings.swift",
       "Sources/CoreModels/ProfileSettingsSnapshot.swift",
       "Sources/CoreModels/CrashReportingSettings.swift",
       "Sources/CoreModels/SyncDataInventory.swift",
@@ -842,7 +843,7 @@
       "Sources/FeatureSyncCloud/",
       "Sources/AppShelliOS/PlozziOSSyncSetup",
       "Sources/CoreModels/ProfileSettingsSnapshot.swift",
-      "Sources/AppShelliOS/PlozziOSAppModel+KeychainSync.swift",
+      "Sources/CoreModels/LosslessAudioSettings.swift",
       "Sources/AppRuntime/LiveTV"
     ]
   },

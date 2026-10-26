@@ -6,7 +6,7 @@ Plozz plays media from sources you connect. For children, combine a **Kids Profi
 
 1. From a non-Kids profile, open **Settings > Profiles**. Add a Kids profile or enable **Kids Profile** in an existing profile's management settings.
 2. Choose a restricted **server user** and suitable libraries for that profile. A Plozz profile does not create a server account or change its permissions.
-3. Create a household **Parental PIN** in **Settings**. This protects restricted settings and leaving Kids profiles; keep it separate from PINs a child knows.
+3. Open **Settings > Parental PIN > Create a Parental PIN** to create the household PIN. This protects restricted settings and leaving Kids profiles; keep it separate from PINs a child knows.
 4. If using [Seerr requests](/media-requests/), link the profile to a restricted Seerr user instead of an unrestricted administrator.
 
 ## What the controls do

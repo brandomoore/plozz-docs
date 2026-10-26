@@ -1,6 +1,6 @@
 # Connect a server
 
-Connect your Jellyfin, Plex, Emby, or Silo account.
+Connect Jellyfin, Plex, Emby, or Silo.
 
 ## Add a connection
 
@@ -22,7 +22,7 @@ Without connections, Apple TV offers **Sign In to a Server**.
 
 Plex Home users and Silo profiles determine server access and history. A Plozz profile controls app preferences, not server-user creation.
 
-See [device setup](/profiles-and-sync/) or [network folders](/network-shares/).
+See [server-user selection](/profiles-and-locks/#choose-a-server-user), [device setup](/profiles-and-sync/), or [network folders](/network-shares/).
 
 ## Restore a saved sign-in
 

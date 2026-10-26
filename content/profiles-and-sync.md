@@ -26,6 +26,8 @@ For each profile, **Display Size**, navigation style, and the main shortcut arra
 
 Downloads, automatic sign-in, [Video buffer](/streaming-quality/), [Live TV buffer](/platform-controls/#live-tv-remote-controls-and-rewind), [Top Shelf preferences](/platform-controls/#launch-from-apple-tv-top-shelf), and the [external-player choice](/external-players/) also remain device-local. The player choice applies across Plozz profiles, not per viewer. [Diagnostics consent](/feedback-and-bugs/#choose-diagnostics-sharing) is neither synced nor transferred.
 
+[Prefer lossless audio](/audio/#choose-output-compatibility) also stays on this device and applies across Plozz profiles, because compatibility depends on the connected audio equipment.
+
 ## Sync Live TV deliberately
 
 Live TV follows iCloud Sync for the same Plozz profile: source addresses, channel settings, guide mappings, and library schedules can sync. Playlist/guide addresses and supported imported source copies use encrypted iCloud storage. A library-channel recipe needs its catalogue snapshot to reproduce the schedule.

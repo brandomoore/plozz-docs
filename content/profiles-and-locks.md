@@ -6,11 +6,17 @@ A Plozz profile keeps preferences, libraries, Home layout, and trackers. A **ser
 
 Use the profile header in **Settings** to switch. Open **Settings > Profiles** to add or manage profiles, including names and avatars. On iPhone/iPad, choose **Edit Profiles** or touch and hold a profile, then **Edit Profile**.
 
-Under each profile's **Libraries**, select servers, server users, and libraries. Sign-ins are shared on the device; each profile chooses which to use. Disabling a library hides browsing/discovery, not account-wide Continue Watching or Next Up; enforce content restrictions on the server.
-
 **Automatically Sign In** restores the last-used profile's previously authorized session on this device, including verified Profile Lock or Plex PIN access. Finish unlocking before enabling it. Turn it off if you want a PIN prompt on later launches; switching profiles still checks their locks.
 
 Each Apple TV user can remember a different Plozz profile. Follow [Apple TV users and automatic sign-in](/apple-tv-profiles/) to set this up.
+
+## Choose a server user
+
+1. Open **Settings > Libraries** for the intended Plozz profile and enable the server.
+2. On Apple TV, open **Watching as**. On iPhone/iPad, use the user picker or Plex identity row. Select a Jellyfin/Emby sign-in or Plex Home user; complete any Plex PIN check.
+3. For a missing sign-in, choose **Add Another User** or **Add Another Plex Account**. Apple TV puts these inside Watching as; mobile shows them in the server's Libraries controls. Sign in, then confirm the identity and libraries.
+
+Added sign-ins are shared by this device's profiles; no server user is created. Disabling libraries hides browsing/discovery, not account-wide Continue Watching or Next Up. Enforce content restrictions on the server.
 
 ## Lock a profile
 

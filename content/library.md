@@ -27,7 +27,7 @@ Use **Add to Watchlist** on a movie or show, then open **Watchlist** for this pr
 
 Watchlist combines Plozz's saved titles with supported connected-server and [tracker](/trackers/) lists, including WeTrakr's planning list. Adds/removals can propagate to those services: check the server user and tracker account first. An entry does not make an unavailable title playable.
 
-**Mark as Watched**, **Mark as Unwatched**, and **Mark Watched Up to Here** change history where supported. The last action includes earlier episodes: use it carefully.
+**Mark as Watched**, **Mark as Unwatched**, and **Mark Watched Up to Here** change history where supported. The last includes earlier episodes and, on Apple TV, earlier seasons; use carefully.
 
 **Remove from Continue Watching** dismisses a title while preserving its position where supported; otherwise it clears resume. It does not mark it watched or remove its Watchlist entry. [Cross-server history settings](/profiles-and-sync/#keep-watch-history-separate) govern matching copies.
 
