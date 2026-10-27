@@ -1,34 +1,34 @@
 # Home and navigation
 
-Customize Home, navigation, and details for the active Plozz profile.
+Customize Home, navigation, and details per Plozz profile.
 
 ## Choose Home rows
 
-Open **Settings > Screens & Navigation > Customize Home**.
+Open **Settings > Screens & Navigation > Customize Home > Rows**.
 
-Choose **Match server** for server arrangements or **Combined rows** for cross-library rows. Presets replace custom arrangements after confirmation, never editing the server. Multiple servers can combine common rows while retaining others. Plex supplies promoted rows, not another client's pinned-library layout.
+Choose **Match server** for server arrangements or **Combined rows** across libraries. Presets replace custom arrangements after confirmation, never editing servers. Common rows can combine across servers while others stay separate. Plex supplies promoted rows, not another client's pinned libraries.
 
-Use **Add section**, or open a section and choose **Remove section**. Choose **Reorder**, move sections, then **Done**. Mix combined, library, and server rows; Home layout/Hero stays pinned. Editing saves a custom arrangement instead of following server order.
+Use **Add row**, or open a row and choose **Remove from Home**. Choose **Edit**, reorder, then **Done**; holding a row also offers **Reorder**. Mix combined, library, and server rows. Editing saves **Custom** instead of following server order.
 
-Removing sections changes Home, not access. An unavailable section stays saved; check its source and **Retry**. **No titles to show** means an empty result, not a connection error.
+Removing rows changes Home, not access. Unavailable rows stay saved: open **Details**, check the source/user, then **Retry**. **No titles to show** means empty results, not a connection error. **Section unavailable in the latest refresh** can mean an empty or changed server row.
 
 ## Add a collection section
 
-1. Choose **Add section > Create section**, then an available source and collection.
+1. Choose **Add row > From a collection**, then an available source and collection.
 2. Select **Posters**, **Landscape**, or **Featured**.
-3. Optionally enter a **Section name**, then **Add to Home**.
+3. Optionally enter a **Row name**, then **Add to Home**.
 
-The preview may omit titles. Reopen to change **Content** or the name, then **Save changes**. It remains tied to that server user; changing users does not grant access.
+Previews may omit titles. Reopen to change **Content** or the name, then **Save changes**. Sections remain tied to their server user; changing users grants no access.
 
 ## Keep older Continue Watching titles
 
-Continue Watching and its merged Next Up titles have no app-imposed count limit or age expiry. Separate Next Up rows show up to 20 titles. Account-wide Continue Watching and Next Up ignore library browsing switches; disabling a library does not clear that history. Sources, watched state, dismissal, excluded servers, and server-user permissions still apply.
+Continue Watching and merged Next Up have no app-imposed count limit or age expiry. Separate Next Up rows show up to 20 titles. These account-wide feeds ignore library browsing switches; disabling a library does not clear history. Sources, watched state, dismissal, excluded servers, and server-user permissions still apply.
 
-In **Customize Home > Continue Watching**, **Include Next Up** defaults on. Turn it off to arrange separate Next Up rows. Removing Continue Watching suspends merging.
+Under **Rows > Continue Watching**, **Include Next Up** defaults on. Turn it off to arrange separate Next Up rows. Removing Continue Watching suspends merging.
 
 ## Choose the hero
 
-Open **Home layout** on Apple TV, or **Hero** on mobile. Apple TV offers **Showcase**, where the focused title fills the background, or **Fullscreen Hero**, a separate carousel. Showcase has separate ratings and Discovery controls.
+In Customize Home, open **Layout** on Apple TV, or **Hero** on mobile. Apple TV offers **Showcase**, where the focused title fills the background, or **Fullscreen Hero**, a separate carousel. Showcase has independent ratings and Discovery controls.
 
 For the carousel, **Hero content sources** selects Continue Watching, recently added titles, Watchlist, libraries, collections, or Discovery. **Show hero** hides the carousel, not Showcase.
 
@@ -38,8 +38,8 @@ For Continue Watching cards/actions, see [Spoiler protection](/spoiler-protectio
 
 ## Arrange shortcuts and details
 
-Under **Screens & Navigation > Navigation > Hide or Reorder Navigation**, hold to hide/show/move; mobile uses dragging to reorder. Unused Home, Search, or Watchlist shortcuts can hide automatically; **Show** retains one. Compact mobile layouts use **More**.
+Under **Screens & Navigation > App navigation > Hide or Reorder Navigation**, hold to hide/show/move; mobile uses dragging to reorder. Unused Home, Search, or Watchlist shortcuts can hide automatically; **Show** retains one. Compact mobile layouts use **More**.
 
 **Detail Page** chooses artwork, trailers, or [theme music and its volume preview](/audio/#control-detail-page-music) independently of Home. Review-score and age-recommendation controls are here.
 
-Use [Customize library pages](/customize-libraries/) for tabs/rows and [Appearance](/appearance/) for cards, logos, and text size.
+See [library tabs and rows](/customize-libraries/) and [appearance sizing](/appearance/).

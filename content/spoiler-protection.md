@@ -30,7 +30,7 @@ To hide scores entirely in a header, use the review-score controls in [Home and 
 
 ## Change Continue Watching cards
 
-Open **Settings > Screens & Navigation > Customize Home > Continue Watching**:
+Open **Settings > Screens & Navigation > Customize Home > Rows > Continue Watching**:
 
 - **Artwork + logo:** wide movie or series artwork, not an episode still.
 - **Thumbnail:** episode stills or movie artwork; episode images follow spoiler masking.
@@ -38,7 +38,7 @@ Open **Settings > Screens & Navigation > Customize Home > Continue Watching**:
 
 **Playback details** is separate: **Detailed** shows the play icon, progress, and playback information; **Progress only** keeps the progress bar without playback text. **Labels** independently controls text below the artwork: **Follow Appearance**, **On**, or **Off**. Hiding labels does not hide detailed playback information.
 
-All three choices show artwork. If Continue Watching is absent, restore it with **Add section**. These are profile presentation choices, not changes to watched state or row membership.
+All three choices show artwork. **Continue Watching settings** remains available under Rows when the row is absent; use **Add row** to restore it. These profile presentation choices do not change watched state or row membership.
 
 To remove an abandoned title from the row instead, use [Remove from Continue Watching](/library/).
 

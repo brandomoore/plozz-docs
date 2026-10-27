@@ -31,7 +31,7 @@ Apple TV needs the YouTube app; iPhone/iPad can fall back to its website. For **
 
 Use **Add to Watchlist** on a movie/show; open **Watchlist** for this profile. **Remove from Watchlist** undoes it.
 
-Watchlist combines saved titles with supported server and [tracker](/trackers/) lists, including WeTrakr's planning list. Changes can propagate: check the server user and tracker account. Entries do not grant playback access.
+Watchlist combines explicit saves with enabled servers' and [trackers'](/trackers/) lists, including WeTrakr's planning list. Disabling a server retracts its contributed entries, not explicit saves. Confirmed removals in a connected list can propagate to other lists. Check [server identity](/profiles-and-locks/#choose-a-server-user) and tracker account; entries grant no playback access.
 
 **Mark as Watched**, **Mark as Unwatched**, and **Mark Watched Up to Here** change supported history. The last includes earlier episodes and, on Apple TV, earlier seasons; use carefully.
 

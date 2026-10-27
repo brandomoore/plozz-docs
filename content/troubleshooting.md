@@ -20,7 +20,7 @@ Check source selection, favorites/guide-only filters, and **Manage channels > Hi
 
 ## A library, title, or picture is wrong
 
-Check profile, server user, enabled libraries, and browse filters. A hidden shortcut does not disable its library. For shares, confirm readability and [scan the folder](/network-shares/). Incomplete [library](/library/#browse-a-library) or Continue Watching results offer **Details** and **Try Again** where available.
+Check profile, server user, enabled libraries, and browse filters. A hidden shortcut does not disable its library. For shares, check readability and [scanning](/network-shares/). Use **Details**/**Try Again** for incomplete [library results](/library/#browse-a-library), or **Details**/**Retry** for [Home rows](/home-and-navigation/#choose-home-rows).
 
 For wrong matches or scores, check [Metadata and ratings](/metadata-and-ratings/). Disable [Circadian Mode](/circadian-mode/) before changing HDR settings for a warm/dark picture.
 

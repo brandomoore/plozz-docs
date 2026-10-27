@@ -45,6 +45,8 @@ Enable **Settings > Playback > Background Audio** (default off) to listen while 
 
 On all three platforms, choose **Theme music** in **Settings > Screens & Navigation > Detail Page > Background**.
 
-Set **Theme music volume** (0%-100%). Changes can preview automatically; use **Play preview** or **Stop preview** to compare levels. Leaving the page stops it. Without an available title theme, preview uses a generated sample, not proof your titles have music.
+Set **Theme music volume** (0%-100%). Changes can preview automatically; use **Play preview** or **Stop preview**. Leaving stops it. Without a title theme, preview uses a generated sample, not your library's music.
 
-Available themes fade in on details, pause outside Plozz, and yield to trailers/full playback. **Off** uses static detail artwork without music/trailers. Home trailers and video tracks are independent.
+Available themes fade in on details, fade out when leaving, pause outside Plozz, and yield to trailers/full playback. **Off** uses static artwork without music/trailers. Home trailers and video tracks are independent.
+
+On iPhone/iPad, use the detail page's speaker button (**Mute theme music**/**Unmute theme music**) while its theme plays. Muting lasts that detail session; it does not change saved volume or Settings previews.

@@ -12,6 +12,8 @@ Plozz plays media from your own sources on Apple TV, iPhone, and iPad.
 
 If **Help improve Plozz?** appears, choose **Share Diagnostics** or **Don't Share**. Both continue setup; you can change [diagnostics sharing](/feedback-and-bugs/#choose-diagnostics-sharing) later.
 
+While libraries load, **Choose later** continues setup; return to **Settings > Libraries** afterward. A failed load is not an empty library: use **Try Again** when offered and check the server user.
+
 > [!TIP]
 > Already use Plozz elsewhere? Choose **Set up from another device** during setup, then follow [Profiles and sync](/profiles-and-sync/). Silo still requires approval for each device.
 

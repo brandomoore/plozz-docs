@@ -6,7 +6,7 @@ A Plozz profile keeps preferences, libraries, Home layout, and trackers. A **ser
 
 Use the profile header in **Settings** to switch. **Settings > Profiles** manages names, avatars, and additions. On iPhone/iPad, choose **Edit Profiles** or touch and hold a profile, then **Edit Profile**.
 
-**Automatically Sign In** restores the last authorized session, including verified Profile Lock or Plex PIN access. Finish unlocking before enabling it; turn it off for startup PIN prompts. Switching profiles still checks locks.
+**Automatically Sign In** restores the last authorized session, including verified Profile Lock or Plex PIN access. Unlock first; turn it off for startup PIN prompts. Switching profiles still checks locks.
 
 Each [Apple TV user](/apple-tv-profiles/) can remember a different Plozz profile.
 
@@ -14,7 +14,7 @@ Each [Apple TV user](/apple-tv-profiles/) can remember a different Plozz profile
 
 When **Add your Plex Home profiles?** appears, choose **Add all profiles** to create or reuse linked Plozz profiles, or **Just me** to select only your Plex user.
 
-After importing, choose who's watching and finish their setup. Other newly created profiles finish setup when first opened. Importing does not unlock anyone: the selected user still completes required authorization/Plex PIN checks.
+**Profiles added** or **Profiles ready** advances automatically to **Choose your profile**. After **Just me**, use **Choose your Plex user**. Each new profile finishes setup when first opened. Importing preserves required authorization/Plex PIN checks.
 
 For children, configure [Kids Profile and Parental PIN](/parental-controls/) separately.
 
@@ -24,7 +24,9 @@ For children, configure [Kids Profile and Parental PIN](/parental-controls/) sep
 2. On Apple TV, open **Watching as**. On iPhone/iPad, use the user picker or Plex identity row. Select a Jellyfin/Emby sign-in or Plex Home user; complete any Plex PIN check.
 3. For a missing sign-in, choose **Add Another User** or **Add Another Plex Account**: inside Watching as on Apple TV, or the server's mobile Libraries controls. Sign in and confirm the identity and libraries.
 
-Sign-ins are shared by this device's profiles. Disabled libraries hide browsing/discovery, not account-wide Continue Watching or Next Up. Enforce restrictions on the server.
+Sign-ins are shared across this device's profiles. Disabled libraries hide browsing, not account-wide Continue Watching/Next Up; enforce restrictions on the server.
+
+Plex user choice sets whose Watchlist you read and write. **Don't use this server's watchlist** excludes its list, not browsing/playback; disable/re-enable the server in Libraries to reconsider.
 
 ## Lock a profile
 

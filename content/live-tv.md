@@ -33,7 +33,7 @@ For a Kids profile's playlist source, set a [Parental PIN](/parental-controls/),
 
 ## Watch several channels
 
-Start a channel, open **Multiview**, and add channels. The limit is **four pictures**, with sound from one pane at a time. Your provider’s simultaneous-stream allowance or available tuners may impose a lower limit.
+Start a channel, open **Multiview**, add channels, then choose **Watch**. The limit is **four pictures**, with one audible pane. On Apple TV, focus a pane for sound; on iPhone/iPad, choose **Audio**. Provider stream/tuner limits may be lower.
 
 Use **Favorite** to save channels/layout; reopen from **Favorite Multiviews**. This reserves no capacity.
 
@@ -49,7 +49,7 @@ Under **Sources**, open a playlist's **Guide options**. For wrong listings, choo
 
 When **Review channel identities** appears in Guide options, select a saved channel and confirm **Restore saved identity** only for the same station/feed. This reuses favorites, hidden state, and guide corrections; otherwise leave the playable entry separate.
 
-Use **Refresh sources** after changes or **Retry** for errors. Longer ranges cannot create listings.
+Use **Refresh sources** after changes or **Retry** for errors.
 
 On mobile, **Stop without Wi-Fi or Ethernet** in **Settings > Live TV** stops playback after detected network changes; brief cellular use remains possible. Low Data Mode pauses Live TV even on Wi-Fi; use an unrestricted connection.
 

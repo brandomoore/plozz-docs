@@ -17,10 +17,18 @@ The order applies across this profile's libraries. Each library shows only suppo
 
 In **Customize Libraries**, choose the library by its name and server. Move rows into your preferred order or below **Hidden** to hide them. These changes affect only that library's **Recommended** page, not [Home](/home-and-navigation/). **Reset Rows** restores its default row arrangement.
 
-Only enabled, supported video libraries appear in this editor. Network shares have no Recommended page. If discovery fails, choose **Try Again**; an unreachable server is not proof it has no libraries.
+The library list includes enabled, supported video and collection libraries. Network shares have no Recommended page. If discovery fails, choose **Try Again**; an unreachable server is not proof it has no libraries.
 
 > [!NOTE]
 > **No visible rows** means the loaded Recommended rows are hidden. Show them again here, or use Browse. Hiding rows does not disable the library.
+
+## Choose collection-cover shapes
+
+In **Customize Libraries**, choose a library supporting collections, then set **Collection covers** to **Auto**, **Posters**, or **Landscape**. Auto samples cover dimensions: a landscape majority chooses landscape; ties or no usable dimensions choose posters.
+
+These are collection covers, not the titles inside them. Collection-only libraries have no Recommended editor.
+
+Below the Recommended row list, set **Covers** for each collection row. Home has independent **Covers** controls: open **Customize Home > Rows** and select its collection-cover row.
 
 ## Adjust the Apple TV library header
 
