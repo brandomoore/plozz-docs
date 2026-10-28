@@ -26,7 +26,7 @@ Set age/content restrictions on the media server itself. Hiding a library or Hom
 
 For [network shares](/network-shares/), choose folders containing only suitable media; there is no media-server user enforcing maturity restrictions.
 
-For playlist sources, follow [Approve playlist sources for Kids](/live-tv/#approve-playlist-sources-for-kids). Approval allows the whole source, not age-filtered programs, and stays on that device. Review the channels before approving.
+Playlist sources stay unavailable in Kids profiles until you create a Parental PIN and [approve each source](/live-tv/#approve-playlist-sources-for-kids). Approval allows the whole source, not age-filtered programs, and stays on that device. Review the channels before approving.
 
 ## Check each device
 

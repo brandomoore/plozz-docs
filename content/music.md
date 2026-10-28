@@ -23,7 +23,9 @@ Music can continue while the Apple TV screensaver is showing. Open Apple TV Cont
 
 ## Lyrics and listening history
 
-The lyrics button controls the synchronized lyrics panel when usable lyrics are found. Plozz checks the music provider and can use an online lyrics fallback. Not every track has synchronized lyrics; a missing panel is not proof that playback failed.
+The speech-bubble lyrics button controls the synchronized lyrics panel when usable lyrics are found. Plozz checks the music provider and can use an online lyrics fallback. Not every track has synchronized lyrics; a missing panel is not proof that playback failed.
+
+Online lookups use **LRCLIB** and can send track title, artist, and duration, not audio files. Turn lyrics off in Now Playing to stop future LRCLIB lookups. This toggle is shared across profiles on this device. While enabled, it is unavailable for tracks without lyrics; change it on a track with lyrics.
 
 Connect **Last.fm** under **Settings > Trackers** for the active profile. Eligible music plays send Now Playing information and completed scrobbles. Tracks must be longer than 30 seconds; scrobbling requires at least half the track or four minutes, whichever is shorter.
 

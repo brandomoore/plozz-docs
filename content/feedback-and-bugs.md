@@ -32,7 +32,7 @@ Change it in **Settings > Help & Diagnostics > Share Crash Reports**. This is no
 
 Sharing sends technical crash, freeze, and failure diagnostics through Sentry, including app/device information, screen categories, and performance measurements. Automatic reports exclude logins, server addresses, media titles, and viewing history.
 
-With sharing enabled, use **Send to Developer** on mobile, or **Send Recent Activity to Developer** on Apple TV, to submit filtered activity, connection, library-load, and playback evidence, not the free-form messages displayed in Recent Activity. Playback/source evidence can survive restarts; send soon after reproducing. Your optional message is sent as written: exclude secrets/personal details.
+With sharing enabled, enter **Message (required)** describing the problem, then choose **Send to Developer** on mobile or **Send Recent Activity to Developer** on Apple TV. A blank message leaves Send disabled. This submits filtered activity, connection, library-load, and playback evidence, not Recent Activity's free-form messages. Playback/source evidence can survive restarts; send soon after reproducing. Your message is sent as written: exclude secrets/personal details.
 
 **Submitted** means accepted for delivery, not confirmed receipt. If submission fails, check sharing and retry.
 

@@ -19,7 +19,7 @@ Supported [external-player returns](/external-players/#return-watch-progress) ca
 
 AniList and MyAnimeList do not treat every television episode as anime. Matching and usable identifiers matter; anime progress is submitted when playback stops at 80% or more.
 
-WeTrakr appears only when configured in the app build. Follow its browser or device-code connection instructions. Its planning list is used for [Watchlist](/library/), not as a source of playable videos.
+WeTrakr appears only when configured in the app build. Follow its browser or device-code connection instructions. Its planning list is used for [Watchlist](/watchlist/), not as a source of playable videos.
 
 ## Connect the correct account
 
@@ -30,7 +30,7 @@ WeTrakr appears only when configured in the app build. Follow its browser or dev
 
 Availability also depends on credentials configured in the app build. **Unavailable** means the tracker is not configured there, not that your media-server password is wrong.
 
-Connected watchlists can affect [Plozz's Watchlist](/library/). Scrobbling sends activity to a third-party account; disconnect a service you no longer want to use.
+Connected watchlists can affect [Plozz's Watchlist](/watchlist/). Scrobbling sends activity to a third-party account; disconnect a service you no longer want to use.
 
 ## Recover a connection
 

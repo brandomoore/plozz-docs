@@ -1,7 +1,5 @@
 # Player controls
 
-Choose what plays and happens next.
-
 ## Reach the controls
 
 On Apple TV, press **Up** from the scrub surface for Playback, Audio, and Subtitles; **Down** reaches information/navigation tabs. On iPhone/iPad, tap the video: portrait uses the ellipsis **Playback options** menu; landscape separates controls.
@@ -23,11 +21,11 @@ The first multi-version video asks your preference. Change **Settings > Playback
 
 ## Autoplay and skipping
 
-Under **Settings > Playback**, next-episode and next-playlist-item autoplay default on. **Show Up Next card** is independent of autoplay.
+Under **Settings > Playback**, next-episode and next-playlist-item autoplay default on. **Show Up Next card** is independent; its lead time applies without credits markers.
 
-Its lead time applies without a credits marker.
+Enable **Skip intros, credits & more**, then open **Customize**. Choose **Default behavior**: **Show skip button**, **Skip instantly**, or **Skip after** (1-30 seconds). Select movies, TV shows, or anime under **Enable for**.
 
-In **Skip intros, credits & more**, turn on **Enable skipping**, choose **Show skip button** or **Skip automatically**, and select movies, TV shows, or anime under **Enable for**. Skipping needs markers. Automatic **Skip after** ranges from **Immediately** to 30 seconds. **Set each marker separately** gives intros, credits, recaps, previews, and commercials independent behavior, including Off.
+Open an intro, credits, recap, preview, or commercial marker's settings to override each content category, including **Off**. **Use default** restores the shared behavior. Disabled content categories must first be enabled on the previous page. Skipping needs markers.
 
 With skipping enabled, **Use community markers** (default on) checks IntroDB/TheIntroDB if intros or credits are missing. Lookups send IMDb/TMDB/TVDB identifiers and applicable episode numbers, ordering, name, and runtime, not video files. Disable it to stop community lookups, not server markers. Coverage and matching vary.
 
@@ -35,7 +33,7 @@ With skipping enabled, **Use community markers** (default on) checks IntroDB/The
 
 ## Jump to a chapter
 
-Open **Chapters** below the timeline; mobile tabs scroll horizontally. Choose a chapter to jump there and close the panel; paused playback stays paused.
+Open **Chapters** below the timeline; mobile tabs scroll horizontally. Choose a chapter to jump there; paused playback stays paused.
 
 The tab needs usable chapters. Plex, Jellyfin, and Emby can supply them; otherwise, Plozz can read supported file chapters, including shares/downloads. Missing images do not prevent use. Intro/credits markers are separate.
 
@@ -43,10 +41,10 @@ The tab needs usable chapters. Plex, Jellyfin, and Emby can supply them; otherwi
 
 Adjust speed where offered. **Zoom Mode** (Apple TV) or **Video** (mobile) offers **Normal** (full picture), **Crop** (cropped edges), **Stretch** (changed proportions), and **Custom** (50%-200%). Zoom lasts this session.
 
-Use **Episodes** or **Playlist** for sequence navigation.
+**Episodes** and **Playlist** navigate the sequence.
 
 ## Explore the cast
 
 In **Cast**, select a person for biography/credits. **See more** opens their page; a credit opens its title page. Both end playback; credits need not be playable.
 
-See [Streaming quality](/streaming-quality/), [Audio](/audio/), [Subtitles](/subtitles/), [AirPlay/Picture in Picture](/platform-controls/#airplay-and-picture-in-picture), or [external players](/external-players/) for settings and limits.
+See [Streaming quality](/streaming-quality/), [Audio](/audio/), [Subtitles](/subtitles/), [AirPlay/Picture in Picture](/platform-controls/#airplay-and-picture-in-picture), or [external players](/external-players/).

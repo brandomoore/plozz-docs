@@ -20,6 +20,8 @@ Keep Plozz open on Apple TV to receive changes; it checks iCloud when brought to
 
 [Library tab order and Recommended-row layouts](/customize-libraries/) are transferable profile preferences too. They do not make an unsupported tab or inaccessible library available on another device.
 
+[Watchlist filters and sort order](/watchlist/#filter-and-sort-the-page) also follow the profile, separately from its saved titles.
+
 With sync and iCloud Keychain available, iPhone/iPad can automatically adopt supported Jellyfin, Plex, Emby, share, and Seerr credentials. Apple TV does not use this iCloud Keychain path; use nearby setup or sign in there. **Silo requires approval on each device**, regardless of sync.
 
 ## Keep device-specific choices local

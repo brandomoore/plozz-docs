@@ -73,8 +73,8 @@ Automatic-lineup errors offer **Retry Plozz channels**; **Refresh Plozz channels
 
 Choose libraries, movies/episodes, ordering, and optional matching rules. Select **Preview schedule**, inspect matches, then **Save channel**. Invalid or missing durations can exclude titles. Empty title, genre, or rating rules allow all accessible matches; review the preview carefully.
 
-Changes start after published programs. Sharing a schedule requires its catalogue snapshot, not just its recipe.
+Changes start after published programs; cross-device schedules need catalogue snapshots.
 
-**Update watch history** defaults off for this profile/device. Enabling it can mark programs watched after 90% viewing, without resume writes. Channels use original files only.
+**Update watch history** defaults off for this profile/device. It can mark programs watched after 90% viewing, without resume writes. [Cross-server history](/profiles-and-sync/#keep-watch-history-separate) and eligible [connected trackers](/trackers/) can receive completions. Channels play original files.
 
 Live TV is experimental; see [controls and buffering](/platform-controls/#live-tv-remote-controls-and-rewind) or [Troubleshooting](/troubleshooting/).

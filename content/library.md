@@ -8,10 +8,12 @@ With [Seerr](/media-requests/), **Not in Your Library** results are requestable,
 
 1. Open a library, or Apple TV's [All Libraries](/combined-libraries/).
 2. Use **Browse** for the catalogue. [Customize library pages](/customize-libraries/) to arrange tabs and Recommended rows.
-3. Filter or sort where supported; clear filters if a title disappears.
+3. Filter or sort where supported. **Genre** and **Year** narrow results together with the selected quick filter; **Clear Filters** resets all three.
 4. Open a show, choose its season, then select an episode. Collections and playlists appear when supplied by the source.
 
 Apple TV's name-sorted Browse can show an [A-Z rail](/combined-libraries/#jump-through-a-large-library); other sorts and collection-member lists do not.
+
+Some choices need **Preparing library filter…** before showing results. Wait, or choose **Cancel**; this does not change your library. If filter options fail, choose **Try Again**.
 
 **Checking collections...** means results are incomplete. Choose **Try Again** after interruption; include **Details** when [reporting failures](/troubleshooting/#report-a-problem).
 
@@ -29,9 +31,7 @@ Apple TV needs the YouTube app; iPhone/iPad can fall back to its website. For **
 
 ## Save titles and manage history
 
-Use **Add to Watchlist** on a movie/show; open **Watchlist** for this profile. **Remove from Watchlist** undoes it.
-
-Watchlist combines explicit saves with enabled servers' and [trackers'](/trackers/) lists, including WeTrakr's planning list. Disabling a server retracts its contributed entries, not explicit saves. Confirmed removals in a connected list can propagate to other lists. Check [server identity](/profiles-and-locks/#choose-a-server-user) and tracker account; entries grant no playback access.
+Use **Add to Watchlist** on a movie/show. [Watchlist](/watchlist/) explains connected-list effects, filtering, sorting, and missing entries; saving grants no playback access.
 
 **Mark as Watched**, **Mark as Unwatched**, and **Mark Watched Up to Here** change supported history. The last includes earlier episodes and, on Apple TV, earlier seasons; use carefully.
 
