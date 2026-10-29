@@ -8,11 +8,9 @@ Use the remote to reveal playback controls. **Settings > Playback > Seeking > Sk
 
 **Seek without pausing** determines whether a playing video responds to scrubbing. When off, pause first, scrub to the position, then press Play. **Prevent Accidental Exit**, under Screens & Navigation's navigation settings, changes app-exit behavior rather than playback quality.
 
-In the same navigation settings, **Zoom when opening titles** enables cinematic artwork transitions. It defaults off, respects Reduce Motion, and stays local to this profile on this Apple TV.
-
 **Fade on display changes** covers dynamic-range and frame-rate transitions, not TV matching settings. If matching is off on Apple TV, disabling fades can avoid needless delays.
 
-Each Apple TV user can [automatically open their remembered Plozz profile](/apple-tv-profiles/).
+Each Apple TV user can [automatically open their remembered Plozz profile](/apple-tv-profiles/). With automatic sign-in off, [returning to browsing can require profile selection again](/apple-tv-profiles/#when-you-return-to-browsing).
 
 ## Live TV remote controls and rewind
 

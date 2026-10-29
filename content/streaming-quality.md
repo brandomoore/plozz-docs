@@ -26,9 +26,13 @@ Silo converts to H.264 at 480p, 720p, 1080p, or 4K, limited by video height. Uns
 
 If Maximum buffers, try a lower session limit. If only conversion fails, check server permission and capacity.
 
+If **Force transcoding** is on and playback fails, turn it off under **Streaming quality > Advanced** and retry. If offered, open the error screen's **Details** to distinguish conversion failure from a connection problem.
+
 Shares have no server converting video; a missing Quality control can be expected.
 
-**Video buffer** in Playback changes temporary read-ahead, not quality or offline downloads. Larger buffers use more storage; actual duration depends on the video and free space. It is unavailable with Apple's native player. Start a new playback session after changing it. This device-wide preference does not transfer or sync.
+## Adjust the video buffer
+
+On Apple TV, iPhone, and iPad, **Settings > Playback > Video buffer** changes temporary read-ahead, not quality or offline downloads. Larger buffers use more storage; actual duration depends on the video and free space. It is unavailable with Apple's native player. Start a new playback session after changing it. This device-wide preference does not transfer or sync.
 
 A filled buffer can bridge brief interruptions, not fix a source that stays too slow. [Live TV buffer](/platform-controls/#live-tv-remote-controls-and-rewind) is separate.
 

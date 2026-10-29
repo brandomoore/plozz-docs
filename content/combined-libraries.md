@@ -10,7 +10,7 @@ combined-libraries
 
 1. Enable the libraries you want under **Settings > Libraries** for the active Plozz profile.
 2. Open **All Libraries** from navigation. It is offered when more than one browsable library is available.
-3. If the shortcut is hidden, open **Settings > Screens & Navigation > App navigation > Hide or Reorder Navigation** and enable it. Horizontal tab-bar layouts do not enable library shortcuts by default.
+3. If the shortcut is hidden, open **Settings > Screens & Navigation > App navigation > Hide or Reorder Navigation** and show it. All three Apple TV navigation layouts support library shortcuts.
 4. Browse and use the available sort or filter controls.
 
 Movies and shows can appear together; music libraries are excluded. Matching titles from several sources can share one card. Matching depends on the available identity information, so not every duplicate is guaranteed to merge.

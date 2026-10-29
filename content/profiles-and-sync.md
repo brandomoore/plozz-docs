@@ -26,7 +26,7 @@ With sync and iCloud Keychain available, iPhone/iPad can automatically adopt sup
 
 ## Keep device-specific choices local
 
-For each profile, **Display Size**, navigation style, and the main shortcut arrangement stay local. Apple TV's **Prevent Accidental Exit** and [title zoom](/platform-controls/#apple-tv) do too. Unlike library-tab order, none sync or transfer; set them on each device.
+For each profile, **Display Size**, navigation style, and the main shortcut arrangement stay local. Apple TV's **Prevent Accidental Exit** does too. Unlike library-tab order, none sync or transfer; set them on each device.
 
 Downloads, automatic sign-in, [Video buffer](/streaming-quality/), [Live TV buffer](/platform-controls/#live-tv-remote-controls-and-rewind), [Top Shelf preferences](/platform-controls/#launch-from-apple-tv-top-shelf), and the [external-player choice](/external-players/) also remain device-local. The player choice applies across Plozz profiles, not per viewer. [Diagnostics consent](/feedback-and-bugs/#choose-diagnostics-sharing) is neither synced nor transferred.
 

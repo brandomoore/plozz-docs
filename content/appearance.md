@@ -14,15 +14,15 @@ Under **Labels**, choose **App default**, **Show labels everywhere**, or **Hide 
 
 Use **Customize by view** for exceptions. **Mixed**, offered for Home rows and Recommended, hides labels in Showcase and on series artwork but shows them elsewhere.
 
-Continue Watching's [Customize Home editor](/spoiler-protection/#change-continue-watching-cards) has separate **Labels** controls: **Follow Appearance** follows its Home rows or Recommended context; **On** or **Off** overrides labels across artwork styles.
+Continue Watching's [Home editor](/spoiler-protection/#change-continue-watching-cards) has separate **Labels** controls: **Follow Appearance** follows its Home rows or Recommended context; **On** or **Off** overrides labels across artwork styles.
 
-A [collection cover](/customize-libraries/#choose-collection-cover-shapes) and its contents are separate: titles inside collections/playlists use **Browse**. Contextual **Card labels** under Customize Home, Customize Libraries, and Detail Page edit these same preferences.
+A [collection cover](/customize-libraries/#choose-collection-cover-shapes) and its contents are separate: titles inside collections/playlists use **Browse**. Contextual **Card labels** under **Screens & Navigation > Home**, **Libraries**, and **Movie & show details** edit these same preferences.
 
 ## Resize title logos
 
-Under **Settings > Screens & Navigation**, adjust **Logo size** and **Text size** in **Customize Home > Layout** (mobile **Hero**) and **Detail Page**. Apple TV remembers separate Showcase/Fullscreen Hero sizes; [library Recommended headers](/customize-libraries/#adjust-the-apple-tv-library-header) are independent too.
+Under **Settings > Screens & Navigation**, adjust **Logo size** and **Text size** in **Home > Layout** (mobile **Home > Hero**) and **Movie & show details**. Apple TV remembers separate Showcase/Fullscreen Hero sizes; [library Recommended headers](/customize-libraries/#adjust-the-apple-tv-library-header) are independent too.
 
-Text size scales title text, descriptions, and metadata, not cards or menus. On Apple TV, Detail Page sizing also changes episode titles/synopses. The center position is the default; constrained headers may fit smaller without changing your saved choice.
+Text size scales title text, descriptions, and metadata, not cards or menus. On Apple TV, detail sizing also changes episode titles/synopses. The center position is the default; constrained headers may fit smaller without changing your saved choice.
 
 ## Choose artwork
 

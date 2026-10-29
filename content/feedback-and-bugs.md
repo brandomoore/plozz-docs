@@ -28,11 +28,11 @@ For logs, follow [Report a problem](/troubleshooting/#report-a-problem). Uploads
 
 When **Help improve Plozz?** appears, choose **Share Diagnostics** or **Don't Share**. Reporting stays off until you consent, including after an upgrade asks again. Either choice continues setup without changing app features.
 
-Change it in **Settings > Help & Diagnostics > Share Crash Reports**. This is not a per-profile preference and is neither synced nor transferred. Builds without a reporting endpoint cannot upload.
+Change it in **Settings > Help & Diagnostics > Share Diagnostics**. Consent is device-wide, neither synced nor transferred. Builds without a reporting endpoint cannot upload.
 
 Sharing sends technical crash, freeze, and failure diagnostics through Sentry, including app/device information, screen categories, and performance measurements. Automatic reports exclude logins, server addresses, media titles, and viewing history.
 
-With sharing enabled, enter **Message (required)** describing the problem, then choose **Send to Developer** on mobile or **Send Recent Activity to Developer** on Apple TV. A blank message leaves Send disabled. This submits filtered activity, connection, library-load, and playback evidence, not Recent Activity's free-form messages. Playback/source evidence can survive restarts; send soon after reproducing. Your message is sent as written: exclude secrets/personal details.
+Under **Send Diagnostics**, choose **Enable Sharing** if needed; consenting does not submit your report. Enter **Message (required)**, then **Send to Developer**. Blank messages disable Send. Submissions include filtered activity, search, connection, library-load, and playback evidence, not Recent Activity's displayed messages. Search evidence excludes query text. Playback/source evidence can survive restarts; reproduce first and send promptly. Your message is sent as written: exclude secrets/personal details.
 
 **Submitted** means accepted for delivery, not confirmed receipt. If submission fails, check sharing and retry.
 

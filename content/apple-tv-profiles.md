@@ -1,6 +1,6 @@
 # Apple TV users and automatic sign-in
 
-Each Apple TV system user can return to their own last-used Plozz profile when opening the app. You do not need to give the Apple TV user and Plozz profile matching names.
+Each Apple TV system user can open their last-used Plozz profile automatically. Names do not need to match.
 
 An Apple TV user is the person selected in tvOS. A Plozz profile holds app preferences and library selections; its linked server user controls server access and history.
 
@@ -15,7 +15,7 @@ apple-tv-profiles
 3. **Enable automatic sign-in.** Open **Settings > Profiles** and enable **Automatically Sign In**.
 4. **Repeat for each person.** Switch to their Apple TV user before setting up their Plozz profile.
 
-Automatic sign-in is off by default. Once enabled, opening Plozz as that Apple TV user restores their last successfully authorized Plozz profile. Choosing another Plozz profile changes the remembered selection for that Apple TV user; this is not a permanent one-to-one name mapping.
+Automatic sign-in defaults off. Once enabled, opening Plozz restores that Apple TV user's last authorized profile. Choosing another changes the remembered selection, not a permanent assignment.
 
 ## What stays shared
 
@@ -30,4 +30,10 @@ This does not create server accounts, change server permissions, or assign a dif
 
 Manual profile switches still check authorization. If the saved profile, lock, server binding, or credentials change, Plozz may require selection or authentication again instead of trusting the old session.
 
-To stop automatic restoration, turn off **Automatically Sign In** while using that Apple TV user. Other Apple TV users keep their own choice.
+Turn off **Automatically Sign In** for that Apple TV user to stop restoration; others keep their choice.
+
+## When you return to browsing
+
+With automatic sign-in off, returning after leaving Plozz while browsing asks you to choose a profile immediately if any profile has a Profile Lock or protected Plex user. Otherwise, multiple profiles trigger the picker after five minutes away; one unlocked profile does not.
+
+This return check does not interrupt video, music, Live TV, or external-player handoff. Brief interruptions such as Control Center do not trigger it. Complete any required PIN check to resume browsing.

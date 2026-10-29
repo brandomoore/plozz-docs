@@ -5,7 +5,7 @@ Spoiler controls hide episode information; they are not parental controls or a f
 ## Hide unwatched episode information
 
 1. Select your Plozz profile.
-2. Open **Settings > Screens & Navigation > Spoiler Protection**, under **All screens**.
+2. Open **Settings > Screens & Navigation > All screens**.
 3. Enable **Hide spoilers for unwatched episodes** on Apple TV, or **Protect unwatched episodes** on iPhone/iPad.
 4. Choose **Blur Thumbnail** or **Placeholder Art**.
 
@@ -30,7 +30,7 @@ To hide scores entirely in a header, use the review-score controls in [Home and 
 
 ## Change Continue Watching cards
 
-Open **Settings > Screens & Navigation > Customize Home > Rows > Continue Watching**:
+Open **Settings > Screens & Navigation > Home > Rows > Continue Watching**:
 
 - **Artwork + logo:** wide movie or series artwork, not an episode still.
 - **Thumbnail:** episode stills or movie artwork; episode images follow spoiler masking.

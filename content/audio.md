@@ -43,7 +43,7 @@ Enable **Settings > Playback > Background Audio** (default off) to listen while 
 
 ## Control detail-page music
 
-On all three platforms, choose **Theme music** in **Settings > Screens & Navigation > Detail Page > Background**.
+On all three platforms, choose **Theme music** in **Settings > Screens & Navigation > Movie & show details > Background**.
 
 Set **Theme music volume** (0%-100%). Changes can preview automatically; use **Play preview** or **Stop preview**. Leaving stops it. Without a title theme, preview uses a generated sample, not your library's music.
 

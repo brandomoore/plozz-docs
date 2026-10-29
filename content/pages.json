@@ -264,31 +264,31 @@
     "slug": "home-and-navigation",
     "title": "Home and navigation",
     "seoTitle": "Customize Plozz Home rows, hero, and navigation",
-    "description": "Arrange Home rows and collection sections, choose hero sources and navigation, and recover unavailable rows without changing library access.",
+    "description": "Arrange Home rows, filter watched suggestions, choose hero sources and Apple TV navigation layouts, and restore hidden shortcuts without changing access.",
     "section": "Library",
-    "kind": "guide",
+    "kind": "reference",
     "file": "home-and-navigation.md",
     "sources": [
-      "Sources/CoreModels/HomeSectionIssue.swift",
       "Sources/FeatureSettings/HomeRowsSettingsView.swift",
       "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
-      "Sources/FeatureSettings/ContinueWatchingNextUpControl.swift",
-      "Sources/FeatureSettings/HomeLayoutPicker.swift",
       "Sources/FeatureSettings/HeroSettingsControls.swift",
       "Sources/FeatureSettings/NavigationLibrariesDetailView.swift",
       "Sources/FeatureSettings/CollectionSectionSettingsView.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/CoreModels/HomeLibraryVisibility.swift",
-      "Sources/AppShelliOS/PlozziOSHomeView.swift",
-      "Sources/CoreUI/HomeSectionStatusView.swift",
       "Sources/FeatureHomeCore/HomeAggregator.swift",
       "Sources/CoreModels/ContinueWatchingPolicy.swift",
       "Sources/CoreModels/NavigationContentAvailability.swift",
       "Sources/AppShell/MainTabView.swift",
       "Sources/AppShelliOS/PlozziOSRootView.swift",
       "Sources/AppRuntime/HeroDiscoveryRuntime.swift",
-      "Sources/FeatureHome/HomeView.swift"
+      "Sources/FeatureHome/HomeView.swift",
+      "Sources/CoreModels/HomeRecentlyAddedPolicy.swift",
+      "Sources/CoreModels/HeroSettings.swift",
+      "Sources/CoreModels/NavigationStyle.swift",
+      "Sources/CoreModels/NavigationRailPlan.swift",
+      "Sources/CoreModels/NavigationStyleSettingsStore.swift"
     ],
     "watch": [
       "Sources/FeatureSettings/Home",
@@ -296,7 +296,7 @@
       "Sources/CoreModels/Home",
       "Sources/CoreModels/Navigation",
       "Sources/FeatureSettings/Collection",
-      "Sources/AppRuntime/HeroDiscoveryRuntime.swift"
+      "Sources/FeatureSettings/NavigationLibrariesDetailView.swift"
     ]
   },
   {
@@ -379,6 +379,7 @@
   },
   {
     "slug": "streaming-quality",
+    "platforms": ["Apple TV", "iPhone", "iPad"],
     "title": "Streaming quality",
     "seoTitle": "Set Plozz streaming quality and buffering",
     "description": "Set mobile network quality, change one stream, distinguish conversion from original playback, and understand video buffering.",
@@ -401,7 +402,7 @@
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/CoreModels/PlaybackSettings.swift",
       "Sources/FeaturePlayback/PlayerViewModel.swift",
-      "Sources/AppShell/PlaybackEngineComposition.swift",
+      "Sources/FeaturePlayback/StreamingPlaybackFeedback.swift",
       "Sources/AppShelliOS/PlozziOSPlaybackEngineComposition.swift",
       "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift",
       "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
@@ -411,7 +412,7 @@
       "Sources/CoreModels/Streaming",
       "Sources/CoreModels/PlaybackReadAhead",
       "Sources/FeatureSettings/PlaybackReadAhead",
-      "Sources/FeatureSettings/ExternalPlayerSettingsView.swift",
+      "Sources/FeaturePlayback/StreamingPlayback",
       "Sources/EnginePlozzigen/",
       "Sources/AppShelliOS/PlozziOSStreamingQuality"
     ]
@@ -594,7 +595,12 @@
       "Sources/AppShelliOS/PlozziOSDownloadActivity.swift",
       "Sources/AppShelliOS/PlozziOSBackgroundHTTPDownloadEngine.swift",
       "Sources/MediaDownloads/DirectShareDownloadSource.swift",
-      "Sources/MediaDownloads/DownloadStorageCapacity.swift"
+      "Sources/MediaDownloads/DownloadStorageCapacity.swift",
+      "Sources/MediaDownloads/DownloadedMediaRegistry.swift",
+      "Sources/MediaDownloads/RegistryOfflinePlaybackResolver.swift",
+      "Sources/FeatureHomeCore/PlaybackVersionChoiceModel.swift",
+      "Sources/AppShelliOS/PlozziOSPlayerView.swift",
+      "Sources/FeaturePlayback/PlayerViewModel.swift"
     ],
     "watch": [
       "Sources/MediaDownloads/",
@@ -751,7 +757,7 @@
     "platforms": ["Apple TV"],
     "title": "Apple TV users and automatic sign-in",
     "seoTitle": "Automatically sign in to a Plozz profile for each Apple TV user",
-    "description": "Set a remembered Plozz profile for each Apple TV system user, enable automatic sign-in, and understand shared accounts and PIN protection.",
+    "description": "Remember a Plozz profile for each Apple TV user, choose automatic sign-in, and understand shared accounts, PIN checks, and returning to browsing.",
     "section": "Accounts & sync",
     "kind": "guide",
     "file": "apple-tv-profiles.md",
@@ -766,15 +772,20 @@
       "Sources/FeatureSettings/SettingsView.swift",
       "Sources/FeatureSettings/ProfileDetailView.swift",
       "Sources/FeatureProfiles/AutomaticSignInSettings.swift",
-      "Sources/CoreSecureStore/Keychain.swift"
+      "Sources/CoreSecureStore/Keychain.swift",
+      "Sources/CoreModels/ProfileReturnPolicy.swift",
+      "Sources/AppShell/TVProfileForegroundProtection.swift",
+      "Sources/AppShell/MainTabView.swift",
+      "Sources/AppShell/LiveTVShellDestination.swift",
+      "Sources/AppRuntime/ExternalPlaybackRuntime.swift"
     ],
     "watch": [
       "App/Resources/Plozz.entitlements",
-      "Sources/CoreModels/ProfileStore.swift",
+      "Sources/CoreModels/Profile",
       "Sources/AppRuntime/AutomaticSignInStore.swift",
       "Sources/AppRuntime/PlexHomeUsersModel.swift",
-      "Sources/AppShell/ProfileFlowModel.swift",
-      "Sources/FeatureSettings/ProfileDetailView.swift"
+      "Sources/AppShell/Profile",
+      "Sources/AppShell/TVProfileForegroundProtection.swift"
     ]
   },
   {
@@ -1001,7 +1012,7 @@
       "Sources/CoreModels/NavigationStyleSettingsStore.swift",
       "Sources/FeaturePlayback/InfoPanelView.swift",
       "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift",
-      "Sources/CoreUI/DetailNavigationTransition.swift",
+      "Sources/CoreModels/ProfileReturnPolicy.swift",
       "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
     ],
     "watch": [
@@ -1035,13 +1046,13 @@
       "Sources/CoreModels/PlaybackDiagnosticJournal.swift",
       "Sources/CoreModels/LiveTVSourceDiagnostics.swift",
       "Sources/FeatureSettings/PrivacyPolicyLink.swift",
-      "Sources/CoreModels/AppLinks.swift",
+      "Sources/FeatureSettings/DiagnosticsSendButton.swift",
       "Sources/FeatureHome/HomePerfOverlay.swift",
       "Sources/FeatureHome/HomeView.swift",
       "Sources/AppShell/MainTabView.swift",
       "Sources/FeatureSettings/RecentActivityDetailView.swift",
       "Sources/CoreNetworking/PlozzLog.swift",
-      "Sources/CoreModels/LibraryDiagnosticJournal.swift"
+      "Sources/CoreModels/SearchDiagnosticJournal.swift"
     ],
     "watch": [
       "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
@@ -1049,7 +1060,7 @@
       "Sources/CrashReporting/",
       "Sources/FeatureSettings/RecentActivityDetailView.swift",
       "Sources/CoreNetworking/PlozzLog.swift",
-      "Sources/CoreNetworking/PlaybackPreparationDiagnostics.swift"
+      "Sources/CoreModels/SearchDiagnosticJournal.swift"
     ]
   },
   {
