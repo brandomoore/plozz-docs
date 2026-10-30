@@ -6,11 +6,11 @@ Put the titles and shortcuts you use most within easy reach. Choose your Plozz p
 
 Open **Settings > Screens & Navigation > Home > Rows**.
 
-Choose **Match server** for server arrangements or **Combined rows** across libraries. Presets replace custom arrangements after confirmation, never editing servers. Common rows can combine across servers while others stay separate. Plex supplies promoted rows, not another client's pinned libraries.
+Choose **Match server** to follow your servers' arrangements, or **Combined rows** to bring libraries together. Applying either preset replaces your custom arrangement after confirmation; it does not edit your servers. Common rows can combine across servers while others stay separate. Plex supplies promoted rows, not another client's pinned libraries.
 
 Use **Add row**, or open a row and choose **Remove from Home**. Choose **Edit**, reorder, then **Done**; holding a row also offers **Reorder**. Mix combined, library, and server rows. Editing saves **Custom** instead of following server order.
 
-Removing rows changes Home, not access. Unavailable rows stay saved: open **Details**, check the source/user, then **Retry**. **No titles to show** means empty results, not a connection error. **Section unavailable in the latest refresh** can mean an empty or changed server row.
+Removing a row hides it from Home without restricting access to its titles. Unavailable rows stay saved: open **Details**, check the source and server user, then choose **Retry**. **No titles to show** means empty results, not a connection error. **Section unavailable in the latest refresh** can mean an empty or changed server row.
 
 ## Add a collection section
 
@@ -22,7 +22,7 @@ Previews may omit titles. Reopen to change **Content** or the name, then **Save 
 
 ## Keep older Continue Watching titles
 
-Continue Watching and merged Next Up have no app-imposed count limit or age expiry. Separate Next Up rows show up to 20 titles. These account-wide feeds ignore library browsing switches; disabling a library does not clear history. Sources, watched state, dismissal, excluded servers, and server-user permissions still apply.
+Plozz does not expire older Continue Watching titles or limit their number, including Next Up titles merged into the row. Separate Next Up rows show up to 20 titles. These rows use account-wide history: disabling a library for browsing does not hide its progress. What appears still depends on the source, watched state, dismissed titles, enabled servers, and server-user permissions.
 
 Under **Rows > Continue Watching**, **Include Next Up** defaults on. Turn it off to arrange separate Next Up rows. Removing Continue Watching suspends merging.
 
@@ -30,7 +30,7 @@ Under **Rows > Continue Watching**, **Include Next Up** defaults on. Turn it off
 
 Under **Settings > Screens & Navigation > Home**, open **Layout** on Apple TV, or **Hero** on mobile. Apple TV offers **Showcase**, where the focused title fills the background, or **Fullscreen Hero**, a separate carousel. Showcase has independent ratings and Discovery controls.
 
-For the carousel, **Hero content sources** selects Continue Watching, recently added titles, Watchlist, libraries, collections, or Discovery. **Show hero** hides the carousel, not Showcase.
+For the carousel, use **Hero content sources** to choose Continue Watching, recently added titles, Watchlist, libraries, collections, or Discovery. Turning off **Show hero** hides the carousel, not Showcase.
 
 Choose advancement, ratings, and muted [server-trailer previews](/library/#watch-a-trailer). Enable Discovery, then choose **Discovery providers**. Seerr is needed only for requests, not recommendations. A new profile's carousel follows the Seerr connection until you explicitly toggle Discovery; Kids profiles exclude Discovery.
 
@@ -63,7 +63,7 @@ Settings remains visible in Apple TV's sidebars. Top Bar lets you move or hide i
 
 On iPhone/iPad, Home, Downloads, and Search are the starting shortcuts, subject to content availability. Other destinations, including individual libraries and eligible **All Libraries**, start under **Hidden** in the editor: hold and choose **Show**. Compact layouts put excess destinations under **More**; More does not reveal shortcuts still hidden. Use the profile button if Settings has no tab.
 
-The layout and shortcuts stay local to this profile/device, unlike transferable Home preferences.
+Set the layout and shortcuts separately for each profile on each device. Your Home preferences can [sync to other devices](/profiles-and-sync/), but this navigation arrangement does not.
 
 Under **Screens & Navigation > Movie & show details**, choose artwork, trailers, or [theme music and its volume preview](/audio/#control-detail-page-music) independently of Home. Review-score and age-recommendation controls are here.
 

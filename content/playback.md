@@ -1,10 +1,10 @@
 # Player controls
 
-Choose how videos play or return to your place.
+Use the player to choose an edition, return to your place, skip an intro, or jump to another scene.
 
 ## Reach the controls
 
-On Apple TV, press up from the timeline for **Playback**, **Audio**, and **Subtitles**; press down for information and navigation. On iPhone/iPad, tap the video: portrait uses the ellipsis **Playback options** menu; landscape separates controls.
+On Apple TV, press up from the timeline for **Playback**, **Audio**, and **Subtitles**; press down for information and navigation. On iPhone/iPad, tap the video. In portrait, open the ellipsis **Playback options** menu; landscape shows separate controls.
 
 See [device controls](/platform-controls/) for seeking, touch, keyboard, and **Seek without pausing**.
 
@@ -12,14 +12,14 @@ See [device controls](/platform-controls/) for seeking, touch, keyboard, and **S
 
 Open **Audio** for tracks or **Version** for files/editions.
 
-Versions keep your server/account and position; timelines can differ.
+Changing versions keeps the selected server account and your position, though different cuts may not line up exactly.
 
 The first multi-version video asks; change **Settings > Playback > Version selection**:
 
 - **Ask every time**: choose before multi-version videos, including autoplay.
 - **Choose automatically**: use a remembered or device-recommended version without the picker.
 
-**Remember series version choices** (Apple TV: **Remember per series**) reuses your version type for later episodes; disable to ignore it. Automatic mode falls back if unmatched.
+**Remember series version choices** (Apple TV: **Remember per series**) reuses your version type for later episodes. Turn it off to stop reusing that choice. Automatic mode chooses an available alternative if the remembered type is missing.
 
 ## Resume or start over
 
@@ -29,11 +29,11 @@ Enable **Ask to resume or start over** in **Settings > Playback** to choose befo
 
 ## Autoplay and skipping
 
-Under **Settings > Playback**, next-episode and next-playlist-item autoplay default on. **Show Up Next card** is independent; its lead time applies without credits markers.
+Under **Settings > Playback**, next-episode and next-playlist-item autoplay default on. **Show Up Next card** controls the preview independently of autoplay. Its lead time is used when credits markers are unavailable.
 
 Enable **Skip intros, credits & more**, then open **Customize**. Choose **Default behavior**: **Show skip button**, **Skip instantly**, or **Skip after** (1-30 seconds). Select movies, TV shows, or anime under **Enable for**.
 
-Open an intro, credits, recap, preview, or commercial marker's settings to override each content category, including **Off**. **Use default** restores the shared behavior. Disabled content categories must first be enabled on the previous page. Skipping needs markers.
+Open an intro, credits, recap, preview, or commercial marker's settings to change its behavior for each content category, including **Off**. **Use default** restores the shared behavior. Enable disabled categories on the previous page first. Skip actions appear only when timings are available.
 
 With skipping enabled, **Use community markers** (default on) checks IntroDB/TheIntroDB if intros or credits are missing. Lookups send IMDb/TMDB/TVDB identifiers and applicable episode numbers, ordering, name, and runtime, not video files. Disable it to stop community lookups, not server markers. Coverage and matching vary.
 
@@ -41,7 +41,7 @@ With skipping enabled, **Use community markers** (default on) checks IntroDB/The
 
 Open **Chapters** below the timeline; mobile tabs scroll horizontally. Choose a chapter; paused playback stays paused.
 
-Usable chapters are required. Plex/Jellyfin/Emby can supply them; otherwise, supported files, including shares/downloads, can. Images are optional; intro/credits markers are separate.
+Plex, Jellyfin, and Emby can supply chapters; Plozz can also read them from supported files, including shares and downloads. Not every video has chapters or chapter images. Intro and credits markers are separate.
 
 ## Speed, picture, and other navigation
 
@@ -51,6 +51,6 @@ Adjust speed where offered. **Zoom Mode** (Apple TV) or **Video** (mobile) offer
 
 ## Explore the cast
 
-In **Cast**, select a person. **See more** opens their biography/credits page; a credit opens details. Both end playback; credits need not be playable.
+In **Cast**, select a person. **See more** opens their biography and credits; selecting a credit opens that title's details. Either action ends playback. A listed credit is not necessarily in your library.
 
 See [Streaming quality](/streaming-quality/), [Audio](/audio/), [Subtitles](/subtitles/), [AirPlay/Picture in Picture](/platform-controls/#airplay-and-picture-in-picture), or [external players](/external-players/).

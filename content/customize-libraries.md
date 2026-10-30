@@ -36,6 +36,6 @@ Under **Recommended Page**, adjust **Logo size** and **Text size** for library h
 
 ## Adjust card labels
 
-**Card labels** in this editor changes labels for Recommended, Browse, collections, and playlists across this profile's libraries. These are the same [per-view Appearance choices](/appearance/#make-cards-easier-to-read), not extra overrides. Continue Watching shares its label setting with Home.
+Under **Page appearance**, open **Customize labels** to change labels for Recommended, Browse, collections, and playlists across this profile's libraries. These are the same [per-view Appearance choices](/appearance/#make-cards-easier-to-read), not extra overrides. Continue Watching shares its label setting with Home.
 
 These preferences belong to the profile and can travel through [iCloud Sync](/profiles-and-sync/#sync-settings). To enable libraries for this profile, use **Settings > Libraries**. To arrange the app's main shortcuts instead, use [Navigation](/home-and-navigation/#arrange-shortcuts-and-details).

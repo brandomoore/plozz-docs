@@ -614,7 +614,7 @@
       "Sources/FeatureSettings/SettingsView.swift",
       "Sources/CoreUI/LiftableReorderList.swift",
       "Sources/CoreModels/ProfileSettingsSnapshot.swift",
-      "Sources/AppShell/ProfileSettingsModel.swift",
+      "Sources/FeatureSettings/CardAppearanceControls.swift",
       "Sources/AppShelliOS/PlozziOSSettingsModel.swift",
       "Sources/AppShelliOS/PlozziOSLibraryRoute.swift",
       "Sources/FeatureHomeCore/LibraryBrowseViewModel.swift",
@@ -625,9 +625,9 @@
       "Sources/FeatureSettings/LibraryPresentationSettingsView.swift",
       "Sources/CoreModels/CollectionCoverLayout.swift",
       "Sources/AppRuntime/LibraryPresentationLoader.swift",
-      "Sources/FeatureHomeCore/LibraryBrowseViewModel.swift",
       "Sources/FeatureHome/LibraryBrowseView.swift",
-      "Sources/AppShelliOS/PlozziOSLibrary"
+      "Sources/AppShelliOS/PlozziOSLibrary",
+      "Sources/FeatureSettings/CardAppearanceControls.swift"
     ],
     "ui": {
       "references": [
@@ -704,8 +704,12 @@
           "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
         },
         {
-          "text": "Card labels",
-          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+          "text": "Page appearance",
+          "source": "Sources/FeatureSettings/LibraryPresentationSettingsView.swift"
+        },
+        {
+          "text": "Customize labels",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
         },
         {
           "text": "Logo size",
@@ -1081,7 +1085,7 @@
     "seoTitle": "Use Plozz chapters, player controls, versions, and skip markers",
     "description": "Jump to chapters, choose versions, set autoplay and skip behavior, and explore cast biographies and credits. See when chapters are available.",
     "section": "Playback",
-    "kind": "guide",
+    "kind": "reference",
     "file": "playback.md",
     "sources": [
       "Sources/FeaturePlayback/PlayerControls.swift",
@@ -1553,7 +1557,7 @@
       "Sources/CoreModels/AudioPolicy.swift",
       "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
       "Sources/FeatureHomeCore/ThemeMusicPlayback.swift",
-      "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
+      "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift",
       "Sources/FeatureHomeCore/ThemeMusicController.swift",
       "Sources/FeatureHome/ItemDetailView.swift",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
@@ -1580,6 +1584,10 @@
         {
           "text": "Audio",
           "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "Playback options",
+          "source": "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift"
         },
         {
           "text": "Preferred audio language",
@@ -2131,8 +2139,8 @@
           "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
         },
         {
-          "text": "Enable Plozz channels",
-          "source": "Sources/FeatureLiveTV/LiveTVSetupWelcome.swift"
+          "text": "Auto-create channels from your libraries",
+          "source": "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift"
         },
         {
           "text": "Retry Plozz channels",
@@ -2200,15 +2208,16 @@
       "Sources/FeatureLiveTV/LiveTVIdentityReviewView.swift",
       "Sources/FeatureLiveTV/LiveTVChannelScanViews.swift",
       "Sources/CoreModels/LiveTVChannelOrganization.swift",
-      "Sources/FeatureLiveTVCore/LiveTVChannelScanCoordinator.swift"
+      "Sources/FeatureLiveTVCore/LiveTVChannelScanCoordinator.swift",
+      "Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift"
     ],
     "watch": [
       "Sources/FeatureLiveTV/LiveTVChannel",
       "Sources/FeatureLiveTV/LiveTVGuideMapping",
       "Sources/FeatureLiveTV/LiveTVIdentityReview",
+      "Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift",
       "Sources/FeatureLiveTV/LiveTVSources",
-      "Sources/FeatureLiveTVCore/LiveTVChannelScan",
-      "Sources/CoreModels/LiveTVChannel"
+      "Sources/FeatureLiveTVCore/LiveTVChannelScan"
     ],
     "ui": {
       "references": [
@@ -2275,6 +2284,18 @@
         {
           "text": "Sources",
           "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        },
+        {
+          "text": "Playlist and guides",
+          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        },
+        {
+          "text": "Name (optional)",
+          "source": "Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift"
+        },
+        {
+          "text": "Save source",
+          "source": "Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift"
         },
         {
           "text": "Guide options",
@@ -2368,7 +2389,7 @@
       "Sources/MediaDownloads/DownloadedMediaRegistry.swift",
       "Sources/FeatureHomeCore/PlaybackVersionChoiceModel.swift",
       "Sources/AppShelliOS/PlozziOSPlayerView.swift",
-      "Sources/FeaturePlayback/PlayerViewModel.swift"
+      "Sources/CoreModels/MediaItemAction.swift"
     ],
     "watch": [
       "Sources/MediaDownloads/",
@@ -2469,6 +2490,10 @@
           "source": "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift"
         },
         {
+          "text": "Download",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
           "text": "Manage Seasons",
           "source": "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
         },
@@ -2514,8 +2539,8 @@
       "Sources/FeatureSettings/ArtworkSettingsControls.swift",
       "Sources/FeatureSettings/AppLanguagePicker.swift",
       "Sources/CoreUI/AppLanguageScope.swift",
-      "Sources/CoreModels/TransparencyPreferenceStore.swift",
-      "Sources/FeatureHome/FocusHeroHomeView.swift",
+      "Sources/CoreModels/ThemeSettings.swift",
+      "Sources/FeatureSettings/LibraryPresentationSettingsView.swift",
       "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
       "Sources/FeatureSettings/HeroSettingsControls.swift",
       "Sources/CoreModels/WatchStatusIndicatorSettingsStore.swift",
@@ -2524,10 +2549,10 @@
     "watch": [
       "Sources/FeatureSettings/Card",
       "Sources/FeatureSettings/ArtworkSettingsControls.swift",
-      "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/CoreModels/CardCaptionSettings.swift",
       "Sources/FeatureSettings/Hero",
-      "Sources/CoreModels/WatchStatusIndicator"
+      "Sources/CoreModels/WatchStatusIndicator",
+      "Sources/FeatureSettings/LibraryPresentationSettingsView.swift"
     ],
     "ui": {
       "references": [
@@ -2593,7 +2618,7 @@
         },
         {
           "text": "Default",
-          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
         },
         {
           "text": "Mixed",
@@ -2608,8 +2633,16 @@
           "source": "Sources/CoreModels/CardCaptionSettings.swift"
         },
         {
+          "text": "Off",
+          "source": "Sources/CoreModels/ThemeSettings.swift"
+        },
+        {
           "text": "Libraries",
           "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Libraries",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
           "text": "Browse",
@@ -2625,7 +2658,7 @@
         },
         {
           "text": "Card labels",
-          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
         },
         {
           "text": "Unwatched",

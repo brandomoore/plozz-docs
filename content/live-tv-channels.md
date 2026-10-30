@@ -24,6 +24,10 @@ Corrections survive guide refreshes. **Use automatic matching** removes your ove
 
 Under **Guide options**, **Keep previous days** and **Look ahead** set the listings to retain. They cannot create programs the guide has not supplied, and earlier listings are not recordings.
 
+## Edit imported playlist details
+
+For a saved imported playlist, open **Sources**, select it, then choose **Playlist and guides**. Edit **Name (optional)** or its guide addresses, then **Save source**. This changes the source's details, not the imported file.
+
 ## Restore a saved channel identity
 
 If **Review channel identities** appears in Guide options, inspect the candidate before choosing **Restore saved identity**. Confirm only the same station and regional feed: this carries over favorites, hidden state, and guide corrections. Otherwise, leave the playable entry separate.

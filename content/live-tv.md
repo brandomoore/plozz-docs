@@ -63,7 +63,7 @@ On both platforms, **Preview after watching** keeps a channel behind the guide a
 
 ## Make channels from your libraries
 
-In **Sources > Plozz channels**, **Enable Plozz channels** manages the automatic lineup. **Create custom channel** uses accessible **Plex, Jellyfin, or Emby** libraries, not IPTV or Silo.
+Open **Sources > Plozz channels**. Turn on **Auto-create channels from your libraries** for an automatic lineup, or choose **Create custom channel** to design your own. Both use accessible **Plex, Jellyfin, or Emby** libraries, not IPTV or Silo.
 
 Automatic-lineup errors offer **Retry Plozz channels**; **Refresh Plozz channels** rebuilds prepared channels. Automatic channels are not editable.
 

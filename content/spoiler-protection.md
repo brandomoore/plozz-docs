@@ -38,7 +38,7 @@ Open **Settings > Screens & Navigation > Home > Rows > Continue Watching**:
 
 **Playback details** is separate: **Detailed** shows the play icon, progress, and playback information; **Progress only** omits playback text. Bars follow [Show progress bars](/appearance/#read-watch-indicators). **Labels** controls text below artwork: **Use default** follows Home/Recommended; **On** or **Off** overrides both. Hiding labels does not hide detailed playback information.
 
-All three choices show artwork. **Continue Watching settings** remains available under Rows when the row is absent; use **Add row** to restore it. These profile presentation choices do not change watched state or row membership.
+All three choices show artwork. **Continue Watching settings** remains available under Rows when the row is absent; use **Add row** to restore it. These choices change how cards look, not your progress or which titles appear.
 
 To remove an abandoned title from the row instead, use [Remove from Continue Watching](/library/).
 

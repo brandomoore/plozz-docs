@@ -1,6 +1,6 @@
 # Listen to music
 
-Music browsing and its full-screen player are available on **Apple TV** for accessible Plex, Jellyfin, and Emby music libraries. This is not a music-download guide; the iPhone/iPad interface does not expose this Music destination.
+Listen to albums and playlists from your Plex, Jellyfin, or Emby music libraries on **Apple TV**. The iPhone/iPad interface does not offer this Music destination.
 
 ## Find your library
 
@@ -9,11 +9,11 @@ Music browsing and its full-screen player are available on **Apple TV** for acce
 3. Open **Music** from navigation. If hidden, check **Settings > Screens & Navigation > App navigation > Hide or Reorder Navigation**.
 4. Browse albums, artists, genres, or playlists. Choose an album or playlist, then **Play**, **Shuffle**, or a starting track.
 
-Music appears only after Plozz finds a visible music library. A video-only server, hidden library, offline source, Silo connection, or ordinary network-share connection does not establish this capability.
+If Music is missing, check that a music library is enabled and its server is reachable. Silo and ordinary network-share connections do not supply this Music destination.
 
 ## Control a listening session
 
-Playing an album or playlist creates the listening queue. The player advances through its tracks; starting a different selection replaces that session's selection.
+Playing an album or playlist creates a queue and advances through its tracks. Starting another album or playlist replaces the current queue.
 
 Use previous/next, play/pause, Shuffle, and Repeat. Repeat cycles through Off, the full queue, and one track. The on-screen confirmation distinguishes queue repeat from repeat-one.
 

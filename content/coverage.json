@@ -157,7 +157,7 @@
         "TopShelf/TopShelf.entitlements",
         "TopShelf/Info.plist"
       ],
-      "answer": "Put Plozz in Apple TV's top Home Screen row. From an adult profile, Settings > Everyone > Top Shelf offers default-on Show Top Shelf, Posters (default) or Full Screen and independent 1-20 Continue Watching/Recently Added counts, defaulting to four each. Full Screen expands with tvOS swipe-up; Play requests playback while More Info opens details without autoplay. Poster selection requests playback. Preferences stay device-local across Plozz profiles; disabling clears media but retains choices. A saved, access-scoped Home snapshot is not live browsing; short feeds are not padded, same-source repeats deduplicate in Full Screen, and authorization/source failures remain visible. Artwork and full-screen spoilers respect profile policy."
+      "answer": "Put Plozz in Apple TV's top Home Screen row. From an adult profile, Settings > Everyone > Top Shelf offers default-on Show Top Shelf, Posters (default) or Full Screen and independent 1-20 Continue Watching/Recently Added counts, defaulting to four each. Full Screen expands with tvOS swipe-up; the first carousel action requests playback and the second opens details without autoplay. These actions have OS-owned captions, not verified app labels. Poster selection requests playback. Preferences stay device-local across Plozz profiles; disabling clears media but retains choices. A saved, access-scoped Home snapshot is not live browsing; short feeds are not padded, same-source repeats deduplicate in Full Screen, and authorization/source failures remain visible. Artwork and full-screen spoilers respect profile policy."
     },
     "community-skip-markers": {
       "documents": [
@@ -2996,6 +2996,10 @@
       "conditions": "Apple TV only. Connection and profile state determine the presented destination; incoming playback and sync prompts require authorization.",
       "controls": [
         {
+          "text": "Enter your Plex PIN",
+          "source": "Sources/AppShell/RootView.swift"
+        },
+        {
           "text": "New server from your other device",
           "source": "Sources/AppShell/RootView.swift"
         },
@@ -3263,6 +3267,10 @@
       "conditions": "Apple TV. Libraries come from the connected server user. A loading failure is not an empty library result.",
       "controls": [
         {
+          "text": "Finding your libraries",
+          "source": "Sources/AppShell/SelectLibrariesView.swift"
+        },
+        {
           "text": "Choose your libraries",
           "source": "Sources/AppShell/SelectLibrariesView.swift"
         },
@@ -3416,8 +3424,24 @@
       ],
       "navigation": "Choose Set up from another device during Apple TV setup.",
       "experience": "Display the receiving Apple TV QR/short code, wait for an intended configured device to send setup, and review the imported accounts/profiles.",
-      "conditions": "Both Plozz devices need the same local network and Local Network permission. Accept only matching comparison codes; Silo authorization remains per device. Compare codes when prompted; verified same-iCloud-account pairing can authenticate without that comparison.",
+      "conditions": "Both Plozz devices need the same local network and Local Network permission. Accept only matching comparison codes; Silo authorization remains per device. Compare codes when prompted; verified same-iCloud-account pairing can authenticate without that comparison. The received summary uses You're all set/Start Watching when no server needs sign-in, otherwise Set Up This Device/Continue. Applying received setup can still fail; the summary is not proof every credential was accepted.",
       "controls": [
+        {
+          "text": "You’re all set",
+          "source": "Sources/AppShell/SyncSetupReceiveView.swift"
+        },
+        {
+          "text": "Set Up This Device",
+          "source": "Sources/AppShell/SyncSetupReceiveView.swift"
+        },
+        {
+          "text": "Start Watching",
+          "source": "Sources/AppShell/SyncSetupReceiveView.swift"
+        },
+        {
+          "text": "Continue",
+          "source": "Sources/AppShell/SyncSetupReceiveView.swift"
+        },
         {
           "text": "Setup didn’t finish",
           "source": "Sources/AppShell/SyncSetupReceiveView.swift"
@@ -3486,6 +3510,14 @@
       "experience": "Offer a short-lived setup invitation and transfer only after pairing confirmation.",
       "conditions": "Apple TV sender; an eligible receiver and local-network authorization are required. The transferred bundle is not offline video or every device-local preference. Compare codes when prompted; verified same-iCloud-account pairing can authenticate without that comparison.",
       "controls": [
+        {
+          "text": "Your other device is set up",
+          "source": "Sources/AppShell/SyncSetupSendView.swift"
+        },
+        {
+          "text": "Done",
+          "source": "Sources/AppShell/SyncSetupSendView.swift"
+        },
         {
           "text": "Setting up the other device…",
           "source": "Sources/AppShell/SyncSetupSendView.swift"
@@ -3881,6 +3913,14 @@
           "source": "Sources/AppShelliOS/AddServerView.swift"
         },
         {
+          "text": "Link Plex account",
+          "source": "Sources/AppShelliOS/AddServerView.swift"
+        },
+        {
+          "text": "Continue",
+          "source": "Sources/AppShelliOS/AddServerView.swift"
+        },
+        {
           "text": "Add Server",
           "source": "Sources/AppShelliOS/AddServerView.swift"
         },
@@ -4023,10 +4063,30 @@
         "iPhone",
         "iPad"
       ],
-      "navigation": "Accept the nearby setup invitation detected on iPhone/iPad.",
-      "experience": "Continue to pairing or dismiss an invitation you do not recognize.",
-      "conditions": "iPhone/iPad; only an active detected setup invitation is shown. Authorize only an intended device. Comparison is required when the pairing protocol supplies codes; verified same-iCloud-account pairing can omit that comparison.",
+      "navigation": "Launch Plozz on iPhone/iPad when synced servers or accounts still need sign-in on this device.",
+      "experience": "Review the detected server/account groups and start receiving setup from another device, or leave these connections for Settings.",
+      "conditions": "This cold-launch invitation comes from unresolved synced connection descriptors, not proof that a sender is nearby. The heading and import action depend on whether new servers, accounts for existing servers, or both are detected. Receiving setup still needs an authorized device; comparison codes are required when supplied, while verified same-account pairing can omit them.",
       "controls": [
+        {
+          "text": "Import server",
+          "source": "Sources/CoreUI/ServerImportHeading.swift"
+        },
+        {
+          "text": "Import servers",
+          "source": "Sources/CoreUI/ServerImportHeading.swift"
+        },
+        {
+          "text": "Import account",
+          "source": "Sources/CoreUI/ServerImportHeading.swift"
+        },
+        {
+          "text": "Import accounts",
+          "source": "Sources/CoreUI/ServerImportHeading.swift"
+        },
+        {
+          "text": "Import setup",
+          "source": "Sources/CoreUI/ServerImportHeading.swift"
+        },
         {
           "text": "Import later in Settings",
           "source": "Sources/AppShelliOS/PlozziOSDetectedSetupView.swift"
@@ -4081,6 +4141,14 @@
           "source": "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift"
         },
         {
+          "text": "No Recent Activity",
+          "source": "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift"
+        },
+        {
+          "text": "No Matches",
+          "source": "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift"
+        },
+        {
           "text": "Share Diagnostics",
           "source": "Sources/CoreUI/SettingsCopy.swift"
         },
@@ -4114,6 +4182,14 @@
         },
         {
           "text": "Refresh",
+          "source": "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift"
+        },
+        {
+          "text": "Copy",
+          "source": "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift"
+        },
+        {
+          "text": "Copied",
           "source": "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift"
         },
         {
@@ -4277,6 +4353,14 @@
       "experience": "Monitor downloads, pause/resume/remove items or batches, and configure storage, network, speed, quality, and notifications.",
       "conditions": "iPhone/iPad only. List and settings follow the active profile. UI order is In Progress, Storage, Network, Download Speed, Download Quality, Notifications. Provider conversion/track limits, network conditions, notification permission, and transfer state gate controls.",
       "controls": [
+        {
+          "text": "Remove All Downloads?",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Cancel Active Downloads?",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
         {
           "text": "Downloads",
           "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
@@ -5023,7 +5107,19 @@
           "source": "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
         },
         {
+          "text": "Available in Another Version",
+          "source": "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
+        },
+        {
           "text": "Request as Administrator?",
+          "source": "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
+        },
+        {
+          "text": "Request Series",
+          "source": "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
+        },
+        {
+          "text": "Request Movie",
           "source": "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
         },
         {
@@ -5521,6 +5617,18 @@
       "conditions": "iPhone/iPad. Library inclusion belongs to the Plozz profile; it does not change server permissions or remove shared accounts.",
       "controls": [
         {
+          "text": "Finding your libraries",
+          "source": "Sources/AppShelliOS/PlozziOSLibrarySelectionView.swift"
+        },
+        {
+          "text": "Couldn’t Load Libraries",
+          "source": "Sources/AppShelliOS/PlozziOSLibrarySelectionView.swift"
+        },
+        {
+          "text": "No Video Libraries",
+          "source": "Sources/AppShelliOS/PlozziOSLibrarySelectionView.swift"
+        },
+        {
           "text": "Choose later",
           "source": "Sources/AppShelliOS/PlozziOSLibrarySelectionView.swift"
         },
@@ -5931,6 +6039,7 @@
     "Sources/AppShelliOS/PlozziOSMetadataSettingsView.swift": {
       "sources": [
         "Sources/AppShelliOS/PlozziOSMetadataSettingsView.swift",
+        "Sources/CoreModels/TMDBUserKeyModel.swift",
         "Sources/CoreUI/AmbientGradientBackground.swift",
         "Sources/CoreUI/SettingsSurfaces.swift",
         "Sources/CoreUI/SettingsPageSurface.swift",
@@ -5946,7 +6055,7 @@
       ],
       "navigation": "From an adult mobile profile, open Settings > Metadata Providers or its Artwork shortcut.",
       "experience": "Choose recommended/custom sources, order or disable providers, verify a personal TMDB token, and inspect cache use.",
-      "conditions": "iPhone/iPad; shared across profiles. Available rating and metadata fields depend on providers and supplied data, not a guaranteed value for every title.",
+      "conditions": "iPhone/iPad; shared across profiles. Available rating and metadata fields depend on providers and supplied data, not a guaranteed value for every title. Order offers Recommended or Custom. Custom shows the draggable provider Priority list and Disabled divider; provider names come from MetadataSourceAttribution. The TMDB action reads Save Key until configured, then Replace Key, and is disabled while the draft is blank. Saving a nonblank key does not establish that it authenticates; Verify Key checks that separately.",
       "controls": [
         {
           "text": "Artwork",
@@ -5962,6 +6071,14 @@
         },
         {
           "text": "Order",
+          "source": "Sources/AppShelliOS/PlozziOSMetadataSettingsView.swift"
+        },
+        {
+          "text": "Recommended",
+          "source": "Sources/AppShelliOS/PlozziOSMetadataSettingsView.swift"
+        },
+        {
+          "text": "Custom",
           "source": "Sources/AppShelliOS/PlozziOSMetadataSettingsView.swift"
         },
         {
@@ -5986,6 +6103,14 @@
         },
         {
           "text": "TMDB v4 API Read Access Token",
+          "source": "Sources/AppShelliOS/PlozziOSMetadataSettingsView.swift"
+        },
+        {
+          "text": "Save Key",
+          "source": "Sources/AppShelliOS/PlozziOSMetadataSettingsView.swift"
+        },
+        {
+          "text": "Replace Key",
           "source": "Sources/AppShelliOS/PlozziOSMetadataSettingsView.swift"
         },
         {
@@ -6136,6 +6261,8 @@
     "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift": {
       "sources": [
         "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
+        "Sources/FeaturePlayback/PlayerMoreMenu.swift",
+        "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift",
         "Sources/FeaturePlayback/PlayerControls.swift",
         "Sources/CoreUI/ArtworkEnvironment.swift",
         "Sources/CoreUI/FallbackAsyncImage.swift",
@@ -6166,8 +6293,36 @@
       "conditions": "iPhone/iPad. Menu visibility follows engine capabilities, available tracks, orientation, current route and online subtitle services. Neither shipped movie engine enables adjustable audio delay. The touch card strip shares Info/Cast/chapter/sequence content, but not Apple TV track/style cards. Cast requires metadata; Chapters requires chapters; Episodes/Playlist require their active sequence context.",
       "controls": [
         {
+          "text": "Play",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
+          "text": "Pause",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
+          "text": "Current time",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
+          "text": "Elapsed time",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
+          "text": "Estimated end time",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
+          "text": "Remaining time",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
           "text": "Skip backward",
           "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
+          "text": "Playback options",
+          "source": "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift"
         },
         {
           "text": "Skip forward",
@@ -6510,6 +6665,14 @@
       "conditions": "Plex user authorization, not a household Parental PIN. Any Plozz Profile Lock remains a separate gate unless verified PIN reuse is configured.",
       "controls": [
         {
+          "text": "Enter your Plex PIN",
+          "source": "Sources/AppShelliOS/PlozziOSPlexPINView.swift"
+        },
+        {
+          "text": "Plex PIN",
+          "source": "Sources/AppShelliOS/PlozziOSPlexPINView.swift"
+        },
+        {
           "text": "Try Again",
           "source": "Sources/CoreUI/ContentStateView.swift"
         },
@@ -6601,6 +6764,18 @@
       "experience": "Choose an authorized profile, add a profile, or enter profile editing.",
       "conditions": "iPhone/iPad. Profile locks and Plex PINs are independent; Kids restrictions can seal household management.",
       "controls": [
+        {
+          "text": "Who’s watching?",
+          "source": "Sources/AppShelliOS/PlozziOSProfilePickerView.swift"
+        },
+        {
+          "text": "Profiles",
+          "source": "Sources/AppShelliOS/PlozziOSProfilePickerView.swift"
+        },
+        {
+          "text": "Add Profile",
+          "source": "Sources/AppShelliOS/PlozziOSProfilePickerView.swift"
+        },
         {
           "text": "Cancel",
           "source": "Sources/AppShelliOS/PlozziOSProfilePickerView.swift"
@@ -6829,6 +7004,8 @@
     "Sources/AppShelliOS/PlozziOSRootView.swift": {
       "sources": [
         "Sources/AppShelliOS/PlozziOSRootView.swift",
+        "Sources/CoreModels/WatchlistBrowsePreferences.swift",
+        "Sources/CoreModels/MediaProvider.swift",
         "Sources/AppRuntime/ExternalPlayerSupport.swift",
         "Sources/AppRuntime/HomeLiveTVRuntime.swift",
         "Sources/AppRuntime/LiveTVLibraryRuntimeView.swift",
@@ -6917,7 +7094,7 @@
       ],
       "navigation": "Launch Plozz on iPhone/iPad, finish required setup, then use its tabs or sidebar.",
       "experience": "Open shown shortcuts, switch profiles, or connect media when Home is empty.",
-      "conditions": "Compact UIKit navigation puts excess shown shortcuts under More; it does not reveal hidden shortcuts. iPad can use regular-width navigation. Profile authorization applies before browsing.",
+      "conditions": "Compact UIKit navigation puts excess shown shortcuts under More; it does not reveal hidden shortcuts. iPad can use regular-width navigation. Profile authorization applies before browsing. Watchlist shows sorting before filtering on mobile; its fields are Date Added, Release Date and Name only. Choosing a field resets its direction: Name starts ascending, dates descending. Clear Filters appears only with a movie/show filter; filtered-empty results also offer it.",
       "controls": [
         {
           "text": "Settings",
@@ -7021,8 +7198,48 @@
           "source": "Sources/CoreUI/BrowseQueryControls.swift"
         },
         {
+          "text": "Date Added",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Release Date",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Name",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
           "text": "Order",
           "source": "Sources/CoreUI/BrowseQueryControls.swift"
+        },
+        {
+          "text": "Ascending",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Descending",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Filter",
+          "source": "Sources/CoreUI/WatchlistBrowseControls.swift"
+        },
+        {
+          "text": "All",
+          "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"
+        },
+        {
+          "text": "Movies",
+          "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"
+        },
+        {
+          "text": "TV Shows",
+          "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"
+        },
+        {
+          "text": "Clear Filters",
+          "source": "Sources/CoreUI/WatchlistBrowseControls.swift"
         },
         {
           "text": "Try Again",
@@ -7067,14 +7284,6 @@
         {
           "text": "Not Now",
           "source": "Sources/CoreUI/SyncedServerSetupPrompt.swift"
-        },
-        {
-          "text": "Filter",
-          "source": "Sources/CoreUI/WatchlistBrowseControls.swift"
-        },
-        {
-          "text": "Clear Filters",
-          "source": "Sources/CoreUI/WatchlistBrowseControls.swift"
         },
         {
           "text": "Your Watchlist is empty",
@@ -7345,6 +7554,14 @@
           "source": "Sources/AppShelliOS/PlozziOSSeerrSettingsView.swift"
         },
         {
+          "text": "Scan Local Network",
+          "source": "Sources/AppShelliOS/PlozziOSSeerrSettingsView.swift"
+        },
+        {
+          "text": "Scanning…",
+          "source": "Sources/AppShelliOS/PlozziOSSeerrSettingsView.swift"
+        },
+        {
           "text": "Loading users…",
           "source": "Sources/AppShelliOS/PlozziOSSeerrSettingsView.swift"
         },
@@ -7388,7 +7605,7 @@
       ],
       "navigation": "Open mobile Settings > Servers, then a connection or Add Server.",
       "experience": "Add, reauthenticate, inspect addresses, rescan shares, or remove a shared connection.",
-      "conditions": "iPhone/iPad. Household connection management is not shown to Kids profiles; removing a shared account is different from disabling a library for one profile.",
+      "conditions": "iPhone/iPad. Household connection management is not shown to Kids profiles; removing a shared account is different from disabling a library for one profile. In Libraries, a non-share server with a saved account offers Add Another Plex Account for Plex or Add Another User for other providers. These sign in an existing server account, not create a server user; shared-folder connections have neither action.",
       "controls": [
         {
           "text": "Servers",
@@ -7455,6 +7672,14 @@
           "source": "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
         },
         {
+          "text": "Add Another Plex Account",
+          "source": "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
+        },
+        {
+          "text": "Add Another User",
+          "source": "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
+        },
+        {
           "text": "Add or manage addresses",
           "source": "Sources/CoreUI/ServerAddressSettingsLink.swift"
         },
@@ -7493,6 +7718,9 @@
     "Sources/AppShelliOS/PlozziOSSettingsView.swift": {
       "sources": [
         "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+        "Sources/CoreModels/CardCaptionSettings.swift",
+        "Sources/CoreModels/EpisodeCountBadgeStyle.swift",
+        "Sources/CoreModels/WatchIndicatorColor.swift",
         "Sources/CoreModels/ThemeSettings.swift",
         "Sources/CoreModels/CardStyle.swift",
         "Sources/CoreModels/WatchStatusIndicator.swift",
@@ -7579,7 +7807,7 @@
       ],
       "navigation": "Open Settings from iPhone/iPad navigation; choose a profile category or household section.",
       "experience": "Change playback, captions, Live TV, libraries, presentation, trackers, language, and authorized household services.",
-      "conditions": "iPhone/iPad compact and regular-width layouts. Category order is Playback, Subtitles, Live TV, Libraries, Appearance, Screens & Navigation, Trackers, Language. Everyone is absent for Kids; Libraries and Manage Profile are sealed by an enforced Parental PIN. Edit/Done reflects SwiftUI list-editing state. Internal developer actions require deliberate version-based activation and are not reader setup steps. On Kids profiles, Name & Avatar replaces the ordinary Libraries category; protected Libraries and Manage Profile move into Parental Controls.",
+      "conditions": "iPhone/iPad compact and regular-width layouts. Category order is Playback, Subtitles, Live TV, Libraries, Appearance, Screens & Navigation, Trackers, Language. Everyone is absent for Kids; Libraries and Manage Profile are sealed by an enforced Parental PIN. Edit/Done reflects SwiftUI list-editing state. Internal developer actions require deliberate version-based activation and are not reader setup steps. On Kids profiles, Name & Avatar replaces the ordinary Libraries category; protected Libraries and Manage Profile move into Parental Controls. Appearance order is Theme, Cards, Artwork, Circadian Mode. Cards contains Labels, Watch indicators, Style, Display Size; Focus is Apple TV-only. Label presets replace overrides; Custom is a readout in the compact picker when no preset matches. Customize labels from Cards offers all nine Page choices; from Movie & show details it contains Episodes, Related titles and Extras without a Page picker. Home/Recommended use Default with On/Off/Mixed, followed by Overrides; Continue Watching and Home's Libraries use Use default/On/Off. Other pages use On/Off only. The color picker is hidden with Hidden watch indicators; Episode count style appears only with episode counts enabled.",
       "controls": [
         {
           "text": "Settings",
@@ -7779,6 +8007,18 @@
         },
         {
           "text": "Edit Profile",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Who’s watching?",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Edit Profiles",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Done Editing",
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
         {
@@ -8368,32 +8608,16 @@
           "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
         },
         {
-          "text": "Watch indicators",
-          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+          "text": "App default",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
         },
         {
-          "text": "Focus",
-          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+          "text": "Show labels everywhere",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
         },
         {
-          "text": "Style",
-          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
-        },
-        {
-          "text": "Display Size",
-          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
-        },
-        {
-          "text": "Cards",
-          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
-        },
-        {
-          "text": "Show unwatched episode count",
-          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
-        },
-        {
-          "text": "Show progress bars",
-          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+          "text": "Hide labels everywhere",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
         },
         {
           "text": "Custom",
@@ -8408,8 +8632,160 @@
           "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
         },
         {
+          "text": "Home",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Recommended",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Browse",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Collections",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Playlists",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Search",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Watchlist",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Movie & show details",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "People",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Default",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Card labels",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Episodes",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Related titles",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Extras",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "On",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Mixed",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
           "text": "Overrides",
           "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Continue Watching",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Libraries",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Use default",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
+          "text": "Watch indicators",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
+          "text": "Color",
+          "source": "Sources/FeatureSettings/WatchIndicatorColorPicker.swift"
+        },
+        {
+          "text": "White",
+          "source": "Sources/CoreModels/WatchIndicatorColor.swift"
+        },
+        {
+          "text": "Blue",
+          "source": "Sources/CoreModels/WatchIndicatorColor.swift"
+        },
+        {
+          "text": "Green",
+          "source": "Sources/CoreModels/WatchIndicatorColor.swift"
+        },
+        {
+          "text": "Yellow",
+          "source": "Sources/CoreModels/WatchIndicatorColor.swift"
+        },
+        {
+          "text": "Orange",
+          "source": "Sources/CoreModels/WatchIndicatorColor.swift"
+        },
+        {
+          "text": "Red",
+          "source": "Sources/CoreModels/WatchIndicatorColor.swift"
+        },
+        {
+          "text": "Pink",
+          "source": "Sources/CoreModels/WatchIndicatorColor.swift"
+        },
+        {
+          "text": "Purple",
+          "source": "Sources/CoreModels/WatchIndicatorColor.swift"
+        },
+        {
+          "text": "Show unwatched episode count",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
+          "text": "Episode count style",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
+          "text": "Attached",
+          "source": "Sources/CoreModels/EpisodeCountBadgeStyle.swift"
+        },
+        {
+          "text": "Floating",
+          "source": "Sources/CoreModels/EpisodeCountBadgeStyle.swift"
+        },
+        {
+          "text": "Show progress bars",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
+          "text": "Style",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
+          "text": "Display Size",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
+          "text": "Cards",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
         },
         {
           "text": "Watch indicator preview",
@@ -8555,6 +8931,18 @@
           "source": "Sources/AppShelliOS/PlozziOSStreamingQuality.swift"
         },
         {
+          "text": "Local network",
+          "source": "Sources/AppShelliOS/PlozziOSStreamingQuality.swift"
+        },
+        {
+          "text": "Remote Wi-Fi / Ethernet",
+          "source": "Sources/AppShelliOS/PlozziOSStreamingQuality.swift"
+        },
+        {
+          "text": "Cellular",
+          "source": "Sources/AppShelliOS/PlozziOSStreamingQuality.swift"
+        },
+        {
           "text": "Advanced",
           "source": "Sources/AppShelliOS/PlozziOSStreamingQuality.swift"
         },
@@ -8564,6 +8952,10 @@
         },
         {
           "text": "Original quality",
+          "source": "Sources/AppShelliOS/PlozziOSStreamingQuality.swift"
+        },
+        {
+          "text": "Quality limit",
           "source": "Sources/AppShelliOS/PlozziOSStreamingQuality.swift"
         },
         {
@@ -8651,8 +9043,20 @@
       ],
       "navigation": "Choose Set Up from Another Device in mobile onboarding or Set Up From Another Device in configured Sync settings.",
       "experience": "Advertise this receiving device and display its QR/short code; wait for the configured device to send setup, then review the received accounts and profiles.",
-      "conditions": "iPhone/iPad on the local network. This receiver displays codes rather than opening the sender scanner. Approve comparison codes only when they match; verified same-account pairing can authenticate without a comparison.",
+      "conditions": "iPhone/iPad on the local network. This receiver displays codes rather than opening the sender scanner. Approve comparison codes only when they match; verified same-account pairing can authenticate without a comparison. The applied summary shows You're all set/Start Watching when no server needs sign-in, otherwise Set Up This Device/Continue. This is separate from the sender's Your other device is set up/Done summary.",
       "controls": [
+        {
+          "text": "You’re all set",
+          "source": "Sources/AppShelliOS/PlozziOSSyncSetupReceiveView.swift"
+        },
+        {
+          "text": "Start Watching",
+          "source": "Sources/AppShelliOS/PlozziOSSyncSetupReceiveView.swift"
+        },
+        {
+          "text": "Continue",
+          "source": "Sources/AppShelliOS/PlozziOSSyncSetupReceiveView.swift"
+        },
         {
           "text": "Set Up This Device",
           "source": "Sources/AppShelliOS/PlozziOSSyncSetupReceiveView.swift"
@@ -8727,6 +9131,14 @@
       "experience": "Scan the receiving device QR code or type its short code; review the successful transfer summary after authorization.",
       "conditions": "iPhone/iPad sender helper screens. Scanning requires Camera permission; code entry does not. Both devices need local-network access. Compare matching codes if prompted; same-account verification can omit that step.",
       "controls": [
+        {
+          "text": "Your other device is set up",
+          "source": "Sources/AppShelliOS/PlozziOSSyncSetupSendView.swift"
+        },
+        {
+          "text": "Done",
+          "source": "Sources/AppShelliOS/PlozziOSSyncSetupSendView.swift"
+        },
         {
           "text": "Cancel",
           "source": "Sources/AppShelliOS/PlozziOSSyncSetupSendView.swift"
@@ -9094,6 +9506,22 @@
           "source": "Sources/AppShelliOS/PlozziOSUnifiedAddShareView.swift"
         },
         {
+          "text": "Username (blank for guest)",
+          "source": "Sources/AppShelliOS/PlozziOSUnifiedAddShareView.swift"
+        },
+        {
+          "text": "Username",
+          "source": "Sources/AppShelliOS/PlozziOSUnifiedAddShareView.swift"
+        },
+        {
+          "text": "Password (optional)",
+          "source": "Sources/AppShelliOS/PlozziOSUnifiedAddShareView.swift"
+        },
+        {
+          "text": "Password",
+          "source": "Sources/AppShelliOS/PlozziOSUnifiedAddShareView.swift"
+        },
+        {
           "text": "Mixed (Automatic)",
           "source": "Sources/AppShelliOS/PlozziOSUnifiedAddShareView.swift"
         },
@@ -9150,6 +9578,14 @@
           "source": "Sources/AppShelliOS/PlozziOSUnifiedAddShareView.swift"
         },
         {
+          "text": "SSH Host Key SHA-256",
+          "source": "Sources/AppShelliOS/PlozziOSUnifiedAddShareView.swift"
+        },
+        {
+          "text": "Certificate SHA-256",
+          "source": "Sources/AppShelliOS/PlozziOSUnifiedAddShareView.swift"
+        },
+        {
           "text": "Loading…",
           "source": "Sources/AppShelliOS/PlozziOSUnifiedAddShareView.swift"
         },
@@ -9175,6 +9611,14 @@
         },
         {
           "text": "Folder",
+          "source": "Sources/AppShelliOS/PlozziOSUnifiedAddShareView.swift"
+        },
+        {
+          "text": "Or open a subfolder",
+          "source": "Sources/AppShelliOS/PlozziOSUnifiedAddShareView.swift"
+        },
+        {
+          "text": "Locations",
           "source": "Sources/AppShelliOS/PlozziOSUnifiedAddShareView.swift"
         },
         {
@@ -10569,7 +11013,7 @@
         "Sources/FeatureHome/LibraryBrowseView.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Reusable LibraryAlphabetMenu.swift is wired into Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/FeatureHome/LibraryBrowseView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitReason": "Only LibraryAlphabetFeedback is constructed by the mobile and Apple TV library views; it displays transient jump progress or an error without controls. The LibraryAlphabetMenu type in this file has no production construction call, so its menu, retry and cancel buttons are unreachable. Apple TV instead constructs its letter rail directly in LibraryBrowseView; mobile has no letter-navigation entry point."
     },
     "Sources/CoreUI/LibraryCardArtwork.swift": {
       "sources": [
@@ -11767,14 +12211,26 @@
       ],
       "navigation": "Open the title source/version actions, including More actions on Apple TV.",
       "experience": "Choose an authorized server copy or file version before playback.",
-      "conditions": "Multiple eligible sources/versions required. A matching validated offline copy on mobile can take precedence; changing server does not force streaming.",
+      "conditions": "Server and Version drill-ins appear only with multiple eligible sources or versions respectively; their destination headings are Servers and Versions. Server names and edition descriptions are dynamic. A matching validated offline copy on mobile can take precedence; changing server does not force streaming.",
       "controls": [
+        {
+          "text": "Servers",
+          "source": "Sources/CoreUI/PlaybackSourceMenu.swift"
+        },
+        {
+          "text": "Versions",
+          "source": "Sources/CoreUI/PlaybackSourceMenu.swift"
+        },
         {
           "text": "Back",
           "source": "Sources/CoreUI/PlaybackSourceMenu.swift"
         },
         {
           "text": "Choose a server",
+          "source": "Sources/CoreUI/PlaybackSourceMenu.swift"
+        },
+        {
+          "text": "Server",
           "source": "Sources/CoreUI/PlaybackSourceMenu.swift"
         },
         {
@@ -13932,6 +14388,10 @@
           "source": "Sources/FeatureAuth/IPTVSignInView.swift"
         },
         {
+          "text": "Server address",
+          "source": "Sources/FeatureAuth/IPTVSignInView.swift"
+        },
+        {
           "text": "Xtream account",
           "source": "Sources/FeatureAuth/IPTVSignInView.swift"
         },
@@ -13941,6 +14401,10 @@
         },
         {
           "text": "Name (optional)",
+          "source": "Sources/FeatureAuth/IPTVSignInView.swift"
+        },
+        {
+          "text": "EPG URL (optional)",
           "source": "Sources/FeatureAuth/IPTVSignInView.swift"
         },
         {
@@ -13985,6 +14449,10 @@
         },
         {
           "text": "Program guides",
+          "source": "Sources/FeatureAuth/IPTVSignInView.swift"
+        },
+        {
+          "text": "Additional guide URL",
           "source": "Sources/FeatureAuth/IPTVSignInView.swift"
         },
         {
@@ -14199,6 +14667,14 @@
         },
         {
           "text": "Choose your servers",
+          "source": "Sources/FeatureAuth/PlexLinkView.swift"
+        },
+        {
+          "text": "Owned",
+          "source": "Sources/FeatureAuth/PlexLinkView.swift"
+        },
+        {
+          "text": "Shared",
           "source": "Sources/FeatureAuth/PlexLinkView.swift"
         }
       ],
@@ -14443,6 +14919,14 @@
       "experience": "Pick a discovered server, rescan, or enter a reachable address manually.",
       "conditions": "All platforms. Local discovery needs permission; remote/Tailscale addresses are entered manually rather than promised as automatic discovery.",
       "controls": [
+        {
+          "text": "Servers",
+          "source": "Sources/FeatureDiscovery/ServerPickerView.swift"
+        },
+        {
+          "text": "Enter address",
+          "source": "Sources/FeatureDiscovery/ServerPickerView.swift"
+        },
         {
           "text": "Choose your Silo server",
           "source": "Sources/FeatureDiscovery/ServerPickerView.swift"
@@ -15571,6 +16055,10 @@
       "conditions": "Apple TV. Episode files must be available to the selected server user; Seerr actions additionally require matched identity and request permissions.",
       "controls": [
         {
+          "text": "Seasons Unavailable",
+          "source": "Sources/FeatureHome/SeriesDetailView.swift"
+        },
+        {
           "text": "Episodes",
           "source": "Sources/FeatureHome/SeriesDetailView.swift"
         },
@@ -15746,6 +16234,8 @@
     "Sources/FeatureHome/WatchlistBrowseView.swift": {
       "sources": [
         "Sources/FeatureHome/WatchlistBrowseView.swift",
+        "Sources/CoreModels/WatchlistBrowsePreferences.swift",
+        "Sources/CoreModels/MediaProvider.swift",
         "Sources/CoreUI/ArtworkEnvironment.swift",
         "Sources/CoreUI/PosterCardView.swift",
         "Sources/CoreUI/FallbackAsyncImage.swift",
@@ -15792,19 +16282,59 @@
       ],
       "navigation": "Open Watchlist in Apple TV navigation.",
       "experience": "Review saved titles, filter/sort them, open details, or remove a save.",
-      "conditions": "Apple TV and the active Plozz profile. Destinations need an authorized server/tracker identity; a saved title outside accessible libraries may not play.",
+      "conditions": "Apple TV and the active Plozz profile. Destinations need an authorized server/tracker identity; a saved title outside accessible libraries may not play. Filtering precedes sorting on Apple TV. Only Date Added, Release Date and Name are offered; selecting a field resets its direction to descending for dates or ascending for Name. Clear Filters appears with an active movie/show filter, including a filtered-empty result.",
       "controls": [
         {
           "text": "Watchlist",
           "source": "Sources/FeatureHome/WatchlistBrowseView.swift"
         },
         {
+          "text": "Filter",
+          "source": "Sources/CoreUI/WatchlistBrowseControls.swift"
+        },
+        {
+          "text": "All",
+          "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"
+        },
+        {
+          "text": "Movies",
+          "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"
+        },
+        {
+          "text": "TV Shows",
+          "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"
+        },
+        {
+          "text": "Clear Filters",
+          "source": "Sources/CoreUI/WatchlistBrowseControls.swift"
+        },
+        {
           "text": "Sort By",
           "source": "Sources/CoreUI/BrowseQueryControls.swift"
         },
         {
+          "text": "Date Added",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Release Date",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Name",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
           "text": "Order",
           "source": "Sources/CoreUI/BrowseQueryControls.swift"
+        },
+        {
+          "text": "Ascending",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Descending",
+          "source": "Sources/CoreModels/MediaProvider.swift"
         },
         {
           "text": "Try Again",
@@ -15841,14 +16371,6 @@
         {
           "text": "Removing…",
           "source": "Sources/CoreUI/PosterCardView.swift"
-        },
-        {
-          "text": "Filter",
-          "source": "Sources/CoreUI/WatchlistBrowseControls.swift"
-        },
-        {
-          "text": "Clear Filters",
-          "source": "Sources/CoreUI/WatchlistBrowseControls.swift"
         },
         {
           "text": "Your Watchlist is empty",
@@ -16123,6 +16645,7 @@
     "Sources/FeatureLiveTV/LibraryChannelEditorView.swift": {
       "sources": [
         "Sources/FeatureLiveTV/LibraryChannelEditorView.swift",
+        "Sources/CoreModels/LibraryChannelModels.swift",
         "Sources/CoreUI/AmbientGradientBackground.swift",
         "Sources/CoreUI/SettingsSurfaces.swift",
         "Sources/FeatureLiveTV/LiveTVSettingsPage.swift",
@@ -16159,8 +16682,12 @@
       ],
       "navigation": "Open Sources > Plozz channels > Create custom channel.",
       "experience": "Name a channel, select libraries and scheduling rules, preview its schedule, and save it.",
-      "conditions": "All platforms. Rules depend on accessible movie/episode libraries and usable durations. Empty rules allow all eligible titles; watch-history updates are profile/device-local, off by default, and do not save resume positions.",
+      "conditions": "All platforms. Rules depend on accessible movie/episode libraries and usable durations. Empty rules allow all eligible titles; watch-history updates are profile/device-local, off by default, and do not save resume positions. Management shows Automatic lineup, Generated channels when available, Custom channels, then Watch history. Custom recipes offer Shows in episode order, Seeded shuffle or Movies; Movies disables the Episodes switch. Editing a saved custom channel changes the heading to Edit custom channel. Generated channels have no editing action. The Parental PIN gate uses local verification, not the shared scaffold's dormant Profile Lock or remote-requirement loading/error states.",
       "controls": [
+        {
+          "text": "Edit custom channel",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
         {
           "text": "Automatic channel",
           "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
@@ -16204,6 +16731,18 @@
         {
           "text": "Order",
           "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Shows in episode order",
+          "source": "Sources/CoreModels/LibraryChannelModels.swift"
+        },
+        {
+          "text": "Seeded shuffle",
+          "source": "Sources/CoreModels/LibraryChannelModels.swift"
+        },
+        {
+          "text": "Movies",
+          "source": "Sources/CoreModels/LibraryChannelModels.swift"
         },
         {
           "text": "Episodes",
@@ -16278,23 +16817,7 @@
           "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
         },
         {
-          "text": "Try Again",
-          "source": "Sources/CoreUI/ContentStateView.swift"
-        },
-        {
-          "text": "Details",
-          "source": "Sources/CoreUI/ContentStateView.swift"
-        },
-        {
           "text": "Cancel",
-          "source": "Sources/CoreUI/PINEntry.swift"
-        },
-        {
-          "text": "Profile Lock",
-          "source": "Sources/CoreUI/ProfileLockCopy.swift"
-        },
-        {
-          "text": "Loading",
           "source": "Sources/CoreUI/PINEntry.swift"
         },
         {
@@ -16303,10 +16826,6 @@
         },
         {
           "text": "Cancel",
-          "source": "Sources/CoreUI/PINProfilePresentation.swift"
-        },
-        {
-          "text": "Loading",
           "source": "Sources/CoreUI/PINProfilePresentation.swift"
         },
         {
@@ -16746,6 +17265,10 @@
     "Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift": {
       "sources": [
         "Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift",
+        "Sources/FeatureLiveTV/LiveTVSourcesView.swift",
+        "Sources/AppShell/RootView.swift",
+        "Sources/AppShelliOS/PlozziOSRootView.swift",
+        "Sources/AppShelliOS/PlozziOSSettingsView.swift",
         "Sources/CoreUI/AmbientGradientBackground.swift",
         "Sources/CoreUI/SettingsSurfaces.swift",
         "Sources/FeatureLiveTV/LiveTVSettingsPage.swift",
@@ -16766,9 +17289,9 @@
         "iPhone",
         "iPad"
       ],
-      "navigation": "On iPhone/iPad, choose Playlist file (M3U) in Live TV Sources, or replace a stored imported source.",
-      "experience": "Import or replace a simple source file and its guide configuration.",
-      "conditions": "File selection is mobile; imported simple Live TV sources can use encrypted profile sync. This is not IPTV account Playlist file import, whose account catalogue stays local.",
+      "navigation": "In Live TV Sources, select an existing imported playlist source, then Playlist and guides.",
+      "experience": "Edit the stored source's name and guide addresses, then save them without replacing the imported file.",
+      "conditions": "Both app shells inject ManagedProviderSetupRouter, and mobile Settings supplies it too. Therefore the Add a source > Playlist file (M3U) action opens IPTV account setup, not this editor's new-file branch. This editor remains reachable for an existing source with importedPlaylistID: that branch offers no file chooser or base-address field. Such saved source copies can use encrypted profile sync; IPTV account file catalogues stay local. Changes require source-management permission.",
       "controls": [
         {
           "text": "Imported playlist",
@@ -16779,7 +17302,11 @@
           "source": "Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift"
         },
         {
-          "text": "Playlist selected",
+          "text": "Name (optional)",
+          "source": "Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift"
+        },
+        {
+          "text": "Save source",
           "source": "Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift"
         },
         {
@@ -16809,8 +17336,8 @@
       ],
       "documents": [
         {
-          "slug": "live-tv",
-          "anchor": "add-iptv"
+          "slug": "live-tv-channels",
+          "anchor": "edit-imported-playlist-details"
         },
         {
           "slug": "profiles-and-sync",
@@ -16857,7 +17384,7 @@
       ],
       "navigation": "Open a channel context menu and choose Multiview > Watch, then add allowed channels.",
       "experience": "Watch up to four panes, choose the audible pane, change layout or save a favorite arrangement.",
-      "conditions": "Provider connection limits still apply. One pane is audible: focus selects it on Apple TV and Audio selects it on mobile. Multiview disables AirPlay/Picture in Picture.",
+      "conditions": "Provider connection limits still apply. One pane is audible: focus selects it on Apple TV and Audio selects it on mobile. Multiview disables AirPlay/Picture in Picture. Favorite/Unfavorite appears when the host supplies a save action and reflects the saved layout. Edit layout appears outside layout-editing mode; Show all appears only when a pane is expanded. Saved/Not saved is the favorite action's accessibility value, not another button.",
       "controls": [
         {
           "text": "Multiview",
@@ -16913,6 +17440,22 @@
         },
         {
           "text": "Layout",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift"
+        },
+        {
+          "text": "Favorite",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift"
+        },
+        {
+          "text": "Unfavorite",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift"
+        },
+        {
+          "text": "Edit layout",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift"
+        },
+        {
+          "text": "Show all",
           "source": "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift"
         },
         {
@@ -17020,6 +17563,14 @@
         },
         {
           "text": "Playlist",
+          "source": "Sources/FeatureLiveTV/LiveTVPlaylistEditor.swift"
+        },
+        {
+          "text": "Playlist or live HLS URL",
+          "source": "Sources/FeatureLiveTV/LiveTVPlaylistEditor.swift"
+        },
+        {
+          "text": "Name (optional)",
           "source": "Sources/FeatureLiveTV/LiveTVPlaylistEditor.swift"
         },
         {
@@ -17229,7 +17780,7 @@
       ],
       "navigation": "Choose Search in Live TV and switch between Channels and Programs.",
       "experience": "Find a station or listing, favorite a channel, and tune its current broadcast.",
-      "conditions": "Only enabled/allowed sources and supplied guide windows are searched. Past/future program selection tunes live, not playback from the listed program start.",
+      "conditions": "Only enabled/allowed sources and supplied guide windows are searched. Past/future program selection tunes live, not playback from the listed program start. Program details offers Watch channel and a state-dependent Add to Favorites/Remove from Favorites only when the caller provides that favorite action. Library-title details require an available library item and navigation callback.",
       "controls": [
         {
           "text": "Programs",
@@ -17253,6 +17804,18 @@
         },
         {
           "text": "Program details",
+          "source": "Sources/FeatureLiveTV/LiveTVProgramSearchView.swift"
+        },
+        {
+          "text": "Watch channel",
+          "source": "Sources/FeatureLiveTV/LiveTVProgramSearchView.swift"
+        },
+        {
+          "text": "Add to Favorites",
+          "source": "Sources/FeatureLiveTV/LiveTVProgramSearchView.swift"
+        },
+        {
+          "text": "Remove from Favorites",
           "source": "Sources/FeatureLiveTV/LiveTVProgramSearchView.swift"
         },
         {
@@ -17899,6 +18462,9 @@
     "Sources/FeatureLiveTV/LiveTVServerSetupView.swift": {
       "sources": [
         "Sources/FeatureLiveTV/LiveTVServerSetupView.swift",
+        "Sources/FeatureLiveTV/LiveTVSourcesView.swift",
+        "Sources/FeatureLiveTVCore/LiveTVServerProbeModel.swift",
+        "Sources/AppRuntime/AccountsProvidersModel.swift",
         "Sources/CoreUI/AmbientGradientBackground.swift",
         "Sources/CoreUI/SettingsSurfaces.swift",
         "Sources/FeatureLiveTV/LiveTVSettingsPage.swift",
@@ -17921,7 +18487,7 @@
       ],
       "navigation": "Choose Media server under Sources, or enroll an eligible connected server.",
       "experience": "Choose the accessible server/user, add playable channels, or deliberately add guide-only data.",
-      "conditions": "Eligible Plex/Jellyfin/Emby server Live TV only. Guide-only enrollment cannot play channels; server permissions and PIN authorization still apply.",
+      "conditions": "Only Plex/Jellyfin/Emby accounts enabled for the active profile are listed; server/user names are dynamic. An unresolved account selection can leave no choices. Connect a server appears in the empty state when a connection callback exists; Connect another server appears below a nonempty list. Checking offers Cancel check. After a successful, still-authorized check with channels, available playback offers Add channels and unsupported playback mode offers Add guide only. Other results offer Check again. Guide-only enrollment cannot play channels; profile/PIN authority is checked again when saving.",
       "controls": [
         {
           "text": "Media server",
@@ -17932,7 +18498,39 @@
           "source": "Sources/FeatureLiveTV/LiveTVServerSetupView.swift"
         },
         {
+          "text": "Connect a server",
+          "source": "Sources/FeatureLiveTV/LiveTVServerSetupView.swift"
+        },
+        {
           "text": "Checking Live TV",
+          "source": "Sources/FeatureLiveTV/LiveTVServerSetupView.swift"
+        },
+        {
+          "text": "No channels returned",
+          "source": "Sources/FeatureLiveTV/LiveTVServerSetupView.swift"
+        },
+        {
+          "text": "Live TV not configured",
+          "source": "Sources/FeatureLiveTV/LiveTVServerSetupView.swift"
+        },
+        {
+          "text": "Live TV access denied",
+          "source": "Sources/FeatureLiveTV/LiveTVServerSetupView.swift"
+        },
+        {
+          "text": "Live TV subscription required",
+          "source": "Sources/FeatureLiveTV/LiveTVServerSetupView.swift"
+        },
+        {
+          "text": "Live TV unavailable",
+          "source": "Sources/FeatureLiveTV/LiveTVServerSetupView.swift"
+        },
+        {
+          "text": "Unsupported server",
+          "source": "Sources/FeatureLiveTV/LiveTVServerSetupView.swift"
+        },
+        {
+          "text": "Guide only",
           "source": "Sources/FeatureLiveTV/LiveTVServerSetupView.swift"
         },
         {
@@ -17940,7 +18538,19 @@
           "source": "Sources/FeatureLiveTV/LiveTVServerSetupView.swift"
         },
         {
+          "text": "Add channels",
+          "source": "Sources/FeatureLiveTV/LiveTVServerSetupView.swift"
+        },
+        {
+          "text": "Add guide only",
+          "source": "Sources/FeatureLiveTV/LiveTVServerSetupView.swift"
+        },
+        {
           "text": "Check again",
+          "source": "Sources/FeatureLiveTV/LiveTVServerSetupView.swift"
+        },
+        {
+          "text": "Connect another server",
           "source": "Sources/FeatureLiveTV/LiveTVServerSetupView.swift"
         },
         {
@@ -17984,6 +18594,7 @@
     "Sources/FeatureLiveTV/LiveTVSetupWelcome.swift": {
       "sources": [
         "Sources/FeatureLiveTV/LiveTVSetupWelcome.swift",
+        "Sources/FeatureLiveTV/LiveTVPrototypeView.swift",
         "Sources/CoreUI/CardStyleEnvironment.swift",
         "Sources/CoreUI/LiquidGlassCardStyle.swift",
         "Sources/CoreUI/SettingsCardButtonStyle.swift",
@@ -18002,30 +18613,10 @@
         "iPhone",
         "iPad"
       ],
-      "navigation": "Enable Plozz channels from Live TV setup or Sources > Plozz channels.",
-      "experience": "Turn eligible video libraries into automatic scheduled channels.",
-      "conditions": "Requires usable library files and durations. This is scheduled original-file playback, not recordings, transcoding, or IPTV access.",
+      "navigation": "Open Live TV with no configured playlist/server sources and no loaded channels, after initial loading and higher-priority error/approval states resolve.",
+      "experience": "Connect an IPTV provider, choose a media server, or open Plozz channel management for an automatic or custom library lineup.",
+      "conditions": "All platforms. The three cards are IPTV provider, Media server and, when library management is available, Plozz channels. Apple TV also shows action captions Connect provider, Choose server and Enable channels/Manage channels; mobile cards omit those action captions. Enable Plozz channels/Manage Plozz channels are accessibility labels, not the visible settings toggle. The library card opens management; Auto-create channels from your libraries there controls the lineup. Server status/retry follows enrollment failures. This welcome path supplies no retryLibrary callback, so its Retry Plozz channels branch is not shown; the channel-management page has its own recovery actions.",
       "controls": [
-        {
-          "text": "Manage Plozz channels",
-          "source": "Sources/FeatureLiveTV/LiveTVSetupWelcome.swift"
-        },
-        {
-          "text": "Enable Plozz channels",
-          "source": "Sources/FeatureLiveTV/LiveTVSetupWelcome.swift"
-        },
-        {
-          "text": "Retry Plozz channels",
-          "source": "Sources/FeatureLiveTV/LiveTVSetupWelcome.swift"
-        },
-        {
-          "text": "Retry",
-          "source": "Sources/FeatureLiveTV/LiveTVSetupWelcome.swift"
-        },
-        {
-          "text": "Checking Live TV access...",
-          "source": "Sources/FeatureLiveTV/LiveTVSetupWelcome.swift"
-        },
         {
           "text": "Live TV",
           "source": "Sources/FeatureLiveTV/LiveTVSetupWelcome.swift"
@@ -18036,6 +18627,50 @@
         },
         {
           "text": "Experimental",
+          "source": "Sources/FeatureLiveTV/LiveTVSetupWelcome.swift"
+        },
+        {
+          "text": "IPTV provider",
+          "source": "Sources/FeatureLiveTV/LiveTVSetupWelcome.swift"
+        },
+        {
+          "text": "Connect provider",
+          "source": "Sources/FeatureLiveTV/LiveTVSetupWelcome.swift"
+        },
+        {
+          "text": "Media server",
+          "source": "Sources/FeatureLiveTV/LiveTVSetupWelcome.swift"
+        },
+        {
+          "text": "Choose server",
+          "source": "Sources/FeatureLiveTV/LiveTVSetupWelcome.swift"
+        },
+        {
+          "text": "Plozz channels",
+          "source": "Sources/FeatureLiveTV/LiveTVSetupWelcome.swift"
+        },
+        {
+          "text": "Enable channels",
+          "source": "Sources/FeatureLiveTV/LiveTVSetupWelcome.swift"
+        },
+        {
+          "text": "Manage channels",
+          "source": "Sources/FeatureLiveTV/LiveTVSetupWelcome.swift"
+        },
+        {
+          "text": "Enable Plozz channels",
+          "source": "Sources/FeatureLiveTV/LiveTVSetupWelcome.swift"
+        },
+        {
+          "text": "Manage Plozz channels",
+          "source": "Sources/FeatureLiveTV/LiveTVSetupWelcome.swift"
+        },
+        {
+          "text": "Retry",
+          "source": "Sources/FeatureLiveTV/LiveTVSetupWelcome.swift"
+        },
+        {
+          "text": "Checking Live TV access...",
           "source": "Sources/FeatureLiveTV/LiveTVSetupWelcome.swift"
         },
         {
@@ -18092,6 +18727,11 @@
     "Sources/FeatureLiveTV/LiveTVSourcesView.swift": {
       "sources": [
         "Sources/FeatureLiveTV/LiveTVSourcesView.swift",
+        "Sources/AppShell/RootView.swift",
+        "Sources/AppShell/LiveTVShellDestination.swift",
+        "Sources/AppShelliOS/PlozziOSRootView.swift",
+        "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+        "Sources/AppShelliOS/PlozziOSLiveTVDestination.swift",
         "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift",
         "Sources/CoreUI/AmbientGradientBackground.swift",
         "Sources/CoreUI/SettingsSurfaces.swift",
@@ -18135,7 +18775,7 @@
       ],
       "navigation": "Open Sources from Live TV or Settings > Live TV.",
       "experience": "Enable/add/edit sources, inspect guide coverage, retain listings, connect a playlist as an account, or access channel tools.",
-      "conditions": "All platforms. Server enrollment supports eligible Plex/Jellyfin/Emby accounts. Local imported-account playlists and encrypted copied simple sources have different sync behavior. Disabling/removing a source keeps channel preferences; provider sign-in may be separately required.",
+      "conditions": "All platforms. Server enrollment supports eligible Plex/Jellyfin/Emby accounts. Both app shells supply provider setup, so Add a source offers IPTV provider and Media server, plus Playlist file (M3U) on iPhone/iPad only. The standalone new IPTV playlist and new imported-source editor branches are not reached with that router; existing simple sources remain editable. Connect as IPTV account is offered only for URL sources, not imported files. Settings embeds sources behind TV sources/Add source, with automatic-channel settings and tools below; the guide Sources sheet shows Your sources, Add a source, then tools. Refresh needs configured sources; availability checks need a playlist; guide coverage needs retained programs. Correct guide mapping requires durable storage and guides; identity review appears only with candidates. PIN/profile authority gates source changes and Kids approvals. Disabling/removing a source keeps channel preferences; provider sign-in may be separately required.",
       "controls": [
         {
           "text": "Sources",
@@ -18194,11 +18834,19 @@
           "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
         },
         {
-          "text": "Media server",
+          "text": "Add a source",
           "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
         },
         {
-          "text": "Add a source",
+          "text": "IPTV provider",
+          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        },
+        {
+          "text": "Playlist file (M3U)",
+          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        },
+        {
+          "text": "Media server",
           "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
         },
         {
@@ -18298,10 +18946,6 @@
           "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
         },
         {
-          "text": "IPTV provider",
-          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
-        },
-        {
           "text": "Tools",
           "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
         },
@@ -18330,23 +18974,7 @@
           "source": "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift"
         },
         {
-          "text": "Try Again",
-          "source": "Sources/CoreUI/ContentStateView.swift"
-        },
-        {
-          "text": "Details",
-          "source": "Sources/CoreUI/ContentStateView.swift"
-        },
-        {
           "text": "Cancel",
-          "source": "Sources/CoreUI/PINEntry.swift"
-        },
-        {
-          "text": "Profile Lock",
-          "source": "Sources/CoreUI/ProfileLockCopy.swift"
-        },
-        {
-          "text": "Loading",
           "source": "Sources/CoreUI/PINEntry.swift"
         },
         {
@@ -18355,10 +18983,6 @@
         },
         {
           "text": "Cancel",
-          "source": "Sources/CoreUI/PINProfilePresentation.swift"
-        },
-        {
-          "text": "Loading",
           "source": "Sources/CoreUI/PINProfilePresentation.swift"
         },
         {
@@ -18866,6 +19490,42 @@
       "conditions": "All platforms. Authorization, source availability, network policy and provider limits apply. Go Live respects the local buffer; scheduled library channels use Jump to now, not a recording. System Enhance Dialogue/Reduce Loud Sounds controls and levels are Apple TV-only and require the system availability signal; iPhone/iPad uses its separately wired menu. Live TV offers no dual-subtitle selection.",
       "controls": [
         {
+          "text": "Paused",
+          "source": "Sources/FeaturePlayback/LiveChannelPlayerView.swift"
+        },
+        {
+          "text": "Preview unavailable",
+          "source": "Sources/FeaturePlayback/LiveChannelPlayerView.swift"
+        },
+        {
+          "text": "Connecting",
+          "source": "Sources/FeaturePlayback/LiveChannelPlayerView.swift"
+        },
+        {
+          "text": "Can’t play this channel",
+          "source": "Sources/FeaturePlayback/LiveChannelPlayerView.swift"
+        },
+        {
+          "text": "Channel unavailable",
+          "source": "Sources/FeaturePlayback/LiveChannelPlayerView.swift"
+        },
+        {
+          "text": "Playback timed out",
+          "source": "Sources/FeaturePlayback/LiveChannelPlayerView.swift"
+        },
+        {
+          "text": "Playback stalled",
+          "source": "Sources/FeaturePlayback/LiveChannelPlayerView.swift"
+        },
+        {
+          "text": "Playback interrupted",
+          "source": "Sources/FeaturePlayback/LiveChannelPlayerView.swift"
+        },
+        {
+          "text": "Playback ended",
+          "source": "Sources/FeaturePlayback/LiveChannelPlayerView.swift"
+        },
+        {
           "text": "Playback Diagnostics",
           "source": "Sources/FeaturePlayback/LiveChannelPlayerView.swift"
         },
@@ -18922,8 +19582,24 @@
           "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
         },
         {
+          "text": "Add to Favorites",
+          "source": "Sources/FeaturePlayback/LiveChannelPlayerView.swift"
+        },
+        {
+          "text": "Remove from Favorites",
+          "source": "Sources/FeaturePlayback/LiveChannelPlayerView.swift"
+        },
+        {
           "text": "Playback position",
           "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
+        },
+        {
+          "text": "Go Live",
+          "source": "Sources/FeaturePlayback/LiveChannelPlayerView.swift"
+        },
+        {
+          "text": "Jump to now",
+          "source": "Sources/FeaturePlayback/LiveChannelPlayerView.swift"
         },
         {
           "text": "Default audio",
@@ -19099,6 +19775,18 @@
           "source": "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift"
         },
         {
+          "text": "Above",
+          "source": "Sources/CoreModels/SubtitleStyle.swift"
+        },
+        {
+          "text": "Center",
+          "source": "Sources/CoreModels/SubtitleStyle.swift"
+        },
+        {
+          "text": "Below",
+          "source": "Sources/CoreModels/SubtitleStyle.swift"
+        },
+        {
           "text": "Horizontal Offset",
           "source": "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift"
         },
@@ -19124,6 +19812,14 @@
         },
         {
           "text": "Background",
+          "source": "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift"
+        },
+        {
+          "text": "On",
+          "source": "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift"
+        },
+        {
+          "text": "Off",
           "source": "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift"
         },
         {
@@ -19955,6 +20651,14 @@
       "conditions": "A sequence with available entries is required; current provider/source ownership is preserved. Loading failures expose retry instead of empty success. On mobile this shared panel is reached through PlayerTouchCardStrip, not the disabled shared transport overlay. Episodes needs an episode browser; Playlist needs an active sequence.",
       "controls": [
         {
+          "text": "Earlier episodes",
+          "source": "Sources/FeaturePlayback/PlayerSequencePanel.swift"
+        },
+        {
+          "text": "Later episodes",
+          "source": "Sources/FeaturePlayback/PlayerSequencePanel.swift"
+        },
+        {
           "text": "Loading episodes…",
           "source": "Sources/FeaturePlayback/PlayerSequencePanel.swift"
         },
@@ -20172,9 +20876,9 @@
       "platforms": [
         "Apple TV"
       ],
-      "navigation": "Choose Download subtitles… on Apple TV or Search & Download… in supported mobile subtitle options.",
+      "navigation": "Choose Download subtitles… from the Apple TV player's subtitle controls.",
       "experience": "Search eligible online subtitles, inspect the available results, and download a selected track.",
-      "conditions": "A configured server subtitle service and supported context are required; network shares use existing subtitles. Language/SDH preferences constrain automatic/search results without creating missing tracks.",
+      "conditions": "Apple TV uses this subtitle download panel; mobile Search & Download… is implemented by PlozziOSPlayerControlsOverlay instead. A configured server subtitle service and supported context are required; shares use existing subtitles. Language/SDH preferences constrain results. The Done button in this file belongs only to a DEBUG preview, not the production download panel.",
       "controls": [
         {
           "text": "Searching for subtitles…",
@@ -20286,6 +20990,22 @@
         {
           "text": "Position",
           "source": "Sources/FeaturePlayback/SubtitleStylePanel.swift"
+        },
+        {
+          "text": "Extra Line Position",
+          "source": "Sources/FeaturePlayback/SubtitleStylePanel.swift"
+        },
+        {
+          "text": "Above",
+          "source": "Sources/CoreModels/SubtitleStyle.swift"
+        },
+        {
+          "text": "Center",
+          "source": "Sources/CoreModels/SubtitleStyle.swift"
+        },
+        {
+          "text": "Below",
+          "source": "Sources/CoreModels/SubtitleStyle.swift"
         },
         {
           "text": "Horizontal Offset",
@@ -20421,6 +21141,14 @@
         },
         {
           "text": "Placement",
+          "source": "Sources/FeaturePlayback/SubtitleStylePanel.swift"
+        },
+        {
+          "text": "Above",
+          "source": "Sources/FeaturePlayback/SubtitleStylePanel.swift"
+        },
+        {
+          "text": "Below",
           "source": "Sources/FeaturePlayback/SubtitleStylePanel.swift"
         },
         {
@@ -20604,6 +21332,14 @@
       "experience": "Preview captions while adjusting their appearance; use supported preview controls and restore defaults deliberately.",
       "conditions": "All platforms. Live TV offers no dual-subtitle preview. System-caption matching and Plozz-only placement/dual choices remain distinct.",
       "controls": [
+        {
+          "text": "Customize subtitle style",
+          "source": "Sources/FeaturePlayback/SubtitleStyleSettingsView.swift"
+        },
+        {
+          "text": "Customize Live TV subtitles",
+          "source": "Sources/FeaturePlayback/SubtitleStyleSettingsView.swift"
+        },
         {
           "text": "Back",
           "source": "Sources/CoreUI/SettingsPageHeader.swift"
@@ -20979,7 +21715,7 @@
       ],
       "navigation": "Add a Plozz profile or choose Name & Avatar for an existing profile.",
       "experience": "Set name/avatar/color, choose available account photos, and save or cancel cosmetic changes.",
-      "conditions": "All platforms where embedded. Management mode controls deletion; cosmetics-only Kids access cannot change locks, Kids status or household restrictions. At least one profile must remain.",
+      "conditions": "All platforms where embedded. Management mode controls deletion; cosmetics-only Kids access cannot change locks, Kids status or household restrictions. At least one profile must remain. Apple TV editors with a live-change callback save existing-profile cosmetics immediately and show Revert All Changes/Done; explicit-save mode shows Cancel and Save for an existing profile or Create for a new one. Mobile uses Cancel and Save/Create in its toolbar. Neutral background is an emoji-avatar choice; the Color sheet is mobile. Save/Create is disabled for a blank name.",
       "controls": [
         {
           "text": "Discard changes?",
@@ -21026,7 +21762,27 @@
           "source": "Sources/FeatureProfiles/ProfileEditorView.swift"
         },
         {
+          "text": "Edit Profile",
+          "source": "Sources/FeatureProfiles/ProfileEditorView.swift"
+        },
+        {
+          "text": "Save",
+          "source": "Sources/FeatureProfiles/ProfileEditorView.swift"
+        },
+        {
+          "text": "Create",
+          "source": "Sources/FeatureProfiles/ProfileEditorView.swift"
+        },
+        {
           "text": "No color",
+          "source": "Sources/FeatureProfiles/ProfileEditorView.swift"
+        },
+        {
+          "text": "Neutral background",
+          "source": "Sources/FeatureProfiles/ProfileEditorView.swift"
+        },
+        {
+          "text": "Color",
           "source": "Sources/FeatureProfiles/ProfileEditorView.swift"
         },
         {
@@ -21342,6 +22098,10 @@
       "experience": "Select, add, or manage a profile from the household roster.",
       "conditions": "Apple TV profile picker. Locks, Plex authorization, automatic sign-in and parental controls determine access and visible actions.",
       "controls": [
+        {
+          "text": "Add Profile",
+          "source": "Sources/FeatureProfiles/ProfilePickerView.swift"
+        },
         {
           "text": "Edit",
           "source": "Sources/FeatureProfiles/ProfilePickerView.swift"
@@ -21921,6 +22681,10 @@
           "source": "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift"
         },
         {
+          "text": "Report a Problem",
+          "source": "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift"
+        },
+        {
           "text": "Scan to report\na bug",
           "source": "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift"
         },
@@ -21992,8 +22756,28 @@
       ],
       "navigation": "Choose a collection for a Home row or hero collection source.",
       "experience": "Select an authorized library collection, retry failures, or cancel selection.",
-      "conditions": "Collection-capable accessible libraries only; dynamic collection names are supplied content, not constant control labels.",
+      "conditions": "Collection-capable accessible libraries only; dynamic collection names are supplied content, not constant control labels. The multi-select hero picker is Choose collections and shows Selected collections/Clear selection only with existing choices. A single-selection callback uses Choose collection without that summary. Source precedes Collections; an unavailable source offers Done instead of inventing collection rows.",
       "controls": [
+        {
+          "text": "Choose collections",
+          "source": "Sources/FeatureSettings/HeroCollectionPickerView.swift"
+        },
+        {
+          "text": "Choose collection",
+          "source": "Sources/FeatureSettings/HeroCollectionPickerView.swift"
+        },
+        {
+          "text": "Selected collections",
+          "source": "Sources/FeatureSettings/HeroCollectionPickerView.swift"
+        },
+        {
+          "text": "Source",
+          "source": "Sources/FeatureSettings/HeroCollectionPickerView.swift"
+        },
+        {
+          "text": "Collections",
+          "source": "Sources/FeatureSettings/HeroCollectionPickerView.swift"
+        },
         {
           "text": "Clear selection",
           "source": "Sources/FeatureSettings/HeroCollectionPickerView.swift"
@@ -22095,7 +22879,7 @@
       ],
       "navigation": "Open Settings > Screens & Navigation > Home.",
       "experience": "Choose Layout on Apple TV or Hero on mobile, then Card labels, Rows and Filtering.",
-      "conditions": "All platforms; profile-specific. Row catalogue/loading errors expose retries. Custom/reorder state changes available buttons; collection rows require accessible source collections. Root order is Layout on Apple TV or Hero on mobile, then Card labels, Rows, Filtering. Row-specific editors have their own coverage record.",
+      "conditions": "All platforms; profile-specific. Row catalogue/loading errors expose retries. Custom/reorder state changes available buttons; collection rows require accessible source collections. Root order is Layout on Apple TV or Hero on mobile, then Card labels, Rows, Filtering. Card labels opens the Home-only editor: no Page picker. Default offers On/Off/Mixed, followed by Continue Watching and Libraries Overrides with Use default/On/Off. Apple TV cycles choices on selection; mobile uses a picker. The same Continue Watching override applies on Recommended. Row-specific editors have their own coverage record.",
       "controls": [
         {
           "text": "Home",
@@ -22124,6 +22908,38 @@
         {
           "text": "Card labels",
           "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Default",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "On",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Mixed",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Overrides",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Continue Watching",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Libraries",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Use default",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
         },
         {
           "text": "Rows",
@@ -22228,14 +23044,6 @@
         {
           "text": "Back",
           "source": "Sources/CoreUI/SettingsPageHeader.swift"
-        },
-        {
-          "text": "Page",
-          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
-        },
-        {
-          "text": "Overrides",
-          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
         }
       ],
       "documents": [
@@ -22252,6 +23060,7 @@
     "Sources/FeatureSettings/HomeSectionSettingsViews.swift": {
       "sources": [
         "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
+        "Sources/CoreModels/CardCaptionSettings.swift",
         "Sources/CoreModels/CollectionSection.swift",
         "Sources/CoreUI/ContinueWatchingPresentation.swift",
         "Sources/CoreUI/ContinueWatchingArtworkSwatch.swift",
@@ -22306,7 +23115,7 @@
       ],
       "navigation": "Select an editable Home/library row or its options from Home Rows settings.",
       "experience": "Choose row presets and Continue Watching layout, labels, progress, next-episode and tap/center-button behavior.",
-      "conditions": "Control names differ by platform; available row content depends on libraries/provider. Presentation does not discard progress or shorten the unbounded Continue Watching feed.",
+      "conditions": "Control names differ by platform; available row content depends on libraries/provider. Continue Watching's Labels control uses Use default/On/Off, never Mixed. It shares the Home/Recommended override, not separate settings for each row instance. Presentation does not discard progress or shorten the unbounded Continue Watching feed.",
       "controls": [
         {
           "text": "All live sources",
@@ -22314,6 +23123,34 @@
         },
         {
           "text": "All libraries",
+          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+        },
+        {
+          "text": "Playback details",
+          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+        },
+        {
+          "text": "Labels",
+          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+        },
+        {
+          "text": "Use default",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
+          "text": "On",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Center button action",
+          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+        },
+        {
+          "text": "When tapping an item",
           "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
         },
         {
@@ -22684,6 +23521,7 @@
     "Sources/FeatureSettings/LibraryPresentationSettingsView.swift": {
       "sources": [
         "Sources/FeatureSettings/LibraryPresentationSettingsView.swift",
+        "Sources/CoreModels/CardCaptionSettings.swift",
         "Sources/CoreModels/LibraryPresentationSettings.swift",
         "Sources/CoreModels/CollectionCoverLayout.swift",
         "Sources/CoreUI/CollectionCoverLayoutPicker.swift",
@@ -22722,8 +23560,8 @@
         "iPad"
       ],
       "navigation": "Open Settings > Screens & Navigation > Libraries.",
-      "experience": "Arrange library tabs and Recommended rows, edit collection covers, or restore navigation/row defaults.",
-      "conditions": "All platforms. Music and provider/library capabilities affect available tabs/rows; hiding everything yields a recoverable no-visible-rows state rather than a permission boundary.",
+      "experience": "Arrange library tabs and Recommended rows, edit collection covers, customize labels, or restore navigation/row defaults.",
+      "conditions": "All platforms. Music and provider/library capabilities affect available tabs/rows; hiding everything yields a recoverable no-visible-rows state rather than a permission boundary. Page appearance contains Recommended Page logo/text size on Apple TV only, then Customize labels on both platforms. Its Page picker offers Recommended, Browse, Collections, Playlists only. Recommended has Default with On/Off/Mixed and a Continue Watching override with Use default/On/Off; the other pages have Card labels with On/Off. Titles inside collections/playlists use Browse. Apple TV cycles row choices on selection; mobile uses a picker.",
       "controls": [
         {
           "text": "Libraries",
@@ -22742,6 +23580,62 @@
           "source": "Sources/FeatureSettings/LibraryPresentationSettingsView.swift"
         },
         {
+          "text": "Customize labels",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
+          "text": "Page",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Recommended",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Browse",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Collections",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Playlists",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Default",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Card labels",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "On",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Mixed",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Overrides",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Continue Watching",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Use default",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
           "text": "Try Again",
           "source": "Sources/FeatureSettings/LibraryPresentationSettingsView.swift"
         },
@@ -22751,6 +23645,14 @@
         },
         {
           "text": "Recommended Page Rows",
+          "source": "Sources/FeatureSettings/LibraryPresentationSettingsView.swift"
+        },
+        {
+          "text": "Continue Watching",
+          "source": "Sources/FeatureSettings/LibraryPresentationSettingsView.swift"
+        },
+        {
+          "text": "Recently Added",
           "source": "Sources/FeatureSettings/LibraryPresentationSettingsView.swift"
         },
         {
@@ -22830,18 +23732,6 @@
           "source": "Sources/CoreUI/SettingsPageHeader.swift"
         },
         {
-          "text": "Customize labels",
-          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
-        },
-        {
-          "text": "Page",
-          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
-        },
-        {
-          "text": "Overrides",
-          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
-        },
-        {
           "text": "Logo size",
           "source": "Sources/FeatureSettings/HeroLogoSizeControl.swift"
         },
@@ -22899,6 +23789,10 @@
       "experience": "Set preview/guide behavior, inspect source choices, manage channels, and change supported mobile network stopping.",
       "conditions": "All platforms with mobile-only Stop without Wi-Fi or Ethernet. Profile preferences differ from per-device parental source approval and network buffer. Low Data Mode independently pauses mobile Live TV.",
       "controls": [
+        {
+          "text": "Live TV",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
         {
           "text": "Guide & browsing",
           "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
@@ -23052,11 +23946,27 @@
       "conditions": "Apple TV household-wide settings. Provider credentials and returned metadata govern fields; disabled providers cannot supply missing ratings.",
       "controls": [
         {
+          "text": "Stored Fields",
+          "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
+        },
+        {
           "text": "Metadata Providers",
           "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
         },
         {
           "text": "Providers",
+          "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
+        },
+        {
+          "text": "Recommended",
+          "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
+        },
+        {
+          "text": "Custom",
+          "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
+        },
+        {
+          "text": "Disabled",
           "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
         },
         {
@@ -23073,6 +23983,14 @@
         },
         {
           "text": "TMDB v4 API Read Access Token",
+          "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
+        },
+        {
+          "text": "Save Key",
+          "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
+        },
+        {
+          "text": "Replace Key",
           "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
         },
         {
@@ -23157,6 +24075,10 @@
         },
         {
           "text": "Cache",
+          "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
+        },
+        {
+          "text": "Lookups",
           "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
         },
         {
@@ -23307,7 +24229,7 @@
       ],
       "navigation": "Open Settings > Screens & Navigation > App navigation > Hide or Reorder Navigation.",
       "experience": "Show, hide and reorder eligible main shortcuts/libraries, or reset navigation.",
-      "conditions": "Per profile on this device. Music remains TV-only, All Libraries needs multiple eligible video libraries. Hidden shortcuts do not appear in mobile More; mobile defaults show Home, Downloads and Search.",
+      "conditions": "Per profile on this device. Music remains TV-only, All Libraries needs multiple eligible video libraries. Hidden shortcuts do not appear in mobile More; mobile defaults show Home, Downloads and Search. This editor arranges destinations; the navigation-style picker is on its parent App navigation page, not here. Row order is saved by the viewer, with hidden rows below Hidden. The last visible destination cannot be hidden; sidebars keep Settings visible. Mobile supports dragging; both platforms offer long-press row actions.",
       "controls": [
         {
           "text": "Home",
@@ -23342,16 +24264,12 @@
           "source": "Sources/CoreModels/AllLibrariesBrowse.swift"
         },
         {
-          "text": "Pinned Sidebar",
-          "source": "Sources/CoreModels/NavigationStyle.swift"
+          "text": "Hidden",
+          "source": "Sources/FeatureSettings/NavigationLibrariesDetailView.swift"
         },
         {
-          "text": "Sidebar",
-          "source": "Sources/CoreModels/NavigationStyle.swift"
-        },
-        {
-          "text": "Top Bar",
-          "source": "Sources/CoreModels/NavigationStyle.swift"
+          "text": "Reset Navigation",
+          "source": "Sources/FeatureSettings/NavigationLibrariesDetailView.swift"
         },
         {
           "text": "Hide",
@@ -23656,6 +24574,9 @@
     "Sources/FeatureSettings/PreferenceDetailViews.swift": {
       "sources": [
         "Sources/FeatureSettings/PreferenceDetailViews.swift",
+        "Sources/CoreModels/CardCaptionSettings.swift",
+        "Sources/CoreModels/EpisodeCountBadgeStyle.swift",
+        "Sources/CoreModels/WatchIndicatorColor.swift",
         "Sources/CoreModels/ThemeSettings.swift",
         "Sources/CoreModels/CardStyle.swift",
         "Sources/CoreModels/CardFocusStyle.swift",
@@ -23744,7 +24665,7 @@
       ],
       "navigation": "Choose Playback, Subtitles, Appearance, or Screens & Navigation in Apple TV Settings.",
       "experience": "Navigate the profile settings workspaces and their nested controls in visible section order.",
-      "conditions": "Apple TV uses workspace-specific order: Appearance Theme, Cards, Artwork, Circadian Mode; Screens & Navigation App navigation, All screens, Home, Libraries, Movie & show details, Music player. Provider management shortcuts are hidden without permission; engine/platform conditions gate playback and subtitle options. Appearance workspace order is Theme, Cards (including Display Size), Artwork, Circadian Mode. Screens & Navigation order is App navigation, All screens, Home, Libraries, Movie & show details, Music player; card, detail and playback destinations have separate nested controls.",
+      "conditions": "Apple TV workspace order: Appearance has Theme, Cards, Artwork, Circadian Mode; Screens & Navigation has App navigation, All screens, Home, Libraries, Movie & show details, Music player. Provider management shortcuts are hidden without permission; engine/platform conditions gate playback and subtitle options. Cards contains Labels, Watch indicators, Focus, Style, Display Size. Presets replace label overrides; the compact Custom readout is iOS-only. Customize labels from Cards offers all nine Page choices; from Movie & show details it contains Episodes, Related titles and Extras without a Page picker. Home/Recommended use Default with On/Off/Mixed, followed by Overrides; Continue Watching and Home's Libraries use Use default/On/Off. Other pages use On/Off only. Apple TV cycles these row choices on selection; mobile presents a picker. The color picker is hidden with Hidden watch indicators; Episode count style appears only with episode counts enabled.",
       "controls": [
         {
           "text": "Appearance",
@@ -24095,6 +25016,14 @@
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
+          "text": "Preferred audio language",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Advanced",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
           "text": "Remember audio language per series",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
@@ -24271,28 +25200,16 @@
           "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
         },
         {
-          "text": "Watch indicators",
-          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+          "text": "App default",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
         },
         {
-          "text": "Focus",
-          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+          "text": "Show labels everywhere",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
         },
         {
-          "text": "Style",
-          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
-        },
-        {
-          "text": "Show unwatched episode count",
-          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
-        },
-        {
-          "text": "Show progress bars",
-          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
-        },
-        {
-          "text": "Custom",
-          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+          "text": "Hide labels everywhere",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
         },
         {
           "text": "Customize labels",
@@ -24303,8 +25220,156 @@
           "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
         },
         {
+          "text": "Home",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Recommended",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Browse",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Collections",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Playlists",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Search",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Watchlist",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Movie & show details",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "People",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Default",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Card labels",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Episodes",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Related titles",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Extras",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "On",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Mixed",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
           "text": "Overrides",
           "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Continue Watching",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Libraries",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Use default",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
+          "text": "Watch indicators",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
+          "text": "Color",
+          "source": "Sources/FeatureSettings/WatchIndicatorColorPicker.swift"
+        },
+        {
+          "text": "White",
+          "source": "Sources/CoreModels/WatchIndicatorColor.swift"
+        },
+        {
+          "text": "Blue",
+          "source": "Sources/CoreModels/WatchIndicatorColor.swift"
+        },
+        {
+          "text": "Green",
+          "source": "Sources/CoreModels/WatchIndicatorColor.swift"
+        },
+        {
+          "text": "Yellow",
+          "source": "Sources/CoreModels/WatchIndicatorColor.swift"
+        },
+        {
+          "text": "Orange",
+          "source": "Sources/CoreModels/WatchIndicatorColor.swift"
+        },
+        {
+          "text": "Red",
+          "source": "Sources/CoreModels/WatchIndicatorColor.swift"
+        },
+        {
+          "text": "Pink",
+          "source": "Sources/CoreModels/WatchIndicatorColor.swift"
+        },
+        {
+          "text": "Purple",
+          "source": "Sources/CoreModels/WatchIndicatorColor.swift"
+        },
+        {
+          "text": "Show unwatched episode count",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
+          "text": "Episode count style",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
+          "text": "Attached",
+          "source": "Sources/CoreModels/EpisodeCountBadgeStyle.swift"
+        },
+        {
+          "text": "Floating",
+          "source": "Sources/CoreModels/EpisodeCountBadgeStyle.swift"
+        },
+        {
+          "text": "Show progress bars",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
+          "text": "Focus",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
+          "text": "Style",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
         },
         {
           "text": "Watch indicator preview",
@@ -25036,8 +26101,28 @@
       ],
       "navigation": "Choose a shared connection under Apple TV Settings > Servers.",
       "experience": "Inspect authorized libraries and connection addresses, rescan a share, reauthenticate or remove the account.",
-      "conditions": "Provider-specific. Removing shared sign-in affects household profiles; Remove Everywhere also removes its synced connection. Library visibility is managed separately per profile.",
+      "conditions": "Provider-specific. Removing shared sign-in affects household profiles; Remove Everywhere also removes its synced connection. Library visibility is managed separately per profile. NFS has no login: its panel says Connection and removal confirmation says Remove. Other accounts use Signed in as and Sign Out; the last account offers Sign Out & Remove Server. With sync-enabled removal, the confirmation instead offers local removal or Remove Everywhere. Names in confirmation titles come from the server/account.",
       "controls": [
+        {
+          "text": "Connection",
+          "source": "Sources/FeatureSettings/ServerDetailView.swift"
+        },
+        {
+          "text": "Signed in as",
+          "source": "Sources/FeatureSettings/ServerDetailView.swift"
+        },
+        {
+          "text": "Sign Out",
+          "source": "Sources/FeatureSettings/ServerDetailView.swift"
+        },
+        {
+          "text": "Sign Out & Remove Server",
+          "source": "Sources/FeatureSettings/ServerDetailView.swift"
+        },
+        {
+          "text": "Remove",
+          "source": "Sources/FeatureSettings/ServerDetailView.swift"
+        },
         {
           "text": "Connection addresses",
           "source": "Sources/FeatureSettings/ServerDetailView.swift"
@@ -25169,6 +26254,14 @@
       "controls": [
         {
           "text": "Servers",
+          "source": "Sources/FeatureSettings/ServersAndLibrariesDetailView.swift"
+        },
+        {
+          "text": "Sign In to a Server",
+          "source": "Sources/FeatureSettings/ServersAndLibrariesDetailView.swift"
+        },
+        {
+          "text": "Add Server",
           "source": "Sources/FeatureSettings/ServersAndLibrariesDetailView.swift"
         }
       ],
@@ -25373,6 +26466,10 @@
       "experience": "Change the active profile preferences, manage permitted shared services, or open Help & Diagnostics.",
       "conditions": "Apple TV only. Profile categories are Playback, Subtitles, Live TV, Libraries, Appearance, Screens & Navigation, Trackers, Language. Everyone is absent for Kids; protected Libraries/Manage Profile need parental unlock. iCloud/metadata destinations require their wired dependencies. Seven version activations expose internal developer controls; these are not ordinary support procedures. On Kids profiles, Name & Avatar replaces the ordinary Libraries category; protected Libraries and Manage Profile move into Parental Controls.",
       "controls": [
+        {
+          "text": "Device & Build",
+          "source": "Sources/FeatureSettings/SettingsView.swift"
+        },
         {
           "text": "Playback",
           "source": "Sources/CoreUI/ProfileSettingsCategory.swift"

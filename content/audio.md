@@ -1,24 +1,22 @@
 # Audio tracks and output
 
-Choose tracks and output compatibility separately. See [Plozz formats](https://plozz.app/formats) for format support.
+Choose your language, improve dialogue where supported, and match audio to your equipment.
 
 ## Select a language or track
 
-Reveal controls and open **Audio**; on iPhone/iPad, use playback options.
+Open **Audio** in the player controls. In portrait on iPhone/iPad, use the ellipsis **Playback options > Audio** menu.
 
 Set **Preferred audio language** in **Settings > Playback > Audio** on Apple TV, or Playback's **Tracks** section on iPhone/iPad. Choose original language, device language, or a specific language, with separate movie, TV, and anime rules.
 
-**Remember audio language per series** follows matched series across servers but remembers language, not an exact mix. Select same-language commentary or surround tracks in the player.
+**Remember audio language per series** reuses your language for matching shows across servers, not an exact mix. Choose commentary or a different surround track in the player.
 
-For wrong languages, check memory and preferences; neither supplies missing tracks.
-
-[Other versions](/playback/) may have different tracks.
+For the wrong language, check remembered choices and preferences. Neither adds missing tracks; [another version](/playback/) may have them.
 
 ## Choose output compatibility
 
 In **Settings > Playback**, find **Prefer lossless audio** under **Audio**. It defaults on. Turn it off to request compressed surround-compatible output, particularly with regular HDMI ARC.
 
-This configures Plozzigen video and Live TV playback, not Apple's native engine or another player app. Reopen the video or retune the channel after changing it. Actual output still depends on the source and connected equipment.
+This affects Plozzigen video and Live TV playback, not Apple's native player or another app. Reopen the video or retune the channel afterward. Output still depends on the source and equipment.
 
 The choice is shared by Plozz profiles on this device; it does not sync or transfer.
 
@@ -33,7 +31,7 @@ If changes fail, use Apple TV Settings.
 
 ## Correct timing
 
-There is no adjustable audio delay. [Subtitle delay](/subtitles/#set-automatic-choices) is separate.
+Plozz has no adjustable audio delay. [Subtitle delay](/subtitles/#set-automatic-choices) changes captions only.
 
 For lip-sync problems, compare tracks, titles, and output routes. For dropouts, use [Troubleshooting](/troubleshooting/).
 
@@ -47,6 +45,6 @@ On all three platforms, choose **Theme music** in **Settings > Screens & Navigat
 
 Set **Theme music volume** (0%-100%). Changes can preview automatically; use **Play preview** or **Stop preview**. Leaving stops it. Without a title theme, preview uses a generated sample, not your library's music.
 
-Available themes fade in on details, fade out when leaving, pause outside Plozz, and yield to trailers/full playback. **Off** uses static artwork without music/trailers. Home trailers and video tracks are independent.
+Available themes fade in on details and stop when you leave or start playback. **Off** uses static artwork without music or trailers. Home trailers and video tracks are independent.
 
 On iPhone/iPad, use the detail page's speaker button (**Mute theme music**/**Unmute theme music**) while its theme plays. Muting lasts that detail session; it does not change saved volume or Settings previews.

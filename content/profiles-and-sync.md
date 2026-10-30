@@ -34,7 +34,7 @@ Downloads, automatic sign-in, [Video buffer](/streaming-quality/), [Live TV buff
 
 ## Sync Live TV deliberately
 
-Live TV follows iCloud Sync for the same Plozz profile: source addresses, channel settings, guide mappings, and library schedules can sync. Playlist/guide addresses and supported imported source copies use encrypted iCloud storage. A library-channel recipe needs its catalogue snapshot to reproduce the schedule.
+Live TV follows iCloud Sync for the same Plozz profile: source addresses, channel settings, guide mappings, and library schedules can sync. Playlist/guide addresses and supported imported source copies use encrypted iCloud storage. Library channels also need their catalogue to finish syncing before devices can reproduce the same schedule.
 
 The **Playlist file** option in IPTV account sign-in is different: those account-imported M3U files stay on the importing device. Use a playlist URL or import again elsewhere.
 

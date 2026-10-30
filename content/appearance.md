@@ -4,19 +4,15 @@ Open **Settings > Appearance** for the profile you want to customize. Make cards
 
 ## Make cards easier to read
 
-Choose a theme and gradient backgrounds. **Cards** controls style and labels; **Display Size** changes card size, columns, and spacing, not video resolution.
+In **Theme**, choose colors and gradient backgrounds. Set **Liquid Glass** to **Off** for solid backgrounds, or follow system Reduce Transparency.
 
-Apple TV's focus appearance emphasizes the selected card. Try larger cards and clearer labels before hiding content.
-
-In **Theme**, set **Liquid Glass** to Off for solid backgrounds, or follow system Reduce Transparency.
-
-Under **Labels**, choose **App default**, **Show labels everywhere**, or **Hide labels everywhere**. Selecting a preset replaces per-view label overrides.
+Then open **Cards > Labels**. Choose **App default**, **Show labels everywhere**, or **Hide labels everywhere**. Selecting a preset replaces your individual label choices.
 
 Open **Customize labels**, then choose **Page**. Home and Recommended have a **Default** plus row **Overrides**. **Mixed** hides labels on series artwork and in Apple TV's Showcase, showing them elsewhere.
 
 Continue Watching's **Use default** follows its Home/Recommended context; **On** or **Off** overrides both. Home's **Libraries** override controls library-card labels.
 
-Titles inside collections/playlists use **Browse**, not [cover labels](/customize-libraries/#choose-collection-cover-shapes). **Card labels** under **Screens & Navigation > Home**, **Libraries**, and **Movie & show details** edit these same preferences.
+Titles inside collections/playlists use **Browse**, not [cover labels](/customize-libraries/#choose-collection-cover-shapes). Under **Screens & Navigation**, **Home > Card labels** and **Customize labels** in **Libraries** or **Movie & show details** edit these same preferences.
 
 ## Read watch indicators
 
@@ -24,11 +20,7 @@ Under **Cards > Watch indicators**, **Unwatched** marks unstarted titles with a 
 
 **Show unwatched episode count**, its badge style, and **Show progress bars** are independent. Hiding bars does not clear saved positions or stop history updates. These choices follow your profile through [sync](/profiles-and-sync/).
 
-## Resize title logos
-
-Under **Settings > Screens & Navigation**, adjust **Logo size** and **Text size** in **Home > Layout** (mobile **Home > Hero**) and **Movie & show details**. Apple TV remembers separate Showcase/Fullscreen Hero sizes; [library Recommended headers](/customize-libraries/#adjust-the-apple-tv-library-header) are independent too.
-
-Text size scales titles, descriptions, and metadata, not cards/menus; Apple TV details also resize episode titles/synopses. The center is default; constrained headers can fit smaller.
+Farther down **Cards**, Apple TV's focus appearance emphasizes the selected card. **Display Size** changes card size, columns, and spacing, not video resolution. Try larger cards and clearer labels before hiding content.
 
 ## Choose artwork
 
@@ -41,6 +33,12 @@ In **Artwork**, start with a preset:
 Home's Watchlist row and Watchlist page have separate artwork scopes. Downloads keep saved images.
 
 Shared [Metadata Providers](/metadata-and-ratings/) are separate; preferences cannot create missing artwork.
+
+## Resize title logos
+
+Under **Settings > Screens & Navigation**, adjust **Logo size** and **Text size** in **Home > Layout** (mobile **Home > Hero**) and **Movie & show details**. Apple TV remembers separate Showcase/Fullscreen Hero sizes; [library Recommended headers](/customize-libraries/#adjust-the-apple-tv-library-header) are independent too.
+
+Text size scales titles, descriptions, and metadata, not cards/menus; Apple TV details also resize episode titles/synopses. The center is default; constrained headers can fit smaller.
 
 ## Change language or nighttime appearance
 
