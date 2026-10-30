@@ -32,7 +32,7 @@ Under **Settings > Screens & Navigation > Home**, open **Layout** on Apple TV, o
 
 For the carousel, **Hero content sources** selects Continue Watching, recently added titles, Watchlist, libraries, collections, or Discovery. **Show hero** hides the carousel, not Showcase.
 
-Choose advancement, ratings, and muted [server-trailer previews](/library/#watch-a-trailer). Enable Discovery, then choose **Discovery providers**. Seerr enables requests, not Discovery; Kids profiles exclude Discovery.
+Choose advancement, ratings, and muted [server-trailer previews](/library/#watch-a-trailer). Enable Discovery, then choose **Discovery providers**. Seerr is needed only for requests, not recommendations. A new profile's carousel follows the Seerr connection until you explicitly toggle Discovery; Kids profiles exclude Discovery.
 
 For Continue Watching cards/actions, see [Spoiler protection](/spoiler-protection/#change-continue-watching-cards).
 
@@ -59,7 +59,9 @@ Leave Settings to see a newly chosen layout. All three offer enabled library sho
 
 Under **Hide or Reorder Navigation**, hold to hide/show/move; mobile uses dragging to reorder. Unused Home, Search, or Watchlist shortcuts can hide automatically; **Show** retains one. **Reset Navigation** restores shortcut order/visibility, not library tabs or access.
 
-Settings remains visible in Apple TV's sidebars. Top Bar lets you move or hide it; the profile picker still offers **Settings**. On iPhone/iPad, use the profile button if Settings has no tab; compact layouts put excess destinations under **More**.
+Settings remains visible in Apple TV's sidebars. Top Bar lets you move or hide it; the profile picker still offers **Settings**.
+
+On iPhone/iPad, Home, Downloads, and Search are the starting shortcuts, subject to content availability. Other destinations, including individual libraries and eligible **All Libraries**, start under **Hidden** in the editor: hold and choose **Show**. Compact layouts put excess destinations under **More**; More does not reveal shortcuts still hidden. Use the profile button if Settings has no tab.
 
 The layout and shortcuts stay local to this profile/device, unlike transferable Home preferences.
 

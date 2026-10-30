@@ -36,7 +36,7 @@ Open **Settings > Screens & Navigation > Home > Rows > Continue Watching**:
 - **Thumbnail:** episode stills or movie artwork; episode images follow spoiler masking.
 - **Poster:** upright movie or show posters, never episode thumbnails.
 
-**Playback details** is separate: **Detailed** shows the play icon, progress, and playback information; **Progress only** keeps the progress bar without playback text. **Labels** independently controls text below the artwork: **Follow Appearance**, **On**, or **Off**. Hiding labels does not hide detailed playback information.
+**Playback details** is separate: **Detailed** shows the play icon, progress, and playback information; **Progress only** omits playback text. Bars follow [Show progress bars](/appearance/#read-watch-indicators). **Labels** controls text below artwork: **Use default** follows Home/Recommended; **On** or **Off** overrides both. Hiding labels does not hide detailed playback information.
 
 All three choices show artwork. **Continue Watching settings** remains available under Rows when the row is absent; use **Add row** to restore it. These profile presentation choices do not change watched state or row membership.
 

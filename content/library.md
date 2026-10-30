@@ -6,7 +6,7 @@ With [Seerr](/media-requests/), **Not in Your Library** results are requestable,
 
 ## Browse a library
 
-1. Open a library, or Apple TV's [All Libraries](/combined-libraries/).
+1. Open a library, or [All Libraries](/combined-libraries/).
 2. Use **Browse** for the catalogue. [Customize library pages](/customize-libraries/) to arrange tabs and Recommended rows.
 3. Filter or sort where supported. **Genre** and **Year** narrow results together with the selected quick filter; **Clear Filters** resets all three.
 4. Open a show, choose its season, then select an episode. Collections and playlists appear when supplied by the source.

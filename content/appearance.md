@@ -4,25 +4,31 @@ Open **Settings > Appearance** for the profile you want to customize. Presentati
 
 ## Make cards easier to read
 
-Choose a theme and gradient backgrounds. In **Cards**, adjust style, labels, watched indicators, and unwatched-episode counts. **Display Size** changes card size, columns, and spacing, not video resolution.
+Choose a theme and gradient backgrounds. **Cards** controls style and labels; **Display Size** changes card size, columns, and spacing, not video resolution.
 
-On Apple TV, focus appearance emphasizes the selected card. Try larger cards and clearer labels before hiding content.
+Apple TV's focus appearance emphasizes the selected card. Try larger cards and clearer labels before hiding content.
 
-In **Theme**, set **Liquid Glass** to Off for solid backgrounds, or follow the system's Reduce Transparency preference. This is separate from card size.
+In **Theme**, set **Liquid Glass** to Off for solid backgrounds, or follow system Reduce Transparency.
 
 Under **Labels**, choose **App default**, **Show labels everywhere**, or **Hide labels everywhere**. Selecting a preset replaces per-view label overrides.
 
-Use **Customize by view** for exceptions. **Mixed**, offered for Home rows and Recommended, hides labels in Showcase and on series artwork but shows them elsewhere.
+Open **Customize labels**, then choose **Page**. Home and Recommended have a **Default** plus row **Overrides**. **Mixed** hides labels on series artwork and in Apple TV's Showcase, showing them elsewhere.
 
-Continue Watching's [Home editor](/spoiler-protection/#change-continue-watching-cards) has separate **Labels** controls: **Follow Appearance** follows its Home rows or Recommended context; **On** or **Off** overrides labels across artwork styles.
+Continue Watching's **Use default** follows its Home/Recommended context; **On** or **Off** overrides both. Home's **Libraries** override controls library-card labels.
 
-A [collection cover](/customize-libraries/#choose-collection-cover-shapes) and its contents are separate: titles inside collections/playlists use **Browse**. Contextual **Card labels** under **Screens & Navigation > Home**, **Libraries**, and **Movie & show details** edit these same preferences.
+Titles inside collections/playlists use **Browse**, not [cover labels](/customize-libraries/#choose-collection-cover-shapes). **Card labels** under **Screens & Navigation > Home**, **Libraries**, and **Movie & show details** edit these same preferences.
+
+## Read watch indicators
+
+Under **Cards > Watch indicators**, **Unwatched** marks unstarted titles with a corner flag; **Watched** marks completed titles with a check. **Hidden** removes those marks, not episode counts or progress.
+
+**Show unwatched episode count**, its badge style, and **Show progress bars** are independent. Hiding bars does not clear saved positions or stop history updates. These choices follow your profile through [sync](/profiles-and-sync/).
 
 ## Resize title logos
 
 Under **Settings > Screens & Navigation**, adjust **Logo size** and **Text size** in **Home > Layout** (mobile **Home > Hero**) and **Movie & show details**. Apple TV remembers separate Showcase/Fullscreen Hero sizes; [library Recommended headers](/customize-libraries/#adjust-the-apple-tv-library-header) are independent too.
 
-Text size scales title text, descriptions, and metadata, not cards or menus. On Apple TV, detail sizing also changes episode titles/synopses. The center position is the default; constrained headers may fit smaller without changing your saved choice.
+Text size scales titles, descriptions, and metadata, not cards/menus; Apple TV details also resize episode titles/synopses. The center is default; constrained headers can fit smaller.
 
 ## Choose artwork
 
@@ -32,14 +38,14 @@ In **Artwork**, start with a preset:
 - **Prefer my library's artwork:** use library images first, with online fallback when missing.
 - **Prefer artwork from metadata providers:** use online images first, falling back to the library. Extra lookups can make browsing slower.
 
-Customize views only when needed. Home's Watchlist row and Watchlist page have different artwork scopes. Downloads keep the images chosen when saved.
+Home's Watchlist row and Watchlist page have separate artwork scopes. Downloads keep saved images.
 
-These choices differ from shared [Metadata Providers](/metadata-and-ratings/). Preferences cannot create missing artwork.
+Shared [Metadata Providers](/metadata-and-ratings/) are separate; preferences cannot create missing artwork.
 
 ## Change language or nighttime appearance
 
 **Settings > Language** changes interface language, separately from [audio](/audio/) and [subtitle language](/subtitles/).
 
-**System** follows the device's language choices. Changing Plozz's language does not translate server-supplied titles or descriptions; dates and numbers still follow the device's region. System-drawn player controls and permission prompts keep the device's language.
+**System** follows device languages. Server titles/descriptions are not translated; dates/numbers follow device region. System-drawn controls and permission prompts retain device language.
 
-Use [Spoiler protection](/spoiler-protection/) for episode information, [Circadian Mode](/circadian-mode/) for scheduled dimming, or [Screens & Navigation](/home-and-navigation/) for Home layouts and shortcuts.
+See [Spoiler protection](/spoiler-protection/), [Circadian Mode](/circadian-mode/), and [Home/navigation](/home-and-navigation/).

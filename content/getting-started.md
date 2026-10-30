@@ -21,7 +21,7 @@ While libraries load, **Choose later** continues setup; return to **Settings > L
 
 Select your profile before changing **Settings**. [Customize Home and navigation](/home-and-navigation/) to choose rows and shortcuts, or adjust [cards, artwork, and language](/appearance/).
 
-On Apple TV, use [automatic profile sign-in](/apple-tv-profiles/) for each system user or [browse libraries together](/combined-libraries/).
+On Apple TV, set up [automatic profile sign-in](/apple-tv-profiles/) for each system user. On all three platforms, [browse libraries together](/combined-libraries/).
 
 Use [Spoiler protection](/spoiler-protection/) to hide unwatched episode information and [Circadian Mode](/circadian-mode/) for scheduled dimming. For children, configure [parental controls](/parental-controls/); hiding a row is not access control.
 

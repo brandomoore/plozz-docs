@@ -7,7 +7,7 @@ Download movies and episodes on iPhone/iPad, not Apple TV.
 1. On movie/episode details, select the server/version if offered, then choose download.
 2. If prompted, choose **Download Original** or a smaller copy.
 3. Open **Downloads** and wait for completion, not preparing, downloading, or **Finishing**.
-4. Open it from Downloads to watch.
+4. Play it from Downloads.
 
 For a show, open **Manage Seasons**, then choose **Download All Available Episodes**, a season, or an episode. Only available library files can download.
 
@@ -35,7 +35,7 @@ Under **Notifications**, set completion/failure switches and allow system notifi
 
 ## Pause, resume, or remove
 
-Use a download’s trailing menu for **Pause**, **Resume**, or **Remove**. The Downloads screen also offers Pause All and Resume All.
+Use a movie/episode's menu for **Pause**, **Resume**, or **Remove**. A show's menu offers **Pause Show**/**Resume Show**; **Remove** deletes its downloaded episodes. Downloads also offers Pause All/Resume All.
 
 Removal deletes local copies, not server originals. Check **Storage** in Download Settings for use and available space before large batches.
 
@@ -44,4 +44,4 @@ Removal deletes local copies, not server originals. Check **Storage** in Downloa
 
 Eligible HTTP transfers can continue in background; in-process/share transfers need Plozz active unless iOS grants execution. Profile switching pauses transfers; return to resume.
 
-On iOS/iPadOS 26 or later, downloads can request continued processing with a Live Activity; the system can decline. Cancellation or expiry pauses its downloads without deleting partial files. Completion still requires offline validation.
+On iOS/iPadOS 26 or later, continued processing with a Live Activity is not guaranteed. Cancellation/expiry pauses work, preserving partial files. Completion still needs offline validation.

@@ -94,14 +94,17 @@
       "Sources/TransportNFS/NFSWireTypes.swift",
       "Sources/FeatureShareOnboarding/UnifiedAddShareModel.swift",
       "Sources/MediaTransportWebDAV/WebDAVMediaTransport.swift",
+      "Sources/MediaTransportHTTP/RangeProbe.swift",
+      "Sources/MediaTransportHTTP/WebDAVClient.swift",
+      "Sources/MediaTransportWebDAV/WebDAVByteSource.swift",
       "Sources/MediaTransportSFTP/SFTPMediaTransport.swift",
       "Sources/MediaTransportFTP/FTPMediaTransport.swift"
     ],
     "watch": [
       "Sources/FeatureShareOnboarding/",
       "Sources/ProviderShare/",
-      "Sources/AppShell/UnifiedAddShareView.swift",
-      "Sources/AppShelliOS/PlozziOSUnifiedAddShareView.swift",
+      "Sources/MediaTransport",
+      "Sources/TransportNFS/",
       "Sources/CoreModels/MediaShareLibraryConfiguration.swift",
       "Sources/FeatureSettings/ServerDetailView.swift"
     ]
@@ -228,10 +231,10 @@
   },
   {
     "slug": "combined-libraries",
-    "platforms": ["Apple TV"],
+    "platforms": ["Apple TV", "iPhone", "iPad"],
     "title": "Browse libraries together",
-    "seoTitle": "Browse All Libraries and jump by letter in Plozz on Apple TV",
-    "description": "Browse video libraries from several servers together, choose a server copy, use Apple TV letter navigation, and understand mobile differences.",
+    "seoTitle": "Browse All Libraries in Plozz on Apple TV, iPhone, and iPad",
+    "description": "Show All Libraries and library shortcuts, browse several servers together, choose a copy, and use Apple TV's letter rail with its loading limits.",
     "section": "Library",
     "kind": "guide",
     "file": "combined-libraries.md",
@@ -241,12 +244,15 @@
       "Sources/AppShell/MainTabViewSupport.swift",
       "Sources/AppShell/MainTabView.swift",
       "Sources/AppShell/HomeTab.swift",
-      "Sources/FeatureHome/AggregatedLibraryProvider.swift",
+      "Sources/FeatureHomeCore/AggregatedLibraryProvider.swift",
+      "Sources/FeatureHomeCore/AllLibrariesProvider.swift",
       "Sources/FeatureHome/LibraryBrowseView.swift",
       "Sources/FeatureHomeCore/LibraryBrowseViewModel.swift",
       "Sources/FeatureHomeCore/LibraryAlphabetState.swift",
       "Sources/CoreUI/LibraryAlphabetMenu.swift",
       "Sources/AppShelliOS/PlozziOSLibraryView.swift",
+      "Sources/AppShelliOS/PlozziOSRootView.swift",
+      "Sources/AppShelliOS/PlozziOSAllLibrariesDestinationView.swift",
       "Sources/FeatureHome/DetailHeroView.swift",
       "Sources/FeatureSettings/NavigationLibrariesDetailView.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift"
@@ -254,10 +260,10 @@
     "watch": [
       "Sources/CoreModels/Navigation",
       "Sources/AppShell/MainTabView",
-      "Sources/FeatureHome/AggregatedLibrary",
+      "Sources/FeatureHomeCore/AggregatedLibrary",
       "Sources/FeatureHome/Library",
-      "Sources/FeatureHomeCore/Library",
-      "Sources/AppShelliOS/PlozziOSLibrary"
+      "Sources/FeatureHomeCore/AllLibrariesProvider.swift",
+      "Sources/AppShelliOS/PlozziOSAllLibraries"
     ]
   },
   {
@@ -323,16 +329,16 @@
       "Sources/FeaturePlayback/PlayerChapterPanel.swift",
       "Sources/FeaturePlayback/PlaybackOptionsPane.swift",
       "Sources/FeaturePlayback/PlayerViewModel.swift",
-      "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift",
+      "Sources/AppShell/MainTabViewSupport.swift",
       "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
-      "Sources/ProviderPlex/PlexProvider.swift",
-      "Sources/ProviderJellyfin/JellyfinProvider.swift",
+      "Sources/CoreUI/PlaybackResumePrompt.swift",
+      "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
       "Sources/FeatureSettings/SkipMarkerSettingsControl.swift"
     ],
     "watch": [
       "Sources/FeaturePlayback/Player",
       "Sources/FeatureHomeCore/PlaybackVersionChoice",
-      "Sources/CoreModels/MediaChapter.swift",
+      "Sources/CoreUI/PlaybackResumePrompt.swift",
       "Sources/AppShelliOS/PlozziOSPlayer",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/CoreModels/Playback"
@@ -390,7 +396,7 @@
       "Sources/AppShelliOS/PlozziOSStreamingQuality.swift",
       "Sources/AppRuntime/ExternalPlaybackRuntime.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-      "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
+      "Sources/AppShelliOS/PlozziOSPlayerView.swift",
       "Sources/CoreModels/StreamingQuality.swift",
       "Sources/CoreModels/StreamingQualitySupport.swift",
       "Sources/ProviderJellyfin/JellyfinStreamingQuality.swift",
@@ -404,7 +410,7 @@
       "Sources/FeaturePlayback/PlayerViewModel.swift",
       "Sources/FeaturePlayback/StreamingPlaybackFeedback.swift",
       "Sources/AppShelliOS/PlozziOSPlaybackEngineComposition.swift",
-      "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift",
+      "Sources/ProviderJellyfin/JellyfinProvider.swift",
       "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
       "Sources/FeaturePlayback/CurrentStreamDetailsSection.swift"
     ],
@@ -613,9 +619,10 @@
   },
   {
     "slug": "appearance",
+    "platforms": ["Apple TV", "iPhone", "iPad"],
     "title": "Appearance and language",
     "seoTitle": "Change Plozz themes, cards, artwork, and interface language",
-    "description": "Adjust cards, labels, title logos and text size, choose artwork sources, customize individual views, and separate app language from media languages.",
+    "description": "Customize card labels, watch marks, episode counts and progress bars, resize headers, choose artwork, and keep app language separate from media languages.",
     "section": "Personalize",
     "kind": "guide",
     "file": "appearance.md",
@@ -624,30 +631,30 @@
       "Sources/FeatureSettings/CardAppearanceControls.swift",
       "Sources/FeatureSettings/ArtworkSettingsControls.swift",
       "Sources/FeatureSettings/AppLanguagePicker.swift",
-      "Sources/CoreModels/AppLanguage.swift",
       "Sources/CoreUI/AppLanguageScope.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/CoreModels/ArtworkSettings.swift",
       "Sources/CoreModels/CardCaptionSettings.swift",
-      "Sources/CoreUI/EpisodeColumnCard.swift",
       "Sources/CoreModels/TransparencyPreferenceStore.swift",
       "Sources/FeatureHome/FocusHeroHomeView.swift",
-      "Sources/FeatureSettings/HomeRowsSettingsView.swift",
+      "Sources/FeatureSettings/CardCaptionCustomizationContent.swift",
       "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
       "Sources/FeatureSettings/HeroSettingsControls.swift",
       "Sources/FeatureSettings/HeroLogoSizeControl.swift",
-      "Sources/CoreModels/HeroSettings.swift",
-      "Sources/CoreModels/DetailPageSettings.swift",
+      "Sources/CoreModels/WatchStatusIndicator.swift",
+      "Sources/CoreModels/WatchStatusIndicatorSettingsStore.swift",
+      "Sources/CoreUI/MediaCardPlaybackIndicators.swift",
+      "Sources/CoreModels/ProfileSettingsSnapshot.swift",
       "Sources/FeatureSettings/LibraryPresentationSettingsView.swift",
       "Sources/CoreModels/HeroTextSize.swift"
     ],
     "watch": [
-      "Sources/FeatureSettings/CardAppearanceControls.swift",
+      "Sources/FeatureSettings/Card",
       "Sources/FeatureSettings/ArtworkSettingsControls.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/CoreModels/CardCaptionSettings.swift",
-      "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
-      "Sources/FeatureSettings/Hero"
+      "Sources/FeatureSettings/Hero",
+      "Sources/CoreModels/WatchStatusIndicator"
     ]
   },
   {

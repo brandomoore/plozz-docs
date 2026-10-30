@@ -2,9 +2,9 @@
 
 ## Reach the controls
 
-On Apple TV, press **Up** from the scrub surface for Playback, Audio, and Subtitles; **Down** reaches information/navigation tabs. On iPhone/iPad, tap the video: portrait uses the ellipsis **Playback options** menu; landscape separates controls.
+On Apple TV, press **Up** from the scrub surface for Playback/Audio/Subtitles; **Down** reaches information/navigation. On iPhone/iPad, tap the video: portrait uses ellipsis **Playback options**; landscape separates controls.
 
-Use the timeline to seek. See [device controls](/platform-controls/) for **Seek without pausing**, touch, and keyboard behavior.
+Seek with the timeline; see [device controls](/platform-controls/) for touch, keyboard, and **Seek without pausing**.
 
 ## Choose audio or a version
 
@@ -12,12 +12,18 @@ Open **Audio** for tracks or **Version** for files/editions; on iPhone/iPad, use
 
 Versions keep your server/account and position; cuts can have different timelines.
 
-The first multi-version video asks your preference. Change **Settings > Playback > Version selection**:
+The first multi-version video asks your preference; change **Settings > Playback > Version selection**:
 
 - **Ask every time:** choose before multi-version videos, including autoplay.
 - **Choose automatically:** use a remembered or device-recommended version without the picker.
 
-**Remember series version choices** (Apple TV: **Remember per series**) reuses your version type for later episodes. Disable it to ignore series choices. Automatic mode chooses a fallback if unmatched.
+**Remember series version choices** (Apple TV: **Remember per series**) reuses your version type for later episodes; disable to ignore it. Automatic mode falls back if unmatched.
+
+## Resume or start over
+
+Enable **Ask to resume or start over** in **Settings > Playback** to choose before resuming. **Resume** shows time remaining; **Start Over** shows full runtime, when known.
+
+**Rewind on resume** (mobile: **Resume rewind**) defaults to five seconds, adjustable from zero to 60.
 
 ## Autoplay and skipping
 
@@ -29,13 +35,11 @@ Open an intro, credits, recap, preview, or commercial marker's settings to overr
 
 With skipping enabled, **Use community markers** (default on) checks IntroDB/TheIntroDB if intros or credits are missing. Lookups send IMDb/TMDB/TVDB identifiers and applicable episode numbers, ordering, name, and runtime, not video files. Disable it to stop community lookups, not server markers. Coverage and matching vary.
 
-**Rewind on resume** (mobile: **Resume rewind**) starts before your saved position: five seconds by default, adjustable from zero to 60.
-
 ## Jump to a chapter
 
 Open **Chapters** below the timeline; mobile tabs scroll horizontally. Choose a chapter to jump there; paused playback stays paused.
 
-The tab needs usable chapters. Plex, Jellyfin, and Emby can supply them; otherwise, Plozz can read supported file chapters, including shares/downloads. Missing images do not prevent use. Intro/credits markers are separate.
+Usable chapters are required. Plex/Jellyfin/Emby can supply them; otherwise, supported files, including shares/downloads, can. Images are optional; intro/credits markers are separate.
 
 ## Speed, picture, and other navigation
 
@@ -45,6 +49,6 @@ Adjust speed where offered. **Zoom Mode** (Apple TV) or **Video** (mobile) offer
 
 ## Explore the cast
 
-In **Cast**, select a person for biography/credits. **See more** opens their page; a credit opens its title page. Both end playback; credits need not be playable.
+In **Cast**, select a person. **See more** opens their biography/credits page; a credit opens details. Both end playback; credits need not be playable.
 
 See [Streaming quality](/streaming-quality/), [Audio](/audio/), [Subtitles](/subtitles/), [AirPlay/Picture in Picture](/platform-controls/#airplay-and-picture-in-picture), or [external players](/external-players/).

@@ -35,8 +35,12 @@ For NFO sidecars and local artwork, see [Metadata and ratings](/metadata-and-rat
 
 ## If files or matches are missing
 
-Confirm the selected root contains the files and that the share account can read them. Check **Browse Files** before treating a matching problem as a connection failure.
+Check the selected root and read permissions through **Browse Files** before treating poor matching as a connection failure.
 
-Choose the content type deliberately: **Personal Videos** avoids movie/TV matching, while an incorrectly classified folder can produce poor catalogue results. A scan updates Plozz's catalogue; it does not rename or reorganize the files on your NAS.
+**Personal Videos** avoids movie/TV matching. Scanning updates Plozz's catalogue, not filenames or NAS organization.
 
-For wrong posters or descriptions after scanning, review [Metadata and ratings](/metadata-and-ratings/). A share has no media-server user enforcing maturity restrictions, so [Kids Profile](/parental-controls/) alone is not a content-rating filter.
+For wrong posters/descriptions, see [Metadata and ratings](/metadata-and-ratings/). Shares have no server maturity filtering; [Kids Profile](/parental-controls/) alone is insufficient.
+
+## WebDAV lists files but will not play
+
+Playback needs valid HTTP byte ranges and a strong ETag or valid Last-Modified header; successful folder browsing does not establish this. Ask the administrator to check the WebDAV server/proxy. After replacing a file, rescan and reopen it rather than repeatedly retrying the old playback.

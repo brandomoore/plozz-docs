@@ -8,9 +8,11 @@ Open **Settings > Playback > Streaming quality** for this profile. Set **Local n
 
 Local versus remote depends on the connection to your source, not simply whether the device uses Wi-Fi.
 
-**Maximum** means original quality without reduction. Lower limits can still play originals whose reported resolution/bitrate fit; otherwise Plozz requests conversion. Bitrate includes audio.
+**Maximum** removes Plozz's reduction limit, not server compatibility requirements. The server may still convert. Lower limits permit originals only when reported dimensions/bitrate fit; unknown facts can require conversion. Bitrate includes audio.
 
-Under **Advanced**, choose the transcoding codec or **Force transcoding**, which can request conversion even at Maximum. The quality picker offers custom limits. Conversion needs provider support, permission, and server capacity.
+Under **Advanced**, choose a transcoding codec or **Force transcoding**, even at Maximum. **Prefer HEVC (H.265)** can fall back to H.264 at the same limit. Conversion needs server support, permission, and capacity.
+
+**Custom…** takes a maximum resolution and whole-number total Kbps. For **Invalid custom quality**, choose a preset or enter a valid limit; it does not mean Maximum.
 
 A limit below Maximum or Force transcoding prevents [external-player handoff](/external-players/), even if the original fits.
 
@@ -18,9 +20,9 @@ A limit below Maximum or Force transcoding prevents [external-player handoff](/e
 
 Reveal playback controls, open **Video > Quality** (under the ellipsis **Playback options** menu in portrait), choose a **Quality limit**, then **Apply**. This changes the current video without overwriting saved network defaults.
 
-Playback briefly reloads around your position. Conversion may alter HDR, audio, or subtitles. **Current stream** reports converted resolution, codecs, HDR, and audio channels where known. **Declared stream bitrate**, when shown, is advertised by the stream, not measured network speed. A limit is not a measurement; **Not available** means the stream supplied no fact.
+Playback reloads around your position. Conversion can alter HDR, audio, or subtitles; **Playing in SDR** identifies an SDR conversion. **Current stream** shows known active-stream facts, not the original file. **Declared stream bitrate** is advertised, not measured speed. **Not available** means no fact was supplied.
 
-Silo converts to H.264 at 480p, 720p, 1080p, or 4K, limited by video height. Unsupported choices are unavailable.
+Silo converts to H.264 at 480p/720p/1080p/4K, limited by video height; unsupported choices are unavailable.
 
 ## Buffering or unavailable choices
 
@@ -32,7 +34,7 @@ Shares have no server converting video; a missing Quality control can be expecte
 
 ## Adjust the video buffer
 
-On Apple TV, iPhone, and iPad, **Settings > Playback > Video buffer** changes temporary read-ahead, not quality or offline downloads. Larger buffers use more storage; actual duration depends on the video and free space. It is unavailable with Apple's native player. Start a new playback session after changing it. This device-wide preference does not transfer or sync.
+On all three platforms, **Settings > Playback > Video buffer** changes temporary read-ahead, not quality/downloads. Larger buffers use more storage; duration depends on video and free space. Unavailable with Apple's native player, this device-wide preference neither transfers nor syncs. Start new playback after changes.
 
 A filled buffer can bridge brief interruptions, not fix a source that stays too slow. [Live TV buffer](/platform-controls/#live-tv-remote-controls-and-rewind) is separate.
 
