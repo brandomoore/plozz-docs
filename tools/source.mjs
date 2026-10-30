@@ -98,14 +98,17 @@ if (positionals[0] === 'plan') {
     if (report.approved !== true || report.independent !== true || report.coverageReviewed !== true
       || report.sourceCommit !== plan.commit || report.snapshotHash !== plan.snapshotHash
       || report.policyHash !== baselineHash() || report.coverageHash !== coverageHash()
-      || report.contentHash !== contentHash(pages) || !/^gpt-\d+(?:\.\d+)?-sol$/.test(report.model)
-      || report.reasoningEffort !== 'high') throw new Error('Missing matching independent Sol/high content and coverage review.');
-    review = { kind: 'independent-review', model: report.model, reasoningEffort: report.reasoningEffort, coverageReviewed: true };
+      || report.contentHash !== contentHash(pages) || report.model !== 'gpt-6-astra'
+      || report.reasoningEffort !== 'high' || report.uiReviewed !== true
+      || report.readerExperienceReviewed !== true) throw new Error('Missing matching independent Astra/high UI, readability and coverage review.');
+    review = { kind: 'independent-review', model: report.model, reasoningEffort: report.reasoningEffort, coverageReviewed: true,
+      uiReviewed: true, readerExperienceReviewed: true };
   }
   const references = new Set([
     ...pages.flatMap(page => page.sources),
     ...[...Object.values(coverage.areas), ...Object.values(coverage.modules), ...Object.values(coverage.settingsCategories),
-      ...Object.values(coverage.capabilities), ...Object.values(coverage.systemIntegrations)].flatMap(record => record.sources),
+      ...Object.values(coverage.capabilities), ...Object.values(coverage.systemIntegrations),
+      ...Object.values(coverage.screens ?? {})].flatMap(record => record.sources),
   ]);
   const sourceFiles = {};
   for (const path of references) {
@@ -123,7 +126,11 @@ if (positionals[0] === 'plan') {
     baselineReviewedAt: plan.baselineRequired ? now : previous?.baselineReviewedAt,
     contentHash: contentHash(pages), coverageHash: coverageHash(), policyHash: baselineHash(),
     sourceFiles, review, pages: pageHistory,
-    discovery: { snapshotHash: discovery.snapshotHash, structureHash: discovery.structureHash, fileCount: discovery.fileCount, modules: discovery.modules, settingsCategories: discovery.settingsCategories, systemSurfaces: discovery.systemSurfaces },
+    discovery: { snapshotHash: discovery.snapshotHash, structureHash: discovery.structureHash, fileCount: discovery.fileCount,
+      modules: discovery.modules, settingsCategories: discovery.settingsCategories, systemSurfaces: discovery.systemSurfaces,
+      screenSurfaces: discovery.screenSurfaces,
+      uiLabels: Object.fromEntries([...references].filter(path => discovery.uiLabels?.[path])
+        .map(path => [path, discovery.uiLabels[path]])) },
   });
   console.log(`Recorded content and coverage review against live app revision ${plan.commit}.`);
 } else throw new Error('Usage: node tools/source.mjs plan [--commit SHA] [--force] | finalize');

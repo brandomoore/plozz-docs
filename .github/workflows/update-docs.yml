@@ -18,7 +18,8 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  DOCS_MODEL: gpt-6.1-sol
+  DOCS_WRITER_MODEL: gpt-6.1-sol
+  DOCS_REVIEW_MODEL: gpt-6-astra
 
 jobs:
   plan:

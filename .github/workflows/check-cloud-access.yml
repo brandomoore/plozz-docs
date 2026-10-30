@@ -10,6 +10,10 @@ jobs:
   copilot:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        model: [gpt-6.1-sol, gpt-6-astra]
     permissions:
       contents: read
       copilot-requests: write
@@ -18,10 +22,10 @@ jobs:
         with:
           node-version: '22'
       - run: npm install --global @github/copilot@1.0.98
-      - name: Verify an inference-only Sol request
+      - name: Verify an inference-only configured-model request
         env:
           COPILOT_GITHUB_TOKEN: ${{ github.token }}
-          COPILOT_MODEL: gpt-6.1-sol
+          COPILOT_MODEL: ${{ matrix.model }}
           COPILOT_HOME: ${{ runner.temp }}/docs-managed-auth
         run: |
           node --input-type=module <<'NODE'
@@ -29,12 +33,12 @@ jobs:
           import { randomUUID } from 'node:crypto';
           const challenge = `DOCS_AUTH_${randomUUID()}`;
           const output = execFileSync('copilot', [
-            '--no-auto-update', '--model', 'gpt-6.1-sol', '--reasoning-effort', 'high',
+            '--no-auto-update', '--model', process.env.COPILOT_MODEL, '--reasoning-effort', 'high',
             '--disable-builtin-mcps', '--available-tools', 'ask_user',
             '--deny-tool', 'ask_user', '--secret-env-vars', 'COPILOT_GITHUB_TOKEN',
             '--no-ask-user', '--silent', '--prompt',
             `Reply with exactly ${challenge}. Do not use tools, delegate, or invoke another AI service.`,
           ], { encoding: 'utf8', timeout: 120000 });
           if (output.trim() !== challenge) throw new Error('Managed authentication did not return the expected response.');
-          console.log('Managed GitHub Actions authentication succeeded for the explicit GPT-6.1 Sol/high request.');
+          console.log(`Managed GitHub Actions authentication succeeded for ${process.env.COPILOT_MODEL}/high.`);
           NODE

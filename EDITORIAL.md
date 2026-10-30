@@ -53,6 +53,20 @@ new capability obligation for it. Draft validation enforces this boundary.
 
 ## Useful answers
 
+- Write for someone using Plozz, not someone implementing it. Begin with what
+  the feature helps them do and when they might want it. Follow with where to
+  find it, what to choose, and what they will see next.
+- Be friendly, direct and natural, without sales language or forced enthusiasm.
+  Prefer complete, short explanations to dense fragments, abstract technical
+  summaries, repetitive qualifications, or a concluding recap.
+- Use the app's words for controls and everyday words for explanations. For
+  example, "This changes how your Continue Watching cards look. Your progress
+  and the titles in the row stay the same" is clearer than "These profile
+  presentation choices do not change watched state or row membership."
+- Explain server/account/profile distinctions when they affect the task, not
+  as boilerplate before every feature. Keep material privacy, access, quality
+  and compatibility limits beside the relevant action. Move deeper technical
+  diagnosis to troubleshooting; do not hide a limitation to simplify prose.
 - Lead with the answer or the task, not introductory marketing.
 - State platform, provider, permission and build requirements before affected steps.
 - Use exact visible labels, but explain consequences rather than listing labels.
@@ -70,6 +84,80 @@ an SEO word target. A focused reference can be longer when a table or explanatio
 actually helps. Hard limits are 450 words for a guide, 900 for a reference, and
 350 for an overview. Do not pad to a limit or omit essential limitations to
 stay short; reorganize the answer.
+
+## UI-first audit contract
+
+The source review follows what a person can navigate, see and change, not the
+repository's module layout. Start at the app's UI entry points and walk pages,
+nested editors, sheets, sections and controls in their visible order. Audit
+Apple TV and iPhone/iPad paths separately where they differ. Trace shared
+components, enum titles and English localization to their actual use.
+
+The trusted source snapshot supplies `screenSurfaces` and `uiLabels` in
+`.docs-work/discovery.json`. Screen candidates include settings sources and
+SwiftUI presentation files, including sheets, overlays and reusable components
+without a navigation title. Literal extraction ignores comments
+and resolves English catalog values. It is evidence for exact wording, not
+proof that a string is visible or a destination reachable: both agents must
+trace the wiring, conditions and shared components. Dynamic names are not
+invented constant UI labels. This process does not run the app or verify pixels.
+
+For **every** discovered surface, add `content/coverage.json` → `screens` keyed
+by its exact source path. A reader-facing screen record has:
+
+- `sources`: its own path plus the exact source files defining its labels and behavior.
+- `platforms`: applicable values from `Apple TV`, `iPhone`, `iPad`.
+- `navigation`: how a person reaches it, using actual UI names.
+- `experience`: what the person can do there and the visible result.
+- `conditions`: provider, account, profile, permission, platform or feature
+  conditions; say when there are no additional conditions.
+- `controls`: an array of `{ "text": "Exact visible label", "source": "Sources/Feature/Example.swift" }`
+  for its in-scope headings, switches, buttons and picker choices, in UI order.
+  Follow shared label definitions rather than citing a caller that has no text.
+- `documents`: guide/section links, shaped as `{ "slug": "...", "anchor": "..." }`.
+
+An informational screen can have no controls, but a settings page full of
+switches cannot. Account for conditional and self-explanatory controls in the
+audit without manufacturing prose for each. Existing editorial exclusions
+still apply; never introduce excluded topics into reader-facing material.
+
+For non-reader surfaces, use `sources`, `omitKind` and a specific `omitReason`
+instead. The allowed kinds are `implementation`, `shared-component`,
+`editorial-scope` and `unreachable`. Identify the parent when excluding a shared
+component, and inventory its controls on that parent's record. "Already
+covered by a broad topic" or "too technical" is not a valid screen exclusion.
+The reviewer checks these decisions rather than accepting a coverage count.
+
+Each entry in `content/pages.json` also needs:
+
+```json
+"ui": {
+  "references": [
+    { "text": "Exact visible label", "source": "Sources/Feature/Example.swift" }
+  ],
+  "emphasis": ["A genuinely non-control phrase emphasized in the article"]
+}
+```
+
+Every reference must match the exact English value in the immutable source
+inventory, appear in the article and use a file in that page's `sources`.
+Bold named controls and each segment of a bold `Settings > ...` path require
+references. Capitalization and punctuation matter. `emphasis` is only for
+non-control emphasis, such as a platform name, outcome or warning—not a way to
+waive label verification. Do not remove bold styling or replace a named control
+with vague directions to escape the check. Both arrays can be empty in a guide
+that names no controls and has no bold emphasis.
+
+The audit ledger is maintenance evidence, not the guide itself. Use friendly
+task guides and focused, UI-ordered settings sections; do not publish a code
+inventory, a wall of switches, or one SEO page per toggle. Each guide should
+explain a feature's purpose, its useful choices and expected results.
+
+Both passes must report concrete findings under `## UI accuracy` and
+`## Reader experience`, as well as `## Visual quality`. The independent reviewer
+checks the actual source and articles, fixes terminology and technical prose,
+and withholds approval for unresolved navigation, coverage or usability gaps.
+Only docs publication is blocked; app development remains independent.
 
 ## Search and discoverability
 

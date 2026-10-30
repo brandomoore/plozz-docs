@@ -1,5 +1,6 @@
 {
   "schemaVersion": 1,
+  "uiAudit": true,
   "fullAuditIntervalDays": 30,
   "sections": ["Connect", "Library", "Playback", "Personalize", "Accounts & sync", "Help"],
   "capabilities": [

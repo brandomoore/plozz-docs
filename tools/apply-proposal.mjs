@@ -11,7 +11,8 @@ for (const entry of files) {
   if (!entry.isFile()) throw new Error('Proposal must contain only flat content files.');
   if (!isContentFilename(entry.name)) throw new Error(`Unexpected proposal file: ${entry.name}`);
   const value = readFileSync(resolve(input, entry.name));
-  if (value.length > 128_000) throw new Error('Proposal file exceeds size limit.');
+  const limit = entry.name === 'coverage.json' ? 1_000_000 : entry.name === 'pages.json' ? 512_000 : 128_000;
+  if (value.length > limit) throw new Error('Proposal file exceeds size limit.');
   proposal.set(entry.name, value);
 }
 if (!proposal.has('pages.json') || !proposal.has('coverage.json') || !proposal.has('getting-started.md')) throw new Error('Incomplete proposal.');

@@ -19,6 +19,10 @@ reader-task baseline and when to use a page, section, external link or omission.
 Guides stay concise; focused reference can be longer when it is genuinely useful.
 `content/coverage.json` maps the required areas and live product surfaces to
 useful answers rather than treating article count as completeness.
+Its `screens` ledger follows UI navigation and records visible controls,
+platform conditions and useful guide destinations. Each page's `ui` metadata
+ties named controls to exact English source labels. `EDITORIAL.md` owns the
+schema and the friendly, experience-oriented writing standard.
 
 `source-state.json` records the immutable app revision, verified source-snapshot
 hash, coverage/policy hashes, and independent review provenance. Per-article
@@ -52,16 +56,23 @@ desktop Copilot app, personal token or Cloudflare deployment secret is needed.
    documentation/configuration, Apple entitlements, app metadata, Top Shelf
    extension entry points, pinned dependencies and an English UI-label
    projection. No app build is performed.
-4. Inventory product modules, settings surfaces, profile-settings categories
+4. Inventory actual settings and navigation surfaces, source-backed English
+   labels, product modules, profile-settings categories
    and system integrations. Require a source-backed answer section for each
    named capability question, not only a mention of its broad topic.
    For identical product inputs, metadata-only updates need no rewrite.
    New/unmapped surfaces, missing coverage or policy changes require a baseline
    review, including features that existed before the previous docs run.
-5. A fresh Copilot CLI writer updates useful guides and the coverage ledger.
+5. A fresh Copilot CLI writer follows the source UI page by page, then updates
+   friendly task guides and the coverage ledger. Explain feature benefits,
+   actual choices and visible results rather than the underlying architecture.
    A separate fresh reviewer checks factual accuracy, UI reachability,
    applicability, completeness against the baseline and editorial/SEO/visual
-   quality. Both assessments appear in the Actions job summary and the
+   quality. Exact control labels and bold menu paths must match source
+   evidence; screen coverage, UI-accuracy and reader-experience assessments are
+   required. Literal matching alone does not prove a control is reachable;
+   the independent reviewer traces its wiring and visibility conditions.
+   Both assessments appear in the Actions job summary and the
    `write-assessment`/`review-assessment` artifacts, including concrete requests
    for useful imagery that needs maintainer-approved assets.
 6. A non-AI job validates content, citations, word counts and scope, refuses a
@@ -152,10 +163,10 @@ appropriate article/breadcrumb data. Sitemap and article dates change only
 when meaningful article content or metadata changes, not on every source audit.
 This helps discovery without promising rankings or manufacturing freshness.
 
-The writer and reviewer use **`gpt-6.1-sol` at `high` effort**, the newest
-available Sol model when configured. The workflow selects it explicitly and
+The writer uses **`gpt-6.1-sol` at `high` effort**. The independent reviewer uses
+**`gpt-6-astra` at `high` effort**. The workflow selects both explicitly and
 does not fall back to another model/provider. The CLI is pinned to
-`@github/copilot@1.0.98`. Update the explicit model when a newer Sol is approved.
+`@github/copilot@1.0.98`. Update the explicit writer when a newer Sol is approved.
 
 ### Managed authentication
 
@@ -171,7 +182,7 @@ Don't export a personal GitHub token or desktop Cloudflare OAuth login into CI.
 If organization/account policies later disable managed inference or the chosen
 model, the job must fail rather than change models or reuse personal credentials.
 The manual **Check managed Copilot access** workflow performs an inference-only
-check with the configured Sol model and no file-editing tools.
+check with each configured model and no file-editing tools.
 
 Run a complete refresh manually:
 

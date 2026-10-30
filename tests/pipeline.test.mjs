@@ -25,7 +25,7 @@ function fixture(t) {
   const root = mkdtempSync(resolve(ROOT, '.docs-work/pipeline-test-'));
   t.after(() => rmSync(root, { recursive: true, force: true }));
   for (const path of ['tools', 'content', 'public', 'bin', 'config', '.docs-work', 'node_modules/.bin']) mkdirSync(resolve(root, path), { recursive: true });
-  for (const name of ['lib.mjs', 'visuals.mjs', 'diagrams.mjs', 'source.mjs', 'source-discovery.mjs', 'apply-proposal.mjs', 'run-agent.mjs', 'publish.mjs', 'build.mjs', 'check.mjs']) copyFileSync(resolve(ROOT, 'tools', name), resolve(root, 'tools', name));
+  for (const name of ['lib.mjs', 'visuals.mjs', 'diagrams.mjs', 'ui-audit.mjs', 'source.mjs', 'source-discovery.mjs', 'apply-proposal.mjs', 'run-agent.mjs', 'publish.mjs', 'build.mjs', 'check.mjs']) copyFileSync(resolve(ROOT, 'tools', name), resolve(root, 'tools', name));
   for (const name of ['docs.css', 'docs.js', 'logo.svg', 'manrope.woff2', 'font-license.txt']) copyFileSync(resolve(ROOT, 'public', name), resolve(root, 'public', name));
   const save = (path, value) => writeFileSync(resolve(root, path), typeof value === 'string' ? value : JSON.stringify(value));
   save('package.json', { type: 'module' });
@@ -90,7 +90,8 @@ globalThis.fetch=async input=>{
 };`);
   const run = (name, args = [], extra = {}) => spawnSync(process.execPath, ['--import', resolve(root, 'preload.mjs'), resolve(root, 'tools', name), ...args], {
     cwd: root, encoding: 'utf8', timeout: 10_000,
-    env: { PATH: `${resolve(root, 'bin')}:${process.env.PATH}`, HOME: root, DOCS_MODEL: 'gpt-6.1-sol', ...extra },
+    env: { PATH: `${resolve(root, 'bin')}:${process.env.PATH}`, HOME: root,
+      DOCS_WRITER_MODEL: 'gpt-6.1-sol', DOCS_REVIEW_MODEL: 'gpt-6-astra', ...extra },
   });
   const state = () => {
     const value = {
@@ -109,7 +110,8 @@ globalThis.fetch=async input=>{
   const read = path => JSON.parse(readFileSync(resolve(root, path), 'utf8'));
   const review = (extra = {}) => save('.docs-work/review.json', { approved: true, independent: true, coverageReviewed: true, sourceCommit: read('.docs-work/plan.json').commit,
     contentHash: contentHash([page], root), coverageHash: coverageHash(root), policyHash: baselineHash(root),
-    snapshotHash: read('.docs-work/discovery.json').snapshotHash, model: 'gpt-6.1-sol', reasoningEffort: 'high', ...extra });
+    snapshotHash: read('.docs-work/discovery.json').snapshotHash, model: 'gpt-6-astra', reasoningEffort: 'high',
+    uiReviewed: true, readerExperienceReviewed: true, ...extra });
   return { root, save, update, run, state, plan, read, review };
 }
 
@@ -384,7 +386,13 @@ test('finalization requires a real matching review receipt or unchanged-content 
   f.review({ sourceCommit: nextRevision });
   result = f.run('source.mjs', ['finalize']);
   assert.notEqual(result.status, 0);
-  assert.match(result.stderr, /matching independent Sol/);
+  assert.match(result.stderr, /matching independent Astra/);
+  for (const override of [{ uiReviewed: false }, { readerExperienceReviewed: false }, { model: 'gpt-6.1-sol' }]) {
+    f.review(override);
+    result = f.run('source.mjs', ['finalize']);
+    assert.notEqual(result.status, 0, 'Legacy or incomplete review evidence cannot approve the new workflow.');
+    assert.match(result.stderr, /matching independent Astra/);
+  }
   f.review();
   f.save('content/getting-started.md', '# Get started\n\nAn unreviewed change.\n');
   result = f.run('source.mjs', ['finalize']);
@@ -411,16 +419,17 @@ test('finalization requires a real matching review receipt or unchanged-content 
   assert.match(result.stderr, /Metadata-only update cannot change guides/);
 });
 
-test('model jobs require credentials, explicit Sol, standalone approval and unchanged infrastructure', t => {
+test('model jobs require explicit writer/reviewer models, UI and readability assessments, and independent approval', t => {
   const f = fixture(t);
   f.plan();
   let result = f.run('run-agent.mjs', ['review']);
   assert.notEqual(result.status, 0);
   assert.match(result.stderr, /COPILOT_GITHUB_TOKEN/);
-  result = f.run('run-agent.mjs', ['review'], { DOCS_MODEL: 'auto', COPILOT_GITHUB_TOKEN: 'fixture' });
+  result = f.run('run-agent.mjs', ['review'], { DOCS_REVIEW_MODEL: 'auto', COPILOT_GITHUB_TOKEN: 'fixture' });
   assert.notEqual(result.status, 0);
-  assert.match(result.stderr, /explicit available GPT Sol/);
-  f.update({ agentResponse: '## Visual quality\nApproved marks.\nNOTDOCS_REVIEW_APPROVED' });
+  assert.match(result.stderr, /explicit GPT Sol writer or GPT-6 Astra reviewer/);
+  const assessments = '\n## UI accuracy\nChecked exact labels and conditional controls.\n## Reader experience\nExplained useful choices and results in plain language.\n';
+  f.update({ agentResponse: `## Visual quality\nApproved marks.${assessments}\nNOTDOCS_REVIEW_APPROVED` });
   result = f.run('run-agent.mjs', ['review'], { COPILOT_GITHUB_TOKEN: 'fixture' });
   assert.notEqual(result.status, 0);
   assert.match(result.stderr, /did not approve publication/);
@@ -432,11 +441,19 @@ test('model jobs require credentials, explicit Sol, standalone approval and unch
     assert.match(result.stderr, /required Visual quality assessment/);
     assert(!existsSync(resolve(f.root, '.docs-work/review.json')));
   }
-  f.update({ agentResponse: '## Visual quality\n\nApproved marks; no <img> needed.\nDOCS_REVIEW_APPROVED' });
+  for (const heading of ['UI accuracy', 'Reader experience']) {
+    f.update({ agentResponse: `## Visual quality\nApproved marks.${assessments.replace(`## ${heading}`, '## Missing')}\nDOCS_REVIEW_APPROVED` });
+    result = f.run('run-agent.mjs', ['review'], { COPILOT_GITHUB_TOKEN: 'fixture' });
+    assert.notEqual(result.status, 0);
+    assert(result.stderr.includes(`required ${heading} assessment`));
+  }
+  f.update({ agentResponse: `## Visual quality\n\nApproved marks; no <img> needed.${assessments}\nDOCS_REVIEW_APPROVED` });
   const summaryPath = resolve(f.root, '.docs-work/summary.md');
   result = f.run('run-agent.mjs', ['review'], { COPILOT_GITHUB_TOKEN: 'fixture', GH_TOKEN: 'fixture', CLOUDFLARE_API_TOKEN: 'fixture', GITHUB_STEP_SUMMARY: summaryPath });
   assert.equal(result.status, 0, result.stderr);
-  assert.equal(f.read('.docs-work/review.json').model, 'gpt-6.1-sol');
+  assert.equal(f.read('.docs-work/review.json').model, 'gpt-6-astra');
+  assert.equal(f.read('.docs-work/review.json').uiReviewed, true);
+  assert.equal(f.read('.docs-work/review.json').readerExperienceReviewed, true);
   const calls = readFileSync(resolve(f.root, 'calls.jsonl'), 'utf8').trim().split('\n').map(JSON.parse);
   const modelCall = calls.find(call => call.name === 'copilot');
   assert(modelCall.args.includes('--no-auto-update'));
@@ -445,9 +462,12 @@ test('model jobs require credentials, explicit Sol, standalone approval and unch
   assert.match(modelCall.args[modelCall.args.indexOf('--prompt') + 1], /Visual quality checklist/);
   assert.match(readFileSync(summaryPath, 'utf8'), /Approved marks; no &lt;img&gt; needed/);
   assert.doesNotMatch(readFileSync(summaryPath, 'utf8'), /<img>/);
-  f.update({ agentResponse: '## Visual quality\nApproved service options; no further imagery needed.' });
+  f.update({ agentResponse: `## Visual quality\nApproved service options; no further imagery needed.${assessments}` });
   result = f.run('run-agent.mjs', ['write'], { COPILOT_GITHUB_TOKEN: 'fixture' });
   assert.equal(result.status, 0, result.stderr);
+  const writeCalls = readFileSync(resolve(f.root, 'calls.jsonl'), 'utf8').trim().split('\n').map(JSON.parse).filter(call => call.name === 'copilot');
+  const writeArgs = writeCalls.at(-1).args;
+  assert.equal(writeArgs[writeArgs.indexOf('--model') + 1], 'gpt-6.1-sol');
   assert.match(readFileSync(resolve(f.root, '.docs-work/write-response.txt'), 'utf8'), /Approved service options/);
   f.update({ mutateProtected: true });
   result = f.run('run-agent.mjs', ['review'], { COPILOT_GITHUB_TOKEN: 'fixture' });

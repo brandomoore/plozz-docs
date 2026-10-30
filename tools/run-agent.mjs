@@ -5,8 +5,10 @@ import { ROOT, readJson, validatePages, validateSeo, validateCoverage, contentHa
 
 const phase = process.argv[2];
 if (!['write', 'review'].includes(phase)) throw new Error('Choose write or review.');
-const model = process.env.DOCS_MODEL;
-if (!/^gpt-\d+(?:\.\d+)?-sol$/.test(model ?? '')) throw new Error('Set an explicit available GPT Sol model; automatic/provider fallbacks are forbidden.');
+const model = phase === 'write' ? process.env.DOCS_WRITER_MODEL : process.env.DOCS_REVIEW_MODEL;
+if (phase === 'write' ? !/^gpt-\d+(?:\.\d+)?-sol$/.test(model ?? '') : model !== 'gpt-6-astra') {
+  throw new Error('Set an explicit GPT Sol writer or GPT-6 Astra reviewer; automatic/provider fallbacks are forbidden.');
+}
 if (!process.env.COPILOT_GITHUB_TOKEN) throw new Error('Missing COPILOT_GITHUB_TOKEN. Cloud jobs must grant copilot-requests: write and supply github.token.');
 const plan = readJson('.docs-work/plan.json');
 if (plan.mode !== 'content') throw new Error('No model work is needed for this source plan.');
@@ -19,7 +21,12 @@ const prompt = `You maintain concise Plozz end-user docs. This is the ${phase ==
 Use only your selected model ${model} at high effort. Do not delegate or call another AI service.
 Read AGENTS.md, EDITORIAL.md, config/documentation-baseline.json and .docs-work/plan.json.
 Frozen LIVE GitHub app source is ${plan.repository}@${plan.commit}. The complete verified product snapshot (${discovery.fileCount} files) is in ${plan.sourceDirectory}.
-Read ${plan.discoveryFile} for product modules, settings categories and system integrations (entitlements, app metadata and extension entry points), and ${plan.labelsFile} for the English UI-label projection when present.
+Read ${plan.discoveryFile} for screenSurfaces, source-backed uiLabels, product modules, settings categories and system integrations, and ${plan.labelsFile} for the English UI-label projection when present.
+Start with what a person SEES AND DOES. Follow the actual UI navigation from entry screens through pages, sections, toggles, buttons, pickers and dialogs on Apple TV and iPhone/iPad. Backend models explain behavior; they do not supply user-facing vocabulary or the guide outline.
+Read EDITORIAL.md's UI-first audit contract. Account for EVERY discovered screen in content/coverage.json screens, including previously existing pages. Trace shared controls into their parent pages and check provider, profile, platform, permission and feature-flag conditions. Record visible controls using exact English source labels and their defining source path; an empty controls list is only valid for a genuinely informational screen. This is a source review, never a claim of having seen or tested the running app.
+Add page.ui.references for named controls and each segment of bold navigation paths, with {text, source} records matching discovery.uiLabels and page.sources. Add page.ui.emphasis only for genuine non-control emphasis such as platform names, outcomes or warnings. Do not classify controls as emphasis, remove their bold styling, or use vague directions to evade exact-label checks. Dynamic user/server names are descriptions, not invented constant labels.
+Write a friendly USER GUIDE, not an engineering summary or a switch inventory. Lead with what someone can do and why they might want it, give exact steps, then explain the visible result. Keep choices and screen sections in UI order when presenting a settings reference. Explain when to use a feature and meaningful tradeoffs; retain material safety/privacy/compatibility limits at the relevant step. Prefer "your progress", "your library" and "this device" to implementation vocabulary. Avoid repetitive caveats, abstract scope language, marketing, robotic recaps and unexplained technical terms. Put deeper technical troubleshooting where readers need it, not in every introduction. Be concise but do not compress useful explanations into telegraphic fragments.
+Include substantive final-report sections headed "## UI accuracy" and "## Reader experience", describing source-verified navigation/terminology corrections, reviewed platform conditions, reader-facing improvements and any unresolved gaps. These assessments are required alongside Visual quality.
 Full baseline audit required: ${plan.baselineRequired ? 'YES: include existing omissions, not just new features' : 'audit changed surfaces and ensure baseline coverage remains complete'}.
 Affected guide slugs: ${plan.affected.join(', ')}.
 Source changes: ${plan.changedFiles.join(', ') || 'initial/full review'}.
@@ -38,7 +45,7 @@ Run npm run check:content for drafts. Full check/build require trusted source fi
 Use immutable raw GitHub URLs under https://raw.githubusercontent.com/${plan.repository}/${plan.commit}/ only if additional public evidence is needed. Citations must be exact existing app file paths in the manifest.
 ${phase === 'write'
   ? 'Review source changes and uncovered existing tasks/settings. Strengthen existing guides or add focused pages only where they help a reader. Preserve correct details. Do not invent features, menu paths, defaults or search-volume claims.'
-  : 'Independently verify both factual accuracy and product-task coverage. Inspect the live module/category/system inventory, not only the proposed edits. Answer every capability question from source and check that its linked section actually explains that answer, including setup and limits; a valid anchor or ledger assertion alone is not evidence of useful coverage. Check defaults, UI reachability, scope, OS/provider/build eligibility, omissions and useful specificity. Correct problems and filler. Check search titles/descriptions, links and page-versus-section decisions. End with the exact standalone line DOCS_REVIEW_APPROVED only after content AND coverage are accurate, useful and complete against the baseline.'}`;
+  : 'Independently verify factual accuracy, UI fidelity, readability and product-task coverage. Walk the source UI screen inventory yourself, not only the proposed edits or writer assertions. Challenge exclusions and empty control inventories. Compare every named control and path to actual UI wiring and localized source; mere presence of a string does not prove it belongs on that screen. Verify that controls are not mislabeled as editorial emphasis. Read each guide as a person trying to use Plozz: does it explain the feature, why to use it, what to select and what happens, without making the reader understand implementation details? Fix technical/robotic prose as well as facts. Answer every capability question from source and check that its linked section explains setup and limits. Check defaults, conditions, permissions and meaningful exceptions. End with DOCS_REVIEW_APPROVED only after content, screen coverage, exact wording AND reader experience are accurate and useful.'}`;
 const env = { ...process.env, COPILOT_MODEL: model, COPILOT_HOME: resolve(ROOT, `.docs-work/copilot-${phase}`) };
 delete env.GH_TOKEN;
 delete env.GITHUB_TOKEN;
@@ -61,15 +68,17 @@ const pages = validatePages(readJson('content/pages.json'));
 validateSeo(pages);
 validateCoverage(pages, discovery);
 const responseLines = result.split(/\r?\n/);
-const visualHeading = responseLines.findIndex(line => line.trim() === '## Visual quality');
-const visualNotes = responseLines.slice(visualHeading + 1).find(line => line.trim())?.trim();
-if (visualHeading < 0 || !visualNotes || visualNotes.startsWith('#') || visualNotes === 'DOCS_REVIEW_APPROVED') {
-  throw new Error('Agent omitted the required Visual quality assessment.');
+for (const heading of ['Visual quality', 'UI accuracy', 'Reader experience']) {
+  const index = responseLines.findIndex(line => line.trim() === `## ${heading}`);
+  const notes = responseLines.slice(index + 1).find(line => line.trim())?.trim();
+  if (index < 0 || !notes || notes.startsWith('#') || notes === 'DOCS_REVIEW_APPROVED') {
+    throw new Error(`Agent omitted the required ${heading} assessment.`);
+  }
 }
 if (phase === 'review') {
   if (result.trim().split(/\r?\n/).at(-1) !== 'DOCS_REVIEW_APPROVED') throw new Error('Independent review did not approve publication.');
   writeFileSync(resolve(ROOT, '.docs-work/review.json'), JSON.stringify({
-    approved: true, independent: true, coverageReviewed: true, sourceCommit: plan.commit,
+    approved: true, independent: true, coverageReviewed: true, uiReviewed: true, readerExperienceReviewed: true, sourceCommit: plan.commit,
     snapshotHash: plan.snapshotHash, policyHash: baselineHash(), coverageHash: coverageHash(),
     contentHash: contentHash(pages), model, reasoningEffort: 'high',
   }, null, 2) + '\n');

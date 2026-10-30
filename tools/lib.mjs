@@ -5,6 +5,7 @@ import { createHash } from 'node:crypto';
 import MarkdownIt from 'markdown-it';
 import { installVisuals, platformIcons } from './visuals.mjs';
 import { diagrams, diagramReferences, diagramText } from './diagrams.mjs';
+import { validateUI } from './ui-audit.mjs';
 
 export const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 export const APP_REPO = 'brandomoore/Plozz';
@@ -167,9 +168,10 @@ export function validateCoverage(pages, discovery, root = ROOT) {
   const policy = readBaseline(root);
   if (coverage?.schemaVersion !== 1 || !coverage.areas || !coverage.modules || !coverage.settingsCategories
     || !coverage.capabilities || !coverage.systemIntegrations) throw new Error('Missing the product coverage ledger.');
-  for (const section of ['areas', 'modules', 'settingsCategories', 'capabilities', 'systemIntegrations']) {
+  for (const section of ['areas', 'modules', 'settingsCategories', 'capabilities', 'systemIntegrations', ...(policy.uiAudit ? ['screens'] : [])]) {
+    if (!coverage[section]) throw new Error(`Missing coverage ledger section: ${section}`);
     for (const [id, record] of Object.entries(coverage[section])) {
-      validateEditorialScope([record.summary, record.answer, record.omitReason].join('\n'), `${section}/${id}`);
+      validateEditorialScope([record.summary, record.answer, record.omitReason, record.navigation, record.experience, record.conditions].join('\n'), `${section}/${id}`);
     }
   }
   if (Object.keys(coverage.areas).some(id => !policy.areas.some(area => area.id === id))) throw new Error('Unknown baseline coverage area.');
@@ -222,6 +224,7 @@ export function validateCoverage(pages, discovery, root = ROOT) {
     if (mappedAreas(record) === omitted) throw new Error(`Classify system integration ${path}: documented areas or a justified internal-code omission.`);
   }
   if (Object.keys(coverage.systemIntegrations).some(path => !discovery.systemSurfaces.includes(path))) throw new Error('Coverage contains retired or unknown system integrations.');
+  if (policy.uiAudit) validateUI(pages, coverage, discovery, { root, markdown, plainText, pageAnchors });
   return coverage;
 }
 

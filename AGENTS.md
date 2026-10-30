@@ -2,6 +2,10 @@
 
 Keep guides short, accurate and useful to someone using the app.
 
+- Explain what people can do, why they might use a feature, where to find it
+  and what happens next. Use a friendly, plain-language voice, not internal
+  implementation terminology. Preserve important limitations at the action
+  they affect instead of repeating technical caveats throughout every guide.
 - `EDITORIAL.md` owns the reader-task baseline, page-versus-section decisions
   and search/discoverability and visual-quality standards. Read it before
   writing or reviewing, including the required visual assessment and asset
@@ -30,6 +34,12 @@ Keep guides short, accurate and useful to someone using the app.
   module, settings category and system integration in `content/coverage.json`.
   Trace operating-system behavior through entitlements and extension entry
   points as well as app UI. Broad topic mentions are not workflow coverage.
+- Follow `EDITORIAL.md`'s UI-first audit contract. Walk actual screens and their
+  nested controls, not just code modules. Maintain `coverage.screens` and
+  each page's `ui` references; exact English labels and bold navigation paths
+  are validated against the frozen source. The reviewer independently checks
+  visibility, navigation, platform conditions, exclusions and reader experience.
+  Do not claim a source-only audit inspected the running app.
 - A setting can belong in a section or need no additional prose. Record a
   source-backed reason for internal-code omissions; don't manufacture pages.
 - Do not embed app revisions or verification dates in guide bodies. The site
@@ -48,6 +58,8 @@ Keep guides short, accurate and useful to someone using the app.
   AI services, or silently choose a fallback model.
 - A separate review session checks every proposed content change against the
   same frozen source. A writer cannot approve its own work.
+  Both passes include substantive `UI accuracy`, `Reader experience` and
+  `Visual quality` report sections before any approval marker.
 - During writing/review, run `npm run check:content`. Full `check` and `build`
   deliberately reject drafts until trusted source finalization records the
   independent review. The publication job then runs `npm run check`, `npm test`

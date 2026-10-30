@@ -6,6 +6,7 @@ import { pipeline } from 'node:stream/promises';
 import { createGunzip } from 'node:zlib';
 import tar from 'tar-stream';
 import { APP_REPO, validSourcePath, sha256 } from './lib.mjs';
+import { discoverUI } from './ui-audit.mjs';
 
 const LABELS = 'App/Resources/Localizable.xcstrings';
 const CATEGORIES = 'Sources/CoreUI/ProfileSettingsCategory.swift';
@@ -115,10 +116,12 @@ export async function downloadSnapshot(commit, tree, pages, work, request = fetc
   await pipeline(Readable.fromWeb(response.body), limiter, createGunzip(), extractor);
   if (remaining.size) throw new Error(`Incomplete source snapshot: ${[...remaining].join(', ')}`);
   const files = Object.fromEntries(inputs.map(file => [file.path, file.sha]).sort(([a], [b]) => a.localeCompare(b)));
+  const catalog = labelsHash ? JSON.parse(readFileSync(resolve(work, 'source-labels.json'), 'utf8')).labels : {};
   const discovery = {
     schemaVersion: 1, repository: APP_REPO, commit, fileCount: inputs.length,
     snapshotHash: sha256(JSON.stringify(files)), files,
     ...discoverSurfaces(inputs.map(file => file.path), readFileSync(resolve(source, CATEGORIES), 'utf8'), labelsHash),
+    ...discoverUI(inputs.map(file => file.path), source, catalog),
   };
   writeFileSync(resolve(work, 'discovery.json'), JSON.stringify(discovery, null, 2) + '\n');
   return discovery;
