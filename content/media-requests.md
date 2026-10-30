@@ -9,7 +9,7 @@ Plozz sends requests to your own **Seerr** server, including compatible Overseer
 3. Connect, then review **Requests are made as** for each Plozz profile.
 4. Choose a Seerr user to apply that user's permissions, quotas, approvals, and quality defaults.
 
-The server connection is shared across Plozz profiles. The acting user is chosen separately for each profile.
+The connection is shared across Plozz profiles. Choose the acting user separately for each profile.
 
 **Admin — unrestricted** is not a harmless display choice: an unlinked profile requests as the administrator, without per-user quota or approval restrictions. For Kids profiles, set a household [Parental PIN](/parental-controls/) and link a restricted Seerr user. Plozz blocks unrestricted admin requests only while that PIN enforces Kids restrictions.
 
@@ -28,7 +28,7 @@ Requests use Seerr defaults, not a separate 4K choice.
 With Seerr connected, open a TMDB-matched library show's details:
 
 1. **Apple TV:** enter the season row, then open **Request Seasons** or its current-status button. **iPhone/iPad:** tap the download-arrow **Manage Seasons** button.
-2. Select a requestable season or **Request All Missing** with its count.
+2. Select a season, or request all missing seasons with the button showing their total.
 
 Use **Refresh Status** or refresh to recheck progress; failed or declined requests need attention in Seerr. Mobile downloads save existing episodes, not requested seasons.
 

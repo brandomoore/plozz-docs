@@ -89,6 +89,13 @@ serialized only with other docs runs; app development is never locked.
 Failed writing/review passes retain their unapproved content artifacts as well
 as assessments for diagnosis. Artifact retention never bypasses the successful
 review and finalization requirements for publication.
+An ordinary validation failure gets one targeted correction pass using the
+same explicit model and the remaining portion of the phase's 50-minute budget.
+Scope violations fail immediately; failed corrections still block publication.
+After restoring and validating an existing draft, a maintainer can dispatch
+with `review_existing=true` to run the independent reviewer without paying for
+another full rewrite. This still freezes source, checks the draft, performs
+independent review, and runs every publication gate.
 
 A full independent coverage audit runs at least every 30 days, including when
 app source is unchanged. Its separate `baselineReviewedAt` clock is not reset

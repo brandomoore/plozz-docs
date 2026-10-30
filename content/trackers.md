@@ -23,7 +23,7 @@ WeTrakr appears only when configured in the app build. Follow its browser or dev
 
 ## Connect the correct account
 
-1. Choose **Connect** for the service.
+1. Select the service's connection button: **Connect** on Apple TV, or, for example, **Connect Trakt** on iPhone/iPad.
 2. Follow the displayed browser, QR, or device-code instructions and authorize your account.
 3. For AniList or MyAnimeList on Apple TV, return and enter the code requested by Plozz. Follow the actual service-specific prompt rather than reusing another tracker's code.
 4. Confirm the connected account name before watching.

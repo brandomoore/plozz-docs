@@ -8,9 +8,9 @@ Open **Settings > Appearance > Circadian Mode** in the profile you want to chang
 
 On Apple TV, choose a mode directly. On iPhone/iPad, enable **Circadian Mode**, then choose **Schedule**:
 
-- **Auto:** follows sunset and sunrise for the location selected in the settings. Choose the appropriate region; do not assume it follows your current travel location.
-- **Manual:** set **Turns on** and **Turns off** for your daily schedule.
-- **Always On:** applies the chosen strength throughout the day.
+- **Auto**: follows sunset and sunrise for the location selected in the settings. Choose the appropriate region; do not assume it follows your current travel location.
+- **Manual**: set **Turns on** and **Turns off** for your daily schedule.
+- **Always On**: applies the chosen strength throughout the day.
 - **Off** on Apple TV, or the disabled master switch on mobile: removes the effect.
 
 ## Adjust the picture

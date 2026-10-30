@@ -1,17 +1,19 @@
 # Connect a server
 
+Connect your account to browse its libraries and save your progress.
+
 ## Add a connection
 
 1. Choose your provider during setup, or open **Settings > Servers > Add Server**.
 2. For Jellyfin, Emby, or Silo, select a server or enter a hostname, IP, or URL, including custom ports/paths.
 3. Complete the provider’s sign-in:
-   - **Jellyfin:** approve the Quick Connect code from Jellyfin on another device, or use username/password.
-   - **Plex:** follow the linking instructions, then select your server.
-   - **Emby:** sign in with your server username and password.
-   - **Silo:** use its browser address, compare codes before approving, then choose a Silo profile. Enter its PIN if required.
+   - **Jellyfin**: approve Quick Connect from Jellyfin on another device, or use username/password.
+   - **Plex**: follow the linking instructions, then select your server.
+   - **Emby**: use your server username and password.
+   - **Silo**: use its browser address, compare codes before approving, then choose a Silo profile and enter its PIN if required.
 4. Choose libraries for your Plozz profile. Later, use **Settings > Libraries** to select servers, users, and libraries.
 
-Without connections, Apple TV offers **Sign In to a Server**.
+Without connections, Apple TV offers **Sign In to a Server** instead.
 
 > [!NOTE]
 > Manual Jellyfin/Emby entries try HTTPS first, then eligible HTTP alternatives before sign-in. Explicit HTTPS addresses and certificate-trust failures never fall back to HTTP.
@@ -41,9 +43,9 @@ Addresses belong to this sign-in on this device. Plozz prefers a reachable local
 
 ## Confirm access before changing settings
 
-Play a video from an enabled library; a server name alone does not confirm access.
+Play a video from an enabled library to confirm access.
 
-If discovery fails, enter the address manually. Remote viewing needs an address reachable from the playback device.
+If discovery fails, enter the address manually. Remote viewing needs a reachable address.
 
 For Tailscale, connect it on the playback device and enter the server's Tailscale IP or MagicDNS address manually; LAN discovery cannot find it.
 

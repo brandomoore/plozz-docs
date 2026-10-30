@@ -1,6 +1,6 @@
 # Appearance and language
 
-Open **Settings > Appearance** for the profile you want to customize. Presentation choices do not change server permissions.
+Open **Settings > Appearance** for the profile you want to customize. Make cards, labels, and artwork easier to read without changing your library.
 
 ## Make cards easier to read
 
@@ -34,9 +34,9 @@ Text size scales titles, descriptions, and metadata, not cards/menus; Apple TV d
 
 In **Artwork**, start with a preset:
 
-- **Recommended:** Plozz chooses artwork to suit each area.
-- **Prefer my library's artwork:** use library images first, with online fallback when missing.
-- **Prefer artwork from metadata providers:** use online images first, falling back to the library. Extra lookups can make browsing slower.
+- **Recommended**: Plozz chooses artwork to suit each area.
+- **Prefer my library's artwork**: use library images first, with online fallback when missing.
+- **Prefer artwork from metadata providers**: use online images first, falling back to the library. Extra lookups can make browsing slower.
 
 Home's Watchlist row and Watchlist page have separate artwork scopes. Downloads keep saved images.
 

@@ -9,10 +9,10 @@ Add a network folder as a library without running a Jellyfin, Plex, Emby, or Sil
 3. Select SMB, NFS, WebDAV, SFTP, or FTP. Enter the address, any required port, and the credentials requested by the form.
 4. Connect, then browse to the share, export, or folder containing your media.
 5. Give the library a name and choose its **Content**:
-   - **Mixed (Automatic):** a common parent containing different kinds of media.
-   - **Movies** or **TV Shows:** a dedicated library.
-   - **Anime:** an anime-only root; Plozz identifies films and episodes.
-   - **Personal Videos:** browse files without movie or TV matching.
+   - **Mixed (Automatic)**: a common parent containing different kinds of media.
+   - **Movies** or **TV Shows**: a dedicated library.
+   - **Anime**: an anime-only root; Plozz identifies films and episodes.
+   - **Personal Videos**: browse files without movie or TV matching.
 6. Confirm your selection with **Use This Folder** when shown, and leave Plozz open while it scans.
 
 If asked to approve a certificate or SSH host key, confirm that it matches your server before continuing.

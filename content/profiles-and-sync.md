@@ -42,7 +42,7 @@ Kids-profile [playlist-source approvals](/live-tv/#approve-playlist-sources-for-
 
 ## Set up another device
 
-Keep both devices on the same local network and allow Plozz Local Network access. On the receiver, choose **Set up from another device** during setup. On an already configured iPhone/iPad, find it in **Settings > iCloud Sync**, under **This Device**.
+Keep both devices on the same local network and allow Plozz Local Network access. During setup, choose **Set up from another device** on Apple TV or **Set Up from Another Device** on iPhone/iPad. On a configured iPhone/iPad, use **Settings > iCloud Sync > This Device > Set Up From Another Device**.
 
 On the configured device, open **Settings > iCloud Sync**. On Apple TV, also choose **Set Up Another Device**.
 

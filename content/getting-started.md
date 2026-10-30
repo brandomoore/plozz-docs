@@ -15,13 +15,13 @@ If **Help improve Plozz?** appears, choose **Share Diagnostics** or **Don't Shar
 While libraries load, **Choose later** continues setup; return to **Settings > Libraries** afterward. A failed load is not an empty library: use **Try Again** when offered and check the server user.
 
 > [!TIP]
-> Already use Plozz elsewhere? Choose **Set up from another device** during setup, then follow [Profiles and sync](/profiles-and-sync/). Silo still requires approval for each device.
+> Already use Plozz? Choose **Set up from another device** on Apple TV or **Set Up from Another Device** on iPhone/iPad. See [Profiles and sync](/profiles-and-sync/); Silo needs device approval.
 
 ## Make the setup yours
 
 Select your profile before changing **Settings**. [Customize Home and navigation](/home-and-navigation/) to choose rows and shortcuts, or adjust [cards, artwork, and language](/appearance/).
 
-On Apple TV, set up [automatic profile sign-in](/apple-tv-profiles/) for each system user. On all three platforms, [browse libraries together](/combined-libraries/).
+On Apple TV, set up [automatic profile sign-in](/apple-tv-profiles/) per system user. On all platforms, [browse libraries together](/combined-libraries/).
 
 Use [Spoiler protection](/spoiler-protection/) to hide unwatched episode information and [Circadian Mode](/circadian-mode/) for scheduled dimming. For children, configure [parental controls](/parental-controls/); hiding a row is not access control.
 

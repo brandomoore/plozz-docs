@@ -32,9 +32,9 @@ To hide scores entirely in a header, use the review-score controls in [Home and 
 
 Open **Settings > Screens & Navigation > Home > Rows > Continue Watching**:
 
-- **Artwork + logo:** wide movie or series artwork, not an episode still.
-- **Thumbnail:** episode stills or movie artwork; episode images follow spoiler masking.
-- **Poster:** upright movie or show posters, never episode thumbnails.
+- **Artwork + logo**: wide movie or series artwork, not an episode still.
+- **Thumbnail**: episode stills or movie artwork; episode images follow spoiler masking.
+- **Poster**: upright movie or show posters, never episode thumbnails.
 
 **Playback details** is separate: **Detailed** shows the play icon, progress, and playback information; **Progress only** omits playback text. Bars follow [Show progress bars](/appearance/#read-watch-indicators). **Labels** controls text below artwork: **Use default** follows Home/Recommended; **On** or **Off** overrides both. Hiding labels does not hide detailed playback information.
 
@@ -46,4 +46,4 @@ To remove an abandoned title from the row instead, use [Remove from Continue Wat
 
 In the same Continue Watching editor, set **Center button action** on Apple TV, or **When tapping an item** on iPhone/iPad. **Play** is the default; **Open detail page** lets you inspect a Home title before starting it. This does not change artwork or history.
 
-On Apple TV, the remote's **Play/Pause** button still plays the focused item directly.
+On Apple TV, the remote's play/pause button still plays the focused item directly.

@@ -9,6 +9,10 @@ on:
         description: Review all guides even if app source is unchanged
         type: boolean
         default: false
+      review_existing:
+        description: Review an existing draft on main without repeating the writer
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -40,7 +44,7 @@ jobs:
       - id: plan
         env:
           GH_TOKEN: ${{ github.token }}
-          DOCS_FORCE_REVIEW: ${{ inputs.force == true }}
+          DOCS_FORCE_REVIEW: ${{ inputs.force == true || inputs.review_existing == true }}
         run: |
           npm run source:plan
           node -e 'const fs=require("fs"); const p=JSON.parse(fs.readFileSync(".docs-work/plan.json")); fs.appendFileSync(process.env.GITHUB_OUTPUT, `mode=${p.mode}\nbase=${p.baseDocsHead}\n`);'
@@ -81,13 +85,16 @@ jobs:
           path: .docs-work
       - run: npm install --global @github/copilot@1.0.98
       - run: npm run agent:write
+        if: inputs.review_existing != true
         env:
           COPILOT_GITHUB_TOKEN: ${{ github.token }}
+      - run: npm run check:content
+        if: inputs.review_existing == true
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: write-assessment
-          path: .docs-work/write-response.txt
+          path: .docs-work/write-response*.txt
           include-hidden-files: true
           retention-days: 7
       - uses: actions/upload-artifact@v4
@@ -132,7 +139,7 @@ jobs:
         if: always()
         with:
           name: review-assessment
-          path: .docs-work/review-response.txt
+          path: .docs-work/review-response*.txt
           include-hidden-files: true
           retention-days: 7
       - uses: actions/upload-artifact@v4

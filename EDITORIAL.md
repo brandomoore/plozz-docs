@@ -158,7 +158,13 @@ interface and the system Now Playing interface. Cite the real framework wiring,
 not an unrelated literal or a comment. Check platform, visibility and editing
 state independently. System labels follow device language; this catalogue
 records their English names. Unknown system labels still block validation
-until their actual API contract is verified; do not guess or waive them.
+if quoted as exact captions; do not guess or waive them. When Apple deliberately
+owns an undocumented or variable caption, describe the verified action and
+location instead of inventing a quotation. For example, TVServices documents
+the first carousel action as playback and the second as information; "Use the
+first button to start watching or the second to view details" is precise without
+claiming a fixed OS caption. Cite the real app wiring. This does not permit
+replacing a known app-defined setting name with vague instructions.
 
 The audit ledger is maintenance evidence, not the guide itself. Use friendly
 task guides and focused, UI-ordered settings sections; do not publish a code

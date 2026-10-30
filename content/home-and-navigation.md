@@ -1,6 +1,6 @@
 # Home and navigation
 
-Customize Home, navigation, and details per Plozz profile.
+Put the titles and shortcuts you use most within easy reach. Choose your Plozz profile before customizing Home, navigation, or detail pages.
 
 ## Choose Home rows
 
@@ -40,8 +40,8 @@ For Continue Watching cards/actions, see [Spoiler protection](/spoiler-protectio
 
 Open **Settings > Screens & Navigation > Home > Filtering**. Under **Hide watched content**, choose independently:
 
-- **Recently Added:** hides completed titles from Home's Recently Added rows. It defaults off. In-progress videos and shows with unwatched episodes remain eligible.
-- **Hero & discovery:** excludes previously watched titles from eligible hero and Discovery suggestions. It defaults on.
+- **Recently Added**: hides completed titles from Home's Recently Added rows. It defaults off. In-progress videos and shows with unwatched episodes remain eligible.
+- **Hero & discovery**: excludes previously watched titles from eligible hero and Discovery suggestions. It defaults on.
 
 These are presentation filters, not history changes or access restrictions. They do not filter library Browse or clear Continue Watching. Recently Added checks a limited window of recent candidates; a short row does not prove there are no older unwatched titles. Turn its filter off to compare.
 

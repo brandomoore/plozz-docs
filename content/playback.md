@@ -1,21 +1,23 @@
 # Player controls
 
+Choose how videos play or return to your place.
+
 ## Reach the controls
 
-On Apple TV, press **Up** from the scrub surface for Playback/Audio/Subtitles; **Down** reaches information/navigation. On iPhone/iPad, tap the video: portrait uses ellipsis **Playback options**; landscape separates controls.
+On Apple TV, press up from the timeline for **Playback**, **Audio**, and **Subtitles**; press down for information and navigation. On iPhone/iPad, tap the video: portrait uses the ellipsis **Playback options** menu; landscape separates controls.
 
-Seek with the timeline; see [device controls](/platform-controls/) for touch, keyboard, and **Seek without pausing**.
+See [device controls](/platform-controls/) for seeking, touch, keyboard, and **Seek without pausing**.
 
 ## Choose audio or a version
 
-Open **Audio** for tracks or **Version** for files/editions; on iPhone/iPad, use playback options.
+Open **Audio** for tracks or **Version** for files/editions.
 
-Versions keep your server/account and position; cuts can have different timelines.
+Versions keep your server/account and position; timelines can differ.
 
-The first multi-version video asks your preference; change **Settings > Playback > Version selection**:
+The first multi-version video asks; change **Settings > Playback > Version selection**:
 
-- **Ask every time:** choose before multi-version videos, including autoplay.
-- **Choose automatically:** use a remembered or device-recommended version without the picker.
+- **Ask every time**: choose before multi-version videos, including autoplay.
+- **Choose automatically**: use a remembered or device-recommended version without the picker.
 
 **Remember series version choices** (Apple TV: **Remember per series**) reuses your version type for later episodes; disable to ignore it. Automatic mode falls back if unmatched.
 
@@ -37,7 +39,7 @@ With skipping enabled, **Use community markers** (default on) checks IntroDB/The
 
 ## Jump to a chapter
 
-Open **Chapters** below the timeline; mobile tabs scroll horizontally. Choose a chapter to jump there; paused playback stays paused.
+Open **Chapters** below the timeline; mobile tabs scroll horizontally. Choose a chapter; paused playback stays paused.
 
 Usable chapters are required. Plex/Jellyfin/Emby can supply them; otherwise, supported files, including shares/downloads, can. Images are optional; intro/credits markers are separate.
 

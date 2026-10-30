@@ -1,5 +1,7 @@
 # IPTV and Live TV
 
+Watch your channels together in one guide, or build scheduled channels from your libraries.
+
 ## Add IPTV
 
 1. Choose **IPTV** during first-run setup, or open **Sources > IPTV provider** in Live TV.
@@ -7,11 +9,11 @@
 3. Enter your provider's XMLTV address in **EPG URL (optional)**. Playlist-declared guides or Xtream listings can load automatically. **Advanced options** adds guide URLs, playlist authentication, and separate playlist/stream and guide headers. Guide headers apply only to the first guide URL's server; leave them empty to use playlist credentials.
 4. Choose **Connect**, wait for import, then open **Live TV**.
 
-On iPhone/iPad, IPTV sign-in's **Playlist file** imports an M3U from Files. That account catalogue stays local; import a replacement to update it. [Live TV source sync](/profiles-and-sync/#sync-live-tv-deliberately) has a different scope.
+On iPhone/iPad, IPTV sign-in's **Playlist file** imports an M3U from Files. This catalogue stays local; reimport to update it. [Live TV source sync](/profiles-and-sync/#sync-live-tv-deliberately) differs.
 
 Channels work without listings. Plozz supplies no channels or subscription.
 
-For video-stream/web-page import errors, use the provider's direct M3U channel-list link. XMLTV belongs in EPG, not the playlist field. Prefer HTTPS.
+For import errors, use the provider's direct M3U link, not a web page. Put XMLTV in EPG. Prefer HTTPS.
 
 ## Find on-demand titles
 
@@ -39,25 +41,19 @@ Use **Favorite** to save channels/layout; reopen from **Favorite Multiviews**. T
 
 ## Organize channels and listings
 
-Press and hold a channel to **Add to Favorites**, **Remove from Favorites**, or **Hide channel**. Favorites and hidden-channel choices belong to the active profile.
-
-In **Manage channels**, review categories, countries/languages, and **Hidden channels**. Category **Show** overrides regional filtering; **Automatic** follows your country/language choices. Regional filtering uses playlist tags, not guesses from channel names. A country OR language match is sufficient; untagged channels can move to Hidden.
-
-Use **Show channel** for an individual exception. Resetting category/region visibility does not undo individually hidden channels or scan exclusions. If channels vanish, also check **Favorites only**, **With guide listings**, and the selected source.
-
-Under **Sources**, open a playlist's **Guide options**. For wrong listings, choose **Correct guide mapping** when offered, find the channel, select its guide source, then choose the correct station and regional feed. Corrections survive guide refreshes; **Use automatic matching** removes an override.
-
-When **Review channel identities** appears in Guide options, select a saved channel and confirm **Restore saved identity** only for the same station/feed. This reuses favorites, hidden state, and guide corrections; otherwise leave the playable entry separate.
+Hold a channel for favorites or hiding actions. Open **Manage channels** for category, country/language, and hidden-channel choices. Follow [Organize channels and fix listings](/live-tv-channels/) for visibility rules, persistent guide corrections, and saved-channel identity checks.
 
 Use **Refresh sources** after changes or **Retry** for errors.
 
 On mobile, **Stop without Wi-Fi or Ethernet** in **Settings > Live TV** stops playback after detected network changes; brief cellular use remains possible. Low Data Mode pauses Live TV even on Wi-Fi; use an unrestricted connection.
 
+## Add movies and shows to a playlist connection
+
+If you connected a simple playlist source but now need authentication or its on-demand catalogue, open **Sources**, select it, then choose **Connect as IPTV account** when offered. Finish account setup; your existing source and channel preferences remain saved. Disable the old source afterward to avoid duplicate channels.
+
 ## Check unavailable channel links
 
-In **Sources**, select a playlist, open **Check channel availability**, then choose **Scan channels**. Scanning is optional and checks reachability, not playback-format support.
-
-Open **Scan results** to review reachable, unavailable, and uncertain links. Unavailable channels are hidden by the scan; uncertain results need another check. Use **Restore channel** or **Restore hidden channels** to undo scan exclusions. Other category, regional, or individual hiding rules still apply.
+Under a playlist in **Sources**, **Check channel availability** offers optional reachability checks. See [check unavailable links](/live-tv-channels/#check-unavailable-links) before scanning: unavailable channels are hidden, but you can restore them.
 
 ## Stop unexpected channel previews
 

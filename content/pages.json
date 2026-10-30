@@ -8,18 +8,20 @@
     "kind": "overview",
     "file": "getting-started.md",
     "sources": [
-      "README.md",
-      "project.yml",
-      "Sources/AppShell/AddAccountView.swift",
-      "Sources/AppShell/FirstRunProfileView.swift",
-      "Sources/AppShelliOS/PlozziOSOnboardingView.swift",
-      "Sources/AppShelliOS/PlozziOSFirstRunView.swift",
       "Sources/CoreModels/ProviderKind.swift",
-      "Sources/CoreUI/ProfileSettingsCategory.swift",
+      "Sources/AppShell/MainTabView.swift",
+      "Sources/CoreUI/SettingsCopy.swift",
       "Sources/FeatureSettings/CrashReportingConsentView.swift",
+      "Sources/AppShell/SelectLibrariesView.swift",
+      "Sources/AppShell/AddAccountView.swift",
+      "Sources/AppShelliOS/PlozziOSOnboardingView.swift",
+      "project.yml",
+      "README.md",
+      "Sources/AppShell/FirstRunProfileView.swift",
+      "Sources/AppShelliOS/PlozziOSFirstRunView.swift",
+      "Sources/CoreUI/ProfileSettingsCategory.swift",
       "Sources/AppShell/RootView.swift",
       "Sources/AppShelliOS/PlozziOSRootView.swift",
-      "Sources/AppShell/SelectLibrariesView.swift",
       "Sources/AppShelliOS/PlozziOSLibrarySelectionView.swift"
     ],
     "watch": [
@@ -29,7 +31,67 @@
       "Sources/AppShell/FirstRun",
       "Sources/AppShelliOS/PlozziOSFirstRun",
       "Sources/CoreModels/ProviderKind.swift"
-    ]
+    ],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Media Share",
+          "source": "Sources/CoreModels/ProviderKind.swift"
+        },
+        {
+          "text": "Live TV",
+          "source": "Sources/AppShell/MainTabView.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShell/MainTabView.swift"
+        },
+        {
+          "text": "Libraries",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
+        },
+        {
+          "text": "Share Diagnostics",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
+        },
+        {
+          "text": "Help improve Plozz?",
+          "source": "Sources/FeatureSettings/CrashReportingConsentView.swift"
+        },
+        {
+          "text": "Don't Share",
+          "source": "Sources/FeatureSettings/CrashReportingConsentView.swift"
+        },
+        {
+          "text": "Choose later",
+          "source": "Sources/AppShell/SelectLibrariesView.swift"
+        },
+        {
+          "text": "Try Again",
+          "source": "Sources/AppShell/SelectLibrariesView.swift"
+        },
+        {
+          "text": "Set up from another device",
+          "source": "Sources/AppShell/AddAccountView.swift"
+        },
+        {
+          "text": "Set Up from Another Device",
+          "source": "Sources/AppShelliOS/PlozziOSOnboardingView.swift"
+        }
+      ],
+      "emphasis": [
+        "Install Plozz.",
+        "Choose a source.",
+        "Connect your media.",
+        "Make it yours.",
+        "Start watching."
+      ]
+    }
   },
   {
     "slug": "servers",
@@ -40,26 +102,26 @@
     "kind": "guide",
     "file": "servers.md",
     "sources": [
+      "Sources/FeatureSettings/SettingsView.swift",
+      "Sources/FeatureSettings/ServersAndLibrariesDetailView.swift",
+      "Sources/FeatureSettings/ServerDetailView.swift",
+      "Sources/FeatureAuth/ServerAddressesView.swift",
+      "Sources/CoreUI/ServerAddressSettingsLink.swift",
+      "Sources/CoreModels/ProviderKind.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/CoreUI/SettingsCopy.swift",
+      "Sources/CoreNetworking/ServerAddressResolver.swift",
+      "Sources/FeatureAuthCore/ServerAddressesModel.swift",
+      "Sources/FeatureAuthCore/AccountReauthenticationModel.swift",
       "Sources/FeatureAuth/AuthView.swift",
       "Sources/FeatureAuth/SiloSignInView.swift",
       "Sources/AppShelliOS/AddServerView.swift",
-      "Sources/FeatureSettings/ServersAndLibrariesDetailView.swift",
-      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift",
-      "Sources/FeatureSettings/ServerDetailView.swift",
       "Sources/FeatureSettings/MyLibrariesDetailView.swift",
-      "Sources/FeatureAuth/ServerAddressesView.swift",
-      "Sources/FeatureAuthCore/ServerAddressesModel.swift",
-      "Sources/CoreNetworking/ServerAddressResolver.swift",
       "Sources/FeatureDiscovery/ServerPickerView.swift",
       "Sources/FeatureDiscoveryCore/ServerPickerViewModel.swift",
       "Sources/FeatureDiscoveryCore/ServerValidator.swift",
-      "Sources/CoreNetworking/ServerURLNormalizer.swift",
-      "Sources/FeatureAuth/AccountReauthenticationView.swift",
-      "Sources/FeatureAuthCore/AccountReauthenticationModel.swift",
-      "Sources/AppRuntime/AccountsProvidersModel.swift",
-      "Sources/AppShell/RootView.swift",
-      "Sources/AppShelliOS/PlozziOSRootView.swift"
+      "Sources/CoreNetworking/ServerURLNormalizer.swift"
     ],
     "watch": [
       "Sources/FeatureAuth",
@@ -68,7 +130,73 @@
       "Sources/FeatureSettings/Server",
       "Sources/FeatureSettings/MyLibrariesDetailView.swift",
       "Sources/ProviderSilo/SiloAuthentication.swift"
-    ]
+    ],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Servers",
+          "source": "Sources/FeatureSettings/SettingsView.swift"
+        },
+        {
+          "text": "Add Server",
+          "source": "Sources/FeatureSettings/ServersAndLibrariesDetailView.swift"
+        },
+        {
+          "text": "Sign In to a Server",
+          "source": "Sources/FeatureSettings/ServersAndLibrariesDetailView.swift"
+        },
+        {
+          "text": "Remove Everywhere",
+          "source": "Sources/FeatureSettings/ServerDetailView.swift"
+        },
+        {
+          "text": "Connection addresses",
+          "source": "Sources/FeatureSettings/ServerDetailView.swift"
+        },
+        {
+          "text": "Sign In Again",
+          "source": "Sources/FeatureSettings/ServerDetailView.swift"
+        },
+        {
+          "text": "Verify and add address",
+          "source": "Sources/FeatureAuth/ServerAddressesView.swift"
+        },
+        {
+          "text": "Add or manage addresses",
+          "source": "Sources/CoreUI/ServerAddressSettingsLink.swift"
+        },
+        {
+          "text": "Jellyfin",
+          "source": "Sources/CoreModels/ProviderKind.swift"
+        },
+        {
+          "text": "Plex",
+          "source": "Sources/CoreModels/ProviderKind.swift"
+        },
+        {
+          "text": "Emby",
+          "source": "Sources/CoreModels/ProviderKind.swift"
+        },
+        {
+          "text": "Silo",
+          "source": "Sources/CoreModels/ProviderKind.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Libraries",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
+        }
+      ],
+      "emphasis": []
+    }
   },
   {
     "slug": "network-shares",
@@ -79,26 +207,26 @@
     "kind": "guide",
     "file": "network-shares.md",
     "sources": [
-      "Sources/AppShell/UnifiedAddShareView.swift",
-      "Sources/AppShelliOS/PlozziOSUnifiedAddShareView.swift",
+      "Sources/CoreModels/ProviderKind.swift",
       "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift",
-      "Sources/FeatureSettings/ServerDetailView.swift",
-      "Sources/FeatureShareOnboarding/MediaShareTransportCatalog.swift",
-      "Sources/AppRuntime/MediaShareTransportComposition.swift",
-      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-      "Sources/ProviderShare/ShareScanner.swift",
+      "Sources/AppShell/UnifiedAddShareView.swift",
       "Sources/CoreModels/MediaItemAction.swift",
+      "Sources/FeatureSettings/ServerDetailView.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/FeatureShareOnboarding/UnifiedAddShareModel.swift",
+      "Sources/AppRuntime/MediaShareTransportComposition.swift",
+      "Sources/MediaTransportHTTP/WebDAVClient.swift",
+      "Sources/AppShelliOS/PlozziOSUnifiedAddShareView.swift",
+      "Sources/FeatureShareOnboarding/MediaShareTransportCatalog.swift",
+      "Sources/ProviderShare/ShareScanner.swift",
       "Sources/CoreModels/MediaShareLibraryConfiguration.swift",
       "Sources/MediaTransportSMB/SMBMediaTransport.swift",
       "Sources/MediaTransportNFS/NFSMediaTransport.swift",
       "Sources/TransportNFS/NFSWireTypes.swift",
-      "Sources/FeatureShareOnboarding/UnifiedAddShareModel.swift",
       "Sources/MediaTransportWebDAV/WebDAVMediaTransport.swift",
       "Sources/MediaTransportHTTP/RangeProbe.swift",
-      "Sources/MediaTransportHTTP/WebDAVClient.swift",
       "Sources/MediaTransportWebDAV/WebDAVByteSource.swift",
-      "Sources/MediaTransportSFTP/SFTPMediaTransport.swift",
-      "Sources/MediaTransportFTP/FTPMediaTransport.swift"
+      "Sources/MediaTransportSFTP/SFTPMediaTransport.swift"
     ],
     "watch": [
       "Sources/FeatureShareOnboarding/",
@@ -107,11 +235,91 @@
       "Sources/TransportNFS/",
       "Sources/CoreModels/MediaShareLibraryConfiguration.swift",
       "Sources/FeatureSettings/ServerDetailView.swift"
-    ]
+    ],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Media Share",
+          "source": "Sources/CoreModels/ProviderKind.swift"
+        },
+        {
+          "text": "Servers",
+          "source": "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
+        },
+        {
+          "text": "Add Server",
+          "source": "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
+        },
+        {
+          "text": "Add Network Share",
+          "source": "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
+        },
+        {
+          "text": "Enter an address manually",
+          "source": "Sources/AppShell/UnifiedAddShareView.swift"
+        },
+        {
+          "text": "Content",
+          "source": "Sources/AppShell/UnifiedAddShareView.swift"
+        },
+        {
+          "text": "Mixed (Automatic)",
+          "source": "Sources/AppShell/UnifiedAddShareView.swift"
+        },
+        {
+          "text": "Movies",
+          "source": "Sources/AppShell/UnifiedAddShareView.swift"
+        },
+        {
+          "text": "TV Shows",
+          "source": "Sources/AppShell/UnifiedAddShareView.swift"
+        },
+        {
+          "text": "Anime",
+          "source": "Sources/AppShell/UnifiedAddShareView.swift"
+        },
+        {
+          "text": "Personal Videos",
+          "source": "Sources/AppShell/UnifiedAddShareView.swift"
+        },
+        {
+          "text": "Use This Folder",
+          "source": "Sources/AppShell/UnifiedAddShareView.swift"
+        },
+        {
+          "text": "Browse Files",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
+          "text": "Scan now",
+          "source": "Sources/FeatureSettings/ServerDetailView.swift"
+        },
+        {
+          "text": "Scan Now",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        }
+      ],
+      "emphasis": [
+        "NFSv3"
+      ]
+    }
   },
   {
     "slug": "library",
-    "platforms": ["Apple TV", "iPhone", "iPad"],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
     "title": "Find and organize media",
     "seoTitle": "Browse, search, and organize your media in Plozz",
     "description": "Browse titles and collections, combine filters, watch trailers, choose a copy, manage history, and recover missing or incomplete library results.",
@@ -119,26 +327,26 @@
     "kind": "guide",
     "file": "library.md",
     "sources": [
-      "Sources/FeatureHome/LibraryBrowseView.swift",
-      "Sources/FeatureHomeCore/LibraryBrowseViewModel.swift",
+      "Sources/AppShell/MainTabView.swift",
+      "Sources/FeatureSearchCore/SearchSection.swift",
+      "Sources/CoreModels/LibraryPresentationSettings.swift",
       "Sources/CoreUI/LibraryFilterMenu.swift",
+      "Sources/CoreUI/ContentStateView.swift",
+      "Sources/CoreUI/LibraryCollectionLoadingView.swift",
+      "Sources/CoreModels/MediaItemAction.swift",
+      "Sources/FeatureHome/ExtrasRowView.swift",
+      "Sources/FeatureHome/DetailHeroView.swift",
+      "Sources/CoreModels/MediaItem+Trailer.swift",
+      "Sources/CoreUI/YouTubeTrailerOpening.swift",
+      "Sources/CoreUI/SettingsCopy.swift",
+      "Sources/AppRuntime/MediaItemActionCoordinator.swift",
+      "Sources/FeatureHomeCore/LibraryBrowseViewModel.swift",
+      "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
+      "Sources/FeatureHome/LibraryBrowseView.swift",
       "Sources/CoreModels/LibraryQuery.swift",
       "Sources/FeatureSearch/SearchView.swift",
       "Sources/AppShelliOS/PlozziOSLibraryView.swift",
-      "Sources/AppRuntime/UniversalWatchlistRuntime.swift",
-      "Sources/FeatureWatchlistCore/WatchlistModel.swift",
-      "Sources/FeatureHome/DetailExtrasView.swift",
-      "Sources/CoreModels/MediaItemActionCatalog.swift",
-      "Sources/AppRuntime/WatchMutationApplier.swift",
-      "Sources/FeatureHome/SeriesDetailView.swift",
-      "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
-      "Sources/CoreModels/MediaItem+Trailer.swift",
-      "Sources/CoreUI/YouTubeTrailerOpening.swift",
-      "Sources/FeatureHome/DetailHeroView.swift",
-      "Sources/FeatureHomeCore/ItemDetailViewModel.swift",
-      "Sources/MetadataKit/DetailMetadataResolver.swift",
-      "Sources/AppShell/HomeTab.swift",
-      "Sources/AppShell/SearchTab.swift"
+      "Sources/AppRuntime/UniversalWatchlistRuntime.swift"
     ],
     "watch": [
       "Sources/FeatureHome",
@@ -147,11 +355,128 @@
       "Sources/CoreUI/YouTubeTrailerOpening.swift",
       "Sources/MetadataKit/DetailMetadataResolver.swift",
       "Sources/MetadataKit/TMDbMetadataProvider.swift"
-    ]
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Search",
+          "source": "Sources/AppShell/MainTabView.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShell/MainTabView.swift"
+        },
+        {
+          "text": "Not in Your Library",
+          "source": "Sources/FeatureSearchCore/SearchSection.swift"
+        },
+        {
+          "text": "Browse",
+          "source": "Sources/CoreModels/LibraryPresentationSettings.swift"
+        },
+        {
+          "text": "Genre",
+          "source": "Sources/CoreUI/LibraryFilterMenu.swift"
+        },
+        {
+          "text": "Year",
+          "source": "Sources/CoreUI/LibraryFilterMenu.swift"
+        },
+        {
+          "text": "Clear Filters",
+          "source": "Sources/CoreUI/LibraryFilterMenu.swift"
+        },
+        {
+          "text": "Preparing library filter…",
+          "source": "Sources/CoreUI/LibraryFilterMenu.swift"
+        },
+        {
+          "text": "Cancel",
+          "source": "Sources/CoreUI/LibraryFilterMenu.swift"
+        },
+        {
+          "text": "Try Again",
+          "source": "Sources/CoreUI/ContentStateView.swift"
+        },
+        {
+          "text": "Details",
+          "source": "Sources/CoreUI/ContentStateView.swift"
+        },
+        {
+          "text": "Checking collections...",
+          "source": "Sources/CoreUI/LibraryCollectionLoadingView.swift"
+        },
+        {
+          "text": "Go to Show",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
+          "text": "Go to Movie",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
+          "text": "Go to Episode",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
+          "text": "Browse Files",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
+          "text": "Add to Watchlist",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
+          "text": "Mark as Watched",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
+          "text": "Mark as Unwatched",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
+          "text": "Mark Watched Up to Here",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
+          "text": "Remove from Continue Watching",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
+          "text": "Extras",
+          "source": "Sources/FeatureHome/ExtrasRowView.swift"
+        },
+        {
+          "text": "More actions",
+          "source": "Sources/FeatureHome/DetailHeroView.swift"
+        },
+        {
+          "text": "Trailer",
+          "source": "Sources/CoreModels/MediaItem+Trailer.swift"
+        },
+        {
+          "text": "Watch on YouTube",
+          "source": "Sources/CoreModels/MediaItem+Trailer.swift"
+        },
+        {
+          "text": "Couldn't open YouTube",
+          "source": "Sources/CoreUI/YouTubeTrailerOpening.swift"
+        },
+        {
+          "text": "Libraries",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
+        }
+      ],
+      "emphasis": []
+    }
   },
   {
     "slug": "watchlist",
-    "platforms": ["Apple TV", "iPhone", "iPad"],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
     "title": "Save and browse your Watchlist",
     "seoTitle": "Save, filter, and sort your Plozz Watchlist",
     "description": "Save movies and shows, filter or sort Watchlist entries, and understand profile identity, missing titles, and changes to connected server and tracker lists.",
@@ -159,26 +484,26 @@
     "kind": "guide",
     "file": "watchlist.md",
     "sources": [
+      "Sources/CoreModels/MediaItemAction.swift",
+      "Sources/FeatureHome/WatchlistBrowseView.swift",
+      "Sources/AppShelliOS/PlozziOSRootView.swift",
+      "Sources/CoreUI/PosterCardView.swift",
+      "Sources/CoreUI/WatchlistBrowseControls.swift",
       "Sources/CoreModels/WatchlistBrowsePreferences.swift",
+      "Sources/CoreUI/BrowseQueryControls.swift",
+      "Sources/CoreModels/MediaProvider.swift",
+      "Sources/AppShell/ProfileServerIdentityPromptView.swift",
+      "Sources/FeatureWatchlistCore/WatchlistModel.swift",
+      "Sources/AppRuntime/UniversalWatchlistRuntime.swift",
       "Sources/CoreModels/ProfileSettingsSnapshot.swift",
       "Sources/CoreModels/MediaItemActionCatalog.swift",
-      "Sources/CoreUI/BrowseQueryControls.swift",
-      "Sources/CoreUI/WatchlistBrowseControls.swift",
-      "Sources/FeatureHome/WatchlistBrowseView.swift",
       "Sources/FeatureHomeCore/WatchlistBrowseModel.swift",
       "Sources/FeatureHomeCore/HomeViewModel.swift",
-      "Sources/AppShelliOS/PlozziOSRootView.swift",
       "Sources/AppShell/HomeTab.swift",
-      "Sources/AppRuntime/UniversalWatchlistRuntime.swift",
       "Sources/AppRuntime/MediaItemActionCoordinator.swift",
       "Sources/FeatureWatchlistCore/WatchlistUnion.swift",
       "Sources/FeatureHome/DetailHeroView.swift",
-      "Sources/AppShelliOS/PlozziOSHeroViews.swift",
-      "Sources/ProviderJellyfin/MediaBrowserWatchlistDestination.swift",
-      "Sources/ProviderPlex/PlexWatchlistDestination.swift",
-      "Sources/ProviderSilo/SiloWatchlistDestination.swift",
-      "Sources/WetrakrService/WetrakrWatchlistDestination.swift",
-      "Sources/CoreModels/ProfileServerIdentityPrompts.swift"
+      "Sources/AppShelliOS/PlozziOSHeroViews.swift"
     ],
     "watch": [
       "Sources/CoreModels/Watchlist",
@@ -187,11 +512,87 @@
       "Sources/FeatureHomeCore/WatchlistBrowseModel.swift",
       "Sources/FeatureWatchlistCore/",
       "Sources/AppRuntime/UniversalWatchlistRuntime.swift"
-    ]
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Add to Watchlist",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
+          "text": "Remove from Watchlist",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
+          "text": "Watchlist",
+          "source": "Sources/FeatureHome/WatchlistBrowseView.swift"
+        },
+        {
+          "text": "More",
+          "source": "Sources/AppShelliOS/PlozziOSRootView.swift",
+          "system": "uikit-more"
+        },
+        {
+          "text": "Removing…",
+          "source": "Sources/CoreUI/PosterCardView.swift"
+        },
+        {
+          "text": "Filter",
+          "source": "Sources/CoreUI/WatchlistBrowseControls.swift"
+        },
+        {
+          "text": "Clear Filters",
+          "source": "Sources/CoreUI/WatchlistBrowseControls.swift"
+        },
+        {
+          "text": "All",
+          "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"
+        },
+        {
+          "text": "Movies",
+          "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"
+        },
+        {
+          "text": "TV Shows",
+          "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"
+        },
+        {
+          "text": "Sort By",
+          "source": "Sources/CoreUI/BrowseQueryControls.swift"
+        },
+        {
+          "text": "Order",
+          "source": "Sources/CoreUI/BrowseQueryControls.swift"
+        },
+        {
+          "text": "Date Added",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Release Date",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Name",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Don't use this server's watchlist",
+          "source": "Sources/AppShell/ProfileServerIdentityPromptView.swift"
+        }
+      ],
+      "emphasis": [
+        "Plozz profile"
+      ]
+    }
   },
   {
     "slug": "customize-libraries",
-    "platforms": ["Apple TV", "iPhone", "iPad"],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
     "title": "Customize library pages",
     "seoTitle": "Customize Plozz library tabs, rows, and collection covers",
     "description": "Arrange library tabs and Recommended rows, choose collection-cover shapes, and size Apple TV headers without changing files, permissions, or Home rows.",
@@ -199,26 +600,26 @@
     "kind": "guide",
     "file": "customize-libraries.md",
     "sources": [
-      "Sources/FeatureSettings/SettingsView.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/FeatureSettings/LibraryPresentationSettingsView.swift",
-      "Sources/CoreUI/LiftableReorderList.swift",
       "Sources/CoreModels/LibraryPresentationSettings.swift",
-      "Sources/CoreModels/ProfileSettingsSnapshot.swift",
-      "Sources/AppRuntime/LibraryPresentationLoader.swift",
-      "Sources/AppShell/ProfileSettingsModel.swift",
+      "Sources/CoreModels/CollectionCoverLayout.swift",
+      "Sources/CoreUI/CollectionCoverLayoutPicker.swift",
+      "Sources/FeatureSettings/HomeRowsSettingsView.swift",
+      "Sources/FeatureSettings/HeroLogoSizeControl.swift",
+      "Sources/FeatureHome/LibraryBrowseView.swift",
+      "Sources/CoreUI/ContentStateView.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/AppRuntime/LibraryPresentationLoader.swift",
+      "Sources/FeatureSettings/SettingsView.swift",
+      "Sources/CoreUI/LiftableReorderList.swift",
+      "Sources/CoreModels/ProfileSettingsSnapshot.swift",
+      "Sources/AppShell/ProfileSettingsModel.swift",
       "Sources/AppShelliOS/PlozziOSSettingsModel.swift",
       "Sources/AppShelliOS/PlozziOSLibraryRoute.swift",
       "Sources/FeatureHomeCore/LibraryBrowseViewModel.swift",
-      "Sources/FeatureHome/LibraryBrowseView.swift",
       "Sources/AppShelliOS/PlozziOSLibraryView.swift",
-      "Sources/FeatureSettings/HeroLogoSizeControl.swift",
-      "Sources/CoreModels/CardCaptionSettings.swift",
-      "Sources/CoreModels/HeroTextSize.swift",
-      "Sources/CoreModels/CollectionCoverLayout.swift",
-      "Sources/CoreUI/CollectionCoverLayoutPicker.swift",
-      "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+      "Sources/CoreModels/CardCaptionSettings.swift"
     ],
     "watch": [
       "Sources/FeatureSettings/LibraryPresentationSettingsView.swift",
@@ -227,11 +628,116 @@
       "Sources/FeatureHomeCore/LibraryBrowseViewModel.swift",
       "Sources/FeatureHome/LibraryBrowseView.swift",
       "Sources/AppShelliOS/PlozziOSLibrary"
-    ]
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Screens & Navigation",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Libraries",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Library Navigation",
+          "source": "Sources/FeatureSettings/LibraryPresentationSettingsView.swift"
+        },
+        {
+          "text": "Hidden",
+          "source": "Sources/FeatureSettings/LibraryPresentationSettingsView.swift"
+        },
+        {
+          "text": "Reset Navigation",
+          "source": "Sources/FeatureSettings/LibraryPresentationSettingsView.swift"
+        },
+        {
+          "text": "Reset Rows",
+          "source": "Sources/FeatureSettings/LibraryPresentationSettingsView.swift"
+        },
+        {
+          "text": "Collection covers",
+          "source": "Sources/FeatureSettings/LibraryPresentationSettingsView.swift"
+        },
+        {
+          "text": "Recommended Page",
+          "source": "Sources/FeatureSettings/LibraryPresentationSettingsView.swift"
+        },
+        {
+          "text": "Recommended",
+          "source": "Sources/CoreModels/LibraryPresentationSettings.swift"
+        },
+        {
+          "text": "Browse",
+          "source": "Sources/CoreModels/LibraryPresentationSettings.swift"
+        },
+        {
+          "text": "Collections",
+          "source": "Sources/CoreModels/LibraryPresentationSettings.swift"
+        },
+        {
+          "text": "Playlists",
+          "source": "Sources/CoreModels/LibraryPresentationSettings.swift"
+        },
+        {
+          "text": "Auto",
+          "source": "Sources/CoreModels/CollectionCoverLayout.swift"
+        },
+        {
+          "text": "Posters",
+          "source": "Sources/CoreModels/CollectionCoverLayout.swift"
+        },
+        {
+          "text": "Landscape",
+          "source": "Sources/CoreModels/CollectionCoverLayout.swift"
+        },
+        {
+          "text": "Covers",
+          "source": "Sources/CoreUI/CollectionCoverLayoutPicker.swift"
+        },
+        {
+          "text": "Home",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Rows",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Card labels",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Logo size",
+          "source": "Sources/FeatureSettings/HeroLogoSizeControl.swift"
+        },
+        {
+          "text": "Text size",
+          "source": "Sources/FeatureSettings/HeroLogoSizeControl.swift"
+        },
+        {
+          "text": "No visible rows",
+          "source": "Sources/FeatureHome/LibraryBrowseView.swift"
+        },
+        {
+          "text": "Try Again",
+          "source": "Sources/CoreUI/ContentStateView.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        }
+      ],
+      "emphasis": []
+    }
   },
   {
     "slug": "combined-libraries",
-    "platforms": ["Apple TV", "iPhone", "iPad"],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
     "title": "Browse libraries together",
     "seoTitle": "Browse All Libraries in Plozz on Apple TV, iPhone, and iPad",
     "description": "Show All Libraries and library shortcuts, browse several servers together, choose a copy, and use Apple TV's letter rail with its loading limits.",
@@ -240,22 +746,25 @@
     "file": "combined-libraries.md",
     "sources": [
       "Sources/CoreModels/AllLibrariesBrowse.swift",
-      "Sources/CoreModels/NavigationRailPlan.swift",
-      "Sources/AppShell/MainTabViewSupport.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/CoreUI/LiftableReorderList.swift",
+      "Sources/FeatureSettings/NavigationLibrariesDetailView.swift",
+      "Sources/AppShelliOS/PlozziOSRootView.swift",
+      "Sources/FeatureHome/DetailHeroView.swift",
+      "Sources/CoreModels/LibraryPresentationSettings.swift",
       "Sources/AppShell/MainTabView.swift",
-      "Sources/AppShell/HomeTab.swift",
+      "Sources/CoreUI/SettingsCopy.swift",
+      "Sources/CoreUI/ProfileSettingsCategory.swift",
       "Sources/FeatureHomeCore/AggregatedLibraryProvider.swift",
-      "Sources/FeatureHomeCore/AllLibrariesProvider.swift",
-      "Sources/FeatureHome/LibraryBrowseView.swift",
-      "Sources/FeatureHomeCore/LibraryBrowseViewModel.swift",
+      "Sources/AppShelliOS/PlozziOSAllLibrariesDestinationView.swift",
       "Sources/FeatureHomeCore/LibraryAlphabetState.swift",
       "Sources/CoreUI/LibraryAlphabetMenu.swift",
-      "Sources/AppShelliOS/PlozziOSLibraryView.swift",
-      "Sources/AppShelliOS/PlozziOSRootView.swift",
-      "Sources/AppShelliOS/PlozziOSAllLibrariesDestinationView.swift",
-      "Sources/FeatureHome/DetailHeroView.swift",
-      "Sources/FeatureSettings/NavigationLibrariesDetailView.swift",
-      "Sources/FeatureSettings/PreferenceDetailViews.swift"
+      "Sources/FeatureHome/LibraryBrowseView.swift",
+      "Sources/CoreModels/NavigationRailPlan.swift",
+      "Sources/AppShell/MainTabViewSupport.swift",
+      "Sources/AppShell/HomeTab.swift",
+      "Sources/FeatureHomeCore/AllLibrariesProvider.swift",
+      "Sources/FeatureHomeCore/LibraryBrowseViewModel.swift"
     ],
     "watch": [
       "Sources/CoreModels/Navigation",
@@ -264,7 +773,61 @@
       "Sources/FeatureHome/Library",
       "Sources/FeatureHomeCore/AllLibrariesProvider.swift",
       "Sources/AppShelliOS/PlozziOSAllLibraries"
-    ]
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "All Libraries",
+          "source": "Sources/CoreModels/AllLibrariesBrowse.swift"
+        },
+        {
+          "text": "App navigation",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Hide or Reorder Navigation",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Show",
+          "source": "Sources/CoreUI/LiftableReorderList.swift"
+        },
+        {
+          "text": "Hidden",
+          "source": "Sources/FeatureSettings/NavigationLibrariesDetailView.swift"
+        },
+        {
+          "text": "More",
+          "source": "Sources/AppShelliOS/PlozziOSRootView.swift",
+          "system": "uikit-more"
+        },
+        {
+          "text": "More actions",
+          "source": "Sources/FeatureHome/DetailHeroView.swift"
+        },
+        {
+          "text": "Browse",
+          "source": "Sources/CoreModels/LibraryPresentationSettings.swift"
+        },
+        {
+          "text": "Search",
+          "source": "Sources/AppShell/MainTabView.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShell/MainTabView.swift"
+        },
+        {
+          "text": "Libraries",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
+        },
+        {
+          "text": "Screens & Navigation",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        }
+      ],
+      "emphasis": []
+    }
   },
   {
     "slug": "home-and-navigation",
@@ -275,26 +838,26 @@
     "kind": "reference",
     "file": "home-and-navigation.md",
     "sources": [
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/FeatureSettings/HomeRowsSettingsView.swift",
       "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
-      "Sources/FeatureSettings/HeroSettingsControls.swift",
-      "Sources/FeatureSettings/NavigationLibrariesDetailView.swift",
+      "Sources/CoreModels/CardCaptionSettings.swift",
       "Sources/FeatureSettings/CollectionSectionSettingsView.swift",
-      "Sources/FeatureSettings/PreferenceDetailViews.swift",
-      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-      "Sources/CoreModels/HomeLibraryVisibility.swift",
-      "Sources/FeatureHomeCore/HomeAggregator.swift",
-      "Sources/CoreModels/ContinueWatchingPolicy.swift",
-      "Sources/CoreModels/NavigationContentAvailability.swift",
-      "Sources/AppShell/MainTabView.swift",
-      "Sources/AppShelliOS/PlozziOSRootView.swift",
-      "Sources/AppRuntime/HeroDiscoveryRuntime.swift",
-      "Sources/FeatureHome/HomeView.swift",
-      "Sources/CoreModels/HomeRecentlyAddedPolicy.swift",
-      "Sources/CoreModels/HeroSettings.swift",
+      "Sources/CoreModels/CollectionSection.swift",
+      "Sources/CoreUI/HomeSectionStatusView.swift",
+      "Sources/CoreModels/HomeSectionIssue.swift",
+      "Sources/FeatureSettings/ContinueWatchingNextUpControl.swift",
+      "Sources/FeatureSettings/HeroSettingsControls.swift",
+      "Sources/CoreUI/HomeLayoutOptionCard.swift",
       "Sources/CoreModels/NavigationStyle.swift",
-      "Sources/CoreModels/NavigationRailPlan.swift",
-      "Sources/CoreModels/NavigationStyleSettingsStore.swift"
+      "Sources/FeatureSettings/NavigationLibrariesDetailView.swift",
+      "Sources/AppShell/NavigationRailView.swift",
+      "Sources/CoreUI/LiftableReorderList.swift",
+      "Sources/AppShelliOS/PlozziOSRootView.swift",
+      "Sources/CoreUI/ProfileSettingsCategory.swift",
+      "Sources/CoreModels/ContinueWatchingPolicy.swift",
+      "Sources/FeatureHomeCore/HomeAggregator.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift"
     ],
     "watch": [
       "Sources/FeatureSettings/Home",
@@ -303,7 +866,214 @@
       "Sources/CoreModels/Navigation",
       "Sources/FeatureSettings/Collection",
       "Sources/FeatureSettings/NavigationLibrariesDetailView.swift"
-    ]
+    ],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "App navigation",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Hide or Reorder Navigation",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Movie & show details",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Home",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Rows",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Filtering",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Add row",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Remove from Home",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Edit",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Done",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Reorder",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Layout",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Hero",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Showcase",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Recently Added",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Hero & discovery",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Hidden",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Discovery",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Match server",
+          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+        },
+        {
+          "text": "Combined rows",
+          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+        },
+        {
+          "text": "Custom",
+          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+        },
+        {
+          "text": "From a collection",
+          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+        },
+        {
+          "text": "Continue Watching",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Row name",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
+          "text": "Add to Home",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
+          "text": "Content",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
+          "text": "Save changes",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
+          "text": "Posters",
+          "source": "Sources/CoreModels/CollectionSection.swift"
+        },
+        {
+          "text": "Landscape",
+          "source": "Sources/CoreModels/CollectionSection.swift"
+        },
+        {
+          "text": "Featured",
+          "source": "Sources/CoreModels/CollectionSection.swift"
+        },
+        {
+          "text": "Details",
+          "source": "Sources/CoreUI/HomeSectionStatusView.swift"
+        },
+        {
+          "text": "Retry",
+          "source": "Sources/CoreUI/HomeSectionStatusView.swift"
+        },
+        {
+          "text": "No titles to show",
+          "source": "Sources/CoreModels/HomeSectionIssue.swift"
+        },
+        {
+          "text": "Section unavailable in the latest refresh",
+          "source": "Sources/CoreModels/HomeSectionIssue.swift"
+        },
+        {
+          "text": "Include Next Up",
+          "source": "Sources/FeatureSettings/ContinueWatchingNextUpControl.swift"
+        },
+        {
+          "text": "Hero content sources",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Show hero",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Discovery providers",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Fullscreen Hero",
+          "source": "Sources/CoreUI/HomeLayoutOptionCard.swift"
+        },
+        {
+          "text": "Hide watched content",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Pinned Sidebar",
+          "source": "Sources/CoreModels/NavigationStyle.swift"
+        },
+        {
+          "text": "Sidebar",
+          "source": "Sources/CoreModels/NavigationStyle.swift"
+        },
+        {
+          "text": "Top Bar",
+          "source": "Sources/CoreModels/NavigationStyle.swift"
+        },
+        {
+          "text": "Reset Navigation",
+          "source": "Sources/FeatureSettings/NavigationLibrariesDetailView.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/FeatureSettings/NavigationLibrariesDetailView.swift"
+        },
+        {
+          "text": "All Libraries",
+          "source": "Sources/AppShell/NavigationRailView.swift"
+        },
+        {
+          "text": "Show",
+          "source": "Sources/CoreUI/LiftableReorderList.swift"
+        },
+        {
+          "text": "More",
+          "source": "Sources/AppShelliOS/PlozziOSRootView.swift",
+          "system": "uikit-more"
+        },
+        {
+          "text": "Screens & Navigation",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        }
+      ],
+      "emphasis": []
+    }
   },
   {
     "slug": "playback",
@@ -315,25 +1085,25 @@
     "file": "playback.md",
     "sources": [
       "Sources/FeaturePlayback/PlayerControls.swift",
-      "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
-      "Sources/FeatureHomeCore/PlaybackVersionChoiceModel.swift",
-      "Sources/FeatureHomeCore/DetailPlaybackSelection.swift",
-      "Sources/FeaturePlayback/PlayerMoreMenu.swift",
-      "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
+      "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift",
+      "Sources/CoreModels/PlaybackVersionSelectionMode.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
-      "Sources/MetadataKit/CommunitySkipMarkers.swift",
-      "Sources/CoreModels/PlaybackSettings.swift",
-      "Sources/FeaturePlayback/CastPanelView.swift",
-      "Sources/FeaturePlayback/PlayerVideoZoom.swift",
-      "Sources/FeaturePlayback/PlayerChapterPanel.swift",
-      "Sources/FeaturePlayback/PlaybackOptionsPane.swift",
-      "Sources/FeaturePlayback/PlayerViewModel.swift",
-      "Sources/AppShell/MainTabViewSupport.swift",
-      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
       "Sources/CoreUI/PlaybackResumePrompt.swift",
-      "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
-      "Sources/FeatureSettings/SkipMarkerSettingsControl.swift"
+      "Sources/FeatureSettings/SkipMarkerSettingsControl.swift",
+      "Sources/FeaturePlayback/PlayerVideoZoom.swift",
+      "Sources/FeaturePlayback/PlaybackOptionsPane.swift",
+      "Sources/FeaturePlayback/PlayerMoreMenu.swift",
+      "Sources/FeaturePlayback/CastPanelView.swift",
+      "Sources/MetadataKit/CommunitySkipMarkers.swift",
+      "Sources/FeatureHomeCore/PlaybackVersionChoiceModel.swift",
+      "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
+      "Sources/FeatureHomeCore/DetailPlaybackSelection.swift",
+      "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
+      "Sources/CoreModels/PlaybackSettings.swift",
+      "Sources/FeaturePlayback/PlayerChapterPanel.swift",
+      "Sources/FeaturePlayback/PlayerViewModel.swift",
+      "Sources/AppShell/MainTabViewSupport.swift"
     ],
     "watch": [
       "Sources/FeaturePlayback/Player",
@@ -342,7 +1112,173 @@
       "Sources/AppShelliOS/PlozziOSPlayer",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/CoreModels/Playback"
-    ]
+    ],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Playback",
+          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "Audio",
+          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "Subtitles",
+          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "Chapters",
+          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "Episodes",
+          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "Playlist",
+          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "Version",
+          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "Cast",
+          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "Playback options",
+          "source": "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift"
+        },
+        {
+          "text": "Ask every time",
+          "source": "Sources/CoreModels/PlaybackVersionSelectionMode.swift"
+        },
+        {
+          "text": "Choose automatically",
+          "source": "Sources/CoreModels/PlaybackVersionSelectionMode.swift"
+        },
+        {
+          "text": "Remember series version choices",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Resume rewind",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Version selection",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Remember per series",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Ask to resume or start over",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Rewind on resume",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Show Up Next card",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Seek without pausing",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Resume",
+          "source": "Sources/CoreUI/PlaybackResumePrompt.swift"
+        },
+        {
+          "text": "Start Over",
+          "source": "Sources/CoreUI/PlaybackResumePrompt.swift"
+        },
+        {
+          "text": "Skip intros, credits & more",
+          "source": "Sources/FeatureSettings/SkipMarkerSettingsControl.swift"
+        },
+        {
+          "text": "Customize",
+          "source": "Sources/FeatureSettings/SkipMarkerSettingsControl.swift"
+        },
+        {
+          "text": "Default behavior",
+          "source": "Sources/FeatureSettings/SkipMarkerSettingsControl.swift"
+        },
+        {
+          "text": "Show skip button",
+          "source": "Sources/FeatureSettings/SkipMarkerSettingsControl.swift"
+        },
+        {
+          "text": "Skip instantly",
+          "source": "Sources/FeatureSettings/SkipMarkerSettingsControl.swift"
+        },
+        {
+          "text": "Skip after",
+          "source": "Sources/FeatureSettings/SkipMarkerSettingsControl.swift"
+        },
+        {
+          "text": "Enable for",
+          "source": "Sources/FeatureSettings/SkipMarkerSettingsControl.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/FeatureSettings/SkipMarkerSettingsControl.swift"
+        },
+        {
+          "text": "Use default",
+          "source": "Sources/FeatureSettings/SkipMarkerSettingsControl.swift"
+        },
+        {
+          "text": "Use community markers",
+          "source": "Sources/FeatureSettings/SkipMarkerSettingsControl.swift"
+        },
+        {
+          "text": "Normal",
+          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
+        },
+        {
+          "text": "Crop",
+          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
+        },
+        {
+          "text": "Stretch",
+          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
+        },
+        {
+          "text": "Custom",
+          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
+        },
+        {
+          "text": "Zoom Mode",
+          "source": "Sources/FeaturePlayback/PlaybackOptionsPane.swift"
+        },
+        {
+          "text": "Video",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "See more",
+          "source": "Sources/FeaturePlayback/CastPanelView.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        }
+      ],
+      "emphasis": []
+    }
   },
   {
     "slug": "external-players",
@@ -353,12 +1289,15 @@
     "kind": "guide",
     "file": "external-players.md",
     "sources": [
-      "Sources/CoreModels/ExternalPlayer.swift",
-      "Sources/CoreModels/ExternalPlayerSettingsModel.swift",
-      "Sources/CoreModels/StreamingQuality.swift",
       "Sources/FeatureSettings/ExternalPlayerSettingsView.swift",
-      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/CoreModels/ExternalPlayer.swift",
+      "Sources/CoreModels/StreamingQuality.swift",
+      "Sources/AppShelliOS/PlozziOSStreamingQuality.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/CoreUI/ProfileSettingsCategory.swift",
       "Sources/AppRuntime/ExternalPlaybackRuntime.swift",
+      "Sources/CoreModels/ExternalPlayerSettingsModel.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/AppRuntime/ExternalPlayerSupport.swift",
       "Sources/AppRuntime/WatchMutationFactory.swift",
       "Sources/AppRuntime/WatchMutationApplier.swift",
@@ -369,10 +1308,7 @@
       "Sources/AppShelliOS/PlozziOSPlayerView.swift",
       "Sources/AppShelliOS/PlozziOSAppModel.swift",
       "Sources/AppShelliOS/PlozziOSRootView.swift",
-      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-      "App/Resources/Info.plist",
-      "App/PlozziOS/Info.plist",
-      "Sources/CoreUI/YouTubeTrailerOpening.swift"
+      "App/Resources/Info.plist"
     ],
     "watch": [
       "Sources/CoreModels/ExternalPlayer",
@@ -381,11 +1317,81 @@
       "Sources/FeatureSettings/ExternalPlayerSettingsView.swift",
       "Sources/AppShell/PlayerPresentation.swift",
       "Sources/AppShelliOS/PlozziOSRootView.swift"
-    ]
+    ],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Advanced",
+          "source": "Sources/FeatureSettings/ExternalPlayerSettingsView.swift"
+        },
+        {
+          "text": "External player",
+          "source": "Sources/FeatureSettings/ExternalPlayerSettingsView.swift"
+        },
+        {
+          "text": "Default player",
+          "source": "Sources/FeatureSettings/ExternalPlayerSettingsView.swift"
+        },
+        {
+          "text": "Custom player",
+          "source": "Sources/FeatureSettings/ExternalPlayerSettingsView.swift"
+        },
+        {
+          "text": "Save and use custom player",
+          "source": "Sources/FeatureSettings/ExternalPlayerSettingsView.swift"
+        },
+        {
+          "text": "Infuse",
+          "source": "Sources/CoreModels/ExternalPlayer.swift"
+        },
+        {
+          "text": "VLC",
+          "source": "Sources/CoreModels/ExternalPlayer.swift"
+        },
+        {
+          "text": "Native Player",
+          "source": "Sources/CoreModels/ExternalPlayer.swift"
+        },
+        {
+          "text": "Plozz",
+          "source": "Sources/CoreModels/ExternalPlayer.swift"
+        },
+        {
+          "text": "Maximum",
+          "source": "Sources/CoreModels/StreamingQuality.swift"
+        },
+        {
+          "text": "Force transcoding",
+          "source": "Sources/AppShelliOS/PlozziOSStreamingQuality.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Playback",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        }
+      ],
+      "emphasis": [
+        "Install the player",
+        "Start a supported movie or episode",
+        "Infuse 8.4.7 or later"
+      ]
+    }
   },
   {
     "slug": "streaming-quality",
-    "platforms": ["Apple TV", "iPhone", "iPad"],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
     "title": "Streaming quality",
     "seoTitle": "Set Plozz streaming quality and buffering",
     "description": "Set mobile network quality, change one stream, distinguish conversion from original playback, and understand video buffering.",
@@ -394,25 +1400,25 @@
     "file": "streaming-quality.md",
     "sources": [
       "Sources/AppShelliOS/PlozziOSStreamingQuality.swift",
-      "Sources/AppRuntime/ExternalPlaybackRuntime.swift",
-      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-      "Sources/AppShelliOS/PlozziOSPlayerView.swift",
       "Sources/CoreModels/StreamingQuality.swift",
+      "Sources/FeaturePlayback/PlayerMoreMenu.swift",
+      "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift",
+      "Sources/AppShelliOS/PlozziOSPlayerView.swift",
+      "Sources/FeaturePlayback/CurrentStreamDetailsSection.swift",
+      "Sources/CoreUI/PlaybackFailureView.swift",
+      "Sources/FeatureSettings/PlaybackReadAheadControl.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/CoreUI/ProfileSettingsCategory.swift",
       "Sources/CoreModels/StreamingQualitySupport.swift",
+      "Sources/AppRuntime/ExternalPlaybackRuntime.swift",
       "Sources/ProviderJellyfin/JellyfinStreamingQuality.swift",
       "Sources/ProviderPlex/PlexStreamingQuality.swift",
       "Sources/ProviderSilo/SiloStreamingQuality.swift",
       "Sources/CoreModels/PlaybackReadAhead.swift",
-      "Sources/FeatureSettings/PlaybackReadAheadControl.swift",
-      "Sources/FeaturePlayback/PlayerMoreMenu.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/CoreModels/PlaybackSettings.swift",
       "Sources/FeaturePlayback/PlayerViewModel.swift",
-      "Sources/FeaturePlayback/StreamingPlaybackFeedback.swift",
-      "Sources/AppShelliOS/PlozziOSPlaybackEngineComposition.swift",
-      "Sources/ProviderJellyfin/JellyfinProvider.swift",
-      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
-      "Sources/FeaturePlayback/CurrentStreamDetailsSection.swift"
+      "Sources/FeaturePlayback/StreamingPlaybackFeedback.swift"
     ],
     "watch": [
       "Sources/CoreModels/Streaming",
@@ -421,7 +1427,110 @@
       "Sources/FeaturePlayback/StreamingPlayback",
       "Sources/EnginePlozzigen/",
       "Sources/AppShelliOS/PlozziOSStreamingQuality"
-    ]
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Streaming quality",
+          "source": "Sources/AppShelliOS/PlozziOSStreamingQuality.swift"
+        },
+        {
+          "text": "Local network",
+          "source": "Sources/AppShelliOS/PlozziOSStreamingQuality.swift"
+        },
+        {
+          "text": "Remote Wi-Fi / Ethernet",
+          "source": "Sources/AppShelliOS/PlozziOSStreamingQuality.swift"
+        },
+        {
+          "text": "Cellular",
+          "source": "Sources/AppShelliOS/PlozziOSStreamingQuality.swift"
+        },
+        {
+          "text": "Advanced",
+          "source": "Sources/AppShelliOS/PlozziOSStreamingQuality.swift"
+        },
+        {
+          "text": "Force transcoding",
+          "source": "Sources/AppShelliOS/PlozziOSStreamingQuality.swift"
+        },
+        {
+          "text": "Custom…",
+          "source": "Sources/AppShelliOS/PlozziOSStreamingQuality.swift"
+        },
+        {
+          "text": "Quality limit",
+          "source": "Sources/AppShelliOS/PlozziOSStreamingQuality.swift"
+        },
+        {
+          "text": "Apply",
+          "source": "Sources/AppShelliOS/PlozziOSStreamingQuality.swift"
+        },
+        {
+          "text": "Maximum",
+          "source": "Sources/CoreModels/StreamingQuality.swift"
+        },
+        {
+          "text": "720p · 2 Mbps",
+          "source": "Sources/CoreModels/StreamingQuality.swift"
+        },
+        {
+          "text": "Prefer HEVC (H.265)",
+          "source": "Sources/CoreModels/StreamingQuality.swift"
+        },
+        {
+          "text": "Invalid custom quality",
+          "source": "Sources/CoreModels/StreamingQuality.swift"
+        },
+        {
+          "text": "Video",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Quality",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Playback options",
+          "source": "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift"
+        },
+        {
+          "text": "Playing in SDR",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerView.swift"
+        },
+        {
+          "text": "Current stream",
+          "source": "Sources/FeaturePlayback/CurrentStreamDetailsSection.swift"
+        },
+        {
+          "text": "Declared stream bitrate",
+          "source": "Sources/FeaturePlayback/CurrentStreamDetailsSection.swift"
+        },
+        {
+          "text": "Not available",
+          "source": "Sources/FeaturePlayback/CurrentStreamDetailsSection.swift"
+        },
+        {
+          "text": "Details",
+          "source": "Sources/CoreUI/PlaybackFailureView.swift"
+        },
+        {
+          "text": "Video buffer",
+          "source": "Sources/FeatureSettings/PlaybackReadAheadControl.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Playback",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        }
+      ],
+      "emphasis": [
+        "iPhone and iPad"
+      ]
+    }
   },
   {
     "slug": "audio",
@@ -432,26 +1541,26 @@
     "kind": "guide",
     "file": "audio.md",
     "sources": [
+      "Sources/FeaturePlayback/PlayerControls.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-      "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
+      "Sources/FeatureSettings/LosslessAudioControl.swift",
       "Sources/FeaturePlayback/SystemPlaybackAudio.swift",
+      "Sources/CoreModels/HeroBackgroundSettings.swift",
       "Sources/FeatureSettings/ThemeMusicVolumeControl.swift",
+      "Sources/AppShelliOS/PlozziOSHeroViews.swift",
+      "Sources/CoreUI/ProfileSettingsCategory.swift",
+      "Sources/CoreModels/AudioPolicy.swift",
+      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
+      "Sources/FeatureHomeCore/ThemeMusicPlayback.swift",
+      "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
       "Sources/FeatureHomeCore/ThemeMusicController.swift",
       "Sources/FeatureHome/ItemDetailView.swift",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
       "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
       "Sources/FeaturePlayback/NativeVideoEngine.swift",
-      "Sources/AppShelliOS/PlozziOSHeroViews.swift",
-      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
-      "Sources/FeatureHomeCore/ThemeMusicPlayback.swift",
       "Sources/CoreModels/PlaybackSettings.swift",
-      "Sources/FeaturePlayback/SeriesTrackMemory.swift",
-      "Sources/FeatureSettings/LosslessAudioControl.swift",
-      "Sources/CoreModels/LosslessAudioSettings.swift",
-      "Sources/CoreModels/ProfileSettingsSnapshot.swift",
-      "Sources/CoreModels/HeroBackgroundSettings.swift",
-      "Sources/CoreModels/ThemeMusicSettings.swift"
+      "Sources/FeaturePlayback/SeriesTrackMemory.swift"
     ],
     "watch": [
       "Sources/FeatureHomeCore/ThemeMusic",
@@ -460,7 +1569,113 @@
       "Sources/FeatureSettings/LosslessAudioControl.swift",
       "Sources/AppShelliOS/PlozziOSHeroViews.swift",
       "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
-    ]
+    ],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Audio",
+          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "Preferred audio language",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Audio",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Remember audio language per series",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Tracks",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Background Audio",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Movie & show details",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Background",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Prefer lossless audio",
+          "source": "Sources/FeatureSettings/LosslessAudioControl.swift"
+        },
+        {
+          "text": "Reduce Loud Sounds",
+          "source": "Sources/FeaturePlayback/SystemPlaybackAudio.swift"
+        },
+        {
+          "text": "Enhance Dialogue",
+          "source": "Sources/FeaturePlayback/SystemPlaybackAudio.swift"
+        },
+        {
+          "text": "Enhance More",
+          "source": "Sources/FeaturePlayback/SystemPlaybackAudio.swift"
+        },
+        {
+          "text": "Enhance",
+          "source": "Sources/FeaturePlayback/SystemPlaybackAudio.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/FeaturePlayback/SystemPlaybackAudio.swift"
+        },
+        {
+          "text": "Theme music",
+          "source": "Sources/CoreModels/HeroBackgroundSettings.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/CoreModels/HeroBackgroundSettings.swift"
+        },
+        {
+          "text": "Theme music volume",
+          "source": "Sources/FeatureSettings/ThemeMusicVolumeControl.swift"
+        },
+        {
+          "text": "Play preview",
+          "source": "Sources/FeatureSettings/ThemeMusicVolumeControl.swift"
+        },
+        {
+          "text": "Stop preview",
+          "source": "Sources/FeatureSettings/ThemeMusicVolumeControl.swift"
+        },
+        {
+          "text": "Mute theme music",
+          "source": "Sources/AppShelliOS/PlozziOSHeroViews.swift"
+        },
+        {
+          "text": "Unmute theme music",
+          "source": "Sources/AppShelliOS/PlozziOSHeroViews.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Playback",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        },
+        {
+          "text": "Screens & Navigation",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        }
+      ],
+      "emphasis": []
+    }
   },
   {
     "slug": "subtitles",
@@ -471,26 +1686,26 @@
     "kind": "guide",
     "file": "subtitles.md",
     "sources": [
-      "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift",
       "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
-      "Sources/FeaturePlayback/SubtitleTrackController.swift",
       "Sources/FeaturePlayback/TrackMenuBuilder.swift",
-      "Sources/FeaturePlayback/SubtitleStylePanel.swift",
+      "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift",
+      "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift",
+      "Sources/FeaturePlayback/PlayerMoreMenu.swift",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
-      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/FeaturePlayback/SystemCaptionStyleConfirmation.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/CoreModels/SubtitleSearchPreference.swift",
+      "Sources/CoreUI/ProfileSettingsCategory.swift",
+      "Sources/FeaturePlayback/SubtitleTrackController.swift",
+      "Sources/FeaturePlayback/SubtitleStylePanel.swift",
       "Sources/FeaturePlayback/SubtitleStyleSettingsView.swift",
       "Sources/FeaturePlayback/SystemCaptionAppearance.swift",
-      "Sources/FeaturePlayback/SystemCaptionStyleConfirmation.swift",
       "Sources/CoreModels/SubtitleBehavior.swift",
       "Sources/CoreModels/SubtitleSelection.swift",
-      "Sources/CoreModels/SubtitleSearchPreference.swift",
       "Sources/CoreModels/SubtitleStyle.swift",
       "Sources/FeaturePlayback/PlayerViewModel.swift",
-      "Sources/FeaturePlayback/NativeVideoEngine.swift",
-      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
-      "Sources/AppRuntime/ExternalPlaybackRuntime.swift",
-      "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+      "Sources/FeaturePlayback/NativeVideoEngine.swift"
     ],
     "watch": [
       "Sources/FeaturePlayback/",
@@ -499,11 +1714,139 @@
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/CoreModels/Subtitle",
       "Sources/AppRuntime/ExternalPlaybackRuntime.swift"
-    ]
+    ],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Style",
+          "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
+        },
+        {
+          "text": "Dual Subtitles",
+          "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
+        },
+        {
+          "text": "Download subtitles…",
+          "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
+        },
+        {
+          "text": "Subtitle Sync",
+          "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/FeaturePlayback/TrackMenuBuilder.swift"
+        },
+        {
+          "text": "Subtitle file formatting",
+          "source": "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift"
+        },
+        {
+          "text": "Use File Positions",
+          "source": "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift"
+        },
+        {
+          "text": "Use File Colors",
+          "source": "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift"
+        },
+        {
+          "text": "Use Bold and Italic",
+          "source": "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift"
+        },
+        {
+          "text": "Playback options",
+          "source": "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift"
+        },
+        {
+          "text": "Advanced…",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Search & Download…",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Second Track",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
+          "text": "Appearance",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
+          "text": "Style",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
+          "text": "Subtitle Delay",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
+          "text": "Customize subtitle style",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Subtitle style",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Remember subtitles per series",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Match Apple TV Subtitle Style",
+          "source": "Sources/FeaturePlayback/SystemCaptionStyleConfirmation.swift"
+        },
+        {
+          "text": "Match Device Subtitle Style",
+          "source": "Sources/FeaturePlayback/SystemCaptionStyleConfirmation.swift"
+        },
+        {
+          "text": "Use a separate style for Live TV",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Preferred language code",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Tracks",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Prefer SDH",
+          "source": "Sources/CoreModels/SubtitleSearchPreference.swift"
+        },
+        {
+          "text": "Only SDH",
+          "source": "Sources/CoreModels/SubtitleSearchPreference.swift"
+        },
+        {
+          "text": "Subtitles",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Playback",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        }
+      ],
+      "emphasis": []
+    }
   },
   {
     "slug": "music",
-    "platforms": ["Apple TV"],
+    "platforms": [
+      "Apple TV"
+    ],
     "title": "Listen to music",
     "seoTitle": "Play server music, playlists, and lyrics in Plozz on Apple TV",
     "description": "Play eligible server music on Apple TV, control album and playlist queues, manage online lyric lookups, and connect Last.fm.",
@@ -511,24 +1854,26 @@
     "kind": "guide",
     "file": "music.md",
     "sources": [
-      "App/Resources/Info.plist",
-      "Sources/CoreUI/NowPlayingSession.swift",
       "Sources/AppShell/MainTabView.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/FeatureMusic/MusicScreens.swift",
+      "Sources/CoreUI/NowPlayingSession.swift",
+      "Sources/FeatureSettings/IntegrationsDetailView.swift",
+      "Sources/CoreUI/SettingsCopy.swift",
+      "Sources/CoreUI/ProfileSettingsCategory.swift",
+      "Sources/FeatureMusic/MusicTabView.swift",
+      "Sources/FeatureMusic/NowPlayingView.swift",
+      "Sources/LastFmService/LastFmService.swift",
+      "App/Resources/Info.plist",
       "Sources/AppShell/MusicAvailabilityScope.swift",
       "Sources/AppShell/AppState.swift",
       "Sources/FeatureMusic/MusicAggregator.swift",
-      "Sources/FeatureMusic/MusicScreens.swift",
-      "Sources/FeatureMusic/MusicTabView.swift",
       "Sources/MetadataKit/LRCLIBLyricsProvider.swift",
       "Sources/FeatureMusic/AudioPlaybackController.swift",
-      "Sources/FeatureMusic/NowPlayingView.swift",
       "Sources/FeatureMusic/MiniPlayerView.swift",
       "Sources/ProviderPlex/PlexMusicProvider.swift",
       "Sources/ProviderJellyfin/JellyfinMusicProvider.swift",
-      "Sources/CoreModels/ProviderKind.swift",
-      "Sources/LastFmService/LastFmScrobbler.swift",
-      "Sources/FeatureSettings/IntegrationsDetailView.swift",
-      "Sources/FeatureSettings/PreferenceDetailViews.swift"
+      "Sources/CoreModels/ProviderKind.swift"
     ],
     "watch": [
       "Sources/FeatureMusic/",
@@ -537,7 +1882,60 @@
       "Sources/ProviderPlex/PlexMusicProvider.swift",
       "Sources/ProviderJellyfin/JellyfinMusicProvider.swift",
       "Sources/LastFmService/"
-    ]
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Music",
+          "source": "Sources/AppShell/MainTabView.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShell/MainTabView.swift"
+        },
+        {
+          "text": "App navigation",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Hide or Reorder Navigation",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Play",
+          "source": "Sources/FeatureMusic/MusicScreens.swift"
+        },
+        {
+          "text": "Shuffle",
+          "source": "Sources/FeatureMusic/MusicScreens.swift"
+        },
+        {
+          "text": "Now Playing",
+          "source": "Sources/CoreUI/NowPlayingSession.swift",
+          "system": "media-now-playing"
+        },
+        {
+          "text": "Last.fm",
+          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        },
+        {
+          "text": "Libraries",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
+        },
+        {
+          "text": "Screens & Navigation",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        },
+        {
+          "text": "Trackers",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        }
+      ],
+      "emphasis": [
+        "Apple TV",
+        "LRCLIB"
+      ]
+    }
   },
   {
     "slug": "live-tv",
@@ -549,25 +1947,25 @@
     "file": "live-tv.md",
     "sources": [
       "Sources/FeatureAuth/IPTVSignInView.swift",
-      "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift",
-      "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift",
-      "Sources/ProviderIPTV/IPTVProvider.swift",
-      "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift",
-      "Sources/FeatureLiveTV/LiveTVServerSetupView.swift",
       "Sources/FeatureLiveTV/LiveTVSourcesView.swift",
-      "Sources/FeatureSettings/LiveTVSettingsView.swift",
+      "Sources/CoreModels/ProviderKind.swift",
+      "Sources/ProviderIPTV/IPTVProvider.swift",
+      "Sources/FeatureLiveTV/LiveTVServerSetupView.swift",
+      "Sources/FeatureLiveTV/LiveTVPrototypeView.swift",
+      "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift",
       "Sources/FeatureLiveTV/LiveTVProgramSearchView.swift",
-      "Sources/AppRuntime/WatchMutationFactory.swift",
-      "Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift",
-      "Sources/FeatureLiveTV/LiveTVGuideMappingView.swift",
-      "Sources/FeatureLiveTVCore/LiveTVChannelScanCoordinator.swift",
-      "Sources/CoreModels/WatchStateReconciler.swift",
-      "Sources/CoreModels/LiveTVMobileNetworkPolicy.swift",
+      "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift",
+      "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift",
+      "Sources/FeatureLiveTV/LiveTVMultiviewGuideActions.swift",
+      "Sources/FeatureLiveTV/LiveTVPrototypeSidebar.swift",
+      "Sources/FeatureSettings/LiveTVSettingsView.swift",
+      "Sources/FeatureLiveTV/LiveTVSetupWelcome.swift",
+      "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift",
       "Sources/FeatureLiveTV/LibraryChannelEditorView.swift",
-      "Sources/FeatureLiveTVCore/LibraryChannelService.swift",
-      "Sources/FeatureLiveTV/LiveTVMultiviewTouchChrome.swift",
-      "Sources/FeaturePlayback/LibraryChannelPlaybackSession.swift",
-      "Sources/FeatureLiveTV/LiveTVIdentityReviewView.swift"
+      "Sources/CoreUI/ProfileSettingsCategory.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/CoreUI/SettingsCopy.swift",
+      "Sources/FeatureLiveTVCore/LibraryChannelService.swift"
     ],
     "watch": [
       "Sources/FeatureLiveTV/",
@@ -576,11 +1974,374 @@
       "Sources/CoreModels/LiveTV",
       "Sources/AppShelliOS/PlozziOSLiveTV",
       "Sources/FeaturePlayback/LiveTVMobileNetwork"
-    ]
+    ],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "IPTV",
+          "source": "Sources/FeatureAuth/IPTVSignInView.swift"
+        },
+        {
+          "text": "Playlist URL",
+          "source": "Sources/FeatureAuth/IPTVSignInView.swift"
+        },
+        {
+          "text": "Xtream account",
+          "source": "Sources/FeatureAuth/IPTVSignInView.swift"
+        },
+        {
+          "text": "EPG URL (optional)",
+          "source": "Sources/FeatureAuth/IPTVSignInView.swift"
+        },
+        {
+          "text": "Advanced options",
+          "source": "Sources/FeatureAuth/IPTVSignInView.swift"
+        },
+        {
+          "text": "Connect",
+          "source": "Sources/FeatureAuth/IPTVSignInView.swift"
+        },
+        {
+          "text": "Playlist file",
+          "source": "Sources/FeatureAuth/IPTVSignInView.swift"
+        },
+        {
+          "text": "Sources",
+          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        },
+        {
+          "text": "IPTV provider",
+          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        },
+        {
+          "text": "Media server",
+          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        },
+        {
+          "text": "Refresh sources",
+          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        },
+        {
+          "text": "Retry",
+          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        },
+        {
+          "text": "Plozz channels",
+          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        },
+        {
+          "text": "Connect as IPTV account",
+          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        },
+        {
+          "text": "Check channel availability",
+          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        },
+        {
+          "text": "IPTV",
+          "source": "Sources/CoreModels/ProviderKind.swift"
+        },
+        {
+          "text": "Movies",
+          "source": "Sources/ProviderIPTV/IPTVProvider.swift"
+        },
+        {
+          "text": "TV Shows",
+          "source": "Sources/ProviderIPTV/IPTVProvider.swift"
+        },
+        {
+          "text": "Add channels",
+          "source": "Sources/FeatureLiveTV/LiveTVServerSetupView.swift"
+        },
+        {
+          "text": "Add guide only",
+          "source": "Sources/FeatureLiveTV/LiveTVServerSetupView.swift"
+        },
+        {
+          "text": "Channels",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeView.swift"
+        },
+        {
+          "text": "Programs",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeView.swift"
+        },
+        {
+          "text": "Search",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
+        {
+          "text": "Watch channel",
+          "source": "Sources/FeatureLiveTV/LiveTVProgramSearchView.swift"
+        },
+        {
+          "text": "Approve this source",
+          "source": "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift"
+        },
+        {
+          "text": "Revoke source approval",
+          "source": "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift"
+        },
+        {
+          "text": "Multiview",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift"
+        },
+        {
+          "text": "Watch",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift"
+        },
+        {
+          "text": "Favorite",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift"
+        },
+        {
+          "text": "Audio",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift"
+        },
+        {
+          "text": "Favorite Multiviews",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewGuideActions.swift"
+        },
+        {
+          "text": "Manage channels",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeSidebar.swift"
+        },
+        {
+          "text": "Stop without Wi-Fi or Ethernet",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "Guide preferences",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "Auto preview",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "Keep watching while browsing",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "Preview after watching",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "Enable Plozz channels",
+          "source": "Sources/FeatureLiveTV/LiveTVSetupWelcome.swift"
+        },
+        {
+          "text": "Retry Plozz channels",
+          "source": "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift"
+        },
+        {
+          "text": "Refresh Plozz channels",
+          "source": "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift"
+        },
+        {
+          "text": "Create custom channel",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Preview schedule",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Save channel",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Update watch history",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Live TV",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Libraries",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
+        }
+      ],
+      "emphasis": [
+        "four pictures",
+        "Plex, Jellyfin, or Emby"
+      ]
+    }
+  },
+  {
+    "slug": "live-tv-channels",
+    "title": "Organize channels and fix listings",
+    "seoTitle": "Organize Plozz Live TV channels and correct guide listings",
+    "description": "Find hidden channels, manage favorites and regional filters, correct guide matching, and safely restore channels hidden by availability scans.",
+    "section": "Playback",
+    "kind": "guide",
+    "file": "live-tv-channels.md",
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "sources": [
+      "Sources/FeatureLiveTV/LiveTVPrototypeBrowse.swift",
+      "Sources/FeatureLiveTV/LiveTVPrototypeSidebar.swift",
+      "Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift",
+      "Sources/FeatureSettings/LiveTVSettingsView.swift",
+      "Sources/FeatureLiveTV/LiveTVSourcesView.swift",
+      "Sources/FeatureLiveTV/LiveTVGuideMappingView.swift",
+      "Sources/FeatureLiveTV/LiveTVIdentityReviewView.swift",
+      "Sources/FeatureLiveTV/LiveTVChannelScanViews.swift",
+      "Sources/CoreModels/LiveTVChannelOrganization.swift",
+      "Sources/FeatureLiveTVCore/LiveTVChannelScanCoordinator.swift"
+    ],
+    "watch": [
+      "Sources/FeatureLiveTV/LiveTVChannel",
+      "Sources/FeatureLiveTV/LiveTVGuideMapping",
+      "Sources/FeatureLiveTV/LiveTVIdentityReview",
+      "Sources/FeatureLiveTV/LiveTVSources",
+      "Sources/FeatureLiveTVCore/LiveTVChannelScan",
+      "Sources/CoreModels/LiveTVChannel"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Hide channel",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeBrowse.swift"
+        },
+        {
+          "text": "Add to Favorites",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeBrowse.swift"
+        },
+        {
+          "text": "Remove from Favorites",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeBrowse.swift"
+        },
+        {
+          "text": "Manage channels",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeSidebar.swift"
+        },
+        {
+          "text": "Categories",
+          "source": "Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift"
+        },
+        {
+          "text": "Countries and languages",
+          "source": "Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift"
+        },
+        {
+          "text": "Filter IPTV by country or language",
+          "source": "Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift"
+        },
+        {
+          "text": "Hidden channels",
+          "source": "Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift"
+        },
+        {
+          "text": "Show channel",
+          "source": "Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift"
+        },
+        {
+          "text": "Reset category and region visibility",
+          "source": "Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift"
+        },
+        {
+          "text": "Show",
+          "source": "Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift"
+        },
+        {
+          "text": "Hide",
+          "source": "Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift"
+        },
+        {
+          "text": "Automatic",
+          "source": "Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift"
+        },
+        {
+          "text": "Favorites only",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "With guide listings",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "Sources",
+          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        },
+        {
+          "text": "Guide options",
+          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        },
+        {
+          "text": "Correct guide mapping",
+          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        },
+        {
+          "text": "Keep previous days",
+          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        },
+        {
+          "text": "Look ahead",
+          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        },
+        {
+          "text": "Review channel identities",
+          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        },
+        {
+          "text": "Check channel availability",
+          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        },
+        {
+          "text": "Use automatic matching",
+          "source": "Sources/FeatureLiveTV/LiveTVGuideMappingView.swift"
+        },
+        {
+          "text": "Restore saved identity",
+          "source": "Sources/FeatureLiveTV/LiveTVIdentityReviewView.swift"
+        },
+        {
+          "text": "Scan channels",
+          "source": "Sources/FeatureLiveTV/LiveTVChannelScanViews.swift"
+        },
+        {
+          "text": "Scan results",
+          "source": "Sources/FeatureLiveTV/LiveTVChannelScanViews.swift"
+        },
+        {
+          "text": "Cancel scan",
+          "source": "Sources/FeatureLiveTV/LiveTVChannelScanViews.swift"
+        },
+        {
+          "text": "Restore channel",
+          "source": "Sources/FeatureLiveTV/LiveTVChannelScanViews.swift"
+        },
+        {
+          "text": "Restore hidden channels",
+          "source": "Sources/FeatureLiveTV/LiveTVChannelScanViews.swift"
+        },
+        {
+          "text": "Retry saving",
+          "source": "Sources/FeatureLiveTV/LiveTVChannelScanViews.swift"
+        }
+      ],
+      "emphasis": []
+    }
   },
   {
     "slug": "downloads",
-    "platforms": ["iPhone", "iPad"],
+    "platforms": [
+      "iPhone",
+      "iPad"
+    ],
     "title": "Watch offline",
     "seoTitle": "Download videos for offline viewing in Plozz on iPhone and iPad",
     "description": "Save and verify an offline copy, choose download quality and networks, manage storage, and understand background-transfer limits.",
@@ -588,22 +2349,23 @@
     "kind": "guide",
     "file": "downloads.md",
     "sources": [
+      "Sources/AppShelliOS/PlozziOSDownloadsView.swift",
+      "Sources/AppShelliOS/PlozziOSDownloadActivity.swift",
       "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift",
       "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
       "Sources/CoreModels/SeriesDownloadPresentation.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/AppShelliOS/PlozziOSDownloadsModel.swift",
+      "Sources/AppShelliOS/PlozziOSBackgroundHTTPDownloadEngine.swift",
+      "Sources/MediaDownloads/RegistryOfflinePlaybackResolver.swift",
+      "Sources/MediaDownloads/DirectShareDownloadSource.swift",
       "Sources/AppShelliOS/PlozziOSAppModel.swift",
-      "Sources/AppShelliOS/PlozziOSDownloadsView.swift",
       "Sources/MediaDownloads/DownloadNetworkPolicy.swift",
       "Sources/ProviderSilo/SiloDownloads.swift",
       "Sources/AppShelliOS/PlozziOSDownloadNotifications.swift",
       "Sources/AppShelliOS/PlozziOSDownloadNotificationNavigation.swift",
-      "Sources/AppShelliOS/PlozziOSDownloadActivity.swift",
-      "Sources/AppShelliOS/PlozziOSBackgroundHTTPDownloadEngine.swift",
-      "Sources/MediaDownloads/DirectShareDownloadSource.swift",
       "Sources/MediaDownloads/DownloadStorageCapacity.swift",
       "Sources/MediaDownloads/DownloadedMediaRegistry.swift",
-      "Sources/MediaDownloads/RegistryOfflinePlaybackResolver.swift",
       "Sources/FeatureHomeCore/PlaybackVersionChoiceModel.swift",
       "Sources/AppShelliOS/PlozziOSPlayerView.swift",
       "Sources/FeaturePlayback/PlayerViewModel.swift"
@@ -615,11 +2377,122 @@
       "Sources/CoreModels/SeriesDownload",
       "Sources/AppShelliOS/SiloOfflineDownload.swift",
       "Sources/ProviderSilo/SiloDownloads.swift"
-    ]
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Downloads",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Download Settings",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Default Quality",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Original",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Allow Cellular Downloads",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Pause in Low Data Mode",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Include All Audio Tracks",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Download Speed",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Limit",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Unlimited",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Continue at Full Speed",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Notifications",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Pause",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Resume",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Remove",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Pause Show",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Resume Show",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Storage",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Cancel Active Downloads",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Delete All Downloads",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Finishing",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadActivity.swift"
+        },
+        {
+          "text": "Download Original",
+          "source": "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift"
+        },
+        {
+          "text": "Manage Seasons",
+          "source": "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
+        },
+        {
+          "text": "Download All Available Episodes",
+          "source": "Sources/CoreModels/SeriesDownloadPresentation.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        }
+      ],
+      "emphasis": [
+        "Original only"
+      ]
+    }
   },
   {
     "slug": "appearance",
-    "platforms": ["Apple TV", "iPhone", "iPad"],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
     "title": "Appearance and language",
     "seoTitle": "Change Plozz themes, cards, artwork, and interface language",
     "description": "Customize card labels, watch marks, episode counts and progress bars, resize headers, choose artwork, and keep app language separate from media languages.",
@@ -629,24 +2502,24 @@
     "sources": [
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/FeatureSettings/CardAppearanceControls.swift",
+      "Sources/CoreModels/CardCaptionSettings.swift",
+      "Sources/FeatureSettings/CardCaptionCustomizationContent.swift",
+      "Sources/CoreModels/WatchStatusIndicator.swift",
+      "Sources/FeatureSettings/HeroLogoSizeControl.swift",
+      "Sources/FeatureSettings/HomeRowsSettingsView.swift",
+      "Sources/CoreModels/ArtworkSettings.swift",
+      "Sources/CoreModels/AppLanguage.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/CoreUI/ProfileSettingsCategory.swift",
       "Sources/FeatureSettings/ArtworkSettingsControls.swift",
       "Sources/FeatureSettings/AppLanguagePicker.swift",
       "Sources/CoreUI/AppLanguageScope.swift",
-      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-      "Sources/CoreModels/ArtworkSettings.swift",
-      "Sources/CoreModels/CardCaptionSettings.swift",
       "Sources/CoreModels/TransparencyPreferenceStore.swift",
       "Sources/FeatureHome/FocusHeroHomeView.swift",
-      "Sources/FeatureSettings/CardCaptionCustomizationContent.swift",
       "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
       "Sources/FeatureSettings/HeroSettingsControls.swift",
-      "Sources/FeatureSettings/HeroLogoSizeControl.swift",
-      "Sources/CoreModels/WatchStatusIndicator.swift",
       "Sources/CoreModels/WatchStatusIndicatorSettingsStore.swift",
-      "Sources/CoreUI/MediaCardPlaybackIndicators.swift",
-      "Sources/CoreModels/ProfileSettingsSnapshot.swift",
-      "Sources/FeatureSettings/LibraryPresentationSettingsView.swift",
-      "Sources/CoreModels/HeroTextSize.swift"
+      "Sources/CoreUI/MediaCardPlaybackIndicators.swift"
     ],
     "watch": [
       "Sources/FeatureSettings/Card",
@@ -655,7 +2528,172 @@
       "Sources/CoreModels/CardCaptionSettings.swift",
       "Sources/FeatureSettings/Hero",
       "Sources/CoreModels/WatchStatusIndicator"
-    ]
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Cards",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Display Size",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Theme",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Liquid Glass",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Artwork",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Movie & show details",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Labels",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
+          "text": "Customize labels",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
+          "text": "Watch indicators",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
+          "text": "Show unwatched episode count",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
+          "text": "Show progress bars",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
+          "text": "Use default",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
+          "text": "App default",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Show labels everywhere",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Hide labels everywhere",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Default",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Mixed",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "On",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Libraries",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Browse",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Page",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Overrides",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Card labels",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Unwatched",
+          "source": "Sources/CoreModels/WatchStatusIndicator.swift"
+        },
+        {
+          "text": "Watched",
+          "source": "Sources/CoreModels/WatchStatusIndicator.swift"
+        },
+        {
+          "text": "Hidden",
+          "source": "Sources/CoreModels/WatchStatusIndicator.swift"
+        },
+        {
+          "text": "Logo size",
+          "source": "Sources/FeatureSettings/HeroLogoSizeControl.swift"
+        },
+        {
+          "text": "Text size",
+          "source": "Sources/FeatureSettings/HeroLogoSizeControl.swift"
+        },
+        {
+          "text": "Home",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Layout",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Hero",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Recommended",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Prefer my library's artwork",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Prefer artwork from metadata providers",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "System",
+          "source": "Sources/CoreModels/AppLanguage.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Appearance",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        },
+        {
+          "text": "Screens & Navigation",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        },
+        {
+          "text": "Language",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        }
+      ],
+      "emphasis": []
+    }
   },
   {
     "slug": "spoiler-protection",
@@ -666,26 +2704,26 @@
     "kind": "guide",
     "file": "spoiler-protection.md",
     "sources": [
-      "Sources/CoreModels/SpoilerSettings.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/CoreModels/SpoilerSettings.swift",
+      "Sources/FeatureSettings/HomeRowsSettingsView.swift",
+      "Sources/CoreUI/ContinueWatchingArtworkSwatch.swift",
+      "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
+      "Sources/CoreUI/ContinueWatchingPresentation.swift",
+      "Sources/CoreModels/CardCaptionSettings.swift",
+      "Sources/FeatureSettings/CardAppearanceControls.swift",
+      "Sources/CoreUI/ProfileSettingsCategory.swift",
       "Sources/FeatureSettings/CustomizeHomeDetailView.swift",
       "Sources/FeatureSettings/ContinueWatchingArtworkPicker.swift",
-      "Sources/FeatureSettings/HomeRowsSettingsView.swift",
-      "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
-      "Sources/CoreUI/ContinueWatchingArtworkSwatch.swift",
       "Sources/CoreUI/ContinueWatchingArtworkSource.swift",
-      "Sources/CoreUI/ContinueWatchingPresentation.swift",
       "Sources/CoreUI/PosterCardView.swift",
       "Sources/CoreUI/SpoilerRevealBox.swift",
       "Sources/CoreModels/HomeLibraryVisibility.swift",
       "Sources/FeaturePlayback/PlayerChapterPanel.swift",
       "Sources/FeatureHomeCore/HomeRow.swift",
       "Sources/CoreUI/MediaRowView.swift",
-      "Sources/CoreModels/CardCaptionSettings.swift",
-      "Sources/FeatureHome/HomeView.swift",
-      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-      "Sources/AppShelliOS/PlozziOSHomeView.swift",
-      "Sources/AppShelliOS/PlozziOSPosterCard.swift"
+      "Sources/FeatureHome/HomeView.swift"
     ],
     "watch": [
       "Sources/CoreModels/Spoiler",
@@ -694,7 +2732,125 @@
       "Sources/CoreUI/ContinueWatching",
       "Sources/CoreModels/HomeLibraryVisibility",
       "Sources/CoreUI/Spoiler"
-    ]
+    ],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "All screens",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Hide spoilers for unwatched episodes",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Hide ratings until watched",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Protect unwatched episodes",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Blur Thumbnail",
+          "source": "Sources/CoreModels/SpoilerSettings.swift"
+        },
+        {
+          "text": "Placeholder Art",
+          "source": "Sources/CoreModels/SpoilerSettings.swift"
+        },
+        {
+          "text": "Home",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Rows",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Continue Watching settings",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Add row",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Artwork + logo",
+          "source": "Sources/CoreUI/ContinueWatchingArtworkSwatch.swift"
+        },
+        {
+          "text": "Thumbnail",
+          "source": "Sources/CoreUI/ContinueWatchingArtworkSwatch.swift"
+        },
+        {
+          "text": "Poster",
+          "source": "Sources/CoreUI/ContinueWatchingArtworkSwatch.swift"
+        },
+        {
+          "text": "Playback details",
+          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+        },
+        {
+          "text": "Center button action",
+          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+        },
+        {
+          "text": "When tapping an item",
+          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+        },
+        {
+          "text": "Labels",
+          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+        },
+        {
+          "text": "Detailed",
+          "source": "Sources/CoreUI/ContinueWatchingPresentation.swift"
+        },
+        {
+          "text": "Progress only",
+          "source": "Sources/CoreUI/ContinueWatchingPresentation.swift"
+        },
+        {
+          "text": "Play",
+          "source": "Sources/CoreUI/ContinueWatchingPresentation.swift"
+        },
+        {
+          "text": "Open detail page",
+          "source": "Sources/CoreUI/ContinueWatchingPresentation.swift"
+        },
+        {
+          "text": "Continue Watching",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "On",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Use default",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Screens & Navigation",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        }
+      ],
+      "emphasis": []
+    }
   },
   {
     "slug": "circadian-mode",
@@ -706,8 +2862,9 @@
     "file": "circadian-mode.md",
     "sources": [
       "Sources/FeatureSettings/NightShiftDetailView.swift",
-      "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/CoreUI/ProfileSettingsCategory.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/CoreModels/NightShiftSettings.swift",
       "Sources/CoreModels/NightShiftRegion.swift",
       "Sources/CoreUI/NightShiftOverlay.swift"
@@ -718,7 +2875,85 @@
       "Sources/CoreUI/NightShift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift"
-    ]
+    ],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Circadian Mode",
+          "source": "Sources/FeatureSettings/NightShiftDetailView.swift"
+        },
+        {
+          "text": "Turns on",
+          "source": "Sources/FeatureSettings/NightShiftDetailView.swift"
+        },
+        {
+          "text": "Turns off",
+          "source": "Sources/FeatureSettings/NightShiftDetailView.swift"
+        },
+        {
+          "text": "Warmth",
+          "source": "Sources/FeatureSettings/NightShiftDetailView.swift"
+        },
+        {
+          "text": "Darkness",
+          "source": "Sources/FeatureSettings/NightShiftDetailView.swift"
+        },
+        {
+          "text": "Fade",
+          "source": "Sources/FeatureSettings/NightShiftDetailView.swift"
+        },
+        {
+          "text": "Preview a day",
+          "source": "Sources/FeatureSettings/NightShiftDetailView.swift"
+        },
+        {
+          "text": "Auto",
+          "source": "Sources/FeatureSettings/NightShiftDetailView.swift"
+        },
+        {
+          "text": "Manual",
+          "source": "Sources/FeatureSettings/NightShiftDetailView.swift"
+        },
+        {
+          "text": "Always On",
+          "source": "Sources/FeatureSettings/NightShiftDetailView.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/FeatureSettings/NightShiftDetailView.swift"
+        },
+        {
+          "text": "Schedule",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Dimness",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Preview a Day",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Preview at Full Strength",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Appearance",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        }
+      ],
+      "emphasis": []
+    }
   },
   {
     "slug": "metadata-and-ratings",
@@ -729,7 +2964,15 @@
     "kind": "guide",
     "file": "metadata-and-ratings.md",
     "sources": [
+      "Sources/FeatureSettings/SettingsView.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/FeatureSettings/MetadataSettingsDetailView.swift",
+      "Sources/CoreUI/DetailInformationSections.swift",
+      "Sources/FeatureSettings/ContentRatingToggle.swift",
+      "Sources/CoreModels/MediaItemAction.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/CoreUI/ProfileSettingsCategory.swift",
+      "Sources/ProviderShare/ShareNFOParser.swift",
       "Sources/AppShelliOS/PlozziOSMetadataSettingsView.swift",
       "Sources/ProviderJellyfin/JellyfinProvider.swift",
       "Sources/ProviderJellyfin/JellyfinClient.swift",
@@ -737,18 +2980,10 @@
       "Sources/ProviderJellyfin/JellyfinServerRatings.swift",
       "Sources/FeatureHomeCore/ItemDetailViewModel.swift",
       "Sources/ProviderShare/ShareLocalArtwork.swift",
-      "Sources/ProviderShare/ShareNFOParser.swift",
       "Sources/ProviderShare/ShareMetadataPipeline.swift",
-      "Sources/FeatureSettings/ContentRatingToggle.swift",
       "Sources/MetadataKit/TMDBKeyValidator.swift",
       "Sources/RatingsService/RatingsServiceFactory.swift",
-      "Sources/RatingsService/RatingsServiceConfig.swift",
-      "Sources/CoreUI/FamilyGuidanceViews.swift",
-      "Sources/AppRuntime/FamilyGuidanceService.swift",
-      "Sources/ProviderPlex/PlexCommonSenseMedia.swift",
-      "Sources/TopShelfKit/TopShelfPublisher.swift",
-      "Sources/FeatureSettings/PreferenceDetailViews.swift",
-      "Sources/CoreModels/MediaItemActionCatalog.swift"
+      "Sources/RatingsService/RatingsServiceConfig.swift"
     ],
     "watch": [
       "Sources/MetadataKit/",
@@ -757,11 +2992,98 @@
       "Sources/AppShelliOS/PlozziOSMetadata",
       "Sources/ProviderJellyfin/JellyfinServerRatings.swift",
       "Sources/ProviderShare/Share"
-    ]
+    ],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Metadata Providers",
+          "source": "Sources/FeatureSettings/SettingsView.swift"
+        },
+        {
+          "text": "Metadata Providers (TMDB, TheTVDB…)",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "All screens",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Your Own TMDB Key",
+          "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
+        },
+        {
+          "text": "TMDB v4 API Read Access Token",
+          "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
+        },
+        {
+          "text": "Verify Key",
+          "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
+        },
+        {
+          "text": "Disabled",
+          "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
+        },
+        {
+          "text": "Diagnostics",
+          "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
+        },
+        {
+          "text": "Artwork",
+          "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
+        },
+        {
+          "text": "Lookups",
+          "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
+        },
+        {
+          "text": "Clear Cache",
+          "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
+        },
+        {
+          "text": "Recommended",
+          "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
+        },
+        {
+          "text": "Custom",
+          "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
+        },
+        {
+          "text": "Ratings",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Show content ratings",
+          "source": "Sources/FeatureSettings/ContentRatingToggle.swift"
+        },
+        {
+          "text": "Refresh Metadata",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Screens & Navigation",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        }
+      ],
+      "emphasis": [
+        "shared by all profiles",
+        "MDBList Ratings plugin"
+      ]
+    }
   },
   {
     "slug": "apple-tv-profiles",
-    "platforms": ["Apple TV"],
+    "platforms": [
+      "Apple TV"
+    ],
     "title": "Apple TV users and automatic sign-in",
     "seoTitle": "Automatically sign in to a Plozz profile for each Apple TV user",
     "description": "Remember a Plozz profile for each Apple TV user, choose automatic sign-in, and understand shared accounts, PIN checks, and returning to browsing.",
@@ -769,20 +3091,20 @@
     "kind": "guide",
     "file": "apple-tv-profiles.md",
     "sources": [
-      "App/Resources/Plozz.entitlements",
-      "Sources/CoreModels/ProfileStore.swift",
-      "Sources/AppRuntime/AutomaticSignInStore.swift",
-      "Sources/AppRuntime/PlexHomeUsersModel.swift",
-      "Sources/AppShell/ProfileFlowModel.swift",
-      "Sources/AppShell/SystemProfileBridge.swift",
-      "Sources/AppShell/RootView.swift",
+      "Sources/AppShell/MainTabView.swift",
       "Sources/FeatureSettings/SettingsView.swift",
-      "Sources/FeatureSettings/ProfileDetailView.swift",
       "Sources/FeatureProfiles/AutomaticSignInSettings.swift",
+      "Sources/AppShell/SystemProfileBridge.swift",
+      "Sources/AppRuntime/AutomaticSignInStore.swift",
+      "App/Resources/Plozz.entitlements",
+      "Sources/AppShell/ProfileFlowModel.swift",
+      "Sources/AppShell/TVProfileForegroundProtection.swift",
+      "Sources/CoreModels/ProfileStore.swift",
+      "Sources/AppRuntime/PlexHomeUsersModel.swift",
+      "Sources/AppShell/RootView.swift",
+      "Sources/FeatureSettings/ProfileDetailView.swift",
       "Sources/CoreSecureStore/Keychain.swift",
       "Sources/CoreModels/ProfileReturnPolicy.swift",
-      "Sources/AppShell/TVProfileForegroundProtection.swift",
-      "Sources/AppShell/MainTabView.swift",
       "Sources/AppShell/LiveTVShellDestination.swift",
       "Sources/AppRuntime/ExternalPlaybackRuntime.swift"
     ],
@@ -793,11 +3115,37 @@
       "Sources/AppRuntime/PlexHomeUsersModel.swift",
       "Sources/AppShell/Profile",
       "Sources/AppShell/TVProfileForegroundProtection.swift"
-    ]
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Settings",
+          "source": "Sources/AppShell/MainTabView.swift"
+        },
+        {
+          "text": "Profiles",
+          "source": "Sources/FeatureSettings/SettingsView.swift"
+        },
+        {
+          "text": "Automatically Sign In",
+          "source": "Sources/FeatureProfiles/AutomaticSignInSettings.swift"
+        }
+      ],
+      "emphasis": [
+        "Choose the Apple TV user.",
+        "Choose their Plozz profile.",
+        "Enable automatic sign-in.",
+        "Repeat for each person."
+      ]
+    }
   },
   {
     "slug": "profiles-and-locks",
-    "platforms": ["Apple TV", "iPhone", "iPad"],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
     "title": "Profiles, kids, and locks",
     "seoTitle": "Set up Plozz profiles, choose server users, and manage profile locks",
     "description": "Import Plex Home profiles, choose server users, add sign-ins, configure profile locks and Kids safeguards, and understand automatic sign-in.",
@@ -805,26 +3153,26 @@
     "kind": "guide",
     "file": "profiles-and-locks.md",
     "sources": [
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/FeatureProfiles/AutomaticSignInSettings.swift",
+      "Sources/CoreUI/PlexHomeOnboardingView.swift",
+      "Sources/FeatureSettings/MyLibrariesDetailView.swift",
+      "Sources/FeatureSettings/ServerUserDetailView.swift",
+      "Sources/FeatureSettings/PlexLinkedUserDetailView.swift",
+      "Sources/AppShell/ProfileServerIdentityPromptView.swift",
+      "Sources/CoreUI/SettingsCopy.swift",
+      "Sources/CoreUI/ProfileLockCopy.swift",
       "Sources/FeatureSettings/ProfileDetailView.swift",
       "Sources/FeatureSettings/ProfileSettingsDetailView.swift",
       "Sources/CoreModels/ProfileServerIdentityPrompts.swift",
       "Sources/FeatureProfiles/ProfileLockSetupView.swift",
-      "Sources/FeatureProfiles/AutomaticSignInSettings.swift",
       "Sources/AppRuntime/PlexHomeUsersModel.swift",
       "Sources/AppShelliOS/PlozziOSAppModel.swift",
-      "Sources/FeatureSettings/MyLibrariesDetailView.swift",
-      "Sources/FeatureSettings/ServerUserDetailView.swift",
-      "Sources/FeatureSettings/PlexLinkedUserDetailView.swift",
       "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift",
       "Sources/AppShelliOS/PlozziOSPlexHomeUserSettingsView.swift",
       "Sources/FeatureHomeCore/HomeAggregator.swift",
-      "Sources/AppShell/ProfileServerIdentityPromptView.swift",
       "Sources/AppShell/RootView.swift",
-      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-      "Sources/CoreModels/ProfileStore.swift",
-      "Sources/CoreUI/PlexHomeOnboardingView.swift",
-      "Sources/AppShell/ProfileFlowModel.swift",
-      "Sources/AppShelliOS/PlozziOSPlexUserSelectionView.swift"
+      "Sources/CoreModels/ProfileStore.swift"
     ],
     "watch": [
       "Sources/FeatureProfiles/",
@@ -833,7 +3181,86 @@
       "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift",
       "Sources/AppRuntime/PlexHomeUsersModel.swift",
       "Sources/AppShell/Profile"
-    ]
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Profiles",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Edit Profile",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Edit Profiles",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Automatically Sign In",
+          "source": "Sources/FeatureProfiles/AutomaticSignInSettings.swift"
+        },
+        {
+          "text": "Add your Plex Home profiles?",
+          "source": "Sources/CoreUI/PlexHomeOnboardingView.swift"
+        },
+        {
+          "text": "Add all profiles",
+          "source": "Sources/CoreUI/PlexHomeOnboardingView.swift"
+        },
+        {
+          "text": "Just me",
+          "source": "Sources/CoreUI/PlexHomeOnboardingView.swift"
+        },
+        {
+          "text": "Profiles added",
+          "source": "Sources/CoreUI/PlexHomeOnboardingView.swift"
+        },
+        {
+          "text": "Profiles ready",
+          "source": "Sources/CoreUI/PlexHomeOnboardingView.swift"
+        },
+        {
+          "text": "Choose your profile",
+          "source": "Sources/CoreUI/PlexHomeOnboardingView.swift"
+        },
+        {
+          "text": "Choose your Plex user",
+          "source": "Sources/CoreUI/PlexHomeOnboardingView.swift"
+        },
+        {
+          "text": "Watching as",
+          "source": "Sources/FeatureSettings/MyLibrariesDetailView.swift"
+        },
+        {
+          "text": "Add Another User",
+          "source": "Sources/FeatureSettings/ServerUserDetailView.swift"
+        },
+        {
+          "text": "Add Another Plex Account",
+          "source": "Sources/FeatureSettings/PlexLinkedUserDetailView.swift"
+        },
+        {
+          "text": "Don't use this server's watchlist",
+          "source": "Sources/AppShell/ProfileServerIdentityPromptView.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Libraries",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
+        },
+        {
+          "text": "Profile Lock",
+          "source": "Sources/CoreUI/ProfileLockCopy.swift"
+        }
+      ],
+      "emphasis": [
+        "server user"
+      ]
+    }
   },
   {
     "slug": "parental-controls",
@@ -842,28 +3269,32 @@
     "description": "Set up Kids profiles and a Parental PIN in Plozz, restrict connected media sources, and understand Discovery, playlist approvals, and content-filtering limits.",
     "section": "Accounts & sync",
     "kind": "guide",
-    "platforms": ["Apple TV", "iPhone", "iPad"],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
     "file": "parental-controls.md",
     "sources": [
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/CoreUI/ProfileLockCopy.swift",
+      "Sources/CoreModels/ParentalPIN.swift",
+      "Sources/CoreModels/LiveTVSourceApproval.swift",
+      "Sources/SeerService/SeerService.swift",
+      "Sources/CoreModels/HeroSettings.swift",
+      "Sources/CoreModels/ProfileStore.swift",
       "Sources/FeatureSettings/ProfileDetailView.swift",
       "Sources/FeatureSettings/ProfileSettingsDetailView.swift",
       "Sources/FeatureSettings/ParentalPINDetailView.swift",
-      "Sources/CoreUI/ProfileLockCopy.swift",
       "Sources/FeatureSettings/SettingsView.swift",
       "Sources/AppShelliOS/PlozziOSParentalPINSettingsView.swift",
-      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/AppShelliOS/PlozziOSAppModel.swift",
       "Sources/AppShell/AppState.swift",
       "Sources/CoreModels/Profile.swift",
-      "Sources/CoreModels/ProfileStore.swift",
-      "Sources/CoreModels/ParentalPIN.swift",
-      "Sources/CoreModels/HeroSettings.swift",
       "Sources/CoreModels/HomeLibraryVisibility.swift",
       "Sources/FeatureHomeCore/HomeAggregator.swift",
-      "Sources/CoreModels/LiveTVSourceApproval.swift",
       "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift",
       "Sources/FeatureSettings/ProfileSeerrSetupView.swift",
-      "Sources/SeerService/SeerService.swift",
       "Sources/FeatureProfiles/AutomaticSignInSettings.swift"
     ],
     "watch": [
@@ -873,7 +3304,34 @@
       "Sources/AppShelliOS/PlozziOSParental",
       "Sources/FeatureLiveTV/LiveTVSourceApproval",
       "Sources/SeerService/"
-    ]
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Profiles",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Kids Profile",
+          "source": "Sources/CoreUI/ProfileLockCopy.swift"
+        },
+        {
+          "text": "Parental PIN",
+          "source": "Sources/CoreUI/ProfileLockCopy.swift"
+        },
+        {
+          "text": "Create a Parental PIN",
+          "source": "Sources/CoreUI/ProfileLockCopy.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        }
+      ],
+      "emphasis": [
+        "server user"
+      ]
+    }
   },
   {
     "slug": "profiles-and-sync",
@@ -884,26 +3342,26 @@
     "kind": "reference",
     "file": "profiles-and-sync.md",
     "sources": [
-      "App/PlozziOS/PlozziOS.entitlements",
-      "Sources/AppShelliOS/PlozziOSAppModel+KeychainSync.swift",
-      "Sources/AppShell/SyncSetupSenderPicker.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/FeatureAuth/IPTVSignInView.swift",
+      "Sources/FeatureLiveTV/LiveTVPortablePendingSources.swift",
+      "Sources/AppShell/AddAccountView.swift",
+      "Sources/AppShelliOS/PlozziOSOnboardingView.swift",
+      "Sources/FeatureSettings/SettingsView.swift",
+      "Sources/FeatureSettings/IntegrationsDetailView.swift",
+      "Sources/FeatureSettings/SyncDataBreakdown.swift",
       "Sources/FeatureSyncSetup/SyncSetupService.swift",
-      "Sources/FeatureSyncSetup/SyncSetupPairingModel.swift",
+      "Sources/FeatureSyncSetup/SyncSetupCoordinator.swift",
+      "Sources/AppShelliOS/PlozziOSAppModel+KeychainSync.swift",
       "Sources/FeatureSyncCloud/CloudConfigSyncService.swift",
+      "App/PlozziOS/PlozziOS.entitlements",
+      "Sources/AppShell/SyncSetupSenderPicker.swift",
+      "Sources/FeatureSyncSetup/SyncSetupPairingModel.swift",
       "Sources/FeatureSettings/SyncEraseDataView.swift",
       "Sources/CoreModels/LosslessAudioSettings.swift",
-      "Sources/CoreModels/ProfileSettingsSnapshot.swift",
-      "Sources/CoreModels/CrashReportingSettings.swift",
-      "Sources/CoreModels/SyncDataInventory.swift",
-      "Sources/FeatureSettings/SyncDataBreakdown.swift",
-      "Sources/FeatureSettings/SettingsView.swift",
-      "Sources/CoreModels/NavigationLibraryLayout.swift",
-      "Sources/CoreUI/LiveTVPortableSyncSettings.swift",
-      "Sources/AppRuntime/LiveTVSourceSyncBridge.swift",
-      "Sources/FeatureLiveTV/LiveTVPortablePendingSources.swift",
-      "Sources/AppShell/AppState+CloudSync.swift",
-      "Sources/FeatureAuth/IPTVSignInView.swift"
+      "Sources/CoreModels/ProfileSettingsSnapshot.swift"
     ],
     "watch": [
       "Sources/FeatureSyncSetup/",
@@ -912,7 +3370,107 @@
       "Sources/CoreModels/ProfileSettingsSnapshot.swift",
       "Sources/AppShell/AppState+CloudSync.swift",
       "Sources/AppRuntime/LiveTV"
-    ]
+    ],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Profiles",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "iCloud Sync",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Sync watch state across servers",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Sync Now",
+          "source": "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift"
+        },
+        {
+          "text": "Needs sign-in",
+          "source": "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift"
+        },
+        {
+          "text": "This Device",
+          "source": "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift"
+        },
+        {
+          "text": "Set Up From Another Device",
+          "source": "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift"
+        },
+        {
+          "text": "Reload From iCloud",
+          "source": "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift"
+        },
+        {
+          "text": "Reset Sync",
+          "source": "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift"
+        },
+        {
+          "text": "Troubleshooting",
+          "source": "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift"
+        },
+        {
+          "text": "Erase Sync Data",
+          "source": "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift"
+        },
+        {
+          "text": "Display Size",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Prevent Accidental Exit",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Playlist file",
+          "source": "Sources/FeatureAuth/IPTVSignInView.swift"
+        },
+        {
+          "text": "Set up IPTV source",
+          "source": "Sources/FeatureLiveTV/LiveTVPortablePendingSources.swift"
+        },
+        {
+          "text": "Set up from another device",
+          "source": "Sources/AppShell/AddAccountView.swift"
+        },
+        {
+          "text": "Set Up from Another Device",
+          "source": "Sources/AppShelliOS/PlozziOSOnboardingView.swift"
+        },
+        {
+          "text": "Set Up Another Device",
+          "source": "Sources/FeatureSettings/SettingsView.swift"
+        },
+        {
+          "text": "Sync across all my servers",
+          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        },
+        {
+          "text": "Sync Data on This Device",
+          "source": "Sources/FeatureSettings/SyncDataBreakdown.swift"
+        },
+        {
+          "text": "Refresh Breakdown",
+          "source": "Sources/FeatureSettings/SyncDataBreakdown.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        }
+      ],
+      "emphasis": [
+        "Silo requires approval on each device"
+      ]
+    }
   },
   {
     "slug": "trackers",
@@ -925,6 +3483,8 @@
     "sources": [
       "Sources/FeatureSettings/IntegrationsDetailView.swift",
       "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/CoreUI/ProfileSettingsCategory.swift",
       "Sources/AppShelliOS/TrackerBrowserAuthorization.swift",
       "Sources/AppShell/RealtimePlaybackScrobbler.swift",
       "Sources/AppShelliOS/PlozziOSTrackerScrobbler.swift",
@@ -940,9 +3500,7 @@
       "Sources/WetrakrService/WetrakrConfig.swift",
       "Sources/WetrakrService/WetrakrScrobbler.swift",
       "Sources/WetrakrService/WetrakrService.swift",
-      "Sources/WetrakrService/WetrakrWatchlistDestination.swift",
-      "Sources/CoreModels/RuntimeFeatureFlags.swift",
-      "Sources/AppRuntime/TrackerTokenSyncBridge.swift"
+      "Sources/WetrakrService/WetrakrWatchlistDestination.swift"
     ],
     "watch": [
       "Sources/AppShelliOS/PlozziOSTracker",
@@ -951,7 +3509,47 @@
       "Sources/AppRuntime/WatchMutation",
       "Sources/WetrakrService/",
       "Sources/AppShell/RealtimePlaybackScrobbler.swift"
-    ]
+    ],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Connect",
+          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        },
+        {
+          "text": "Unavailable",
+          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        },
+        {
+          "text": "Retry",
+          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        },
+        {
+          "text": "Sync across all my servers",
+          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        },
+        {
+          "text": "Connect Trakt",
+          "source": "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Trackers",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        }
+      ],
+      "emphasis": [
+        "Plozz profile"
+      ]
+    }
   },
   {
     "slug": "media-requests",
@@ -962,26 +3560,26 @@
     "kind": "guide",
     "file": "media-requests.md",
     "sources": [
+      "Sources/FeatureSettings/SettingsView.swift",
       "Sources/FeatureSettings/SeerDetailView.swift",
+      "Sources/CoreModels/HeroCTA.swift",
+      "Sources/FeatureHome/DetailHeroView.swift",
+      "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
+      "Sources/CoreUI/SeasonRequestMenuContent.swift",
+      "Sources/CoreUI/DetailInformationSections.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/FeatureSettings/ProfileSeerrSetupView.swift",
       "Sources/AppShelliOS/PlozziOSSeerrSettingsView.swift",
-      "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
       "Sources/AppShell/HomeTab.swift",
       "Sources/SeerService/SeerService.swift",
       "Sources/SeerService/SeerMapper.swift",
       "Sources/CoreModels/SeerRequestIdentity.swift",
       "Sources/CoreModels/SeasonRequestPresentation.swift",
       "Sources/CoreModels/SeriesDownloadPresentation.swift",
-      "Sources/CoreUI/SeasonRequestMenuContent.swift",
       "Sources/FeatureHome/SeriesDetailView.swift",
-      "Sources/CoreUI/DetailInformationSections.swift",
       "Sources/FeatureHome/ItemDetailView.swift",
       "Sources/FeatureHomeCore/ItemDetailViewModel.swift",
-      "Sources/MetadataKit/ExternalTitleMetadataResolver.swift",
-      "Sources/MetadataKit/TMDbMetadataProvider.swift",
-      "Sources/CoreModels/ProfileStore.swift",
-      "Sources/CoreModels/HeroCTA.swift",
-      "Sources/AppShelliOS/PlozziOSAppModel.swift"
+      "Sources/MetadataKit/ExternalTitleMetadataResolver.swift"
     ],
     "watch": [
       "Sources/SeerService/",
@@ -990,7 +3588,80 @@
       "Sources/CoreUI/DetailInformationSections.swift",
       "Sources/FeatureHome/SeriesDetailView.swift",
       "Sources/MetadataKit/TMDbMetadataProvider.swift"
-    ]
+    ],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Seerr",
+          "source": "Sources/FeatureSettings/SettingsView.swift"
+        },
+        {
+          "text": "Admin API key",
+          "source": "Sources/FeatureSettings/SeerDetailView.swift"
+        },
+        {
+          "text": "Requests are made as",
+          "source": "Sources/FeatureSettings/SeerDetailView.swift"
+        },
+        {
+          "text": "Admin — unrestricted",
+          "source": "Sources/FeatureSettings/SeerDetailView.swift"
+        },
+        {
+          "text": "Relink required",
+          "source": "Sources/FeatureSettings/SeerDetailView.swift"
+        },
+        {
+          "text": "Requested · Unreleased",
+          "source": "Sources/CoreModels/HeroCTA.swift"
+        },
+        {
+          "text": "Request",
+          "source": "Sources/FeatureHome/DetailHeroView.swift"
+        },
+        {
+          "text": "Request Seasons",
+          "source": "Sources/FeatureHome/DetailHeroView.swift"
+        },
+        {
+          "text": "Manage Seasons",
+          "source": "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
+        },
+        {
+          "text": "Refresh Status",
+          "source": "Sources/CoreUI/SeasonRequestMenuContent.swift"
+        },
+        {
+          "text": "Release & Availability",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Streaming",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Rent",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Buy",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        }
+      ],
+      "emphasis": [
+        "Apple TV:",
+        "iPhone/iPad:"
+      ]
+    }
   },
   {
     "slug": "platform-controls",
@@ -1001,26 +3672,26 @@
     "kind": "reference",
     "file": "platform-controls.md",
     "sources": [
-      "Sources/AppShell/MainTabView.swift",
-      "Sources/FeaturePlayback/PlayerTouchGestureSurface.swift",
-      "Sources/AppShelliOS/PlozziOSPlayerKeyboardControls.swift",
-      "Sources/AppShelliOS/PlozziOSPictureInPictureController.swift",
-      "Sources/AppShelliOS/PlozziOSPlayerOrientation.swift",
-      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-      "Sources/CoreModels/LivePlaybackBuffer.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
-      "Sources/CoreModels/TopShelfSettings.swift",
-      "Sources/FeatureSettings/TopShelfSettingsView.swift",
-      "Sources/AppShell/HomeTab.swift",
-      "TopShelf/ContentProvider.swift",
-      "Sources/CoreModels/PlaybackDiagnostics.swift",
+      "Sources/FeaturePlayback/LiveChannelTransport.swift",
       "Sources/FeaturePlayback/LiveChannelPlayerView.swift",
+      "Sources/FeatureSettings/PlaybackReadAheadControl.swift",
+      "Sources/CoreModels/LivePlaybackBuffer.swift",
+      "Sources/CoreUI/SettingsCopy.swift",
+      "Sources/FeatureSettings/TopShelfSettingsView.swift",
+      "Sources/FeatureSettings/TopShelfStylePicker.swift",
+      "Sources/AppShell/HomeTab.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/CoreModels/PlaybackOrientation.swift",
       "Sources/AppShelliOS/PlozziOSLivePresentationControls.swift",
-      "Sources/CoreModels/NavigationStyleSettingsStore.swift",
+      "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
       "Sources/FeaturePlayback/InfoPanelView.swift",
       "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift",
-      "Sources/CoreModels/ProfileReturnPolicy.swift",
-      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
+      "Sources/CoreUI/ProfileSettingsCategory.swift",
+      "Sources/TopShelfKit/TopShelfContentBuilder.swift",
+      "Sources/TopShelfKit/TopShelfItemResolver.swift",
+      "Sources/FeaturePlayback/PlayerTouchGestureSurface.swift",
+      "Sources/AppShelliOS/PlozziOSPictureInPictureController.swift"
     ],
     "watch": [
       "Sources/AppShelliOS/PlozziOSPlayer",
@@ -1029,7 +3700,169 @@
       "Sources/TopShelfKit/",
       "Sources/FeatureSettings/TopShelf",
       "Sources/CoreModels/NavigationStyleSettingsStore.swift"
-    ]
+    ],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Seeking",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Skip Intervals",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Seek without pausing",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Prevent Accidental Exit",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Fade on display changes",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Guide",
+          "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
+        },
+        {
+          "text": "Go Live",
+          "source": "Sources/FeaturePlayback/LiveChannelPlayerView.swift"
+        },
+        {
+          "text": "Jump to now",
+          "source": "Sources/FeaturePlayback/LiveChannelPlayerView.swift"
+        },
+        {
+          "text": "Live TV buffer",
+          "source": "Sources/FeatureSettings/PlaybackReadAheadControl.swift"
+        },
+        {
+          "text": "Automatic",
+          "source": "Sources/CoreModels/LivePlaybackBuffer.swift"
+        },
+        {
+          "text": "Everyone",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
+        },
+        {
+          "text": "Top Shelf",
+          "source": "Sources/FeatureSettings/TopShelfSettingsView.swift"
+        },
+        {
+          "text": "Show Top Shelf",
+          "source": "Sources/FeatureSettings/TopShelfSettingsView.swift"
+        },
+        {
+          "text": "Continue Watching",
+          "source": "Sources/FeatureSettings/TopShelfSettingsView.swift"
+        },
+        {
+          "text": "Recently Added",
+          "source": "Sources/FeatureSettings/TopShelfSettingsView.swift"
+        },
+        {
+          "text": "Posters",
+          "source": "Sources/FeatureSettings/TopShelfStylePicker.swift"
+        },
+        {
+          "text": "Full Screen",
+          "source": "Sources/FeatureSettings/TopShelfStylePicker.swift"
+        },
+        {
+          "text": "Unable to Open Title",
+          "source": "Sources/AppShell/HomeTab.swift"
+        },
+        {
+          "text": "Volume and brightness gestures",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Player orientation",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Help & Diagnostics",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Auto",
+          "source": "Sources/CoreModels/PlaybackOrientation.swift"
+        },
+        {
+          "text": "Landscape",
+          "source": "Sources/CoreModels/PlaybackOrientation.swift"
+        },
+        {
+          "text": "Portrait",
+          "source": "Sources/CoreModels/PlaybackOrientation.swift"
+        },
+        {
+          "text": "AirPlay",
+          "source": "Sources/AppShelliOS/PlozziOSLivePresentationControls.swift"
+        },
+        {
+          "text": "Picture in Picture",
+          "source": "Sources/AppShelliOS/PlozziOSLivePresentationControls.swift"
+        },
+        {
+          "text": "Playback Diagnostics Overlay",
+          "source": "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift"
+        },
+        {
+          "text": "Playback Info",
+          "source": "Sources/FeaturePlayback/InfoPanelView.swift"
+        },
+        {
+          "text": "Network throughput",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Buffer",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Seekable",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Playback cache",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "AVPlayer time",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "AVPlayer window",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Behind live",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Rewind window",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Playback",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        }
+      ],
+      "emphasis": []
+    }
   },
   {
     "slug": "feedback-and-bugs",
@@ -1040,11 +3873,15 @@
     "kind": "guide",
     "file": "feedback-and-bugs.md",
     "sources": [
+      "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift",
+      "Sources/FeatureSettings/SettingsView.swift",
+      "Sources/FeatureSettings/CrashReportingConsentView.swift",
+      "Sources/CoreUI/SettingsCopy.swift",
+      "Sources/FeatureSettings/DiagnosticsSendButton.swift",
+      "Sources/FeatureSettings/ReleaseNotesViews.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
       "Sources/FeatureSettings/SendDiagnosticsCard.swift",
-      "Sources/CoreUI/SettingsCopy.swift",
-      "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift",
-      "Sources/FeatureSettings/CrashReportingConsentView.swift",
       "Sources/CoreModels/CrashReportingSettings.swift",
       "Sources/CrashReporting/SentryCrashReporter.swift",
       "Sources/CrashReporting/CrashRedaction.swift",
@@ -1053,13 +3890,9 @@
       "Sources/CoreModels/PlaybackDiagnosticJournal.swift",
       "Sources/CoreModels/LiveTVSourceDiagnostics.swift",
       "Sources/FeatureSettings/PrivacyPolicyLink.swift",
-      "Sources/FeatureSettings/DiagnosticsSendButton.swift",
       "Sources/FeatureHome/HomePerfOverlay.swift",
       "Sources/FeatureHome/HomeView.swift",
-      "Sources/AppShell/MainTabView.swift",
-      "Sources/FeatureSettings/RecentActivityDetailView.swift",
-      "Sources/CoreNetworking/PlozzLog.swift",
-      "Sources/CoreModels/SearchDiagnosticJournal.swift"
+      "Sources/AppShell/MainTabView.swift"
     ],
     "watch": [
       "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
@@ -1068,7 +3901,84 @@
       "Sources/FeatureSettings/RecentActivityDetailView.swift",
       "Sources/CoreNetworking/PlozzLog.swift",
       "Sources/CoreModels/SearchDiagnosticJournal.swift"
-    ]
+    ],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Send Feedback",
+          "source": "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift"
+        },
+        {
+          "text": "Report a Problem",
+          "source": "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift"
+        },
+        {
+          "text": "Send Diagnostics",
+          "source": "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift"
+        },
+        {
+          "text": "Home Performance Overlay",
+          "source": "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift"
+        },
+        {
+          "text": "Help & Diagnostics",
+          "source": "Sources/FeatureSettings/SettingsView.swift"
+        },
+        {
+          "text": "Help improve Plozz?",
+          "source": "Sources/FeatureSettings/CrashReportingConsentView.swift"
+        },
+        {
+          "text": "Don't Share",
+          "source": "Sources/FeatureSettings/CrashReportingConsentView.swift"
+        },
+        {
+          "text": "Share Diagnostics",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
+        },
+        {
+          "text": "Enable Sharing",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
+        },
+        {
+          "text": "Message (required)",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
+        },
+        {
+          "text": "Send to Developer",
+          "source": "Sources/FeatureSettings/DiagnosticsSendButton.swift"
+        },
+        {
+          "text": "Submitted",
+          "source": "Sources/FeatureSettings/DiagnosticsSendButton.swift"
+        },
+        {
+          "text": "Release Notes",
+          "source": "Sources/FeatureSettings/ReleaseNotesViews.swift"
+        },
+        {
+          "text": "Show release notes on startup for new versions",
+          "source": "Sources/FeatureSettings/ReleaseNotesViews.swift"
+        },
+        {
+          "text": "Don’t Show Again",
+          "source": "Sources/FeatureSettings/ReleaseNotesViews.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        }
+      ],
+      "emphasis": [
+        "Plozz on Discord:",
+        "Plozz on GitHub:"
+      ]
+    }
   },
   {
     "slug": "troubleshooting",
@@ -1079,26 +3989,26 @@
     "kind": "guide",
     "file": "troubleshooting.md",
     "sources": [
-      "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
-      "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift",
+      "Sources/FeatureAuth/AccountRecoveryScreen.swift",
+      "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift",
       "Sources/FeatureLiveTV/LiveTVSourcesView.swift",
+      "Sources/FeatureLiveTV/LiveTVPrototypeSidebar.swift",
+      "Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift",
+      "Sources/CoreUI/PlaybackDiagnosticDetailsView.swift",
+      "Sources/CoreUI/PlayResumeButtonLabel.swift",
+      "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
       "App/PlozziOS/Info.plist",
       "Sources/CoreUI/HomeSectionStatusView.swift",
       "Sources/CoreUI/PlaybackFailureView.swift",
-      "Sources/CoreUI/PlaybackDiagnosticDetailsView.swift",
       "Sources/CoreModels/PlaybackDiagnosticReport.swift",
       "Sources/CoreModels/LibraryLoadDiagnostic.swift",
       "Sources/FeatureAuth/PlexAccountRecoveryView.swift",
       "Sources/FeatureHome/LibraryBrowseView.swift",
       "Sources/AppRuntime/PlexHomeUsersModel.swift",
       "Sources/FeatureHomeCore/ItemDetailViewModel.swift",
-      "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
-      "Sources/AppShelliOS/PlozziOSPlexPINView.swift",
-      "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift",
-      "Sources/AppShelliOS/PlozziOSLibraryView.swift",
-      "Sources/CoreModels/HomeSectionIssue.swift",
-      "Sources/AppShell/RootView.swift",
-      "Sources/CoreNetworking/PlozzLog.swift"
+      "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
     ],
     "watch": [
       "Sources/CoreUI/Playback",
@@ -1107,6 +4017,86 @@
       "Sources/FeatureHomeCore/HomeViewModel.swift",
       "Sources/FeatureHome/LibraryBrowseView.swift",
       "Sources/FeaturePlayback/PlaybackDiagnostics"
-    ]
+    ],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Try Again",
+          "source": "Sources/FeatureAuth/AccountRecoveryScreen.swift"
+        },
+        {
+          "text": "Sign In Again",
+          "source": "Sources/FeatureAuth/AccountRecoveryScreen.swift"
+        },
+        {
+          "text": "iCloud Sync",
+          "source": "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift"
+        },
+        {
+          "text": "Needs sign-in",
+          "source": "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift"
+        },
+        {
+          "text": "Sources",
+          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        },
+        {
+          "text": "Retry",
+          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        },
+        {
+          "text": "Manage channels",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeSidebar.swift"
+        },
+        {
+          "text": "Hidden channels",
+          "source": "Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift"
+        },
+        {
+          "text": "Details",
+          "source": "Sources/CoreUI/PlaybackDiagnosticDetailsView.swift"
+        },
+        {
+          "text": "Share details",
+          "source": "Sources/CoreUI/PlaybackDiagnosticDetailsView.swift"
+        },
+        {
+          "text": "No streams found",
+          "source": "Sources/CoreUI/PlayResumeButtonLabel.swift"
+        },
+        {
+          "text": "Help & Diagnostics",
+          "source": "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift"
+        },
+        {
+          "text": "Report a Problem",
+          "source": "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift"
+        },
+        {
+          "text": "Recent Activity",
+          "source": "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift"
+        },
+        {
+          "text": "Refresh",
+          "source": "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift"
+        },
+        {
+          "text": "Copy",
+          "source": "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        }
+      ],
+      "emphasis": [
+        "guide only"
+      ]
+    }
   }
 ]

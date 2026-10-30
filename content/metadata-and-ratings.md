@@ -10,8 +10,8 @@ Open **Settings > Metadata Providers**, or follow **Metadata Providers (TMDB, Th
 
 Controls are **shared by all profiles**, unlike [artwork presentation](/appearance/).
 
-- **Recommended:** chooses sources per field.
-- **Custom:** reorder sources; move one below **Disabled** to disable it.
+- **Recommended**: chooses sources per field.
+- **Custom**: reorder sources; move one below **Disabled** to disable it.
 
 Recommended restores policy without rebuilding the list.
 

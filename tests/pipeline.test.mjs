@@ -67,7 +67,7 @@ if(name==='gh') {
 } else if(name==='copilot') {
   if(process.env.GH_TOKEN||process.env.GITHUB_TOKEN||process.env.CLOUDFLARE_API_TOKEN) throw Error('Credential leaked to model process');
   if(f.mutateProtected) fs.writeFileSync('AGENTS.md','changed');
-  console.log(f.agentResponse);
+  console.log(f.repairResponse && args.some(arg=>arg.includes('CORRECTION PASS:')) ? f.repairResponse : f.agentResponse);
 } else if(name==='wrangler') {
   if(args.includes('upload')) console.log('Worker Version ID: 11111111-1111-4111-8111-111111111111');
 } else throw Error('Unexpected executable');
@@ -499,4 +499,43 @@ test('publisher preserves porcelain paths and main races without Cloudflare cred
   result = f.run('publish.mjs', [], env);
   assert.notEqual(result.status, 0);
   assert.match(result.stderr, /non-documentation changes/);
+});
+
+test('a failed assessment gets one targeted correction, never an unbounded retry or scope bypass', t => {
+  const f = fixture(t);
+  f.plan();
+  const approved = '## Visual quality\nClear procedures.\n## UI accuracy\nExact source labels.\n## Reader experience\nUseful choices and results.\nDOCS_REVIEW_APPROVED';
+  f.update({ agentResponse: 'Missing assessments.', repairResponse: approved });
+  let result = f.run('run-agent.mjs', ['review'], { COPILOT_GITHUB_TOKEN: 'fixture' });
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stderr, /one bounded correction pass/);
+  const calls = () => readFileSync(resolve(f.root, 'calls.jsonl'), 'utf8').trim().split('\n').map(JSON.parse).filter(call => call.name === 'copilot');
+  assert.equal(calls().length, 2);
+  assert(calls()[1].args.some(arg => arg.includes('CORRECTION PASS:')));
+  assert.equal(f.read('.docs-work/review.json').approved, true);
+  assert(existsSync(resolve(f.root, '.docs-work/review-response-1.txt')));
+  f.update({ mutateProtected: true, agentResponse: approved });
+  result = f.run('run-agent.mjs', ['review'], { COPILOT_GITHUB_TOKEN: 'fixture' });
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /modified protected infrastructure/);
+  assert.equal(calls().length, 3, 'A protected-file violation must not get a repair invocation.');
+});
+
+test('the full UI ledger fits a bounded proposal without relaxing ordinary article limits', t => {
+  const f = fixture(t);
+  mkdirSync(resolve(f.root, 'proposal'));
+  f.save('proposal/pages.json', [page]);
+  f.save('proposal/getting-started.md', '# Get started\n\nInstall Plozz.\n');
+  f.save('proposal/coverage.json', { ...f.read('content/coverage.json'), padding: 'x'.repeat(1_600_000) });
+  let result = f.run('apply-proposal.mjs', ['proposal']);
+  assert.equal(result.status, 0, result.stderr);
+  f.save('proposal/coverage.json', 'x'.repeat(2_000_001));
+  result = f.run('apply-proposal.mjs', ['proposal']);
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /size limit/);
+  f.save('proposal/coverage.json', {});
+  f.save('proposal/getting-started.md', 'x'.repeat(128_001));
+  result = f.run('apply-proposal.mjs', ['proposal']);
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /size limit/);
 });

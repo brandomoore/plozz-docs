@@ -17,8 +17,8 @@ On a show's details, the Watchlist action saves the show, not the highlighted ep
 
 On Apple TV, iPhone, and iPad, use the controls above the Watchlist grid:
 
-- **Filter:** open **All** or the active filter, then choose **All**, **Movies**, or **TV Shows**. **Clear Filters** restores all titles without deleting saves.
-- **Sort:** open the current sort label, initially **Date Added**. Under **Sort By**, choose **Date Added**, **Release Date**, or **Name**; change **Order** if needed.
+- **Filter**: open **All** or the active filter, then choose **All**, **Movies**, or **TV Shows**. **Clear Filters** restores all titles without deleting saves.
+- To sort, open the current label, initially **Date Added**. Under **Sort By**, choose **Date Added**, **Release Date**, or **Name**; change **Order** if needed.
 
 Date Added defaults to newest first and uses Watchlist save dates, not library-import dates. Entries without a usable save date follow dated entries.
 

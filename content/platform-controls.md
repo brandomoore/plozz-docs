@@ -1,6 +1,6 @@
 # Device and system controls
 
-Controls depend on device and playback path.
+Use remote, touch, or system controls to seek, change the picture, or watch on another screen.
 
 ## Apple TV
 
@@ -26,7 +26,7 @@ For a channel with a usable rewind window, reveal controls and use the timeline 
 2. From an adult Plozz profile, open **Settings > Everyone > Top Shelf**. **Show Top Shelf** is on by default.
 3. Choose **Posters** or **Full Screen**, then set separate **Continue Watching** and **Recently Added** counts: four each by default, adjustable from one to 20.
 
-Posters is the default; selecting one requests playback. With Full Screen, swipe up to expand the shelf. Continue Watching precedes Recently Added; same-source repeats appear once. **Play** requests playback; **More Info** opens title/series details without starting it. Format badges describe source files, not current output.
+Posters is the default; select one to start watching. With Full Screen, swipe up to expand the shelf. Continue Watching appears before Recently Added, without repeated titles from the same source. Use the first button to start watching or the second to view details. Format badges describe the video file, not your TV's current output.
 
 These preferences are shared by Plozz profiles on this Apple TV and do not sync. Turning Show Top Shelf off clears its media without forgetting your layout or counts.
 
@@ -36,7 +36,7 @@ Artwork follows [Appearance > Artwork](/appearance/); full-screen episode text a
 
 ## iPhone and iPad
 
-Tap the video to reveal controls. With a hardware keyboard, **Space** plays/pauses and **Left/Right** skip during eligible playback. Shortcuts yield while menus, sheets, or other player interactions are active.
+Tap the video to reveal controls. On a hardware keyboard, press the space bar to play/pause or the left/right arrows to skip. Shortcuts yield while menus, sheets, or player interactions are active.
 
 During supported local playback, double-tap the left/right side to skip, hold the picture for a temporary speed boost, or pinch to switch Normal/Crop. Vertical drags near the left edge adjust brightness; near the right edge, volume. VoiceOver disables hold, pinch, side-tap, and level-drag shortcuts.
 

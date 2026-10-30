@@ -9,7 +9,7 @@ Plozz can open eligible Plex, Jellyfin, or Emby movies and episodes in another i
 
 1. **Install the player** on the device running Plozz.
 2. Open **Settings > Playback > Advanced > External player**.
-3. Under **Default player**, choose **Infuse** or **VLC**. Apple TV also offers **Native Player**, a separate app, not Apple's playback engine inside Plozz. Unavailable apps are marked **not installed**.
+3. Under **Default player**, choose **Infuse** or **VLC**. Apple TV also offers **Native Player**, a separate app, not Apple's playback engine inside Plozz. Unavailable apps show their name followed by "(not installed)".
 4. **Start a supported movie or episode** normally. Choose its version first if prompted.
 
 **Plozz** is the default. The choice applies to all Plozz profiles on this device, not your other devices. Returned progress still belongs to the viewer who started playback.
