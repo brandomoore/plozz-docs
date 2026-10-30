@@ -148,6 +148,18 @@ waive label verification. Do not remove bold styling or replace a named control
 with vague directions to escape the check. Both arrays can be empty in a guide
 that names no controls and has no bold emphasis.
 
+Apple-generated labels are not app literals. `systemUiLabels` records the
+small, verified framework contract catalogue from `tools/ui-audit.mjs`, with
+Apple documentation and actual code-symbol evidence in the frozen file. For
+these labels, add `system` to the same reference shape, for example
+`{ "text": "Edit", "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift", "system": "swiftui-edit" }`.
+The current catalogue covers SwiftUI Edit/Done, UIKit's conditional More
+interface and the system Now Playing interface. Cite the real framework wiring,
+not an unrelated literal or a comment. Check platform, visibility and editing
+state independently. System labels follow device language; this catalogue
+records their English names. Unknown system labels still block validation
+until their actual API contract is verified; do not guess or waive them.
+
 The audit ledger is maintenance evidence, not the guide itself. Use friendly
 task guides and focused, UI-ordered settings sections; do not publish a code
 inventory, a wall of switches, or one SEO page per toggle. Each guide should

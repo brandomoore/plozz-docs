@@ -91,6 +91,7 @@ jobs:
           include-hidden-files: true
           retention-days: 7
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: proposed-content
           path: content/
@@ -135,6 +136,7 @@ jobs:
           include-hidden-files: true
           retention-days: 7
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: reviewed-content
           path: content/

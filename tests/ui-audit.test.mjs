@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { swiftStrings, discoverUI, validateUI } from '../tools/ui-audit.mjs';
+import { swiftStrings, discoverUI, validateUI, systemUIContracts } from '../tools/ui-audit.mjs';
 import { markdown, plainText, pageAnchors } from '../tools/lib.mjs';
 
 test('Swift label evidence ignores comments and dynamic templates, handling raw strings and escapes', () => {
@@ -97,4 +97,42 @@ test('unused references and editorial-emphasis escape hatches remain reviewable 
   f.discovery.uiLabels[f.path].push('Unused label');
   f.pages[0].ui.references.push({ text: 'Unused label', source: f.path });
   assert.throws(f.check, /Unused UI label reference/);
+});
+
+test('system captions require real framework identifiers, not comments or quoted symbol names', t => {
+  const root = mkdtempSync(resolve(tmpdir(), 'plozz-system-ui-'));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  const sources = {
+    'Sources/FeatureSettings/Editor.swift': 'import SwiftUI\nstruct Editor: View { var body: some View { EditButton() } }',
+    'Sources/AppShelliOS/Tabs.swift': 'let tabs: UITabBarController\nlet more = tabs.moreNavigationController',
+    'Sources/CoreUI/Playing.swift': 'private var center = MPNowPlayingInfoCenter.default()',
+    'Sources/CoreUI/Comment.swift': '// EditButton() MPNowPlayingInfoCenter.default()\nlet symbols = "UITabBarController moreNavigationController"',
+  };
+  for (const [path, text] of Object.entries(sources)) {
+    mkdirSync(resolve(root, path, '..'), { recursive: true });
+    writeFileSync(resolve(root, path), text);
+  }
+  const result = discoverUI(Object.keys(sources), root);
+  assert.deepEqual(result.systemUiLabels['Sources/FeatureSettings/Editor.swift'].map(entry => entry.text), ['Edit', 'Done']);
+  assert.equal(result.systemUiLabels['Sources/AppShelliOS/Tabs.swift'][0].id, 'uikit-more');
+  assert.equal(result.systemUiLabels['Sources/CoreUI/Playing.swift'][0].id, 'media-now-playing');
+  assert.equal(result.systemUiLabels['Sources/CoreUI/Comment.swift'], undefined);
+  assert(!result.uiLabels['Sources/FeatureSettings/Editor.swift'].includes('Edit'), 'Do not pretend system captions are app literals.');
+});
+
+test('system references are explicit and cannot invent captions or documentation contracts', t => {
+  const f = fixture(t);
+  const contract = systemUIContracts.find(contract => contract.id === 'swiftui-edit');
+  f.discovery.systemUiLabels = { [f.path]: [{ id: contract.id, text: contract.text, documentation: contract.documentation }] };
+  writeFileSync(resolve(f.root, 'content/getting-started.md'), '# Get started\n\n## Your screen\n\nOpen **Settings > Appearance**. Use **Show progress bars** on **Apple TV**. Choose **Edit**.\n');
+  const ref = { text: 'Edit', source: f.path };
+  f.pages[0].ui.references.push(ref);
+  assert.throws(f.check, /verified system contract/);
+  ref.system = contract.id;
+  assert.doesNotThrow(f.check);
+  ref.system = 'invented-contract';
+  assert.throws(f.check, /verified system contract/);
+  ref.system = contract.id;
+  f.discovery.systemUiLabels[f.path][0].documentation = 'https://example.com/unverified';
+  assert.throws(f.check, /verified system contract/);
 });

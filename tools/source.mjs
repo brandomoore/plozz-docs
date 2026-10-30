@@ -130,7 +130,9 @@ if (positionals[0] === 'plan') {
       modules: discovery.modules, settingsCategories: discovery.settingsCategories, systemSurfaces: discovery.systemSurfaces,
       screenSurfaces: discovery.screenSurfaces,
       uiLabels: Object.fromEntries([...references].filter(path => discovery.uiLabels?.[path])
-        .map(path => [path, discovery.uiLabels[path]])) },
+        .map(path => [path, discovery.uiLabels[path]])),
+      systemUiLabels: Object.fromEntries([...references].filter(path => discovery.systemUiLabels?.[path])
+        .map(path => [path, discovery.systemUiLabels[path]])) },
   });
   console.log(`Recorded content and coverage review against live app revision ${plan.commit}.`);
 } else throw new Error('Usage: node tools/source.mjs plan [--commit SHA] [--force] | finalize');

@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto';
 import MarkdownIt from 'markdown-it';
 import { installVisuals, platformIcons } from './visuals.mjs';
 import { diagrams, diagramReferences, diagramText } from './diagrams.mjs';
-import { validateUI } from './ui-audit.mjs';
+import { validateUI, systemUIContracts } from './ui-audit.mjs';
 
 export const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 export const APP_REPO = 'brandomoore/Plozz';
@@ -38,7 +38,7 @@ export const readCoverage = (root = ROOT) => {
 export const readBaseline = (root = ROOT) => JSON.parse(readFileSync(resolve(root, 'config/documentation-baseline.json'), 'utf8'));
 export const baselineHash = (root = ROOT) => sha256(JSON.stringify({
   policy: readBaseline(root), editorial: readFileSync(resolve(root, 'EDITORIAL.md'), 'utf8'),
-  diagrams,
+  diagrams, systemUIContracts,
 }));
 export const coverageHash = (root = ROOT) => sha256(JSON.stringify(readCoverage(root)));
 export const isContentFilename = name => /^(?:[a-z][a-z0-9-]{1,60}\.md|pages\.json|coverage\.json)$/.test(name);

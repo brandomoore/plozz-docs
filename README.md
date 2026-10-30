@@ -72,6 +72,8 @@ desktop Copilot app, personal token or Cloudflare deployment secret is needed.
    evidence; screen coverage, UI-accuracy and reader-experience assessments are
    required. Literal matching alone does not prove a control is reachable;
    the independent reviewer traces its wiring and visibility conditions.
+   OS-generated labels use a small Apple-documented contract catalogue tied
+   to real framework calls, rather than fabricated app-source literals.
    Both assessments appear in the Actions job summary and the
    `write-assessment`/`review-assessment` artifacts, including concrete requests
    for useful imagery that needs maintainer-approved assets.
@@ -84,6 +86,9 @@ desktop Copilot app, personal token or Cloudflare deployment secret is needed.
 If deployment fails after the docs commit, the next run detects that Git and
 the live site differ and retries deployment without another rewrite. Runs are
 serialized only with other docs runs; app development is never locked.
+Failed writing/review passes retain their unapproved content artifacts as well
+as assessments for diagnosis. Artifact retention never bypasses the successful
+review and finalization requirements for publication.
 
 A full independent coverage audit runs at least every 30 days, including when
 app source is unchanged. Its separate `baselineReviewedAt` clock is not reset

@@ -1,10 +1,22 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+export const systemUIContracts = [
+  { id: 'swiftui-edit', text: 'Edit', symbols: ['EditButton'],
+    documentation: 'https://developer.apple.com/documentation/swiftui/editbutton' },
+  { id: 'swiftui-done', text: 'Done', symbols: ['EditButton'],
+    documentation: 'https://developer.apple.com/documentation/swiftui/editbutton' },
+  { id: 'uikit-more', text: 'More', symbols: ['UITabBarController', 'moreNavigationController'],
+    documentation: 'https://developer.apple.com/documentation/uikit/uitabbarcontroller/morenavigationcontroller' },
+  { id: 'media-now-playing', text: 'Now Playing', symbols: ['MPNowPlayingInfoCenter'],
+    documentation: 'https://developer.apple.com/documentation/mediaplayer/mpnowplayinginfocenter' },
+];
+
 // Collect literal evidence, not a claim that every string is a reachable control.
 // The independent source review still checks navigation, wiring and conditions.
-export function swiftStrings(source) {
+function scanSwift(source) {
   const values = new Set();
+  const identifiers = new Set();
   let index = 0;
   const comment = () => {
     if (source.startsWith('//', index)) {
@@ -61,23 +73,30 @@ export function swiftStrings(source) {
     return true;
   };
   while (index < source.length) {
-    if (!comment() && !string()) index++;
+    if (comment() || string()) continue;
+    const word = source.slice(index).match(/^[a-zA-Z_][a-zA-Z0-9_]*/)?.[0];
+    if (word) { identifiers.add(word); index += word.length; }
+    else index++;
   }
-  return [...values].sort();
+  return { strings: [...values].sort(), identifiers };
 }
 
+export const swiftStrings = source => scanSwift(source).strings;
+
 export function discoverUI(paths, sourceRoot, catalog = {}) {
-  const labels = {}, screens = new Set();
+  const labels = {}, systemLabels = {}, screens = new Set();
   for (const path of paths.filter(path => /^(?:App|Sources)\/.*\.swift$/.test(path))) {
     const source = readFileSync(resolve(sourceRoot, path), 'utf8');
-    const literalLabels = swiftStrings(source);
-    const localized = literalLabels.map(key => catalog[key]?.source?.stringUnit?.value ?? key);
+    const scanned = scanSwift(source);
+    const localized = scanned.strings.map(key => catalog[key]?.source?.stringUnit?.value ?? key);
     labels[path] = [...new Set(localized)].sort();
+    const contracts = systemUIContracts.filter(contract => contract.symbols.every(symbol => scanned.identifiers.has(symbol)));
+    if (contracts.length) systemLabels[path] = contracts.map(({ id, text, documentation }) => ({ id, text, documentation }));
     if (/^Sources\/FeatureSettings\//.test(path)
       || /^Sources\/AppShelliOS\/.*Settings.*\.swift$/.test(path)
       || /\b(?:some\s+View|ViewModifier|UIViewRepresentable|UIViewControllerRepresentable)\b|:\s*View\b/.test(source)) screens.add(path);
   }
-  return { screenSurfaces: [...screens].sort(), uiLabels: labels };
+  return { screenSurfaces: [...screens].sort(), uiLabels: labels, systemUiLabels: systemLabels };
 }
 
 export function validateUI(pages, coverage, discovery, { root, markdown, plainText, pageAnchors }) {
@@ -86,10 +105,14 @@ export function validateUI(pages, coverage, discovery, { root, markdown, plainTe
   }
   const reference = (ref, sources, context) => {
     if (!ref || typeof ref.text !== 'string' || !ref.text.trim() || ref.text.length > 500
-      || !sources.includes(ref.source) || !discovery.files?.[ref.source]
-      || !discovery.uiLabels[ref.source]?.includes(ref.text)) {
+      || !sources.includes(ref.source) || !discovery.files?.[ref.source]) {
       throw new Error(`UI label must match exact English source wording and cited evidence: ${context}: ${ref?.text}`);
     }
+    const literal = !ref.system && discovery.uiLabels[ref.source]?.includes(ref.text);
+    const system = ref.system && discovery.systemUiLabels?.[ref.source]?.some(contract =>
+      contract.id === ref.system && contract.text === ref.text
+      && systemUIContracts.some(known => known.id === contract.id && known.text === contract.text && known.documentation === contract.documentation));
+    if (!literal && !system) throw new Error(`UI label must match exact English source wording or a verified system contract: ${context}: ${ref.text}`);
   };
   const links = (documents, context) => {
     if (!Array.isArray(documents) || !documents.length) throw new Error(`UI screen needs a useful guide or section: ${context}`);
