@@ -58,7 +58,7 @@ For travel, use [completed downloads](/downloads/); external presentation does n
 
 ## Read playback information
 
-Enable **Settings > Help & Diagnostics > Playback Diagnostics Overlay**, or open **Playback Info** in the player's Info card.
+Enable **Settings > Help & Diagnostics > Playback Diagnostics Overlay**, or open **Playback Info** in the player's **Info** card.
 
 During conversion, video/audio facts describe the current stream; original-file details appear separately. Neither reports your physical speaker layout.
 

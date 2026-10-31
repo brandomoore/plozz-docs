@@ -13,29 +13,29 @@ The order applies across this profile's libraries. Each library shows only suppo
 
 **Browse** remains available if all other supported tabs are hidden. **Reset Navigation** restores the library-tab arrangement, not the app's main shortcuts.
 
+## Adjust the Apple TV library header
+
+Next, under **Page appearance > Recommended Page**, adjust **Logo size** and **Text size** for library headers. Text size scales descriptions and metadata, not cards or menus. These sizes are independent of Home and movie/show details; the center marker identifies the default.
+
+## Adjust card labels
+
+On all platforms, **Page appearance > Customize labels** changes labels for Recommended, Browse, collections, and playlists across this profile's libraries. These are the same [Appearance choices](/appearance/#make-cards-easier-to-read), not extra overrides. Continue Watching shares its label setting with Home.
+
+## Choose collection-cover shapes
+
+Below Page appearance, choose a library by its name and server. The list includes enabled, supported video and collection libraries, not network shares. If discovery fails, choose **Try Again**.
+
+For a library supporting collections, set **Collection covers** to **Auto**, **Posters**, or **Landscape**. Auto samples the covers and follows their majority shape. Ties or no usable dimensions select posters.
+
+These shapes apply to collection covers, not the titles inside them. Collection-only libraries have no Recommended-row editor.
+
 ## Arrange Recommended rows
 
-In this **Libraries** editor, choose the library by its name and server. Move rows into your preferred order or below **Hidden** to hide them. These changes affect only that library's **Recommended** page, not [Home](/home-and-navigation/). **Reset Rows** restores its default row arrangement.
-
-The library list includes enabled, supported video and collection libraries. Network shares have no Recommended page. If discovery fails, choose **Try Again**; an unreachable server is not proof it has no libraries.
+On the selected library's settings page, move Recommended rows into your preferred order or below **Hidden** to hide them. These changes affect only that library's **Recommended** page, not [Home](/home-and-navigation/). **Reset Rows** restores its default arrangement.
 
 > [!NOTE]
 > **No visible rows** means the loaded Recommended rows are hidden. Show them again here, or use Browse. Hiding rows does not disable the library.
 
-## Choose collection-cover shapes
-
-In the same editor, choose a library supporting collections, then set **Collection covers** to **Auto**, **Posters**, or **Landscape**. Auto samples cover dimensions: a landscape majority chooses landscape; ties or no usable dimensions choose posters.
-
-These are collection covers, not the titles inside them. Collection-only libraries have no Recommended editor.
-
-Below the Recommended row list, set **Covers** for each collection row. Home has independent **Covers** controls: under Screens & Navigation, open **Home > Rows** and select its collection-cover row.
-
-## Adjust the Apple TV library header
-
-Under **Recommended Page**, adjust **Logo size** and **Text size** for library headers. Text size scales descriptions and metadata, not cards or menus. These are independent of Home's Showcase/Hero and movie/show detail sizes; the center marker identifies the default.
-
-## Adjust card labels
-
-Under **Page appearance**, open **Customize labels** to change labels for Recommended, Browse, collections, and playlists across this profile's libraries. These are the same [per-view Appearance choices](/appearance/#make-cards-easier-to-read), not extra overrides. Continue Watching shares its label setting with Home.
+Below the row list, set **Covers** for each collection row. Home has independent **Covers** controls: under Screens & Navigation, open **Home > Rows** and select its collection-cover row.
 
 These preferences belong to the profile and can travel through [iCloud Sync](/profiles-and-sync/#sync-settings). To enable libraries for this profile, use **Settings > Libraries**. To arrange the app's main shortcuts instead, use [Navigation](/home-and-navigation/#arrange-shortcuts-and-details).

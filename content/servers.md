@@ -5,7 +5,7 @@ Connect your account to browse its libraries and save your progress.
 ## Add a connection
 
 1. Choose your provider during setup, or open **Settings > Servers > Add Server**.
-2. For Jellyfin, Emby, or Silo, select a server or enter a hostname, IP, or URL, including custom ports/paths.
+2. For Jellyfin, Emby, or Silo, select a server or enter its address. Include any custom port or path.
 3. Complete the provider’s sign-in:
    - **Jellyfin**: approve Quick Connect from Jellyfin on another device, or use username/password.
    - **Plex**: follow the linking instructions, then select your server.
@@ -31,7 +31,7 @@ See [server-user selection](/profiles-and-locks/#choose-a-server-user), [device 
 
 In **Settings > Servers**, select the server and choose **Sign In Again** beside the sign-in. On iPhone/iPad, open its sign-in row first.
 
-Use the original account, server, and server profile. Cancellation/failure preserves the connection. Check reachability before reauthenticating.
+Use the original account, server, and server profile. Cancelling or a failed sign-in leaves your saved connection in place.
 
 ## Add local or remote addresses
 
@@ -45,8 +45,8 @@ Addresses belong to this sign-in on this device. Plozz prefers a reachable local
 
 Play a video from an enabled library to confirm access.
 
-If discovery fails, enter the address manually. Remote viewing needs a reachable address.
+If discovery fails, enter the address manually.
 
 For Tailscale, connect it on the playback device and enter the server's Tailscale IP or MagicDNS address manually; LAN discovery cannot find it.
 
-For missing content, check libraries and user permissions before removing connections. See [Troubleshooting](/troubleshooting/) for sign-in errors. Server networking remains the owner's responsibility; see [Jellyfin networking](https://jellyfin.org/docs/general/post-install/networking/).
+For missing content, check enabled libraries and user permissions. See [Troubleshooting](/troubleshooting/) for sign-in errors. Ask the owner about server setup; see [Jellyfin networking](https://jellyfin.org/docs/general/post-install/networking/).

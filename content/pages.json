@@ -2062,7 +2062,7 @@
       "Sources/FeatureLiveTV/LiveTVMultiviewGuideActions.swift",
       "Sources/FeatureLiveTV/LiveTVPrototypeSidebar.swift",
       "Sources/FeatureSettings/LiveTVSettingsView.swift",
-      "Sources/FeatureLiveTV/LiveTVSetupWelcome.swift",
+      "Sources/FeatureLiveTV/LiveTVSourceAccessGate.swift",
       "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift",
       "Sources/FeatureLiveTV/LibraryChannelEditorView.swift",
       "Sources/CoreUI/ProfileSettingsCategory.swift",
@@ -2182,6 +2182,10 @@
           "source": "Sources/FeatureLiveTV/LiveTVProgramSearchView.swift"
         },
         {
+          "text": "Unlock TV sources",
+          "source": "Sources/FeatureLiveTV/LiveTVSourceAccessGate.swift"
+        },
+        {
           "text": "Approve this source",
           "source": "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift"
         },
@@ -2259,6 +2263,22 @@
         },
         {
           "text": "Update watch history",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Order",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Movies",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Episodes",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Source libraries",
           "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
         },
         {
@@ -2859,15 +2879,15 @@
       "Sources/FeaturePlayback/PlayerChapterPanel.swift",
       "Sources/FeatureHomeCore/HomeRow.swift",
       "Sources/CoreUI/MediaRowView.swift",
-      "Sources/FeatureHome/HomeView.swift"
+      "Sources/CoreUI/DetailInformationSections.swift"
     ],
     "watch": [
       "Sources/CoreModels/Spoiler",
       "Sources/FeatureSettings/HomeSection",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/CoreUI/ContinueWatching",
-      "Sources/CoreModels/HomeLibraryVisibility",
-      "Sources/CoreUI/Spoiler"
+      "Sources/CoreUI/Spoiler",
+      "Sources/CoreUI/DetailInformationSections.swift"
     ],
     "platforms": [
       "Apple TV",
@@ -2876,6 +2896,10 @@
     ],
     "ui": {
       "references": [
+        {
+          "text": "Show Ratings",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
         {
           "text": "All screens",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
@@ -3963,6 +3987,14 @@
         {
           "text": "Playback Info",
           "source": "Sources/FeaturePlayback/InfoPanelView.swift"
+        },
+        {
+          "text": "Playback Info",
+          "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
+        },
+        {
+          "text": "Info",
+          "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
         },
         {
           "text": "Network throughput",

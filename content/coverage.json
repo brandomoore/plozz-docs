@@ -18,6 +18,10 @@
         {
           "slug": "parental-controls",
           "anchor": "check-each-device"
+        },
+        {
+          "slug": "live-tv",
+          "anchor": "approve-playlist-sources-for-kids"
         }
       ],
       "sources": [
@@ -29,9 +33,11 @@
         "Sources/AppShelliOS/PlozziOSSettingsView.swift",
         "Sources/SeerService/SeerService.swift",
         "Sources/CoreModels/HomeLibraryVisibility.swift",
-        "Sources/FeatureHomeCore/HomeAggregator.swift"
+        "Sources/FeatureHomeCore/HomeAggregator.swift",
+        "Sources/FeatureLiveTV/LiveTVSourceAccessGate.swift",
+        "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift"
       ],
-      "answer": "The stable parental-controls guide is the age-suitability entry point. Combine a Kids Profile, restricted server identity and household Parental PIN; Kids profiles disable external Discovery but do not add an app-wide maturity filter. The PIN protects restricted settings and leaving Kids profiles, unlike an individual Profile Lock. Library hiding is not account-wide access control and network shares have no server maturity filter. Kids playlist sources remain unavailable without a Parental PIN and explicit approval; approval is whole-source and device-local. Use a restricted Seerr user and check content and automatic sign-in on each device."
+      "answer": "The stable parental-controls guide is the age-suitability entry point. Combine a Kids Profile, restricted server identity and household Parental PIN; Kids profiles disable external Discovery but do not add an app-wide maturity filter. The PIN protects restricted settings and leaving Kids profiles, unlike an individual Profile Lock. Library hiding is not account-wide access control and network shares have no server maturity filter. Kids playlist approval requires switching to that profile, unlocking Sources with the Parental PIN, selecting an enabled playlist and entering the PIN again for Approve this source. Approval is whole-source and device-local. Use a restricted Seerr user and check content and automatic sign-in on each device."
     },
     "apple-tv-user-sign-in": {
       "documents": [
@@ -220,7 +226,7 @@
         "Sources/AppRuntime/WatchMutationFactory.swift",
         "Sources/CoreModels/WatchStateReconciler.swift"
       ],
-      "answer": "Open Live TV Sources > Plozz channels; enable the automatic lineup or Create custom channel. Automatic channels are not individually editable; Retry Plozz channels recovers preparation errors and Refresh Plozz channels rebuilds prepared lineups. For custom channels choose accessible Plex/Jellyfin/Emby libraries, movies/episodes, order and rules, then Preview schedule and Save channel. Missing/invalid durations exclude titles; blank rules allow all matches. Changes start after published programs. Cross-device schedules need catalogue snapshots. Update watch history is profile-scoped, device-local and default-off; enabling it can mark programs watched after 90% actual viewing without resume writes. Both shells use the authorized completion mutation pipeline, so matching servers follow the cross-server history setting and connected video/anime trackers can receive eligible completions too. Playback uses original files, not IPTV or Silo sources."
+      "answer": "Open Live TV Sources > Plozz channels; enable the automatic lineup or Create custom channel. Automatic channels are not individually editable; Retry Plozz channels recovers preparation errors and Refresh Plozz channels rebuilds prepared lineups. For custom channels set the name, order and Movies/Episodes choices, then select accessible Plex/Jellyfin/Emby libraries and optional semicolon-separated rules. Movie-only ordering disables Episodes. Preview schedule before Save channel; missing/invalid durations exclude titles and blank rules allow all matches. Changes start after published programs. The library catalogue must finish syncing before devices can reproduce the same schedule. Update watch history is profile-scoped, device-local and default-off; enabling it can mark programs watched after 90% actual viewing without resume writes. Both shells use the authorized completion mutation pipeline, so matching servers follow the cross-server history setting and connected video/anime trackers can receive eligible completions too. Playback uses original files, not IPTV or Silo sources."
     },
     "offline-background": {
       "documents": [
@@ -5150,6 +5156,10 @@
           "source": "Sources/CoreUI/DetailInformationSections.swift"
         },
         {
+          "text": "Show Ratings",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
           "text": "Release & Availability",
           "source": "Sources/CoreUI/DetailInformationSections.swift"
         },
@@ -6299,6 +6309,7 @@
     "Sources/AppShelliOS/PlozziOSOnboardingView.swift": {
       "sources": [
         "Sources/AppShelliOS/PlozziOSOnboardingView.swift",
+        "Sources/CoreModels/ProviderKind.swift",
         "Sources/CoreUI/AmbientGradientBackground.swift",
         "Sources/CoreUI/ThemePalette.swift",
         "Sources/CoreUI/NativeGradientCardSurface.swift",
@@ -6309,9 +6320,33 @@
         "iPad"
       ],
       "navigation": "Open Plozz on iPhone/iPad before any source is connected.",
-      "experience": "Add a server, add a network share, or receive setup from another device.",
-      "conditions": "iPhone/iPad first run. Set Up from Another Device is spelled differently from the configured Sync settings action and Apple TV setup.",
+      "experience": "Choose a provider to open its sign-in flow, choose Media Share to select a network folder, or receive setup from another device.",
+      "conditions": "iPhone/iPad first run. All six provider rows are constructed in this order; Media Share opens the unified share form while the others open AddServerView seeded with the chosen provider. Set Up from Another Device has platform-specific capitalization.",
       "controls": [
+        {
+          "text": "Jellyfin",
+          "source": "Sources/CoreModels/ProviderKind.swift"
+        },
+        {
+          "text": "Plex",
+          "source": "Sources/CoreModels/ProviderKind.swift"
+        },
+        {
+          "text": "Emby",
+          "source": "Sources/CoreModels/ProviderKind.swift"
+        },
+        {
+          "text": "Silo",
+          "source": "Sources/CoreModels/ProviderKind.swift"
+        },
+        {
+          "text": "Media Share",
+          "source": "Sources/CoreModels/ProviderKind.swift"
+        },
+        {
+          "text": "IPTV",
+          "source": "Sources/CoreModels/ProviderKind.swift"
+        },
         {
           "text": "Set Up from Another Device",
           "source": "Sources/AppShelliOS/PlozziOSOnboardingView.swift"
@@ -7098,6 +7133,7 @@
     "Sources/AppShelliOS/PlozziOSProfileSetupView.swift": {
       "sources": [
         "Sources/AppShelliOS/PlozziOSProfileSetupView.swift",
+        "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift",
         "Sources/CoreUI/AmbientGradientBackground.swift",
         "Sources/CoreUI/ThemePalette.swift",
         "Sources/CoreUI/SettingsSurfaces.swift",
@@ -7114,8 +7150,40 @@
       ],
       "navigation": "Add a profile on iPhone/iPad and continue the guided setup.",
       "experience": "Choose its server users, libraries, and optional Seerr identity before finishing.",
-      "conditions": "iPhone/iPad. Only authorized server users are offered; imported Plex Home profiles and Silo profiles have provider-specific authorization.",
+      "conditions": "iPhone/iPad. The libraries step embeds PlozziOSMyLibrariesSettingsView with profileSetup presentation, followed by optional Seerr, theme and lock steps on their separately inventoried screens. Setup overrides the Libraries navigation title with the profile's name. Server/library names and Plex identity rows are dynamic; Watching as is a picker for multiple non-Plex, non-share sign-ins. Add Another Plex Account/Add Another User exclude shares. Add Server appears only with no server groups. Loading and recovery controls depend on discovery state. Setup cannot be dismissed by swiping.",
       "controls": [
+        {
+          "text": "Add Server",
+          "source": "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
+        },
+        {
+          "text": "Watching as",
+          "source": "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
+        },
+        {
+          "text": "Add Another Plex Account",
+          "source": "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
+        },
+        {
+          "text": "Add Another User",
+          "source": "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
+        },
+        {
+          "text": "Loading libraries…",
+          "source": "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
+        },
+        {
+          "text": "Sign In Again",
+          "source": "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
+        },
+        {
+          "text": "Edit connection",
+          "source": "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
+        },
+        {
+          "text": "Retry",
+          "source": "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
+        },
         {
           "text": "Done",
           "source": "Sources/AppShelliOS/PlozziOSProfileSetupView.swift"
@@ -15166,7 +15234,7 @@
       ],
       "navigation": "Choose Jellyfin, Emby, or Silo from Add Server.",
       "experience": "Pick a discovered server, rescan, or enter a reachable address manually.",
-      "conditions": "All platforms. Local discovery needs permission; remote/Tailscale addresses are entered manually rather than promised as automatic discovery.",
+      "conditions": "Apple TV's provider sign-in flow uses this picker; iPhone/iPad supplies its own AddServerView. Local discovery needs permission. Remote/Tailscale addresses are entered manually rather than promised as automatic discovery.",
       "controls": [
         {
           "text": "Servers",
@@ -15750,6 +15818,10 @@
         },
         {
           "text": "Ratings",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Show Ratings",
           "source": "Sources/CoreUI/DetailInformationSections.swift"
         },
         {
@@ -19929,10 +20001,30 @@
       ],
       "navigation": "Select a playable channel from Live TV, Search, Home, or an authorized guide overlay.",
       "experience": "Watch a live channel, reveal its guide, use an available rewind window, or return toward live.",
-      "conditions": "All platforms. Authorization, source availability, network policy and provider limits apply. Go Live respects the local buffer; scheduled library channels use Jump to now, not a recording. System Enhance Dialogue/Reduce Loud Sounds controls and levels are Apple TV-only and require the system availability signal; iPhone/iPad uses its separately wired menu. Live TV offers no dual-subtitle selection.",
+      "conditions": "All platforms. Authorization, source availability, network policy and provider limits apply. Go Live respects the local buffer; scheduled library channels use Jump to now, not a recording. The shared transport exposes Info and On Now, plus Guide only when guide content is supplied. Playback Info in the Info card toggles diagnostics; its caption expands on TV focus and is an accessibility label on touch. Apple TV shows Audio for multiple tracks or available system-audio settings; iPhone/iPad shows it when any audio track exists. Subtitles needs an available track and leads to separately inventoried settings. System Enhance Dialogue/Reduce Loud Sounds controls and levels are Apple TV-only and require the system availability signal. Live TV offers no dual-subtitle selection.",
       "controls": [
         {
+          "text": "Info",
+          "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
+        },
+        {
+          "text": "On Now",
+          "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
+        },
+        {
           "text": "Guide",
+          "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
+        },
+        {
+          "text": "Playback Info",
+          "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
+        },
+        {
+          "text": "Audio",
+          "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
+        },
+        {
+          "text": "Subtitles",
           "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
         },
         {
@@ -21275,6 +21367,10 @@
       "conditions": "Available options follow engine capabilities and current tracks. Shipped movie engines do not enable adjustable audio delay; image-based primary captions disable dual subtitles.",
       "controls": [
         {
+          "text": "Download Subtitles",
+          "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
+        },
+        {
           "text": "Off",
           "source": "Sources/FeaturePlayback/TrackMenuBuilder.swift"
         },
@@ -22445,7 +22541,7 @@
       ],
       "navigation": "Add a Plozz profile or choose Name & Avatar for an existing profile.",
       "experience": "Set name/avatar/color, choose available account photos, and save or cancel cosmetic changes.",
-      "conditions": "All platforms where embedded. Management mode controls deletion; cosmetics-only Kids access cannot change locks, Kids status or household restrictions. At least one profile must remain. Apple TV editors with a live-change callback save existing-profile cosmetics immediately and show Revert All Changes/Done; explicit-save mode shows Cancel and Save for an existing profile or Create for a new one. Mobile uses Cancel and Save/Create in its toolbar. Neutral background is an emoji-avatar choice; the Color sheet is mobile. Save/Create is disabled for a blank name.",
+      "conditions": "All platforms where embedded. Management mode controls deletion; cosmetics-only Kids access cannot change locks, Kids status or household restrictions. At least one profile must remain. Apple TV editors with a live-change callback save existing-profile cosmetics immediately and show Revert All Changes/Done; explicit-save mode shows Cancel and Save for an existing profile or Create for a new one. Mobile uses Cancel and Save/Create in its toolbar. Neutral background is an emoji-avatar choice; the Color sheet is mobile. Mobile's Browse all controls open Symbols, Emoji or Photos sheets; choosing an avatar closes the sheet. Photos borrows available account avatars, not the device photo library, and its Browse all photos control is absent without candidates. Save/Create is disabled for a blank name.",
       "controls": [
         {
           "text": "Discard changes?",
@@ -22545,6 +22641,26 @@
         },
         {
           "text": "Symbol",
+          "source": "Sources/FeatureProfiles/ProfileEditorView.swift"
+        },
+        {
+          "text": "Browse all symbols",
+          "source": "Sources/FeatureProfiles/ProfileEditorView.swift"
+        },
+        {
+          "text": "Symbols",
+          "source": "Sources/FeatureProfiles/ProfileEditorView.swift"
+        },
+        {
+          "text": "Browse all emoji",
+          "source": "Sources/FeatureProfiles/ProfileEditorView.swift"
+        },
+        {
+          "text": "Browse all photos",
+          "source": "Sources/FeatureProfiles/ProfileEditorView.swift"
+        },
+        {
+          "text": "Photos",
           "source": "Sources/FeatureProfiles/ProfileEditorView.swift"
         },
         {
@@ -25098,7 +25214,7 @@
       ],
       "navigation": "Open Circadian Mode within Settings > Appearance.",
       "experience": "Choose Off, Auto, Manual or Always On, then relevant location/times, fade, darkness, warmth and preview.",
-      "conditions": "All platforms with platform-specific presentation. Fade is hidden for Always On; auto uses selected location. The tint affects Plozz, not other apps/system display settings; preview stops when leaving.",
+      "conditions": "Apple TV embeds these controls under Appearance; iPhone/iPad has its own settings implementation. Fade is hidden for Always On; Auto uses the selected location. The tint affects Plozz, not other apps/system display settings; preview stops when leaving.",
       "controls": [
         {
           "text": "Circadian Mode",
@@ -26604,6 +26720,8 @@
     "Sources/FeatureSettings/ProfileSetupLibrariesView.swift": {
       "sources": [
         "Sources/FeatureSettings/ProfileSetupLibrariesView.swift",
+        "Sources/FeatureSettings/MyLibrariesDetailView.swift",
+        "Sources/CoreUI/SettingsSwitchToggle.swift",
         "Sources/CoreUI/AmbientGradientBackground.swift",
         "Sources/CoreUI/ThemePalette.swift",
         "Sources/CoreUI/NativeActionButton.swift",
@@ -26615,8 +26733,44 @@
       ],
       "navigation": "Continue the new Apple TV profile wizard to its libraries step.",
       "experience": "Choose server identities and enabled libraries before completing setup.",
-      "conditions": "Accessible signed-in sources only. User authorization failures must be retried, not mistaken for no libraries.",
+      "conditions": "Apple TV. Embeds MyLibrariesDetailView in profileSetup presentation: server switches, library checkmarks and Watching as use the same authorization and recovery as Settings > Libraries. Server and library names are dynamic. The settings-only Add Server to This Apple TV button and share-scan status are absent. Plex/server identity destinations have separate screen records; Done remains pinned below the list.",
       "controls": [
+        {
+          "text": "What does this profile watch?",
+          "source": "Sources/FeatureSettings/MyLibrariesDetailView.swift"
+        },
+        {
+          "text": "On",
+          "source": "Sources/CoreUI/SettingsSwitchToggle.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/CoreUI/SettingsSwitchToggle.swift"
+        },
+        {
+          "text": "Watching as",
+          "source": "Sources/FeatureSettings/MyLibrariesDetailView.swift"
+        },
+        {
+          "text": "Libraries",
+          "source": "Sources/FeatureSettings/MyLibrariesDetailView.swift"
+        },
+        {
+          "text": "Discovering libraries…",
+          "source": "Sources/FeatureSettings/MyLibrariesDetailView.swift"
+        },
+        {
+          "text": "Sign In Again",
+          "source": "Sources/FeatureSettings/MyLibrariesDetailView.swift"
+        },
+        {
+          "text": "Edit connection",
+          "source": "Sources/FeatureSettings/MyLibrariesDetailView.swift"
+        },
+        {
+          "text": "Retry",
+          "source": "Sources/FeatureSettings/MyLibrariesDetailView.swift"
+        },
         {
           "text": "Done",
           "source": "Sources/FeatureSettings/ProfileSetupLibrariesView.swift"
@@ -26636,6 +26790,10 @@
     "Sources/FeatureSettings/RecentActivityDetailView.swift": {
       "sources": [
         "Sources/FeatureSettings/RecentActivityDetailView.swift",
+        "Sources/FeatureSettings/SendDiagnosticsCard.swift",
+        "Sources/FeatureSettings/DiagnosticsSendButton.swift",
+        "Sources/FeatureSettings/DiagnosticsInfoButton.swift",
+        "Sources/CoreUI/SettingsCopy.swift",
         "Sources/CoreUI/SettingsPageHeader.swift",
         "Sources/CoreUI/TextTierStyle.swift"
       ],
@@ -26643,12 +26801,36 @@
         "Apple TV"
       ],
       "navigation": "Open Settings > Help & Diagnostics > Recent Activity.",
-      "experience": "Inspect current local activity, filter/refresh it, and deliberately copy/share a diagnostic summary.",
-      "conditions": "All platforms with platform-specific controls. Summary export omits displayed log messages; manually copied local logs may still contain private details.",
+      "experience": "Read newest-first local log entries, narrow them by category, or deliberately send a diagnostic report with a message.",
+      "conditions": "Apple TV. The page captures up to 500 entries when opened and offers All plus the categories present; it has no refresh, copy or share-summary control. The embedded SendDiagnosticsCard requires a message, configured reporting and consent. Submitted reports use allowlisted technical evidence, not the displayed log text; a viewer's submitted message is retained. The information sheet is inventoried separately. iPhone/iPad's distinct Recent Activity screen has refresh and summary export.",
       "controls": [
         {
           "text": "Recent Activity",
           "source": "Sources/FeatureSettings/RecentActivityDetailView.swift"
+        },
+        {
+          "text": "Send Diagnostics",
+          "source": "Sources/FeatureSettings/SendDiagnosticsCard.swift"
+        },
+        {
+          "text": "Message (required)",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
+        },
+        {
+          "text": "Enable Sharing",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
+        },
+        {
+          "text": "Send to Developer",
+          "source": "Sources/FeatureSettings/DiagnosticsSendButton.swift"
+        },
+        {
+          "text": "Submitted",
+          "source": "Sources/FeatureSettings/DiagnosticsSendButton.swift"
+        },
+        {
+          "text": "About Diagnostic Sharing",
+          "source": "Sources/FeatureSettings/DiagnosticsInfoButton.swift"
         },
         {
           "text": "All",
@@ -26656,6 +26838,10 @@
         }
       ],
       "documents": [
+        {
+          "slug": "feedback-and-bugs",
+          "anchor": "choose-diagnostics-sharing"
+        },
         {
           "slug": "troubleshooting",
           "anchor": "report-a-problem"
@@ -26828,6 +27014,8 @@
     "Sources/FeatureSettings/SendDiagnosticsCard.swift": {
       "sources": [
         "Sources/FeatureSettings/SendDiagnosticsCard.swift",
+        "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
+        "Sources/FeatureSettings/RecentActivityDetailView.swift",
         "Sources/CoreUI/NativeActionButton.swift",
         "Sources/FeatureSettings/DiagnosticsInfoButton.swift",
         "Sources/CoreUI/SettingsRowFocusStyle.swift",
@@ -26836,13 +27024,11 @@
         "Sources/CoreUI/SettingsCopy.swift"
       ],
       "platforms": [
-        "Apple TV",
-        "iPhone",
-        "iPad"
+        "Apple TV"
       ],
-      "navigation": "Open Send Diagnostics under Help & Diagnostics.",
+      "navigation": "Open Help & Diagnostics on Apple TV, or its Recent Activity page, to reach the embedded Send Diagnostics card.",
       "experience": "Enable consent if needed, enter the required message and submit filtered diagnostic evidence.",
-      "conditions": "All platforms where embedded. A nonblank message and consent are required; user text is transmitted as written. Submitted means accepted for delivery, not confirmed receipt.",
+      "conditions": "The two production call sites are Apple TV's HelpDiagnosticsDetailView and RecentActivityDetailView; iPhone/iPad implements its own section with shared send/info controls. A nonblank message and consent are required; user text is transmitted as written. Submitted means accepted for delivery, not confirmed receipt.",
       "controls": [
         {
           "text": "Message (required)",

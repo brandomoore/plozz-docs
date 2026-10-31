@@ -31,7 +31,9 @@ Open Live TV's **Search**, choose **Channels** or **Programs**, and enter a name
 
 ## Approve playlist sources for Kids
 
-For a Kids profile's playlist source, set a [Parental PIN](/parental-controls/), open **Sources**, select the playlist, and choose **Approve this source**. Approval allows every channel in that source, not age-filtered programs. It stays on this device; choose **Revoke source approval** there to undo it. Changed sources or profile identities can require approval again.
+First set a [Parental PIN](/parental-controls/), then switch to the Kids profile and open **Sources**. Enter the PIN when prompted; select **Unlock TV sources** first if offered. Select an enabled playlist, choose **Approve this source**, and enter the PIN again to save approval.
+
+Approval allows every channel in that source, not age-filtered programs. It stays on this device; choose **Revoke source approval** to undo it. Source or profile-identity changes can require approval again.
 
 ## Watch several channels
 
@@ -67,10 +69,12 @@ Open **Sources > Plozz channels**. Turn on **Auto-create channels from your libr
 
 Automatic-lineup errors offer **Retry Plozz channels**; **Refresh Plozz channels** rebuilds prepared channels. Automatic channels are not editable.
 
-Choose libraries, movies/episodes, ordering, and optional matching rules. Select **Preview schedule**, inspect matches, then **Save channel**. Invalid or missing durations can exclude titles. Empty title, genre, or rating rules allow all accessible matches; review the preview carefully.
+1. Name your custom channel and set its **Order**. Enable **Movies**, **Episodes**, or both; movie-only ordering disables Episodes.
+2. Select **Source libraries**, then add any title, genre, or rating rules. Separate multiple entries with semicolons. Empty rules allow all accessible matches.
+3. Choose **Preview schedule** and check the programs, then **Save channel**. Titles with missing or invalid durations are excluded.
 
-Changes start after published programs; cross-device schedules need catalogue snapshots.
+Changes take effect after programs already on the schedule. Let the library catalogue [finish syncing](/profiles-and-sync/#sync-live-tv-deliberately) before expecting the same schedule on another device.
 
-**Update watch history** defaults off for this profile/device. It can mark programs watched after 90% viewing, without resume writes. [Cross-server history](/profiles-and-sync/#keep-watch-history-separate) and eligible [connected trackers](/trackers/) can receive completions. Channels play original files.
+**Update watch history** defaults off for this profile on this device. Turn it on to mark programs watched after viewing 90%; it does not save resume positions. [Cross-server history](/profiles-and-sync/#keep-watch-history-separate) and eligible [connected trackers](/trackers/) can receive completions. Channels play original files.
 
 Live TV is experimental; see [controls and buffering](/platform-controls/#live-tv-remote-controls-and-rewind) or [Troubleshooting](/troubleshooting/).

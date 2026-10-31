@@ -1,6 +1,6 @@
 # Appearance and language
 
-Open **Settings > Appearance** for the profile you want to customize. Make cards, labels, and artwork easier to read without changing your library.
+Make cards, labels, and artwork easier to read without changing your library. Select the profile you want to customize, then open **Settings > Appearance**.
 
 ## Make cards easier to read
 
@@ -30,7 +30,7 @@ In **Artwork**, start with a preset:
 - **Prefer my library's artwork**: use library images first, with online fallback when missing.
 - **Prefer artwork from metadata providers**: use online images first, falling back to the library. Extra lookups can make browsing slower.
 
-Home's Watchlist row and Watchlist page have separate artwork scopes. Downloads keep saved images.
+Home's Watchlist row and the Watchlist page have separate artwork choices. Downloads keep their saved images.
 
 Shared [Metadata Providers](/metadata-and-ratings/) are separate; preferences cannot create missing artwork.
 

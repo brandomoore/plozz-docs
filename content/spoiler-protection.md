@@ -24,7 +24,7 @@ The [Chapters](/playback/#jump-to-a-chapter) panel follows the same episode text
 
 ## Hide scores separately
 
-**Hide ratings until watched** works independently of episode spoiler protection. Both protections are off by default. It hides external ratings for unfinished movies, episodes, shows, and seasons, including in-progress items. Press or tap a blurred rating to reveal it.
+**Hide ratings until watched** works independently of episode spoiler protection. Both protections are off by default. It hides external ratings for unfinished movies, episodes, shows, and seasons, including in-progress items. Select **Show Ratings** over blurred detail-page scores to reveal them.
 
 To hide scores entirely in a header, use the review-score controls in [Home and detail-page settings](/home-and-navigation/) instead.
 

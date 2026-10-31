@@ -1,6 +1,6 @@
 # Streaming quality
 
-Streaming-quality limits apply to Plex, Jellyfin, Emby, and Silo movies/episodes on **iPhone and iPad**, not Apple TV, shares, music, or Live TV.
+Use a smaller video stream to reduce data use or ease buffering. Quality limits apply to Plex, Jellyfin, Emby, and Silo movies/episodes on **iPhone and iPad**, not Apple TV, shares, music, or Live TV.
 
 ## Save network-specific limits
 
@@ -8,11 +8,11 @@ Open **Settings > Playback > Streaming quality** for this profile. Set **Local n
 
 Local versus remote depends on the connection to your source, not simply whether the device uses Wi-Fi.
 
-**Maximum** removes Plozz's reduction limit, not server compatibility requirements. The server may still convert. Lower limits permit originals only when reported dimensions/bitrate fit; unknown facts can require conversion. Bitrate includes audio.
+**Maximum** asks for no quality reduction, but the server may still convert for compatibility. Lower limits allow the original only when its reported resolution and total bitrate fit. Missing information can require conversion.
 
 Under **Advanced**, choose a transcoding codec or **Force transcoding**, even at Maximum. **Prefer HEVC (H.265)** can fall back to H.264 at the same limit. Conversion needs server support, permission, and capacity.
 
-**Custom…** takes a maximum resolution and whole-number total Kbps. For **Invalid custom quality**, choose a preset or enter a valid limit; it does not mean Maximum.
+**Custom…** takes a maximum resolution and a total bitrate in whole-number Kbps. For **Invalid custom quality**, choose a preset or correct the limit.
 
 A limit below Maximum or Force transcoding prevents [external-player handoff](/external-players/), even if the original fits.
 
