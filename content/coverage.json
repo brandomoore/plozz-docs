@@ -179,7 +179,7 @@
       "documents": [
         {
           "slug": "subtitles",
-          "anchor": "choose-a-track"
+          "anchor": "show-two-languages"
         },
         {
           "slug": "platform-controls",
@@ -196,7 +196,7 @@
         "Sources/FeaturePlayback/PlayerMoreMenu.swift",
         "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift"
       ],
-      "answer": "Select primary text, then another text track through Apple TV Style > Dual Subtitles (or its direct control) or mobile Subtitles > Advanced… > Second Track; Off there removes only the second line. Mobile portrait starts in the ellipsis Playback options menu, while landscape separates controls. Plozzigen can decode embedded second text tracks; native playback needs fetchable text delivery. Image primaries disable dual mode and images cannot be second tracks. Locally remuxed wireless AirPlay has no selectable subtitles."
+      "answer": "For movies and episodes, select primary text, then another text track through Apple TV Style > Dual Subtitles (or its direct control) or mobile Subtitles > Advanced… > Second Track; Off there removes only the second track. Live TV excludes dual subtitles. Mobile portrait starts in the ellipsis Playback options menu, while landscape separates controls. Plozzigen can decode embedded second text tracks; native playback needs fetchable text delivery. Image primaries disable dual mode and images cannot be second tracks. Locally remuxed wireless AirPlay has no selectable subtitles."
     },
     "library-channels": {
       "documents": [
@@ -419,7 +419,7 @@
         "Sources/AppShell/MainTabView.swift",
         "Sources/AppShell/HomeTab.swift"
       ],
-      "summary": "The extension renders the shared saved snapshot as native poster sections or a details carousel. Full Screen has distinct Play/More Info routes; both resolve only within admitted active accounts. The adult settings entry controls default-on visibility, style and per-feed counts on this device without broadening source permissions."
+      "summary": "The extension renders the shared saved snapshot as native poster sections or a details carousel. Full Screen has distinct playback and details actions with OS-owned captions; both resolve only within admitted active accounts. The adult settings entry controls default-on visibility, style and per-feed counts on this device without broadening source permissions."
     },
     "TopShelf/Info.plist": {
       "areas": [
@@ -551,6 +551,14 @@
         {
           "slug": "live-tv",
           "anchor": "find-on-demand-titles"
+        },
+        {
+          "slug": "browse-home-rows",
+          "anchor": "open-a-larger-grid"
+        },
+        {
+          "slug": "browse-home-rows",
+          "anchor": "narrow-or-rearrange-the-results"
         }
       ],
       "sources": [
@@ -571,11 +579,11 @@
         "Sources/AppRuntime/MediaItemActionCoordinator.swift",
         "Sources/AppRuntime/WatchMutationApplier.swift",
         "Sources/FeatureHome/DetailHeroView.swift",
-        "Sources/FeatureHome/SeriesDetailView.swift",
+        "Sources/FeatureHomeCore/HomeRowBrowseModel.swift",
         "Sources/CoreUI/YouTubeTrailerOpening.swift",
-        "Sources/FeatureWatchlistCore/WatchlistUnion.swift"
+        "Sources/FeatureHomeCore/HomeRowBrowseFactory.swift"
       ],
-      "summary": "Browse, filter, sort and search enabled libraries; All Libraries now combines them on Apple TV, iPhone and iPad, with explicit mobile shortcut visibility explained in the combined-library capability. Only Apple TV exposes the name-sort letter rail. Genre/year intersect quick filters; preparation, interrupted collections and failed facets retain cancellation/retry paths. Collections, playlists, extras, IPTV on-demand catalogues and source/version selection remain distinct from requests and schedule-only placeholders. Watchlist covers save/removal, filters, date/name sorting, profile ownership and connected-list effects; disabling sources does not erase explicit saves. History actions distinguish watched-state changes from Continue Watching dismissal/resume clearing and cross-server delivery. Library tabs and Recommended rows differ from Home/main shortcuts; Browse is the fallback, shares lack Recommended, and collection-cover shapes have independent library/row scopes. Preserve reset scope and hidden-row recovery. Server-owned trailers/previews play in Plozz; Watch on YouTube opens externally regardless of external-player preference, requiring the TV app or mobile app/web fallback without guaranteeing availability."
+      "summary": "Browse, filter, sort and search enabled libraries; All Libraries combines them on Apple TV, iPhone and iPad, with explicit mobile shortcut visibility explained in the combined-library capability. Only Apple TV exposes the name-sort letter rail. Genre/year intersect quick filters; preparation, interrupted collections and failed facets retain cancellation/retry paths. Eligible Home row previews open a row-specific grid, not an unrestricted library query: TV uses a trailing See all card and mobile a heading chevron. Combined Recently Added, collection members and server recommendations retain their actual feeds; filter/sort changes load the remaining feed before publishing results, with Retry on failure. Watchlist shortcuts open the dedicated page and its saved preferences instead. Collections, playlists, extras, IPTV on-demand catalogues and source/version selection remain distinct from requests and schedule-only placeholders. Watchlist covers save/removal, filters, date/name sorting, profile ownership and connected-list effects; disabling sources does not erase explicit saves. History actions distinguish watched-state changes from Continue Watching dismissal/resume clearing and cross-server delivery. Library tabs and Recommended rows differ from Home/main shortcuts; Browse is the fallback, shares lack Recommended, and collection-cover shapes have independent library/row scopes. Server-owned trailers/previews play in Plozz; Watch on YouTube opens externally regardless of external-player preference, requiring the TV app or mobile app/web fallback without guaranteeing availability."
     },
     "home-navigation": {
       "documents": [
@@ -604,6 +612,10 @@
         {
           "slug": "home-and-navigation",
           "anchor": "arrange-shortcuts-and-details"
+        },
+        {
+          "slug": "browse-home-rows",
+          "anchor": "open-a-larger-grid"
         }
       ],
       "sources": [
@@ -618,17 +630,17 @@
         "Sources/AppRuntime/HeroDiscoveryRuntime.swift",
         "Sources/FeatureSettings/NavigationLibrariesDetailView.swift",
         "Sources/CoreModels/NavigationContentAvailability.swift",
-        "Sources/CoreModels/NavigationLibraryLayout.swift",
+        "Sources/FeatureHomeCore/HomePresentationRow.swift",
         "Sources/AppShell/MainTabView.swift",
         "Sources/AppShelliOS/PlozziOSRootView.swift",
         "Sources/FeatureHome/HomeView.swift",
         "Sources/AppShelliOS/PlozziOSHomeView.swift",
         "Sources/FeatureSettings/LibraryPresentationSettingsView.swift",
         "Sources/CoreModels/NavigationStyleSettingsStore.swift",
-        "Sources/FeatureSettings/PreferenceDetailViews.swift",
+        "Sources/FeatureHomeCore/HomeRowBrowseView.swift",
         "Sources/AppShelliOS/PlozziOSSettingsView.swift"
       ],
-      "summary": "Screens & Navigation separates Home layout/hero, Rows, Filtering, main shortcuts and movie/show details. Presets replace custom Home arrangements after confirmation without editing servers; collection sections retain source identity, presentation choices and failure recovery. History feeds ignore library discovery switches, with no age/count cap for Continue Watching/merged Next Up and separate Next Up previews capped at 20. Recently Added and Hero & discovery filters are presentation-only with different defaults and candidate limits. Showcase and the carousel remain separate. Discovery recommendations do not require Seerr, but a new profile's carousel follows its connection until Discovery is explicitly toggled; Kids policy still excludes Discovery. All three TV navigation layouts offer eligible library shortcuts; changes retain saved order. Mobile starts with Home, Downloads and Search subject to availability; other destinations, including individual libraries and All Libraries, start Hidden until explicitly shown. Compact More contains overflow of shown destinations, not hidden shortcuts. TV sidebars retain Settings, Top Bar has a profile-picker escape, and mobile retains the profile-button route. Reset Navigation does not reset library tabs or access. Main layout/shortcuts stay local per profile/device; Home preferences transfer."
+      "summary": "Screens & Navigation separates Home layout/hero, Rows, Filtering, main shortcuts and movie/show details. Presets replace custom Home arrangements after confirmation without editing servers; collection sections retain source identity, presentation choices and failure recovery. The Home browsing guide explains eligible expanded rows separately from the arranger: TV See all cards versus mobile row headings, platform control order, original-feed membership and retry. Plain combined Continue Watching remains unbounded in its rail and does not gain this shortcut merely from its item count; Live TV rows are not row-browser feeds. History feeds ignore library discovery switches, with no age/count cap for Continue Watching/merged Next Up and separate Next Up previews capped at 20. Recently Added and Hero & discovery filters are presentation-only with different defaults and candidate limits. Showcase and the carousel remain separate. Discovery recommendations do not require Seerr, but a new profile's carousel follows its connection until Discovery is explicitly toggled; Kids policy still excludes Discovery. All three TV navigation layouts offer eligible library shortcuts; changes retain saved order. Mobile starts with Home, Downloads and Search subject to availability; other destinations, including individual libraries and All Libraries, start Hidden until explicitly shown. Compact More contains overflow of shown destinations, not hidden shortcuts. TV sidebars retain Settings, Top Bar has a profile-picker escape, and mobile retains the profile-button route. Reset Navigation does not reset library tabs or access. Main layout/shortcuts stay local per profile/device; Home preferences transfer."
     },
     "appearance": {
       "documents": [
@@ -890,9 +902,11 @@
         "Sources/FeaturePlayback/TrackMenuBuilder.swift",
         "Sources/FeaturePlayback/NativeVideoEngine.swift",
         "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
-        "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        "Sources/FeaturePlayback/PlayerMoreMenu.swift",
+        "Sources/CoreModels/SubtitleStyle.swift",
+        "Sources/FeaturePlayback/SubtitleOverlayView.swift"
       ],
-      "summary": "Select/search tracks, distinguish forced/SDH and per-content policies, enter mobile language codes or follow device language, style text or Live TV, and manage second tracks. Mobile Subtitles > Advanced… contains Second Track, Subtitle Delay and Appearance > Style; Search & Download… opens search separately. Portrait starts in Playback options. Prefer SDH permits fallback; Only SDH makes automatic/search/download choices strict without overriding manual or remembered choices. Matching device caption style replaces custom appearance after confirmation; edits exit matching while placement/dual controls remain Plozz-specific. Explain embedded Plozzigen versus fetchable native text, image-primary exclusion, secondary Off, timing and AirPlay limits. External apps receive eligible fetchable SRT sidecars without Plozz styling/dual guarantees; custom templates receive no subtitle links."
+      "summary": "Select/search tracks, distinguish forced/SDH and per-content policies, enter mobile language codes or follow device language, style text or Live TV, and manage second tracks. Mobile Subtitles > Advanced… contains Second Track, Subtitle Delay and Appearance > Style; Search & Download… opens search separately. Portrait starts in Playback options. Prefer SDH permits fallback; Only SDH makes automatic/search/download choices strict without overriding manual or remembered choices. Matching device caption style replaces custom appearance after confirmation; edits exit matching while placement/dual controls remain Plozz-specific. Position chooses vertical placement; Extra Line Position offers Above/Center/Below for wrapped-line growth, with screen-edge clamping, not second-track placement. The public appearance section explains this distinction alongside file-formatting overrides. Explain embedded Plozzigen versus fetchable native text, image-primary exclusion, secondary Off, timing and AirPlay limits. External apps receive eligible fetchable SRT sidecars without Plozz styling/dual guarantees; custom templates receive no subtitle links."
     },
     "music": {
       "documents": [
@@ -1008,7 +1022,7 @@
         "Sources/FeaturePlayback/PlayerViewModel.swift",
         "Sources/FeatureHomeCore/PlaybackVersionChoiceModel.swift"
       ],
-      "summary": "Select the intended source/version on mobile details before downloading and test the validated, completed copy offline. Playback prefers a usable matching download even with another server/version selected; check the saved edition rather than assuming a source switch forces streaming. Manage Seasons downloads available episodes, not placeholders. Preparing/Downloading/Finishing are not completion; all bytes still need offline validation. Distinguish background HTTP from in-process/share work and fallible iOS 26 continued processing. Switching profiles pauses outgoing transfers; return to the owning profile to resume, subject to network policy. Retain quality/network policy, provider preparation, track limits, speed caps and uncapped background behavior. Reduced Jellyfin/Emby copies require Download Speed > Limit > Unlimited. Storage in Download Settings shows download use and available device capacity. Cancel Active Downloads deletes unfinished copies but keeps completed ones; Delete All Downloads removes this profile's saved videos, not server originals. Pause preserves work; notifications need permission. Completion notices open the title or batch without autoplay and require authorization for the owning profile rather than bypassing its lock."
+      "summary": "Select the intended source/version on mobile details before downloading and test the validated, completed copy offline. Playback prefers a usable matching download even with another server/version selected; check the saved edition rather than assuming a source switch forces streaming. Manage Seasons downloads available episodes, not placeholders. Preparing/Downloading/Finishing are not completion; all bytes still need offline validation. Distinguish background HTTP from in-process/share work and fallible iOS 26 continued processing. Cancelling the system download Live Activity pauses its transfers and preserves partial files; Resume in Plozz differs from deleting downloads. Switching profiles pauses outgoing transfers; return to the owning profile to resume, subject to network policy. Retain quality/network policy, provider preparation, track limits, speed caps and uncapped background behavior. Reduced Jellyfin/Emby copies require Download Speed > Limit > Unlimited. Storage in Download Settings shows download use and available device capacity. Cancel Active Downloads deletes unfinished copies but keeps completed ones; Delete All Downloads removes this profile's saved videos, not server originals. Pause preserves work; notifications need permission. Completion notices open the title or batch without autoplay and require authorization for the owning profile rather than bypassing its lock."
     },
     "profiles": {
       "documents": [
@@ -1466,7 +1480,7 @@
         "Sources/FeatureHomeCore/LibraryBrowseViewModel.swift",
         "Sources/AppShelliOS/PlozziOSLibraryView.swift",
         "Sources/FeatureHome/HomePerfOverlay.swift",
-        "Sources/FeatureHome/DetailExtrasView.swift",
+        "Sources/FeatureHomeCore/HomeRowBrowseFactory.swift",
         "Sources/FeatureHome/WatchlistBrowseView.swift",
         "Sources/FeatureHome/DetailHeroView.swift",
         "Sources/FeatureHome/SeriesDetailView.swift",
@@ -1483,7 +1497,7 @@
         "Sources/AppShell/HomeTab.swift",
         "Sources/AppShelliOS/PlozziOSAllLibrariesDestinationView.swift"
       ],
-      "summary": "Keep browsing, collection recovery, source/version selection, Watchlists and schedule-only placeholders together. Both shells now resolve All Libraries through FeatureHomeCore's shared source inventory/merge policy; mobile has a reachable navigation destination but still no alphabet rail. Name-sort rail behavior is TV-only; unused menu/observed feedback state is not a mobile jump control. Library presentation, collection covers and Home rows retain independent scopes and failure recovery. Account-wide history ignores disabled-library discovery. Both shells wire detail theme music and server trailers with lifecycle/authorization checks; online trailers open YouTube externally with mobile-only web fallback. The TV Home performance overlay supports stutter reporting, not a mobile overlay. Rendering/skeleton changes do not create new reader procedures."
+      "summary": "Keep browsing, collection recovery, source/version selection, Watchlists and schedule-only placeholders together. Both shells resolve All Libraries through FeatureHomeCore's shared source inventory/merge policy; mobile has a reachable navigation destination but still no alphabet rail. Home row browsing is a separate reachable workflow: eligible TV See all cards/mobile headings open the original row feed through HomeRowBrowseFactory, while Watchlist routes to its existing page. Filtering/sorting waits for the full available row rather than sorting only the preview; server-feed identity and current profile visibility are retained. Name-sort rail behavior is TV-only; unused menu/observed feedback state is not a mobile jump control. Library presentation, collection covers and Home rows retain independent scopes and failure recovery. Account-wide history ignores disabled-library discovery. Both shells wire detail theme music and server trailers with lifecycle/authorization checks; online trailers open YouTube externally with mobile-only web fallback. The TV Home performance overlay supports stutter reporting, not a mobile overlay."
     },
     "FeatureLiveTV": {
       "areas": [
@@ -2377,7 +2391,7 @@
       ],
       "navigation": "Open Home on Apple TV or follow a title link from Top Shelf.",
       "experience": "Browse the active profile Home and resolve a title that cannot be reopened from its saved source.",
-      "conditions": "Apple TV. Top Shelf links may first require profile/PIN authorization; a missing original connection cannot be replaced by an arbitrary same-named title.",
+      "conditions": "Apple TV. Top Shelf links may first require profile/PIN authorization; a missing original connection cannot be replaced by an arbitrary same-named title. A failed external YouTube trailer handoff presents the shared error dialog; Apple TV has no browser fallback.",
       "controls": [
         {
           "text": "Request Failed",
@@ -2386,6 +2400,14 @@
         {
           "text": "OK",
           "source": "Sources/AppShell/HomeTab.swift"
+        },
+        {
+          "text": "Couldn't open YouTube",
+          "source": "Sources/CoreUI/YouTubeTrailerOpening.swift"
+        },
+        {
+          "text": "OK",
+          "source": "Sources/CoreUI/YouTubeTrailerOpening.swift"
         },
         {
           "text": "Unable to Open Title",
@@ -2416,6 +2438,7 @@
     },
     "Sources/AppShell/MainTabView.swift": {
       "sources": [
+        "Sources/ProviderIPTV/IPTVProvider.swift",
         "Sources/AppShell/MainTabView.swift",
         "Sources/CoreModels/AllLibrariesBrowse.swift",
         "Sources/CoreModels/NavigationStyle.swift",
@@ -2472,6 +2495,14 @@
       "experience": "Open Home, Search, libraries, Watchlist, Live TV, Music, Settings, or profile switching.",
       "conditions": "Apple TV. Destinations follow the active profile layout; Music requires accessible music, combined libraries require multiple eligible video libraries, and Live TV follows enabled sources.",
       "controls": [
+        {
+          "text": "Movies",
+          "source": "Sources/ProviderIPTV/IPTVProvider.swift"
+        },
+        {
+          "text": "TV Shows",
+          "source": "Sources/ProviderIPTV/IPTVProvider.swift"
+        },
         {
           "text": "Home",
           "source": "Sources/AppShell/MainTabView.swift"
@@ -3097,6 +3128,7 @@
     },
     "Sources/AppShell/SearchTab.swift": {
       "sources": [
+        "Sources/FeatureSearchCore/SearchSection.swift",
         "Sources/AppShell/SearchTab.swift",
         "Sources/AppShell/MainTabViewSupport.swift",
         "Sources/AppShell/NavigationRailShell.swift",
@@ -3145,8 +3177,20 @@
       ],
       "navigation": "Choose Search in Apple TV navigation.",
       "experience": "Search connected media and eligible discovery results, then open a title.",
-      "conditions": "Apple TV. Provider access, enabled discovery, and the active profile affect results; a discovery match is not automatically playable.",
+      "conditions": "Apple TV. Provider access, enabled discovery, and the active profile affect results; a discovery match is not automatically playable. A failed external YouTube trailer handoff presents the shared error dialog; Apple TV has no browser fallback.",
       "controls": [
+        {
+          "text": "Not in Your Library",
+          "source": "Sources/FeatureSearchCore/SearchSection.swift"
+        },
+        {
+          "text": "Couldn't open YouTube",
+          "source": "Sources/CoreUI/YouTubeTrailerOpening.swift"
+        },
+        {
+          "text": "OK",
+          "source": "Sources/CoreUI/YouTubeTrailerOpening.swift"
+        },
         {
           "text": "Source Unavailable",
           "source": "Sources/AppShell/MainTabViewSupport.swift"
@@ -4125,6 +4169,10 @@
       "conditions": "iPhone/iPad. Upload requires consent and a configured reporting endpoint; copied local activity is different from redacted submitted evidence. Developer-only controls are not ordinary support steps.",
       "controls": [
         {
+          "text": "Message (required)",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
+        },
+        {
           "text": "Get Help",
           "source": "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift"
         },
@@ -4327,6 +4375,7 @@
     },
     "Sources/AppShelliOS/PlozziOSDownloadsView.swift": {
       "sources": [
+        "Sources/AppShelliOS/PlozziOSDownloadActivity.swift",
         "Sources/AppShelliOS/PlozziOSDownloadsView.swift",
         "Sources/CoreModels/SeriesDownloadPresentation.swift",
         "Sources/CoreUI/AmbientGradientBackground.swift",
@@ -4351,8 +4400,12 @@
       ],
       "navigation": "Open Downloads from mobile navigation, then Download Settings for transfer preferences.",
       "experience": "Monitor downloads, pause/resume/remove items or batches, and configure storage, network, speed, quality, and notifications.",
-      "conditions": "iPhone/iPad only. List and settings follow the active profile. UI order is In Progress, Storage, Network, Download Speed, Download Quality, Notifications. Provider conversion/track limits, network conditions, notification permission, and transfer state gate controls.",
+      "conditions": "iPhone/iPad only. List and settings follow the active profile. Download Settings order is Network, Download Speed, Download Quality, Notifications, In Progress, Storage; In Progress requires active transfers. Provider conversion/track limits, network conditions, notification permission, and transfer state gate controls. The iOS/iPadOS 26+ footer explains background download Live Activities: cancelling one pauses tracked downloads without deleting partial files, and they can resume in Plozz. This is not Cancel Active Downloads, which deletes unfinished copies. Finishing is a Live Activity status, not a Downloads-list label.",
       "controls": [
+        {
+          "text": "Finishing",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadActivity.swift"
+        },
         {
           "text": "Remove All Downloads?",
           "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
@@ -4367,26 +4420,6 @@
         },
         {
           "text": "Download Settings",
-          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
-        },
-        {
-          "text": "In Progress",
-          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
-        },
-        {
-          "text": "Cancel Active Downloads",
-          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
-        },
-        {
-          "text": "Storage",
-          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
-        },
-        {
-          "text": "Downloaded titles",
-          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
-        },
-        {
-          "text": "Delete All Downloads",
           "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
         },
         {
@@ -4502,6 +4535,34 @@
           "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
         },
         {
+          "text": "In Progress",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Pause All",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Resume All",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Cancel Active Downloads",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Storage",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Downloaded titles",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Delete All Downloads",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
           "text": "Downloads Unavailable",
           "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
         },
@@ -4559,14 +4620,6 @@
         },
         {
           "text": "Downloaded",
-          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
-        },
-        {
-          "text": "Pause All",
-          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
-        },
-        {
-          "text": "Resume All",
           "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
         },
         {
@@ -4685,7 +4738,12 @@
     },
     "Sources/AppShelliOS/PlozziOSHomeView.swift": {
       "sources": [
+        "Sources/CoreModels/HomeSectionIssue.swift",
         "Sources/AppShelliOS/PlozziOSHomeView.swift",
+        "Sources/CoreUI/BrowseRowHeading.swift",
+        "Sources/FeatureHomeCore/HomePresentationRow.swift",
+        "Sources/FeatureHomeCore/HomeRow.swift",
+        "Sources/FeatureHomeCore/HomeRowBrowseView.swift",
         "Sources/AppShelliOS/PlozziOSAddShareView.swift",
         "Sources/AppShelliOS/PlozziOSDownloadNotificationNavigation.swift",
         "Sources/AppShelliOS/PlozziOSDownloadNotifications.swift",
@@ -4773,9 +4831,20 @@
         "iPad"
       ],
       "navigation": "Open Home from iPhone/iPad navigation.",
-      "experience": "Browse profile rows and hero suggestions, retry failed loading, or connect a source when none exists.",
-      "conditions": "iPhone/iPad. Home content follows enabled libraries, source availability, profile presentation, watched-content filtering, and eligible Discovery providers.",
+      "experience": "Browse profile rows and hero suggestions, tap an eligible row's heading chevron for its larger grid, retry failed loading, or connect a source when none exists.",
+      "conditions": "iPhone/iPad. Home content follows enabled libraries, source availability, profile presentation, watched-content filtering, and eligible Discovery providers. Row-heading browsing requires more available titles, nonempty results, no loading/failure, and no section issue. The row title is the action label, including dynamic server/collection names, not a separate See all caption. The global Watchlist action opens the dedicated Watchlist page; combined Continue Watching and Live TV rows do not gain a row browser. Source/profile changes invalidate an open browser.",
       "controls": [
+        {
+          "text": "No titles to show",
+          "source": "Sources/CoreModels/HomeSectionIssue.swift"
+        },
+        {
+          "text": "Section unavailable in the latest refresh",
+          "source": "Sources/CoreModels/HomeSectionIssue.swift"
+        },
+        {"text": "Continue Watching", "source": "Sources/FeatureHomeCore/HomeRow.swift"},
+        {"text": "Watchlist", "source": "Sources/FeatureHomeCore/HomeRow.swift"},
+        {"text": "Recently Added", "source": "Sources/FeatureHomeCore/HomeRow.swift"},
         {
           "text": "Your Home is empty",
           "source": "Sources/AppShelliOS/PlozziOSHomeView.swift"
@@ -4952,11 +5021,17 @@
         {
           "slug": "library",
           "anchor": "browse-a-library"
+        },
+        {
+          "slug": "browse-home-rows",
+          "anchor": "open-a-larger-grid"
         }
       ]
     },
     "Sources/AppShelliOS/PlozziOSItemDetailView.swift": {
       "sources": [
+        "Sources/CoreModels/MediaItem+Trailer.swift",
+        "Sources/CoreModels/HeroCTA.swift",
         "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
         "Sources/CoreUI/SeasonEpisodeActions.swift",
         "Sources/CoreModels/SeriesDownloadPresentation.swift",
@@ -5043,6 +5118,54 @@
       "conditions": "iPhone/iPad. Play/download requires authorized available library files. Seerr requests require a matched title and request identity; status buttons, download quality, and season actions reflect provider and current state.",
       "controls": [
         {
+          "text": "Trailer",
+          "source": "Sources/CoreModels/MediaItem+Trailer.swift"
+        },
+        {
+          "text": "Watch on YouTube",
+          "source": "Sources/CoreModels/MediaItem+Trailer.swift"
+        },
+        {
+          "text": "Requested · Unreleased",
+          "source": "Sources/CoreModels/HeroCTA.swift"
+        },
+        {
+          "text": "Download",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
+          "text": "Download Original",
+          "source": "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift"
+        },
+        {
+          "text": "Mute theme music",
+          "source": "Sources/AppShelliOS/PlozziOSHeroViews.swift"
+        },
+        {
+          "text": "Unmute theme music",
+          "source": "Sources/AppShelliOS/PlozziOSHeroViews.swift"
+        },
+        {
+          "text": "Ratings",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Release & Availability",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Streaming",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Rent",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Buy",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
           "text": "Unable to load show",
           "source": "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
         },
@@ -5077,6 +5200,14 @@
         {
           "text": "OK",
           "source": "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
+        },
+        {
+          "text": "Couldn't open YouTube",
+          "source": "Sources/CoreUI/YouTubeTrailerOpening.swift"
+        },
+        {
+          "text": "OK",
+          "source": "Sources/CoreUI/YouTubeTrailerOpening.swift"
         },
         {
           "text": "Server unavailable",
@@ -5719,6 +5850,10 @@
       "experience": "Browse its visible tabs and rows, filter video titles, open collections/playlists, or recover an empty presentation.",
       "conditions": "iPhone/iPad. No Apple TV letter rail is exposed. All Libraries needs more than one eligible non-music library; music-library browsing is not supplied here.",
       "controls": [
+        {
+          "text": "Checking collections...",
+          "source": "Sources/CoreUI/LibraryCollectionLoadingView.swift"
+        },
         {
           "text": "Loading libraries…",
           "source": "Sources/AppShelliOS/PlozziOSLibraryView.swift"
@@ -6453,6 +6588,10 @@
         {
           "slug": "subtitles",
           "anchor": "choose-a-track"
+        },
+        {
+          "slug": "subtitles",
+          "anchor": "show-two-languages"
         }
       ]
     },
@@ -6546,6 +6685,10 @@
       "experience": "Use playback, inspect failures, or hand eligible playback to a system presentation.",
       "conditions": "iPhone/iPad. The active engine and route govern available tracks, zoom, subtitle timing, AirPlay, and Picture in Picture. Offline playback uses a validated matching copy when available.",
       "controls": [
+        {
+          "text": "Playing in SDR",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerView.swift"
+        },
         {
           "text": "Couldn't load versions",
           "source": "Sources/AppShelliOS/PlozziOSPlayerView.swift"
@@ -7097,6 +7240,10 @@
       "conditions": "Compact UIKit navigation puts excess shown shortcuts under More; it does not reveal hidden shortcuts. iPad can use regular-width navigation. Profile authorization applies before browsing. Watchlist shows sorting before filtering on mobile; its fields are Date Added, Release Date and Name only. Choosing a field resets its direction: Name starts ascending, dates descending. Clear Filters appears only with a movie/show filter; filtered-empty results also offer it.",
       "controls": [
         {
+          "text": "AirPlay",
+          "source": "Sources/AppShelliOS/PlozziOSLivePresentationControls.swift"
+        },
+        {
           "text": "Settings",
           "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
         },
@@ -7318,6 +7465,7 @@
     },
     "Sources/AppShelliOS/PlozziOSSearchView.swift": {
       "sources": [
+        "Sources/FeatureSearchCore/SearchSection.swift",
         "Sources/AppShelliOS/PlozziOSSearchView.swift",
         "Sources/AppShelliOS/PlozziOSMediaSection.swift",
         "Sources/AppShelliOS/PlozziOSPosterCard.swift",
@@ -7365,6 +7513,10 @@
       "experience": "Search connected libraries and eligible discovery information, then open a result.",
       "conditions": "iPhone/iPad. The profile, connected providers and Discovery settings control eligible results. A listing outside your library does not grant playback.",
       "controls": [
+        {
+          "text": "Not in Your Library",
+          "source": "Sources/FeatureSearchCore/SearchSection.swift"
+        },
         {
           "text": "Search",
           "source": "Sources/AppShelliOS/PlozziOSSearchView.swift"
@@ -7511,7 +7663,7 @@
       ],
       "navigation": "From an adult mobile profile, open Settings > Seerr.",
       "experience": "Connect a Seerr server with an authorized admin key and map each profile to its request user.",
-      "conditions": "iPhone/iPad; household connection, per-profile request identity. Admin — unrestricted bypasses user quotas; enforced Kids restrictions block unrestricted admin requests.",
+      "conditions": "iPhone/iPad; household connection, per-profile request identity. The mobile secret field is API key, not the Apple TV field Admin API key. An administrator supplies the credential. Admin — unrestricted bypasses user quotas; enforced Kids restrictions block unrestricted admin requests.",
       "controls": [
         {
           "text": "Connection",
@@ -7717,6 +7869,10 @@
     },
     "Sources/AppShelliOS/PlozziOSSettingsView.swift": {
       "sources": [
+        "Sources/CoreModels/HeroBackgroundSettings.swift",
+        "Sources/CoreModels/ArtworkSettings.swift",
+        "Sources/CoreModels/AppLanguage.swift",
+        "Sources/CoreModels/LivePlaybackBuffer.swift",
         "Sources/AppShelliOS/PlozziOSSettingsView.swift",
         "Sources/CoreModels/CardCaptionSettings.swift",
         "Sources/CoreModels/EpisodeCountBadgeStyle.swift",
@@ -7868,6 +8024,10 @@
         {
           "text": "Language",
           "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        },
+        {
+          "text": "System",
+          "source": "Sources/CoreModels/AppLanguage.swift"
         },
         {
           "text": "Parental Controls",
@@ -8122,6 +8282,18 @@
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
         {
+          "text": "Recommended",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Prefer my library's artwork",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Prefer artwork from metadata providers",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
           "text": "Hero",
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
@@ -8152,6 +8324,18 @@
         {
           "text": "Background",
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/CoreModels/HeroBackgroundSettings.swift"
+        },
+        {
+          "text": "Trailer",
+          "source": "Sources/CoreModels/HeroBackgroundSettings.swift"
+        },
+        {
+          "text": "Theme music",
+          "source": "Sources/CoreModels/HeroBackgroundSettings.swift"
         },
         {
           "text": "Start muted",
@@ -8644,6 +8828,10 @@
           "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
         },
         {
+          "text": "Browse",
+          "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
           "text": "Collections",
           "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
         },
@@ -8824,6 +9012,10 @@
           "source": "Sources/FeatureSettings/PlaybackReadAheadControl.swift"
         },
         {
+          "text": "Automatic",
+          "source": "Sources/CoreModels/LivePlaybackBuffer.swift"
+        },
+        {
           "text": "No servers yet",
           "source": "Sources/FeatureSettings/SettingsLibrariesRow.swift"
         },
@@ -8927,6 +9119,14 @@
       "conditions": "iPhone/iPad. Quality conversion needs provider/server support; network classification and current playback path affect the available choices. It is not download quality.",
       "controls": [
         {
+          "text": "720p · 2 Mbps",
+          "source": "Sources/CoreModels/StreamingQuality.swift"
+        },
+        {
+          "text": "Invalid custom quality",
+          "source": "Sources/CoreModels/StreamingQuality.swift"
+        },
+        {
           "text": "Streaming quality",
           "source": "Sources/AppShelliOS/PlozziOSStreamingQuality.swift"
         },
@@ -9012,6 +9212,26 @@
         },
         {
           "text": "Current stream",
+          "source": "Sources/FeaturePlayback/CurrentStreamDetailsSection.swift"
+        },
+        {
+          "text": "Resolution",
+          "source": "Sources/FeaturePlayback/CurrentStreamDetailsSection.swift"
+        },
+        {
+          "text": "Video codec",
+          "source": "Sources/FeaturePlayback/CurrentStreamDetailsSection.swift"
+        },
+        {
+          "text": "Audio",
+          "source": "Sources/FeaturePlayback/CurrentStreamDetailsSection.swift"
+        },
+        {
+          "text": "Channels",
+          "source": "Sources/FeaturePlayback/CurrentStreamDetailsSection.swift"
+        },
+        {
+          "text": "Declared stream bitrate",
           "source": "Sources/FeaturePlayback/CurrentStreamDetailsSection.swift"
         },
         {
@@ -9976,6 +10196,7 @@
     "Sources/CoreUI/BrowseQueryControls.swift": {
       "sources": [
         "Sources/CoreUI/BrowseQueryControls.swift",
+        "Sources/FeatureHomeCore/HomeRowBrowseView.swift",
         "Sources/AppShelliOS/PlozziOSLibraryView.swift",
         "Sources/FeatureHome/LibraryBrowseView.swift",
         "Sources/CoreUI/WatchlistBrowseControls.swift",
@@ -9985,7 +10206,20 @@
         "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Reusable BrowseQueryControls.swift is wired into Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/FeatureHome/LibraryBrowseView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/FeatureHome/WatchlistBrowseView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/FeatureHome/LibraryBrowseView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/FeatureHome/WatchlistBrowseView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/FeatureHome/LibraryBrowseView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/FeatureHome/WatchlistBrowseView.swift, Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/FeatureHome/LibraryBrowseView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/FeatureHome/WatchlistBrowseView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitReason": "Shared sort/filter menus and adaptive layout are used by LibraryBrowseView, PlozziOSLibraryView, WatchlistBrowseView, the mobile root's Watchlist and diagnostics, and HomeRowBrowseView. Each parent inventories its actual picker fields. Only the Home row browser supplies the Default reset choice; this component alone does not make every field available everywhere."
+    },
+    "Sources/CoreUI/BrowseRowHeading.swift": {
+      "sources": [
+        "Sources/CoreUI/BrowseRowHeading.swift",
+        "Sources/AppShelliOS/PlozziOSMediaSection.swift",
+        "Sources/HeroUI/FeaturedMediaRow.swift",
+        "Sources/AppShelliOS/PlozziOSHomeView.swift",
+        "Sources/FeatureHome/HomeView.swift",
+        "Sources/FeatureHomeCore/HomePresentationRow.swift",
+        "Sources/FeatureHomeCore/HomeRow.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Heading button used by mobile Home rails and FeaturedMediaRow when their parent supplies an eligible browse action. It preserves the actual localized or server/collection row title and adds a decorative chevron; it does not define a constant See all caption. Named row headings and visibility conditions are inventoried on the Home parents."
     },
     "Sources/CoreUI/CardCaptionEnvironment.swift": {
       "sources": [
@@ -11540,6 +11774,17 @@
       "omitKind": "shared-component",
       "omitReason": "Reusable MediaRowSection.swift is wired into Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/ItemDetailView.swift, Sources/FeatureHome/LibraryBrowseView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/FeatureHomeCore/PersonDetailView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/FeatureHome/HomeView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/FeatureSettings/HomeRowsSettingsView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
     },
+    "Sources/CoreUI/MediaRowBrowseCard.swift": {
+      "sources": [
+        "Sources/CoreUI/MediaRowBrowseCard.swift",
+        "Sources/CoreUI/MediaRowView.swift",
+        "Sources/HeroUI/FeaturedMediaRow.swift",
+        "Sources/FeatureHome/HomeView.swift",
+        "Sources/FeatureHomeCore/HomePresentationRow.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Apple TV-only trailing See all action card is supplied by ordinary and featured Home rails when more titles can be browsed. HomeView inventories its visible label and conditions. This is not a movie card: it has no play action, watch state or media context menu, and mobile uses a heading button instead."
+    },
     "Sources/CoreUI/MediaRowView.swift": {
       "sources": [
         "Sources/CoreUI/MediaRowView.swift",
@@ -12336,6 +12581,10 @@
       "experience": "Import all eligible Plex Home profiles or keep only yourself, then choose your profile.",
       "conditions": "Plex Home account data required. Imported Plozz profiles are separate app preferences and preserve required Plex user authorization.",
       "controls": [
+        {
+          "text": "Add your Plex Home profiles?",
+          "source": "Sources/CoreUI/PlexHomeOnboardingView.swift"
+        },
         {
           "text": "Add all profiles",
           "source": "Sources/CoreUI/PlexHomeOnboardingView.swift"
@@ -15014,6 +15263,12 @@
     "Sources/FeatureHome/FocusHeroHomeView.swift": {
       "sources": [
         "Sources/FeatureHome/FocusHeroHomeView.swift",
+        "Sources/FeatureHome/HomeView.swift",
+        "Sources/FeatureSettings/PreferenceDetailViews.swift",
+        "Sources/CoreUI/HomeLayoutOptionCard.swift",
+        "Sources/CoreUI/MediaRowBrowseCard.swift",
+        "Sources/FeatureHomeCore/HomePresentationRow.swift",
+        "Sources/FeatureHomeCore/HomeRow.swift",
         "Sources/CoreUI/ArtworkEnvironment.swift",
         "Sources/CoreUI/HeroLogoArtwork.swift",
         "Sources/CoreUI/HeroArtworkDisplayState.swift",
@@ -15031,9 +15286,9 @@
       "platforms": [
         "Apple TV"
       ],
-      "navigation": "Choose Fullscreen Hero for Apple TV Home and return to browsing.",
-      "experience": "Navigate featured titles and supporting rows with the remote.",
-      "conditions": "Apple TV Fullscreen Hero presentation only; playable and discovery/request targets retain their own availability requirements.",
+      "navigation": "On Apple TV, open Settings > Screens & Navigation > Home > Layout, choose Showcase, then return to Home.",
+      "experience": "Move through Home rows with the remote while the focused title supplies the background and details; open eligible rows with their trailing See all card.",
+      "conditions": "Apple TV Showcase presentation, not the separate Fullscreen Hero carousel. HomeView supplies the same ordered row bodies and browse eligibility as classic Home. See all requires more titles and a loaded nonempty row without failure or section issue; global Watchlist opens its dedicated page. Playable and discovery/request targets retain their own availability requirements. Names from servers/collections remain dynamic.",
       "controls": [
         {
           "text": "Loading",
@@ -15042,12 +15297,20 @@
         {
           "text": "Live TV",
           "source": "Sources/FeatureHome/FocusHeroHomeView.swift"
-        }
+        },
+        {"text": "Continue Watching", "source": "Sources/FeatureHomeCore/HomeRow.swift"},
+        {"text": "Watchlist", "source": "Sources/FeatureHomeCore/HomeRow.swift"},
+        {"text": "Recently Added", "source": "Sources/FeatureHomeCore/HomeRow.swift"},
+        {"text": "See all", "source": "Sources/CoreUI/MediaRowBrowseCard.swift"}
       ],
       "documents": [
         {
           "slug": "home-and-navigation",
           "anchor": "choose-home-rows"
+        },
+        {
+          "slug": "browse-home-rows",
+          "anchor": "open-a-larger-grid"
         }
       ]
     },
@@ -15125,7 +15388,12 @@
     },
     "Sources/FeatureHome/HomeView.swift": {
       "sources": [
+        "Sources/CoreModels/HomeSectionIssue.swift",
         "Sources/FeatureHome/HomeView.swift",
+        "Sources/CoreUI/MediaRowBrowseCard.swift",
+        "Sources/FeatureHomeCore/HomePresentationRow.swift",
+        "Sources/FeatureHomeCore/HomeRow.swift",
+        "Sources/FeatureHomeCore/HomeRowBrowseView.swift",
         "Sources/CoreUI/ActionProgressIcon.swift",
         "Sources/CoreUI/PlayResumeButtonLabel.swift",
         "Sources/FeatureHome/HomeHeroView.swift",
@@ -15206,9 +15474,21 @@
         "Apple TV"
       ],
       "navigation": "Open Home after selecting a profile on Apple TV.",
-      "experience": "Browse hero choices and ordered rows, inspect unavailable sections, and open titles.",
-      "conditions": "Apple TV. Active libraries, provider feeds, profile row layout, Discovery eligibility and watched-content filtering affect the result.",
+      "experience": "Browse hero choices and ordered rows, select a trailing See all card for an eligible row's larger grid, inspect unavailable sections, and open titles.",
+      "conditions": "Apple TV. Active libraries, provider feeds, profile row layout, Discovery eligibility and watched-content filtering affect the result. An eligible row has more titles, nonempty results, no loading/failure, and no section issue. A trailing See all card opens row browsing; the global Watchlist shortcut opens its dedicated page. Combined Continue Watching stays unbounded in its rail without this shortcut, and Live TV rows are not row-browser feeds. Featured rows stop trailer previews before navigation. Source/profile changes invalidate an open browser.",
       "controls": [
+        {
+          "text": "No titles to show",
+          "source": "Sources/CoreModels/HomeSectionIssue.swift"
+        },
+        {
+          "text": "Section unavailable in the latest refresh",
+          "source": "Sources/CoreModels/HomeSectionIssue.swift"
+        },
+        {"text": "Continue Watching", "source": "Sources/FeatureHomeCore/HomeRow.swift"},
+        {"text": "Watchlist", "source": "Sources/FeatureHomeCore/HomeRow.swift"},
+        {"text": "Recently Added", "source": "Sources/FeatureHomeCore/HomeRow.swift"},
+        {"text": "See all", "source": "Sources/CoreUI/MediaRowBrowseCard.swift"},
         {
           "text": "Loading Home content",
           "source": "Sources/FeatureHome/HomeView.swift"
@@ -15354,11 +15634,17 @@
         {
           "slug": "home-and-navigation",
           "anchor": "choose-home-rows"
+        },
+        {
+          "slug": "browse-home-rows",
+          "anchor": "open-a-larger-grid"
         }
       ]
     },
     "Sources/FeatureHome/ItemDetailView.swift": {
       "sources": [
+        "Sources/CoreModels/MediaItem+Trailer.swift",
+        "Sources/CoreModels/HeroCTA.swift",
         "Sources/FeatureHome/ItemDetailView.swift",
         "Sources/CoreModels/MediaItemAction.swift",
         "Sources/CoreUI/ActionProgressIcon.swift",
@@ -15446,6 +15732,42 @@
       "experience": "Play an authorized file/version, inspect extras and related titles, or use Watchlist/watched actions.",
       "conditions": "Apple TV. Actions follow media kind, provider support, profile authorization and current library availability. Discovery information does not itself supply playback.",
       "controls": [
+        {
+          "text": "Trailer",
+          "source": "Sources/CoreModels/MediaItem+Trailer.swift"
+        },
+        {
+          "text": "Watch on YouTube",
+          "source": "Sources/CoreModels/MediaItem+Trailer.swift"
+        },
+        {
+          "text": "Requested · Unreleased",
+          "source": "Sources/CoreModels/HeroCTA.swift"
+        },
+        {
+          "text": "Request",
+          "source": "Sources/FeatureHome/DetailHeroView.swift"
+        },
+        {
+          "text": "Ratings",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Release & Availability",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Streaming",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Rent",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Buy",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
         {
           "text": "Couldn't load versions",
           "source": "Sources/FeatureHome/ItemDetailView.swift"
@@ -15745,6 +16067,10 @@
       "conditions": "Apple TV. Letter navigation requires name sorting and enough rows; combined/deep results are loaded as supported. Tab content and actions depend on library kind and provider.",
       "controls": [
         {
+          "text": "Checking collections...",
+          "source": "Sources/CoreUI/LibraryCollectionLoadingView.swift"
+        },
+        {
           "text": "No visible rows",
           "source": "Sources/FeatureHome/LibraryBrowseView.swift"
         },
@@ -15968,6 +16294,8 @@
     },
     "Sources/FeatureHome/SeriesDetailView.swift": {
       "sources": [
+        "Sources/CoreModels/MediaItem+Trailer.swift",
+        "Sources/CoreModels/HeroCTA.swift",
         "Sources/FeatureHome/SeriesDetailView.swift",
         "Sources/CoreUI/ActionProgressIcon.swift",
         "Sources/FeatureHome/DetailHeroView.swift",
@@ -16054,6 +16382,42 @@
       "experience": "Browse seasons/episodes, continue watching, and request eligible missing seasons.",
       "conditions": "Apple TV. Episode files must be available to the selected server user; Seerr actions additionally require matched identity and request permissions.",
       "controls": [
+        {
+          "text": "Trailer",
+          "source": "Sources/CoreModels/MediaItem+Trailer.swift"
+        },
+        {
+          "text": "Watch on YouTube",
+          "source": "Sources/CoreModels/MediaItem+Trailer.swift"
+        },
+        {
+          "text": "Requested · Unreleased",
+          "source": "Sources/CoreModels/HeroCTA.swift"
+        },
+        {
+          "text": "Request",
+          "source": "Sources/FeatureHome/DetailHeroView.swift"
+        },
+        {
+          "text": "Ratings",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Release & Availability",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Streaming",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Rent",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Buy",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
         {
           "text": "Seasons Unavailable",
           "source": "Sources/FeatureHome/SeriesDetailView.swift"
@@ -16411,6 +16775,68 @@
       ],
       "omitKind": "shared-component",
       "omitReason": "Reusable HeroTrailerController.swift is wired into Sources/AppShell/SearchTab.swift, Sources/AppShell/MainTabView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/AppShell/MainTabView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/FeatureHome/FocusHeroHomeView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/FeatureHome/ItemDetailView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/FeatureHome/HomeView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/FeatureHome/FocusHeroHomeView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/FeatureHome/ItemDetailView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/FeatureHome/HomeView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/FeatureHome/FocusHeroHomeView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/FeatureHome/ItemDetailView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/FeatureHome/HomeView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+    },
+    "Sources/FeatureHomeCore/HomeRowBrowseView.swift": {
+      "sources": [
+        "Sources/FeatureHomeCore/HomeRowBrowseView.swift",
+        "Sources/FeatureHomeCore/HomeRowBrowseModel.swift",
+        "Sources/FeatureHomeCore/HomeRowBrowseFactory.swift",
+        "Sources/FeatureHomeCore/HomeViewModel.swift",
+        "Sources/FeatureHomeCore/HomePresentationRow.swift",
+        "Sources/CoreUI/BrowseQueryControls.swift",
+        "Sources/CoreModels/WatchlistBrowsePreferences.swift",
+        "Sources/CoreModels/MediaProvider.swift",
+        "Sources/CoreModels/HomeRowFeed.swift",
+        "Sources/ProviderPlex/PlexHomeLayout.swift",
+        "Sources/ProviderJellyfin/JellyfinHomeLayout.swift",
+        "Sources/FeatureHome/HomeView.swift",
+        "Sources/AppShelliOS/PlozziOSHomeView.swift",
+        "Sources/CoreUI/PosterCardView.swift",
+        "Sources/AppShelliOS/PlozziOSPosterCard.swift",
+        "Sources/CoreModels/MediaItemAction.swift"
+      ],
+      "platforms": ["Apple TV", "iPhone", "iPad"],
+      "navigation": "From an eligible Home row, select the trailing See all card on Apple TV or tap the row heading with a chevron on iPhone/iPad. The global Watchlist row uses the separate Watchlist page instead.",
+      "experience": "Browse that row's original feed in a larger title grid, combine media-kind and watch-state filters, choose a sort/order, open details, and retry loading failures without substituting another library list.",
+      "conditions": "Requires more titles and a loaded nonempty row without failure or section issue, plus current profile/source access and the original row's applicable visibility policy. Account-wide history is not filtered by disabled-library browsing switches. Row titles and source suffixes are supplied content. TV has filter then sort beside the heading; mobile toolbar has icon-only sort then filter. Media choices precede watch-state choices inside Filter. Sort By offers Default, Name, Date Added, Release Date and Runtime; Order is disabled for Default. Nondefault queries load all remaining available feed pages before showing the new projection. Default pages load incrementally; Load more appears only when more remain. No titles to show is the empty state; Retry follows a loading error. There is no Clear Filters button here: reset both Filter pickers to All. Combined Recently Added merges admitted sources; collections retain movie/show members; server rows retain their actual feed, limits and ownership. Plain combined Continue Watching and Live TV are not reachable through this browser. Browser choices are not stored as library or Watchlist preferences. Card actions remain kind/provider-capability dependent.",
+      "controls": [
+        {"text": "Filter", "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"},
+        {"text": "All", "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"},
+        {"text": "Movies", "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"},
+        {"text": "TV Shows", "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"},
+        {"text": "All", "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"},
+        {"text": "Unwatched", "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"},
+        {"text": "In Progress", "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"},
+        {"text": "Sort By", "source": "Sources/CoreUI/BrowseQueryControls.swift"},
+        {"text": "Default", "source": "Sources/CoreUI/BrowseQueryControls.swift"},
+        {"text": "Name", "source": "Sources/CoreModels/MediaProvider.swift"},
+        {"text": "Date Added", "source": "Sources/CoreModels/MediaProvider.swift"},
+        {"text": "Release Date", "source": "Sources/CoreModels/MediaProvider.swift"},
+        {"text": "Runtime", "source": "Sources/CoreModels/MediaProvider.swift"},
+        {"text": "Order", "source": "Sources/CoreUI/BrowseQueryControls.swift"},
+        {"text": "Ascending", "source": "Sources/CoreModels/MediaProvider.swift"},
+        {"text": "Descending", "source": "Sources/CoreModels/MediaProvider.swift"},
+        {"text": "Retry", "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"},
+        {"text": "Load more", "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"},
+        {"text": "No titles to show", "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"},
+        {"text": "Go to Show", "source": "Sources/CoreModels/MediaItemAction.swift"},
+        {"text": "Go to Movie", "source": "Sources/CoreModels/MediaItemAction.swift"},
+        {"text": "Go to Episode", "source": "Sources/CoreModels/MediaItemAction.swift"},
+        {"text": "Add to Watchlist", "source": "Sources/CoreModels/MediaItemAction.swift"},
+        {"text": "Remove from Watchlist", "source": "Sources/CoreModels/MediaItemAction.swift"},
+        {"text": "Mark as Watched", "source": "Sources/CoreModels/MediaItemAction.swift"},
+        {"text": "Mark as Unwatched", "source": "Sources/CoreModels/MediaItemAction.swift"},
+        {"text": "Mark Watched Up to Here", "source": "Sources/CoreModels/MediaItemAction.swift"},
+        {"text": "Remove from Continue Watching", "source": "Sources/CoreModels/MediaItemAction.swift"},
+        {"text": "Refresh Metadata", "source": "Sources/CoreModels/MediaItemAction.swift"},
+        {"text": "Browse Files", "source": "Sources/CoreModels/MediaItemAction.swift"}
+      ],
+      "documents": [
+        {"slug": "browse-home-rows", "anchor": "open-a-larger-grid"},
+        {"slug": "browse-home-rows", "anchor": "narrow-or-rearrange-the-results"},
+        {"slug": "browse-home-rows", "anchor": "when-the-grid-is-empty-or-fails"},
+        {"slug": "library", "anchor": "save-titles-and-manage-history"}
+      ]
     },
     "Sources/FeatureHomeCore/PersonDetailView.swift": {
       "sources": [
@@ -17387,6 +17813,10 @@
       "conditions": "Provider connection limits still apply. One pane is audible: focus selects it on Apple TV and Audio selects it on mobile. Multiview disables AirPlay/Picture in Picture. Favorite/Unfavorite appears when the host supplies a save action and reflects the saved layout. Edit layout appears outside layout-editing mode; Show all appears only when a pane is expanded. Saved/Not saved is the favorite action's accessibility value, not another button.",
       "controls": [
         {
+          "text": "Watch",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift"
+        },
+        {
           "text": "Multiview",
           "source": "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift"
         },
@@ -17979,6 +18409,18 @@
       "experience": "Browse the production channel guide, search channels/programs, and tune a channel.",
       "conditions": "Despite its filename, this is the wired production guide on all platforms. Source use, parental source approvals, provider limits, region/category filtering and network policy determine visible/playable channels.",
       "controls": [
+        {
+          "text": "Search",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
+        {
+          "text": "Add to Favorites",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeBrowse.swift"
+        },
+        {
+          "text": "Remove from Favorites",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeBrowse.swift"
+        },
         {
           "text": "Live TV",
           "source": "Sources/FeatureLiveTV/LiveTVPrototypeView.swift"
@@ -19490,6 +19932,10 @@
       "conditions": "All platforms. Authorization, source availability, network policy and provider limits apply. Go Live respects the local buffer; scheduled library channels use Jump to now, not a recording. System Enhance Dialogue/Reduce Loud Sounds controls and levels are Apple TV-only and require the system availability signal; iPhone/iPad uses its separately wired menu. Live TV offers no dual-subtitle selection.",
       "controls": [
         {
+          "text": "Guide",
+          "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
+        },
+        {
           "text": "Paused",
           "source": "Sources/FeaturePlayback/LiveChannelPlayerView.swift"
         },
@@ -19735,6 +20181,7 @@
     "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift": {
       "sources": [
         "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift",
+        "Sources/FeaturePlayback/SubtitleOverlayView.swift",
         "Sources/CoreModels/SubtitleStyle.swift",
         "Sources/CoreModels/SubtitlePrimitives.swift",
         "Sources/CoreUI/SettingsRowFocusStyle.swift",
@@ -19748,8 +20195,16 @@
       ],
       "navigation": "On iPhone/iPad, open Subtitles > Advanced… > Appearance > Style, or customize captions from Settings.",
       "experience": "Edit caption text, shadow/outline, background, dual-track style and subtitle file formatting.",
-      "conditions": "iPhone/iPad text captions only; dual-track settings require eligible video playback and are absent for Live TV. Matching device style replaces the custom look after confirmation. Font weights depend on the chosen font; system font names are dynamic. Live TV disables dual-subtitle controls.",
+      "conditions": "iPhone/iPad text captions only; dual-track settings require eligible video playback and are absent for Live TV. Show second subtitle controls only the Settings preview; actual tracks are chosen during playback. Matching device style replaces the custom look after confirmation. Font weights depend on the chosen font; system font names are dynamic. Position sets the vertical location; Extra Line Position's Above/Center/Below choices govern wrapped-line growth, not second-track placement. Clamping keeps the block visible within 0-100%; negative positions can crop it.",
       "controls": [
+        {
+          "text": "Match Device Subtitle Style",
+          "source": "Sources/FeaturePlayback/SystemCaptionStyleConfirmation.swift"
+        },
+        {
+          "text": "Match Device Subtitle Style?",
+          "source": "Sources/FeaturePlayback/SystemCaptionStyleConfirmation.swift"
+        },
         {
           "text": "Text",
           "source": "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift"
@@ -19788,6 +20243,10 @@
         },
         {
           "text": "Horizontal Offset",
+          "source": "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift"
+        },
+        {
+          "text": "Text Color",
           "source": "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift"
         },
         {
@@ -19859,6 +20318,10 @@
           "source": "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift"
         },
         {
+          "text": "Color",
+          "source": "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift"
+        },
+        {
           "text": "Thickness",
           "source": "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift"
         },
@@ -19880,6 +20343,10 @@
         },
         {
           "text": "Show Window",
+          "source": "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift"
+        },
+        {
+          "text": "Dark Gray",
           "source": "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift"
         },
         {
@@ -20072,7 +20539,7 @@
       ],
       "navigation": "Enable Playback Diagnostics Overlay in Help & Diagnostics, then play media.",
       "experience": "Read transfer rate, buffers, seekable range and available route/engine telemetry.",
-      "conditions": "Device-local diagnostic visibility. Plozzigen and native routes report different fields; encoded bitrate, network speed, disk cache and physical audio output must not be equated.",
+      "conditions": "Device-local diagnostic visibility. Mobile lays out Source, Video, Audio, optional Original File, Subtitles, optional Live, Playback and System sections; Apple TV groups them into three columns. Missing measurements omit their rows. Transcoding distinguishes current stream facts from the original file. Plozzigen uses AVPlayer time/window labels; native uses Position/Seekable. Live fields need live-stream telemetry; cache fields need session-cache measurements. Encoded bitrate, network throughput, cache capacity and physical audio output are different measurements.",
       "controls": [
         {
           "text": "Gathering metrics…",
@@ -20083,11 +20550,191 @@
           "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
         },
         {
+          "text": "SOURCE",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "File",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Size",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Delivery",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
           "text": "Stream",
           "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
         },
         {
+          "text": "Container",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "CURRENT VIDEO",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "VIDEO",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Codec",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Resolution",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Frame Rate",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Estimated bitrate",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Bitrate",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
           "text": "Source",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Codec Tag",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "CURRENT AUDIO",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "AUDIO",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Channels",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Sample Rate",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Encoding",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Processing",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "System output",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Connection",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "ORIGINAL FILE",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Video",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Audio",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "SUBTITLES",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Track",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "LIVE",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Route",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Playlist",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Variant",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Behind live",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Rewind window",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Stream clock",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Start-up",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Segments",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Errors",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "PLAYBACK",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Position",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "AVPlayer time",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Seekable",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "AVPlayer window",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "State",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Buffer",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Engine buffer",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Cache storage",
           "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
         },
         {
@@ -20099,11 +20746,55 @@
           "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
         },
         {
+          "text": "Playback cache",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Read-ahead target",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Read-ahead",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
           "text": "Memory limit reached",
           "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
         },
         {
           "text": "Cache limit reached",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Stalls",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Dropped",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Declared stream bitrate",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Network throughput",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "SYSTEM",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Device",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Thermal",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Instances",
           "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
         },
         {
@@ -20145,6 +20836,10 @@
           "source": "Sources/FeaturePlayback/PlaybackOptionsPane.swift"
         },
         {
+          "text": "Normal",
+          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
+        },
+        {
           "text": "Normal (Default)",
           "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
         },
@@ -20154,6 +20849,10 @@
         },
         {
           "text": "Stretch",
+          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
+        },
+        {
+          "text": "Custom",
           "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
         },
         {
@@ -20322,6 +21021,10 @@
           "anchor": "choose-a-track"
         },
         {
+          "slug": "subtitles",
+          "anchor": "show-two-languages"
+        },
+        {
           "slug": "audio",
           "anchor": "select-a-language-or-track"
         }
@@ -20378,6 +21081,7 @@
     },
     "Sources/FeaturePlayback/PlayerMoreMenu.swift": {
       "sources": [
+        "Sources/FeaturePlayback/TrackMenuBuilder.swift",
         "Sources/FeaturePlayback/PlayerMoreMenu.swift",
         "Sources/CoreUI/PlayerSurfaceAppearance.swift",
         "Sources/FeaturePlayback/PlayerControlsSupport.swift",
@@ -20392,6 +21096,10 @@
       "experience": "Choose supported video/audio/subtitle or stream-quality options.",
       "conditions": "Menu controls are conditional on engine capabilities and provider conversion support. Secondary subtitles need an eligible text track; audio-delay UI remains capability-gated off for shipped movie engines.",
       "controls": [
+        {
+          "text": "Off",
+          "source": "Sources/FeaturePlayback/TrackMenuBuilder.swift"
+        },
         {
           "text": "Subtitles",
           "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
@@ -20437,6 +21145,10 @@
         {
           "slug": "subtitles",
           "anchor": "choose-a-track"
+        },
+        {
+          "slug": "subtitles",
+          "anchor": "show-two-languages"
         },
         {
           "slug": "streaming-quality",
@@ -20545,6 +21257,7 @@
     },
     "Sources/FeaturePlayback/PlayerOptionsPanel.swift": {
       "sources": [
+        "Sources/FeaturePlayback/TrackMenuBuilder.swift",
         "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
         "Sources/CoreUI/PlayerSurfaceAppearance.swift",
         "Sources/FeaturePlayback/PlayerControlsSupport.swift",
@@ -20561,6 +21274,10 @@
       "experience": "Select supported tracks, speed, zoom, subtitle style, search, or timing adjustments.",
       "conditions": "Available options follow engine capabilities and current tracks. Shipped movie engines do not enable adjustable audio delay; image-based primary captions disable dual subtitles.",
       "controls": [
+        {
+          "text": "Off",
+          "source": "Sources/FeaturePlayback/TrackMenuBuilder.swift"
+        },
         {
           "text": "Couldn't change audio setting",
           "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
@@ -20606,6 +21323,10 @@
         {
           "slug": "subtitles",
           "anchor": "choose-a-track"
+        },
+        {
+          "slug": "subtitles",
+          "anchor": "show-two-languages"
         },
         {
           "slug": "playback",
@@ -20878,7 +21599,7 @@
       ],
       "navigation": "Choose Download subtitles… from the Apple TV player's subtitle controls.",
       "experience": "Search eligible online subtitles, inspect the available results, and download a selected track.",
-      "conditions": "Apple TV uses this subtitle download panel; mobile Search & Download… is implemented by PlozziOSPlayerControlsOverlay instead. A configured server subtitle service and supported context are required; shares use existing subtitles. Language/SDH preferences constrain results. The Done button in this file belongs only to a DEBUG preview, not the production download panel.",
+      "conditions": "Apple TV uses this subtitle download panel; mobile Search & Download… is implemented by PlozziOSPlayerControlsOverlay instead. A configured server subtitle service and supported context are required; shares use existing subtitles. Language/SDH preferences constrain results. File match appears only for a provider-confirmed video-file hash match; it is not a timing guarantee and an unmarked result may still work. The Done button in this file belongs only to a DEBUG preview, not the production download panel.",
       "controls": [
         {
           "text": "Searching for subtitles…",
@@ -20960,6 +21681,7 @@
     "Sources/FeaturePlayback/SubtitleStylePanel.swift": {
       "sources": [
         "Sources/FeaturePlayback/SubtitleStylePanel.swift",
+        "Sources/FeaturePlayback/SubtitleOverlayView.swift",
         "Sources/CoreModels/SubtitleStyle.swift",
         "Sources/CoreModels/SubtitlePrimitives.swift",
         "Sources/CoreUI/SettingsControlRows.swift",
@@ -20973,8 +21695,16 @@
       ],
       "navigation": "In Apple TV video controls, open Subtitles > Style; also used by the Settings caption preview.",
       "experience": "Adjust font, placement, colors, edges, backgrounds and supported second-track style, or override file formatting.",
-      "conditions": "Apple TV style panels. Image captions cannot be restyled; dual subtitles are excluded for Live TV. Matching the system style needs confirmation and editing stops matching. HDR brightness appears only when relevant. Available font weights depend on the selected font. System font choices are dynamic; Live TV callers disable dual-subtitle controls.",
+      "conditions": "Apple TV style panels. Image captions cannot be restyled; dual subtitles are excluded for Live TV. Show second subtitle controls only the Settings preview; actual tracks are chosen during playback. Matching the system style needs confirmation and editing stops matching. HDR brightness appears only when relevant. Available font weights depend on the selected font. Position sets vertical location; Extra Line Position's Above/Center/Below choices govern wrapped-line growth, not second-track placement. Clamping applies within 0-100%; negative positions can crop text. System font choices are dynamic.",
       "controls": [
+        {
+          "text": "Match Apple TV Subtitle Style",
+          "source": "Sources/FeaturePlayback/SystemCaptionStyleConfirmation.swift"
+        },
+        {
+          "text": "Match Apple TV Subtitle Style?",
+          "source": "Sources/FeaturePlayback/SystemCaptionStyleConfirmation.swift"
+        },
         {
           "text": "Font",
           "source": "Sources/FeaturePlayback/SubtitleStylePanel.swift"
@@ -22143,6 +22873,7 @@
     },
     "Sources/FeatureSearch/SearchView.swift": {
       "sources": [
+        "Sources/FeatureSearchCore/SearchSection.swift",
         "Sources/FeatureSearch/SearchView.swift",
         "Sources/AppShell/SearchTab.swift"
       ],
@@ -22843,6 +23574,7 @@
     },
     "Sources/FeatureSettings/HomeRowsSettingsView.swift": {
       "sources": [
+        "Sources/CoreModels/HomeSectionIssue.swift",
         "Sources/FeatureSettings/HomeRowsSettingsView.swift",
         "Sources/CoreUI/HomeLayoutOptionCard.swift",
         "Sources/CoreModels/CardCaptionSettings.swift",
@@ -22881,6 +23613,18 @@
       "experience": "Choose Layout on Apple TV or Hero on mobile, then Card labels, Rows and Filtering.",
       "conditions": "All platforms; profile-specific. Row catalogue/loading errors expose retries. Custom/reorder state changes available buttons; collection rows require accessible source collections. Root order is Layout on Apple TV or Hero on mobile, then Card labels, Rows, Filtering. Card labels opens the Home-only editor: no Page picker. Default offers On/Off/Mixed, followed by Continue Watching and Libraries Overrides with Use default/On/Off. Apple TV cycles choices on selection; mobile uses a picker. The same Continue Watching override applies on Recommended. Row-specific editors have their own coverage record.",
       "controls": [
+        {
+          "text": "No titles to show",
+          "source": "Sources/CoreModels/HomeSectionIssue.swift"
+        },
+        {
+          "text": "Section unavailable in the latest refresh",
+          "source": "Sources/CoreModels/HomeSectionIssue.swift"
+        },
+        {
+          "text": "Hidden",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
         {
           "text": "Home",
           "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
@@ -23117,6 +23861,18 @@
       "experience": "Choose row presets and Continue Watching layout, labels, progress, next-episode and tap/center-button behavior.",
       "conditions": "Control names differ by platform; available row content depends on libraries/provider. Continue Watching's Labels control uses Use default/On/Off, never Mixed. It shares the Home/Recommended override, not separate settings for each row instance. Presentation does not discard progress or shorten the unbounded Continue Watching feed.",
       "controls": [
+        {
+          "text": "Hero content sources",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Discovery providers",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Covers",
+          "source": "Sources/CoreUI/CollectionCoverLayoutPicker.swift"
+        },
         {
           "text": "All live sources",
           "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
@@ -23407,6 +24163,10 @@
       "conditions": "Apple TV tracker settings. Services have independent identities, title/track matching and app configuration. Last.fm music scrobbling requires sufficient listening time; it does not store video progress.",
       "controls": [
         {
+          "text": "Last.fm",
+          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        },
+        {
           "text": "Trackers",
           "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
         },
@@ -23563,6 +24323,10 @@
       "experience": "Arrange library tabs and Recommended rows, edit collection covers, customize labels, or restore navigation/row defaults.",
       "conditions": "All platforms. Music and provider/library capabilities affect available tabs/rows; hiding everything yields a recoverable no-visible-rows state rather than a permission boundary. Page appearance contains Recommended Page logo/text size on Apple TV only, then Customize labels on both platforms. Its Page picker offers Recommended, Browse, Collections, Playlists only. Recommended has Default with On/Off/Mixed and a Continue Watching override with Use default/On/Off; the other pages have Card labels with On/Off. Titles inside collections/playlists use Browse. Apple TV cycles row choices on selection; mobile uses a picker.",
       "controls": [
+        {
+          "text": "Covers",
+          "source": "Sources/CoreUI/CollectionCoverLayoutPicker.swift"
+        },
         {
           "text": "Libraries",
           "source": "Sources/FeatureSettings/LibraryPresentationSettingsView.swift"
@@ -23943,12 +24707,8 @@
       ],
       "navigation": "From an adult Apple TV profile, open Metadata Providers in Settings or its Artwork shortcut.",
       "experience": "Choose recommended/custom field sources, disable/order providers, verify a personal token, or inspect/rebuild caches.",
-      "conditions": "Apple TV household-wide settings. Provider credentials and returned metadata govern fields; disabled providers cannot supply missing ratings.",
+      "conditions": "Apple TV household-wide settings. Main-page order is Providers, Artwork, Your Own TMDB Key, Diagnostics; Diagnostics contains Overview, Stored Fields and Cache. Custom shows provider ordering/Disabled and the Apple TV-only Reset to Recommended action. Selecting Recommended preserves the custom lists, whereas Reset to Recommended discards overrides. Provider credentials and returned metadata govern fields; disabled providers cannot supply missing ratings.",
       "controls": [
-        {
-          "text": "Stored Fields",
-          "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
-        },
         {
           "text": "Metadata Providers",
           "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
@@ -23971,6 +24731,10 @@
         },
         {
           "text": "Reset to Recommended",
+          "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
+        },
+        {
+          "text": "Artwork",
           "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
         },
         {
@@ -24018,10 +24782,6 @@
           "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
         },
         {
-          "text": "Artwork",
-          "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
-        },
-        {
           "text": "Diagnostics",
           "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
         },
@@ -24063,6 +24823,10 @@
         },
         {
           "text": "All sources healthy",
+          "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
+        },
+        {
+          "text": "Stored Fields",
           "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
         },
         {
@@ -24573,6 +25337,10 @@
     },
     "Sources/FeatureSettings/PreferenceDetailViews.swift": {
       "sources": [
+        "Sources/CoreModels/HeroBackgroundSettings.swift",
+        "Sources/CoreModels/ArtworkSettings.swift",
+        "Sources/CoreModels/AppLanguage.swift",
+        "Sources/CoreModels/LivePlaybackBuffer.swift",
         "Sources/FeatureSettings/PreferenceDetailViews.swift",
         "Sources/CoreModels/CardCaptionSettings.swift",
         "Sources/CoreModels/EpisodeCountBadgeStyle.swift",
@@ -24800,6 +25568,22 @@
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
+          "text": "Recommended",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Prefer my library's artwork",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Prefer artwork from metadata providers",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Screens & Navigation",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
           "text": "App navigation",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
@@ -24840,6 +25624,10 @@
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
+          "text": "Hide spoilers for unwatched episodes",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
           "text": "Mode",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
@@ -24876,12 +25664,28 @@
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
+          "text": "System",
+          "source": "Sources/CoreModels/AppLanguage.swift"
+        },
+        {
           "text": "Metadata Providers (TMDB, TheTVDB…)",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
           "text": "Background",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/CoreModels/HeroBackgroundSettings.swift"
+        },
+        {
+          "text": "Trailer",
+          "source": "Sources/CoreModels/HeroBackgroundSettings.swift"
+        },
+        {
+          "text": "Theme music",
+          "source": "Sources/CoreModels/HeroBackgroundSettings.swift"
         },
         {
           "text": "Hero",
@@ -25001,6 +25805,10 @@
         },
         {
           "text": "Subtitle style",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Customize subtitle style",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
@@ -25398,6 +26206,10 @@
         {
           "text": "Live TV buffer",
           "source": "Sources/FeatureSettings/PlaybackReadAheadControl.swift"
+        },
+        {
+          "text": "Automatic",
+          "source": "Sources/CoreModels/LivePlaybackBuffer.swift"
         },
         {
           "text": "Selected",
@@ -26033,6 +26845,10 @@
       "conditions": "All platforms where embedded. A nonblank message and consent are required; user text is transmitted as written. Submitted means accepted for delivery, not confirmed receipt.",
       "controls": [
         {
+          "text": "Message (required)",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
+        },
+        {
           "text": "Send Diagnostics",
           "source": "Sources/FeatureSettings/SendDiagnosticsCard.swift"
         },
@@ -26421,6 +27237,7 @@
     },
     "Sources/FeatureSettings/SettingsView.swift": {
       "sources": [
+        "Sources/CoreModels/AppLanguage.swift",
         "Sources/FeatureSettings/SettingsView.swift",
         "Sources/CoreUI/ProfileSettingsCategory.swift",
         "Sources/CoreUI/SettingsCopy.swift",
@@ -26464,12 +27281,8 @@
       ],
       "navigation": "Open Settings in Apple TV navigation, then a profile category or Everyone destination.",
       "experience": "Change the active profile preferences, manage permitted shared services, or open Help & Diagnostics.",
-      "conditions": "Apple TV only. Profile categories are Playback, Subtitles, Live TV, Libraries, Appearance, Screens & Navigation, Trackers, Language. Everyone is absent for Kids; protected Libraries/Manage Profile need parental unlock. iCloud/metadata destinations require their wired dependencies. Seven version activations expose internal developer controls; these are not ordinary support procedures. On Kids profiles, Name & Avatar replaces the ordinary Libraries category; protected Libraries and Manage Profile move into Parental Controls.",
+      "conditions": "Apple TV only. Profile categories are Playback, Subtitles, Live TV, Libraries, Appearance, Screens & Navigation, Trackers, Language, followed by Everyone and About. Everyone is absent for Kids; protected Libraries/Manage Profile need parental unlock. iCloud/metadata destinations require their wired dependencies. Seven version activations expose internal developer controls below About, including Device & Build; these are not ordinary support procedures. On Kids profiles, Name & Avatar replaces the ordinary Libraries category; protected Libraries and Manage Profile move into Parental Controls before About.",
       "controls": [
-        {
-          "text": "Device & Build",
-          "source": "Sources/FeatureSettings/SettingsView.swift"
-        },
         {
           "text": "Playback",
           "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
@@ -26515,6 +27328,10 @@
           "source": "Sources/FeatureSettings/AppLanguagePicker.swift"
         },
         {
+          "text": "System",
+          "source": "Sources/CoreModels/AppLanguage.swift"
+        },
+        {
           "text": "Parental Controls",
           "source": "Sources/CoreUI/ProfileLockCopy.swift"
         },
@@ -26555,20 +27372,20 @@
           "source": "Sources/FeatureSettings/SettingsView.swift"
         },
         {
-          "text": "Release Notes",
-          "source": "Sources/FeatureSettings/SettingsAboutSection.swift"
-        },
-        {
-          "text": "Help & Diagnostics",
-          "source": "Sources/FeatureSettings/SettingsView.swift"
-        },
-        {
           "text": "About",
           "source": "Sources/FeatureSettings/SettingsView.swift"
         },
         {
+          "text": "Release Notes",
+          "source": "Sources/FeatureSettings/SettingsAboutSection.swift"
+        },
+        {
           "text": "Attributions",
           "source": "Sources/CoreUI/SettingsCopy.swift"
+        },
+        {
+          "text": "Help & Diagnostics",
+          "source": "Sources/FeatureSettings/SettingsView.swift"
         },
         {
           "text": "Sign Out of All Accounts",
@@ -26608,6 +27425,10 @@
         },
         {
           "text": "Developer Mode Enabled",
+          "source": "Sources/FeatureSettings/SettingsView.swift"
+        },
+        {
+          "text": "Device & Build",
           "source": "Sources/FeatureSettings/SettingsView.swift"
         },
         {

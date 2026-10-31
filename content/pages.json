@@ -471,6 +471,69 @@
     }
   },
   {
+    "slug": "browse-home-rows",
+    "title": "Browse more from Home",
+    "seoTitle": "Browse and filter more titles from Plozz Home rows",
+    "description": "Open a Home row's larger grid on Apple TV, iPhone, or iPad, filter unwatched titles, change sorting, and recover row-loading errors.",
+    "section": "Library",
+    "kind": "guide",
+    "file": "browse-home-rows.md",
+    "platforms": ["Apple TV", "iPhone", "iPad"],
+    "sources": [
+      "Sources/AppShell/MainTabView.swift",
+      "Sources/FeatureHome/HomeView.swift",
+      "Sources/AppShelliOS/PlozziOSHomeView.swift",
+      "Sources/AppShelliOS/PlozziOSMediaSection.swift",
+      "Sources/CoreUI/BrowseRowHeading.swift",
+      "Sources/CoreUI/MediaRowBrowseCard.swift",
+      "Sources/CoreUI/MediaRowView.swift",
+      "Sources/HeroUI/FeaturedMediaRow.swift",
+      "Sources/FeatureHomeCore/HomePresentationRow.swift",
+      "Sources/FeatureHomeCore/HomeRowBrowseView.swift",
+      "Sources/FeatureHomeCore/HomeRowBrowseModel.swift",
+      "Sources/FeatureHomeCore/HomeRowBrowseFactory.swift",
+      "Sources/FeatureHomeCore/HomeRow.swift",
+      "Sources/CoreUI/BrowseQueryControls.swift",
+      "Sources/CoreModels/WatchlistBrowsePreferences.swift",
+      "Sources/CoreModels/MediaProvider.swift",
+      "Sources/CoreModels/HomeRowFeed.swift",
+      "Sources/ProviderPlex/PlexHomeLayout.swift",
+      "Sources/ProviderJellyfin/JellyfinHomeLayout.swift"
+    ],
+    "watch": [
+      "Sources/FeatureHomeCore/HomeRow",
+      "Sources/CoreUI/Browse",
+      "Sources/CoreUI/MediaRowBrowseCard.swift",
+      "Sources/FeatureHome/HomeView.swift",
+      "Sources/AppShelliOS/PlozziOSHomeView.swift",
+      "Sources/HeroUI/FeaturedMediaRow.swift"
+    ],
+    "ui": {
+      "references": [
+        {"text": "Home", "source": "Sources/AppShell/MainTabView.swift"},
+        {"text": "See all", "source": "Sources/CoreUI/MediaRowBrowseCard.swift"},
+        {"text": "Recently Added", "source": "Sources/FeatureHomeCore/HomeRow.swift"},
+        {"text": "Watchlist", "source": "Sources/FeatureHomeCore/HomeRow.swift"},
+        {"text": "Filter", "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"},
+        {"text": "All", "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"},
+        {"text": "Movies", "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"},
+        {"text": "TV Shows", "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"},
+        {"text": "Unwatched", "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"},
+        {"text": "In Progress", "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"},
+        {"text": "Sort By", "source": "Sources/CoreUI/BrowseQueryControls.swift"},
+        {"text": "Name", "source": "Sources/CoreModels/MediaProvider.swift"},
+        {"text": "Date Added", "source": "Sources/CoreModels/MediaProvider.swift"},
+        {"text": "Release Date", "source": "Sources/CoreModels/MediaProvider.swift"},
+        {"text": "Runtime", "source": "Sources/CoreModels/MediaProvider.swift"},
+        {"text": "Order", "source": "Sources/CoreUI/BrowseQueryControls.swift"},
+        {"text": "Default", "source": "Sources/CoreUI/BrowseQueryControls.swift"},
+        {"text": "No titles to show", "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"},
+        {"text": "Retry", "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"}
+      ],
+      "emphasis": []
+    }
+  },
+  {
     "slug": "watchlist",
     "platforms": [
       "Apple TV",
@@ -861,7 +924,7 @@
       "Sources/CoreUI/ProfileSettingsCategory.swift",
       "Sources/CoreModels/ContinueWatchingPolicy.swift",
       "Sources/FeatureHomeCore/HomeAggregator.swift",
-      "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+      "Sources/CoreUI/MediaRowBrowseCard.swift"
     ],
     "watch": [
       "Sources/FeatureSettings/Home",
@@ -878,6 +941,10 @@
     ],
     "ui": {
       "references": [
+        {
+          "text": "See all",
+          "source": "Sources/CoreUI/MediaRowBrowseCard.swift"
+        },
         {
           "text": "App navigation",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
@@ -1691,7 +1758,7 @@
     "seoTitle": "Choose, style, and synchronize subtitles in Plozz",
     "description": "Select or search subtitles, use a second text track, set language and SDH preferences, and resolve timing or image-subtitle limits.",
     "section": "Playback",
-    "kind": "guide",
+    "kind": "reference",
     "file": "subtitles.md",
     "sources": [
       "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
@@ -1708,12 +1775,12 @@
       "Sources/FeaturePlayback/SubtitleTrackController.swift",
       "Sources/FeaturePlayback/SubtitleStylePanel.swift",
       "Sources/FeaturePlayback/SubtitleStyleSettingsView.swift",
-      "Sources/FeaturePlayback/SystemCaptionAppearance.swift",
+      "Sources/FeaturePlayback/SubtitleOverlayView.swift",
       "Sources/CoreModels/SubtitleBehavior.swift",
       "Sources/CoreModels/SubtitleSelection.swift",
       "Sources/CoreModels/SubtitleStyle.swift",
       "Sources/FeaturePlayback/PlayerViewModel.swift",
-      "Sources/FeaturePlayback/NativeVideoEngine.swift"
+      "Sources/FeaturePlayback/PlayerMenuRowStyle.swift"
     ],
     "watch": [
       "Sources/FeaturePlayback/",
@@ -1730,6 +1797,26 @@
     ],
     "ui": {
       "references": [
+        {
+          "text": "Position",
+          "source": "Sources/FeaturePlayback/SubtitleStylePanel.swift"
+        },
+        {
+          "text": "Extra Line Position",
+          "source": "Sources/FeaturePlayback/SubtitleStylePanel.swift"
+        },
+        {
+          "text": "Above",
+          "source": "Sources/CoreModels/SubtitleStyle.swift"
+        },
+        {
+          "text": "Center",
+          "source": "Sources/CoreModels/SubtitleStyle.swift"
+        },
+        {
+          "text": "Below",
+          "source": "Sources/CoreModels/SubtitleStyle.swift"
+        },
         {
           "text": "Style",
           "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
@@ -1777,6 +1864,14 @@
         {
           "text": "Search & Download…",
           "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Subtitles",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "File match",
+          "source": "Sources/FeaturePlayback/PlayerMenuRowStyle.swift"
         },
         {
           "text": "Second Track",
@@ -2470,6 +2565,14 @@
           "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
         },
         {
+          "text": "Pause All",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Resume All",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
           "text": "Storage",
           "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
         },
@@ -3058,6 +3161,10 @@
           "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
         },
         {
+          "text": "Save Key",
+          "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
+        },
+        {
           "text": "Disabled",
           "source": "Sources/FeatureSettings/MetadataSettingsDetailView.swift"
         },
@@ -3636,6 +3743,10 @@
         {
           "text": "Admin API key",
           "source": "Sources/FeatureSettings/SeerDetailView.swift"
+        },
+        {
+          "text": "API key",
+          "source": "Sources/AppShelliOS/PlozziOSSeerrSettingsView.swift"
         },
         {
           "text": "Requests are made as",

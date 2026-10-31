@@ -15,12 +15,14 @@ On a show's details, the Watchlist action saves the show, not the highlighted ep
 
 ## Filter and sort the page
 
-On Apple TV, iPhone, and iPad, use the controls above the Watchlist grid:
+You can also reach this page from an eligible [Home row shortcut](/browse-home-rows/#open-a-larger-grid).
+
+Use the controls above the Watchlist grid. Apple TV shows filtering first; iPhone/iPad show sorting first.
 
 - **Filter**: open **All** or the active filter, then choose **All**, **Movies**, or **TV Shows**. **Clear Filters** restores all titles without deleting saves.
 - To sort, open the current label, initially **Date Added**. Under **Sort By**, choose **Date Added**, **Release Date**, or **Name**; change **Order** if needed.
 
-Date Added defaults to newest first and uses Watchlist save dates, not library-import dates. Entries without a usable save date follow dated entries.
+Choosing Name starts A-Z; choosing either date starts newest first. Date Added uses Watchlist save dates, not library-import dates. Entries without a usable save date follow dated entries.
 
 These browse choices belong to this profile and can [sync or transfer](/profiles-and-sync/). They arrange the Watchlist page, not its Home row.
 

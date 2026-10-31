@@ -4,6 +4,8 @@ Put the titles and shortcuts you use most within easy reach. Choose your Plozz p
 
 ## Choose Home rows
 
+To explore beyond a row's preview, use [Browse more from Home](/browse-home-rows/). Apple TV offers a **See all** card; iPhone/iPad use a row-heading chevron when more titles are available.
+
 Open **Settings > Screens & Navigation > Home > Rows**.
 
 Choose **Match server** to follow your servers' arrangements, or **Combined rows** to bring libraries together. Applying either preset replaces your custom arrangement after confirmation; it does not edit your servers. Common rows can combine across servers while others stay separate. Plex supplies promoted rows, not another client's pinned libraries.
@@ -22,7 +24,7 @@ Previews may omit titles. Reopen to change **Content** or the name, then **Save 
 
 ## Keep older Continue Watching titles
 
-Plozz does not expire older Continue Watching titles or limit their number, including Next Up titles merged into the row. Separate Next Up rows show up to 20 titles. These rows use account-wide history: disabling a library for browsing does not hide its progress. What appears still depends on the source, watched state, dismissed titles, enabled servers, and server-user permissions.
+Plozz does not expire older Continue Watching titles or limit their number, including Next Up titles merged into the row. Separate Next Up rows preview up to 20 titles; an eligible [row shortcut](/browse-home-rows/) can show more. These rows use account-wide history: disabling a library for browsing does not hide its progress. What appears still depends on the source, watched state, dismissed titles, enabled servers, and server-user permissions.
 
 Under **Rows > Continue Watching**, **Include Next Up** defaults on. Turn it off to arrange separate Next Up rows. Removing Continue Watching suspends merging.
 
@@ -43,7 +45,7 @@ Open **Settings > Screens & Navigation > Home > Filtering**. Under **Hide watche
 - **Recently Added**: hides completed titles from Home's Recently Added rows. It defaults off. In-progress videos and shows with unwatched episodes remain eligible.
 - **Hero & discovery**: excludes previously watched titles from eligible hero and Discovery suggestions. It defaults on.
 
-These are presentation filters, not history changes or access restrictions. They do not filter library Browse or clear Continue Watching. Recently Added checks a limited window of recent candidates; a short row does not prove there are no older unwatched titles. Turn its filter off to compare.
+These are presentation filters, not history changes or access restrictions. They do not filter library Browse or clear Continue Watching. Recently Added previews check a limited window of recent candidates; a short row does not prove there are no older unwatched titles. Turn its filter off to compare.
 
 ## Arrange shortcuts and details
 

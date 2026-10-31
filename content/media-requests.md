@@ -1,15 +1,15 @@
 # Request movies and shows
 
-Plozz sends requests to your own **Seerr** server, including compatible Overseerr/Jellyseerr installations. Plozz supplies no media.
+Send requests to your own **Seerr** server, including compatible Overseerr/Jellyseerr installations. Plozz supplies no media.
 
 ## Connect Seerr
 
 1. Open **Settings > Seerr**, or the Seerr step during profile setup.
-2. Enter the Seerr server address and its **Admin API key**. Only an authorized administrator should supply this key.
+2. Enter the server address and key supplied by an authorized administrator: **Admin API key** on Apple TV, or **API key** on iPhone/iPad.
 3. Connect, then review **Requests are made as** for each Plozz profile.
 4. Choose a Seerr user to apply that user's permissions, quotas, approvals, and quality defaults.
 
-The connection is shared across Plozz profiles. Choose the acting user separately for each profile.
+Plozz profiles share the connection. Choose the acting user for each.
 
 **Admin — unrestricted** is not a harmless display choice: an unlinked profile requests as the administrator, without per-user quota or approval restrictions. For Kids profiles, set a household [Parental PIN](/parental-controls/) and link a restricted Seerr user. Plozz blocks unrestricted admin requests only while that PIN enforces Kids restrictions.
 
