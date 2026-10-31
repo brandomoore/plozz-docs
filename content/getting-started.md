@@ -4,7 +4,7 @@ Plozz plays media from your own sources on Apple TV, iPhone, and iPad.
 
 ## Set up Plozz
 
-1. **Install Plozz.** Join the [TestFlight beta](https://testflight.apple.com/join/EKfReNMu) on a device running tvOS, iOS, or iPadOS 18 or later.
+1. **Install Plozz.** Download [Plozz Player from the App Store](https://apps.apple.com/app/plozz-player/id6782668147) for tvOS, iOS or iPadOS 18 or later.
 2. **Choose a source.** Open Plozz and choose Jellyfin, Plex, Emby, Silo, IPTV, or **Media Share**.
 3. **Connect your media.** [Connect a server](/servers/), [choose a network folder](/network-shares/), or [add an IPTV service](/live-tv/). Plozz supplies no movies, channels, or subscriptions.
 4. **Make it yours.** Complete the profile, library, and appearance choices shown. A [Plozz profile](/profiles-and-locks/) keeps your app preferences; it is separate from your server account.
