@@ -3,7 +3,7 @@
     "slug": "getting-started",
     "title": "Get started",
     "seoTitle": "Get started with Plozz on Apple TV, iPhone, and iPad",
-    "description": "Install Plozz, connect your own media source, choose a profile, and find the guides for watching and personalizing your setup.",
+    "description": "Install Plozz, connect your own media, choose a profile, and use settings search to find the controls for your setup.",
     "section": "Connect",
     "kind": "overview",
     "file": "getting-started.md",
@@ -22,15 +22,20 @@
       "Sources/CoreUI/ProfileSettingsCategory.swift",
       "Sources/AppShell/RootView.swift",
       "Sources/AppShelliOS/PlozziOSRootView.swift",
-      "Sources/AppShelliOS/PlozziOSLibrarySelectionView.swift"
+      "Sources/AppShelliOS/PlozziOSLibrarySelectionView.swift",
+      "Sources/FeatureSettings/SettingsView.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/FeatureSettings/SettingsSearchResults.swift",
+      "Sources/CoreModels/SettingsSearch.swift",
+      "Sources/CoreUI/SettingsSearchAnchor.swift"
     ],
     "watch": [
-      "README.md",
-      "project.yml",
-      "Sources/AppShell/AddAccountView.swift",
       "Sources/AppShell/FirstRun",
       "Sources/AppShelliOS/PlozziOSFirstRun",
-      "Sources/CoreModels/ProviderKind.swift"
+      "Sources/FeatureSettings/SettingsSearch",
+      "Sources/CoreModels/SettingsSearch",
+      "Sources/CoreUI/SettingsSearchAnchor.swift",
+      "Sources/AppShelliOS/PlozziOSOnboardingView.swift"
     ],
     "platforms": [
       "Apple TV",
@@ -39,6 +44,10 @@
     ],
     "ui": {
       "references": [
+        {
+          "text": "Search settings",
+          "source": "Sources/FeatureSettings/SettingsView.swift"
+        },
         {
           "text": "Media Share",
           "source": "Sources/CoreModels/ProviderKind.swift"
@@ -900,11 +909,12 @@
     "slug": "home-and-navigation",
     "title": "Home and navigation",
     "seoTitle": "Customize Plozz Home rows, hero, and navigation",
-    "description": "Arrange Home rows, filter watched suggestions, choose hero sources and Apple TV navigation layouts, and restore hidden shortcuts without changing access.",
+    "description": "Arrange Home rows, choose hero sources and Apple TV row styles, filter watched suggestions, and restore hidden navigation shortcuts.",
     "section": "Library",
     "kind": "reference",
     "file": "home-and-navigation.md",
     "sources": [
+      "Sources/CoreUI/MediaRowBrowseCard.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/FeatureSettings/HomeRowsSettingsView.swift",
       "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
@@ -915,16 +925,15 @@
       "Sources/CoreModels/HomeSectionIssue.swift",
       "Sources/FeatureSettings/ContinueWatchingNextUpControl.swift",
       "Sources/FeatureSettings/HeroSettingsControls.swift",
-      "Sources/CoreUI/HomeLayoutOptionCard.swift",
+      "Sources/FeatureSettings/HomeHeroEnabledPicker.swift",
+      "Sources/FeatureSettings/HomeRowStylePicker.swift",
       "Sources/CoreModels/NavigationStyle.swift",
       "Sources/FeatureSettings/NavigationLibrariesDetailView.swift",
       "Sources/AppShell/NavigationRailView.swift",
       "Sources/CoreUI/LiftableReorderList.swift",
       "Sources/AppShelliOS/PlozziOSRootView.swift",
       "Sources/CoreUI/ProfileSettingsCategory.swift",
-      "Sources/CoreModels/ContinueWatchingPolicy.swift",
-      "Sources/FeatureHomeCore/HomeAggregator.swift",
-      "Sources/CoreUI/MediaRowBrowseCard.swift"
+      "Sources/CoreModels/HeroSourceKind.swift"
     ],
     "watch": [
       "Sources/FeatureSettings/Home",
@@ -990,15 +999,11 @@
           "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
         },
         {
-          "text": "Layout",
+          "text": "Row style",
           "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
         },
         {
           "text": "Hero",
-          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
-        },
-        {
-          "text": "Showcase",
           "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
         },
         {
@@ -1098,8 +1103,32 @@
           "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
         },
         {
-          "text": "Fullscreen Hero",
-          "source": "Sources/CoreUI/HomeLayoutOptionCard.swift"
+          "text": "On",
+          "source": "Sources/FeatureSettings/HomeHeroEnabledPicker.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/FeatureSettings/HomeHeroEnabledPicker.swift"
+        },
+        {
+          "text": "Classic",
+          "source": "Sources/FeatureSettings/HomeRowStylePicker.swift"
+        },
+        {
+          "text": "Content sources",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Ratings",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Trailers",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Discovery row",
+          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
         },
         {
           "text": "Hide watched content",
@@ -1141,6 +1170,42 @@
         {
           "text": "Screens & Navigation",
           "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        },
+        {
+          "text": "Showcase",
+          "source": "Sources/FeatureSettings/HomeRowStylePicker.swift"
+        },
+        {
+          "text": "Continue Watching",
+          "source": "Sources/CoreModels/HeroSourceKind.swift"
+        },
+        {
+          "text": "Recently Added",
+          "source": "Sources/CoreModels/HeroSourceKind.swift"
+        },
+        {
+          "text": "Watchlist",
+          "source": "Sources/CoreModels/HeroSourceKind.swift"
+        },
+        {
+          "text": "Random from Library",
+          "source": "Sources/CoreModels/HeroSourceKind.swift"
+        },
+        {
+          "text": "Collections",
+          "source": "Sources/CoreModels/HeroSourceKind.swift"
+        },
+        {
+          "text": "Discovery",
+          "source": "Sources/CoreModels/HeroSourceKind.swift"
+        },
+        {
+          "text": "Items to show",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Advance automatically",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
         }
       ],
       "emphasis": []
@@ -1149,8 +1214,8 @@
   {
     "slug": "playback",
     "title": "Player controls",
-    "seoTitle": "Use Plozz chapters, player controls, versions, and skip markers",
-    "description": "Jump to chapters, choose versions, set autoplay and skip behavior, and explore cast biographies and credits. See when chapters are available.",
+    "seoTitle": "Use Plozz seeking, zoom, versions, chapters, and skip markers",
+    "description": "Seek with the Apple TV remote, crop black bars, choose editions, set autoplay and skip behavior, and jump to chapters while watching.",
     "section": "Playback",
     "kind": "reference",
     "file": "playback.md",
@@ -1168,21 +1233,21 @@
       "Sources/FeaturePlayback/CastPanelView.swift",
       "Sources/MetadataKit/CommunitySkipMarkers.swift",
       "Sources/FeatureHomeCore/PlaybackVersionChoiceModel.swift",
-      "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
       "Sources/FeatureHomeCore/DetailPlaybackSelection.swift",
-      "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
       "Sources/CoreModels/PlaybackSettings.swift",
       "Sources/FeaturePlayback/PlayerChapterPanel.swift",
       "Sources/FeaturePlayback/PlayerViewModel.swift",
-      "Sources/AppShell/MainTabViewSupport.swift"
+      "Sources/FeaturePlayback/CustomPlayerContainer.swift",
+      "Sources/FeaturePlayback/RemoteSeekScan.swift",
+      "Sources/FeaturePlayback/VideoPresentationView.swift"
     ],
     "watch": [
       "Sources/FeaturePlayback/Player",
-      "Sources/FeatureHomeCore/PlaybackVersionChoice",
-      "Sources/CoreUI/PlaybackResumePrompt.swift",
       "Sources/AppShelliOS/PlozziOSPlayer",
-      "Sources/FeatureSettings/PreferenceDetailViews.swift",
-      "Sources/CoreModels/Playback"
+      "Sources/FeaturePlayback/Remote",
+      "Sources/FeaturePlayback/Video",
+      "Sources/FeaturePlayback/CustomPlayerContainer.swift",
+      "Sources/EnginePlozzigen/PlozzigenNativePictureAnalyzer.swift"
     ],
     "platforms": [
       "Apple TV",
@@ -1316,7 +1381,11 @@
           "source": "Sources/FeatureSettings/SkipMarkerSettingsControl.swift"
         },
         {
-          "text": "Normal",
+          "text": "Normal (Default)",
+          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
+        },
+        {
+          "text": "Auto-crop black bars",
           "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
         },
         {
@@ -1756,16 +1825,19 @@
     "slug": "subtitles",
     "title": "Subtitles",
     "seoTitle": "Choose, style, and synchronize subtitles in Plozz",
-    "description": "Select or search subtitles, use a second text track, set language and SDH preferences, and resolve timing or image-subtitle limits.",
+    "description": "Choose or find subtitles, place captions near the video, use a second text track, and adjust style, language, SDH, or timing.",
     "section": "Playback",
     "kind": "reference",
     "file": "subtitles.md",
     "sources": [
+      "Sources/FeaturePlayback/SubtitleStylePanel.swift",
+      "Sources/CoreModels/SubtitleStyle.swift",
       "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
       "Sources/FeaturePlayback/TrackMenuBuilder.swift",
       "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift",
       "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift",
       "Sources/FeaturePlayback/PlayerMoreMenu.swift",
+      "Sources/FeaturePlayback/PlayerMenuRowStyle.swift",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/FeaturePlayback/SystemCaptionStyleConfirmation.swift",
@@ -1773,14 +1845,11 @@
       "Sources/CoreModels/SubtitleSearchPreference.swift",
       "Sources/CoreUI/ProfileSettingsCategory.swift",
       "Sources/FeaturePlayback/SubtitleTrackController.swift",
-      "Sources/FeaturePlayback/SubtitleStylePanel.swift",
       "Sources/FeaturePlayback/SubtitleStyleSettingsView.swift",
       "Sources/FeaturePlayback/SubtitleOverlayView.swift",
       "Sources/CoreModels/SubtitleBehavior.swift",
-      "Sources/CoreModels/SubtitleSelection.swift",
-      "Sources/CoreModels/SubtitleStyle.swift",
-      "Sources/FeaturePlayback/PlayerViewModel.swift",
-      "Sources/FeaturePlayback/PlayerMenuRowStyle.swift"
+      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
+      "Sources/FeaturePlayback/VideoPresentationView.swift"
     ],
     "watch": [
       "Sources/FeaturePlayback/",
@@ -1799,6 +1868,22 @@
       "references": [
         {
           "text": "Position",
+          "source": "Sources/FeaturePlayback/SubtitleStylePanel.swift"
+        },
+        {
+          "text": "Position",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
+          "text": "Bottom of screen",
+          "source": "Sources/CoreModels/SubtitleStyle.swift"
+        },
+        {
+          "text": "Bottom of video",
+          "source": "Sources/CoreModels/SubtitleStyle.swift"
+        },
+        {
+          "text": "Vertical offset",
           "source": "Sources/FeaturePlayback/SubtitleStylePanel.swift"
         },
         {
@@ -2065,15 +2150,15 @@
       "Sources/FeatureLiveTV/LiveTVSourceAccessGate.swift",
       "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift",
       "Sources/FeatureLiveTV/LibraryChannelEditorView.swift",
+      "Sources/CoreModels/LibraryChannelModels.swift",
       "Sources/CoreUI/ProfileSettingsCategory.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-      "Sources/CoreUI/SettingsCopy.swift",
-      "Sources/FeatureLiveTVCore/LibraryChannelService.swift"
+      "Sources/CoreUI/SettingsCopy.swift"
     ],
     "watch": [
       "Sources/FeatureLiveTV/",
       "Sources/FeatureLiveTVCore/",
-      "Sources/CoreModels/LibraryChannelHistorySettings.swift",
+      "Sources/CoreModels/LibraryChannel",
       "Sources/CoreModels/LiveTV",
       "Sources/AppShelliOS/PlozziOSLiveTV",
       "Sources/FeaturePlayback/LiveTVMobileNetwork"
@@ -2254,6 +2339,14 @@
           "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
         },
         {
+          "text": "Channel name",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Delete channel",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
           "text": "Preview schedule",
           "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
         },
@@ -2279,6 +2372,14 @@
         },
         {
           "text": "Source libraries",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Allowed ratings",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Include unrated titles",
           "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
         },
         {
@@ -2667,7 +2768,7 @@
       "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
       "Sources/FeatureSettings/HeroSettingsControls.swift",
       "Sources/CoreModels/WatchStatusIndicatorSettingsStore.swift",
-      "Sources/CoreUI/MediaCardPlaybackIndicators.swift"
+      "Sources/FeatureSettings/HomeRowStylePicker.swift"
     ],
     "watch": [
       "Sources/FeatureSettings/Card",
@@ -2808,7 +2909,7 @@
           "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
         },
         {
-          "text": "Layout",
+          "text": "Row style",
           "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
         },
         {
@@ -2846,6 +2947,10 @@
         {
           "text": "Language",
           "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        },
+        {
+          "text": "Showcase",
+          "source": "Sources/FeatureSettings/HomeRowStylePicker.swift"
         }
       ],
       "emphasis": []
@@ -3856,7 +3961,7 @@
       "Sources/FeaturePlayback/InfoPanelView.swift",
       "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift",
       "Sources/CoreUI/ProfileSettingsCategory.swift",
-      "Sources/TopShelfKit/TopShelfContentBuilder.swift",
+      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
       "Sources/TopShelfKit/TopShelfItemResolver.swift",
       "Sources/FeaturePlayback/PlayerTouchGestureSurface.swift",
       "Sources/AppShelliOS/PlozziOSPictureInPictureController.swift"

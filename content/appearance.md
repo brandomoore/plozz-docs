@@ -36,7 +36,7 @@ Shared [Metadata Providers](/metadata-and-ratings/) are separate; preferences ca
 
 ## Resize title logos
 
-Under **Settings > Screens & Navigation**, adjust **Logo size** and **Text size** in **Home > Layout** (mobile **Home > Hero**) and **Movie & show details**. Apple TV remembers separate Showcase/Fullscreen Hero sizes; [library Recommended headers](/customize-libraries/#adjust-the-apple-tv-library-header) are independent too.
+Under **Settings > Screens & Navigation**, adjust **Logo size** and **Text size** in **Home > Hero** (with the hero enabled) and **Movie & show details**. Apple TV's **Home > Row style > Showcase** has separate sizes; [library Recommended headers](/customize-libraries/#adjust-the-apple-tv-library-header) are independent too.
 
 Text size scales titles, descriptions, and metadata, not cards/menus; Apple TV details also resize episode titles/synopses. The center is default; constrained headers can fit smaller.
 

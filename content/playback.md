@@ -8,6 +8,14 @@ On Apple TV, press up from the timeline for **Playback**, **Audio**, and **Subti
 
 See [device controls](/platform-controls/) for seeking, touch, keyboard, and **Seek without pausing**.
 
+## Seek on Apple TV
+
+With playback options closed, click the remote's left/right edge to jump by your saved skip interval. Swipe horizontally to scrub; **Seek without pausing** determines whether you need to pause first.
+
+To cross a longer stretch, hold a left/right click to start scanning. Scanning continues after you release. Click the same direction to speed up, or the opposite direction to slow down and eventually reverse. Watch the timeline and preview, when available.
+
+Press the center button to use the selected position, or play/pause to use it and resume. Press Back to cancel without moving from your original place. Wait for loading to finish before seeking.
+
 ## Choose audio or a version
 
 Open **Audio** for tracks or **Version** for files/editions.
@@ -45,12 +53,19 @@ Plex, Jellyfin, and Emby can supply chapters; Plozz can also read them from supp
 
 ## Speed, picture, and other navigation
 
-Adjust speed where offered. **Zoom Mode** (Apple TV) or **Video** (mobile) offers **Normal** (full picture), **Crop** (cropped edges), **Stretch** (changed proportions), and **Custom** (50%-200%). Zoom lasts this session.
+Adjust speed where offered. Open **Playback > Zoom Mode** on Apple TV, or **Video** on mobile, for picture choices:
+
+- **Normal (Default)** keeps the whole picture.
+- **Auto-crop black bars**, when offered, enlarges the detected picture without stretching it. Some bars may remain to preserve the picture's proportions. If detection is unavailable, it uses the normal fit.
+- **Crop** fills the screen by cutting off edges; **Stretch** fills it by changing proportions.
+- **Custom** lets you set 50%-200% zoom.
+
+Zoom lasts this session and does not change streaming quality. Detection works during supported local playback, not AirPlay or Picture in Picture. Return to **Normal (Default)** if the crop is unhelpful.
 
 **Episodes** and **Playlist** navigate the sequence.
 
 ## Explore the cast
 
-In **Cast**, select a person. **See more** opens their biography and credits; selecting a credit opens that title's details. Either action ends playback. A listed credit is not necessarily in your library.
+In **Cast**, select a person to read their available biography and credits without leaving the video. Choose **See more** for their full page, or select a credit to open that title's details. Opening either page ends playback. A listed credit is not necessarily in your library.
 
 See [Streaming quality](/streaming-quality/), [Audio](/audio/), [Subtitles](/subtitles/), [AirPlay/Picture in Picture](/platform-controls/#airplay-and-picture-in-picture), or [external players](/external-players/).

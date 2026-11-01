@@ -200,9 +200,13 @@
         "Sources/FeaturePlayback/SubtitleTrackController.swift",
         "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
         "Sources/FeaturePlayback/PlayerMoreMenu.swift",
-        "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift"
+        "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift",
+        "Sources/CoreModels/SubtitleStyle.swift",
+        "Sources/FeaturePlayback/SubtitleStylePanel.swift",
+        "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift",
+        "Sources/FeaturePlayback/SubtitleOverlayView.swift"
       ],
-      "answer": "For movies and episodes, select primary text, then another text track through Apple TV Style > Dual Subtitles (or its direct control) or mobile Subtitles > Advanced… > Second Track; Off there removes only the second track. Live TV excludes dual subtitles. Mobile portrait starts in the ellipsis Playback options menu, while landscape separates controls. Plozzigen can decode embedded second text tracks; native playback needs fetchable text delivery. Image primaries disable dual mode and images cannot be second tracks. Locally remuxed wireless AirPlay has no selectable subtitles."
+      "answer": "For movies and episodes, select primary text, then another text track through Apple TV Style > Dual Subtitles (or its direct control) or mobile Subtitles > Advanced… > Second Track; Off there removes only the second track. Live TV excludes dual subtitles. Mobile portrait starts in the ellipsis Playback options menu, while landscape separates controls. AetherEngine can decode embedded second text tracks; native playback needs fetchable text delivery. Image primaries disable dual mode and images cannot be second tracks. Image-primary placement is a separate supported control: Bottom of video can move eligible lower dialogue while preserving its original font, colors, image size and fixed artwork. Locally remuxed wireless AirPlay has no selectable subtitles."
     },
     "library-channels": {
       "documents": [
@@ -214,6 +218,7 @@
       "sources": [
         "Sources/FeatureLiveTV/LibraryChannelEditorView.swift",
         "Sources/FeatureLiveTVCore/LibraryChannelService.swift",
+        "Sources/CoreModels/LibraryChannelModels.swift",
         "Sources/FeatureLiveTV/LiveTVPrototypeView.swift",
         "Sources/AppRuntime/LiveTVLibraryRuntime.swift",
         "Sources/FeaturePlayback/LibraryChannelPlaybackSession.swift",
@@ -226,7 +231,7 @@
         "Sources/AppRuntime/WatchMutationFactory.swift",
         "Sources/CoreModels/WatchStateReconciler.swift"
       ],
-      "answer": "Open Live TV Sources > Plozz channels; enable the automatic lineup or Create custom channel. Automatic channels are not individually editable; Retry Plozz channels recovers preparation errors and Refresh Plozz channels rebuilds prepared lineups. For custom channels set the name, order and Movies/Episodes choices, then select accessible Plex/Jellyfin/Emby libraries and optional semicolon-separated rules. Movie-only ordering disables Episodes. Preview schedule before Save channel; missing/invalid durations exclude titles and blank rules allow all matches. Changes start after published programs. The library catalogue must finish syncing before devices can reproduce the same schedule. Update watch history is profile-scoped, device-local and default-off; enabling it can mark programs watched after 90% actual viewing without resume writes. Both shells use the authorized completion mutation pipeline, so matching servers follow the cross-server history setting and connected video/anime trackers can receive eligible completions too. Playback uses original files, not IPTV or Silo sources."
+      "answer": "Open Live TV Sources > Plozz channels; enable the automatic lineup or Create custom channel. Automatic channels are not individually editable; Retry Plozz channels recovers preparation errors and Refresh Plozz channels rebuilds prepared lineups. For custom channels set the name, order and Movies/Episodes choices, then select accessible Plex/Jellyfin/Emby libraries and optional semicolon-separated rules. Allowed ratings matches normalized exact classifications, not a maximum age; Include unrated titles defaults on and admits missing classifications independently of that list. Movie-only ordering disables Episodes. Preview schedule before Save channel; missing/invalid durations exclude titles and blank fields allow all matches. Changes start after published programs. The library catalogue must finish syncing before devices can reproduce the same schedule. Update watch history is profile-scoped, device-local and default-off; enabling it can mark programs watched after 90% actual viewing without resume writes. Both shells use the authorized completion mutation pipeline, so matching servers follow the cross-server history setting and connected video/anime trackers can receive eligible completions too. Playback uses original files, not IPTV or Silo sources. Select a saved custom-channel name to edit; its Delete channel context action removes the channel without deleting library media."
     },
     "offline-background": {
       "documents": [
@@ -622,6 +627,10 @@
         {
           "slug": "browse-home-rows",
           "anchor": "open-a-larger-grid"
+        },
+        {
+          "slug": "home-and-navigation",
+          "anchor": "choose-row-style-on-apple-tv"
         }
       ],
       "sources": [
@@ -630,13 +639,11 @@
         "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
         "Sources/CoreModels/HeroSettings.swift",
         "Sources/CoreModels/NavigationStyle.swift",
-        "Sources/CoreModels/NavigationRailPlan.swift",
         "Sources/FeatureHomeCore/HomeAggregator.swift",
         "Sources/FeatureSettings/HeroSettingsControls.swift",
         "Sources/AppRuntime/HeroDiscoveryRuntime.swift",
         "Sources/FeatureSettings/NavigationLibrariesDetailView.swift",
         "Sources/CoreModels/NavigationContentAvailability.swift",
-        "Sources/FeatureHomeCore/HomePresentationRow.swift",
         "Sources/AppShell/MainTabView.swift",
         "Sources/AppShelliOS/PlozziOSRootView.swift",
         "Sources/FeatureHome/HomeView.swift",
@@ -644,7 +651,9 @@
         "Sources/FeatureSettings/LibraryPresentationSettingsView.swift",
         "Sources/CoreModels/NavigationStyleSettingsStore.swift",
         "Sources/FeatureHomeCore/HomeRowBrowseView.swift",
-        "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+        "Sources/FeatureSettings/HomeHeroEnabledPicker.swift",
+        "Sources/FeatureSettings/HomeRowStylePicker.swift"
       ],
       "summary": "Screens & Navigation separates Home layout/hero, Rows, Filtering, main shortcuts and movie/show details. Presets replace custom Home arrangements after confirmation without editing servers; collection sections retain source identity, presentation choices and failure recovery. The Home browsing guide explains eligible expanded rows separately from the arranger: TV See all cards versus mobile row headings, platform control order, original-feed membership and retry. Plain combined Continue Watching remains unbounded in its rail and does not gain this shortcut merely from its item count; Live TV rows are not row-browser feeds. History feeds ignore library discovery switches, with no age/count cap for Continue Watching/merged Next Up and separate Next Up previews capped at 20. Recently Added and Hero & discovery filters are presentation-only with different defaults and candidate limits. Showcase and the carousel remain separate. Discovery recommendations do not require Seerr, but a new profile's carousel follows its connection until Discovery is explicitly toggled; Kids policy still excludes Discovery. All three TV navigation layouts offer eligible library shortcuts; changes retain saved order. Mobile starts with Home, Downloads and Search subject to availability; other destinations, including individual libraries and All Libraries, start Hidden until explicitly shown. Compact More contains overflow of shown destinations, not hidden shortcuts. TV sidebars retain Settings, Top Bar has a profile-picker escape, and mobile retains the profile-button route. Reset Navigation does not reset library tabs or access. Main layout/shortcuts stay local per profile/device; Home preferences transfer."
     },
@@ -664,6 +673,10 @@
         {
           "slug": "customize-libraries",
           "anchor": "choose-collection-cover-shapes"
+        },
+        {
+          "slug": "home-and-navigation",
+          "anchor": "choose-row-style-on-apple-tv"
         }
       ],
       "sources": [
@@ -764,6 +777,10 @@
         },
         {
           "slug": "external-players"
+        },
+        {
+          "slug": "playback",
+          "anchor": "seek-on-apple-tv"
         }
       ],
       "sources": [
@@ -778,15 +795,15 @@
         "Sources/MetadataKit/CommunitySkipMarkers.swift",
         "Sources/CoreModels/PlaybackSettings.swift",
         "Sources/FeaturePlayback/PlayerViewModel.swift",
-        "Sources/CoreModels/ExternalPlayer.swift",
-        "Sources/FeaturePlayback/NativeVideoEngine.swift",
-        "Sources/AppShell/MainTabViewSupport.swift",
         "Sources/AppRuntime/ExternalPlaybackRuntime.swift",
         "Sources/FeaturePlayback/PlayerVideoZoom.swift",
         "Sources/FeaturePlayback/PlayerMoreMenu.swift",
         "Sources/FeaturePlayback/CastPanelView.swift",
-        "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
-        "Sources/FeatureSettings/SkipMarkerSettingsControl.swift"
+        "Sources/FeatureSettings/SkipMarkerSettingsControl.swift",
+        "Sources/FeaturePlayback/CustomPlayerContainer.swift",
+        "Sources/FeaturePlayback/RemoteClickInterpreter.swift",
+        "Sources/FeaturePlayback/RemoteSeekScan.swift",
+        "Sources/FeaturePlayback/VideoPresentationView.swift"
       ],
       "summary": "Use remote/mobile controls, same-account versions, prompt/automatic selection and independent series memory. Ask to resume or start over is a separate opt-in control: before an in-progress video, Resume shows remaining time and Start Over the full runtime when known; resume rewind remains independent. The shared prompt is wired through the TV player host and mobile Home/details without dropping the pending request. Keep autoplay, Up Next, category/marker-specific skipping and community privacy/coverage limits. Chapters needs usable source/file chapters with optional images; zoom is session-only and cast-page navigation ends playback. External handoff stays in its focused guide with direct-source eligibility, token sharing, fallback and authorized progress-return limits."
     },
@@ -876,7 +893,7 @@
         "Sources/CoreModels/HeroBackgroundSettings.swift",
         "Sources/CoreModels/ThemeMusicSettings.swift"
       ],
-      "summary": "Select tracks/language; series memory stores language, not an exact commentary track, codec or mix, and can follow matched series across servers. Playback > Audio exposes default-on Prefer lossless audio in both shells. Turning it off requests Plozzigen's compressed surround-compatible output, useful for regular HDMI ARC. The adapter samples it for on-demand/live loads, not native-engine or external-app playback; reopen video/retune after changes. Actual output depends on source/equipment. It is shared across Plozz profiles on this device and excluded from sync/transfer. Retain no adjustable engine audio delay, opt-in mobile Background Audio/data use, and output-gated TV Reduce Loud Sounds/Enhance Dialogue with system-wide scope and Settings recovery. Screens & Navigation > Movie & show details > Background > Theme music plays through the shared controller on Apple TV, iPhone and iPad. Theme music volume is 0%-100%; adjusting it can preview automatically and Play preview/Stop preview provide explicit control. Preview resolution checks authorized Home titles, then can use a generated sample if none supplies a theme; a preview is not universal title availability. Leaving the page stops the preview. Detail music fades in/out, pauses outside the app, and yields to trailers/full playback. The mobile detail speaker button toggles Mute theme music/Unmute theme music only during active detail playback; session mute changes neither saved volume nor Settings previews and resets on leaving that detail. Off selects static detail art independently of Home trailers and video tracks."
+      "summary": "Select tracks/language; series memory stores language, not an exact commentary track, codec or mix, and can follow matched series across servers. Playback > Audio exposes default-on Prefer lossless audio in both shells. Turning it off requests AetherEngine's compressed surround-compatible output, useful for regular HDMI ARC. The adapter samples it for on-demand/live loads, not native-engine or external-app playback; reopen video/retune after changes. Actual output depends on source/equipment. It is shared across Plozz profiles on this device and excluded from sync/transfer. Retain no adjustable engine audio delay, opt-in mobile Background Audio/data use, and output-gated TV Reduce Loud Sounds/Enhance Dialogue with system-wide scope and Settings recovery. Screens & Navigation > Movie & show details > Background > Theme music plays through the shared controller on Apple TV, iPhone and iPad. Theme music volume is 0%-100%; adjusting it can preview automatically and Play preview/Stop preview provide explicit control. Preview resolution checks authorized Home titles, then can use a generated sample if none supplies a theme; a preview is not universal title availability. Leaving the page stops the preview. Detail music fades in/out, pauses outside the app, and yields to trailers/full playback. The mobile detail speaker button toggles Mute theme music/Unmute theme music only during active detail playback; session mute changes neither saved volume nor Settings previews and resets on leaving that detail. Off selects static detail art independently of Home trailers and video tracks."
     },
     "subtitles": {
       "documents": [
@@ -890,6 +907,10 @@
         {
           "slug": "external-players",
           "anchor": "what-stays-in-plozz"
+        },
+        {
+          "slug": "subtitles",
+          "anchor": "keep-captions-near-the-picture"
         }
       ],
       "sources": [
@@ -910,9 +931,10 @@
         "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
         "Sources/FeaturePlayback/PlayerMoreMenu.swift",
         "Sources/CoreModels/SubtitleStyle.swift",
-        "Sources/FeaturePlayback/SubtitleOverlayView.swift"
+        "Sources/FeaturePlayback/SubtitleOverlayView.swift",
+        "Sources/FeaturePlayback/VideoPresentationView.swift"
       ],
-      "summary": "Select/search tracks, distinguish forced/SDH and per-content policies, enter mobile language codes or follow device language, style text or Live TV, and manage second tracks. Mobile Subtitles > Advanced… contains Second Track, Subtitle Delay and Appearance > Style; Search & Download… opens search separately. Portrait starts in Playback options. Prefer SDH permits fallback; Only SDH makes automatic/search/download choices strict without overriding manual or remembered choices. Matching device caption style replaces custom appearance after confirmation; edits exit matching while placement/dual controls remain Plozz-specific. Position chooses vertical placement; Extra Line Position offers Above/Center/Below for wrapped-line growth, with screen-edge clamping, not second-track placement. The public appearance section explains this distinction alongside file-formatting overrides. Explain embedded Plozzigen versus fetchable native text, image-primary exclusion, secondary Off, timing and AirPlay limits. External apps receive eligible fetchable SRT sidecars without Plozz styling/dual guarantees; custom templates receive no subtitle links."
+      "summary": "Select/search tracks, distinguish forced/SDH and per-content policies, enter mobile language codes or follow device language, style text or Live TV, and manage second tracks. Mobile Subtitles > Advanced… contains Second Track, Subtitle Delay and Appearance > Style; Search & Download… opens search separately. Portrait starts in Playback options. Prefer SDH permits fallback; Only SDH makes automatic/search/download choices strict without overriding manual or remembered choices. Matching device caption style replaces custom appearance after confirmation; edits exit matching while placement/dual controls remain Plozz-specific. Position selects Bottom of screen or Bottom of video, and Vertical offset measures upward from that reference; Extra Line Position offers Above/Center/Below for wrapped-line growth, with screen-edge clamping, not second-track placement. The picture-placement section explains active-picture detection with video-frame fallback, eligible lower-dialogue image movement that preserves size/fixed artwork, and file-formatting overrides. Explain embedded AetherEngine versus fetchable native text, image-primary exclusion, secondary Off, timing and AirPlay limits. External apps receive eligible fetchable SRT sidecars without Plozz styling/dual guarantees; custom templates receive no subtitle links."
     },
     "music": {
       "documents": [
@@ -1337,6 +1359,10 @@
         {
           "slug": "feedback-and-bugs",
           "anchor": "read-what-s-new"
+        },
+        {
+          "slug": "getting-started",
+          "anchor": "find-a-setting"
         }
       ],
       "sources": [
@@ -1353,13 +1379,13 @@
         "Sources/CoreModels/PlaybackDiagnosticJournal.swift",
         "Sources/CrashReporting/CrashRedaction.swift",
         "Sources/CrashReporting/CrashDiagnostics.swift",
-        "Sources/CoreUI/SettingsCopy.swift",
-        "Sources/FeatureHome/HomePerfOverlay.swift",
-        "Sources/FeatureHome/HomeView.swift",
         "Sources/AppShell/MainTabView.swift",
         "Sources/FeatureSettings/RecentActivityDetailView.swift",
         "Sources/CoreModels/LibraryDiagnosticJournal.swift",
-        "Sources/CoreModels/SearchDiagnosticJournal.swift"
+        "Sources/CoreModels/SearchDiagnosticJournal.swift",
+        "Sources/FeatureSettings/SettingsSearchResults.swift",
+        "Sources/CoreModels/SettingsSearch.swift",
+        "Sources/CoreUI/SettingsSearchAnchor.swift"
       ],
       "summary": "Keep symptom checks and reset/cache scopes non-destructive. Incomplete library results offer Details/Try Again, while Home row statuses offer Details/Retry without discarding saved choices; No streams found rechecks inventory, not playback. Restore saved sign-ins without deleting connections; Plex Home can require the original account, not a PIN reset. Cover Discord/GitHub/mobile email, duplicate checks and safe reproduction/device/source details. Startup diagnostics choices both continue; reporting defaults off and needs current consent plus a configured endpoint. Share Diagnostics is device-wide, not profile-owned or transferred. Send Diagnostics offers Enable Sharing when off; consenting enables reporting without submitting the manual report. Both platforms then use Message (required) and Send to Developer; blank messages disable Send and CrashDiagnostics rejects them. Automatic Sentry reports include fixed screen categories/performance evidence but exclude identity/server/media/history. Explicit submissions include allowlisted activity, search, connection, preparation, failed-library-load and retained playback/source evidence, not free-form Recent Activity messages. Search evidence excludes query text, names and URLs. The submitted message is sent as written, so exclude secrets and personal details. Export aliases are scoped to one submission. Mobile Refresh/filter/search/Copy exports an activity summary without message text, whereas local display, manual text selection and screenshots can expose server/content details. Submitted confirms SDK handoff, not receipt or a public issue. Privacy Policy is reachable in consent/Settings, with a TV QR handoff. Apple TV Home Performance Overlay is wired through MainTabView/HomeView and exposes FPS, hitches and thermal state for stutter reports; the mobile toggle has no Home renderer consumer, so do not promise a mobile overlay. Local error details need no upload consent. Settings > Release Notes remains reachable after startup notices are disabled. Show release notes on startup for new versions and the confirmed Don’t Show Again action control automatic notices, not manual access."
     },
@@ -1583,7 +1609,7 @@
         "Sources/CoreModels/LivePlaybackBuffer.swift",
         "Sources/FeaturePlayback/PlayerMoreMenu.swift"
       ],
-      "summary": "Use task sections for player preferences, text/image/dual-subtitle limits, confirmed caption-style replacement and live rewind. Mobile menus consolidate in portrait and separate in landscape; Advanced… owns second subtitles, delay and style, while Video owns Quality/zoom. Session-only Normal/Crop/Stretch/Custom zoom has an explained 50%-200% range. Chapters needs usable provider/file chapters; seeking preserves play/pause intent and episode spoilers, and thumbnails are optional. Series audio memory stores language, not an exact mix. Prefer lossless audio selects the Plozzigen adapter's lossless/surroundCompat request at each video/live load; neither the native engine nor an external app consumes this device preference, and requested mode does not guarantee actual output. Live TV buffer is a new-load cushion with latency/tuning costs, separate from library files. Neither wired engine advertises audio-delay or engine-local dialogue processing; the TV system bridge separately exposes output-gated global Reduce Loud Sounds/Enhance Dialogue and recovery. Cast page navigation ends playback. Diagnostics separate active conversion facts, original sources, measured throughput, player-window/buffer values and temporary cache without claiming physical speaker layout. PlayerScreenshotHook and LiveChannelScreenshotHook only preselect panels for internal capture; they expose no reader screenshot workflow."
+      "summary": "Use task sections for player preferences, text/image/dual-subtitle limits, confirmed caption-style replacement and live rewind. Mobile menus consolidate in portrait and separate in landscape; Advanced… owns second subtitles, delay and style, while Video owns Quality/zoom. Session-only Normal (Default)/Auto-crop black bars/Crop/Stretch/Custom zoom has an explained 50%-200% range. Chapters needs usable provider/file chapters; seeking preserves play/pause intent and episode spoilers, and thumbnails are optional. Series audio memory stores language, not an exact mix. Prefer lossless audio selects the AetherEngine adapter's lossless/surroundCompat request at each video/live load; neither the native engine nor an external app consumes this device preference, and requested mode does not guarantee actual output. Live TV buffer is a new-load cushion with latency/tuning costs, separate from library files. Neither wired engine advertises audio-delay or engine-local dialogue processing; the TV system bridge separately exposes output-gated global Reduce Loud Sounds/Enhance Dialogue and recovery. Cast page navigation ends playback. Diagnostics separate active conversion facts, original sources, measured throughput, player-window/buffer values and temporary cache without claiming physical speaker layout. PlayerScreenshotHook and LiveChannelScreenshotHook only preselect panels for internal capture; they expose no reader screenshot workflow."
     },
     "FeatureProfiles": {
       "areas": [
@@ -1997,7 +2023,7 @@
         "Sources/AppShell/MainTabView.swift",
         "Sources/AppShell/HomeTab.swift"
       ],
-      "summary": "Document Apple TV placement, local shared visibility/layout/count preferences, same-copy deduplication, Play versus More Info and current access checks. Full-screen metadata uses known source facts, series artwork and spoiler policy, never a guarantee of output or a live server browser. Poster/backdrop composition is infrastructure, not another reader control."
+      "summary": "Document Apple TV placement, local shared visibility/layout/count preferences, same-copy deduplication, playback versus details actions and current access checks. The carousel buttons have OS-owned captions, not verified app labels. Full-screen metadata uses known source facts, series artwork and spoiler policy, never a guarantee of output or a live server browser. Poster/backdrop composition is infrastructure, not another reader control."
     },
     "TraktService": {
       "areas": [
@@ -2131,7 +2157,7 @@
         "Sources/CoreModels/ProfileSettingsSnapshot.swift",
         "Sources/CoreUI/PlaybackResumePrompt.swift"
       ],
-      "summary": "Cover version mode/series memory, autoplay/skips, quality, audio, background listening, orientation/gestures and history with platform/provider gates. Explain the optional Ask to resume or start over prompt independently of resume rewind and version selection. Skip settings distinguish enablement, content categories, button/automatic delay and per-marker Off; community requests remain separately controllable. Remember audio language per series stores language, not exact commentary/mix. Default-on Prefer lossless audio is shared on this device, not synced/transferred; turning it off requests compressed surround-compatible Plozzigen output for newly loaded video/live streams, not a guaranteed hardware format or a native/external-player setting. Video buffer is temporary read-ahead, while independent local Live TV buffer requests a live-edge cushion; both are new-load choices, not offline downloads. Missing remembered versions fall back automatically in automatic mode. Advanced > External player is device-wide rather than profile-owned; its focused guide explains platform apps, custom templates, direct-play fallback, access-token sharing and authorized progress returns."
+      "summary": "Cover version mode/series memory, autoplay/skips, quality, audio, background listening, orientation/gestures and history with platform/provider gates. Explain the optional Ask to resume or start over prompt independently of resume rewind and version selection. Skip settings distinguish enablement, content categories, button/automatic delay and per-marker Off; community requests remain separately controllable. Remember audio language per series stores language, not exact commentary/mix. Default-on Prefer lossless audio is shared on this device, not synced/transferred; turning it off requests compressed surround-compatible AetherEngine output for newly loaded video/live streams, not a guaranteed hardware format or a native/external-player setting. Video buffer is temporary read-ahead, while independent local Live TV buffer requests a live-edge cushion; both are new-load choices, not offline downloads. Missing remembered versions fall back automatically in automatic mode. Advanced > External player is device-wide rather than profile-owned; its focused guide explains platform apps, custom templates, direct-play fallback, access-token sharing and authorized progress returns."
     },
     "screensNavigation": {
       "areas": [
@@ -3250,50 +3276,6 @@
         {
           "slug": "library",
           "anchor": "browse-a-library"
-        }
-      ]
-    },
-    "Sources/AppShell/SelectHomeLayoutView.swift": {
-      "sources": [
-        "Sources/AppShell/SelectHomeLayoutView.swift",
-        "Sources/CoreUI/HomeLayoutOptionCard.swift",
-        "Sources/CoreUI/AmbientGradientBackground.swift",
-        "Sources/CoreUI/ThemePalette.swift",
-        "Sources/CoreUI/HeroLogoSizePreview.swift",
-        "Sources/CoreUI/HomeLayoutSwatch.swift",
-        "Sources/CoreUI/NativeActionButton.swift",
-        "Sources/CoreUI/NativeGradientCardSurface.swift",
-        "Sources/CoreUI/TextTierStyle.swift",
-        "Sources/CoreUI/ThemeOptionCard.swift"
-      ],
-      "platforms": [
-        "Apple TV"
-      ],
-      "navigation": "Choose the Home layout during Apple TV setup, or change it later under Home settings.",
-      "experience": "Preview and choose the initial Home presentation.",
-      "conditions": "Apple TV first-run flow; the selected profile owns the presentation.",
-      "controls": [
-        {
-          "text": "Choose Home layout for this profile",
-          "source": "Sources/AppShell/SelectHomeLayoutView.swift"
-        },
-        {
-          "text": "Fullscreen Hero",
-          "source": "Sources/CoreUI/HomeLayoutOptionCard.swift"
-        },
-        {
-          "text": "Showcase",
-          "source": "Sources/CoreUI/HomeLayoutOptionCard.swift"
-        },
-        {
-          "text": "Continue",
-          "source": "Sources/AppShell/SelectHomeLayoutView.swift"
-        }
-      ],
-      "documents": [
-        {
-          "slug": "home-and-navigation",
-          "anchor": "choose-home-rows"
         }
       ]
     },
@@ -6452,7 +6434,15 @@
         "Sources/FeaturePlayback/PlayerSkipMarkerTrack.swift",
         "Sources/FeaturePlayback/PlayerTimelineClock.swift",
         "Sources/FeaturePlayback/PlayerTouchLevelControl.swift",
-        "Sources/FeaturePlayback/PlayerZoomSettings.swift"
+        "Sources/FeaturePlayback/PlayerZoomSettings.swift",
+        "Sources/FeaturePlayback/PlayerVideoZoom.swift",
+        "Sources/FeaturePlayback/VideoPresentationView.swift",
+        "Sources/FeaturePlayback/VideoActivePicture.swift",
+        "Sources/FeaturePlayback/NativeVideoEngine.swift",
+        "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
+        "Sources/EnginePlozzigen/PlozzigenNativePictureAnalyzer.swift",
+        "Sources/AppShell/PlaybackEngineComposition.swift",
+        "Sources/AppShelliOS/PlozziOSPlaybackEngineComposition.swift"
       ],
       "platforms": [
         "iPhone",
@@ -6460,7 +6450,7 @@
       ],
       "navigation": "Tap the playing mobile video; portrait consolidates options, while landscape separates menus.",
       "experience": "Seek, choose audio/subtitles, adjust supported speed/zoom, or open advanced subtitle and track options.",
-      "conditions": "iPhone/iPad. Menu visibility follows engine capabilities, available tracks, orientation, current route and online subtitle services. Neither shipped movie engine enables adjustable audio delay. The touch card strip shares Info/Cast/chapter/sequence content, but not Apple TV track/style cards. Cast requires metadata; Chapters requires chapters; Episodes/Playlist require their active sequence context.",
+      "conditions": "iPhone/iPad. Menu visibility follows engine capabilities, available tracks, orientation, current route and online subtitle services. Neither shipped movie engine enables adjustable audio delay. In Subtitles > Advanced… > Appearance, text primaries offer Style and image primaries offer Position; image primaries disable Second Track. The touch card strip shares Info/Cast/chapter/sequence content, but not Apple TV track/style cards. Cast requires metadata; Chapters requires chapters; Episodes/Playlist require their active sequence context. Auto-crop black bars appears only when the supplied engine supports active-picture analysis; both production movie-engine factories wire this support. Picture sampling requires local, ready, visible playback and is suspended for external playback or Picture in Picture. Missing/invalid detection falls back to normal fit. Cropping preserves picture proportions and need not fill every screen edge; zoom remains session-only. Mobile uses Video; Apple TV uses Playback > Zoom Mode.",
       "controls": [
         {
           "text": "Play",
@@ -6495,6 +6485,26 @@
           "source": "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift"
         },
         {
+          "text": "Subtitles",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Audio",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Playback Speed",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Video",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Version",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
           "text": "Skip forward",
           "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
         },
@@ -6524,6 +6534,10 @@
         },
         {
           "text": "Style",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
+          "text": "Position",
           "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
         },
         {
@@ -6599,6 +6613,26 @@
           "source": "Sources/FeaturePlayback/PlayerZoomSettings.swift"
         },
         {
+          "text": "Normal (Default)",
+          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
+        },
+        {
+          "text": "Auto-crop black bars",
+          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
+        },
+        {
+          "text": "Crop",
+          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
+        },
+        {
+          "text": "Stretch",
+          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
+        },
+        {
+          "text": "Custom",
+          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
+        },
+        {
           "text": "Zoom Amount",
           "source": "Sources/FeaturePlayback/PlayerZoomSettings.swift"
         },
@@ -6627,6 +6661,10 @@
         {
           "slug": "subtitles",
           "anchor": "show-two-languages"
+        },
+        {
+          "slug": "playback",
+          "anchor": "speed-picture-and-other-navigation"
         }
       ]
     },
@@ -8023,7 +8061,10 @@
         "Sources/CoreUI/ThemePalette.swift",
         "Sources/FeatureSettings/SettingsLibrariesRow.swift",
         "Sources/FeatureSettings/SettingsOptionList.swift",
-        "Sources/FeatureSettings/ThemeMusicVolumeControl.swift"
+        "Sources/FeatureSettings/ThemeMusicVolumeControl.swift",
+        "Sources/FeatureSettings/SettingsSearchResults.swift",
+        "Sources/CoreModels/SettingsSearch.swift",
+        "Sources/CoreUI/SettingsSearchAnchor.swift"
       ],
       "platforms": [
         "iPhone",
@@ -8031,8 +8072,12 @@
       ],
       "navigation": "Open Settings from iPhone/iPad navigation; choose a profile category or household section.",
       "experience": "Change playback, captions, Live TV, libraries, presentation, trackers, language, and authorized household services.",
-      "conditions": "iPhone/iPad compact and regular-width layouts. Category order is Playback, Subtitles, Live TV, Libraries, Appearance, Screens & Navigation, Trackers, Language. Everyone is absent for Kids; Libraries and Manage Profile are sealed by an enforced Parental PIN. Edit/Done reflects SwiftUI list-editing state. Internal developer actions require deliberate version-based activation and are not reader setup steps. On Kids profiles, Name & Avatar replaces the ordinary Libraries category; protected Libraries and Manage Profile move into Parental Controls. Appearance order is Theme, Cards, Artwork, Circadian Mode. Cards contains Labels, Watch indicators, Style, Display Size; Focus is Apple TV-only. Label presets replace overrides; Custom is a readout in the compact picker when no preset matches. Customize labels from Cards offers all nine Page choices; from Movie & show details it contains Episodes, Related titles and Extras without a Page picker. Home/Recommended use Default with On/Off/Mixed, followed by Overrides; Continue Watching and Home's Libraries use Use default/On/Off. Other pages use On/Off only. The color picker is hidden with Hidden watch indicators; Episode count style appears only with episode counts enabled.",
+      "conditions": "iPhone/iPad compact and regular-width layouts. Category order is Playback, Subtitles, Live TV, Libraries, Appearance, Screens & Navigation, Trackers, Language. Everyone is absent for Kids; Libraries and Manage Profile are sealed by an enforced Parental PIN. Edit/Done reflects SwiftUI list-editing state. Internal developer actions require deliberate version-based activation and are not reader setup steps. On Kids profiles, Name & Avatar replaces the ordinary Libraries category; protected Libraries and Manage Profile move into Parental Controls. Appearance order is Theme, Cards, Artwork, Circadian Mode. Cards contains Labels, Watch indicators, Style, Display Size; Focus is Apple TV-only. Label presets replace overrides; Custom is a readout in the compact picker when no preset matches. Customize labels from Cards offers all nine Page choices; from Movie & show details it contains Episodes, Related titles and Extras without a Page picker. Home/Recommended use Default with On/Off/Mixed, followed by Overrides; Continue Watching and Home's Libraries use Use default/On/Off. Other pages use On/Off only. The color picker is hidden with Hidden watch indicators; Episode count style appears only with episode counts enabled. Settings search is available from the root; the Apple TV link precedes the profile categories; selecting a result focuses the control on TV or briefly highlights it on mobile and still checks parental authorization. It never enables a prerequisite automatically.",
       "controls": [
+        {
+          "text": "Search settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
         {
           "text": "Settings",
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
@@ -9155,6 +9200,10 @@
         },
         {
           "slug": "profiles-and-sync"
+        },
+        {
+          "slug": "getting-started",
+          "anchor": "find-a-setting"
         }
       ]
     },
@@ -10033,7 +10082,6 @@
         "Sources/CoreUI/ThemePalette.swift",
         "Sources/AppShell/ProfileServerIdentityPromptView.swift",
         "Sources/AppShell/RootView.swift",
-        "Sources/AppShell/SelectHomeLayoutView.swift",
         "Sources/AppShell/SelectNavigationStyleView.swift",
         "Sources/AppShell/SelectThemeView.swift",
         "Sources/AppShell/SyncSetupReceiveView.swift",
@@ -10114,7 +10162,7 @@
         "Sources/CoreUI/HeroArtworkDisplayState.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Reusable AmbientGradientBackground.swift is wired into Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/CoreUI/FamilyGuidanceViews.swift, Sources/CoreUI/FamilyGuidanceViews.swift, Sources/CoreUI/PlaybackDiagnosticDetailsView.swift, Sources/FeatureAuth/IPTVSignInView.swift, Sources/FeaturePlayback/SubtitleStyleSettingsView.swift, Sources/FeatureSettings/LiveTVSettingsView.swift, Sources/AppShell/ProfileServerIdentityPromptView.swift, Sources/AppShell/RootView.swift, Sources/AppShell/RootView.swift, Sources/AppShell/RootView.swift, Sources/AppShell/RootView.swift, Sources/AppShell/RootView.swift, Sources/AppShell/SelectHomeLayoutView.swift, Sources/AppShell/SelectNavigationStyleView.swift, Sources/AppShell/SelectThemeView.swift, Sources/AppShell/SyncSetupReceiveView.swift, Sources/AppShell/SyncSetupSendView.swift, Sources/AppShelliOS/PlozziOSDetectedSetupView.swift, Sources/AppShelliOS/PlozziOSDownloadedShowView.swift, Sources/AppShelliOS/PlozziOSFirstRunView.swift, Sources/AppShelliOS/PlozziOSOnboardingView.swift, Sources/AppShelliOS/PlozziOSProfilePickerView.swift, Sources/AppShelliOS/PlozziOSProfilePickerView.swift, Sources/AppShelliOS/PlozziOSProfileSetupView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift, Sources/FeatureProfiles/ProfileEditorView.swift, Sources/FeatureProfiles/ProfileEditorView.swift, Sources/FeatureProfiles/ProfileEditorView.swift, Sources/FeatureProfiles/ProfileLockOfferView.swift, Sources/FeatureSettings/CrashReportingConsentView.swift, Sources/FeatureSettings/ProfileSeerrSetupView.swift, Sources/FeatureSettings/ProfileSetupLibrariesView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/FeatureHomeCore/PersonDetailView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelScanViews.swift, Sources/FeatureLiveTV/LiveTVChannelScanViews.swift, Sources/FeatureLiveTV/LiveTVGuideMappingView.swift, Sources/FeatureLiveTV/LiveTVGuideMappingView.swift, Sources/FeatureLiveTV/LiveTVGuideMappingView.swift, Sources/FeatureLiveTV/LiveTVIdentityReviewView.swift, Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift, Sources/FeatureLiveTV/LiveTVPlaylistEditor.swift, Sources/FeatureLiveTV/LiveTVProgramSearchView.swift, Sources/FeatureLiveTV/LiveTVServerSetupView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureSettings/ExternalPlayerSettingsView.swift, Sources/FeatureSettings/IntegrationsDetailView.swift, Sources/FeatureSettings/NightShiftDetailView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShell/ProfileSelectionView.swift, Sources/AppShell/RootView.swift, Sources/AppShelliOS/PlozziOSPlexPINView.swift, Sources/FeatureLiveTV/LiveTVPortablePendingSources.swift, Sources/FeatureProfiles/ParentalPINSetupView.swift, Sources/FeatureProfiles/ParentalPINView.swift, Sources/FeatureProfiles/ProfileLockPINView.swift, Sources/FeatureProfiles/ProfileLockSetupView.swift, Sources/FeatureHome/ItemDetailView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/FeatureSettings/SettingsView.swift, Sources/AppShelliOS/AddServerView.swift, Sources/AppShelliOS/AddServerView.swift, Sources/AppShelliOS/AddServerView.swift, Sources/AppShelliOS/AddServerView.swift, Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift, Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift, Sources/AppShelliOS/PlozziOSDownloadsView.swift, Sources/AppShelliOS/PlozziOSLibrarySelectionView.swift, Sources/AppShelliOS/PlozziOSMetadataDiagnosticsView.swift, Sources/AppShelliOS/PlozziOSMetadataSettingsView.swift, Sources/AppShelliOS/PlozziOSParentalPINSettingsView.swift, Sources/AppShelliOS/PlozziOSPlexHomeUserSettingsView.swift, Sources/AppShelliOS/PlozziOSProfileSettingsView.swift, Sources/AppShelliOS/PlozziOSSeerrSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSStreamingQuality.swift, Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift, Sources/FeatureAuth/PlexAccountRecoveryView.swift, Sources/FeatureSettings/ExternalPlayerSettingsView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/ReleaseNotesViews.swift, Sources/AppShell/MainTabView.swift, Sources/FeatureSettings/ProfileSettingsDetailView.swift, Sources/AppShelliOS/PlozziOSProfileSetupView.swift, Sources/AppShelliOS/PlozziOSServerSettingsViews.swift, Sources/AppShelliOS/PlozziOSServerSettingsViews.swift, Sources/AppShelliOS/PlozziOSServerSettingsViews.swift, Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift, Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitReason": "Shared app and settings background rendering, including SettingsView and SelectThemeView. It has no independent screen, named action or preference; theme choices are inventoried on those parent pages."
     },
     "Sources/CoreUI/AppLanguageScope.swift": {
       "sources": [
@@ -11133,38 +11181,25 @@
         "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
         "Sources/FeatureSettings/LibraryPresentationSettingsView.swift",
         "Sources/FeatureSettings/PreferenceDetailViews.swift",
-        "Sources/CoreUI/HomeLayoutSwatch.swift",
-        "Sources/CoreUI/HomeLayoutOptionCard.swift",
-        "Sources/AppShell/SelectHomeLayoutView.swift"
+        "Sources/CoreUI/HomeLayoutSwatch.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Reusable HeroLogoSizePreview.swift is wired into Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/LibraryPresentationSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/LibraryPresentationSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShell/SelectHomeLayoutView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
-    },
-    "Sources/CoreUI/HomeLayoutOptionCard.swift": {
-      "sources": [
-        "Sources/CoreUI/HomeLayoutOptionCard.swift",
-        "Sources/AppShell/SelectHomeLayoutView.swift",
-        "Sources/FeatureSettings/HomeLayoutPicker.swift",
-        "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
-      ],
-      "omitKind": "shared-component",
-      "omitReason": "Reusable HomeLayoutOptionCard.swift is wired into Sources/AppShell/SelectHomeLayoutView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitReason": "Shared logo/text preview constructed by HeroLogoSizeControl for Hero, Showcase row style, detail pages and Recommended library headers. Size controls are inventoried on those parent settings pages; the preview is not another destination."
     },
     "Sources/CoreUI/HomeLayoutSwatch.swift": {
       "sources": [
         "Sources/CoreUI/HomeLayoutSwatch.swift",
-        "Sources/CoreUI/HomeLayoutOptionCard.swift",
-        "Sources/AppShell/SelectHomeLayoutView.swift",
-        "Sources/FeatureSettings/HomeLayoutPicker.swift",
         "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
         "Sources/CoreUI/HeroLogoSizePreview.swift",
         "Sources/FeatureSettings/HeroLogoSizeControl.swift",
         "Sources/AppShelliOS/PlozziOSSettingsView.swift",
         "Sources/FeatureSettings/LibraryPresentationSettingsView.swift",
-        "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        "Sources/FeatureSettings/PreferenceDetailViews.swift",
+        "Sources/FeatureSettings/HomeHeroEnabledPicker.swift",
+        "Sources/FeatureSettings/HomeRowStylePicker.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Reusable HomeLayoutSwatch.swift is wired into Sources/AppShell/SelectHomeLayoutView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/LibraryPresentationSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShell/SelectHomeLayoutView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/LibraryPresentationSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShell/SelectHomeLayoutView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitReason": "Schematic Home previews constructed by HomeHeroEnabledPicker and HomeRowStylePicker. Their On/Off and Showcase/Classic controls are inventoried on HomeSectionSettingsViews; this drawing exposes no additional action."
     },
     "Sources/CoreUI/HomeLiveTVCard.swift": {
       "sources": [
@@ -11915,7 +11950,6 @@
         "Sources/CoreUI/NativeActionButton.swift",
         "Sources/AppShell/FirstRunProfileView.swift",
         "Sources/AppShell/ProfileServerIdentityPromptView.swift",
-        "Sources/AppShell/SelectHomeLayoutView.swift",
         "Sources/AppShell/SelectLibrariesView.swift",
         "Sources/AppShell/SelectNavigationStyleView.swift",
         "Sources/AppShell/SelectThemeView.swift",
@@ -12009,7 +12043,7 @@
         "Sources/AppShelliOS/PlozziOSHeroViews.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Reusable NativeActionButton.swift is wired into Sources/AppShell/FirstRunProfileView.swift, Sources/AppShell/ProfileServerIdentityPromptView.swift, Sources/AppShell/SelectHomeLayoutView.swift, Sources/AppShell/SelectLibrariesView.swift, Sources/AppShell/SelectNavigationStyleView.swift, Sources/AppShell/SelectThemeView.swift, Sources/AppShell/SyncSetupSenderPicker.swift, Sources/AppShell/SyncSetupSenderPicker.swift, Sources/AppShell/SyncSetupSenderPicker.swift, Sources/AppShelliOS/PlozziOSFirstRunView.swift, Sources/AppShelliOS/PlozziOSFirstRunView.swift, Sources/AppShelliOS/PlozziOSLibrarySelectionView.swift, Sources/CoreUI/ConnectionCodeView.swift, Sources/CoreUI/PlaybackDiagnosticDetailsView.swift, Sources/CoreUI/PlaybackFailureView.swift, Sources/CoreUI/PlexHomeOnboardingView.swift, Sources/CoreUI/SetupSummaryView.swift, Sources/FeatureAuth/AccountRecoveryScreen.swift, Sources/FeatureAuth/IPTVSignInView.swift, Sources/FeatureAuth/IPTVSignInView.swift, Sources/FeatureAuth/ServerAddressesView.swift, Sources/FeatureAuth/ServerAddressesView.swift, Sources/FeatureAuth/ServerAddressesView.swift, Sources/FeatureAuth/ServerAddressesView.swift, Sources/FeatureHome/LibraryBrowseView.swift, Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift, Sources/FeatureLiveTV/LiveTVCatalogStorageView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift, Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift, Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift, Sources/FeatureLiveTV/LiveTVPlaylistEditor.swift, Sources/FeatureLiveTV/LiveTVProgramSearchView.swift, Sources/FeatureLiveTV/LiveTVServerSetupView.swift, Sources/FeatureLiveTV/LiveTVSetupWelcome.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeaturePlayback/LiveChannelPlayerView.swift, Sources/FeatureProfiles/ProfileLockOfferView.swift, Sources/FeatureSettings/CollectionSectionSettingsView.swift, Sources/FeatureSettings/CrashReportingConsentView.swift, Sources/FeatureSettings/CrashReportingConsentView.swift, Sources/FeatureSettings/HeroCollectionPickerView.swift, Sources/FeatureSettings/HeroCollectionPickerView.swift, Sources/FeatureSettings/HomeRowsSettingsView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/LiveTVSettingsView.swift, Sources/FeatureSettings/LiveTVSettingsView.swift, Sources/FeatureSettings/MetadataSettingsDetailView.swift, Sources/FeatureSettings/MetadataSettingsDetailView.swift, Sources/FeatureSettings/ProfileSeerrSetupView.swift, Sources/FeatureSettings/ProfileSetupLibrariesView.swift, Sources/FeatureSettings/ReleaseNotesViews.swift, Sources/FeatureSettings/SyncDataBreakdown.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/ItemDetailView.swift, Sources/FeatureHome/LibraryBrowseView.swift, Sources/FeatureHome/WatchlistBrowseView.swift, Sources/FeatureMusic/MusicScreens.swift, Sources/FeatureMusic/MusicScreens.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/FeatureSettings/LibraryPresentationSettingsView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/CoreUI/PlaybackSourceMenu.swift, Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift, Sources/FeaturePlayback/PlayerOptionPanes.swift, Sources/AppShell/ProfileSelectionView.swift, Sources/AppShell/RootView.swift, Sources/AppShelliOS/PlozziOSPlexPINView.swift, Sources/FeatureLiveTV/LiveTVPortablePendingSources.swift, Sources/FeatureProfiles/ParentalPINSetupView.swift, Sources/FeatureProfiles/ParentalPINView.swift, Sources/FeatureProfiles/ProfileLockPINView.swift, Sources/FeatureProfiles/ProfileLockSetupView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeaturePlayback/PlayerView.swift, Sources/AppShell/SearchTab.swift, Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift, Sources/FeatureLiveTV/LiveTVPreviewIntroductionView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSPlayerVersions.swift, Sources/AppShelliOS/PlozziOSProfileSettingsView.swift, Sources/FeatureSettings/ProfileSettingsDetailView.swift, Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift, Sources/FeatureSettings/SendDiagnosticsCard.swift, Sources/AppShell/MainTabView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/FeatureHomeCore/PersonDetailView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShell/FirstRunProfileView.swift, Sources/AppShell/ProfileServerIdentityPromptView.swift, Sources/AppShell/SelectHomeLayoutView.swift, Sources/AppShell/SelectLibrariesView.swift, Sources/AppShell/SelectNavigationStyleView.swift, Sources/AppShell/SelectThemeView.swift, Sources/AppShell/SyncSetupSenderPicker.swift, Sources/AppShell/SyncSetupSenderPicker.swift, Sources/AppShell/SyncSetupSenderPicker.swift, Sources/AppShelliOS/PlozziOSFirstRunView.swift, Sources/AppShelliOS/PlozziOSFirstRunView.swift, Sources/AppShelliOS/PlozziOSLibrarySelectionView.swift, Sources/CoreUI/ConnectionCodeView.swift, Sources/CoreUI/PlaybackDiagnosticDetailsView.swift, Sources/CoreUI/PlaybackFailureView.swift, Sources/CoreUI/PlexHomeOnboardingView.swift, Sources/CoreUI/SetupSummaryView.swift, Sources/FeatureAuth/AccountRecoveryScreen.swift, Sources/FeatureAuth/IPTVSignInView.swift, Sources/FeatureAuth/IPTVSignInView.swift, Sources/FeatureAuth/ServerAddressesView.swift, Sources/FeatureAuth/ServerAddressesView.swift, Sources/FeatureAuth/ServerAddressesView.swift, Sources/FeatureAuth/ServerAddressesView.swift, Sources/FeatureHome/LibraryBrowseView.swift, Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift, Sources/FeatureLiveTV/LiveTVCatalogStorageView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift, Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift, Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift, Sources/FeatureLiveTV/LiveTVPlaylistEditor.swift, Sources/FeatureLiveTV/LiveTVProgramSearchView.swift, Sources/FeatureLiveTV/LiveTVServerSetupView.swift, Sources/FeatureLiveTV/LiveTVSetupWelcome.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeaturePlayback/LiveChannelPlayerView.swift, Sources/FeatureProfiles/ProfileLockOfferView.swift, Sources/FeatureSettings/CollectionSectionSettingsView.swift, Sources/FeatureSettings/CrashReportingConsentView.swift, Sources/FeatureSettings/CrashReportingConsentView.swift, Sources/FeatureSettings/HeroCollectionPickerView.swift, Sources/FeatureSettings/HeroCollectionPickerView.swift, Sources/FeatureSettings/HomeRowsSettingsView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/LiveTVSettingsView.swift, Sources/FeatureSettings/LiveTVSettingsView.swift, Sources/FeatureSettings/MetadataSettingsDetailView.swift, Sources/FeatureSettings/MetadataSettingsDetailView.swift, Sources/FeatureSettings/ProfileSeerrSetupView.swift, Sources/FeatureSettings/ProfileSetupLibrariesView.swift, Sources/FeatureSettings/ReleaseNotesViews.swift, Sources/FeatureSettings/SyncDataBreakdown.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/ItemDetailView.swift, Sources/FeatureHome/LibraryBrowseView.swift, Sources/FeatureHome/WatchlistBrowseView.swift, Sources/FeatureMusic/MusicScreens.swift, Sources/FeatureMusic/MusicScreens.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/FeatureSettings/LibraryPresentationSettingsView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/CoreUI/PlaybackSourceMenu.swift, Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift, Sources/FeaturePlayback/PlayerOptionPanes.swift, Sources/AppShell/ProfileSelectionView.swift, Sources/AppShell/RootView.swift, Sources/AppShelliOS/PlozziOSPlexPINView.swift, Sources/FeatureLiveTV/LiveTVPortablePendingSources.swift, Sources/FeatureProfiles/ParentalPINSetupView.swift, Sources/FeatureProfiles/ParentalPINView.swift, Sources/FeatureProfiles/ProfileLockPINView.swift, Sources/FeatureProfiles/ProfileLockSetupView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeaturePlayback/PlayerView.swift, Sources/AppShell/SearchTab.swift, Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift, Sources/FeatureLiveTV/LiveTVPreviewIntroductionView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSPlayerVersions.swift, Sources/AppShelliOS/PlozziOSProfileSettingsView.swift, Sources/FeatureSettings/ProfileSettingsDetailView.swift, Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift, Sources/FeatureSettings/SendDiagnosticsCard.swift, Sources/AppShell/MainTabView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/FeatureHomeCore/PersonDetailView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitReason": "Shared native action-button presentation for setup and settings pages, including SelectNavigationStyleView, SelectThemeView and HomeSectionSettingsViews. Labels and consequences belong to those parent actions; this wrapper has no independent destination."
     },
     "Sources/CoreUI/NativeArtworkPoster.swift": {
       "sources": [
@@ -12057,7 +12091,6 @@
         "Sources/CoreUI/ThemePalette.swift",
         "Sources/AppShell/ProfileServerIdentityPromptView.swift",
         "Sources/AppShell/RootView.swift",
-        "Sources/AppShell/SelectHomeLayoutView.swift",
         "Sources/AppShell/SelectNavigationStyleView.swift",
         "Sources/AppShell/SelectThemeView.swift",
         "Sources/AppShell/SyncSetupReceiveView.swift",
@@ -12146,7 +12179,7 @@
         "Sources/FeatureSettings/CardAppearanceControls.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Reusable NativeGradientCardSurface.swift is wired into Sources/AppShell/MainTabView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/CoreUI/FamilyGuidanceViews.swift, Sources/CoreUI/FamilyGuidanceViews.swift, Sources/CoreUI/PlaybackDiagnosticDetailsView.swift, Sources/FeatureAuth/IPTVSignInView.swift, Sources/FeaturePlayback/SubtitleStyleSettingsView.swift, Sources/FeatureSettings/LiveTVSettingsView.swift, Sources/AppShell/ProfileServerIdentityPromptView.swift, Sources/AppShell/RootView.swift, Sources/AppShell/RootView.swift, Sources/AppShell/RootView.swift, Sources/AppShell/RootView.swift, Sources/AppShell/RootView.swift, Sources/AppShell/SelectHomeLayoutView.swift, Sources/AppShell/SelectNavigationStyleView.swift, Sources/AppShell/SelectThemeView.swift, Sources/AppShell/SyncSetupReceiveView.swift, Sources/AppShell/SyncSetupSendView.swift, Sources/AppShelliOS/PlozziOSDetectedSetupView.swift, Sources/AppShelliOS/PlozziOSDownloadedShowView.swift, Sources/AppShelliOS/PlozziOSFirstRunView.swift, Sources/AppShelliOS/PlozziOSOnboardingView.swift, Sources/AppShelliOS/PlozziOSProfilePickerView.swift, Sources/AppShelliOS/PlozziOSProfilePickerView.swift, Sources/AppShelliOS/PlozziOSProfileSetupView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift, Sources/FeatureProfiles/ProfileEditorView.swift, Sources/FeatureProfiles/ProfileEditorView.swift, Sources/FeatureProfiles/ProfileEditorView.swift, Sources/FeatureProfiles/ProfileLockOfferView.swift, Sources/FeatureSettings/CrashReportingConsentView.swift, Sources/FeatureSettings/ProfileSeerrSetupView.swift, Sources/FeatureSettings/ProfileSetupLibrariesView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/FeatureHomeCore/PersonDetailView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelScanViews.swift, Sources/FeatureLiveTV/LiveTVChannelScanViews.swift, Sources/FeatureLiveTV/LiveTVGuideMappingView.swift, Sources/FeatureLiveTV/LiveTVGuideMappingView.swift, Sources/FeatureLiveTV/LiveTVGuideMappingView.swift, Sources/FeatureLiveTV/LiveTVIdentityReviewView.swift, Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift, Sources/FeatureLiveTV/LiveTVPlaylistEditor.swift, Sources/FeatureLiveTV/LiveTVProgramSearchView.swift, Sources/FeatureLiveTV/LiveTVServerSetupView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureSettings/ExternalPlayerSettingsView.swift, Sources/FeatureSettings/IntegrationsDetailView.swift, Sources/FeatureSettings/NightShiftDetailView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShell/ProfileSelectionView.swift, Sources/AppShell/RootView.swift, Sources/AppShelliOS/PlozziOSPlexPINView.swift, Sources/FeatureLiveTV/LiveTVPortablePendingSources.swift, Sources/FeatureProfiles/ParentalPINSetupView.swift, Sources/FeatureProfiles/ParentalPINView.swift, Sources/FeatureProfiles/ProfileLockPINView.swift, Sources/FeatureProfiles/ProfileLockSetupView.swift, Sources/FeatureHome/ItemDetailView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/FeatureSettings/SettingsView.swift, Sources/AppShelliOS/AddServerView.swift, Sources/AppShelliOS/AddServerView.swift, Sources/AppShelliOS/AddServerView.swift, Sources/AppShelliOS/AddServerView.swift, Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift, Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift, Sources/AppShelliOS/PlozziOSDownloadsView.swift, Sources/AppShelliOS/PlozziOSLibrarySelectionView.swift, Sources/AppShelliOS/PlozziOSMetadataDiagnosticsView.swift, Sources/AppShelliOS/PlozziOSMetadataSettingsView.swift, Sources/AppShelliOS/PlozziOSParentalPINSettingsView.swift, Sources/AppShelliOS/PlozziOSPlexHomeUserSettingsView.swift, Sources/AppShelliOS/PlozziOSProfileSettingsView.swift, Sources/AppShelliOS/PlozziOSSeerrSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSStreamingQuality.swift, Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift, Sources/FeatureAuth/PlexAccountRecoveryView.swift, Sources/FeatureSettings/ExternalPlayerSettingsView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/ReleaseNotesViews.swift, Sources/AppShell/MainTabView.swift, Sources/FeatureSettings/ProfileSettingsDetailView.swift, Sources/AppShelliOS/PlozziOSProfileSetupView.swift, Sources/AppShelliOS/PlozziOSServerSettingsViews.swift, Sources/AppShelliOS/PlozziOSServerSettingsViews.swift, Sources/AppShelliOS/PlozziOSServerSettingsViews.swift, Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift, Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/FeatureSettings/IntegrationsDetailView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/FeatureHome/LibraryBrowseView.swift, Sources/FeatureHome/ItemDetailView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureProfiles/ProfileEditorView.swift, Sources/FeatureProfiles/ProfilePickerView.swift, Sources/FeatureProfiles/ProfilePickerView.swift, Sources/FeatureProfiles/ProfileEditorView.swift, Sources/FeatureProfiles/ProfileEditorView.swift, Sources/CoreUI/FamilyGuidanceViews.swift, Sources/CoreUI/FamilyGuidanceViews.swift, Sources/CoreUI/FamilyGuidanceViews.swift, Sources/FeatureLiveTV/LiveTVSetupWelcome.swift, Sources/FeatureHomeCore/PersonDetailView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShelliOS/PlozziOSHomeView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitReason": "Gradient surface rendering used by SettingsSurfaces and AmbientGradientBackground in parent SettingsView content. It draws backgrounds and introduces no named control or independently reachable page."
     },
     "Sources/CoreUI/NativeLibraryPosterBitmap.swift": {
       "sources": [
@@ -14329,8 +14362,6 @@
         "Sources/FeatureLiveTV/LiveTVSetupWelcome.swift",
         "Sources/FeatureSettings/SettingsSplitLayout.swift",
         "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift",
-        "Sources/CoreUI/HomeLayoutOptionCard.swift",
-        "Sources/AppShell/SelectHomeLayoutView.swift",
         "Sources/AppShell/SelectThemeView.swift",
         "Sources/AppShelliOS/PlozziOSHeroViews.swift",
         "Sources/CoreUI/DetailHeaderMetadataRow.swift",
@@ -14352,7 +14383,7 @@
         "Sources/AppShell/ProfileServerIdentityPromptView.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Reusable TextTierStyle.swift is wired into Sources/AppShell/AddAccountView.swift, Sources/AppShell/FirstRunProfileView.swift, Sources/AppShell/RootView.swift, Sources/AppShell/SelectLibrariesView.swift, Sources/AppShell/SyncSetupSenderPicker.swift, Sources/AppShell/SyncSetupSenderPicker.swift, Sources/AppShell/SyncSetupSenderPicker.swift, Sources/AppShell/SyncSetupSenderPicker.swift, Sources/AppShell/UnifiedAddShareView.swift, Sources/AppShell/UnifiedAddShareView.swift, Sources/AppShell/UnifiedAddShareView.swift, Sources/AppShelliOS/AddServerView.swift, Sources/AppShelliOS/AddServerView.swift, Sources/AppShelliOS/AddServerView.swift, Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift, Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift, Sources/AppShelliOS/PlozziOSDownloadsView.swift, Sources/AppShelliOS/PlozziOSDownloadsView.swift, Sources/AppShelliOS/PlozziOSDownloadsView.swift, Sources/AppShelliOS/PlozziOSFirstRunView.swift, Sources/AppShelliOS/PlozziOSFirstRunView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSLibrarySelectionView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/AppShelliOS/PlozziOSMetadataDiagnosticsView.swift, Sources/AppShelliOS/PlozziOSMetadataSettingsView.swift, Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift, Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift, Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift, Sources/AppShelliOS/PlozziOSPlexHomeUserSettingsView.swift, Sources/AppShelliOS/PlozziOSProfileSetupView.swift, Sources/AppShelliOS/PlozziOSSearchView.swift, Sources/AppShelliOS/PlozziOSSeerrSettingsView.swift, Sources/AppShelliOS/PlozziOSServerSettingsViews.swift, Sources/AppShelliOS/PlozziOSServerSettingsViews.swift, Sources/AppShelliOS/PlozziOSServerSettingsViews.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift, Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift, Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift, Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift, Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift, Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift, Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift, Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift, Sources/CoreUI/ConnectionCodeView.swift, Sources/CoreUI/FamilyGuidanceViews.swift, Sources/CoreUI/FamilyGuidanceViews.swift, Sources/CoreUI/PlexHomeOnboardingView.swift, Sources/CoreUI/SetupSummaryView.swift, Sources/CoreUI/SetupSummaryView.swift, Sources/CoreUI/SetupSummaryView.swift, Sources/FeatureAuth/AccountRecoveryScreen.swift, Sources/FeatureAuth/ServerAddressesView.swift, Sources/FeatureAuth/ServerAddressesView.swift, Sources/FeatureAuth/ServerAddressesView.swift, Sources/FeatureDiscovery/ServerPickerView.swift, Sources/FeatureDiscovery/ServerPickerView.swift, Sources/FeatureHome/ItemDetailView.swift, Sources/FeatureHome/LibraryBrowseView.swift, Sources/FeatureHomeCore/PersonDetailView.swift, Sources/FeatureMusic/MusicScreens.swift, Sources/FeatureMusic/MusicScreens.swift, Sources/FeatureMusic/MusicScreens.swift, Sources/FeatureMusic/MusicScreens.swift, Sources/FeatureMusic/NowPlayingView.swift, Sources/FeatureMusic/NowPlayingView.swift, Sources/FeatureMusic/NowPlayingView.swift, Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift, Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift, Sources/FeaturePlayback/PlayerOptionPanes.swift, Sources/FeaturePlayback/PlayerOptionPanes.swift, Sources/FeaturePlayback/PlayerOptionsPanel.swift, Sources/FeatureSettings/CollectionSectionSettingsView.swift, Sources/FeatureSettings/CrashReportingConsentView.swift, Sources/FeatureSettings/CrashReportingConsentView.swift, Sources/FeatureSettings/HelpDiagnosticsDetailView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/IntegrationsDetailView.swift, Sources/FeatureSettings/IntegrationsDetailView.swift, Sources/FeatureSettings/IntegrationsDetailView.swift, Sources/FeatureSettings/IntegrationsDetailView.swift, Sources/FeatureSettings/IntegrationsDetailView.swift, Sources/FeatureSettings/IntegrationsDetailView.swift, Sources/FeatureSettings/IntegrationsDetailView.swift, Sources/FeatureSettings/MetadataSettingsDetailView.swift, Sources/FeatureSettings/MetadataSettingsDetailView.swift, Sources/FeatureSettings/MetadataSettingsDetailView.swift, Sources/FeatureSettings/MetadataSettingsDetailView.swift, Sources/FeatureSettings/MyLibrariesDetailView.swift, Sources/FeatureSettings/NavigationLibrariesDetailView.swift, Sources/FeatureSettings/PlexLinkedUserDetailView.swift, Sources/FeatureSettings/ProfileSeerrSetupView.swift, Sources/FeatureSettings/RecentActivityDetailView.swift, Sources/FeatureSettings/RecentActivityDetailView.swift, Sources/FeatureSettings/ReleaseNotesViews.swift, Sources/FeatureSettings/ReleaseNotesViews.swift, Sources/FeatureSettings/SeerDetailView.swift, Sources/FeatureSettings/SeerDetailView.swift, Sources/FeatureSettings/ServerDetailView.swift, Sources/FeatureSettings/ServerDetailView.swift, Sources/FeatureSettings/SettingsView.swift, Sources/FeatureSettings/SyncEraseDataView.swift, Sources/FeatureSettings/TopShelfSettingsView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/WatchlistBrowseView.swift, Sources/FeatureMusic/MusicScreens.swift, Sources/FeatureMusic/MusicScreens.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/FeatureSettings/NightShiftDetailView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/SettingsView.swift, Sources/FeatureSettings/HomeRowsSettingsView.swift, Sources/FeatureSettings/LibraryPresentationSettingsView.swift, Sources/FeatureSettings/LibraryPresentationSettingsView.swift, Sources/FeaturePlayback/InfoPanelView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/AppShell/SyncSetupReceiveView.swift, Sources/FeatureAuth/IPTVSignInView.swift, Sources/FeatureAuth/PasswordSignInView.swift, Sources/FeatureAuth/QuickConnectView.swift, Sources/FeatureAuth/SiloSignInView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/FeaturePlayback/SubtitleStyleSettingsView.swift, Sources/FeatureProfiles/ProfileEditorView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/LiveTVSettingsView.swift, Sources/FeatureSettings/MetadataSettingsDetailView.swift, Sources/FeatureSettings/ParentalPINDetailView.swift, Sources/FeatureSettings/ProfileDetailView.swift, Sources/FeatureSettings/ProfileSettingsDetailView.swift, Sources/FeatureSettings/ReleaseNotesViews.swift, Sources/FeatureSettings/ServerUserDetailView.swift, Sources/FeatureSettings/ServersAndLibrariesDetailView.swift, Sources/FeatureSettings/SettingsView.swift, Sources/FeatureSettings/ExternalPlayerSettingsView.swift, Sources/FeatureSettings/ExternalPlayerSettingsView.swift, Sources/FeatureSettings/ExternalPlayerSettingsView.swift, Sources/FeatureSettings/ExternalPlayerSettingsView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/MyLibrariesDetailView.swift, Sources/FeatureSettings/NightShiftDetailView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/ProfileDetailView.swift, Sources/FeatureSettings/SendDiagnosticsCard.swift, Sources/AppShelliOS/PlozziOSDownloadsView.swift, Sources/AppShelliOS/PlozziOSDownloadsView.swift, Sources/AppShelliOS/PlozziOSParentalPINSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSStreamingQuality.swift, Sources/AppShelliOS/PlozziOSStreamingQuality.swift, Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift, Sources/FeatureAuth/IPTVSignInView.swift, Sources/FeatureAuth/IPTVSignInView.swift, Sources/FeatureAuth/IPTVSignInView.swift, Sources/FeatureAuth/ServerAddressesView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelScanViews.swift, Sources/FeatureLiveTV/LiveTVChannelScanViews.swift, Sources/FeatureLiveTV/LiveTVChannelScanViews.swift, Sources/FeatureLiveTV/LiveTVChannelScanViews.swift, Sources/FeatureLiveTV/LiveTVChannelScanViews.swift, Sources/FeatureLiveTV/LiveTVGuideMappingView.swift, Sources/FeatureLiveTV/LiveTVGuideMappingView.swift, Sources/FeatureLiveTV/LiveTVGuideMappingView.swift, Sources/FeatureLiveTV/LiveTVIdentityReviewView.swift, Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift, Sources/FeatureLiveTV/LiveTVPlaylistEditor.swift, Sources/FeatureLiveTV/LiveTVPortablePendingSources.swift, Sources/FeatureLiveTV/LiveTVProgramSearchView.swift, Sources/FeatureLiveTV/LiveTVProgramSearchView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureLiveTV/LiveTVServerSetupView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureProfiles/ProfileEditorView.swift, Sources/FeatureSettings/ExternalPlayerSettingsView.swift, Sources/FeatureSettings/ExternalPlayerSettingsView.swift, Sources/FeatureSettings/HomeRowsSettingsView.swift, Sources/FeatureSettings/LibraryPresentationSettingsView.swift, Sources/FeatureSettings/LiveTVSettingsView.swift, Sources/FeatureSettings/LiveTVSettingsView.swift, Sources/FeatureSettings/LiveTVSettingsView.swift, Sources/FeatureSettings/LiveTVSettingsView.swift, Sources/FeatureSettings/LiveTVSettingsView.swift, Sources/FeatureSettings/ReleaseNotesViews.swift, Sources/FeatureSettings/SyncDataBreakdown.swift, Sources/AppShell/SelectNavigationStyleView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShell/SearchTab.swift, Sources/FeaturePlayback/PlayerOptionPanes.swift, Sources/FeatureSettings/MetadataSettingsDetailView.swift, Sources/FeatureHome/FocusHeroHomeView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShell/ProfileSelectionView.swift, Sources/AppShell/RootView.swift, Sources/AppShelliOS/PlozziOSPlexPINView.swift, Sources/FeatureLiveTV/LiveTVPortablePendingSources.swift, Sources/FeatureProfiles/ParentalPINSetupView.swift, Sources/FeatureProfiles/ParentalPINView.swift, Sources/FeatureProfiles/ProfileLockPINView.swift, Sources/FeatureProfiles/ProfileLockSetupView.swift, Sources/FeatureSettings/HeroCollectionPickerView.swift, Sources/AppShell/AddAccountView.swift, Sources/CoreUI/PlaybackSourceMenu.swift, Sources/CoreUI/PlaybackSourceMenu.swift, Sources/FeatureAuth/PlexLinkView.swift, Sources/FeatureLiveTV/LiveTVServerSetupView.swift, Sources/FeatureLiveTV/LiveTVSetupWelcome.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/LiveTVSettingsView.swift, Sources/FeatureSettings/ProfileDetailView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/AppShell/SelectHomeLayoutView.swift, Sources/AppShell/SelectThemeView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift, Sources/FeaturePlayback/PlayerOptionPanes.swift, Sources/AppShelliOS/PlozziOSProfileSettingsView.swift, Sources/FeatureAuth/SiloSignInView.swift, Sources/FeatureSettings/HeroCollectionPickerView.swift, Sources/FeatureLiveTV/LiveTVSetupWelcome.swift, Sources/FeatureSettings/NightShiftDetailView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureSettings/HomeRowsSettingsView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSPlayerVersions.swift, Sources/AppShell/ProfileServerIdentityPromptView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/AppShell/AddAccountView.swift, Sources/AppShell/FirstRunProfileView.swift, Sources/AppShell/RootView.swift, Sources/AppShell/SelectLibrariesView.swift, Sources/AppShell/SyncSetupSenderPicker.swift, Sources/AppShell/SyncSetupSenderPicker.swift, Sources/AppShell/SyncSetupSenderPicker.swift, Sources/AppShell/SyncSetupSenderPicker.swift, Sources/AppShell/UnifiedAddShareView.swift, Sources/AppShell/UnifiedAddShareView.swift, Sources/AppShell/UnifiedAddShareView.swift, Sources/AppShelliOS/AddServerView.swift, Sources/AppShelliOS/AddServerView.swift, Sources/AppShelliOS/AddServerView.swift, Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift, Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift, Sources/AppShelliOS/PlozziOSDownloadsView.swift, Sources/AppShelliOS/PlozziOSDownloadsView.swift, Sources/AppShelliOS/PlozziOSDownloadsView.swift, Sources/AppShelliOS/PlozziOSFirstRunView.swift, Sources/AppShelliOS/PlozziOSFirstRunView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSLibrarySelectionView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/AppShelliOS/PlozziOSMetadataDiagnosticsView.swift, Sources/AppShelliOS/PlozziOSMetadataSettingsView.swift, Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift, Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift, Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift, Sources/AppShelliOS/PlozziOSPlexHomeUserSettingsView.swift, Sources/AppShelliOS/PlozziOSProfileSetupView.swift, Sources/AppShelliOS/PlozziOSSearchView.swift, Sources/AppShelliOS/PlozziOSSeerrSettingsView.swift, Sources/AppShelliOS/PlozziOSServerSettingsViews.swift, Sources/AppShelliOS/PlozziOSServerSettingsViews.swift, Sources/AppShelliOS/PlozziOSServerSettingsViews.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift, Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift, Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift, Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift, Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift, Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift, Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift, Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift, Sources/CoreUI/ConnectionCodeView.swift, Sources/CoreUI/FamilyGuidanceViews.swift, Sources/CoreUI/FamilyGuidanceViews.swift, Sources/CoreUI/PlexHomeOnboardingView.swift, Sources/CoreUI/SetupSummaryView.swift, Sources/CoreUI/SetupSummaryView.swift, Sources/CoreUI/SetupSummaryView.swift, Sources/FeatureAuth/AccountRecoveryScreen.swift, Sources/FeatureAuth/ServerAddressesView.swift, Sources/FeatureAuth/ServerAddressesView.swift, Sources/FeatureAuth/ServerAddressesView.swift, Sources/FeatureDiscovery/ServerPickerView.swift, Sources/FeatureDiscovery/ServerPickerView.swift, Sources/FeatureHome/ItemDetailView.swift, Sources/FeatureHome/LibraryBrowseView.swift, Sources/FeatureHomeCore/PersonDetailView.swift, Sources/FeatureMusic/MusicScreens.swift, Sources/FeatureMusic/MusicScreens.swift, Sources/FeatureMusic/MusicScreens.swift, Sources/FeatureMusic/MusicScreens.swift, Sources/FeatureMusic/NowPlayingView.swift, Sources/FeatureMusic/NowPlayingView.swift, Sources/FeatureMusic/NowPlayingView.swift, Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift, Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift, Sources/FeaturePlayback/PlayerOptionPanes.swift, Sources/FeaturePlayback/PlayerOptionPanes.swift, Sources/FeaturePlayback/PlayerOptionsPanel.swift, Sources/FeatureSettings/CollectionSectionSettingsView.swift, Sources/FeatureSettings/CrashReportingConsentView.swift, Sources/FeatureSettings/CrashReportingConsentView.swift, Sources/FeatureSettings/HelpDiagnosticsDetailView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/IntegrationsDetailView.swift, Sources/FeatureSettings/IntegrationsDetailView.swift, Sources/FeatureSettings/IntegrationsDetailView.swift, Sources/FeatureSettings/IntegrationsDetailView.swift, Sources/FeatureSettings/IntegrationsDetailView.swift, Sources/FeatureSettings/IntegrationsDetailView.swift, Sources/FeatureSettings/IntegrationsDetailView.swift, Sources/FeatureSettings/MetadataSettingsDetailView.swift, Sources/FeatureSettings/MetadataSettingsDetailView.swift, Sources/FeatureSettings/MetadataSettingsDetailView.swift, Sources/FeatureSettings/MetadataSettingsDetailView.swift, Sources/FeatureSettings/MyLibrariesDetailView.swift, Sources/FeatureSettings/NavigationLibrariesDetailView.swift, Sources/FeatureSettings/PlexLinkedUserDetailView.swift, Sources/FeatureSettings/ProfileSeerrSetupView.swift, Sources/FeatureSettings/RecentActivityDetailView.swift, Sources/FeatureSettings/RecentActivityDetailView.swift, Sources/FeatureSettings/ReleaseNotesViews.swift, Sources/FeatureSettings/ReleaseNotesViews.swift, Sources/FeatureSettings/SeerDetailView.swift, Sources/FeatureSettings/SeerDetailView.swift, Sources/FeatureSettings/ServerDetailView.swift, Sources/FeatureSettings/ServerDetailView.swift, Sources/FeatureSettings/SettingsView.swift, Sources/FeatureSettings/SyncEraseDataView.swift, Sources/FeatureSettings/TopShelfSettingsView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/WatchlistBrowseView.swift, Sources/FeatureMusic/MusicScreens.swift, Sources/FeatureMusic/MusicScreens.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/FeatureSettings/NightShiftDetailView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/SettingsView.swift, Sources/FeatureSettings/HomeRowsSettingsView.swift, Sources/FeatureSettings/LibraryPresentationSettingsView.swift, Sources/FeatureSettings/LibraryPresentationSettingsView.swift, Sources/FeaturePlayback/InfoPanelView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/AppShell/SyncSetupReceiveView.swift, Sources/FeatureAuth/IPTVSignInView.swift, Sources/FeatureAuth/PasswordSignInView.swift, Sources/FeatureAuth/QuickConnectView.swift, Sources/FeatureAuth/SiloSignInView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/FeaturePlayback/SubtitleStyleSettingsView.swift, Sources/FeatureProfiles/ProfileEditorView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/LiveTVSettingsView.swift, Sources/FeatureSettings/MetadataSettingsDetailView.swift, Sources/FeatureSettings/ParentalPINDetailView.swift, Sources/FeatureSettings/ProfileDetailView.swift, Sources/FeatureSettings/ProfileSettingsDetailView.swift, Sources/FeatureSettings/ReleaseNotesViews.swift, Sources/FeatureSettings/ServerUserDetailView.swift, Sources/FeatureSettings/ServersAndLibrariesDetailView.swift, Sources/FeatureSettings/SettingsView.swift, Sources/FeatureSettings/ExternalPlayerSettingsView.swift, Sources/FeatureSettings/ExternalPlayerSettingsView.swift, Sources/FeatureSettings/ExternalPlayerSettingsView.swift, Sources/FeatureSettings/ExternalPlayerSettingsView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/MyLibrariesDetailView.swift, Sources/FeatureSettings/NightShiftDetailView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/ProfileDetailView.swift, Sources/FeatureSettings/SendDiagnosticsCard.swift, Sources/AppShelliOS/PlozziOSDownloadsView.swift, Sources/AppShelliOS/PlozziOSDownloadsView.swift, Sources/AppShelliOS/PlozziOSParentalPINSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSStreamingQuality.swift, Sources/AppShelliOS/PlozziOSStreamingQuality.swift, Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift, Sources/FeatureAuth/IPTVSignInView.swift, Sources/FeatureAuth/IPTVSignInView.swift, Sources/FeatureAuth/IPTVSignInView.swift, Sources/FeatureAuth/ServerAddressesView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVChannelScanViews.swift, Sources/FeatureLiveTV/LiveTVChannelScanViews.swift, Sources/FeatureLiveTV/LiveTVChannelScanViews.swift, Sources/FeatureLiveTV/LiveTVChannelScanViews.swift, Sources/FeatureLiveTV/LiveTVChannelScanViews.swift, Sources/FeatureLiveTV/LiveTVGuideMappingView.swift, Sources/FeatureLiveTV/LiveTVGuideMappingView.swift, Sources/FeatureLiveTV/LiveTVGuideMappingView.swift, Sources/FeatureLiveTV/LiveTVIdentityReviewView.swift, Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift, Sources/FeatureLiveTV/LiveTVPlaylistEditor.swift, Sources/FeatureLiveTV/LiveTVPortablePendingSources.swift, Sources/FeatureLiveTV/LiveTVProgramSearchView.swift, Sources/FeatureLiveTV/LiveTVProgramSearchView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureLiveTV/LiveTVServerSetupView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureProfiles/ProfileEditorView.swift, Sources/FeatureSettings/ExternalPlayerSettingsView.swift, Sources/FeatureSettings/ExternalPlayerSettingsView.swift, Sources/FeatureSettings/HomeRowsSettingsView.swift, Sources/FeatureSettings/LibraryPresentationSettingsView.swift, Sources/FeatureSettings/LiveTVSettingsView.swift, Sources/FeatureSettings/LiveTVSettingsView.swift, Sources/FeatureSettings/LiveTVSettingsView.swift, Sources/FeatureSettings/LiveTVSettingsView.swift, Sources/FeatureSettings/LiveTVSettingsView.swift, Sources/FeatureSettings/ReleaseNotesViews.swift, Sources/FeatureSettings/SyncDataBreakdown.swift, Sources/AppShell/SelectNavigationStyleView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShell/SearchTab.swift, Sources/FeaturePlayback/PlayerOptionPanes.swift, Sources/FeatureSettings/MetadataSettingsDetailView.swift, Sources/FeatureHome/FocusHeroHomeView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShell/ProfileSelectionView.swift, Sources/AppShell/RootView.swift, Sources/AppShelliOS/PlozziOSPlexPINView.swift, Sources/FeatureLiveTV/LiveTVPortablePendingSources.swift, Sources/FeatureProfiles/ParentalPINSetupView.swift, Sources/FeatureProfiles/ParentalPINView.swift, Sources/FeatureProfiles/ProfileLockPINView.swift, Sources/FeatureProfiles/ProfileLockSetupView.swift, Sources/FeatureSettings/HeroCollectionPickerView.swift, Sources/AppShell/AddAccountView.swift, Sources/CoreUI/PlaybackSourceMenu.swift, Sources/CoreUI/PlaybackSourceMenu.swift, Sources/FeatureAuth/PlexLinkView.swift, Sources/FeatureLiveTV/LiveTVServerSetupView.swift, Sources/FeatureLiveTV/LiveTVSetupWelcome.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/LiveTVSettingsView.swift, Sources/FeatureSettings/ProfileDetailView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/AppShell/SelectHomeLayoutView.swift, Sources/AppShell/SelectThemeView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift, Sources/FeaturePlayback/PlayerOptionPanes.swift, Sources/AppShelliOS/PlozziOSProfileSettingsView.swift, Sources/FeatureAuth/SiloSignInView.swift, Sources/FeatureSettings/HeroCollectionPickerView.swift, Sources/FeatureLiveTV/LiveTVSetupWelcome.swift, Sources/FeatureSettings/NightShiftDetailView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureSettings/HomeRowsSettingsView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSPlayerVersions.swift, Sources/AppShell/ProfileServerIdentityPromptView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitReason": "Shared typography applied to settings headings, values and explanatory text, including HeroLogoSizeControl and the Home/detail parent settings pages. Reader-facing sizes and labels are inventoried there; text styling itself is not a setting."
     },
     "Sources/CoreUI/ThemeOptionCard.swift": {
       "sources": [
@@ -14363,20 +14394,17 @@
         "Sources/AppShell/SelectNavigationStyleView.swift",
         "Sources/FeatureSettings/ContinueWatchingArtworkPicker.swift",
         "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
-        "Sources/CoreUI/HomeLayoutOptionCard.swift",
-        "Sources/AppShell/SelectHomeLayoutView.swift",
         "Sources/FeatureSettings/CompactDisplaySizePicker.swift",
         "Sources/FeatureSettings/CompactNavigationPicker.swift",
         "Sources/FeatureSettings/CompactSpoilerModePicker.swift",
         "Sources/FeatureSettings/TopShelfStylePicker.swift",
         "Sources/FeatureSettings/TopShelfSettingsView.swift",
-        "Sources/FeatureSettings/HomeLayoutPicker.swift",
         "Sources/FeatureSettings/CompactCardFocusStylePicker.swift",
         "Sources/FeatureSettings/CardAppearanceControls.swift",
         "Sources/AppShelliOS/PlozziOSSettingsView.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Reusable ThemeOptionCard.swift is wired into Sources/AppShell/SelectThemeView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShell/SelectThemeView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShell/SelectNavigationStyleView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/AppShell/SelectHomeLayoutView.swift, Sources/AppShell/SelectThemeView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/TopShelfSettingsView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShell/SelectNavigationStyleView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/AppShell/SelectHomeLayoutView.swift, Sources/AppShell/SelectThemeView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/TopShelfSettingsView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShell/SelectThemeView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShell/SelectNavigationStyleView.swift, Sources/AppShell/SelectHomeLayoutView.swift, Sources/AppShell/SelectThemeView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/TopShelfSettingsView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitReason": "Theme preview card constructed by SelectThemeView and CompactThemePicker. Theme selection is inventoried on setup and Appearance parent pages; there is no separate card-screen workflow."
     },
     "Sources/CoreUI/ThemePalette.swift": {
       "sources": [
@@ -14449,7 +14477,6 @@
         "Sources/FeatureLiveTV/LibraryChannelEditorView.swift",
         "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift",
         "Sources/AppShell/ProfileServerIdentityPromptView.swift",
-        "Sources/AppShell/SelectHomeLayoutView.swift",
         "Sources/AppShell/SelectNavigationStyleView.swift",
         "Sources/AppShell/SyncSetupReceiveView.swift",
         "Sources/AppShell/SyncSetupSendView.swift",
@@ -14467,7 +14494,7 @@
         "Sources/AppShell/LiveTVShellDestination.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Reusable ThemePalette.swift is wired into Sources/AppShell/MainTabView.swift, Sources/AppShell/RootView.swift, Sources/AppShell/RootView.swift, Sources/AppShell/SelectThemeView.swift, Sources/AppShelliOS/PlozziOSFirstRunView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeaturePlayback/InfoPanelView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureMusic/MusicScreens.swift, Sources/FeatureProfiles/ProfilePickerView.swift, Sources/AppShelliOS/PlozziOSDownloadsView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/FeatureSettings/IntegrationsDetailView.swift, Sources/FeatureLiveTV/LiveTVSetupWelcome.swift, Sources/FeatureMusic/MusicScreens.swift, Sources/FeatureMusic/MusicScreens.swift, Sources/FeatureMusic/MusicScreens.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/FeatureHome/LibraryBrowseView.swift, Sources/FeatureHome/WatchlistBrowseView.swift, Sources/FeatureSettings/CollectionSectionSettingsView.swift, Sources/FeatureHomeCore/PersonDetailView.swift, Sources/CoreUI/FamilyGuidanceViews.swift, Sources/CoreUI/FamilyGuidanceViews.swift, Sources/CoreUI/FamilyGuidanceViews.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/FeatureHome/LibraryBrowseView.swift, Sources/FeatureMusic/MusicScreens.swift, Sources/FeatureMusic/MusicScreens.swift, Sources/FeatureMusic/MusicScreens.swift, Sources/FeatureProfiles/ProfileEditorView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/ItemDetailView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/AppShelliOS/PlozziOSSearchView.swift, Sources/AppShell/SearchTab.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureProfiles/ProfileEditorView.swift, Sources/FeatureProfiles/ProfileEditorView.swift, Sources/AppShell/ProfileSelectionView.swift, Sources/AppShell/RootView.swift, Sources/AppShelliOS/PlozziOSPlexPINView.swift, Sources/FeatureLiveTV/LiveTVPortablePendingSources.swift, Sources/FeatureProfiles/ParentalPINSetupView.swift, Sources/FeatureProfiles/ParentalPINView.swift, Sources/FeatureProfiles/ProfileLockPINView.swift, Sources/FeatureProfiles/ProfileLockSetupView.swift, Sources/AppShelliOS/PlozziOSProfileSettingsView.swift, Sources/FeatureSettings/ProfileSettingsDetailView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/AppShell/MainTabView.swift, Sources/AppShell/RootView.swift, Sources/AppShell/RootView.swift, Sources/AppShell/SelectThemeView.swift, Sources/AppShelliOS/PlozziOSFirstRunView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeaturePlayback/InfoPanelView.swift, Sources/AppShell/ProfileServerIdentityPromptView.swift, Sources/AppShell/RootView.swift, Sources/AppShell/RootView.swift, Sources/AppShell/RootView.swift, Sources/AppShell/RootView.swift, Sources/AppShell/RootView.swift, Sources/AppShell/SelectHomeLayoutView.swift, Sources/AppShell/SelectNavigationStyleView.swift, Sources/AppShell/SelectThemeView.swift, Sources/AppShell/SyncSetupReceiveView.swift, Sources/AppShell/SyncSetupSendView.swift, Sources/AppShelliOS/PlozziOSDetectedSetupView.swift, Sources/AppShelliOS/PlozziOSDownloadedShowView.swift, Sources/AppShelliOS/PlozziOSFirstRunView.swift, Sources/AppShelliOS/PlozziOSOnboardingView.swift, Sources/AppShelliOS/PlozziOSProfilePickerView.swift, Sources/AppShelliOS/PlozziOSProfilePickerView.swift, Sources/AppShelliOS/PlozziOSProfileSetupView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift, Sources/FeatureProfiles/ProfileEditorView.swift, Sources/FeatureProfiles/ProfileEditorView.swift, Sources/FeatureProfiles/ProfileEditorView.swift, Sources/FeatureProfiles/ProfileLockOfferView.swift, Sources/FeatureSettings/CrashReportingConsentView.swift, Sources/FeatureSettings/ProfileSeerrSetupView.swift, Sources/FeatureSettings/ProfileSetupLibrariesView.swift, Sources/AppShell/ProfileSelectionView.swift, Sources/AppShell/RootView.swift, Sources/AppShelliOS/PlozziOSPlexPINView.swift, Sources/FeatureLiveTV/LiveTVPortablePendingSources.swift, Sources/FeatureProfiles/ParentalPINSetupView.swift, Sources/FeatureProfiles/ParentalPINView.swift, Sources/FeatureProfiles/ProfileLockPINView.swift, Sources/FeatureProfiles/ProfileLockSetupView.swift, Sources/AppShelliOS/PlozziOSProfileSettingsView.swift, Sources/FeatureSettings/ProfileSettingsDetailView.swift, Sources/AppShell/MainTabView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitReason": "Shared theme palette used by RootView, MainTabView, mobile roots, player and media cards, profiles and settings. Color choices are inventoried on SelectThemeView and Appearance parent settings; palette lookup exposes no independent screen or control. The cited callers show current wiring rather than a removed Home-layout setup step."
     },
     "Sources/CoreUI/TimedLayout.swift": {
       "sources": [
@@ -15333,7 +15360,6 @@
         "Sources/FeatureHome/FocusHeroHomeView.swift",
         "Sources/FeatureHome/HomeView.swift",
         "Sources/FeatureSettings/PreferenceDetailViews.swift",
-        "Sources/CoreUI/HomeLayoutOptionCard.swift",
         "Sources/CoreUI/MediaRowBrowseCard.swift",
         "Sources/FeatureHomeCore/HomePresentationRow.swift",
         "Sources/FeatureHomeCore/HomeRow.swift",
@@ -15349,14 +15375,18 @@
         "Sources/CoreUI/RatingsBadgeRow.swift",
         "Sources/CoreUI/TextTierStyle.swift",
         "Sources/FeatureHome/HeroDirectionalPress.swift",
-        "Sources/FeatureHomeCore/HeroTrailerController.swift"
+        "Sources/FeatureHomeCore/HeroTrailerController.swift",
+        "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
+        "Sources/FeatureSettings/HomeRowStylePicker.swift",
+        "Sources/CoreModels/HeroSettings.swift",
+        "Sources/FeatureHome/HeroShowcaseStage.swift"
       ],
       "platforms": [
         "Apple TV"
       ],
-      "navigation": "On Apple TV, open Settings > Screens & Navigation > Home > Layout, choose Showcase, then return to Home.",
+      "navigation": "On Apple TV, open Settings > Screens & Navigation > Home > Row style, choose Showcase, then return to Home.",
       "experience": "Move through Home rows with the remote while the focused title supplies the background and details; open eligible rows with their trailing See all card.",
-      "conditions": "Apple TV Showcase presentation, not the separate Fullscreen Hero carousel. HomeView supplies the same ordered row bodies and browse eligibility as classic Home. See all requires more titles and a loaded nonempty row without failure or section issue; global Watchlist opens its dedicated page. Playable and discovery/request targets retain their own availability requirements. Names from servers/collections remain dynamic.",
+      "conditions": "Apple TV Showcase rows, whether Hero is on or off. HomeView supplies ordered row bodies and browse eligibility. With Hero enabled, the featured carousel sits above Showcase; with it off, eligible non-Kids Discovery row picks can appear. See all requires more titles and a loaded nonempty row without failure or section issue; Watchlist opens its own page. Playable and request targets retain their availability and authorization requirements. Server/collection names are dynamic.",
       "controls": [
         {
           "text": "Loading",
@@ -15379,6 +15409,10 @@
         {
           "slug": "browse-home-rows",
           "anchor": "open-a-larger-grid"
+        },
+        {
+          "slug": "home-and-navigation",
+          "anchor": "choose-row-style-on-apple-tv"
         }
       ]
     },
@@ -17180,7 +17214,7 @@
       ],
       "navigation": "Open Sources > Plozz channels > Create custom channel.",
       "experience": "Name a channel, select libraries and scheduling rules, preview its schedule, and save it.",
-      "conditions": "All platforms. Rules depend on accessible movie/episode libraries and usable durations. Empty rules allow all eligible titles; watch-history updates are profile/device-local, off by default, and do not save resume positions. Management shows Automatic lineup, Generated channels when available, Custom channels, then Watch history. Custom recipes offer Shows in episode order, Seeded shuffle or Movies; Movies disables the Episodes switch. Editing a saved custom channel changes the heading to Edit custom channel. Generated channels have no editing action. The Parental PIN gate uses local verification, not the shared scaffold's dormant Profile Lock or remote-requirement loading/error states.",
+      "conditions": "All platforms. Rules depend on accessible movie/episode libraries and usable durations. Empty fields allow all eligible titles. Allowed ratings matches exact classifications after case/diacritic normalization, not an age ceiling. Include unrated titles defaults on and independently allows absent classifications. Watch-history updates are profile/device-local, off by default, and do not save resume positions. Management shows Automatic lineup, Generated channels when available, Custom channels, then Watch history. Custom recipes offer Shows in episode order, Seeded shuffle or Movies; Movies disables the Episodes switch. Editing a saved custom channel changes the heading to Edit custom channel. Generated channels have no editing action. The Parental PIN gate uses local verification, not the shared scaffold's dormant Profile Lock or remote-requirement loading/error states. Saved custom-channel name rows open Edit custom channel; their context menu Delete channel removes only the schedule/definition, not source media. Automatic channels remain non-editable and non-deletable through this custom menu. Create/edit fields are Channel name, Icon, Order, Movies/Episodes, Source libraries, then Rules; Preview schedule changes to Save channel after a valid preview.",
       "controls": [
         {
           "text": "Edit custom channel",
@@ -19836,7 +19870,7 @@
       ],
       "navigation": "Open Cast from the video player, then select a person.",
       "experience": "Read cast information, open See more, or choose another credited title.",
-      "conditions": "Requires available cast/metadata. Expanded person/credit navigation ends playback, and a credit need not have an accessible library copy.",
+      "conditions": "Requires available cast/metadata. Selecting a person expands biography and credits inside the player without ending playback. See more opens the full person page and selecting a credit opens title details; those page-navigation actions end playback. A credit need not have an accessible library copy.",
       "controls": [
         {
           "text": "Cast",
@@ -19887,10 +19921,13 @@
         "Sources/FeaturePlayback/CustomPlayerContainer.swift",
         "Sources/FeaturePlayback/PlayerView.swift",
         "Sources/FeaturePlayback/LiveChannelPlayerView.swift",
-        "Sources/FeaturePlayback/LiveChannelAuxiliaryControls.swift"
+        "Sources/FeaturePlayback/LiveChannelAuxiliaryControls.swift",
+        "Sources/FeaturePlayback/RemoteSeekScan.swift",
+        "Sources/FeaturePlayback/RemoteClickInterpreter.swift",
+        "Sources/FeaturePlayback/PlayerControls.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Reusable CustomPlayerContainer.swift is wired into Sources/FeaturePlayback/PlayerView.swift, Sources/FeaturePlayback/PlayerView.swift, Sources/FeaturePlayback/LiveChannelPlayerView.swift, Sources/FeaturePlayback/PlayerView.swift, Sources/FeaturePlayback/LiveChannelPlayerView.swift, Sources/FeaturePlayback/LiveChannelPlayerView.swift, Sources/FeaturePlayback/PlayerView.swift, Sources/FeaturePlayback/PlayerView.swift, Sources/FeaturePlayback/PlayerView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitReason": "Movie-player host and UIKit remote-input implementation constructed by PlayerView/PlayerControls. The Apple TV edge-click, persistent held-click scan, commit/cancel and swipe controls are inventoried on PlayerControls; internal focus, thumbnail cadence and engine composition do not introduce a separate reader screen."
     },
     "Sources/FeaturePlayback/InfoPanelView.swift": {
       "sources": [
@@ -19904,7 +19941,8 @@
         "Sources/CoreUI/ReduceTransparencyEnvironment.swift",
         "Sources/CoreUI/TextTierStyle.swift",
         "Sources/CoreUI/ThemePalette.swift",
-        "Sources/FeaturePlayback/PlayerCardMetrics.swift"
+        "Sources/FeaturePlayback/PlayerCardMetrics.swift",
+        "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
       ],
       "platforms": [
         "Apple TV",
@@ -19992,7 +20030,17 @@
         "Sources/FeaturePlayback/PlayerTouchLevelControl.swift",
         "Sources/FeaturePlayback/PlayerZoomSettings.swift",
         "Sources/FeaturePlayback/SubtitleControlsFrame.swift",
-        "Sources/FeaturePlayback/UpNextCardView.swift"
+        "Sources/FeaturePlayback/UpNextCardView.swift",
+        "Sources/FeaturePlayback/PlayerMoreMenu.swift",
+        "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift",
+        "Sources/FeaturePlayback/PlayerVideoZoom.swift",
+        "Sources/FeaturePlayback/VideoPresentationView.swift",
+        "Sources/FeaturePlayback/VideoActivePicture.swift",
+        "Sources/FeaturePlayback/NativeVideoEngine.swift",
+        "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
+        "Sources/EnginePlozzigen/PlozzigenNativePictureAnalyzer.swift",
+        "Sources/AppShell/PlaybackEngineComposition.swift",
+        "Sources/AppShelliOS/PlozziOSPlaybackEngineComposition.swift"
       ],
       "platforms": [
         "Apple TV",
@@ -20001,7 +20049,7 @@
       ],
       "navigation": "Select a playable channel from Live TV, Search, Home, or an authorized guide overlay.",
       "experience": "Watch a live channel, reveal its guide, use an available rewind window, or return toward live.",
-      "conditions": "All platforms. Authorization, source availability, network policy and provider limits apply. Go Live respects the local buffer; scheduled library channels use Jump to now, not a recording. The shared transport exposes Info and On Now, plus Guide only when guide content is supplied. Playback Info in the Info card toggles diagnostics; its caption expands on TV focus and is an accessibility label on touch. Apple TV shows Audio for multiple tracks or available system-audio settings; iPhone/iPad shows it when any audio track exists. Subtitles needs an available track and leads to separately inventoried settings. System Enhance Dialogue/Reduce Loud Sounds controls and levels are Apple TV-only and require the system availability signal. Live TV offers no dual-subtitle selection.",
+      "conditions": "All platforms. Authorization, source availability, network policy and provider limits apply. Go Live respects the local buffer; scheduled library channels use Jump to now, not a recording. The shared transport exposes Info and On Now, plus Guide only when guide content is supplied. Playback Info in the Info card toggles diagnostics; its caption expands on TV focus and is an accessibility label on touch. Apple TV shows Audio for multiple tracks or available system-audio settings; iPhone/iPad shows it when any audio track exists. Subtitles needs an available track and leads to separately inventoried settings. System Enhance Dialogue/Reduce Loud Sounds controls and levels are Apple TV-only and require the system availability signal. Live TV offers no dual-subtitle selection. Auto-crop black bars appears only when the supplied engine supports active-picture analysis; both production movie-engine factories wire this support. Picture sampling requires local, ready, visible playback and is suspended for external playback or Picture in Picture. Missing/invalid detection falls back to normal fit. Cropping preserves picture proportions and need not fill every screen edge; zoom remains session-only. Mobile uses Video; Apple TV uses Playback > Zoom Mode.",
       "controls": [
         {
           "text": "Info",
@@ -20152,8 +20200,52 @@
           "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
         },
         {
+          "text": "Playback",
+          "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
+        },
+        {
+          "text": "Playback options",
+          "source": "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift"
+        },
+        {
+          "text": "Subtitles",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Audio",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Video",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Multiview",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
           "text": "Zoom Mode",
           "source": "Sources/FeaturePlayback/PlayerZoomSettings.swift"
+        },
+        {
+          "text": "Normal (Default)",
+          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
+        },
+        {
+          "text": "Auto-crop black bars",
+          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
+        },
+        {
+          "text": "Crop",
+          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
+        },
+        {
+          "text": "Stretch",
+          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
+        },
+        {
+          "text": "Custom",
+          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
         },
         {
           "text": "Zoom Amount",
@@ -20176,6 +20268,10 @@
         {
           "slug": "live-tv",
           "anchor": "search-the-guide"
+        },
+        {
+          "slug": "playback",
+          "anchor": "speed-picture-and-other-navigation"
         }
       ]
     },
@@ -20279,7 +20375,15 @@
         "Sources/CoreUI/SettingsRowFocusStyle.swift",
         "Sources/CoreUI/SettingsSwitchToggle.swift",
         "Sources/CoreUI/TextTierStyle.swift",
-        "Sources/FeaturePlayback/SystemCaptionStyleConfirmation.swift"
+        "Sources/FeaturePlayback/SystemCaptionStyleConfirmation.swift",
+        "Sources/FeaturePlayback/PlayerVideoZoom.swift",
+        "Sources/FeaturePlayback/VideoPresentationView.swift",
+        "Sources/FeaturePlayback/VideoActivePicture.swift",
+        "Sources/FeaturePlayback/NativeVideoEngine.swift",
+        "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
+        "Sources/EnginePlozzigen/PlozzigenNativePictureAnalyzer.swift",
+        "Sources/AppShell/PlaybackEngineComposition.swift",
+        "Sources/AppShelliOS/PlozziOSPlaybackEngineComposition.swift"
       ],
       "platforms": [
         "iPhone",
@@ -20287,7 +20391,7 @@
       ],
       "navigation": "On iPhone/iPad, open Subtitles > Advanced… > Appearance > Style, or customize captions from Settings.",
       "experience": "Edit caption text, shadow/outline, background, dual-track style and subtitle file formatting.",
-      "conditions": "iPhone/iPad text captions only; dual-track settings require eligible video playback and are absent for Live TV. Show second subtitle controls only the Settings preview; actual tracks are chosen during playback. Matching device style replaces the custom look after confirmation. Font weights depend on the chosen font; system font names are dynamic. Position sets the vertical location; Extra Line Position's Above/Center/Below choices govern wrapped-line growth, not second-track placement. Clamping keeps the block visible within 0-100%; negative positions can crop it.",
+      "conditions": "iPhone/iPad text styling and conditional image-caption placement; dual-track settings require eligible video playback and are absent for Live TV. Show second subtitle controls only the Settings preview; actual tracks are chosen during playback. Matching device style replaces the custom look after confirmation. Font weights depend on the chosen font; system font names are dynamic. Position selects Bottom of screen or Bottom of video; Vertical offset measures upward from that reference; Extra Line Position's Above/Center/Below choices govern wrapped-line growth, not second-track placement. Bottom of video follows the detected active picture when available and otherwise the video frame. Text offset spans -5% to 100% in 0.5% steps; clamping keeps the block visible within 0-100%, while negative positions can crop it. The movie player's Subtitles > Advanced… > Appearance link is named Position for an image primary, not Style. That editor shows Vertical offset only with Bottom of video; it moves eligible lower dialogue while preserving image size and fixed artwork, not restyling images or enabling dual subtitles. SubtitleOverlayView checks safe bounds and collisions. Actual primary/secondary text styling and timing remain track/path-dependent.",
       "controls": [
         {
           "text": "Match Device Subtitle Style",
@@ -20315,6 +20419,18 @@
         },
         {
           "text": "Position",
+          "source": "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift"
+        },
+        {
+          "text": "Bottom of screen",
+          "source": "Sources/CoreModels/SubtitleStyle.swift"
+        },
+        {
+          "text": "Bottom of video",
+          "source": "Sources/CoreModels/SubtitleStyle.swift"
+        },
+        {
+          "text": "Vertical offset",
           "source": "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift"
         },
         {
@@ -20610,6 +20726,10 @@
         {
           "slug": "subtitles",
           "anchor": "change-appearance"
+        },
+        {
+          "slug": "subtitles",
+          "anchor": "keep-captions-near-the-picture"
         }
       ]
     },
@@ -20914,14 +21034,21 @@
         "Sources/FeaturePlayback/PlaybackOptionsPane.swift",
         "Sources/FeaturePlayback/PlayerVideoZoom.swift",
         "Sources/FeaturePlayback/PlayerMenuRowStyle.swift",
-        "Sources/FeaturePlayback/PlayerOptionsRows.swift"
+        "Sources/FeaturePlayback/PlayerOptionsRows.swift",
+        "Sources/FeaturePlayback/VideoPresentationView.swift",
+        "Sources/FeaturePlayback/VideoActivePicture.swift",
+        "Sources/FeaturePlayback/NativeVideoEngine.swift",
+        "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
+        "Sources/EnginePlozzigen/PlozzigenNativePictureAnalyzer.swift",
+        "Sources/AppShell/PlaybackEngineComposition.swift",
+        "Sources/AppShelliOS/PlozziOSPlaybackEngineComposition.swift"
       ],
       "platforms": [
         "Apple TV"
       ],
       "navigation": "On Apple TV, reveal controls and open Playback above the timeline; open Zoom Mode for picture choices.",
       "experience": "Adjust the current video playback speed and zoom mode; Custom changes zoom percentage without changing encoded quality.",
-      "conditions": "Apple TV card UI; the current engine must offer playbackSpeed or videoZoom. Zoom is session-only. Quality conversion is configured in the separate quality surfaces, not this pane.",
+      "conditions": "Apple TV card UI; the current engine must offer playbackSpeed or videoZoom. Zoom is session-only. Quality conversion is configured in the separate quality surfaces, not this pane. Auto-crop black bars appears only when the supplied engine supports active-picture analysis; both production movie-engine factories wire this support. Picture sampling requires local, ready, visible playback and is suspended for external playback or Picture in Picture. Missing/invalid detection falls back to normal fit. Cropping preserves picture proportions and need not fill every screen edge; zoom remains session-only. Mobile uses Video; Apple TV uses Playback > Zoom Mode.",
       "controls": [
         {
           "text": "Zoom Mode",
@@ -20933,6 +21060,10 @@
         },
         {
           "text": "Normal (Default)",
+          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
+        },
+        {
+          "text": "Auto-crop black bars",
           "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
         },
         {
@@ -20970,30 +21101,21 @@
     "Sources/FeaturePlayback/PlayerAudioMenu.swift": {
       "sources": [
         "Sources/FeaturePlayback/PlayerAudioMenu.swift",
-        "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift"
+        "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift",
+        "Sources/FeaturePlayback/PlayerMoreMenu.swift",
+        "Sources/FeaturePlayback/NativeVideoEngine.swift",
+        "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
       ],
       "platforms": [
         "iPhone",
         "iPad"
       ],
       "navigation": "Open Audio from the movie player options.",
-      "experience": "Choose the available audio track and supported output processing.",
-      "conditions": "Track inventory and engine route determine choices. System loudness/dialogue controls are Apple TV-specific and not a universal speaker-layout setting.",
+      "experience": "Choose another audio track when the video supplies one.",
+      "conditions": "Track names are dynamic. A single track is shown disabled; multiple tracks allow selection. The optional engine-local Enhance Dialogue/On/Off submenu is dormant because neither shipped engine advertises dialogEnhance, so its labels are omitted from the visible inventory. The separate system loudness/dialogue bridge is Apple TV-only and does not populate this mobile menu.",
       "controls": [
         {
           "text": "Audio",
-          "source": "Sources/FeaturePlayback/PlayerAudioMenu.swift"
-        },
-        {
-          "text": "Enhance Dialogue",
-          "source": "Sources/FeaturePlayback/PlayerAudioMenu.swift"
-        },
-        {
-          "text": "On",
-          "source": "Sources/FeaturePlayback/PlayerAudioMenu.swift"
-        },
-        {
-          "text": "Off",
           "source": "Sources/FeaturePlayback/PlayerAudioMenu.swift"
         }
       ],
@@ -21041,14 +21163,17 @@
         "Sources/FeaturePlayback/PlayerTimelineClock.swift",
         "Sources/FeaturePlayback/SubtitleControlsFrame.swift",
         "Sources/FeaturePlayback/SystemPlaybackAudio.swift",
-        "Sources/FeaturePlayback/UpNextCardView.swift"
+        "Sources/FeaturePlayback/UpNextCardView.swift",
+        "Sources/FeaturePlayback/CustomPlayerContainer.swift",
+        "Sources/FeaturePlayback/RemoteSeekScan.swift",
+        "Sources/FeaturePlayback/RemoteClickInterpreter.swift"
       ],
       "platforms": [
         "Apple TV"
       ],
       "navigation": "From the Apple TV timeline, move up for playback/audio/subtitle controls and down for information/navigation.",
       "experience": "Choose a player card and open its options or supported navigation.",
-      "conditions": "Apple TV. Tracks, chapters, sequence, versions and playback engine capabilities gate cards; missing data is not supplied by an unrelated provider.",
+      "conditions": "Apple TV. Tracks, chapters, sequence, versions and playback engine capabilities gate cards; missing data is not supplied by an unrelated provider. Apple TV surface controls distinguish edge clicks from center selection. Holding a left/right click starts persistent scanning; same-direction clicks accelerate and opposite-direction clicks slow or reverse. Center commits with prior playback intent; Play/Pause commits and resumes; Back cancels. Loading or missing/invalid duration blocks seeking. Seek without pausing gates swipe scrubbing, not the held-click scan.",
       "controls": [
         {
           "text": "Info",
@@ -21119,6 +21244,10 @@
         {
           "slug": "audio",
           "anchor": "select-a-language-or-track"
+        },
+        {
+          "slug": "playback",
+          "anchor": "seek-on-apple-tv"
         }
       ]
     },
@@ -21178,22 +21307,39 @@
         "Sources/CoreUI/PlayerSurfaceAppearance.swift",
         "Sources/FeaturePlayback/PlayerControlsSupport.swift",
         "Sources/CoreUI/ReduceTransparencyEnvironment.swift",
-        "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift"
+        "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift",
+        "Sources/FeaturePlayback/PlayerVideoZoom.swift",
+        "Sources/FeaturePlayback/PlayerZoomSettings.swift",
+        "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
+        "Sources/FeaturePlayback/NativeVideoEngine.swift",
+        "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
       ],
       "platforms": [
         "iPhone",
         "iPad"
       ],
-      "navigation": "Open the compact player options menu on a supported playback layout.",
+      "navigation": "Tap Playback options in the portrait movie player, or the separate track/speed/video buttons in landscape.",
       "experience": "Choose supported video/audio/subtitle or stream-quality options.",
-      "conditions": "Menu controls are conditional on engine capabilities and provider conversion support. Secondary subtitles need an eligible text track; audio-delay UI remains capability-gated off for shipped movie engines.",
+      "conditions": "The consolidated menu orders Subtitles, Audio, Playback Speed, Video, Version, then Multiview when supplied. Subtitle tracks are dynamic, with Off; Search & Download… requires download support and precedes Advanced…. Secondary subtitles need an eligible text track. Audio offers track selection, with a single track shown disabled; engine-local dialogue enhancement and audio-delay UI remain capability-gated off for shipped movie engines. Speed presets precede Custom…. Video places available zoom modes before Quality, which requires provider conversion support. Auto-crop black bars requires active-picture support; Custom opens the zoom sheet. Version appears only for multiple versions. The movie overlay does not supply Multiview, but the live-channel transport can supply it.",
       "controls": [
+        {
+          "text": "Playback options",
+          "source": "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift"
+        },
+        {
+          "text": "Subtitles",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
         {
           "text": "Off",
           "source": "Sources/FeaturePlayback/TrackMenuBuilder.swift"
         },
         {
-          "text": "Subtitles",
+          "text": "Search & Download…",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Advanced…",
           "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
         },
         {
@@ -21205,8 +21351,36 @@
           "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
         },
         {
+          "text": "Custom…",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
           "text": "Video",
           "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Zoom Mode",
+          "source": "Sources/FeaturePlayback/PlayerZoomSettings.swift"
+        },
+        {
+          "text": "Normal (Default)",
+          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
+        },
+        {
+          "text": "Auto-crop black bars",
+          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
+        },
+        {
+          "text": "Crop",
+          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
+        },
+        {
+          "text": "Stretch",
+          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
+        },
+        {
+          "text": "Custom",
+          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
         },
         {
           "text": "Quality",
@@ -21218,18 +21392,6 @@
         },
         {
           "text": "Multiview",
-          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
-        },
-        {
-          "text": "Advanced…",
-          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
-        },
-        {
-          "text": "Search & Download…",
-          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
-        },
-        {
-          "text": "Custom…",
           "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
         }
       ],
@@ -21251,25 +21413,98 @@
     "Sources/FeaturePlayback/PlayerOptionPanes.swift": {
       "sources": [
         "Sources/FeaturePlayback/PlayerOptionPanes.swift",
-        "Sources/FeaturePlayback/SystemPlaybackAudio.swift",
-        "Sources/CoreUI/LabeledSettingRow.swift",
-        "Sources/CoreUI/SettingsStepper.swift",
-        "Sources/CoreUI/MediaBadgeView.swift",
+        "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
+        "Sources/FeaturePlayback/PlaybackOptionsPane.swift",
+        "Sources/FeaturePlayback/PlayerControls.swift",
+        "Sources/FeaturePlayback/PlayerAudioMenu.swift",
+        "Sources/FeaturePlayback/PlayerOptionsRows.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "PlayerOptionsPanel constructs AudioPaneView and PlayerMenuRowStack for audio, subtitles and versions; its record owns their visible controls and status labels. PlaybackOptionsPane also uses the row stack for zoom choices, inventoried there. These are bodies inside the parent panels, not another destination. SpeedPaneView has no construction site, and SyncPaneView is reachable only through the A/V Sync category omitted by PlayerControls.trackControlCategories. The non-tvOS No alternate audio branch is not used by the mobile player, which constructs PlayerAudioMenu instead."
+    },
+    "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift": {
+      "sources": [
+        "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift",
+        "Sources/FeaturePlayback/PlayerAudioMenu.swift",
+        "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Reusable PlayerOptionsMenuButton.swift is wired into Sources/FeaturePlayback/PlayerAudioMenu.swift, Sources/FeaturePlayback/PlayerMoreMenu.swift, Sources/FeaturePlayback/PlayerAudioMenu.swift, Sources/FeaturePlayback/PlayerMoreMenu.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+    },
+    "Sources/FeaturePlayback/PlayerOptionsPanel.swift": {
+      "sources": [
+        "Sources/FeaturePlayback/TrackMenuBuilder.swift",
+        "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
+        "Sources/FeaturePlayback/PlayerControls.swift",
+        "Sources/FeaturePlayback/PlayerOptionPanes.swift",
+        "Sources/FeaturePlayback/PlaybackOptionsPane.swift",
         "Sources/CoreUI/MediaVersionChoiceButton.swift",
-        "Sources/CoreUI/NativeActionButton.swift",
-        "Sources/CoreUI/SettingsAdjustmentFocusScope.swift",
+        "Sources/CoreUI/PlayerSurfaceAppearance.swift",
+        "Sources/FeaturePlayback/PlayerControlsSupport.swift",
+        "Sources/CoreUI/ReduceTransparencyEnvironment.swift",
         "Sources/CoreUI/SettingsRowFocusStyle.swift",
         "Sources/CoreUI/TextTierStyle.swift",
         "Sources/FeaturePlayback/PlayerMenuRowStyle.swift",
-        "Sources/FeaturePlayback/PlayerOptionsRows.swift"
+        "Sources/FeaturePlayback/PlayerOptionsRows.swift",
+        "Sources/FeaturePlayback/SystemPlaybackAudio.swift",
+        "Sources/FeaturePlayback/NativeVideoEngine.swift",
+        "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
       ],
       "platforms": [
         "Apple TV"
       ],
-      "navigation": "Open the relevant Apple TV playback/audio option pane.",
-      "experience": "Choose playback speed, supported track/output options, or return to the parent menu.",
-      "conditions": "Apple TV menu panes share the active engine capabilities and track inventory; unavailable options must remain hidden.",
+      "navigation": "Open an available Version, Playback, Audio or Subtitles panel above the Apple TV player's timeline.",
+      "experience": "Select supported tracks, speed, zoom, subtitle style, search, or timing adjustments.",
+      "conditions": "Controls are grouped by the track-row order: Version, Playback, Audio, Subtitles. Version needs multiple versions and uses MediaVersionChoiceButton for its dynamic title or Original fallback. PlaybackOptionsPane owns speed and zoom controls. Neither shipped engine enables adjustable audio delay or engine-local Dialog Enhance; the standalone A/V Sync category is also omitted by PlayerControls. The separate Apple TV-wide Enhance Dialogue then Reduce Loud Sounds controls require SystemPlaybackAudio availability and precede selectable audio tracks. Enhance Dialogue opens levels when available or acts as a toggle; empty audio shows a Back action. In Subtitles, header actions Subtitle Sync and Style (or the conditional Dual Subtitles alternative) precede tracks and Download subtitles…. Timing, styling and download availability follow the active track and provider. Image primaries disable dual subtitles. Nested download/style controls have their own SubtitleDownloadPanel and SubtitleStylePanel records; their header labels are included here.",
       "controls": [
+        {
+          "text": "Version",
+          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "Original",
+          "source": "Sources/CoreUI/MediaVersionChoiceButton.swift"
+        },
+        {
+          "text": "Resumes at the current position. Different cuts may have different timing.",
+          "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
+        },
+        {
+          "text": "Playback",
+          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "Zoom Mode",
+          "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
+        },
+        {
+          "text": "Audio",
+          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "Enhance Dialogue",
+          "source": "Sources/FeaturePlayback/SystemPlaybackAudio.swift"
+        },
+        {
+          "text": "Enhance Dialogue",
+          "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
+        },
+        {
+          "text": "Enhance More",
+          "source": "Sources/FeaturePlayback/SystemPlaybackAudio.swift"
+        },
+        {
+          "text": "Enhance",
+          "source": "Sources/FeaturePlayback/SystemPlaybackAudio.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/FeaturePlayback/SystemPlaybackAudio.swift"
+        },
+        {
+          "text": "Reduce Loud Sounds",
+          "source": "Sources/FeaturePlayback/SystemPlaybackAudio.swift"
+        },
         {
           "text": "Updating",
           "source": "Sources/FeaturePlayback/PlayerOptionPanes.swift"
@@ -21291,96 +21526,20 @@
           "source": "Sources/FeaturePlayback/PlayerOptionPanes.swift"
         },
         {
-          "text": "No alternate audio",
-          "source": "Sources/FeaturePlayback/PlayerOptionPanes.swift"
-        },
-        {
-          "text": "Enhance Dialogue",
-          "source": "Sources/FeaturePlayback/SystemPlaybackAudio.swift"
-        },
-        {
-          "text": "Reduce Loud Sounds",
-          "source": "Sources/FeaturePlayback/SystemPlaybackAudio.swift"
-        },
-        {
-          "text": "Enhance More",
-          "source": "Sources/FeaturePlayback/SystemPlaybackAudio.swift"
-        },
-        {
-          "text": "Enhance",
-          "source": "Sources/FeaturePlayback/SystemPlaybackAudio.swift"
-        },
-        {
-          "text": "Off",
-          "source": "Sources/FeaturePlayback/SystemPlaybackAudio.swift"
-        },
-        {
-          "text": "Original",
-          "source": "Sources/CoreUI/MediaVersionChoiceButton.swift"
-        },
-        {
-          "text": "EXTERNAL",
-          "source": "Sources/FeaturePlayback/PlayerMenuRowStyle.swift"
-        },
-        {
-          "text": "External subtitle",
-          "source": "Sources/FeaturePlayback/PlayerMenuRowStyle.swift"
-        }
-      ],
-      "documents": [
-        {
-          "slug": "playback",
-          "anchor": "speed-picture-and-other-navigation"
-        },
-        {
-          "slug": "audio",
-          "anchor": "select-a-language-or-track"
-        }
-      ]
-    },
-    "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift": {
-      "sources": [
-        "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift",
-        "Sources/FeaturePlayback/PlayerAudioMenu.swift",
-        "Sources/FeaturePlayback/PlayerMoreMenu.swift"
-      ],
-      "omitKind": "shared-component",
-      "omitReason": "Reusable PlayerOptionsMenuButton.swift is wired into Sources/FeaturePlayback/PlayerAudioMenu.swift, Sources/FeaturePlayback/PlayerMoreMenu.swift, Sources/FeaturePlayback/PlayerAudioMenu.swift, Sources/FeaturePlayback/PlayerMoreMenu.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
-    },
-    "Sources/FeaturePlayback/PlayerOptionsPanel.swift": {
-      "sources": [
-        "Sources/FeaturePlayback/TrackMenuBuilder.swift",
-        "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
-        "Sources/CoreUI/PlayerSurfaceAppearance.swift",
-        "Sources/FeaturePlayback/PlayerControlsSupport.swift",
-        "Sources/CoreUI/ReduceTransparencyEnvironment.swift",
-        "Sources/CoreUI/SettingsRowFocusStyle.swift",
-        "Sources/CoreUI/TextTierStyle.swift",
-        "Sources/FeaturePlayback/PlayerMenuRowStyle.swift",
-        "Sources/FeaturePlayback/PlayerOptionsRows.swift"
-      ],
-      "platforms": [
-        "Apple TV"
-      ],
-      "navigation": "Open a playback, audio, or subtitle option card in the Apple TV player.",
-      "experience": "Select supported tracks, speed, zoom, subtitle style, search, or timing adjustments.",
-      "conditions": "Available options follow engine capabilities and current tracks. Shipped movie engines do not enable adjustable audio delay; image-based primary captions disable dual subtitles.",
-      "controls": [
-        {
-          "text": "Download Subtitles",
+          "text": "Couldn't change audio setting",
           "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
         },
         {
-          "text": "Off",
-          "source": "Sources/FeaturePlayback/TrackMenuBuilder.swift"
-        },
-        {
-          "text": "Couldn't change audio setting",
+          "text": "Try changing this setting in Apple TV Settings.",
           "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
         },
         {
           "text": "OK",
           "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
+        },
+        {
+          "text": "Subtitles",
+          "source": "Sources/FeaturePlayback/PlayerControls.swift"
         },
         {
           "text": "Subtitle Sync",
@@ -21395,23 +21554,51 @@
           "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
         },
         {
+          "text": "Off",
+          "source": "Sources/FeaturePlayback/TrackMenuBuilder.swift"
+        },
+        {
+          "text": "EXTERNAL",
+          "source": "Sources/FeaturePlayback/PlayerMenuRowStyle.swift"
+        },
+        {
+          "text": "External subtitle",
+          "source": "Sources/FeaturePlayback/PlayerMenuRowStyle.swift"
+        },
+        {
+          "text": "No subtitles",
+          "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
+        },
+        {
           "text": "Download subtitles…",
           "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
         },
         {
-          "text": "Dialog Enhance",
+          "text": "Download Subtitles",
           "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
         },
         {
-          "text": "Boost speech clarity in loud mixes",
+          "text": "Subtitle Style",
           "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
         },
         {
-          "text": "Original",
+          "text": "Font",
           "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
         },
         {
-          "text": "Enhance Dialogue",
+          "text": "System Fonts",
+          "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
+        },
+        {
+          "text": "Shadow & Outline",
+          "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
+        },
+        {
+          "text": "Background",
+          "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
+        },
+        {
+          "text": "File Formatting",
           "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
         }
       ],
@@ -21427,6 +21614,10 @@
         {
           "slug": "playback",
           "anchor": "speed-picture-and-other-navigation"
+        },
+        {
+          "slug": "audio",
+          "anchor": "improve-dialogue-on-apple-tv"
         }
       ]
     },
@@ -21784,14 +21975,22 @@
         "Sources/CoreUI/SettingsSurfaces.swift",
         "Sources/FeaturePlayback/PlayerMenuRowStyle.swift",
         "Sources/FeaturePlayback/PlayerOptionsRows.swift",
-        "Sources/FeaturePlayback/SystemCaptionStyleConfirmation.swift"
+        "Sources/FeaturePlayback/SystemCaptionStyleConfirmation.swift",
+        "Sources/FeaturePlayback/PlayerVideoZoom.swift",
+        "Sources/FeaturePlayback/VideoPresentationView.swift",
+        "Sources/FeaturePlayback/VideoActivePicture.swift",
+        "Sources/FeaturePlayback/NativeVideoEngine.swift",
+        "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
+        "Sources/EnginePlozzigen/PlozzigenNativePictureAnalyzer.swift",
+        "Sources/AppShell/PlaybackEngineComposition.swift",
+        "Sources/AppShelliOS/PlozziOSPlaybackEngineComposition.swift"
       ],
       "platforms": [
         "Apple TV"
       ],
       "navigation": "In Apple TV video controls, open Subtitles > Style; also used by the Settings caption preview.",
       "experience": "Adjust font, placement, colors, edges, backgrounds and supported second-track style, or override file formatting.",
-      "conditions": "Apple TV style panels. Image captions cannot be restyled; dual subtitles are excluded for Live TV. Show second subtitle controls only the Settings preview; actual tracks are chosen during playback. Matching the system style needs confirmation and editing stops matching. HDR brightness appears only when relevant. Available font weights depend on the selected font. Position sets vertical location; Extra Line Position's Above/Center/Below choices govern wrapped-line growth, not second-track placement. Clamping applies within 0-100%; negative positions can crop text. System font choices are dynamic.",
+      "conditions": "Apple TV style panels. Image captions keep their font/colors and offer placement only; dual subtitles are excluded for Live TV. Show second subtitle controls only the Settings preview; actual tracks are chosen during playback. Matching the system style needs confirmation and editing stops matching. HDR brightness appears only when relevant. Available font weights depend on the selected font. Position selects Bottom of screen or Bottom of video; Vertical offset measures upward from that reference; Extra Line Position's Above/Center/Below choices govern wrapped-line growth, not second-track placement. Clamping applies within 0-100%; negative positions can crop text. System font choices are dynamic. Bottom of video follows the detected active picture when available and otherwise the video frame. Text offset spans -5% to 100% in 0.5% steps, with negative text placement able to crop. Image-primary Style shows Position and only shows Vertical offset with Bottom of video; it moves eligible lower dialogue while preserving image size and fixed artwork, not restyling images or enabling dual subtitles. SubtitleOverlayView checks safe bounds and collisions. Actual primary/secondary text styling and timing remain track/path-dependent.",
       "controls": [
         {
           "text": "Match Apple TV Subtitle Style",
@@ -21815,6 +22014,18 @@
         },
         {
           "text": "Position",
+          "source": "Sources/FeaturePlayback/SubtitleStylePanel.swift"
+        },
+        {
+          "text": "Bottom of screen",
+          "source": "Sources/CoreModels/SubtitleStyle.swift"
+        },
+        {
+          "text": "Bottom of video",
+          "source": "Sources/CoreModels/SubtitleStyle.swift"
+        },
+        {
+          "text": "Vertical offset",
           "source": "Sources/FeaturePlayback/SubtitleStylePanel.swift"
         },
         {
@@ -22114,6 +22325,10 @@
         {
           "slug": "subtitles",
           "anchor": "change-appearance"
+        },
+        {
+          "slug": "subtitles",
+          "anchor": "keep-captions-near-the-picture"
         }
       ]
     },
@@ -23680,19 +23895,10 @@
       "omitKind": "shared-component",
       "omitReason": "Reusable HeroSettingsControls.swift is wired into Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
     },
-    "Sources/FeatureSettings/HomeLayoutPicker.swift": {
-      "sources": [
-        "Sources/FeatureSettings/HomeLayoutPicker.swift",
-        "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
-      ],
-      "omitKind": "shared-component",
-      "omitReason": "Reusable HomeLayoutPicker.swift is wired into Sources/FeatureSettings/HomeSectionSettingsViews.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
-    },
     "Sources/FeatureSettings/HomeRowsSettingsView.swift": {
       "sources": [
         "Sources/CoreModels/HomeSectionIssue.swift",
         "Sources/FeatureSettings/HomeRowsSettingsView.swift",
-        "Sources/CoreUI/HomeLayoutOptionCard.swift",
         "Sources/CoreModels/CardCaptionSettings.swift",
         "Sources/CoreUI/HomeSectionStatusView.swift",
         "Sources/CoreUI/HorizontalEdgeFadeMask.swift",
@@ -23718,7 +23924,11 @@
         "Sources/CoreUI/SettingsRowLabel.swift",
         "Sources/FeatureSettings/SettingsWorkspace.swift",
         "Sources/CoreUI/SettingsSurfaces.swift",
-        "Sources/CoreUI/TextTierStyle.swift"
+        "Sources/CoreUI/TextTierStyle.swift",
+        "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
+        "Sources/FeatureSettings/HomeHeroEnabledPicker.swift",
+        "Sources/FeatureSettings/HomeRowStylePicker.swift",
+        "Sources/CoreModels/HeroSettings.swift"
       ],
       "platforms": [
         "Apple TV",
@@ -23726,9 +23936,41 @@
         "iPad"
       ],
       "navigation": "Open Settings > Screens & Navigation > Home.",
-      "experience": "Choose Layout on Apple TV or Hero on mobile, then Card labels, Rows and Filtering.",
-      "conditions": "All platforms; profile-specific. Row catalogue/loading errors expose retries. Custom/reorder state changes available buttons; collection rows require accessible source collections. Root order is Layout on Apple TV or Hero on mobile, then Card labels, Rows, Filtering. Card labels opens the Home-only editor: no Page picker. Default offers On/Off/Mixed, followed by Continue Watching and Libraries Overrides with Use default/On/Off. Apple TV cycles choices on selection; mobile uses a picker. The same Continue Watching override applies on Recommended. Row-specific editors have their own coverage record.",
+      "experience": "Open Hero, Apple TV Row style, Card labels, Rows and Filtering in UI order. Change the featured carousel independently of Classic/Showcase rows; edit row arrangement and recover source errors without changing library access.",
+      "conditions": "All platforms, active-profile preferences. Root order is Hero, then Row style on Apple TV only, Card labels, Rows and Filtering. Hero summarizes On/Off; Apple TV Row style summarizes Showcase/Classic. Card labels opens the Home-only editor without Page: Default offers On/Off/Mixed, then Continue Watching and Libraries overrides with Use default/On/Off. The Continue Watching override also applies on Recommended. Row discovery/loading exposes retries; Edit/Done and Reorder follow editing state. With Showcase selected and Hero off, Discovery is managed by Row style and its row cannot be reordered or removed here; this managed row is absent in Kids profiles. Collection choices require accessible collections. Filtering orders Recently Added before Hero & discovery and does not alter history or access.",
       "controls": [
+        {
+          "text": "Home",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Hero",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "On",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Row style",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Showcase",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Classic",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Card labels",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
         {
           "text": "No titles to show",
           "source": "Sources/CoreModels/HomeSectionIssue.swift"
@@ -23742,43 +23984,11 @@
           "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
         },
         {
-          "text": "Home",
-          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
-        },
-        {
-          "text": "Layout",
-          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
-        },
-        {
-          "text": "Hero",
-          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
-        },
-        {
-          "text": "Fullscreen Hero",
-          "source": "Sources/CoreUI/HomeLayoutOptionCard.swift"
-        },
-        {
-          "text": "Showcase",
-          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
-        },
-        {
-          "text": "Off",
-          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
-        },
-        {
-          "text": "Card labels",
-          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
-        },
-        {
           "text": "Default",
           "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
         },
         {
           "text": "On",
-          "source": "Sources/CoreModels/CardCaptionSettings.swift"
-        },
-        {
-          "text": "Off",
           "source": "Sources/CoreModels/CardCaptionSettings.swift"
         },
         {
@@ -23904,6 +24114,10 @@
         {
           "text": "Back",
           "source": "Sources/CoreUI/SettingsPageHeader.swift"
+        },
+        {
+          "text": "Managed by Row style.",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
         }
       ],
       "documents": [
@@ -23934,8 +24148,6 @@
         "Sources/CoreUI/ExtendedArtworkFill.swift",
         "Sources/CoreUI/HeroLogoSizePreview.swift",
         "Sources/FeatureSettings/HeroLogoSizeControl.swift",
-        "Sources/CoreUI/HomeLayoutOptionCard.swift",
-        "Sources/FeatureSettings/HomeLayoutPicker.swift",
         "Sources/CoreUI/HomeLayoutSwatch.swift",
         "Sources/CoreUI/HorizontalEdgeFadeMask.swift",
         "Sources/FeatureSettings/ViewCustomizationControls.swift",
@@ -23966,24 +24178,173 @@
         "Sources/CoreUI/TextTierStyle.swift",
         "Sources/CoreUI/ThemeOptionCard.swift",
         "Sources/FeatureSettings/ContinueWatchingNextUpControl.swift",
-        "Sources/FeatureSettings/SettingsOptionList.swift"
+        "Sources/FeatureSettings/SettingsOptionList.swift",
+        "Sources/FeatureSettings/HomeHeroEnabledPicker.swift",
+        "Sources/FeatureSettings/HomeRowStylePicker.swift",
+        "Sources/CoreModels/HeroSourceKind.swift",
+        "Sources/CoreModels/HeroDiscovery.swift",
+        "Sources/CoreModels/HeroSettings.swift"
       ],
       "platforms": [
         "Apple TV",
         "iPhone",
         "iPad"
       ],
-      "navigation": "Select an editable Home/library row or its options from Home Rows settings.",
-      "experience": "Choose row presets and Continue Watching layout, labels, progress, next-episode and tap/center-button behavior.",
-      "conditions": "Control names differ by platform; available row content depends on libraries/provider. Continue Watching's Labels control uses Use default/On/Off, never Mixed. It shares the Home/Recommended override, not separate settings for each row instance. Presentation does not discard progress or shorten the unbounded Continue Watching feed.",
+      "navigation": "Open Settings > Screens & Navigation > Home, then Hero, Row style on Apple TV, or Rows and an editable row. Add row opens available rows or From a collection.",
+      "experience": "Enable or hide the featured hero, select its content, sizes, advancement, ratings and trailers; independently choose Showcase/Classic rows on Apple TV. Configure individual Home rows, Continue Watching presentation and actions, and row presets.",
+      "conditions": "This file owns multiple nested Home pages. Hero appears on all platforms: TV On/Off and mobile Show hero gate the following sizes, Content sources (TV) or Hero content sources (mobile), item count, advancement, Ratings and Trailers links. Title-source order is Continue Watching, Recently Added, Watchlist, Random from Library, Collections, Discovery; enabled sources reveal their respective nested choices. Random libraries are enabled non-music Home libraries and the last selected library cannot be deselected. Kids profiles exclude Discovery. TV Row style selects Showcase/Classic independently of Hero; only Showcase exposes its own sizes and rating controls. Discovery row is available only in Showcase with Hero off and a non-Kids profile; its providers require the row enabled. Mobile always uses the carousel and has no Row style destination. Continue Watching appearance applies to Home and Recommended; Labels uses Use default/On/Off, never Mixed. Include Next Up precedes tap/center-button action. Collection covers require applicable rows. Preset replacement requires confirmation and preserves server settings. Dynamic library, account, collection and row names come from the source, not constant control captions. Showcase logo/text sizes are independent, but Show ratings, age guidance and review-score count bind to the same hero settings as the featured carousel; the isShowcase argument only changes search anchors.",
       "controls": [
+        {
+          "text": "Hero",
+          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+        },
+        {
+          "text": "On",
+          "source": "Sources/FeatureSettings/HomeHeroEnabledPicker.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/FeatureSettings/HomeHeroEnabledPicker.swift"
+        },
+        {
+          "text": "Show hero",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Logo size",
+          "source": "Sources/FeatureSettings/HeroLogoSizeControl.swift"
+        },
+        {
+          "text": "Text size",
+          "source": "Sources/FeatureSettings/HeroLogoSizeControl.swift"
+        },
+        {
+          "text": "Default",
+          "source": "Sources/FeatureSettings/HeroLogoSizeControl.swift"
+        },
+        {
+          "text": "Content",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Content sources",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
         {
           "text": "Hero content sources",
           "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
         },
         {
+          "text": "Items to show",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Advance automatically",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Seconds per item",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Ratings",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Trailers",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Continue Watching",
+          "source": "Sources/CoreModels/HeroSourceKind.swift"
+        },
+        {
+          "text": "Recently Added",
+          "source": "Sources/CoreModels/HeroSourceKind.swift"
+        },
+        {
+          "text": "Watchlist",
+          "source": "Sources/CoreModels/HeroSourceKind.swift"
+        },
+        {
+          "text": "Prefer less recently shown Watchlist items",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Random from Library",
+          "source": "Sources/CoreModels/HeroSourceKind.swift"
+        },
+        {
+          "text": "Choose libraries",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Random libraries",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "All libraries on Home",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Collections",
+          "source": "Sources/CoreModels/HeroSourceKind.swift"
+        },
+        {
+          "text": "Choose collections",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Discovery",
+          "source": "Sources/CoreModels/HeroSourceKind.swift"
+        },
+        {
           "text": "Discovery providers",
           "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Show ratings",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Show Common Sense age",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Play trailers",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Play trailer behind the hero",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Start muted",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Provider labels",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Show provider labels",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Row style",
+          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+        },
+        {
+          "text": "Showcase",
+          "source": "Sources/FeatureSettings/HomeRowStylePicker.swift"
+        },
+        {
+          "text": "Classic",
+          "source": "Sources/FeatureSettings/HomeRowStylePicker.swift"
+        },
+        {
+          "text": "Discovery row",
+          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
         },
         {
           "text": "Covers",
@@ -24043,26 +24404,6 @@
         },
         {
           "text": "Available rows",
-          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
-        },
-        {
-          "text": "Ratings",
-          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
-        },
-        {
-          "text": "Show Common Sense age",
-          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
-        },
-        {
-          "text": "Discovery row",
-          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
-        },
-        {
-          "text": "Home layout",
-          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
-        },
-        {
-          "text": "Hero",
           "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
         },
         {
@@ -24170,50 +24511,6 @@
           "source": "Sources/FeatureSettings/ContinueWatchingNextUpControl.swift"
         },
         {
-          "text": "Logo size",
-          "source": "Sources/FeatureSettings/HeroLogoSizeControl.swift"
-        },
-        {
-          "text": "Text size",
-          "source": "Sources/FeatureSettings/HeroLogoSizeControl.swift"
-        },
-        {
-          "text": "Default",
-          "source": "Sources/FeatureSettings/HeroLogoSizeControl.swift"
-        },
-        {
-          "text": "Show hero",
-          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
-        },
-        {
-          "text": "Items to show",
-          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
-        },
-        {
-          "text": "Advance automatically",
-          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
-        },
-        {
-          "text": "Seconds per item",
-          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
-        },
-        {
-          "text": "Show ratings",
-          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
-        },
-        {
-          "text": "Show Common Sense age",
-          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
-        },
-        {
-          "text": "Play trailer behind the hero",
-          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
-        },
-        {
-          "text": "Start muted",
-          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
-        },
-        {
           "text": "On",
           "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
         },
@@ -24223,18 +24520,6 @@
         },
         {
           "text": "No content sources selected",
-          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
-        },
-        {
-          "text": "Show provider labels",
-          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
-        },
-        {
-          "text": "All libraries on Home",
-          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
-        },
-        {
-          "text": "Prefer less recently shown Watchlist items",
           "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
         }
       ],
@@ -24246,6 +24531,14 @@
         {
           "slug": "spoiler-protection",
           "anchor": "change-continue-watching-cards"
+        },
+        {
+          "slug": "home-and-navigation",
+          "anchor": "choose-the-hero"
+        },
+        {
+          "slug": "home-and-navigation",
+          "anchor": "choose-row-style-on-apple-tv"
         }
       ]
     },
@@ -27460,15 +27753,22 @@
         "Sources/FeatureSettings/SettingsCommunityLinks.swift",
         "Sources/FeatureSettings/SettingsCommunityLogo.swift",
         "Sources/FeatureSettings/SettingsFormLayout.swift",
-        "Sources/FeatureSettings/SettingsLibrariesRow.swift"
+        "Sources/FeatureSettings/SettingsLibrariesRow.swift",
+        "Sources/FeatureSettings/SettingsSearchResults.swift",
+        "Sources/CoreModels/SettingsSearch.swift",
+        "Sources/CoreUI/SettingsSearchAnchor.swift"
       ],
       "platforms": [
         "Apple TV"
       ],
       "navigation": "Open Settings in Apple TV navigation, then a profile category or Everyone destination.",
       "experience": "Change the active profile preferences, manage permitted shared services, or open Help & Diagnostics.",
-      "conditions": "Apple TV only. Profile categories are Playback, Subtitles, Live TV, Libraries, Appearance, Screens & Navigation, Trackers, Language, followed by Everyone and About. Everyone is absent for Kids; protected Libraries/Manage Profile need parental unlock. iCloud/metadata destinations require their wired dependencies. Seven version activations expose internal developer controls below About, including Device & Build; these are not ordinary support procedures. On Kids profiles, Name & Avatar replaces the ordinary Libraries category; protected Libraries and Manage Profile move into Parental Controls before About.",
+      "conditions": "Apple TV only. Profile categories are Playback, Subtitles, Live TV, Libraries, Appearance, Screens & Navigation, Trackers, Language, followed by Everyone and About. Everyone is absent for Kids; protected Libraries/Manage Profile need parental unlock. iCloud/metadata destinations require their wired dependencies. Seven version activations expose internal developer controls below About, including Device & Build; these are not ordinary support procedures. On Kids profiles, Name & Avatar replaces the ordinary Libraries category; protected Libraries and Manage Profile move into Parental Controls before About. Settings search is available from the root; the Apple TV link precedes the profile categories; selecting a result focuses the control on TV or briefly highlights it on mobile and still checks parental authorization. It never enables a prerequisite automatically.",
       "controls": [
+        {
+          "text": "Search settings",
+          "source": "Sources/FeatureSettings/SettingsView.swift"
+        },
         {
           "text": "Playback",
           "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
@@ -27774,6 +28074,10 @@
         },
         {
           "slug": "feedback-and-bugs"
+        },
+        {
+          "slug": "getting-started",
+          "anchor": "find-a-setting"
         }
       ]
     },
@@ -28076,6 +28380,117 @@
       ],
       "omitKind": "shared-component",
       "omitReason": "Reusable HomeHeroBackdrop.swift is wired into Sources/FeatureHome/FocusHeroHomeView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/FocusHeroHomeView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/FocusHeroHomeView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/FocusHeroHomeView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/FocusHeroHomeView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/FocusHeroHomeView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/FocusHeroHomeView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/FocusHeroHomeView.swift, Sources/FeatureHome/HomeView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+    },
+    "Sources/AppShelliOS/PlozziOSHomeScrollView.swift": {
+      "sources": [
+        "Sources/AppShelliOS/PlozziOSHomeScrollView.swift",
+        "Sources/AppShelliOS/PlozziOSHomeView.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Mobile Home scroll container and row-position preservation, constructed by PlozziOSHomeView. It supplies no independent caption or action; Home headings, card navigation and row browse controls are inventoried on that parent."
+    },
+    "Sources/CoreUI/MediaArtworkZoom.swift": {
+      "sources": [
+        "Sources/CoreUI/MediaArtworkZoom.swift",
+        "Sources/AppShelliOS/PlozziOSHomeView.swift",
+        "Sources/AppShelliOS/PlozziOSLibraryView.swift",
+        "Sources/AppShelliOS/PlozziOSSearchView.swift",
+        "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
+        "Sources/CoreUI/PosterCardView.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Shared iPhone/iPad artwork-origin and detail-navigation transition wrappers used by Home, library, Search and detail cards. This is not the player Zoom Mode or an artwork editor; visible card actions are inventoried on those parents."
+    },
+    "Sources/CoreUI/SettingsSearchAnchor.swift": {
+      "sources": [
+        "Sources/CoreUI/SettingsSearchAnchor.swift",
+        "Sources/FeatureSettings/SettingsView.swift",
+        "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+        "Sources/FeatureSettings/SettingsSearchResults.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Shared settings-search landing, scroll, focus and temporary highlight behavior. SettingsView and PlozziOSSettingsView route search results through this wrapper; named search controls belong to those parents and SettingsSearchResults. It changes no preference or authorization."
+    },
+    "Sources/FeatureHome/HeroShowcaseStage.swift": {
+      "sources": [
+        "Sources/FeatureHome/HeroShowcaseStage.swift",
+        "Sources/FeatureHome/HomeView.swift",
+        "Sources/FeatureHome/FocusHeroHomeView.swift",
+        "Sources/FeatureHome/HomeHeroView.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Apple TV composition and motion between the featured hero, Showcase backdrop and rows in HomeView/FocusHeroHomeView/HomeHeroView. It contributes no independent settings or action labels; Hero and Row style controls belong to HomeSectionSettingsViews."
+    },
+    "Sources/FeatureSettings/HomeHeroEnabledPicker.swift": {
+      "sources": [
+        "Sources/FeatureSettings/HomeHeroEnabledPicker.swift",
+        "Sources/FeatureSettings/HeroSettingsControls.swift",
+        "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Apple TV On/Off preview picker constructed by HeroSettingsControls on the Hero page in HomeSectionSettingsViews. It enables the featured hero independently of row style; its controls are inventoried on that parent, not omitted from the audit."
+    },
+    "Sources/FeatureSettings/HomeRowStylePicker.swift": {
+      "sources": [
+        "Sources/FeatureSettings/HomeRowStylePicker.swift",
+        "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Apple TV Showcase/Classic preview picker constructed by HomeRowStyleSettingsView in HomeSectionSettingsViews. Row style is independent of Hero On/Off; both choices and conditional Showcase settings are inventoried on that parent."
+    },
+    "Sources/FeatureSettings/SettingsSearchResults.swift": {
+      "sources": [
+        "Sources/FeatureSettings/SettingsSearchResults.swift",
+        "Sources/FeatureSettings/SettingsView.swift",
+        "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+        "Sources/CoreModels/SettingsSearch.swift",
+        "Sources/CoreModels/SettingsSearchAdditionalEntries.swift",
+        "Sources/CoreUI/SettingsSearchAnchor.swift"
+      ],
+      "platforms": [
+        "Apple TV",
+        "iPhone",
+        "iPad"
+      ],
+      "navigation": "Open Settings > Search settings on Apple TV, or activate the settings search field on iPhone/iPad; enter a task and select a result.",
+      "experience": "See suggested settings with an empty query or matched settings with their destination paths. Selecting a result opens its page and focuses or highlights the target, or its enabling prerequisite, without changing it.",
+      "conditions": "The catalogue filters platform and Kids-profile applicability. Apple TV supplies a separate Search settings page; mobile overlays results while search is active, with iPhone iOS 26 system toolbar placement and iPad navigation-bar drawer placement. Empty queries show five catalogue suggestions, not an empty result screen. Result titles and paths are resolved from the cited catalogue, not server/user names. Required parental authorization is still checked on the destination. Disabled prerequisites are focused rather than enabled; unavailable destinations show their verified unavailable state. Mobile highlight is temporary and respects reduced-motion/transparency settings. No claim of running-app inspection.",
+      "controls": [
+        {
+          "text": "Search settings",
+          "source": "Sources/FeatureSettings/SettingsSearchResults.swift"
+        },
+        {
+          "text": "Suggestions",
+          "source": "Sources/FeatureSettings/SettingsSearchResults.swift"
+        },
+        {
+          "text": "Subtitle size",
+          "source": "Sources/CoreModels/SettingsSearch.swift"
+        },
+        {
+          "text": "Theme",
+          "source": "Sources/CoreModels/SettingsSearch.swift"
+        },
+        {
+          "text": "Autoplay next episode",
+          "source": "Sources/CoreModels/SettingsSearch.swift"
+        },
+        {
+          "text": "Rewind on resume",
+          "source": "Sources/CoreModels/SettingsSearch.swift"
+        },
+        {
+          "text": "Display Size",
+          "source": "Sources/CoreModels/SettingsSearch.swift"
+        }
+      ],
+      "documents": [
+        {
+          "slug": "getting-started",
+          "anchor": "find-a-setting"
+        }
+      ]
     }
   }
 }

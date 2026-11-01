@@ -16,7 +16,7 @@ Dual subtitles show two text tracks together, useful when watching with someone 
 
 Select your primary text track first. On Apple TV, open **Style > Dual Subtitles**, or **Dual Subtitles** directly if shown. On iPhone/iPad, open **Subtitles > Advanced… > Second Track**. Choose another text track; **Off** there removes only the second track.
 
-Plozzigen can decode embedded second text tracks; native playback needs separately fetchable text. Image subtitles cannot be restyled or used as second tracks; an image-based primary disables dual subtitles.
+AetherEngine can decode embedded second text tracks; Apple's native player needs text it can fetch separately. Image subtitles keep their font and colors and cannot be second tracks; an image-based primary disables dual subtitles.
 
 ## Change appearance
 
@@ -24,13 +24,19 @@ Open **Settings > Subtitles** and choose **Customize subtitle style**—under **
 
 In Style, **Match Apple TV Subtitle Style** (**Match Device Subtitle Style** on mobile) replaces your custom look after confirmation. Editing a control stops matching. Placement and dual-subtitle settings remain Plozz-specific.
 
-In the player, open **Style** on Apple TV, or **Subtitles > Advanced… > Appearance > Style** on iPhone/iPad. **Position** runs from bottom (0%) to top (100%); negative values can crop text.
-
-**Extra Line Position** makes wrapped lines grow **Above**, around the **Center**, or **Below** that position. Within 0–100%, screen edges keep the block onscreen. This is not the placement of a second-language track.
-
-If file formatting overrides your choices, open **Subtitle file formatting**. Turn off **Use File Positions**, **Use File Colors**, or **Use Bold and Italic** to use your chosen style instead.
+In the player, open **Style** on Apple TV, or **Subtitles > Advanced… > Appearance > Style** on iPhone/iPad. Adjust font, size, colors, and outline for text captions. With image subtitles, the mobile link is **Position** instead of Style: you can move captions, not restyle their text.
 
 **Use a separate style for Live TV** in **Settings > Subtitles** separates channel appearance.
+
+## Keep captions near the picture
+
+In Style, **Position** chooses **Bottom of screen** or **Bottom of video**. Screen placement can use the black space below a wide movie; video placement keeps dialogue near the picture, following detected black bars where supported. Without detection, it follows the video frame.
+
+Then adjust **Vertical offset** upward from that bottom edge. For text, 0%-100% stays within the screen; negative values can crop it. **Extra Line Position** makes wrapped lines grow **Above**, around the **Center**, or **Below** the chosen position, not a second-language track.
+
+For image subtitles, Bottom of video can move lower dialogue without resizing it or moving fixed signs/artwork. Its Vertical offset appears only in this mode.
+
+If file formatting overrides your choices, open **Subtitle file formatting**. Turn off **Use File Positions**, **Use File Colors**, or **Use Bold and Italic** to use your chosen style instead.
 
 ## Set automatic choices
 
