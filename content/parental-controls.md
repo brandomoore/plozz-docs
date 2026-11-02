@@ -26,7 +26,9 @@ Set age/content restrictions on the media server itself. Hiding a library or Hom
 
 For [network shares](/network-shares/), choose folders containing only suitable media; there is no media-server user enforcing maturity restrictions.
 
-Playlist sources stay unavailable in Kids profiles until you create a Parental PIN and [approve each source](/live-tv/#approve-playlist-sources-for-kids). Approval allows the whole source, not age-filtered programs, and stays on that device. Review the channels before approving.
+Standalone playlist sources stay unavailable in Kids profiles until you create a Parental PIN and [approve each source](/live-tv/#approve-playlist-sources-for-kids). Approval allows the whole source, not age-filtered programs, and stays on that device.
+
+IPTV accounts added through **IPTV provider** do not use that approval. Enable only suitable accounts under **Settings > Libraries**, and review both their channels and on-demand titles. Converting a standalone playlist to an IPTV account does not carry over its approval protection.
 
 ## Check each device
 

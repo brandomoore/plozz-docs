@@ -46,7 +46,7 @@
       "references": [
         {
           "text": "Search settings",
-          "source": "Sources/FeatureSettings/SettingsView.swift"
+          "source": "Sources/FeatureSettings/SettingsSearchResults.swift"
         },
         {
           "text": "Media Share",
@@ -126,18 +126,18 @@
       "Sources/FeatureAuth/SiloSignInView.swift",
       "Sources/AppShelliOS/AddServerView.swift",
       "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift",
-      "Sources/FeatureSettings/MyLibrariesDetailView.swift",
       "Sources/FeatureDiscovery/ServerPickerView.swift",
-      "Sources/FeatureDiscoveryCore/ServerPickerViewModel.swift",
       "Sources/FeatureDiscoveryCore/ServerValidator.swift",
-      "Sources/CoreNetworking/ServerURLNormalizer.swift"
+      "Sources/CoreNetworking/ServerURLNormalizer.swift",
+      "Sources/AppShelliOS/ServerOnboardingViews.swift",
+      "Sources/AppShell/AddAccountView.swift"
     ],
     "watch": [
-      "Sources/FeatureAuth",
-      "Sources/FeatureDiscovery",
-      "Sources/AppShelliOS/AddServerView.swift",
+      "Sources/FeatureAuth/",
+      "Sources/FeatureDiscovery/",
       "Sources/FeatureSettings/Server",
-      "Sources/FeatureSettings/MyLibrariesDetailView.swift",
+      "Sources/AppShelliOS/ServerOnboarding",
+      "Sources/CoreUI/SettingsCopy.swift",
       "Sources/ProviderSilo/SiloAuthentication.swift"
     ],
     "platforms": [
@@ -148,16 +148,12 @@
     "ui": {
       "references": [
         {
-          "text": "Servers",
-          "source": "Sources/FeatureSettings/SettingsView.swift"
+          "text": "Sources",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
-          "text": "Add Server",
-          "source": "Sources/FeatureSettings/ServersAndLibrariesDetailView.swift"
-        },
-        {
-          "text": "Sign In to a Server",
-          "source": "Sources/FeatureSettings/ServersAndLibrariesDetailView.swift"
+          "text": "Add Source",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
           "text": "Remove Everywhere",
@@ -178,6 +174,18 @@
         {
           "text": "Add or manage addresses",
           "source": "Sources/CoreUI/ServerAddressSettingsLink.swift"
+        },
+        {
+          "text": "Sign in with username & password",
+          "source": "Sources/FeatureAuth/AuthView.swift"
+        },
+        {
+          "text": "Use Password",
+          "source": "Sources/AppShelliOS/AddServerView.swift"
+        },
+        {
+          "text": "Continue",
+          "source": "Sources/AppShelliOS/AddServerView.swift"
         },
         {
           "text": "Jellyfin",
@@ -229,13 +237,13 @@
       "Sources/FeatureShareOnboarding/MediaShareTransportCatalog.swift",
       "Sources/ProviderShare/ShareScanner.swift",
       "Sources/CoreModels/MediaShareLibraryConfiguration.swift",
-      "Sources/MediaTransportSMB/SMBMediaTransport.swift",
       "Sources/MediaTransportNFS/NFSMediaTransport.swift",
-      "Sources/TransportNFS/NFSWireTypes.swift",
       "Sources/MediaTransportWebDAV/WebDAVMediaTransport.swift",
-      "Sources/MediaTransportHTTP/RangeProbe.swift",
-      "Sources/MediaTransportWebDAV/WebDAVByteSource.swift",
-      "Sources/MediaTransportSFTP/SFTPMediaTransport.swift"
+      "Sources/MediaTransportSFTP/SFTPMediaTransport.swift",
+      "Sources/CoreUI/SettingsCopy.swift",
+      "Sources/AppShell/AddAccountView.swift",
+      "Sources/MediaTransportFTP/FTPMediaTransport.swift",
+      "Sources/MediaTransportFTP/FTPNetworkBackend.swift"
     ],
     "watch": [
       "Sources/FeatureShareOnboarding/",
@@ -243,7 +251,7 @@
       "Sources/MediaTransport",
       "Sources/TransportNFS/",
       "Sources/CoreModels/MediaShareLibraryConfiguration.swift",
-      "Sources/FeatureSettings/ServerDetailView.swift"
+      "Sources/CoreUI/SettingsCopy.swift"
     ],
     "platforms": [
       "Apple TV",
@@ -257,16 +265,12 @@
           "source": "Sources/CoreModels/ProviderKind.swift"
         },
         {
-          "text": "Servers",
-          "source": "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
+          "text": "Sources",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
-          "text": "Add Server",
-          "source": "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
-        },
-        {
-          "text": "Add Network Share",
-          "source": "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
+          "text": "Add Source",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
           "text": "Enter an address manually",
@@ -2136,7 +2140,7 @@
     "sources": [
       "Sources/FeatureAuth/IPTVSignInView.swift",
       "Sources/FeatureLiveTV/LiveTVSourcesView.swift",
-      "Sources/CoreModels/ProviderKind.swift",
+      "Sources/AppRuntime/LiveTVSourcesRuntime.swift",
       "Sources/ProviderIPTV/IPTVProvider.swift",
       "Sources/FeatureLiveTV/LiveTVServerSetupView.swift",
       "Sources/FeatureLiveTV/LiveTVPrototypeView.swift",
@@ -2150,18 +2154,18 @@
       "Sources/FeatureLiveTV/LiveTVSourceAccessGate.swift",
       "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift",
       "Sources/FeatureLiveTV/LibraryChannelEditorView.swift",
-      "Sources/CoreModels/LibraryChannelModels.swift",
       "Sources/CoreUI/ProfileSettingsCategory.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-      "Sources/CoreUI/SettingsCopy.swift"
+      "Sources/CoreUI/SettingsCopy.swift",
+      "Sources/ProviderSilo/SiloLibraryChannels.swift"
     ],
     "watch": [
       "Sources/FeatureLiveTV/",
       "Sources/FeatureLiveTVCore/",
       "Sources/CoreModels/LibraryChannel",
       "Sources/CoreModels/LiveTV",
-      "Sources/AppShelliOS/PlozziOSLiveTV",
-      "Sources/FeaturePlayback/LiveTVMobileNetwork"
+      "Sources/ProviderSilo/Silo",
+      "Sources/AppRuntime/LiveTV"
     ],
     "platforms": [
       "Apple TV",
@@ -2199,8 +2203,8 @@
           "source": "Sources/FeatureAuth/IPTVSignInView.swift"
         },
         {
-          "text": "Sources",
-          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+          "text": "TV Sources",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
           "text": "IPTV provider",
@@ -2229,10 +2233,6 @@
         {
           "text": "Check channel availability",
           "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
-        },
-        {
-          "text": "IPTV",
-          "source": "Sources/CoreModels/ProviderKind.swift"
         },
         {
           "text": "Movies",
@@ -2393,11 +2393,14 @@
         {
           "text": "Libraries",
           "source": "Sources/CoreUI/SettingsCopy.swift"
+        },
+        {
+          "text": "Add TV Source",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         }
       ],
       "emphasis": [
-        "four pictures",
-        "Plex, Jellyfin, or Emby"
+        "four pictures"
       ]
     }
   },
@@ -2405,7 +2408,7 @@
     "slug": "live-tv-channels",
     "title": "Organize channels and fix listings",
     "seoTitle": "Organize Plozz Live TV channels and correct guide listings",
-    "description": "Find hidden channels, manage favorites and regional filters, correct guide matching, and safely restore channels hidden by availability scans.",
+    "description": "Check IPTV guide progress, recover missing listings, manage channel visibility, correct guide matches, and restore saved channel identities.",
     "section": "Playback",
     "kind": "guide",
     "file": "live-tv-channels.md",
@@ -2425,15 +2428,23 @@
       "Sources/FeatureLiveTV/LiveTVChannelScanViews.swift",
       "Sources/CoreModels/LiveTVChannelOrganization.swift",
       "Sources/FeatureLiveTVCore/LiveTVChannelScanCoordinator.swift",
-      "Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift"
+      "Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift",
+      "Sources/CoreUI/SettingsCopy.swift",
+      "Sources/FeatureLiveTVCore/LiveTVGuidePreparationModel.swift",
+      "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift",
+      "Sources/FeatureLiveTV/LiveTVGuidePreparationToast.swift",
+      "Sources/FeatureAuth/IPTVSignInView.swift",
+      "Sources/AppRuntime/IPTVAccountGuideIndex.swift",
+      "Sources/FeatureSettings/ServerDetailView.swift",
+      "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift"
     ],
     "watch": [
-      "Sources/FeatureLiveTV/LiveTVChannel",
-      "Sources/FeatureLiveTV/LiveTVGuideMapping",
-      "Sources/FeatureLiveTV/LiveTVIdentityReview",
-      "Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift",
-      "Sources/FeatureLiveTV/LiveTVSources",
-      "Sources/FeatureLiveTVCore/LiveTVChannelScan"
+      "Sources/FeatureLiveTV/LiveTV",
+      "Sources/FeatureLiveTVCore/LiveTVGuide",
+      "Sources/FeatureLiveTVCore/LiveTVChannelScan",
+      "Sources/AppRuntime/IPTVAccountGuideIndex.swift",
+      "Sources/CoreUI/SettingsCopy.swift"
     ],
     "ui": {
       "references": [
@@ -2498,8 +2509,8 @@
           "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
         },
         {
-          "text": "Sources",
-          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+          "text": "TV Sources",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
           "text": "Playlist and guides",
@@ -2568,6 +2579,38 @@
         {
           "text": "Retry saving",
           "source": "Sources/FeatureLiveTV/LiveTVChannelScanViews.swift"
+        },
+        {
+          "text": "Guide ready",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Guide update failed",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Guide update paused",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "No guide configured",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Refresh guide",
+          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        },
+        {
+          "text": "Edit connection",
+          "source": "Sources/FeatureSettings/ServerDetailView.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Sources",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         }
       ],
       "emphasis": []
@@ -3066,7 +3109,7 @@
           "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
         },
         {
-          "text": "When tapping an item",
+          "text": "Tap action",
           "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
         },
         {
@@ -3552,14 +3595,14 @@
       "Sources/SeerService/SeerService.swift",
       "Sources/CoreModels/HeroSettings.swift",
       "Sources/CoreModels/ProfileStore.swift",
-      "Sources/FeatureSettings/ProfileDetailView.swift",
-      "Sources/FeatureSettings/ProfileSettingsDetailView.swift",
+      "Sources/FeatureLiveTV/LiveTVSourcesView.swift",
+      "Sources/CoreUI/SettingsCopy.swift",
       "Sources/FeatureSettings/ParentalPINDetailView.swift",
       "Sources/FeatureSettings/SettingsView.swift",
       "Sources/AppShelliOS/PlozziOSParentalPINSettingsView.swift",
       "Sources/AppShelliOS/PlozziOSAppModel.swift",
-      "Sources/AppShell/AppState.swift",
-      "Sources/CoreModels/Profile.swift",
+      "Sources/AppRuntime/AccountsProvidersModel.swift",
+      "Sources/AppRuntime/LiveTVSourcesRuntime.swift",
       "Sources/CoreModels/HomeLibraryVisibility.swift",
       "Sources/FeatureHomeCore/HomeAggregator.swift",
       "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift",
@@ -3570,7 +3613,7 @@
       "Sources/FeatureProfiles/",
       "Sources/FeatureSettings/Profile",
       "Sources/FeatureSettings/Parental",
-      "Sources/AppShelliOS/PlozziOSParental",
+      "Sources/AppRuntime/LiveTVSourcesRuntime.swift",
       "Sources/FeatureLiveTV/LiveTVSourceApproval",
       "Sources/SeerService/"
     ],
@@ -3595,6 +3638,14 @@
         {
           "text": "Settings",
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "IPTV provider",
+          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        },
+        {
+          "text": "Libraries",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         }
       ],
       "emphasis": [
@@ -3629,7 +3680,7 @@
       "Sources/AppShell/SyncSetupSenderPicker.swift",
       "Sources/FeatureSyncSetup/SyncSetupPairingModel.swift",
       "Sources/FeatureSettings/SyncEraseDataView.swift",
-      "Sources/CoreModels/LosslessAudioSettings.swift",
+      "Sources/CoreModels/LiveTVSourceApproval.swift",
       "Sources/CoreModels/ProfileSettingsSnapshot.swift"
     ],
     "watch": [
@@ -4281,15 +4332,15 @@
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
       "App/PlozziOS/Info.plist",
-      "Sources/CoreUI/HomeSectionStatusView.swift",
       "Sources/CoreUI/PlaybackFailureView.swift",
       "Sources/CoreModels/PlaybackDiagnosticReport.swift",
       "Sources/CoreModels/LibraryLoadDiagnostic.swift",
-      "Sources/FeatureAuth/PlexAccountRecoveryView.swift",
       "Sources/FeatureHome/LibraryBrowseView.swift",
       "Sources/AppRuntime/PlexHomeUsersModel.swift",
       "Sources/FeatureHomeCore/ItemDetailViewModel.swift",
-      "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
+      "Sources/CoreUI/SettingsCopy.swift",
+      "Sources/FeatureLiveTVCore/LiveTVGuidePreparationModel.swift",
+      "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
     ],
     "watch": [
       "Sources/CoreUI/Playback",
@@ -4323,8 +4374,8 @@
           "source": "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift"
         },
         {
-          "text": "Sources",
-          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+          "text": "TV Sources",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
           "text": "Retry",
@@ -4373,6 +4424,10 @@
         {
           "text": "Settings",
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Refresh guide",
+          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
         }
       ],
       "emphasis": [

@@ -1,25 +1,23 @@
 # Connect a server
 
-Connect your account to browse its libraries and save your progress.
+Connect an account to browse libraries and save your progress.
 
 ## Add a connection
 
-1. Choose your provider during setup, or open **Settings > Servers > Add Server**.
-2. For Jellyfin, Emby, or Silo, select a server or enter its address. Include any custom port or path.
+1. From a non-Kids profile, open **Settings > Sources > Add Source**, or choose a provider during setup.
+2. For Jellyfin, Emby, or Silo, choose a server or enter its address, including any custom port/path.
 3. Complete the provider’s sign-in:
-   - **Jellyfin**: approve Quick Connect from Jellyfin on another device, or use username/password.
-   - **Plex**: follow the linking instructions, then select your server.
+   - **Jellyfin**: approve Quick Connect on another device, or choose **Sign in with username & password** on Apple TV or **Use Password** on mobile.
+   - **Plex**: follow the linking instructions, then select the servers to add. On iPhone/iPad, owned servers start selected; review shared servers, then **Continue**.
    - **Emby**: use your server username and password.
    - **Silo**: use its browser address, compare codes before approving, then choose a Silo profile and enter its PIN if required.
 4. Choose libraries for your Plozz profile. Later, use **Settings > Libraries** to select servers, users, and libraries.
-
-Without connections, Apple TV offers **Sign In to a Server** instead.
 
 > [!NOTE]
 > Manual Jellyfin/Emby entries try HTTPS first, then eligible HTTP alternatives before sign-in. Explicit HTTPS addresses and certificate-trust failures never fall back to HTTP.
 
 > [!WARNING]
-> Sign-ins are shared by profiles on this device. Turning off a server under **Libraries** affects only the active profile; removing it under **Servers** signs out its accounts for everyone. **Remove Everywhere**, when offered, also removes it from your other iCloud devices.
+> Sign-ins are shared by profiles on this device. Turning off a server under **Libraries** affects only the active profile; removing a sign-in under **Sources** affects everyone using it. **Remove Everywhere**, when offered, also removes it from your other iCloud devices.
 
 ## Keep identities separate
 
@@ -29,21 +27,21 @@ See [server-user selection](/profiles-and-locks/#choose-a-server-user), [device 
 
 ## Restore a saved sign-in
 
-In **Settings > Servers**, select the server and choose **Sign In Again** beside the sign-in. On iPhone/iPad, open its sign-in row first.
+In **Settings > Sources**, select the server and choose **Sign In Again** beside the sign-in. On iPhone/iPad, open its sign-in row first.
 
-Use the original account, server, and server profile. Cancelling or a failed sign-in leaves your saved connection in place.
+Use the original account, server, and server profile. Failed or cancelled sign-in leaves your saved connection unchanged.
 
 ## Add local or remote addresses
 
-Select the server in **Settings > Servers**, then **Connection addresses > Add or manage addresses**. Choose the sign-in if asked, enter another address for that server, then **Verify and add address**.
+Select the server in **Settings > Sources**, then **Connection addresses > Add or manage addresses**. Choose the sign-in if asked, enter another address, then **Verify and add address**.
 
-Only add trusted addresses: Plozz uses your sign-in there, and HTTP is unencrypted. Silo requires approval at the new address using the same account and profile.
+Only add trusted addresses: they use your sign-in. HTTP is unencrypted. Silo requires approval at the new address using the same account and profile.
 
 Addresses belong to this sign-in on this device. Plozz prefers a reachable local address and tries saved alternatives after connection failures. Plex also discovers its own addresses.
 
 ## Confirm access before changing settings
 
-Play a video from an enabled library to confirm access.
+Play from an enabled library to confirm access.
 
 If discovery fails, enter the address manually.
 

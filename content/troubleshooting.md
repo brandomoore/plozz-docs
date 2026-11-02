@@ -8,13 +8,13 @@ Try narrow checks before resetting.
 2. If Jellyfin Quick Connect is unavailable, use username/password. For expired logins, use [Sign In Again](/servers/#restore-a-saved-sign-in), not account removal.
 3. For Silo, complete browser approval and any profile PIN.
 
-If a Plex Home check fails, choose **Try Again** or **Sign In Again** when offered. Relink the original Plex account, then retry the intended Home user; this does not reset its PIN.
+If a Plex Home check fails, choose **Try Again** or **Sign In Again** when offered. Relink the original Plex account and retry the Home user; its PIN stays unchanged.
 
 After [sync](/profiles-and-sync/), check **Settings > iCloud Sync** for **Needs sign-in**. Synced entries are not authenticated connections.
 
 ## Channels or listings are missing
 
-In Live TV's **Sources**, inspect errors and **Retry**. Refresh after playlist changes.
+In Live TV's **TV Sources**, use **Retry** for errors. For failed or paused IPTV guides, select the source, then **Refresh guide**; [check guide progress](/live-tv-channels/#wait-for-an-iptv-guide).
 
 Check source selection, favorites/guide-only filters, and **Manage channels > Hidden channels**. Missing listings need not prevent playback; a **guide only** connection cannot play channels. See [Live TV](/live-tv/) for mapping, playlist errors, and stream limits.
 
@@ -28,7 +28,7 @@ For wrong matches or scores, check [Metadata and ratings](/metadata-and-ratings/
 
 Compare another title. On iPhone/iPad, try lower [streaming quality](/streaming-quality/) where supported. If Maximum works but conversion fails, check server capability/permission.
 
-Select **No streams found** on a title's details to recheck the source without starting playback, or choose another accessible copy.
+On the title's details, select **No streams found** to recheck without playing, or choose another accessible copy.
 
 Check [audio tracks and timing](/audio/), or [subtitle track, style, and timing limits](/subtitles/).
 
@@ -48,4 +48,4 @@ Inspect engine, delivery, and measured stream/buffer facts with [Playback Info](
 
 In mobile **Recent Activity**, use **Refresh**, filter/search, then **Copy** for a filtered summary without displayed message text. Local messages can contain server/content details; review manually copied text or screenshots before sharing.
 
-Local error details do not require [diagnostics-sharing consent](/feedback-and-bugs/#choose-diagnostics-sharing); log uploads do. Never post passwords, tokens, pairing codes, or private playlist URLs.
+Local error details need no [diagnostics-sharing consent](/feedback-and-bugs/#choose-diagnostics-sharing); log uploads do. Never post passwords, tokens, pairing codes, or private playlist URLs.

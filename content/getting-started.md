@@ -19,7 +19,7 @@ While libraries load, **Choose later** continues setup; return to **Settings > L
 
 ## Find a setting
 
-Select your profile before changing **Settings**. On Apple TV, choose **Search settings**. On iPhone/iPad, use the settings search field.
+Select your profile before changing **Settings**. On Apple TV, use the **Search settings** field. On iPhone/iPad, use the settings search field.
 
 Enter a setting or task, then select a result. Its path shows where the setting belongs. Plozz opens that page and focuses the control on Apple TV, or briefly highlights it on mobile.
 

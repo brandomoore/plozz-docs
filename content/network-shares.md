@@ -4,7 +4,7 @@ Add a network folder as a library without running a Jellyfin, Plex, Emby, or Sil
 
 ## Connect a folder
 
-1. Choose **Media Share** during setup. Later, use **Settings > Servers > Add Network Share** on iPhone/iPad, or **Settings > Servers > Add Server > Media Share** on Apple TV.
+1. Choose **Media Share** during setup. Later, use a non-Kids profile and open **Settings > Sources > Add Source > Media Share**.
 2. Select a detected device, or choose **Enter an address manually**.
 3. Select SMB, NFS, WebDAV, SFTP, or FTP. Enter the address, any required port, and the credentials requested by the form.
 4. Connect, then browse to the share, export, or folder containing your media.
@@ -27,7 +27,7 @@ NFS requires **NFSv3** and uses the export's access rules rather than a Plozz us
 
 Recognized titles open their normal details. Use a title’s **Browse Files** action to inspect its original folders and files.
 
-Routine scans can skip unchanged folders. Open **Settings > Servers** and select the share. On Apple TV, choose **Scan now**. On iPhone/iPad, open the share's sign-in row, then choose **Scan Now**. Keep Plozz open while it scans.
+Routine scans can skip unchanged folders. Open **Settings > Sources** and select the share. On Apple TV, choose **Scan now**. On iPhone/iPad, open the share's sign-in row, then choose **Scan Now**. Keep Plozz open while it scans.
 
 Shares do not offer server-based streaming-quality controls; [offline downloads](/downloads/) use Original quality only.
 

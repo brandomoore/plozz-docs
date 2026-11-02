@@ -35,9 +35,12 @@
         "Sources/CoreModels/HomeLibraryVisibility.swift",
         "Sources/FeatureHomeCore/HomeAggregator.swift",
         "Sources/FeatureLiveTV/LiveTVSourceAccessGate.swift",
-        "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift"
+        "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift",
+        "Sources/AppRuntime/AccountsProvidersModel.swift",
+        "Sources/AppRuntime/LiveTVSourcesRuntime.swift",
+        "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
       ],
-      "answer": "The stable parental-controls guide is the age-suitability entry point. Combine a Kids Profile, restricted server identity and household Parental PIN; Kids profiles disable external Discovery but do not add an app-wide maturity filter. The PIN protects restricted settings and leaving Kids profiles, unlike an individual Profile Lock. Library hiding is not account-wide access control and network shares have no server maturity filter. Kids playlist approval requires switching to that profile, unlocking Sources with the Parental PIN, selecting an enabled playlist and entering the PIN again for Approve this source. Approval is whole-source and device-local. Use a restricted Seerr user and check content and automatic sign-in on each device."
+      "answer": "The stable parental-controls guide explains Kids Profile setup, restricted server identities and the household Parental PIN. Kids profiles disable external Discovery, not every mature title. The PIN protects restricted settings and leaving Kids profiles; a Profile Lock protects entry. Library hiding is not account-wide access control, and shares have no server maturity filter. Standalone playlist approval requires the Kids profile, TV Sources authorization and a second PIN entry for Approve this source. It grants the whole source locally. IPTV accounts added through IPTV provider are automatically enrolled as server sources, which LiveTVSourceAuthorization.filtering does not filter; they have no standalone approval control. Enable only suitable accounts in Settings > Libraries and inspect channels and on-demand titles. Converting a standalone playlist does not transfer its approval protection. Use a restricted Seerr identity and check content, restrictions and automatic sign-in on every device."
     },
     "apple-tv-user-sign-in": {
       "documents": [
@@ -229,9 +232,13 @@
         "Sources/AppShell/RootView.swift",
         "Sources/AppShelliOS/PlozziOSAppModel.swift",
         "Sources/AppRuntime/WatchMutationFactory.swift",
-        "Sources/CoreModels/WatchStateReconciler.swift"
+        "Sources/CoreModels/WatchStateReconciler.swift",
+        "Sources/ProviderSilo/SiloLibraryChannels.swift",
+        "Sources/ProviderSilo/SiloPlayback.swift",
+        "Sources/AppRuntime/AccountsProvidersModel.swift",
+        "Sources/AppRuntime/ManagedProviderRegistry.swift"
       ],
-      "answer": "Open Live TV Sources > Plozz channels; enable the automatic lineup or Create custom channel. Automatic channels are not individually editable; Retry Plozz channels recovers preparation errors and Refresh Plozz channels rebuilds prepared lineups. For custom channels set the name, order and Movies/Episodes choices, then select accessible Plex/Jellyfin/Emby libraries and optional semicolon-separated rules. Allowed ratings matches normalized exact classifications, not a maximum age; Include unrated titles defaults on and admits missing classifications independently of that list. Movie-only ordering disables Episodes. Preview schedule before Save channel; missing/invalid durations exclude titles and blank fields allow all matches. Changes start after published programs. The library catalogue must finish syncing before devices can reproduce the same schedule. Update watch history is profile-scoped, device-local and default-off; enabling it can mark programs watched after 90% actual viewing without resume writes. Both shells use the authorized completion mutation pipeline, so matching servers follow the cross-server history setting and connected video/anime trackers can receive eligible completions too. Playback uses original files, not IPTV or Silo sources. Select a saved custom-channel name to edit; its Delete channel context action removes the channel without deleting library media."
+      "answer": "Open Live TV's TV Sources > Plozz channels; enable the automatic lineup or Create custom channel. Automatic channels are not individually editable; Retry Plozz channels recovers preparation errors and Refresh Plozz channels rebuilds prepared lineups. For custom channels set the name, order and Movies/Episodes choices, then select accessible Plex/Jellyfin/Emby/Silo libraries and optional semicolon-separated rules. Allowed ratings matches normalized exact classifications, not a maximum age; Include unrated titles defaults on and admits missing classifications independently of that list. Movie-only ordering disables Episodes. Preview schedule before Save channel; missing/invalid durations exclude titles and blank fields allow all matches. Changes start after published programs. The library catalogue must finish syncing before devices can reproduce the same schedule. Update watch history is profile-scoped, device-local and default-off; enabling it can mark programs watched after 90% actual viewing without resume writes. Both shells use the authorized completion mutation pipeline, so matching servers follow the cross-server history setting and connected video/anime trackers can receive eligible completions too. Playback uses original files, not IPTV or network-share sources. Silo requires allowed, available protocol-3 original_http support; its eligible single-file versions must have reliable duration/size and are revalidated before playback. Silo native Live TV remains a separate unsupported source type. Select a saved custom-channel name to edit; its Delete channel context action removes the channel without deleting library media."
     },
     "offline-background": {
       "documents": [
@@ -485,6 +492,10 @@
         {
           "slug": "live-tv",
           "anchor": "add-iptv"
+        },
+        {
+          "slug": "live-tv-channels",
+          "anchor": "wait-for-an-iptv-guide"
         }
       ],
       "sources": [
@@ -495,7 +506,6 @@
         "Sources/AppShell/SelectLibrariesView.swift",
         "Sources/AppShelliOS/PlozziOSLibrarySelectionView.swift",
         "Sources/FeatureDiscovery/ServerPickerView.swift",
-        "Sources/FeatureDiscoveryCore/ServerPickerViewModel.swift",
         "Sources/FeatureDiscoveryCore/ServerValidator.swift",
         "Sources/CoreNetworking/ServerURLNormalizer.swift",
         "Sources/AppShelliOS/AddServerView.swift",
@@ -507,9 +517,10 @@
         "Sources/FeatureSettings/ServerDetailView.swift",
         "Sources/AppRuntime/AccountsProvidersModel.swift",
         "Sources/AppShelliOS/PlozziOSPlexHomeUserSettingsView.swift",
-        "Sources/MediaTransportWebDAV/WebDAVMediaTransport.swift"
+        "Sources/MediaTransportWebDAV/WebDAVMediaTransport.swift",
+        "Sources/CoreUI/SettingsCopy.swift"
       ],
-      "summary": "Connect supported media servers, approved Silo devices, IPTV accounts or wired share transports; shared sign-ins differ from profile library selection/server-user access. Manual Jellyfin/Emby checks prefer HTTPS, with eligible HTTP alternatives but no downgrade after explicit HTTPS or TLS rejection. Choose later defers initial library selection without declaring failed discovery empty. Libraries > Watching as or mobile identity controls select existing users; adding another sign-in does not create server users. Sign In Again validates the original account/server/profile without deleting a connection on failure/cancellation. Manage only trusted verified alternate addresses; HTTP is unencrypted, Silo reapproves and Tailscale needs manual entry on an already-connected playback device. WebDAV folder browsing does not establish seekable playback: the network-share section explains valid byte ranges and strong ETag/valid Last-Modified requirements, administrator checks and rescan/reopen after replacing files."
+      "summary": "Connect supported media servers, approved Silo devices, IPTV accounts or wired share transports; shared sign-ins differ from profile library selection/server-user access. Manual Jellyfin/Emby checks prefer HTTPS, with eligible HTTP alternatives but no downgrade after explicit HTTPS or TLS rejection. Choose later defers initial library selection without declaring failed discovery empty. Libraries > Watching as or mobile identity controls select existing users; adding another sign-in does not create server users. Sign In Again validates the original account/server/profile without deleting a connection on failure/cancellation. Manage only trusted verified alternate addresses; HTTP is unencrypted, Silo reapproves and Tailscale needs manual entry on an already-connected playback device. WebDAV folder browsing does not establish seekable playback: the network-share section explains valid byte ranges and strong ETag/valid Last-Modified requirements, administrator checks and rescan/reopen after replacing files. Shared Sources > Add Source navigation replaces separate server/share add actions. IPTV guide preparation is independent of channel availability and has explicit status/recovery in the channel guide."
     },
     "library": {
       "documents": [
@@ -997,31 +1008,35 @@
         {
           "slug": "live-tv-channels",
           "anchor": "check-unavailable-links"
+        },
+        {
+          "slug": "live-tv-channels",
+          "anchor": "wait-for-an-iptv-guide"
         }
       ],
       "sources": [
         "Sources/FeatureAuth/IPTVSignInView.swift",
         "Sources/CoreModels/LibraryChannelHistorySettings.swift",
-        "Sources/CoreModels/LiveTVMobileNetworkPolicy.swift",
         "Sources/ProviderIPTV/IPTVProvider.swift",
         "Sources/FeatureLiveTV/LiveTVServerSetupView.swift",
         "Sources/FeatureLiveTV/LiveTVSourcesView.swift",
         "Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift",
-        "Sources/FeatureLiveTV/LiveTVGuideMappingView.swift",
-        "Sources/FeatureLiveTV/LiveTVIdentityReviewView.swift",
-        "Sources/FeatureLiveTVCore/LiveTVChannelScanCoordinator.swift",
         "Sources/FeatureSettings/LiveTVSettingsView.swift",
         "Sources/AppRuntime/WatchMutationFactory.swift",
         "Sources/AppShelliOS/PlozziOSLiveTVDestination.swift",
         "Sources/FeatureLiveTV/LibraryChannelEditorView.swift",
-        "Sources/CoreModels/WatchStateReconciler.swift",
         "Sources/FeatureLiveTVCore/LibraryChannelService.swift",
         "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift",
         "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift",
-        "Sources/FeatureLiveTV/LiveTVMultiviewTouchChrome.swift",
-        "Sources/FeatureLiveTV/LiveTVProgramSearchView.swift"
+        "Sources/FeatureLiveTV/LiveTVProgramSearchView.swift",
+        "Sources/CoreUI/SettingsCopy.swift",
+        "Sources/FeatureLiveTVCore/LiveTVGuidePreparationModel.swift",
+        "Sources/AppRuntime/IPTVAccountGuideIndex.swift",
+        "Sources/ProviderSilo/SiloLibraryChannels.swift",
+        "Sources/AppRuntime/LiveTVSourcesRuntime.swift",
+        "Sources/AppRuntime/LiveTVLibraryRuntime.swift"
       ],
-      "summary": "Set up IPTV or server channels and distinguish direct M3U catalogues from web pages, single-stream HLS and XMLTV. The main sign-in form exposes EPG URL (optional); Advanced options adds guides, playlist authentication and separate playlist/stream versus guide headers. Guide headers are scoped to the first guide URL's server, with empty fields following playlist credentials. Prefer HTTPS. Explain device-local account file imports separately from encrypted source-copy sync. Find on-demand libraries, correct guide mappings, favorite/hide channels and run per-playlist reachability checks. Review channel identities restores a saved channel only after same-station/feed confirmation; favorites, hidden state and guide corrections follow that identity, otherwise the separate entry remains playable. Channels/Programs search tunes live, not from programme start. Kids playlist-source PIN approvals grant the whole source locally, not ratings-based filtering or server-account authorization. Explain Multiview setup through Watch, four-pane/provider limits and one audible pane: focus selects sound on Apple TV, while mobile exposes Audio. Retain previews and original-file library-channel schedule/history limits; history is profile-scoped, device-local and default-off. Opted-in 90%-viewed completions use the normal watch-mutation pipeline without resume writes, including the cross-server setting and eligible connected trackers; this consequential cross-module workflow needs ongoing audit coverage. Mobile Settings > Live TV > Stop without Wi-Fi or Ethernet gates detected network changes, not every request; brief cellular use remains possible. Low Data Mode independently pauses Live TV even on Wi-Fi; use an unrestricted connection. Automatic-lineup Retry/Refresh is distinct from custom-channel editing. Live TV buffer is a local new-load cushion with latency/tuning costs, respected by Go Live, not a recording or a buffer for scheduled library files. A focused channel-organization guide explains category overrides, country-OR-language filtering, hidden-channel recovery and scanning. Guide retention only keeps listings supplied by the guide, not recordings. Connect as IPTV account migrates an existing simple playlist into the account catalogue without losing its source preferences; disable the older simple source afterward to avoid duplicate live entries."
+      "summary": "Set up IPTV or server channels using direct M3U catalogues rather than web pages or single-stream HLS. EPG URL (optional) accepts XMLTV; Advanced options adds guides, authentication and separate playlist/stream versus guide headers. Guide headers apply to the first guide URL's server; empty fields follow playlist credentials. Prefer HTTPS. Distinguish device-local IPTV account file imports from encrypted standalone source-copy sync. Current IPTV accounts expose Refresh guide and household Sources > Edit connection, not standalone Playlist and guides, guide mapping, identity repair or availability scans. Standalone Kids approvals grant the whole playlist locally; IPTV accounts are enrolled as server sources and do not use that approval, so account selection and content review remain essential. Connect as IPTV account preserves the older source/preferences but not its approval protection on the new account; disable the duplicate source afterward. Category overrides, country-OR-language filtering, individual hiding and scan exclusions have distinct recovery paths. Identity restoration requires same-station/feed confirmation and carries favorites, hiding and mappings. Guide retention is not recording. Search tunes the live channel rather than replaying a program. Multiview supports four pictures subject to provider limits, with focus-selected audio on Apple TV and Audio on mobile. Auto preview and Keep watching while browsing are TV-only; Preview after watching is shared. Mobile network restrictions react to detected changes and may briefly use cellular; Low Data Mode pauses Live TV even on Wi-Fi. Library channels admit eligible Plex/Jellyfin/Emby/Silo originals, not native Silo TV. Automatic channels offer Retry/Refresh but are not individually editable. Custom channels need valid durations, exact-rating rules and explicit handling of unrated titles; schedules wait for already-scheduled programs and catalogue sync. History is default-off, profile-scoped and device-local; 90%-viewed completions use normal cross-server/tracker updates without resume writes. Live TV buffer trades tuning latency for a new-load cushion, respects Go Live, and is not recording or buffering for scheduled library files. Authorized account guide updates report stage progress across navigation; dismissing is not cancellation, and Guide ready does not promise every channel/date."
     },
     "offline": {
       "documents": [
@@ -1363,6 +1378,10 @@
         {
           "slug": "getting-started",
           "anchor": "find-a-setting"
+        },
+        {
+          "slug": "live-tv-channels",
+          "anchor": "wait-for-an-iptv-guide"
         }
       ],
       "sources": [
@@ -1384,10 +1403,10 @@
         "Sources/CoreModels/LibraryDiagnosticJournal.swift",
         "Sources/CoreModels/SearchDiagnosticJournal.swift",
         "Sources/FeatureSettings/SettingsSearchResults.swift",
-        "Sources/CoreModels/SettingsSearch.swift",
-        "Sources/CoreUI/SettingsSearchAnchor.swift"
+        "Sources/CoreUI/SettingsSearchAnchor.swift",
+        "Sources/FeatureLiveTVCore/LiveTVGuidePreparationModel.swift"
       ],
-      "summary": "Keep symptom checks and reset/cache scopes non-destructive. Incomplete library results offer Details/Try Again, while Home row statuses offer Details/Retry without discarding saved choices; No streams found rechecks inventory, not playback. Restore saved sign-ins without deleting connections; Plex Home can require the original account, not a PIN reset. Cover Discord/GitHub/mobile email, duplicate checks and safe reproduction/device/source details. Startup diagnostics choices both continue; reporting defaults off and needs current consent plus a configured endpoint. Share Diagnostics is device-wide, not profile-owned or transferred. Send Diagnostics offers Enable Sharing when off; consenting enables reporting without submitting the manual report. Both platforms then use Message (required) and Send to Developer; blank messages disable Send and CrashDiagnostics rejects them. Automatic Sentry reports include fixed screen categories/performance evidence but exclude identity/server/media/history. Explicit submissions include allowlisted activity, search, connection, preparation, failed-library-load and retained playback/source evidence, not free-form Recent Activity messages. Search evidence excludes query text, names and URLs. The submitted message is sent as written, so exclude secrets and personal details. Export aliases are scoped to one submission. Mobile Refresh/filter/search/Copy exports an activity summary without message text, whereas local display, manual text selection and screenshots can expose server/content details. Submitted confirms SDK handoff, not receipt or a public issue. Privacy Policy is reachable in consent/Settings, with a TV QR handoff. Apple TV Home Performance Overlay is wired through MainTabView/HomeView and exposes FPS, hitches and thermal state for stutter reports; the mobile toggle has no Home renderer consumer, so do not promise a mobile overlay. Local error details need no upload consent. Settings > Release Notes remains reachable after startup notices are disabled. Show release notes on startup for new versions and the confirmed Don’t Show Again action control automatic notices, not manual access."
+      "summary": "Keep symptom checks and reset/cache scopes non-destructive. Incomplete library results offer Details/Try Again, while Home row statuses offer Details/Retry without discarding saved choices; No streams found rechecks inventory, not playback. Restore saved sign-ins without deleting connections; Plex Home can require the original account, not a PIN reset. Cover Discord/GitHub/mobile email, duplicate checks and safe reproduction/device/source details. Startup diagnostics choices both continue; reporting defaults off and needs current consent plus a configured endpoint. Share Diagnostics is device-wide, not profile-owned or transferred. Send Diagnostics offers Enable Sharing when off; consenting enables reporting without submitting the manual report. Both platforms then use Message (required) and Send to Developer; blank messages disable Send and CrashDiagnostics rejects them. Automatic Sentry reports include fixed screen categories/performance evidence but exclude identity/server/media/history. Explicit submissions include allowlisted activity, search, connection, preparation, failed-library-load and retained playback/source evidence, not free-form Recent Activity messages. Search evidence excludes query text, names and URLs. The submitted message is sent as written, so exclude secrets and personal details. Export aliases are scoped to one submission. Mobile Refresh/filter/search/Copy exports an activity summary without message text, whereas local display, manual text selection and screenshots can expose server/content details. Submitted confirms SDK handoff, not receipt or a public issue. Privacy Policy is reachable in consent/Settings, with a TV QR handoff. Apple TV Home Performance Overlay is wired through MainTabView/HomeView and exposes FPS, hitches and thermal state for stutter reports; the mobile toggle has no Home renderer consumer, so do not promise a mobile overlay. Local error details need no upload consent. Settings > Release Notes remains reachable after startup notices are disabled. Show release notes on startup for new versions and the confirmed Don’t Show Again action control automatic notices, not manual access. Shared Sources > Add Source navigation replaces separate server/share add actions. IPTV guide preparation is independent of channel availability and has explicit status/recovery in the channel guide."
     },
     "platforms": {
       "documents": [
@@ -1544,7 +1563,6 @@
         "Sources/FeatureLiveTV/LiveTVPrototypeView.swift",
         "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift",
         "Sources/CoreModels/LiveTVMobileNetworkPolicy.swift",
-        "Sources/FeatureLiveTV/LiveTVPrototypeBrowse.swift",
         "Sources/FeatureLiveTV/LiveTVChannelPreferencesView.swift",
         "Sources/AppShelliOS/PlozziOSLiveTVDestination.swift",
         "Sources/FeatureLiveTV/LiveTVGuideMappingView.swift",
@@ -1556,11 +1574,12 @@
         "Sources/FeatureLiveTV/LiveTVProgramSearchView.swift",
         "Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift",
         "Sources/FeatureLiveTV/LiveTVIdentityReviewView.swift",
-        "Sources/FeatureLiveTVCore/LiveTVPrototypeImportModel.swift",
-        "Sources/FeatureLiveTVCore/LiveTVIndexedCache.swift",
-        "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift"
+        "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift",
+        "Sources/FeatureLiveTVCore/LiveTVGuidePreparationModel.swift",
+        "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift",
+        "Sources/FeatureLiveTV/LiveTVGuidePreparationToast.swift"
       ],
-      "summary": "Cover reachable channel menus, previews, Multiviews, guide search/correction, source-scoped channel-identity review, local Kids playlist approvals and channel checks. The mobile destination wires the network policy into playback eligibility: Wi-Fi-only enforcement follows detected changes, while Low Data Mode independently pauses live playback until an unrestricted connection is available. Automatic library channels offer preparation Retry and ready-state Refresh, but no individual editing; custom channels retain their separate editor. Guide options reaches Review channel identities; confirmed historical identity is applied by the durable cache/import model and reuses saved preferences only when the old entry is absent. The playlist detail's SettingsPageLink reaches scanning; its global Sources destination is nested under library-channel management and unreliable. Source-copy import exists for legacy/fallback flows and syncs differently from current IPTV-account file imports; do not invent a universal alternate import procedure. Personal channel-label/preferences and the separate unavailable-favorite recovery helper have no prototype presentation route, so omit them as unusable controls without confusing them with the reachable identity review. Maintain the focused channel-organization sections, guide retention limits and source-to-IPTV-account migration; these are reachable workflows, unlike the retired personal channel editor."
+      "summary": "Cover reachable channel menus, previews, Multiviews, guide search/correction, source-scoped channel-identity review, local Kids playlist approvals and channel checks. The mobile destination wires the network policy into playback eligibility: Wi-Fi-only enforcement follows detected changes, while Low Data Mode independently pauses live playback until an unrestricted connection is available. Automatic library channels offer preparation Retry and ready-state Refresh, but no individual editing; custom channels retain their separate editor. Guide options reaches Review channel identities; confirmed historical identity is applied by the durable cache/import model and reuses saved preferences only when the old entry is absent. The playlist detail's SettingsPageLink reaches scanning; its global TV Sources destination is nested under library-channel management and unreliable. Source-copy import exists for legacy/fallback flows and syncs differently from current IPTV-account file imports; do not invent a universal alternate import procedure. Personal channel-label/preferences and the separate unavailable-favorite recovery helper have no prototype presentation route, so omit them as unusable controls without confusing them with the reachable identity review. Maintain the focused channel-organization sections, guide retention limits and source-to-IPTV-account migration; these are reachable workflows, unlike the retired personal channel editor. TV Sources/Add TV Source labels are shared with CoreUI; setup and source details expose persistent, authorized IPTV guide preparation and Refresh guide. Eligible Silo libraries participate in automatic/custom Plozz channels without supplying native Silo Live TV."
     },
     "FeatureMusic": {
       "areas": [
@@ -1908,9 +1927,12 @@
         "Sources/ProviderIPTV/IPTVCatalog.swift",
         "Sources/FeatureAuth/IPTVSignInView.swift",
         "Sources/FeatureAuthCore/IPTVAuthViewModel.swift",
-        "Sources/CoreModels/IPTVCredential.swift"
+        "Sources/CoreModels/IPTVCredential.swift",
+        "Sources/FeatureLiveTVCore/LiveTVGuidePreparationModel.swift",
+        "Sources/AppRuntime/IPTVAccountGuideIndex.swift",
+        "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
       ],
-      "summary": "Keep playlist/Xtream and EPG setup, scoped guide credentials, local account-file imports, guide-only operation and optional on-demand catalogues in existing source/library tasks. HTTP/proxy/parsing diagnostics do not add a new selectable source type."
+      "summary": "Keep playlist/Xtream and EPG setup, scoped guide credentials, local account-file imports, guide-only operation and optional on-demand catalogues in existing source/library tasks. HTTP/proxy/parsing diagnostics do not add a new selectable source type. Explicit account setup starts authorized guide preparation beyond the sheet lifetime; stage/current-listing status and Refresh guide recovery are documented separately from channel availability."
     },
     "ProviderJellyfin": {
       "areas": [
@@ -1968,13 +1990,19 @@
         "connections",
         "quality",
         "offline",
-        "sync"
+        "sync",
+        "live-tv"
       ],
       "sources": [
         "Sources/ProviderSilo/SiloAuthentication.swift",
         "Sources/ProviderSilo/SiloStreamingQuality.swift",
-        "Sources/ProviderSilo/SiloDownloads.swift"
-      ]
+        "Sources/ProviderSilo/SiloDownloads.swift",
+        "Sources/ProviderSilo/SiloLibraryChannels.swift",
+        "Sources/ProviderSilo/SiloPlayback.swift",
+        "Sources/AppRuntime/LiveTVLibraryRuntime.swift",
+        "Sources/FeatureLiveTVCore/LibraryChannelService.swift"
+      ],
+      "summary": "Silo library channels are reachable on all platforms through the shared library runtime and automatic/custom channel management. Server capability/permission checks require available protocol-3 original-file delivery; eligible single-file versions with reliable runtime/size are catalogued and validated before playback. Transport sessions suppress ordinary resume writes; default-off channel completion reporting is separate. This does not enable native Silo Live TV, IPTV channels or external-player handoff."
     },
     "RatingsService": {
       "areas": [
@@ -2127,9 +2155,13 @@
         "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift",
         "Sources/CoreUI/LiveTVPortableSyncSettings.swift",
         "Sources/CoreModels/LiveTVMobileNetworkPolicy.swift",
-        "Sources/AppShelliOS/PlozziOSLiveTVDestination.swift"
+        "Sources/AppShelliOS/PlozziOSLiveTVDestination.swift",
+        "Sources/CoreUI/SettingsCopy.swift",
+        "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift",
+        "Sources/FeatureLiveTVCore/LiveTVGuidePreparationModel.swift",
+        "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
       ],
-      "summary": "Keep guide previews, favorites/hidden channels, search and mobile cellular policy in the Live TV reference. Distinguish the Wi-Fi-only setting's detected-transition limit from the independent Low Data Mode pause, which also applies on Wi-Fi. Explain local whole-source Kids approval and source-configuration sync separately; straightforward ordering/filter choices need no individual pages."
+      "summary": "Keep guide previews, favorites/hidden channels, search and mobile cellular policy in the Live TV reference. Distinguish the Wi-Fi-only setting's detected-transition limit from the independent Low Data Mode pause, which also applies on Wi-Fi. Explain local whole-source Kids approval and source-configuration sync separately; straightforward ordering/filter choices need no individual pages. Settings uses the shared TV Sources/Add TV Source labels; distinguish it from household Sources. Guide preparation/status and explicit Refresh guide need recovery instructions, not a page for every progress stage."
     },
     "playback": {
       "areas": [
@@ -2286,25 +2318,22 @@
         "Sources/AppShell/AddMediaShareView.swift",
         "Sources/CoreUI/ProviderBrandMark.swift",
         "Sources/CoreUI/SettingsRowFocusStyle.swift",
-        "Sources/CoreUI/TextTierStyle.swift"
+        "Sources/CoreUI/TextTierStyle.swift",
+        "Sources/CoreUI/SettingsCopy.swift"
       ],
       "platforms": [
         "Apple TV"
       ],
-      "navigation": "On Apple TV, start setup or open Settings > Servers > Add Server.",
+      "navigation": "On Apple TV, start setup or open Settings > Sources > Add Source.",
       "experience": "Choose the kind of media source or receive setup from another device.",
-      "conditions": "Apple TV. Each provider routes to its supported discovery/sign-in flow; receiving setup needs a second Plozz device on the local network.",
+      "conditions": "Apple TV. The returning-user chooser shows Add Source; first-run branding replaces that heading. Back appears when the caller permits returning to the app. Provider choices are Jellyfin, Plex, Emby, Silo, Media Share, IPTV in that order. Plex linking prepares its code before navigation, temporarily disabling provider choices and showing Requesting a code. Each provider routes to its supported discovery/sign-in flow. The optional Set up from another device action needs a second Plozz device on the local network.",
       "controls": [
         {
+          "text": "Add Source",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
+        },
+        {
           "text": "Back",
-          "source": "Sources/AppShell/AddAccountView.swift"
-        },
-        {
-          "text": "Set up from another device",
-          "source": "Sources/AppShell/AddAccountView.swift"
-        },
-        {
-          "text": "Requesting a code",
           "source": "Sources/AppShell/AddAccountView.swift"
         },
         {
@@ -2316,6 +2345,10 @@
           "source": "Sources/CoreModels/ProviderKind.swift"
         },
         {
+          "text": "Requesting a code",
+          "source": "Sources/AppShell/AddAccountView.swift"
+        },
+        {
           "text": "Emby",
           "source": "Sources/CoreModels/ProviderKind.swift"
         },
@@ -2324,12 +2357,16 @@
           "source": "Sources/CoreModels/ProviderKind.swift"
         },
         {
+          "text": "Media Share",
+          "source": "Sources/CoreModels/ProviderKind.swift"
+        },
+        {
           "text": "IPTV",
           "source": "Sources/CoreModels/ProviderKind.swift"
         },
         {
-          "text": "Media Share",
-          "source": "Sources/CoreModels/ProviderKind.swift"
+          "text": "Set up from another device",
+          "source": "Sources/AppShell/AddAccountView.swift"
         }
       ],
       "documents": [
@@ -3049,14 +3086,17 @@
         "Sources/CoreUI/TextTierStyle.swift",
         "Sources/CoreUI/TransientStatusPresentation.swift",
         "Sources/FeatureProfiles/AutomaticSignInSettings.swift",
-        "Sources/CoreUI/ProfileLockCopy.swift"
+        "Sources/CoreUI/ProfileLockCopy.swift",
+        "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift",
+        "Sources/FeatureLiveTV/LiveTVGuidePreparationToast.swift",
+        "Sources/FeatureLiveTVCore/LiveTVGuidePreparationModel.swift"
       ],
       "platforms": [
         "Apple TV"
       ],
       "navigation": "Launch Plozz on Apple TV; RootView chooses setup, profile selection, browsing, or recovery.",
       "experience": "Recover startup failures or set up a shared server connection before entering browsing.",
-      "conditions": "Apple TV only. Connection and profile state determine the presented destination; incoming playback and sync prompts require authorization.",
+      "conditions": "Apple TV only. Connection and profile state determine the presented destination; incoming playback and sync prompts require authorization. After explicit IPTV setup/refresh, a shared guide notice can remain across navigation while the account is authorized. It is hidden behind another transient message. Dismiss hides only the notice; terminal notices also auto-dismiss after five seconds. Percentages describe the current stage, not total work. Profile/account authorization changes cancel and remove scoped work; this does not promise OS background execution.",
       "controls": [
         {
           "text": "Enter your Plex PIN",
@@ -3129,6 +3169,58 @@
         {
           "text": "Loading",
           "source": "Sources/CoreUI/PINProfilePresentation.swift"
+        },
+        {
+          "text": "Adding guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Refreshing guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Downloading guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Reading guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Preparing listings",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Saving guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Checking channels",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Guide ready",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "No current guide listings",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "No guide configured",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Guide update paused",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Guide update failed",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Dismiss",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationToast.swift"
         }
       ],
       "documents": [
@@ -3137,6 +3229,10 @@
         },
         {
           "slug": "troubleshooting"
+        },
+        {
+          "slug": "live-tv-channels",
+          "anchor": "wait-for-an-iptv-guide"
         }
       ]
     },
@@ -3289,14 +3385,15 @@
         "Sources/CoreUI/SettingsRowFocusStyle.swift",
         "Sources/CoreUI/SettingsSwitchToggle.swift",
         "Sources/CoreUI/SetupProgressCard.swift",
-        "Sources/CoreUI/TextTierStyle.swift"
+        "Sources/CoreUI/TextTierStyle.swift",
+        "Sources/FeatureLiveTVCore/LiveTVGuidePreparationModel.swift"
       ],
       "platforms": [
         "Apple TV"
       ],
       "navigation": "Continue Apple TV setup after connecting a source.",
       "experience": "Choose libraries for this profile, continue later while loading, or retry a failed load.",
-      "conditions": "Apple TV. Libraries come from the connected server user. A loading failure is not an empty library result.",
+      "conditions": "Apple TV. Libraries come from the connected server user. A loading failure is not an empty library result. A just-added IPTV account with guide-preparation status and no selectable libraries shows Live TV and Playlist added, with Continue available so viewing need not wait for guide listings. These are not failed-library states. The status can be terminal as well as loading. The Apple TV root owns the guide notice over this presentation. Empty successful non-IPTV discovery can auto-continue, but an IPTV guide status keeps the explicit Continue step visible.",
       "controls": [
         {
           "text": "Finding your libraries",
@@ -3317,6 +3414,14 @@
         {
           "text": "Try Again",
           "source": "Sources/AppShell/SelectLibrariesView.swift"
+        },
+        {
+          "text": "Live TV",
+          "source": "Sources/AppShell/SelectLibrariesView.swift"
+        },
+        {
+          "text": "Playlist added",
+          "source": "Sources/AppShell/SelectLibrariesView.swift"
         }
       ],
       "documents": [
@@ -3327,6 +3432,10 @@
         {
           "slug": "servers",
           "anchor": "keep-identities-separate"
+        },
+        {
+          "slug": "live-tv-channels",
+          "anchor": "wait-for-an-iptv-guide"
         }
       ]
     },
@@ -3685,7 +3794,7 @@
       "platforms": [
         "Apple TV"
       ],
-      "navigation": "Choose Media Share from Apple TV Add Server; select a discovered location or enter an address.",
+      "navigation": "Choose Media Share from Apple TV Add Source; select a discovered location or enter an address.",
       "experience": "Choose a protocol, authenticate, approve host trust when required, browse to a folder, and save its content type.",
       "conditions": "Apple TV. SMB/NFS discovery needs Local Network permission; manual entry supports the shipped transports. FTP, TLS, NFS exports, and SFTP host-key states expose different controls. Never infer anonymous or key-file SFTP support. The protocol picker order is SMB, NFS, WebDAV, SFTP, FTP; FTPS uses an ftps address under FTP rather than a separate protocol choice.",
       "controls": [
@@ -3917,51 +4026,63 @@
         "Sources/CoreUI/SettingsPageSurface.swift",
         "Sources/CoreUI/DialogPresentation.swift",
         "Sources/FeatureAuth/AccountReauthenticationView.swift",
-        "Sources/CoreUI/ManagedProviderPicker.swift",
         "Sources/CoreUI/NativeGradientCardSurface.swift",
         "Sources/CoreUI/ProviderBrandMark.swift",
         "Sources/CoreUI/SettingsRowFocusStyle.swift",
         "Sources/CoreUI/SettingsSwitchToggle.swift",
-        "Sources/CoreUI/TextTierStyle.swift"
+        "Sources/CoreUI/TextTierStyle.swift",
+        "Sources/CoreUI/SettingsCopy.swift",
+        "Sources/AppShelliOS/ServerOnboardingViews.swift",
+        "Sources/CoreModels/ProviderKind.swift",
+        "Sources/FeatureAuth/SiloSignInView.swift",
+        "Sources/FeatureAuth/IPTVSignInView.swift",
+        "Sources/AppShelliOS/PlozziOSUnifiedAddShareView.swift",
+        "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift",
+        "Sources/FeatureLiveTV/LiveTVGuidePreparationToast.swift",
+        "Sources/FeatureLiveTVCore/LiveTVGuidePreparationModel.swift"
       ],
       "platforms": [
         "iPhone",
         "iPad"
       ],
-      "navigation": "On iPhone/iPad, choose a source during setup or open Settings > Servers > Add Server.",
-      "experience": "Choose and connect a server provider, including Plex browser linking or device approval.",
-      "conditions": "iPhone/iPad. Discovery and password/Quick Connect choices depend on provider; local discovery requires Local Network permission.",
+      "navigation": "On iPhone/iPad, choose a provider during setup or open Settings > Sources > Add Source, then select the provider.",
+      "experience": "Connect a chosen provider through server discovery/manual address, Jellyfin Quick Connect/password, Emby password, Silo approval, Plex linking and multi-server selection, or the shared IPTV/share flow.",
+      "conditions": "iPhone/iPad. The provider chooser is skipped when opened with a chosen provider from onboarding, account recovery or Live TV setup. Discovery requires Local Network permission and is scoped to Jellyfin, Emby or Silo. Password is initial for Emby; Jellyfin starts Quick Connect and offers Use Password. Silo uses its separately inventoried sign-in view. Plex owned servers start selected; shared servers need explicit selection, Continue requires at least one, and leaving server selection offers Start Over or Keep Going without adding servers on cancellation. Account reauthentication validates the existing identity instead of adding another server. Profile changes dismiss setup. IPTV guide work is owned beyond the sheet lifetime. After explicit IPTV setup/refresh, a shared guide notice can remain across navigation while the account is authorized. It is hidden behind another transient message. Dismiss hides only the notice; terminal notices also auto-dismiss after five seconds. Percentages describe the current stage, not total work. Profile/account authorization changes cancel and remove scoped work; this does not promise OS background execution.",
       "controls": [
         {
-          "text": "Server address",
-          "source": "Sources/AppShelliOS/AddServerView.swift"
+          "text": "Add Source",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
-          "text": "Media server",
-          "source": "Sources/AppShelliOS/AddServerView.swift"
+          "text": "Jellyfin",
+          "source": "Sources/CoreModels/ProviderKind.swift"
         },
         {
-          "text": "Checking server…",
-          "source": "Sources/AppShelliOS/AddServerView.swift"
+          "text": "Plex",
+          "source": "Sources/CoreModels/ProviderKind.swift"
         },
         {
-          "text": "Link Plex account",
-          "source": "Sources/AppShelliOS/AddServerView.swift"
+          "text": "Emby",
+          "source": "Sources/CoreModels/ProviderKind.swift"
         },
         {
-          "text": "Continue",
-          "source": "Sources/AppShelliOS/AddServerView.swift"
+          "text": "Silo",
+          "source": "Sources/CoreModels/ProviderKind.swift"
         },
         {
-          "text": "Add Server",
-          "source": "Sources/AppShelliOS/AddServerView.swift"
+          "text": "Media Share",
+          "source": "Sources/CoreModels/ProviderKind.swift"
+        },
+        {
+          "text": "IPTV",
+          "source": "Sources/CoreModels/ProviderKind.swift"
         },
         {
           "text": "Cancel",
           "source": "Sources/AppShelliOS/AddServerView.swift"
         },
         {
-          "text": "Saved and nearby servers",
+          "text": "Servers",
           "source": "Sources/AppShelliOS/AddServerView.swift"
         },
         {
@@ -3973,11 +4094,23 @@
           "source": "Sources/AppShelliOS/AddServerView.swift"
         },
         {
-          "text": "Other options",
+          "text": "Enter address",
           "source": "Sources/AppShelliOS/AddServerView.swift"
         },
         {
-          "text": "Sign in with username and password",
+          "text": "Server address",
+          "source": "Sources/AppShelliOS/AddServerView.swift"
+        },
+        {
+          "text": "Checking server…",
+          "source": "Sources/AppShelliOS/AddServerView.swift"
+        },
+        {
+          "text": "Connect",
+          "source": "Sources/AppShelliOS/AddServerView.swift"
+        },
+        {
+          "text": "Back",
           "source": "Sources/AppShelliOS/AddServerView.swift"
         },
         {
@@ -3986,7 +4119,7 @@
         },
         {
           "text": "Waiting for approval…",
-          "source": "Sources/AppShelliOS/AddServerView.swift"
+          "source": "Sources/AppShelliOS/ServerOnboardingViews.swift"
         },
         {
           "text": "Signed in",
@@ -4005,6 +4138,10 @@
           "source": "Sources/AppShelliOS/AddServerView.swift"
         },
         {
+          "text": "Sign In",
+          "source": "Sources/AppShelliOS/AddServerView.swift"
+        },
+        {
           "text": "Username",
           "source": "Sources/AppShelliOS/AddServerView.swift"
         },
@@ -4013,15 +4150,7 @@
           "source": "Sources/AppShelliOS/AddServerView.swift"
         },
         {
-          "text": "Sign In",
-          "source": "Sources/AppShelliOS/AddServerView.swift"
-        },
-        {
           "text": "Use Quick Connect",
-          "source": "Sources/AppShelliOS/AddServerView.swift"
-        },
-        {
-          "text": "Requesting a Plex link code…",
           "source": "Sources/AppShelliOS/AddServerView.swift"
         },
         {
@@ -4029,7 +4158,15 @@
           "source": "Sources/AppShelliOS/AddServerView.swift"
         },
         {
+          "text": "Requesting a Plex link code…",
+          "source": "Sources/AppShelliOS/AddServerView.swift"
+        },
+        {
           "text": "Open Plex to link",
+          "source": "Sources/AppShelliOS/AddServerView.swift"
+        },
+        {
+          "text": "Or enter a code at",
           "source": "Sources/AppShelliOS/AddServerView.swift"
         },
         {
@@ -4037,7 +4174,19 @@
           "source": "Sources/AppShelliOS/AddServerView.swift"
         },
         {
-          "text": "Choose a server",
+          "text": "Choose your servers",
+          "source": "Sources/AppShelliOS/AddServerView.swift"
+        },
+        {
+          "text": "Owned",
+          "source": "Sources/AppShelliOS/ServerOnboardingViews.swift"
+        },
+        {
+          "text": "Shared",
+          "source": "Sources/AppShelliOS/ServerOnboardingViews.swift"
+        },
+        {
+          "text": "Continue",
           "source": "Sources/AppShelliOS/AddServerView.swift"
         },
         {
@@ -4045,26 +4194,90 @@
           "source": "Sources/AppShelliOS/AddServerView.swift"
         },
         {
-          "text": "Provider",
-          "source": "Sources/CoreUI/ManagedProviderPicker.swift"
+          "text": "Start over?",
+          "source": "Sources/AppShelliOS/AddServerView.swift"
+        },
+        {
+          "text": "Start Over",
+          "source": "Sources/AppShelliOS/AddServerView.swift"
+        },
+        {
+          "text": "Keep Going",
+          "source": "Sources/AppShelliOS/AddServerView.swift"
+        },
+        {
+          "text": "Adding guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Refreshing guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Downloading guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Reading guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Preparing listings",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Saving guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Checking channels",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Guide ready",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "No current guide listings",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "No guide configured",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Guide update paused",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Guide update failed",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Dismiss",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationToast.swift"
         }
       ],
       "documents": [
         {
           "slug": "servers",
           "anchor": "add-a-connection"
+        },
+        {
+          "slug": "live-tv-channels",
+          "anchor": "wait-for-an-iptv-guide"
         }
       ]
     },
     "Sources/AppShelliOS/PlozziOSAddShareView.swift": {
       "sources": [
         "Sources/AppShelliOS/PlozziOSAddShareView.swift",
-        "Sources/AppShelliOS/PlozziOSHomeView.swift",
-        "Sources/AppShelliOS/PlozziOSRootView.swift",
+        "Sources/AppShelliOS/PlozziOSUnifiedAddShareView.swift",
+        "Sources/AppShelliOS/AddServerView.swift",
         "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
       ],
-      "omitKind": "shared-component",
-      "omitReason": "Reusable PlozziOSAddShareView.swift is wired into Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/AppShelliOS/PlozziOSServerSettingsViews.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitKind": "unreachable",
+      "omitReason": "This legacy wrapper constructs PlozziOSUnifiedAddShareView but has no constructor call in the frozen product source. Current AddServerView and server-settings routes construct the unified share screen directly. Do not treat this unused wrapper as another setup route."
     },
     "Sources/AppShelliOS/PlozziOSAllLibrariesDestinationView.swift": {
       "sources": [
@@ -4653,7 +4866,10 @@
         "Sources/CoreUI/SettingsRowFocusStyle.swift",
         "Sources/CoreUI/SettingsSwitchToggle.swift",
         "Sources/CoreUI/SettingsSurfaces.swift",
-        "Sources/CoreUI/TextTierStyle.swift"
+        "Sources/CoreUI/TextTierStyle.swift",
+        "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift",
+        "Sources/FeatureLiveTV/LiveTVGuidePreparationToast.swift",
+        "Sources/FeatureLiveTVCore/LiveTVGuidePreparationModel.swift"
       ],
       "platforms": [
         "iPhone",
@@ -4661,7 +4877,7 @@
       ],
       "navigation": "Continue iPhone/iPad first-run setup after a source is connected.",
       "experience": "Set the first profile and initial appearance before opening Home.",
-      "conditions": "iPhone/iPad initial setup. Additional profile and Plex Home flows depend on connected accounts.",
+      "conditions": "iPhone/iPad initial setup. Additional profile and Plex Home flows depend on connected accounts. After explicit IPTV setup/refresh, a shared guide notice can remain across navigation while the account is authorized. It is hidden behind another transient message. Dismiss hides only the notice; terminal notices also auto-dismiss after five seconds. Percentages describe the current stage, not total work. Profile/account authorization changes cancel and remove scoped work; this does not promise OS background execution.",
       "controls": [
         {
           "text": "Edit",
@@ -4678,12 +4894,68 @@
         {
           "text": "Appearance",
           "source": "Sources/AppShelliOS/PlozziOSFirstRunView.swift"
+        },
+        {
+          "text": "Adding guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Refreshing guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Downloading guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Reading guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Preparing listings",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Saving guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Checking channels",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Guide ready",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "No current guide listings",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "No guide configured",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Guide update paused",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Guide update failed",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Dismiss",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationToast.swift"
         }
       ],
       "documents": [
         {
           "slug": "getting-started",
           "anchor": "set-up-plozz"
+        },
+        {
+          "slug": "live-tv-channels",
+          "anchor": "wait-for-an-iptv-guide"
         }
       ]
     },
@@ -4715,6 +4987,14 @@
       ],
       "omitKind": "shared-component",
       "omitReason": "Reusable PlozziOSHomeRailLayout.swift is wired into Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+    },
+    "Sources/AppShelliOS/PlozziOSHomeScrollView.swift": {
+      "sources": [
+        "Sources/AppShelliOS/PlozziOSHomeScrollView.swift",
+        "Sources/AppShelliOS/PlozziOSHomeView.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Mobile Home scroll container and row-position preservation, constructed by PlozziOSHomeView. It supplies no independent caption or action; Home headings, card navigation and row browse controls are inventoried on that parent."
     },
     "Sources/AppShelliOS/PlozziOSHomeSkeletonRail.swift": {
       "sources": [
@@ -4812,7 +5092,8 @@
         "Sources/FeatureHomeCore/HeroTrailerController.swift",
         "Sources/HeroUI/HeroDiscoveryAttribution.swift",
         "Sources/HeroUI/HeroExposureObserver.swift",
-        "Sources/HeroUI/HeroPagingDotsView.swift"
+        "Sources/HeroUI/HeroPagingDotsView.swift",
+        "Sources/CoreUI/SettingsCopy.swift"
       ],
       "platforms": [
         "iPhone",
@@ -4820,7 +5101,7 @@
       ],
       "navigation": "Open Home from iPhone/iPad navigation.",
       "experience": "Browse profile rows and hero suggestions, tap an eligible row's heading chevron for its larger grid, retry failed loading, or connect a source when none exists.",
-      "conditions": "iPhone/iPad. Home content follows enabled libraries, source availability, profile presentation, watched-content filtering, and eligible Discovery providers. Row-heading browsing requires more available titles, nonempty results, no loading/failure, and no section issue. The row title is the action label, including dynamic server/collection names, not a separate See all caption. The global Watchlist action opens the dedicated Watchlist page; combined Continue Watching and Live TV rows do not gain a row browser. Source/profile changes invalidate an open browser.",
+      "conditions": "iPhone/iPad. Home content follows enabled libraries, source availability, profile presentation, watched-content filtering, and eligible Discovery providers. Row-heading browsing requires more available titles, nonempty results, no loading/failure, and no section issue. The row title is the action label, including dynamic server/collection names, not a separate See all caption. The global Watchlist action opens the dedicated Watchlist page; combined Continue Watching and Live TV rows do not gain a row browser. Source/profile changes invalidate an open browser. The connected Home empty state passes hasAccounts true and shows Nothing to watch yet with Add Source. The same file defines Build your library and Set Up from Another Device for the no-account RootView caller; those are not additional actions on connected Home.",
       "controls": [
         {
           "text": "No titles to show",
@@ -4830,20 +5111,25 @@
           "text": "Section unavailable in the latest refresh",
           "source": "Sources/CoreModels/HomeSectionIssue.swift"
         },
-        {"text": "Continue Watching", "source": "Sources/FeatureHomeCore/HomeRow.swift"},
-        {"text": "Watchlist", "source": "Sources/FeatureHomeCore/HomeRow.swift"},
-        {"text": "Recently Added", "source": "Sources/FeatureHomeCore/HomeRow.swift"},
         {
-          "text": "Your Home is empty",
+          "text": "Continue Watching",
+          "source": "Sources/FeatureHomeCore/HomeRow.swift"
+        },
+        {
+          "text": "Watchlist",
+          "source": "Sources/FeatureHomeCore/HomeRow.swift"
+        },
+        {
+          "text": "Recently Added",
+          "source": "Sources/FeatureHomeCore/HomeRow.swift"
+        },
+        {
+          "text": "Nothing to watch yet",
           "source": "Sources/AppShelliOS/PlozziOSHomeView.swift"
         },
         {
-          "text": "Add Server",
-          "source": "Sources/AppShelliOS/PlozziOSHomeView.swift"
-        },
-        {
-          "text": "Add Network Share",
-          "source": "Sources/AppShelliOS/PlozziOSHomeView.swift"
+          "text": "Add Source",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
           "text": "Unable to load Home",
@@ -5729,7 +6015,10 @@
         "Sources/CoreUI/SettingsRowFocusStyle.swift",
         "Sources/CoreUI/SettingsSwitchToggle.swift",
         "Sources/CoreUI/SetupProgressCard.swift",
-        "Sources/CoreUI/TextTierStyle.swift"
+        "Sources/CoreUI/TextTierStyle.swift",
+        "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift",
+        "Sources/FeatureLiveTV/LiveTVGuidePreparationToast.swift",
+        "Sources/FeatureLiveTVCore/LiveTVGuidePreparationModel.swift"
       ],
       "platforms": [
         "iPhone",
@@ -5737,7 +6026,7 @@
       ],
       "navigation": "Choose libraries during mobile profile setup or edit the active profile libraries.",
       "experience": "Include the libraries the current server user can access, retrying failed discovery instead of accepting an empty result.",
-      "conditions": "iPhone/iPad. Library inclusion belongs to the Plozz profile; it does not change server permissions or remove shared accounts.",
+      "conditions": "iPhone/iPad. Library inclusion belongs to the Plozz profile; it does not change server permissions or remove shared accounts. After explicit IPTV setup/refresh, a shared guide notice can remain across navigation while the account is authorized. It is hidden behind another transient message. Dismiss hides only the notice; terminal notices also auto-dismiss after five seconds. Percentages describe the current stage, not total work. Profile/account authorization changes cancel and remove scoped work; this does not promise OS background execution. A just-added IPTV account with guide-preparation status and no selectable libraries shows Live TV and Playlist added, with Continue available so viewing need not wait for guide listings. These are not failed-library states. The status can be terminal as well as loading. hostsGuideProgress defaults on; first-run embeds this view with that flag off because PlozziOSFirstRunView owns the notice. The pending Plex PIN view temporarily replaces library selection without accepting an unverified user.",
       "controls": [
         {
           "text": "Finding your libraries",
@@ -5770,12 +6059,80 @@
         {
           "text": "Some servers could not be reached. Their libraries can be configured later in Settings.",
           "source": "Sources/AppShelliOS/PlozziOSLibrarySelectionView.swift"
+        },
+        {
+          "text": "Adding guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Refreshing guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Downloading guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Reading guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Preparing listings",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Saving guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Checking channels",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Guide ready",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "No current guide listings",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "No guide configured",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Guide update paused",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Guide update failed",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Dismiss",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationToast.swift"
+        },
+        {
+          "text": "Live TV",
+          "source": "Sources/AppShelliOS/PlozziOSLibrarySelectionView.swift"
+        },
+        {
+          "text": "Playlist added",
+          "source": "Sources/AppShelliOS/PlozziOSLibrarySelectionView.swift"
         }
       ],
       "documents": [
         {
           "slug": "servers",
           "anchor": "keep-identities-separate"
+        },
+        {
+          "slug": "live-tv-channels",
+          "anchor": "wait-for-an-iptv-guide"
+        },
+        {
+          "slug": "live-tv-channels",
+          "anchor": "wait-for-an-iptv-guide"
         }
       ]
     },
@@ -5832,7 +6189,8 @@
         "Sources/CoreUI/SystemCardFocus.swift",
         "Sources/CoreUI/SystemPosterCaption.swift",
         "Sources/CoreUI/TextTierStyle.swift",
-        "Sources/CoreUI/ThemePalette.swift"
+        "Sources/CoreUI/ThemePalette.swift",
+        "Sources/CoreUI/SettingsCopy.swift"
       ],
       "platforms": [
         "iPhone",
@@ -5867,8 +6225,8 @@
           "source": "Sources/AppShelliOS/PlozziOSLibraryView.swift"
         },
         {
-          "text": "Add Server",
-          "source": "Sources/AppShelliOS/PlozziOSLibraryView.swift"
+          "text": "Add Source",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
           "text": "Browse Files",
@@ -6295,7 +6653,8 @@
         "Sources/CoreUI/AmbientGradientBackground.swift",
         "Sources/CoreUI/ThemePalette.swift",
         "Sources/CoreUI/NativeGradientCardSurface.swift",
-        "Sources/CoreUI/ProviderBrandMark.swift"
+        "Sources/CoreUI/ProviderBrandMark.swift",
+        "Sources/AppShelliOS/ServerOnboardingViews.swift"
       ],
       "platforms": [
         "iPhone",
@@ -7180,7 +7539,11 @@
         "Sources/CoreUI/NativeGradientCardSurface.swift",
         "Sources/CoreUI/SettingsRowFocusStyle.swift",
         "Sources/CoreUI/SettingsSwitchToggle.swift",
-        "Sources/CoreUI/TextTierStyle.swift"
+        "Sources/CoreUI/TextTierStyle.swift",
+        "Sources/CoreUI/SettingsCopy.swift",
+        "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift",
+        "Sources/FeatureLiveTV/LiveTVGuidePreparationToast.swift",
+        "Sources/FeatureLiveTVCore/LiveTVGuidePreparationModel.swift"
       ],
       "platforms": [
         "iPhone",
@@ -7188,11 +7551,11 @@
       ],
       "navigation": "Add a profile on iPhone/iPad and continue the guided setup.",
       "experience": "Choose its server users, libraries, and optional Seerr identity before finishing.",
-      "conditions": "iPhone/iPad. The libraries step embeds PlozziOSMyLibrariesSettingsView with profileSetup presentation, followed by optional Seerr, theme and lock steps on their separately inventoried screens. Setup overrides the Libraries navigation title with the profile's name. Server/library names and Plex identity rows are dynamic; Watching as is a picker for multiple non-Plex, non-share sign-ins. Add Another Plex Account/Add Another User exclude shares. Add Server appears only with no server groups. Loading and recovery controls depend on discovery state. Setup cannot be dismissed by swiping.",
+      "conditions": "iPhone/iPad. The libraries step embeds PlozziOSMyLibrariesSettingsView with profileSetup presentation, followed by optional Seerr, theme and lock steps on their separately inventoried screens. Setup overrides the Libraries navigation title with the profile's name. Server/library names and Plex identity rows are dynamic; Watching as is a picker for multiple non-Plex, non-share sign-ins. Add Another Plex Account/Add Another User exclude shares. Add Source appears only with no server groups. Loading and recovery controls depend on discovery state. Setup cannot be dismissed by swiping. After explicit IPTV setup/refresh, a shared guide notice can remain across navigation while the account is authorized. It is hidden behind another transient message. Dismiss hides only the notice; terminal notices also auto-dismiss after five seconds. Percentages describe the current stage, not total work. Profile/account authorization changes cancel and remove scoped work; this does not promise OS background execution.",
       "controls": [
         {
-          "text": "Add Server",
-          "source": "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
+          "text": "Add Source",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
           "text": "Watching as",
@@ -7225,12 +7588,68 @@
         {
           "text": "Done",
           "source": "Sources/AppShelliOS/PlozziOSProfileSetupView.swift"
+        },
+        {
+          "text": "Adding guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Refreshing guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Downloading guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Reading guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Preparing listings",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Saving guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Checking channels",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Guide ready",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "No current guide listings",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "No guide configured",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Guide update paused",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Guide update failed",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Dismiss",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationToast.swift"
         }
       ],
       "documents": [
         {
           "slug": "profiles-and-locks",
           "anchor": "choose-who-is-watching"
+        },
+        {
+          "slug": "live-tv-channels",
+          "anchor": "wait-for-an-iptv-guide"
         }
       ]
     },
@@ -7335,7 +7754,12 @@
         "Sources/FeatureHomeCore/HeroTrailerController.swift",
         "Sources/FeatureHomeCore/ThemeMusicPlayback.swift",
         "Sources/FeatureLiveTV/LiveTVPrototypeBrowse.swift",
-        "Sources/FeatureLiveTV/LiveTVPrototypePreview.swift"
+        "Sources/FeatureLiveTV/LiveTVPrototypePreview.swift",
+        "Sources/AppShelliOS/PlozziOSHomeView.swift",
+        "Sources/CoreUI/SettingsCopy.swift",
+        "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift",
+        "Sources/FeatureLiveTV/LiveTVGuidePreparationToast.swift",
+        "Sources/FeatureLiveTVCore/LiveTVGuidePreparationModel.swift"
       ],
       "platforms": [
         "iPhone",
@@ -7343,7 +7767,7 @@
       ],
       "navigation": "Launch Plozz on iPhone/iPad, finish required setup, then use its tabs or sidebar.",
       "experience": "Open shown shortcuts, switch profiles, or connect media when Home is empty.",
-      "conditions": "Compact UIKit navigation puts excess shown shortcuts under More; it does not reveal hidden shortcuts. iPad can use regular-width navigation. Profile authorization applies before browsing. Watchlist shows sorting before filtering on mobile; its fields are Date Added, Release Date and Name only. Choosing a field resets its direction: Name starts ascending, dates descending. Clear Filters appears only with a movie/show filter; filtered-empty results also offer it.",
+      "conditions": "Compact UIKit navigation puts excess shown shortcuts under More; it does not reveal hidden shortcuts. iPad can use regular-width navigation. Profile authorization applies before browsing. Watchlist shows sorting before filtering on mobile; its fields are Date Added, Release Date and Name only. Choosing a field resets its direction: Name starts ascending, dates descending. Clear Filters appears only with a movie/show filter; filtered-empty results also offer it. The no-account Home destination passes hasAccounts false to the shared empty state and supplies both Add Source and Set Up from Another Device. Connected empty Home instead shows Nothing to watch yet in its separately inventoried HomeView. After explicit IPTV setup/refresh, a shared guide notice can remain across navigation while the account is authorized. It is hidden behind another transient message. Dismiss hides only the notice; terminal notices also auto-dismiss after five seconds. Percentages describe the current stage, not total work. Profile/account authorization changes cancel and remove scoped work; this does not promise OS background execution.",
       "controls": [
         {
           "text": "AirPlay",
@@ -7367,19 +7791,15 @@
         },
         {
           "text": "Build your library",
-          "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
+          "source": "Sources/AppShelliOS/PlozziOSHomeView.swift"
         },
         {
-          "text": "Add Server",
-          "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
+          "text": "Add Source",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
           "text": "Set Up from Another Device",
-          "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
-        },
-        {
-          "text": "Add Network Share",
-          "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
+          "source": "Sources/AppShelliOS/PlozziOSHomeView.swift"
         },
         {
           "text": "Home",
@@ -7557,6 +7977,58 @@
         {
           "text": "Watch channel",
           "source": "Sources/FeatureLiveTV/LiveTVLoadingSkeleton.swift"
+        },
+        {
+          "text": "Adding guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Refreshing guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Downloading guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Reading guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Preparing listings",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Saving guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Checking channels",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Guide ready",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "No current guide listings",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "No guide configured",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Guide update paused",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Guide update failed",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Dismiss",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationToast.swift"
         }
       ],
       "documents": [
@@ -7566,6 +8038,10 @@
         },
         {
           "slug": "getting-started"
+        },
+        {
+          "slug": "live-tv-channels",
+          "anchor": "wait-for-an-iptv-guide"
         }
       ]
     },
@@ -7861,21 +8337,17 @@
         "iPhone",
         "iPad"
       ],
-      "navigation": "Open mobile Settings > Servers, then a connection or Add Server.",
+      "navigation": "Open Settings > Sources on iPhone/iPad, then select a connection or Add Source; choose Media Share for a network folder.",
       "experience": "Add, reauthenticate, inspect addresses, rescan shares, or remove a shared connection.",
       "conditions": "iPhone/iPad. Household connection management is not shown to Kids profiles; removing a shared account is different from disabling a library for one profile. In Libraries, a non-share server with a saved account offers Add Another Plex Account for Plex or Add Another User for other providers. These sign in an existing server account, not create a server user; shared-folder connections have neither action.",
       "controls": [
         {
-          "text": "Servers",
-          "source": "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
+          "text": "Sources",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
-          "text": "Add Server",
-          "source": "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
-        },
-        {
-          "text": "Add Network Share",
-          "source": "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
+          "text": "Add Source",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
           "text": "Signed in as",
@@ -8064,7 +8536,10 @@
         "Sources/FeatureSettings/ThemeMusicVolumeControl.swift",
         "Sources/FeatureSettings/SettingsSearchResults.swift",
         "Sources/CoreModels/SettingsSearch.swift",
-        "Sources/CoreUI/SettingsSearchAnchor.swift"
+        "Sources/CoreUI/SettingsSearchAnchor.swift",
+        "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift",
+        "Sources/FeatureLiveTV/LiveTVGuidePreparationToast.swift",
+        "Sources/FeatureLiveTVCore/LiveTVGuidePreparationModel.swift"
       ],
       "platforms": [
         "iPhone",
@@ -8072,7 +8547,7 @@
       ],
       "navigation": "Open Settings from iPhone/iPad navigation; choose a profile category or household section.",
       "experience": "Change playback, captions, Live TV, libraries, presentation, trackers, language, and authorized household services.",
-      "conditions": "iPhone/iPad compact and regular-width layouts. Category order is Playback, Subtitles, Live TV, Libraries, Appearance, Screens & Navigation, Trackers, Language. Everyone is absent for Kids; Libraries and Manage Profile are sealed by an enforced Parental PIN. Edit/Done reflects SwiftUI list-editing state. Internal developer actions require deliberate version-based activation and are not reader setup steps. On Kids profiles, Name & Avatar replaces the ordinary Libraries category; protected Libraries and Manage Profile move into Parental Controls. Appearance order is Theme, Cards, Artwork, Circadian Mode. Cards contains Labels, Watch indicators, Style, Display Size; Focus is Apple TV-only. Label presets replace overrides; Custom is a readout in the compact picker when no preset matches. Customize labels from Cards offers all nine Page choices; from Movie & show details it contains Episodes, Related titles and Extras without a Page picker. Home/Recommended use Default with On/Off/Mixed, followed by Overrides; Continue Watching and Home's Libraries use Use default/On/Off. Other pages use On/Off only. The color picker is hidden with Hidden watch indicators; Episode count style appears only with episode counts enabled. Settings search is available from the root; the Apple TV link precedes the profile categories; selecting a result focuses the control on TV or briefly highlights it on mobile and still checks parental authorization. It never enables a prerequisite automatically.",
+      "conditions": "iPhone/iPad compact and regular-width layouts. Category order is Playback, Subtitles, Live TV, Libraries, Appearance, Screens & Navigation, Trackers, Language. Everyone is absent for Kids; Libraries and Manage Profile are sealed by an enforced Parental PIN. Edit/Done reflects SwiftUI list-editing state. Internal developer actions require deliberate version-based activation and are not reader setup steps. On Kids profiles, Name & Avatar replaces the ordinary Libraries category; protected Libraries and Manage Profile move into Parental Controls. Appearance order is Theme, Cards, Artwork, Circadian Mode. Cards contains Labels, Watch indicators, Style, Display Size; Focus is Apple TV-only. Label presets replace overrides; Custom is a readout in the compact picker when no preset matches. Customize labels from Cards offers all nine Page choices; from Movie & show details it contains Episodes, Related titles and Extras without a Page picker. Home/Recommended use Default with On/Off/Mixed, followed by Overrides; Continue Watching and Home's Libraries use Use default/On/Off. Other pages use On/Off only. The color picker is hidden with Hidden watch indicators; Episode count style appears only with episode counts enabled. Settings search is available from the root; the Apple TV link precedes the profile categories; selecting a result focuses the control on TV or briefly highlights it on mobile and still checks parental authorization. It never enables a prerequisite automatically. After explicit IPTV setup/refresh, a shared guide notice can remain across navigation while the account is authorized. It is hidden behind another transient message. Dismiss hides only the notice; terminal notices also auto-dismiss after five seconds. Percentages describe the current stage, not total work. Profile/account authorization changes cancel and remove scoped work; this does not promise OS background execution.",
       "controls": [
         {
           "text": "Search settings",
@@ -8155,8 +8630,8 @@
           "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
-          "text": "Servers",
-          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+          "text": "Sources",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
           "text": "Profiles",
@@ -8865,8 +9340,8 @@
           "source": "Sources/AppRuntime/LiveTVSourcesRuntimeView.swift"
         },
         {
-          "text": "Sources",
-          "source": "Sources/AppShelliOS/PlozziOSLiveTVDestination.swift"
+          "text": "TV Sources",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
           "text": "Profile access changed",
@@ -9181,8 +9656,56 @@
           "source": "Sources/FeatureSettings/ViewCustomizationControls.swift"
         },
         {
-          "text": "Color",
-          "source": "Sources/FeatureSettings/WatchIndicatorColorPicker.swift"
+          "text": "Adding guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Refreshing guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Downloading guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Reading guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Preparing listings",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Saving guide",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Checking channels",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Guide ready",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "No current guide listings",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "No guide configured",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Guide update paused",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Guide update failed",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Dismiss",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationToast.swift"
         }
       ],
       "documents": [
@@ -9204,6 +9727,10 @@
         {
           "slug": "getting-started",
           "anchor": "find-a-setting"
+        },
+        {
+          "slug": "live-tv-channels",
+          "anchor": "wait-for-an-iptv-guide"
         }
       ]
     },
@@ -9794,7 +10321,7 @@
         "iPhone",
         "iPad"
       ],
-      "navigation": "On iPhone/iPad, choose Add Network Share during setup or from server settings.",
+      "navigation": "On iPhone/iPad, choose Media Share during onboarding or Settings > Sources > Add Source > Media Share.",
       "experience": "Choose a transport, verify trusted endpoints, browse a folder/export, and create its library.",
       "conditions": "iPhone/iPad. Local Network permission is needed for local discovery. Transport-specific credentials, certificate approval, host keys, and content choices appear only for the selected method. The protocol picker order is SMB, NFS, WebDAV, SFTP, FTP; FTPS uses an ftps address under FTP rather than a separate protocol choice.",
       "controls": [
@@ -10018,6 +10545,16 @@
         }
       ]
     },
+    "Sources/AppShelliOS/ServerOnboardingViews.swift": {
+      "sources": [
+        "Sources/AppShelliOS/ServerOnboardingViews.swift",
+        "Sources/AppShelliOS/AddServerView.swift",
+        "Sources/AppShelliOS/PlozziOSOnboardingView.swift",
+        "Sources/CoreModels/ProviderKind.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Shared iPhone/iPad onboarding layout, provider rows, approval-code display and Plex server-selection rows are constructed by AddServerView and PlozziOSOnboardingView. Their controls, including Owned/Shared and Waiting for approval…, are inventoried on those parents; this is not another navigation destination."
+    },
     "Sources/AppShelliOS/SyncSetupSASConfirmView.swift": {
       "sources": [
         "Sources/AppShelliOS/SyncSetupSASConfirmView.swift",
@@ -10068,6 +10605,17 @@
       ],
       "omitKind": "shared-component",
       "omitReason": "Reusable AdaptiveMediaMetadataRow.swift is wired into Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+    },
+    "Sources/CoreUI/AdaptiveStatusOverlay.swift": {
+      "sources": [
+        "Sources/CoreUI/AdaptiveStatusOverlay.swift",
+        "Sources/CoreUI/TransientStatusPresentation.swift",
+        "Sources/FeatureLiveTV/LiveTVGuidePreparationToast.swift",
+        "Sources/AppShell/RootView.swift",
+        "Sources/AppShelliOS/PlozziOSRootView.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Positions shared transient status and guide notices around native bars and safe areas on each platform. It defines no captions or actions; the guide notice status and Dismiss action are inventoried on the root/setup/settings parents that host them."
     },
     "Sources/CoreUI/AmbientGradientBackground.swift": {
       "sources": [
@@ -10561,9 +11109,9 @@
         "iPhone",
         "iPad"
       ],
-      "navigation": "Reach a device-pairing or Silo approval code-comparison step.",
+      "navigation": "Reach the explicit verification-code comparison during nearby device setup; the same file also supplies noninteractive codes for server approval.",
       "experience": "Compare the code on both intended devices and explicitly accept or reject it.",
-      "conditions": "Only an active supported pairing/approval uses this shared screen. A mismatched code must stop the transfer/approval.",
+      "conditions": "Yes, they match and No, they're different belong to the nearby setup verification prompt, not Silo/Plex/Jellyfin sign-in. Those flows reuse only ConnectionCodeView to display their current code. Same-account verified device setup can bypass the comparison; a mismatch must reject that transfer.",
       "controls": [
         {
           "text": "Check the code",
@@ -11563,10 +12111,11 @@
     "Sources/CoreUI/ManagedProviderPicker.swift": {
       "sources": [
         "Sources/CoreUI/ManagedProviderPicker.swift",
-        "Sources/AppShelliOS/AddServerView.swift"
+        "Sources/AppShelliOS/AddServerView.swift",
+        "Sources/AppShelliOS/ServerOnboardingViews.swift"
       ],
-      "omitKind": "shared-component",
-      "omitReason": "Reusable ManagedProviderPicker.swift is wired into Sources/AppShelliOS/AddServerView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitKind": "unreachable",
+      "omitReason": "The frozen source defines this Provider picker but never constructs it. Current AddServerView uses ServerProviderChoices from ServerOnboardingViews instead, with direct branded provider choices. The unused picker is not a visible setup step."
     },
     "Sources/CoreUI/MediaArtworkPlaceholder.swift": {
       "sources": [
@@ -11597,6 +12146,18 @@
       ],
       "omitKind": "shared-component",
       "omitReason": "Reusable MediaArtworkPlaceholder.swift is wired into Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSSeasonRequestSheet.swift, Sources/FeatureSettings/CollectionSectionSettingsView.swift, Sources/FeatureHome/LibraryBrowseView.swift, Sources/FeatureHome/WatchlistBrowseView.swift, Sources/FeatureHome/ItemDetailView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/LibraryBrowseView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/FeatureHomeCore/PersonDetailView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/AppShelliOS/PlozziOSSearchView.swift, Sources/AppShell/SearchTab.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSSeasonRequestSheet.swift, Sources/FeatureSettings/CollectionSectionSettingsView.swift, Sources/FeatureHome/LibraryBrowseView.swift, Sources/FeatureHome/WatchlistBrowseView.swift, Sources/FeatureHome/ItemDetailView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/LibraryBrowseView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/FeatureHomeCore/PersonDetailView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/AppShelliOS/PlozziOSSearchView.swift, Sources/AppShell/SearchTab.swift, Sources/AppShelliOS/PlozziOSHomeView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+    },
+    "Sources/CoreUI/MediaArtworkZoom.swift": {
+      "sources": [
+        "Sources/CoreUI/MediaArtworkZoom.swift",
+        "Sources/AppShelliOS/PlozziOSHomeView.swift",
+        "Sources/AppShelliOS/PlozziOSLibraryView.swift",
+        "Sources/AppShelliOS/PlozziOSSearchView.swift",
+        "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
+        "Sources/CoreUI/PosterCardView.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Shared iPhone/iPad artwork-origin and detail-navigation transition wrappers used by Home, library, Search and detail cards. This is not the player Zoom Mode or an artwork editor; visible card actions are inventoried on those parents."
     },
     "Sources/CoreUI/MediaBadgeView.swift": {
       "sources": [
@@ -11829,6 +12390,17 @@
       "omitKind": "shared-component",
       "omitReason": "Reusable MediaLibraryMark.swift is wired into Sources/FeaturePlayback/CastPanelView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/FeatureHome/LibraryBrowseView.swift, Sources/FeatureHome/WatchlistBrowseView.swift, Sources/FeatureSettings/CollectionSectionSettingsView.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/AppShelliOS/PlozziOSSearchView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/ItemDetailView.swift, Sources/FeatureHome/LibraryBrowseView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/FeatureHomeCore/PersonDetailView.swift, Sources/AppShell/SearchTab.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/FeatureHome/SeriesDetailView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
     },
+    "Sources/CoreUI/MediaRowBrowseCard.swift": {
+      "sources": [
+        "Sources/CoreUI/MediaRowBrowseCard.swift",
+        "Sources/CoreUI/MediaRowView.swift",
+        "Sources/HeroUI/FeaturedMediaRow.swift",
+        "Sources/FeatureHome/HomeView.swift",
+        "Sources/FeatureHomeCore/HomePresentationRow.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Apple TV-only trailing See all action card is supplied by ordinary and featured Home rails when more titles can be browsed. HomeView inventories its visible label and conditions. This is not a movie card: it has no play action, watch state or media context menu, and mobile uses a heading button instead."
+    },
     "Sources/CoreUI/MediaRowEpisodeEntry.swift": {
       "sources": [
         "Sources/CoreUI/MediaRowEpisodeEntry.swift",
@@ -11876,17 +12448,6 @@
       ],
       "omitKind": "shared-component",
       "omitReason": "Reusable MediaRowSection.swift is wired into Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/ItemDetailView.swift, Sources/FeatureHome/LibraryBrowseView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/FeatureHomeCore/PersonDetailView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/FeatureHome/HomeView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/FeatureSettings/HomeRowsSettingsView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
-    },
-    "Sources/CoreUI/MediaRowBrowseCard.swift": {
-      "sources": [
-        "Sources/CoreUI/MediaRowBrowseCard.swift",
-        "Sources/CoreUI/MediaRowView.swift",
-        "Sources/HeroUI/FeaturedMediaRow.swift",
-        "Sources/FeatureHome/HomeView.swift",
-        "Sources/FeatureHomeCore/HomePresentationRow.swift"
-      ],
-      "omitKind": "shared-component",
-      "omitReason": "Apple TV-only trailing See all action card is supplied by ordinary and featured Home rails when more titles can be browsed. HomeView inventories its visible label and conditions. This is not a movie card: it has no play action, watch state or media context menu, and mobile uses a heading button instead."
     },
     "Sources/CoreUI/MediaRowView.swift": {
       "sources": [
@@ -13690,6 +14251,16 @@
       "omitKind": "shared-component",
       "omitReason": "Reusable SettingsRowLabel.swift is wired into Sources/FeatureLiveTV/LiveTVChannelScanViews.swift, Sources/FeatureLiveTV/LiveTVGuideMappingView.swift, Sources/FeatureLiveTV/LiveTVGuideMappingView.swift, Sources/FeatureLiveTV/LiveTVPortablePendingSources.swift, Sources/FeatureLiveTV/LiveTVServerSetupView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureSettings/HelpDiagnosticsDetailView.swift, Sources/FeatureSettings/MetadataSettingsDetailView.swift, Sources/FeatureSettings/ParentalPINDetailView.swift, Sources/FeatureSettings/ProfileDetailView.swift, Sources/FeatureSettings/SettingsView.swift, Sources/FeatureSettings/SettingsView.swift, Sources/FeatureLiveTV/LibraryChannelEditorView.swift, Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift, Sources/AppShelliOS/PlozziOSProfileSettingsView.swift, Sources/FeatureSettings/ProfileSettingsDetailView.swift, Sources/FeatureLiveTV/LiveTVPlaylistEditor.swift, Sources/AppShell/ProfileSelectionView.swift, Sources/FeatureSettings/LiveTVSettingsView.swift, Sources/FeatureSettings/NightShiftDetailView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/HomeRowsSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/LibraryPresentationSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
     },
+    "Sources/CoreUI/SettingsSearchAnchor.swift": {
+      "sources": [
+        "Sources/CoreUI/SettingsSearchAnchor.swift",
+        "Sources/FeatureSettings/SettingsView.swift",
+        "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+        "Sources/FeatureSettings/SettingsSearchResults.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Shared settings-search landing, scroll, focus and temporary highlight behavior. SettingsView and PlozziOSSettingsView route search results through this wrapper; named search controls belong to those parents and SettingsSearchResults. It changes no preference or authorization."
+    },
     "Sources/CoreUI/SettingsSectionSurface.swift": {
       "sources": [
         "Sources/CoreUI/SettingsSectionSurface.swift",
@@ -14703,7 +15274,7 @@
         "iPhone",
         "iPad"
       ],
-      "navigation": "Choose IPTV in Add Server during setup or from Servers settings.",
+      "navigation": "Choose IPTV during setup or under Settings > Sources > Add Source; Live TV > TV Sources > IPTV provider opens the same sign-in flow.",
       "experience": "Connect a playlist/Xtream account, add EPG links, or configure provider authentication and guide headers.",
       "conditions": "All platforms for URLs/accounts; Playlist file import is iPhone/iPad-only and its account catalogue stays local. Playlist, stream, and guide authentication scopes differ. Use trusted providers and HTTPS.",
       "controls": [
@@ -14961,7 +15532,7 @@
       "platforms": [
         "Apple TV"
       ],
-      "navigation": "Choose Plex in Add Server.",
+      "navigation": "Choose Plex in Add Source.",
       "experience": "Link the Plex account through its browser code and choose the servers to connect.",
       "conditions": "Plex authorization must complete before server selection. Multiple linked servers remain distinct sources.",
       "controls": [
@@ -15082,7 +15653,7 @@
         "iPhone",
         "iPad"
       ],
-      "navigation": "Open Settings > Servers, select a server, then Connection addresses > Add or manage addresses.",
+      "navigation": "Open Settings > Sources, select a server, then Connection addresses > Add or manage addresses.",
       "experience": "Verify a trusted alternative endpoint, inspect saved addresses, or remove an unwanted address.",
       "conditions": "Supported server connections only; addresses belong to this sign-in/device. Explicit HTTPS failures are not permission to downgrade; HTTP is unencrypted.",
       "controls": [
@@ -15182,7 +15753,7 @@
       ],
       "navigation": "Choose a Silo server from discovery or a manually entered address.",
       "experience": "Open the Silo approval page, approve this device, choose the intended Silo profile and enter its PIN if required.",
-      "conditions": "Silo requires device-specific authorization; copying setup or signing into another device does not authorize this device.",
+      "conditions": "Silo requires device-specific authorization; copying setup or signing into another device does not authorize this device. Mobile opens the approval link locally and offers Use another device to expand the alternate address/code instructions. Apple TV shows QR/address instructions alongside the code. Expiry offers Get a new code without adding a connection; profile names are dynamic and protected profiles use the Silo Profile PIN, not a Plozz Profile Lock.",
       "controls": [
         {
           "text": "Cancel",
@@ -15239,6 +15810,30 @@
         {
           "text": "PIN required",
           "source": "Sources/CoreUI/ServerUserRow.swift"
+        },
+        {
+          "text": "Connect to Silo",
+          "source": "Sources/FeatureAuth/SiloSignInView.swift"
+        },
+        {
+          "text": "Use another device",
+          "source": "Sources/FeatureAuth/SiloSignInView.swift"
+        },
+        {
+          "text": "Choose your Silo profile",
+          "source": "Sources/FeatureAuth/SiloSignInView.swift"
+        },
+        {
+          "text": "Unlock your profile",
+          "source": "Sources/FeatureAuth/SiloSignInView.swift"
+        },
+        {
+          "text": "Your code has expired",
+          "source": "Sources/FeatureAuth/SiloSignInView.swift"
+        },
+        {
+          "text": "Let's get you connected",
+          "source": "Sources/FeatureAuth/SiloSignInView.swift"
         }
       ],
       "documents": [
@@ -15259,7 +15854,7 @@
       "platforms": [
         "Apple TV"
       ],
-      "navigation": "Choose Jellyfin, Emby, or Silo from Add Server.",
+      "navigation": "Choose Jellyfin, Emby, or Silo from Add Source.",
       "experience": "Pick a discovered server, rescan, or enter a reachable address manually.",
       "conditions": "Apple TV's provider sign-in flow uses this picker; iPhone/iPad supplies its own AddServerView. Local discovery needs permission. Remote/Tailscale addresses are entered manually rather than promised as automatic discovery.",
       "controls": [
@@ -15334,7 +15929,7 @@
         "Sources/FeatureHome/SeriesDetailView.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Reusable DetailExtrasView.swift is wired into Sources/FeatureHome/ItemDetailView.swift, Sources/FeatureHome/SeriesDetailView.swift, Sources/FeatureHome/ItemDetailView.swift, Sources/FeatureHome/SeriesDetailView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitReason": "ItemDetailView and SeriesDetailView construct this shared lower-detail layout. Reachable extras, related titles, cast and DetailInformationSections controls are inventoried on those parents using their defining files. The private StudiosRow and InfoChipsRow helpers have no constructor calls; their unused Studios literal is not a second visible section."
     },
     "Sources/FeatureHome/DetailHeroView.swift": {
       "sources": [
@@ -15396,10 +15991,22 @@
           "text": "Live TV",
           "source": "Sources/FeatureHome/FocusHeroHomeView.swift"
         },
-        {"text": "Continue Watching", "source": "Sources/FeatureHomeCore/HomeRow.swift"},
-        {"text": "Watchlist", "source": "Sources/FeatureHomeCore/HomeRow.swift"},
-        {"text": "Recently Added", "source": "Sources/FeatureHomeCore/HomeRow.swift"},
-        {"text": "See all", "source": "Sources/CoreUI/MediaRowBrowseCard.swift"}
+        {
+          "text": "Continue Watching",
+          "source": "Sources/FeatureHomeCore/HomeRow.swift"
+        },
+        {
+          "text": "Watchlist",
+          "source": "Sources/FeatureHomeCore/HomeRow.swift"
+        },
+        {
+          "text": "Recently Added",
+          "source": "Sources/FeatureHomeCore/HomeRow.swift"
+        },
+        {
+          "text": "See all",
+          "source": "Sources/CoreUI/MediaRowBrowseCard.swift"
+        }
       ],
       "documents": [
         {
@@ -15454,6 +16061,16 @@
       ],
       "omitKind": "shared-component",
       "omitReason": "Reusable HeroForegroundUIView.swift is wired into Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/HomeView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+    },
+    "Sources/FeatureHome/HeroShowcaseStage.swift": {
+      "sources": [
+        "Sources/FeatureHome/HeroShowcaseStage.swift",
+        "Sources/FeatureHome/HomeView.swift",
+        "Sources/FeatureHome/FocusHeroHomeView.swift",
+        "Sources/FeatureHome/HomeHeroView.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Apple TV composition and motion between the featured hero, Showcase backdrop and rows in HomeView/FocusHeroHomeView/HomeHeroView. It contributes no independent settings or action labels; Hero and Row style controls belong to HomeSectionSettingsViews."
     },
     "Sources/FeatureHome/HomeContentNotice.swift": {
       "sources": [
@@ -15587,10 +16204,22 @@
           "text": "Section unavailable in the latest refresh",
           "source": "Sources/CoreModels/HomeSectionIssue.swift"
         },
-        {"text": "Continue Watching", "source": "Sources/FeatureHomeCore/HomeRow.swift"},
-        {"text": "Watchlist", "source": "Sources/FeatureHomeCore/HomeRow.swift"},
-        {"text": "Recently Added", "source": "Sources/FeatureHomeCore/HomeRow.swift"},
-        {"text": "See all", "source": "Sources/CoreUI/MediaRowBrowseCard.swift"},
+        {
+          "text": "Continue Watching",
+          "source": "Sources/FeatureHomeCore/HomeRow.swift"
+        },
+        {
+          "text": "Watchlist",
+          "source": "Sources/FeatureHomeCore/HomeRow.swift"
+        },
+        {
+          "text": "Recently Added",
+          "source": "Sources/FeatureHomeCore/HomeRow.swift"
+        },
+        {
+          "text": "See all",
+          "source": "Sources/CoreUI/MediaRowBrowseCard.swift"
+        },
         {
           "text": "Loading Home content",
           "source": "Sources/FeatureHome/HomeView.swift"
@@ -16862,6 +17491,19 @@
         }
       ]
     },
+    "Sources/FeatureHomeCore/DetailPlaybackPreparationView.swift": {
+      "sources": [
+        "Sources/FeatureHomeCore/DetailPlaybackPreparationView.swift",
+        "Sources/FeatureHomeCore/DetailPlaybackPreparation.swift",
+        "Sources/FeatureHome/ItemDetailView.swift",
+        "Sources/FeatureHome/SeriesDetailView.swift",
+        "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
+        "Sources/AppShell/AppState+DetailPlaybackPreparation.swift",
+        "Sources/AppShelliOS/PlozziOSAppModel+DetailPlaybackPreparation.swift"
+      ],
+      "omitKind": "implementation",
+      "omitReason": "Environment/ViewModifier wiring prepares an already selected playback source while authorized detail pages are active, then invalidates work on scene/profile/source changes. It creates no visible screen or control, starts no playback, and has no separate reader procedure."
+    },
     "Sources/FeatureHomeCore/HeroTrailerController.swift": {
       "sources": [
         "Sources/FeatureHomeCore/HeroTrailerController.swift",
@@ -16901,47 +17543,153 @@
         "Sources/AppShelliOS/PlozziOSPosterCard.swift",
         "Sources/CoreModels/MediaItemAction.swift"
       ],
-      "platforms": ["Apple TV", "iPhone", "iPad"],
+      "platforms": [
+        "Apple TV",
+        "iPhone",
+        "iPad"
+      ],
       "navigation": "From an eligible Home row, select the trailing See all card on Apple TV or tap the row heading with a chevron on iPhone/iPad. The global Watchlist row uses the separate Watchlist page instead.",
       "experience": "Browse that row's original feed in a larger title grid, combine media-kind and watch-state filters, choose a sort/order, open details, and retry loading failures without substituting another library list.",
       "conditions": "Requires more titles and a loaded nonempty row without failure or section issue, plus current profile/source access and the original row's applicable visibility policy. Account-wide history is not filtered by disabled-library browsing switches. Row titles and source suffixes are supplied content. TV has filter then sort beside the heading; mobile toolbar has icon-only sort then filter. Media choices precede watch-state choices inside Filter. Sort By offers Default, Name, Date Added, Release Date and Runtime; Order is disabled for Default. Nondefault queries load all remaining available feed pages before showing the new projection. Default pages load incrementally; Load more appears only when more remain. No titles to show is the empty state; Retry follows a loading error. There is no Clear Filters button here: reset both Filter pickers to All. Combined Recently Added merges admitted sources; collections retain movie/show members; server rows retain their actual feed, limits and ownership. Plain combined Continue Watching and Live TV are not reachable through this browser. Browser choices are not stored as library or Watchlist preferences. Card actions remain kind/provider-capability dependent.",
       "controls": [
-        {"text": "Filter", "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"},
-        {"text": "All", "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"},
-        {"text": "Movies", "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"},
-        {"text": "TV Shows", "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"},
-        {"text": "All", "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"},
-        {"text": "Unwatched", "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"},
-        {"text": "In Progress", "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"},
-        {"text": "Sort By", "source": "Sources/CoreUI/BrowseQueryControls.swift"},
-        {"text": "Default", "source": "Sources/CoreUI/BrowseQueryControls.swift"},
-        {"text": "Name", "source": "Sources/CoreModels/MediaProvider.swift"},
-        {"text": "Date Added", "source": "Sources/CoreModels/MediaProvider.swift"},
-        {"text": "Release Date", "source": "Sources/CoreModels/MediaProvider.swift"},
-        {"text": "Runtime", "source": "Sources/CoreModels/MediaProvider.swift"},
-        {"text": "Order", "source": "Sources/CoreUI/BrowseQueryControls.swift"},
-        {"text": "Ascending", "source": "Sources/CoreModels/MediaProvider.swift"},
-        {"text": "Descending", "source": "Sources/CoreModels/MediaProvider.swift"},
-        {"text": "Retry", "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"},
-        {"text": "Load more", "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"},
-        {"text": "No titles to show", "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"},
-        {"text": "Go to Show", "source": "Sources/CoreModels/MediaItemAction.swift"},
-        {"text": "Go to Movie", "source": "Sources/CoreModels/MediaItemAction.swift"},
-        {"text": "Go to Episode", "source": "Sources/CoreModels/MediaItemAction.swift"},
-        {"text": "Add to Watchlist", "source": "Sources/CoreModels/MediaItemAction.swift"},
-        {"text": "Remove from Watchlist", "source": "Sources/CoreModels/MediaItemAction.swift"},
-        {"text": "Mark as Watched", "source": "Sources/CoreModels/MediaItemAction.swift"},
-        {"text": "Mark as Unwatched", "source": "Sources/CoreModels/MediaItemAction.swift"},
-        {"text": "Mark Watched Up to Here", "source": "Sources/CoreModels/MediaItemAction.swift"},
-        {"text": "Remove from Continue Watching", "source": "Sources/CoreModels/MediaItemAction.swift"},
-        {"text": "Refresh Metadata", "source": "Sources/CoreModels/MediaItemAction.swift"},
-        {"text": "Browse Files", "source": "Sources/CoreModels/MediaItemAction.swift"}
+        {
+          "text": "Filter",
+          "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"
+        },
+        {
+          "text": "All",
+          "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"
+        },
+        {
+          "text": "Movies",
+          "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"
+        },
+        {
+          "text": "TV Shows",
+          "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"
+        },
+        {
+          "text": "All",
+          "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"
+        },
+        {
+          "text": "Unwatched",
+          "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"
+        },
+        {
+          "text": "In Progress",
+          "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"
+        },
+        {
+          "text": "Sort By",
+          "source": "Sources/CoreUI/BrowseQueryControls.swift"
+        },
+        {
+          "text": "Default",
+          "source": "Sources/CoreUI/BrowseQueryControls.swift"
+        },
+        {
+          "text": "Name",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Date Added",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Release Date",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Runtime",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Order",
+          "source": "Sources/CoreUI/BrowseQueryControls.swift"
+        },
+        {
+          "text": "Ascending",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Descending",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Retry",
+          "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"
+        },
+        {
+          "text": "Load more",
+          "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"
+        },
+        {
+          "text": "No titles to show",
+          "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"
+        },
+        {
+          "text": "Go to Show",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
+          "text": "Go to Movie",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
+          "text": "Go to Episode",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
+          "text": "Add to Watchlist",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
+          "text": "Remove from Watchlist",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
+          "text": "Mark as Watched",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
+          "text": "Mark as Unwatched",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
+          "text": "Mark Watched Up to Here",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
+          "text": "Remove from Continue Watching",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
+          "text": "Refresh Metadata",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
+          "text": "Browse Files",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        }
       ],
       "documents": [
-        {"slug": "browse-home-rows", "anchor": "open-a-larger-grid"},
-        {"slug": "browse-home-rows", "anchor": "narrow-or-rearrange-the-results"},
-        {"slug": "browse-home-rows", "anchor": "when-the-grid-is-empty-or-fails"},
-        {"slug": "library", "anchor": "save-titles-and-manage-history"}
+        {
+          "slug": "browse-home-rows",
+          "anchor": "open-a-larger-grid"
+        },
+        {
+          "slug": "browse-home-rows",
+          "anchor": "narrow-or-rearrange-the-results"
+        },
+        {
+          "slug": "browse-home-rows",
+          "anchor": "when-the-grid-is-empty-or-fails"
+        },
+        {
+          "slug": "library",
+          "anchor": "save-titles-and-manage-history"
+        }
       ]
     },
     "Sources/FeatureHomeCore/PersonDetailView.swift": {
@@ -17205,31 +17953,80 @@
         "Sources/CoreUI/SettingsRowLabel.swift",
         "Sources/CoreUI/TextTierStyle.swift",
         "Sources/FeatureLiveTV/LiveTVPreparationProgressView.swift",
-        "Sources/CoreUI/ProfileLockCopy.swift"
+        "Sources/CoreUI/ProfileLockCopy.swift",
+        "Sources/CoreUI/SettingsCopy.swift",
+        "Sources/AppRuntime/LiveTVLibraryRuntime.swift",
+        "Sources/ProviderSilo/SiloLibraryChannels.swift",
+        "Sources/ProviderSilo/SiloPlayback.swift",
+        "Sources/FeatureLiveTVCore/LibraryChannelService.swift"
       ],
       "platforms": [
         "Apple TV",
         "iPhone",
         "iPad"
       ],
-      "navigation": "Open Sources > Plozz channels > Create custom channel.",
+      "navigation": "Open Live TV > TV Sources > Plozz channels > Create custom channel; alternatively use Settings > Live TV > Plozz channels > Manage channels.",
       "experience": "Name a channel, select libraries and scheduling rules, preview its schedule, and save it.",
-      "conditions": "All platforms. Rules depend on accessible movie/episode libraries and usable durations. Empty fields allow all eligible titles. Allowed ratings matches exact classifications after case/diacritic normalization, not an age ceiling. Include unrated titles defaults on and independently allows absent classifications. Watch-history updates are profile/device-local, off by default, and do not save resume positions. Management shows Automatic lineup, Generated channels when available, Custom channels, then Watch history. Custom recipes offer Shows in episode order, Seeded shuffle or Movies; Movies disables the Episodes switch. Editing a saved custom channel changes the heading to Edit custom channel. Generated channels have no editing action. The Parental PIN gate uses local verification, not the shared scaffold's dormant Profile Lock or remote-requirement loading/error states. Saved custom-channel name rows open Edit custom channel; their context menu Delete channel removes only the schedule/definition, not source media. Automatic channels remain non-editable and non-deletable through this custom menu. Create/edit fields are Channel name, Icon, Order, Movies/Episodes, Source libraries, then Rules; Preview schedule changes to Save channel after a valid preview.",
+      "conditions": "All platforms. Rules depend on accessible movie/episode libraries and usable durations. Empty fields allow all eligible titles. Allowed ratings matches exact classifications after case/diacritic normalization, not an age ceiling. Include unrated titles defaults on and independently allows absent classifications. Watch-history updates are profile/device-local, off by default, and do not save resume positions. Management shows Automatic lineup, Generated channels when available, Custom channels, then Watch history. Custom recipes offer Shows in episode order, Seeded shuffle or Movies; Movies disables the Episodes switch. Editing a saved custom channel changes the heading to Edit custom channel. Generated channels have no editing action. The Parental PIN gate uses local verification, not the shared scaffold's dormant Profile Lock or remote-requirement loading/error states. Saved custom-channel name rows open Edit custom channel; their context menu Delete channel removes only the schedule/definition, not source media. Automatic channels remain non-editable and non-deletable through this custom menu. Create/edit fields are Channel name, Icon, Order, Movies/Episodes, Source libraries, then Rules; Preview schedule changes to Save channel after a valid preview. Context discovery now includes Silo through LibraryChannelCatalogProviding and LibraryChannelPlaybackProviding, with server permission, available playback, protocol 3 and original_http support required. Only eligible single-file Silo movie/episode versions with valid durations and sizes enter the schedule; disc images, multipart and multi-episode files are rejected. The existing empty-source helper text still names only Plex/Jellyfin/Emby and is not evidence that Silo is unsupported. Runtime eligibility and provider validation govern the available library choices.",
       "controls": [
+        {
+          "text": "Plozz channels",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Automatic lineup",
+          "source": "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift"
+        },
+        {
+          "text": "Auto-create channels from your libraries",
+          "source": "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift"
+        },
+        {
+          "text": "Preparing Plozz channels",
+          "source": "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift"
+        },
+        {
+          "text": "Waiting for server",
+          "source": "Sources/FeatureLiveTV/LiveTVPreparationProgressView.swift"
+        },
+        {
+          "text": "Retry Plozz channels",
+          "source": "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift"
+        },
+        {
+          "text": "Refresh Plozz channels",
+          "source": "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift"
+        },
+        {
+          "text": "Generated channels",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Custom channels",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Create custom channel",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Delete channel",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Watch history",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Update watch history",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
         {
           "text": "Edit custom channel",
           "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
         },
         {
           "text": "Automatic channel",
-          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
-        },
-        {
-          "text": "Preview schedule",
-          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
-        },
-        {
-          "text": "Save channel",
           "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
         },
         {
@@ -17321,80 +18118,20 @@
           "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
         },
         {
-          "text": "Plozz channels",
+          "text": "Preview schedule",
           "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
         },
         {
-          "text": "Watch history",
+          "text": "Save channel",
           "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
-        },
-        {
-          "text": "Update watch history",
-          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
-        },
-        {
-          "text": "Generated channels",
-          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
-        },
-        {
-          "text": "Custom channels",
-          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
-        },
-        {
-          "text": "Create custom channel",
-          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
-        },
-        {
-          "text": "Delete channel",
-          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
-        },
-        {
-          "text": "Cancel",
-          "source": "Sources/CoreUI/PINEntry.swift"
-        },
-        {
-          "text": "Delete",
-          "source": "Sources/CoreUI/PINEntry.swift"
-        },
-        {
-          "text": "Cancel",
-          "source": "Sources/CoreUI/PINProfilePresentation.swift"
-        },
-        {
-          "text": "Back",
-          "source": "Sources/CoreUI/SettingsPageHeader.swift"
-        },
-        {
-          "text": "Automatic lineup",
-          "source": "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift"
-        },
-        {
-          "text": "Refresh Plozz channels",
-          "source": "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift"
-        },
-        {
-          "text": "Retry Plozz channels",
-          "source": "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift"
-        },
-        {
-          "text": "Auto-create channels from your libraries",
-          "source": "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift"
-        },
-        {
-          "text": "Preparing Plozz channels",
-          "source": "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift"
-        },
-        {
-          "text": "Waiting for server",
-          "source": "Sources/FeatureLiveTV/LiveTVPreparationProgressView.swift"
         },
         {
           "text": "Profile settings unavailable",
           "source": "Sources/FeatureLiveTV/LiveTVSourceAccessGate.swift"
         },
         {
-          "text": "TV sources",
-          "source": "Sources/FeatureLiveTV/LiveTVSourceAccessGate.swift"
+          "text": "TV Sources",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
           "text": "Unlock TV sources",
@@ -17411,6 +18148,22 @@
         {
           "text": "Incorrect PIN. Try again.",
           "source": "Sources/CoreUI/ProfileLockCopy.swift"
+        },
+        {
+          "text": "Delete",
+          "source": "Sources/CoreUI/PINEntry.swift"
+        },
+        {
+          "text": "Cancel",
+          "source": "Sources/CoreUI/PINEntry.swift"
+        },
+        {
+          "text": "Cancel",
+          "source": "Sources/CoreUI/PINProfilePresentation.swift"
+        },
+        {
+          "text": "Back",
+          "source": "Sources/CoreUI/SettingsPageHeader.swift"
         }
       ],
       "documents": [
@@ -17615,9 +18368,9 @@
         "iPhone",
         "iPad"
       ],
-      "navigation": "Open Sources, select a playlist, then Check channel availability.",
+      "navigation": "Open TV Sources, select a standalone playlist, then Check channel availability.",
       "experience": "Start/cancel a reachability scan, review results and restore channels excluded by the scan.",
-      "conditions": "Per supported playlist; not a codec/playability test. Unavailable links are hidden, uncertain results need review. Persistence errors need Retry saving; restoring scan exclusions does not override other hiding rules.",
+      "conditions": "Supported standalone playlists only; IPTV account/server details do not offer this action. This is not a codec/playability test. Unavailable links are hidden, uncertain results need review. Persistence errors need Retry saving; restoring scan exclusions does not override other hiding rules.",
       "controls": [
         {
           "text": "Check channels",
@@ -17703,7 +18456,7 @@
       ],
       "navigation": "From a playlist source, choose Guide options > Correct guide mapping when offered.",
       "experience": "Find a channel, select its guide source/station and regional feed, or restore automatic matching.",
-      "conditions": "Eligible stored playlist/guide mappings only; search results are bounded, not all stations at once. Correct listings do not authorize a stream or create missing programs.",
+      "conditions": "Eligible standalone playlist/guide mappings only, not current IPTV account connections. Search results are bounded, not all stations at once. Correct listings do not authorize a stream or create missing programs.",
       "controls": [
         {
           "text": "Guide mapping",
@@ -17745,6 +18498,39 @@
         }
       ]
     },
+    "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift": {
+      "sources": [
+        "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift",
+        "Sources/FeatureLiveTVCore/LiveTVGuidePreparationModel.swift",
+        "Sources/FeatureLiveTV/LiveTVSourcesView.swift",
+        "Sources/FeatureLiveTV/LiveTVGuidePreparationToast.swift",
+        "Sources/AppShell/RootView.swift",
+        "Sources/AppShelliOS/PlozziOSRootView.swift",
+        "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+        "Sources/AppShelliOS/PlozziOSLibrarySelectionView.swift",
+        "Sources/AppShelliOS/PlozziOSFirstRunView.swift",
+        "Sources/AppShelliOS/PlozziOSProfileSetupView.swift",
+        "Sources/AppShelliOS/AddServerView.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Renders terminal guide-status labels inline in LiveTVSourcesView, and both stage and terminal labels in the root/setup/settings notice. Each parent inventories its reachable labels with authorization, stage-percentage and current-listing conditions; this is not a separate destination."
+    },
+    "Sources/FeatureLiveTV/LiveTVGuidePreparationToast.swift": {
+      "sources": [
+        "Sources/FeatureLiveTV/LiveTVGuidePreparationToast.swift",
+        "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift",
+        "Sources/FeatureLiveTVCore/LiveTVGuidePreparationModel.swift",
+        "Sources/AppShell/RootView.swift",
+        "Sources/AppShelliOS/PlozziOSRootView.swift",
+        "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+        "Sources/AppShelliOS/PlozziOSLibrarySelectionView.swift",
+        "Sources/AppShelliOS/PlozziOSFirstRunView.swift",
+        "Sources/AppShelliOS/PlozziOSProfileSetupView.swift",
+        "Sources/AppShelliOS/AddServerView.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Shared guide-progress notice hosted by the cited root/setup/settings parents. Its Dismiss button hides the notice without cancelling work; the action and status labels are recorded on every host, with competing-status and auto-dismiss conditions. The notice has no independent navigation route."
+    },
     "Sources/FeatureLiveTV/LiveTVIdentityReviewView.swift": {
       "sources": [
         "Sources/FeatureLiveTV/LiveTVIdentityReviewView.swift",
@@ -17768,7 +18554,7 @@
       ],
       "navigation": "Open Review channel identities in a source Guide options when candidates exist.",
       "experience": "Review a new entry against saved channel identity and confirm only the same station/feed.",
-      "conditions": "Explicit confirmation required; name similarity is not identity. Restoring carries favorites, hidden state and guide corrections; a rejected candidate remains separate and playable.",
+      "conditions": "Offered for standalone playlists with identity-review candidates, not current IPTV account sources. Explicit confirmation is required; name similarity is not identity. Restoring carries favorites, hidden state and guide corrections; a rejected candidate remains separate and playable.",
       "controls": [
         {
           "text": "Review channel identities",
@@ -18082,16 +18868,17 @@
         "Sources/CoreUI/SettingsSwitchToggle.swift",
         "Sources/CoreUI/SettingsSectionSurface.swift",
         "Sources/CoreUI/SettingsRowLabel.swift",
-        "Sources/CoreUI/TextTierStyle.swift"
+        "Sources/CoreUI/TextTierStyle.swift",
+        "Sources/CoreUI/SettingsCopy.swift"
       ],
       "platforms": [
         "Apple TV",
         "iPhone",
         "iPad"
       ],
-      "navigation": "In Sources, add an IPTV playlist or edit an existing simple URL source.",
-      "experience": "Name the source, enter playlist/guide URLs and supported headers, verify and save it.",
-      "conditions": "All platforms; direct playlists and supported single streams differ from web pages. This simple source is separate from IPTV account VOD sign-in. Credentials and private URLs must not be shared publicly.",
+      "navigation": "In Live TV > TV Sources, select an existing simple URL playlist and open Playlist and guides.",
+      "experience": "Edit the existing playlist name, playlist address and ordered guide addresses, check the playlist, then save without changing individual stream files.",
+      "conditions": "All platforms. Both production shells supply managed setup routing, so new playlists use IPTV account setup instead of this standalone editor. The existing simple-source editor remains reachable. It edits playlist/guide URLs, not authentication headers; account setup owns those. Save changes starts playlist checking, Cancel check stops it, and saving occurs after a successful check; previous configuration remains on failure. HTTP is unencrypted. Dynamic guide names and source URLs are not constant labels.",
       "controls": [
         {
           "text": "IPTV source",
@@ -18123,10 +18910,6 @@
         },
         {
           "text": "Save changes",
-          "source": "Sources/FeatureLiveTV/LiveTVPlaylistEditor.swift"
-        },
-        {
-          "text": "Add source",
           "source": "Sources/FeatureLiveTV/LiveTVPlaylistEditor.swift"
         },
         {
@@ -18451,7 +19234,7 @@
         "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Reusable LiveTVPrototypeStyle.swift is wired into Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/AppShell/MainTabView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/AppShell/MainTabView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/AppShell/MainTabView.swift, Sources/AppShelliOS/PlozziOSRootView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitReason": "Shared guide metrics, artwork and styling support LiveTVPrototypeView, its browse rows and playback previews. PrototypeGuideSectionLabel in LiveTVPrototypeBrowse uses the Recently watched, Favorites and Channels titles defined here; these are inventoried on LiveTVPrototypeView. The source/scenario title helpers do not establish another reachable picker or settings page."
     },
     "Sources/FeatureLiveTV/LiveTVPrototypeView.swift": {
       "sources": [
@@ -18463,6 +19246,7 @@
         "Sources/FeatureLiveTV/LiveTVPrototypePreview.swift",
         "Sources/CoreUI/ChannelLogoArtwork.swift",
         "Sources/FeatureLiveTV/LiveTVPrototypeStyle.swift",
+        "Sources/FeatureLiveTVCore/LiveTVPrototypeModel.swift",
         "Sources/CoreUI/ContentStateView.swift",
         "Sources/CoreUI/PINEntry.swift",
         "Sources/FeatureLiveTV/LiveTVSourceAccessGate.swift",
@@ -18504,7 +19288,8 @@
         "Sources/FeatureLiveTV/LiveTVPrototypeSearch.swift",
         "Sources/FeatureLiveTV/LiveTVSourceLoadState.swift",
         "Sources/FeatureLiveTV/PrototypeNativeGuideList.swift",
-        "Sources/CoreUI/ProfileLockCopy.swift"
+        "Sources/CoreUI/ProfileLockCopy.swift",
+        "Sources/CoreUI/SettingsCopy.swift"
       ],
       "platforms": [
         "Apple TV",
@@ -18513,7 +19298,7 @@
       ],
       "navigation": "Open Live TV from navigation or Home, after enabling an available source.",
       "experience": "Browse the production channel guide, search channels/programs, and tune a channel.",
-      "conditions": "Despite its filename, this is the wired production guide on all platforms. Source use, parental source approvals, provider limits, region/category filtering and network policy determine visible/playable channels.",
+      "conditions": "Despite its filename, this is the wired production guide on all platforms. Source use, standalone-playlist parental approvals, provider limits, region/category filtering and network policy determine visible/playable channels. Recently watched requires its preference enabled and visible recent entries; Favorites requires visible favorites. Channels includes all visible channels, including entries repeated in those shortcut sections. Their headings come from LiveTVPrototypeStyle through PrototypeGuideSectionLabel.",
       "controls": [
         {
           "text": "Search",
@@ -18530,6 +19315,18 @@
         {
           "text": "Live TV",
           "source": "Sources/FeatureLiveTV/LiveTVPrototypeView.swift"
+        },
+        {
+          "text": "Recently watched",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeStyle.swift"
+        },
+        {
+          "text": "Favorites",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeStyle.swift"
+        },
+        {
+          "text": "Channels",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeStyle.swift"
         },
         {
           "text": "Couldn't open title",
@@ -18601,10 +19398,6 @@
         },
         {
           "text": "Search programs",
-          "source": "Sources/FeatureLiveTV/LiveTVPrototypeView.swift"
-        },
-        {
-          "text": "Cancel",
           "source": "Sources/FeatureLiveTV/LiveTVPrototypeView.swift"
         },
         {
@@ -18724,8 +19517,8 @@
           "source": "Sources/FeatureLiveTV/LiveTVPrototypeBrowse.swift"
         },
         {
-          "text": "Sources",
-          "source": "Sources/FeatureLiveTV/LiveTVPrototypeBrowse.swift"
+          "text": "TV Sources",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
           "text": "No channels available",
@@ -18968,10 +19761,6 @@
           "source": "Sources/FeatureLiveTV/LiveTVSourceAccessGate.swift"
         },
         {
-          "text": "TV sources",
-          "source": "Sources/FeatureLiveTV/LiveTVSourceAccessGate.swift"
-        },
-        {
           "text": "Unlock TV sources",
           "source": "Sources/FeatureLiveTV/LiveTVSourceAccessGate.swift"
         },
@@ -19026,16 +19815,17 @@
         "Sources/CoreUI/SettingsSwitchToggle.swift",
         "Sources/CoreUI/SettingsSectionSurface.swift",
         "Sources/CoreUI/SettingsRowLabel.swift",
-        "Sources/CoreUI/TextTierStyle.swift"
+        "Sources/CoreUI/TextTierStyle.swift",
+        "Sources/CoreUI/SettingsCopy.swift"
       ],
       "platforms": [
         "Apple TV",
         "iPhone",
         "iPad"
       ],
-      "navigation": "Choose Media server under Sources, or enroll an eligible connected server.",
+      "navigation": "Choose Media server under TV Sources, or enroll an eligible connected server.",
       "experience": "Choose the accessible server/user, add playable channels, or deliberately add guide-only data.",
-      "conditions": "Only Plex/Jellyfin/Emby accounts enabled for the active profile are listed; server/user names are dynamic. An unresolved account selection can leave no choices. Connect a server appears in the empty state when a connection callback exists; Connect another server appears below a nonempty list. Checking offers Cancel check. After a successful, still-authorized check with channels, available playback offers Add channels and unsupported playback mode offers Add guide only. Other results offer Check again. Guide-only enrollment cannot play channels; profile/PIN authority is checked again when saving.",
+      "conditions": "Active IPTV, Plex, Jellyfin and Emby accounts for this profile are listed; unresolved account selection can leave no choices. Server/user names are dynamic. Add Source appears both in the empty state and below nonempty choices when a setup callback exists. Checking offers Cancel check. An authorized result with channels offers Add channels for playable sources or Add guide only for unsupported playback; other results offer Check again. Guide-only enrollment cannot play. PIN/profile authority is rechecked on save. Silo library-channel support is separate and does not add native Silo TV enrollment.",
       "controls": [
         {
           "text": "Media server",
@@ -19046,8 +19836,8 @@
           "source": "Sources/FeatureLiveTV/LiveTVServerSetupView.swift"
         },
         {
-          "text": "Connect a server",
-          "source": "Sources/FeatureLiveTV/LiveTVServerSetupView.swift"
+          "text": "Add Source",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
           "text": "Checking Live TV",
@@ -19095,10 +19885,6 @@
         },
         {
           "text": "Check again",
-          "source": "Sources/FeatureLiveTV/LiveTVServerSetupView.swift"
-        },
-        {
-          "text": "Connect another server",
           "source": "Sources/FeatureLiveTV/LiveTVServerSetupView.swift"
         },
         {
@@ -19314,20 +20100,26 @@
         "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift",
         "Sources/FeatureLiveTV/LiveTVPreparationProgressView.swift",
         "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift",
-        "Sources/CoreUI/ProfileLockCopy.swift"
+        "Sources/CoreUI/ProfileLockCopy.swift",
+        "Sources/CoreUI/SettingsCopy.swift",
+        "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift",
+        "Sources/FeatureLiveTVCore/LiveTVGuidePreparationModel.swift",
+        "Sources/AppRuntime/AccountsProvidersModel.swift",
+        "Sources/AppRuntime/LiveTVSourcesRuntime.swift",
+        "Sources/CoreModels/LiveTVSourceApproval.swift"
       ],
       "platforms": [
         "Apple TV",
         "iPhone",
         "iPad"
       ],
-      "navigation": "Open Sources from Live TV or Settings > Live TV.",
-      "experience": "Enable/add/edit sources, inspect guide coverage, retain listings, connect a playlist as an account, or access channel tools.",
-      "conditions": "All platforms. Server enrollment supports eligible Plex/Jellyfin/Emby accounts. Both app shells supply provider setup, so Add a source offers IPTV provider and Media server, plus Playlist file (M3U) on iPhone/iPad only. The standalone new IPTV playlist and new imported-source editor branches are not reached with that router; existing simple sources remain editable. Connect as IPTV account is offered only for URL sources, not imported files. Settings embeds sources behind TV sources/Add source, with automatic-channel settings and tools below; the guide Sources sheet shows Your sources, Add a source, then tools. Refresh needs configured sources; availability checks need a playlist; guide coverage needs retained programs. Correct guide mapping requires durable storage and guides; identity review appears only with candidates. PIN/profile authority gates source changes and Kids approvals. Disabling/removing a source keeps channel preferences; provider sign-in may be separately required.",
+      "navigation": "Open TV Sources from the Live TV guide, or open Settings > Live TV and its TV Sources group. Add TV Source opens the setup choices in Settings; the guide sheet shows those choices directly.",
+      "experience": "Add or enable TV sources, inspect their status and guide progress, refresh an IPTV guide, edit a playlist or account connection, manage Kids approvals, or open channel-organization tools without confusing TV sources with household Sources settings.",
+      "conditions": "All three platforms. Source management is profile-authorized and protected by a Parental PIN for sealed Kids profiles. The guide sheet presents Your sources, Add TV Source, then tools; Settings embeds TV Sources with Add TV Source, followed by Plozz channels, preferences and tools. Both shells wire IPTV provider and Media server; Playlist file (M3U) is mobile-only. Media server can list active IPTV accounts as well as Plex/Jellyfin/Emby; Silo is not a native TV-source provider. Existing standalone playlists expose Use this source, Kids approval, Playlist and guides, optional availability scanning, Guide options and removal. Approval requires an enabled standalone source and the household PIN; it is device-local and is not offered for IPTV accounts, which use server-source enrollment. New setup and Connect as IPTV account use that account path; conversion is URL-only and leaves the older standalone source saved, without transferring its approval protection. Mapping requires durable storage and guides; identity review needs candidates. Account details instead offer Use this source, Rename source, Live TV status, conditional Refresh guide and removal, not standalone editing/mapping/scanning/approval. Refresh guide requires an authorized IPTV account and is disabled while loading or off. Disabling/removing cancels pending guide work; dismissing the notice does not. Channel choices and account sign-ins survive source removal. The enabled source needs runtime status before its inline terminal status appears; stage progress uses the shared notice. Guide ready covers current listings, not every channel/date.",
       "controls": [
         {
-          "text": "Sources",
-          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+          "text": "TV Sources",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
           "text": "Source changes couldn't be saved",
@@ -19350,12 +20142,12 @@
           "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
         },
         {
-          "text": "Add TV source",
+          "text": "Your sources",
           "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
         },
         {
-          "text": "Your sources",
-          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+          "text": "Add TV Source",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
           "text": "Refreshing sources",
@@ -19379,10 +20171,6 @@
         },
         {
           "text": "Guide coverage",
-          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
-        },
-        {
-          "text": "Add a source",
           "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
         },
         {
@@ -19582,19 +20370,7 @@
           "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
         },
         {
-          "text": "TV sources",
-          "source": "Sources/FeatureLiveTV/LiveTVSettingsSourceList.swift"
-        },
-        {
-          "text": "Add source",
-          "source": "Sources/FeatureLiveTV/LiveTVSettingsSourceList.swift"
-        },
-        {
           "text": "Profile settings unavailable",
-          "source": "Sources/FeatureLiveTV/LiveTVSourceAccessGate.swift"
-        },
-        {
-          "text": "TV sources",
           "source": "Sources/FeatureLiveTV/LiveTVSourceAccessGate.swift"
         },
         {
@@ -19616,6 +20392,30 @@
         {
           "text": "Source paused",
           "source": "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift"
+        },
+        {
+          "text": "Refresh guide",
+          "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        },
+        {
+          "text": "Guide ready",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "No current guide listings",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "No guide configured",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Guide update paused",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+        },
+        {
+          "text": "Guide update failed",
+          "source": "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
         }
       ],
       "documents": [
@@ -19629,6 +20429,10 @@
         },
         {
           "slug": "live-tv-channels"
+        },
+        {
+          "slug": "live-tv-channels",
+          "anchor": "wait-for-an-iptv-guide"
         }
       ]
     },
@@ -21656,7 +22460,7 @@
       ],
       "navigation": "Open Episodes or Playlist from player navigation.",
       "experience": "Move to another eligible entry in the active episode/playlist sequence.",
-      "conditions": "A sequence with available entries is required; current provider/source ownership is preserved. Loading failures expose retry instead of empty success. On mobile this shared panel is reached through PlayerTouchCardStrip, not the disabled shared transport overlay. Episodes needs an episode browser; Playlist needs an active sequence.",
+      "conditions": "A sequence with available entries is required; current provider/source ownership is preserved. Loading failures expose retry instead of empty success. Apple TV constructs PlayerEpisodeNativeRow, whose earlier/later error cards define their own Try Again label. Mobile reaches the shared panel through PlayerTouchCardStrip, not the disabled shared transport overlay. Episodes needs an episode browser; Playlist needs an active sequence.",
       "controls": [
         {
           "text": "Earlier episodes",
@@ -21673,6 +22477,18 @@
         {
           "text": "Try Again",
           "source": "Sources/FeaturePlayback/PlayerSequencePanel.swift"
+        },
+        {
+          "text": "Earlier episodes",
+          "source": "Sources/FeaturePlayback/PlayerEpisodeNativeRow.swift"
+        },
+        {
+          "text": "Later episodes",
+          "source": "Sources/FeaturePlayback/PlayerEpisodeNativeRow.swift"
+        },
+        {
+          "text": "Try Again",
+          "source": "Sources/FeaturePlayback/PlayerEpisodeNativeRow.swift"
         },
         {
           "text": "Episodes",
@@ -23895,6 +24711,23 @@
       "omitKind": "shared-component",
       "omitReason": "Reusable HeroSettingsControls.swift is wired into Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift, Sources/FeatureSettings/HomeSectionSettingsViews.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
     },
+    "Sources/FeatureSettings/HomeHeroEnabledPicker.swift": {
+      "sources": [
+        "Sources/FeatureSettings/HomeHeroEnabledPicker.swift",
+        "Sources/FeatureSettings/HeroSettingsControls.swift",
+        "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Apple TV On/Off preview picker constructed by HeroSettingsControls on the Hero page in HomeSectionSettingsViews. It enables the featured hero independently of row style; its controls are inventoried on that parent, not omitted from the audit."
+    },
+    "Sources/FeatureSettings/HomeRowStylePicker.swift": {
+      "sources": [
+        "Sources/FeatureSettings/HomeRowStylePicker.swift",
+        "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Apple TV Showcase/Classic preview picker constructed by HomeRowStyleSettingsView in HomeSectionSettingsViews. Row style is independent of Hero On/Off; both choices and conditional Showcase settings are inventoried on that parent."
+    },
     "Sources/FeatureSettings/HomeRowsSettingsView.swift": {
       "sources": [
         "Sources/CoreModels/HomeSectionIssue.swift",
@@ -24383,7 +25216,7 @@
           "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
         },
         {
-          "text": "When tapping an item",
+          "text": "Tap action",
           "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
         },
         {
@@ -25345,7 +26178,7 @@
           "source": "Sources/FeatureSettings/MyLibrariesDetailView.swift"
         },
         {
-          "text": "Add Server to This Apple TV",
+          "text": "Add Source to This Apple TV",
           "source": "Sources/FeatureSettings/MyLibrariesDetailView.swift"
         },
         {
@@ -27026,7 +27859,7 @@
       ],
       "navigation": "Continue the new Apple TV profile wizard to its libraries step.",
       "experience": "Choose server identities and enabled libraries before completing setup.",
-      "conditions": "Apple TV. Embeds MyLibrariesDetailView in profileSetup presentation: server switches, library checkmarks and Watching as use the same authorization and recovery as Settings > Libraries. Server and library names are dynamic. The settings-only Add Server to This Apple TV button and share-scan status are absent. Plex/server identity destinations have separate screen records; Done remains pinned below the list.",
+      "conditions": "Apple TV. Embeds MyLibrariesDetailView in profileSetup presentation: server switches, library checkmarks and Watching as use the same authorization and recovery as Settings > Libraries. Server and library names are dynamic. The settings-only Add Source to This Apple TV button and share-scan status are absent. Plex/server identity destinations have separate screen records; Done remains pinned below the list.",
       "controls": [
         {
           "text": "What does this profile watch?",
@@ -27389,12 +28222,13 @@
         "Sources/CoreUI/SettingsSectionSurface.swift",
         "Sources/CoreUI/ShareScanProgressViews.swift",
         "Sources/CoreUI/TextTierStyle.swift",
-        "Sources/FeatureSettings/FocusSectionCompat.swift"
+        "Sources/FeatureSettings/FocusSectionCompat.swift",
+        "Sources/CoreUI/SettingsCopy.swift"
       ],
       "platforms": [
         "Apple TV"
       ],
-      "navigation": "Choose a shared connection under Apple TV Settings > Servers.",
+      "navigation": "Choose a shared connection under Apple TV Settings > Sources.",
       "experience": "Inspect authorized libraries and connection addresses, rescan a share, reauthenticate or remove the account.",
       "conditions": "Provider-specific. Removing shared sign-in affects household profiles; Remove Everywhere also removes its synced connection. Library visibility is managed separately per profile. NFS has no login: its panel says Connection and removal confirmation says Remove. Other accounts use Signed in as and Sign Out; the last account offers Sign Out & Remove Server. With sync-enabled removal, the confirmation instead offers local removal or Remove Everywhere. Names in confirmation titles come from the server/account.",
       "controls": [
@@ -27423,8 +28257,8 @@
           "source": "Sources/FeatureSettings/ServerDetailView.swift"
         },
         {
-          "text": "Servers",
-          "source": "Sources/FeatureSettings/ServerDetailView.swift"
+          "text": "Sources",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
           "text": "Remove Everywhere",
@@ -27538,26 +28372,27 @@
         "Sources/FeatureSettings/ServersAndLibrariesDetailView.swift",
         "Sources/CoreUI/SettingsPageHeader.swift",
         "Sources/CoreUI/SettingsRowFocusStyle.swift",
-        "Sources/CoreUI/TextTierStyle.swift"
+        "Sources/CoreUI/TextTierStyle.swift",
+        "Sources/CoreUI/SettingsCopy.swift"
       ],
       "platforms": [
         "Apple TV"
       ],
-      "navigation": "From an adult Apple TV profile, open Settings > Servers.",
+      "navigation": "From a non-Kids Apple TV profile, open Settings > Sources, then select a source or Add Source.",
       "experience": "Review shared connections, add a source, or enter recovery/details for a connected server.",
-      "conditions": "Apple TV household connection management; sign-in state determines Add Server versus Sign In to a Server and reauthentication controls.",
+      "conditions": "Apple TV household source management is withheld from Kids profiles. Both empty and connected lists offer Add Source. Source rows use dynamic server names and sign-in summaries. Shared sign-ins differ from each profile's Libraries selections; removal can affect everyone.",
       "controls": [
         {
-          "text": "Servers",
+          "text": "Sources",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
+        },
+        {
+          "text": "No sources have been added yet.",
           "source": "Sources/FeatureSettings/ServersAndLibrariesDetailView.swift"
         },
         {
-          "text": "Sign In to a Server",
-          "source": "Sources/FeatureSettings/ServersAndLibrariesDetailView.swift"
-        },
-        {
-          "text": "Add Server",
-          "source": "Sources/FeatureSettings/ServersAndLibrariesDetailView.swift"
+          "text": "Add Source",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         }
       ],
       "documents": [
@@ -27690,6 +28525,60 @@
       "omitKind": "shared-component",
       "omitReason": "Reusable SettingsQRCode.swift is wired into Sources/FeatureSettings/CrashReportingConsentView.swift, Sources/FeatureSettings/HelpDiagnosticsDetailView.swift, Sources/FeatureSettings/PrivacyPolicyLink.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/SettingsView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
     },
+    "Sources/FeatureSettings/SettingsSearchResults.swift": {
+      "sources": [
+        "Sources/FeatureSettings/SettingsSearchResults.swift",
+        "Sources/FeatureSettings/SettingsView.swift",
+        "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+        "Sources/CoreModels/SettingsSearch.swift",
+        "Sources/CoreModels/SettingsSearchAdditionalEntries.swift",
+        "Sources/CoreUI/SettingsSearchAnchor.swift"
+      ],
+      "platforms": [
+        "Apple TV",
+        "iPhone",
+        "iPad"
+      ],
+      "navigation": "Open Settings and use its Search settings field on Apple TV, or activate the settings search field on iPhone/iPad; enter a task and select a result.",
+      "experience": "See suggested settings with an empty query or matched settings with their destination paths. Selecting a result opens its page and focuses or highlights the target, or its enabling prerequisite, without changing it.",
+      "conditions": "The catalogue filters platform and Kids-profile applicability. Apple TV keeps its search field at the top of the Settings workspace and replaces root content with results while searching; mobile overlays results while search is active, with iPhone iOS 26 system toolbar placement and iPad navigation-bar drawer placement. Empty queries show five catalogue suggestions, not an empty result screen. Result titles and paths are resolved from the cited catalogue, not server/user names. Required parental authorization is still checked on the destination. Disabled prerequisites are focused rather than enabled; unavailable destinations show their verified unavailable state. Mobile highlight is temporary and respects reduced-motion/transparency settings. No claim of running-app inspection.",
+      "controls": [
+        {
+          "text": "Search settings",
+          "source": "Sources/FeatureSettings/SettingsSearchResults.swift"
+        },
+        {
+          "text": "Suggestions",
+          "source": "Sources/FeatureSettings/SettingsSearchResults.swift"
+        },
+        {
+          "text": "Subtitle size",
+          "source": "Sources/CoreModels/SettingsSearch.swift"
+        },
+        {
+          "text": "Theme",
+          "source": "Sources/CoreModels/SettingsSearch.swift"
+        },
+        {
+          "text": "Autoplay next episode",
+          "source": "Sources/CoreModels/SettingsSearch.swift"
+        },
+        {
+          "text": "Rewind on resume",
+          "source": "Sources/CoreModels/SettingsSearch.swift"
+        },
+        {
+          "text": "Display Size",
+          "source": "Sources/CoreModels/SettingsSearch.swift"
+        }
+      ],
+      "documents": [
+        {
+          "slug": "getting-started",
+          "anchor": "find-a-setting"
+        }
+      ]
+    },
     "Sources/FeatureSettings/SettingsSegmentedPicker.swift": {
       "sources": [
         "Sources/FeatureSettings/SettingsSegmentedPicker.swift",
@@ -27763,11 +28652,11 @@
       ],
       "navigation": "Open Settings in Apple TV navigation, then a profile category or Everyone destination.",
       "experience": "Change the active profile preferences, manage permitted shared services, or open Help & Diagnostics.",
-      "conditions": "Apple TV only. Profile categories are Playback, Subtitles, Live TV, Libraries, Appearance, Screens & Navigation, Trackers, Language, followed by Everyone and About. Everyone is absent for Kids; protected Libraries/Manage Profile need parental unlock. iCloud/metadata destinations require their wired dependencies. Seven version activations expose internal developer controls below About, including Device & Build; these are not ordinary support procedures. On Kids profiles, Name & Avatar replaces the ordinary Libraries category; protected Libraries and Manage Profile move into Parental Controls before About. Settings search is available from the root; the Apple TV link precedes the profile categories; selecting a result focuses the control on TV or briefly highlights it on mobile and still checks parental authorization. It never enables a prerequisite automatically.",
+      "conditions": "Apple TV only. Profile categories are Playback, Subtitles, Live TV, Libraries, Appearance, Screens & Navigation, Trackers, Language, followed by Everyone and About. Everyone is absent for Kids; protected Libraries/Manage Profile need parental unlock. iCloud/metadata destinations require their wired dependencies. Seven version activations expose internal developer controls below About, including Device & Build; these are not ordinary support procedures. On Kids profiles, Name & Avatar replaces the ordinary Libraries category; protected Libraries and Manage Profile move into Parental Controls before About. Settings search is available from the root; the Apple TV Search settings field precedes the profile categories and displays results in the same workspace; selecting a result focuses the control on TV or briefly highlights it on mobile and still checks parental authorization. It never enables a prerequisite automatically.",
       "controls": [
         {
           "text": "Search settings",
-          "source": "Sources/FeatureSettings/SettingsView.swift"
+          "source": "Sources/FeatureSettings/SettingsSearchResults.swift"
         },
         {
           "text": "Playback",
@@ -27830,8 +28719,8 @@
           "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
-          "text": "Servers",
-          "source": "Sources/FeatureSettings/SettingsView.swift"
+          "text": "Sources",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
           "text": "Profiles",
@@ -27970,8 +28859,8 @@
           "source": "Sources/FeatureSettings/SettingsView.swift"
         },
         {
-          "text": "Add a server",
-          "source": "Sources/FeatureSettings/SettingsView.swift"
+          "text": "Add Source",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
           "text": "Not connected",
@@ -28147,7 +29036,7 @@
         "iPhone",
         "iPad"
       ],
-      "navigation": "Open Sync Data on This Device in iCloud Sync settings.",
+      "navigation": "Open Settings > iCloud Sync > Troubleshooting, then inspect the Sync Data on This Device section.",
       "experience": "Inspect encoded local sync record sizes and refresh their breakdown.",
       "conditions": "All platforms. These are local records, not iCloud storage quota. Downloaded files/guides and separately stored credentials are excluded.",
       "controls": [
@@ -28380,117 +29269,6 @@
       ],
       "omitKind": "shared-component",
       "omitReason": "Reusable HomeHeroBackdrop.swift is wired into Sources/FeatureHome/FocusHeroHomeView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/FocusHeroHomeView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/FocusHeroHomeView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/FocusHeroHomeView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/FocusHeroHomeView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/FocusHeroHomeView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/FocusHeroHomeView.swift, Sources/FeatureHome/HomeView.swift, Sources/FeatureHome/FocusHeroHomeView.swift, Sources/FeatureHome/HomeView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
-    },
-    "Sources/AppShelliOS/PlozziOSHomeScrollView.swift": {
-      "sources": [
-        "Sources/AppShelliOS/PlozziOSHomeScrollView.swift",
-        "Sources/AppShelliOS/PlozziOSHomeView.swift"
-      ],
-      "omitKind": "shared-component",
-      "omitReason": "Mobile Home scroll container and row-position preservation, constructed by PlozziOSHomeView. It supplies no independent caption or action; Home headings, card navigation and row browse controls are inventoried on that parent."
-    },
-    "Sources/CoreUI/MediaArtworkZoom.swift": {
-      "sources": [
-        "Sources/CoreUI/MediaArtworkZoom.swift",
-        "Sources/AppShelliOS/PlozziOSHomeView.swift",
-        "Sources/AppShelliOS/PlozziOSLibraryView.swift",
-        "Sources/AppShelliOS/PlozziOSSearchView.swift",
-        "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
-        "Sources/CoreUI/PosterCardView.swift"
-      ],
-      "omitKind": "shared-component",
-      "omitReason": "Shared iPhone/iPad artwork-origin and detail-navigation transition wrappers used by Home, library, Search and detail cards. This is not the player Zoom Mode or an artwork editor; visible card actions are inventoried on those parents."
-    },
-    "Sources/CoreUI/SettingsSearchAnchor.swift": {
-      "sources": [
-        "Sources/CoreUI/SettingsSearchAnchor.swift",
-        "Sources/FeatureSettings/SettingsView.swift",
-        "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-        "Sources/FeatureSettings/SettingsSearchResults.swift"
-      ],
-      "omitKind": "shared-component",
-      "omitReason": "Shared settings-search landing, scroll, focus and temporary highlight behavior. SettingsView and PlozziOSSettingsView route search results through this wrapper; named search controls belong to those parents and SettingsSearchResults. It changes no preference or authorization."
-    },
-    "Sources/FeatureHome/HeroShowcaseStage.swift": {
-      "sources": [
-        "Sources/FeatureHome/HeroShowcaseStage.swift",
-        "Sources/FeatureHome/HomeView.swift",
-        "Sources/FeatureHome/FocusHeroHomeView.swift",
-        "Sources/FeatureHome/HomeHeroView.swift"
-      ],
-      "omitKind": "shared-component",
-      "omitReason": "Apple TV composition and motion between the featured hero, Showcase backdrop and rows in HomeView/FocusHeroHomeView/HomeHeroView. It contributes no independent settings or action labels; Hero and Row style controls belong to HomeSectionSettingsViews."
-    },
-    "Sources/FeatureSettings/HomeHeroEnabledPicker.swift": {
-      "sources": [
-        "Sources/FeatureSettings/HomeHeroEnabledPicker.swift",
-        "Sources/FeatureSettings/HeroSettingsControls.swift",
-        "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
-      ],
-      "omitKind": "shared-component",
-      "omitReason": "Apple TV On/Off preview picker constructed by HeroSettingsControls on the Hero page in HomeSectionSettingsViews. It enables the featured hero independently of row style; its controls are inventoried on that parent, not omitted from the audit."
-    },
-    "Sources/FeatureSettings/HomeRowStylePicker.swift": {
-      "sources": [
-        "Sources/FeatureSettings/HomeRowStylePicker.swift",
-        "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
-      ],
-      "omitKind": "shared-component",
-      "omitReason": "Apple TV Showcase/Classic preview picker constructed by HomeRowStyleSettingsView in HomeSectionSettingsViews. Row style is independent of Hero On/Off; both choices and conditional Showcase settings are inventoried on that parent."
-    },
-    "Sources/FeatureSettings/SettingsSearchResults.swift": {
-      "sources": [
-        "Sources/FeatureSettings/SettingsSearchResults.swift",
-        "Sources/FeatureSettings/SettingsView.swift",
-        "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-        "Sources/CoreModels/SettingsSearch.swift",
-        "Sources/CoreModels/SettingsSearchAdditionalEntries.swift",
-        "Sources/CoreUI/SettingsSearchAnchor.swift"
-      ],
-      "platforms": [
-        "Apple TV",
-        "iPhone",
-        "iPad"
-      ],
-      "navigation": "Open Settings > Search settings on Apple TV, or activate the settings search field on iPhone/iPad; enter a task and select a result.",
-      "experience": "See suggested settings with an empty query or matched settings with their destination paths. Selecting a result opens its page and focuses or highlights the target, or its enabling prerequisite, without changing it.",
-      "conditions": "The catalogue filters platform and Kids-profile applicability. Apple TV supplies a separate Search settings page; mobile overlays results while search is active, with iPhone iOS 26 system toolbar placement and iPad navigation-bar drawer placement. Empty queries show five catalogue suggestions, not an empty result screen. Result titles and paths are resolved from the cited catalogue, not server/user names. Required parental authorization is still checked on the destination. Disabled prerequisites are focused rather than enabled; unavailable destinations show their verified unavailable state. Mobile highlight is temporary and respects reduced-motion/transparency settings. No claim of running-app inspection.",
-      "controls": [
-        {
-          "text": "Search settings",
-          "source": "Sources/FeatureSettings/SettingsSearchResults.swift"
-        },
-        {
-          "text": "Suggestions",
-          "source": "Sources/FeatureSettings/SettingsSearchResults.swift"
-        },
-        {
-          "text": "Subtitle size",
-          "source": "Sources/CoreModels/SettingsSearch.swift"
-        },
-        {
-          "text": "Theme",
-          "source": "Sources/CoreModels/SettingsSearch.swift"
-        },
-        {
-          "text": "Autoplay next episode",
-          "source": "Sources/CoreModels/SettingsSearch.swift"
-        },
-        {
-          "text": "Rewind on resume",
-          "source": "Sources/CoreModels/SettingsSearch.swift"
-        },
-        {
-          "text": "Display Size",
-          "source": "Sources/CoreModels/SettingsSearch.swift"
-        }
-      ],
-      "documents": [
-        {
-          "slug": "getting-started",
-          "anchor": "find-a-setting"
-        }
-      ]
     }
   }
 }

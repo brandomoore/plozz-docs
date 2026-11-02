@@ -38,7 +38,7 @@ Live TV follows iCloud Sync for the same Plozz profile: source addresses, channe
 
 The **Playlist file** option in IPTV account sign-in is different: those account-imported M3U files stay on the importing device. Use a playlist URL or import again elsewhere.
 
-Kids-profile [playlist-source approvals](/live-tv/#approve-playlist-sources-for-kids) remain local and must be granted on each device. If iCloud Sync shows **Set up IPTV source**, enter its address or update the older sending app; a source descriptor alone is not a usable connection.
+Kids-profile [standalone playlist approvals](/live-tv/#approve-playlist-sources-for-kids) remain local and must be granted on each device; they do not cover IPTV accounts. If iCloud Sync shows **Set up IPTV source**, enter its address or update the older sending app. Synced source details alone may not be enough to connect.
 
 ## Set up another device
 

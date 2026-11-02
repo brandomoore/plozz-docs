@@ -44,6 +44,6 @@ To remove an abandoned title from the row instead, use [Remove from Continue Wat
 
 ## Choose what selecting a card does
 
-In the same Continue Watching editor, set **Center button action** on Apple TV, or **When tapping an item** on iPhone/iPad. **Play** is the default; **Open detail page** lets you inspect a Home title before starting it. This does not change artwork or history.
+In the same Continue Watching editor, set **Center button action** on Apple TV, or **Tap action** on iPhone/iPad. **Play** is the default; **Open detail page** lets you inspect a Home title before starting it. This does not change artwork or history.
 
 On Apple TV, the remote's play/pause button still plays the focused item directly.

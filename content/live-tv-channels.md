@@ -1,6 +1,12 @@
 # Organize channels and fix listings
 
-Keep the channels you watch easy to find, hide unwanted groups, and correct a guide that shows the wrong station. These choices belong to your Plozz profile.
+Organize [Live TV](/live-tv/) channels and fix their listings.
+
+## Wait for an IPTV guide
+
+Your IPTV guide loads while you browse. Dismissing its progress notice does not cancel it; percentages describe individual stages. Keep Plozz open.
+
+**Guide ready** means current listings were found, not that every channel has them. For **Guide update failed** or **Guide update paused**, open **TV Sources**, select the IPTV account's source, then **Refresh guide**. For **No guide configured**, add a guide address using **Edit connection** under **Settings > Sources**.
 
 ## Find hidden channels
 
@@ -12,32 +18,31 @@ Open **Manage channels** in Live TV, then:
 - In **Countries and languages**, enable **Filter IPTV by country or language** and select the tags you want. A country OR language match is enough. Tags come from the playlist; Plozz does not guess from names.
 - In **Hidden channels**, use **Show channel** to make an individual exception. **Reset category and region visibility** keeps individually hidden channels and scan exclusions.
 
-An untagged channel can be hidden by regional filtering. Also check **Favorites only**, **With guide listings**, and the selected source. Favorites remain saved when a source is unavailable.
+Regional filtering can hide untagged channels. Check **Favorites only**, **With guide listings**, and the selected source too. Unavailable favorites stay saved.
 
 ## Correct a channel's guide
 
-1. Open **Sources**, select the playlist, then **Guide options > Correct guide mapping** when offered.
-2. Find the channel and choose its guide source.
-3. Select the correct station, checking its regional feed.
+Guide correction, file editing, identity repair and scans below are for standalone playlists, not IPTV accounts. Accounts use **Refresh guide** and **Edit connection** instead.
+
+1. Under a standalone playlist in **TV Sources**, open **Guide options > Correct guide mapping** when offered.
+2. Select the channel, its guide source, and the correct station. Check the regional feed.
 
 Corrections survive guide refreshes. **Use automatic matching** removes your override.
 
-Under **Guide options**, **Keep previous days** and **Look ahead** set the listings to retain. They cannot create programs the guide has not supplied, and earlier listings are not recordings.
+Under **Guide options**, **Keep previous days** and **Look ahead** set how many days to keep. They cannot create missing listings; earlier listings are not recordings.
 
 ## Edit imported playlist details
 
-For a saved imported playlist, open **Sources**, select it, then choose **Playlist and guides**. Edit **Name (optional)** or its guide addresses, then **Save source**. This changes the source's details, not the imported file.
+In **TV Sources**, select the imported playlist, then **Playlist and guides**. Edit **Name (optional)** or guide addresses, then **Save source**. The imported file stays unchanged.
 
 ## Restore a saved channel identity
 
-If **Review channel identities** appears in Guide options, inspect the candidate before choosing **Restore saved identity**. Confirm only the same station and regional feed: this carries over favorites, hidden state, and guide corrections. Otherwise, leave the playable entry separate.
+If **Review channel identities** appears in Guide options, inspect the candidate before choosing **Restore saved identity**. Confirm only the same station and regional feed: this carries over favorites, hiding, and guide corrections. Otherwise, leave it separate.
 
 ## Check unavailable links
 
-In **Sources**, select a playlist, open **Check channel availability**, then choose **Scan channels**. This optional check tests reachability, not playback-format support.
+In **TV Sources**, select a playlist, open **Check channel availability**, then **Scan channels**. This tests reachability, not playback-format support.
 
-Open **Scan results** for reachable, unavailable, and uncertain links. Unavailable channels are hidden by the scan; uncertain results need another check. **Cancel scan** stops the remaining checks.
+Open **Scan results**. Unavailable channels are hidden; uncertain results need another check. **Cancel scan** stops remaining checks.
 
 Use **Restore channel** or **Restore hidden channels** to undo scan exclusions. Other hiding rules still apply. If saving results fails, use **Retry saving** before assuming your choices will persist.
-
-For source setup, playback, and Multiview, see [IPTV and Live TV](/live-tv/).
