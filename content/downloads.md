@@ -9,7 +9,7 @@ Save videos on iPhone/iPad for offline viewing. Apple TV has no offline download
 3. Open **Downloads** and wait until your copy is ready to play.
 4. Play it from Downloads.
 
-For shows, open **Manage Seasons**, then choose **Download All Available Episodes**, a season, or an episode. Only available files can download.
+For shows, open **Manage Seasons**, then choose **Download All Available Episodes**, a season, or an episode. Only available video files can download, not [streaming-service links](/network-shares/#open-links-to-streaming-services).
 
 Plozz prefers a usable matching download even if you select another server/version. Check the saved edition; changing servers does not force streaming.
 

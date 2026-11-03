@@ -33,6 +33,21 @@ Shares do not offer server-based streaming-quality controls; [offline downloads]
 
 For NFO sidecars and local artwork, see [Metadata and ratings](/metadata-and-ratings/#use-local-metadata-for-network-shares).
 
+## Open links to streaming services
+
+Keep shortcuts to streaming-service titles alongside your own videos using `.strmlnk` files. These small text files open the destination outside Plozz instead of playing video in Plozz.
+
+1. In your shared folder, create a UTF-8 text file named for the movie or episode, ending in `.strmlnk`.
+2. Put one direct HTTPS title link inside, with no other text. Supported destinations are Apple TV, Prime Video, YouTube, Movies Anywhere, and Fandango at Home. Service homepages, YouTube Shorts, and shortened links other than `youtu.be` are not accepted. The file must be no larger than 8 KiB.
+3. Rescan the share and open the title. If other copies are available, open the ellipsis **More actions** menu. Choose the share under **Server**, then the link under **Source**, where offered.
+4. Choose the button naming the destination service, or **Open Link** if the destination has not loaded yet.
+
+Apple TV needs a compatible destination app. On iPhone/iPad, the link may open an app or browser. The destination's sign-in, purchase/subscription, regional availability, and parental restrictions still apply.
+
+These links cannot be downloaded, and opening one does not return watch progress to Plozz. This is separate from the [external video-player setting](/external-players/).
+
+For **Couldn't Open Link**, check the file's contents and destination app, then try again.
+
 ## If files or matches are missing
 
 Check the selected root and read permissions through **Browse Files** before treating poor matching as a connection failure.

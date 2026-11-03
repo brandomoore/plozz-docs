@@ -1,6 +1,6 @@
 # Use another video player
 
-Plozz can open eligible Plex, Jellyfin, or Emby movies and episodes in another installed app. This is different from AirPlay and from Plozz's built-in playback engines.
+Plozz can open eligible Plex, Jellyfin, or Emby movies and episodes in another installed player. AirPlay and [imported streaming-service links](/network-shares/#open-links-to-streaming-services) work separately.
 
 ## Choose a trusted player
 

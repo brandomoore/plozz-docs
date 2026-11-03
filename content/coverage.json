@@ -40,7 +40,7 @@
         "Sources/AppRuntime/LiveTVSourcesRuntime.swift",
         "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
       ],
-      "answer": "The stable parental-controls guide explains Kids Profile setup, restricted server identities and the household Parental PIN. Kids profiles disable external Discovery, not every mature title. The PIN protects restricted settings and leaving Kids profiles; a Profile Lock protects entry. Library hiding is not account-wide access control, and shares have no server maturity filter. Standalone playlist approval requires the Kids profile, TV Sources authorization and a second PIN entry for Approve this source. It grants the whole source locally. IPTV accounts added through IPTV provider are automatically enrolled as server sources, which LiveTVSourceAuthorization.filtering does not filter; they have no standalone approval control. Enable only suitable accounts in Settings > Libraries and inspect channels and on-demand titles. Converting a standalone playlist does not transfer its approval protection. Use a restricted Seerr identity and check content, restrictions and automatic sign-in on every device."
+      "answer": "The stable parental-controls guide explains Kids Profile setup, restricted server identities and the household Parental PIN. Kids profiles disable external Discovery, not every mature title. The PIN protects restricted settings and switching from a Kids profile to a non-Kids profile. Switching between Kids profiles does not require the household PIN; a destination Profile Lock still protects entry. Library hiding is not account-wide access control, and shares have no server maturity filter. Standalone playlist approval requires the Kids profile, TV Sources authorization and a second PIN entry for Approve this source. It grants the whole source locally. IPTV accounts added through IPTV provider are automatically enrolled as server sources, which LiveTVSourceAuthorization.filtering does not filter; they have no standalone approval control. Enable only suitable accounts in Settings > Libraries and inspect channels and on-demand titles. Converting a standalone playlist does not transfer its approval protection. Use a restricted Seerr identity and check content, restrictions and automatic sign-in on every device."
     },
     "apple-tv-user-sign-in": {
       "documents": [
@@ -265,7 +265,7 @@
         "Sources/MediaDownloads/DownloadedMediaRegistry.swift",
         "Sources/MediaDownloads/RegistryOfflinePlaybackResolver.swift"
       ],
-      "answer": "On iPhone/iPad, select a movie/episode's server and version if offered before downloading; for a show use Manage Seasons to download available episodes or choose a season/episode. Choose quality, wait for completed status in Downloads and test that copy's video, audio and subtitles offline. Playback prefers a usable matching download even with another server/version selected; changing servers alone does not force streaming. Eligible HTTP transfers use background sessions; in-process/share transfers need foreground execution unless the OS grants continued processing. Switching profiles pauses that profile's transfers; return to the owning profile to resume. iOS/iPadOS 26 Live Activities can be declined; cancellation/expiry pauses active work without deleting partial files. All received bytes still require offline validation. Network, speed, source and storage limits remain; Apple TV has no downloads."
+      "answer": "On iPhone/iPad, select a movie/episode's server and version if offered before downloading; for a show use Manage Seasons to download available episodes or choose a season/episode. Imported streaming-service links are not downloadable video files. Choose quality, wait for completed status in Downloads and test that copy's video, audio and subtitles offline. Playback prefers a usable matching download even with another server/version selected; changing servers alone does not force streaming. Eligible HTTP transfers use background sessions; in-process/share transfers need foreground execution unless the OS grants continued processing. Switching profiles pauses that profile's transfers; return to the owning profile to resume. iOS/iPadOS 26 Live Activities can be declined; cancellation/expiry pauses active work without deleting partial files. All received bytes still require offline validation. Network, speed, source and storage limits remain; Apple TV has no downloads."
     },
     "cross-server-history": {
       "documents": [
@@ -524,6 +524,10 @@
     },
     "library": {
       "documents": [
+        {
+          "slug": "network-shares",
+          "anchor": "open-links-to-streaming-services"
+        },
         {
           "slug": "library"
         },
@@ -928,6 +932,7 @@
         "Sources/FeaturePlayback/SubtitleTrackController.swift",
         "Sources/AppRuntime/ExternalPlaybackRuntime.swift",
         "Sources/FeaturePlayback/SubtitleStylePanel.swift",
+        "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift",
         "Sources/FeaturePlayback/SystemCaptionAppearance.swift",
         "Sources/FeaturePlayback/SystemCaptionStyleConfirmation.swift",
         "Sources/FeatureSettings/PreferenceDetailViews.swift",
@@ -945,7 +950,7 @@
         "Sources/FeaturePlayback/SubtitleOverlayView.swift",
         "Sources/FeaturePlayback/VideoPresentationView.swift"
       ],
-      "summary": "Select/search tracks, distinguish forced/SDH and per-content policies, enter mobile language codes or follow device language, style text or Live TV, and manage second tracks. Mobile Subtitles > Advanced… contains Second Track, Subtitle Delay and Appearance > Style; Search & Download… opens search separately. Portrait starts in Playback options. Prefer SDH permits fallback; Only SDH makes automatic/search/download choices strict without overriding manual or remembered choices. Matching device caption style replaces custom appearance after confirmation; edits exit matching while placement/dual controls remain Plozz-specific. Position selects Bottom of screen or Bottom of video, and Vertical offset measures upward from that reference; Extra Line Position offers Above/Center/Below for wrapped-line growth, with screen-edge clamping, not second-track placement. The picture-placement section explains active-picture detection with video-frame fallback, eligible lower-dialogue image movement that preserves size/fixed artwork, and file-formatting overrides. Explain embedded AetherEngine versus fetchable native text, image-primary exclusion, secondary Off, timing and AirPlay limits. External apps receive eligible fetchable SRT sidecars without Plozz styling/dual guarantees; custom templates receive no subtitle links."
+      "summary": "Select/search tracks, distinguish forced/SDH and per-content policies, enter mobile language codes or follow device language, style text or Live TV, and manage second tracks. Mobile Subtitles > Advanced… contains Second Track, Subtitle Delay and Appearance > Style; Search & Download… opens search separately. Portrait starts in Playback options. Prefer SDH permits fallback; Only SDH makes automatic/search/download choices strict without overriding manual or remembered choices. Matching device caption style replaces custom appearance after confirmation; appearance edits leave matching, but control-avoidance-only edits preserve it. Position selects Bottom of screen or Bottom of video, and Vertical offset measures upward from that reference; Extra Line Position offers Above/Center/Below for wrapped-line growth, not second-track placement. Default-on Auto-Move Away from Controls follows those placement controls in both editors, lifts colliding Plozz-rendered text/eligible image captions while controls are visible, and returns them when controls disappear; disabling allows overlap. The picture-placement section retains active-picture detection with video-frame fallback, lower-dialogue image movement preserving size/fixed artwork, and file-formatting overrides. Explain embedded AetherEngine versus fetchable native text, image-primary exclusion, secondary Off, timing and AirPlay limits. External apps receive eligible fetchable SRT sidecars without Plozz styling/dual guarantees; custom templates receive no subtitle links."
     },
     "music": {
       "documents": [
@@ -1973,7 +1978,9 @@
       "areas": [
         "connections",
         "library",
-        "metadata"
+        "metadata",
+        "playback",
+        "offline"
       ],
       "sources": [
         "Sources/ProviderShare/ShareScanner.swift",
@@ -1981,9 +1988,19 @@
         "Sources/ProviderShare/ShareLocalArtwork.swift",
         "Sources/ProviderShare/ShareNFOParser.swift",
         "Sources/ProviderShare/ShareLocalMetadataAssociationPolicy.swift",
-        "Sources/ProviderShare/ShareCatalogReadProjection.swift"
+        "Sources/ProviderShare/ShareCatalogReadProjection.swift",
+        "Sources/ProviderShare/ShareMediaParser.swift",
+        "Sources/ProviderShare/ShareProvider.swift",
+        "Sources/CoreModels/ExternalMediaLink.swift",
+        "Sources/CoreModels/HeroCTA.swift",
+        "Sources/CoreModels/MediaVersion.swift",
+        "Sources/CoreModels/MediaItemActionCatalog.swift",
+        "Sources/CoreUI/ExternalMediaOpening.swift",
+        "Sources/AppShell/HomeTab.swift",
+        "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
+        "Sources/AppShelliOS/PlozziOSDownloadsModel.swift"
       ],
-      "summary": "Cover share connection/scanning and movie/TV local NFO/artwork association in existing guides. Personal Videos deliberately bypasses catalogue matching. Local metadata precedence and ambiguous-folder rejection are implemented in scanner/enrichment/projection, not inferred from NFO filenames alone."
+      "summary": "Network shares covers connection/scanning, Personal Videos and local NFO/artwork association. Its Open links to streaming services section explains the additional imported-title workflow: scan a UTF-8 .strmlnk file up to 8192 bytes containing one allowlisted HTTPS title URL, select its source/version when mixed with playable copies, then use the destination-specific action or Open Link fallback. ExternalMediaLink validates actual service hosts/title paths, not arbitrary streaming URLs. Apple TV requests an installed destination app through universalLinksOnly; mobile uses normal app/browser routing. Opening rechecks active authorization and reports Couldn't Open Link rather than starting a stream. No external-player callback session is created, so no automatic returned watch progress; download eligibility and the mobile download guard reject external sources. Destination access, regional availability and restrictions remain outside Plozz. Local metadata precedence and ambiguous-folder rejection remain source-verified rather than inferred from sidecar filenames."
     },
     "ProviderSilo": {
       "areas": [
@@ -2238,9 +2255,14 @@
         "Sources/CoreModels/SubtitleSelection.swift",
         "Sources/CoreModels/SubtitleSearchPreference.swift",
         "Sources/FeaturePlayback/SystemCaptionAppearance.swift",
-        "Sources/FeaturePlayback/SystemCaptionStyleConfirmation.swift"
+        "Sources/FeaturePlayback/SystemCaptionStyleConfirmation.swift",
+        "Sources/CoreModels/SubtitleStyle.swift",
+        "Sources/FeaturePlayback/SubtitleStylePanel.swift",
+        "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift",
+        "Sources/FeaturePlayback/SubtitleOverlayView.swift",
+        "Sources/FeaturePlayback/SubtitleControlsFrame.swift"
       ],
-      "summary": "Combine language codes/device fallback, per-content policies, SDH/search, remembered series choices and text/image styling limits rather than separate pages per preference. Explain Prefer SDH fallback versus strict Only SDH automatic/search/download selection, matching device caption appearance, replacement confirmation and leaving matching through custom edits."
+      "summary": "Combine language codes/device fallback, per-content policies, SDH/search, remembered series choices and text/image styling limits rather than separate pages per preference. Explain Prefer SDH fallback versus strict Only SDH selection and matching device caption appearance with replacement confirmation. Appearance edits leave matching; changing only default-on Auto-Move Away from Controls preserves it. Keep captions near the picture explains that independent toggle in the editor's placement section, its temporary collision avoidance and the overlap tradeoff when disabled."
     },
     "trackers": {
       "areas": [
@@ -2259,6 +2281,46 @@
     }
   },
   "screens": {
+    "Sources/AppShelliOS/PlozziOSHeroKeyboardControls.swift": {
+      "sources": [
+        "Sources/AppShelliOS/PlozziOSHeroKeyboardControls.swift",
+        "Sources/AppShelliOS/PlozziOSHomeView.swift",
+        "Sources/AppShelliOS/PlozziOSHeroViews.swift"
+      ],
+      "omitKind": "unreachable",
+      "omitReason": "Home constructs this carousel keyboard adapter only when plozziOSIsRunningOnMac is true. It is not reachable on the documented Apple TV, iPhone or iPad surfaces and does not establish a mobile Home keyboard shortcut. It yields to text entry and presented controllers on its Mac-only path."
+    },
+    "Sources/AppShelliOS/PlozziOSStationaryNavigationSource.swift": {
+      "sources": [
+        "Sources/AppShelliOS/PlozziOSStationaryNavigationSource.swift",
+        "Sources/AppShelliOS/PlozziOSHomeView.swift"
+      ],
+      "omitKind": "implementation",
+      "omitReason": "Home mounts this noninteractive UIKit transition helper to keep its outgoing background stationary during a native push. Its temporary snapshot is hidden from accessibility, supplies no controls and does not add a navigation setting or change the reader's procedure."
+    },
+    "Sources/CoreUI/ExternalMediaOpening.swift": {
+      "sources": [
+        "Sources/CoreUI/ExternalMediaOpening.swift",
+        "Sources/CoreModels/ExternalMediaLink.swift",
+        "Sources/CoreModels/HeroCTA.swift",
+        "Sources/ProviderShare/ShareProvider.swift",
+        "Sources/AppShell/HomeTab.swift",
+        "Sources/AppShell/SearchTab.swift",
+        "Sources/AppShelliOS/PlozziOSHomeView.swift",
+        "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Shared imported-title-link opener and failure alert are mounted by HomeTab, SearchTab, mobile Home and mobile details. Those parent records inventory Couldn't Open Link and OK; their hero/detail records inventory the Open Link fallback. The destination-specific button title is dynamic. Apple TV requests universal-link opening in an installed app; mobile can use app or browser routing. Authorization and cancellation are rechecked before opening; failure is not built-in playback or an external-player progress session."
+    },
+    "Sources/CoreUI/PlozzMetrics.swift": {
+      "sources": [
+        "Sources/CoreUI/PlozzMetrics.swift",
+        "Sources/AppShell/MainTabView.swift",
+        "Sources/AppShelliOS/PlozziOSRootView.swift"
+      ],
+      "omitKind": "implementation",
+      "omitReason": "Shared typography, spacing and card geometry values consume device, Dynamic Type and existing display-size preferences. The file defines no independent screen or named control; Appearance and the platform root records own the actual reader-facing settings."
+    },
     "Sources/AppRuntime/ExternalPlayerSupport.swift": {
       "sources": [
         "Sources/AppRuntime/ExternalPlayerSupport.swift",
@@ -2298,7 +2360,7 @@
         "Sources/AppShelliOS/PlozziOSSettingsView.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Reusable LiveTVSourcesLibraryView.swift is wired into Sources/AppShell/MainTabView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitReason": "The LiveTVSourcesScanView type in this file is constructed by Apple TV and mobile source settings; Profile access changed, Channel checks unavailable and Retry are inventoried on MainTabView and PlozziOSSettingsView. The separate LiveTVSourcesLibraryView type has no construction call in the frozen product, so its Loading libraries and Plozz channels unavailable states are unreachable. Both shells open LibraryChannelManagementView directly with prepareForEditing instead."
     },
     "Sources/AppRuntime/LiveTVSourcesRuntimeView.swift": {
       "sources": [
@@ -2449,6 +2511,9 @@
     "Sources/AppShell/HomeTab.swift": {
       "sources": [
         "Sources/AppShell/HomeTab.swift",
+        "Sources/CoreUI/ExternalMediaOpening.swift",
+        "Sources/CoreModels/ExternalMediaLink.swift",
+        "Sources/ProviderShare/ShareProvider.swift",
         "Sources/AppShell/MainTabViewSupport.swift",
         "Sources/AppShell/NavigationRailShell.swift",
         "Sources/CoreUI/ArtworkEnvironment.swift",
@@ -2459,8 +2524,8 @@
         "Apple TV"
       ],
       "navigation": "Open Home on Apple TV or follow a title link from Top Shelf.",
-      "experience": "Browse the active profile Home and resolve a title that cannot be reopened from its saved source.",
-      "conditions": "Apple TV. Top Shelf links may first require profile/PIN authorization; a missing original connection cannot be replaced by an arbitrary same-named title. A failed external YouTube trailer handoff presents the shared error dialog; Apple TV has no browser fallback.",
+      "experience": "Browse the active profile Home, open supported imported title links in a destination app, and recover titles whose saved source cannot be reopened.",
+      "conditions": "Apple TV. Top Shelf links may first require profile/PIN authorization; a missing original connection cannot be replaced by an arbitrary same-named title. Imported .strmlnk sources use the authorized share provider and require an installed universal-link destination; they do not start Plozz playback or return watch progress. YouTube trailers have a separate opener. Either external opening can fail visibly; Apple TV has no browser fallback.",
       "controls": [
         {
           "text": "Request Failed",
@@ -2479,6 +2544,14 @@
           "source": "Sources/CoreUI/YouTubeTrailerOpening.swift"
         },
         {
+          "text": "Couldn't Open Link",
+          "source": "Sources/CoreUI/ExternalMediaOpening.swift"
+        },
+        {
+          "text": "OK",
+          "source": "Sources/CoreUI/ExternalMediaOpening.swift"
+        },
+        {
           "text": "Unable to Open Title",
           "source": "Sources/AppShell/HomeTab.swift"
         },
@@ -2488,6 +2561,10 @@
         }
       ],
       "documents": [
+        {
+          "slug": "network-shares",
+          "anchor": "open-links-to-streaming-services"
+        },
         {
           "slug": "home-and-navigation"
         },
@@ -3258,6 +3335,9 @@
       "sources": [
         "Sources/FeatureSearchCore/SearchSection.swift",
         "Sources/AppShell/SearchTab.swift",
+        "Sources/CoreUI/ExternalMediaOpening.swift",
+        "Sources/CoreModels/ExternalMediaLink.swift",
+        "Sources/ProviderShare/ShareProvider.swift",
         "Sources/AppShell/MainTabViewSupport.swift",
         "Sources/AppShell/NavigationRailShell.swift",
         "Sources/CoreUI/ArtworkEnvironment.swift",
@@ -3304,9 +3384,17 @@
         "Apple TV"
       ],
       "navigation": "Choose Search in Apple TV navigation.",
-      "experience": "Search connected media and eligible discovery results, then open a title.",
-      "conditions": "Apple TV. Provider access, enabled discovery, and the active profile affect results; a discovery match is not automatically playable. A failed external YouTube trailer handoff presents the shared error dialog; Apple TV has no browser fallback.",
+      "experience": "Search connected media and eligible discovery results, then open details, play an accessible file or open an imported title link in its destination app.",
+      "conditions": "Apple TV. Provider access, enabled discovery, and the active profile affect results; a discovery match is not automatically playable. Imported share title links require authorization and an installed destination app, with no Plozz stream or progress callback. YouTube trailer opening is separate. Both external openers report failure visibly and have no browser fallback on Apple TV.",
       "controls": [
+        {
+          "text": "Couldn't Open Link",
+          "source": "Sources/CoreUI/ExternalMediaOpening.swift"
+        },
+        {
+          "text": "OK",
+          "source": "Sources/CoreUI/ExternalMediaOpening.swift"
+        },
         {
           "text": "Not in Your Library",
           "source": "Sources/FeatureSearchCore/SearchSection.swift"
@@ -3369,6 +3457,10 @@
         }
       ],
       "documents": [
+        {
+          "slug": "network-shares",
+          "anchor": "open-links-to-streaming-services"
+        },
         {
           "slug": "library",
           "anchor": "browse-a-library"
@@ -5006,6 +5098,9 @@
     },
     "Sources/AppShelliOS/PlozziOSHomeView.swift": {
       "sources": [
+        "Sources/CoreModels/HeroCTA.swift",
+        "Sources/CoreModels/ExternalMediaLink.swift",
+        "Sources/CoreUI/ExternalMediaOpening.swift",
         "Sources/CoreModels/HomeSectionIssue.swift",
         "Sources/AppShelliOS/PlozziOSHomeView.swift",
         "Sources/CoreUI/BrowseRowHeading.swift",
@@ -5100,9 +5195,21 @@
         "iPad"
       ],
       "navigation": "Open Home from iPhone/iPad navigation.",
-      "experience": "Browse profile rows and hero suggestions, tap an eligible row's heading chevron for its larger grid, retry failed loading, or connect a source when none exists.",
+      "experience": "Browse profile rows and hero suggestions, tap an eligible row's heading chevron for its larger grid, play accessible media or open an imported title link in its destination app/browser. A failed link shows Couldn't Open Link. Retry failed Home loading or connect a source when none exists.",
       "conditions": "iPhone/iPad. Home content follows enabled libraries, source availability, profile presentation, watched-content filtering, and eligible Discovery providers. Row-heading browsing requires more available titles, nonempty results, no loading/failure, and no section issue. The row title is the action label, including dynamic server/collection names, not a separate See all caption. The global Watchlist action opens the dedicated Watchlist page; combined Continue Watching and Live TV rows do not gain a row browser. Source/profile changes invalidate an open browser. The connected Home empty state passes hasAccounts true and shows Nothing to watch yet with Add Source. The same file defines Build your library and Set Up from Another Device for the no-account RootView caller; those are not additional actions on connected Home.",
       "controls": [
+        {
+          "text": "Open Link",
+          "source": "Sources/CoreModels/HeroCTA.swift"
+        },
+        {
+          "text": "Couldn't Open Link",
+          "source": "Sources/CoreUI/ExternalMediaOpening.swift"
+        },
+        {
+          "text": "OK",
+          "source": "Sources/CoreUI/ExternalMediaOpening.swift"
+        },
         {
           "text": "No titles to show",
           "source": "Sources/CoreModels/HomeSectionIssue.swift"
@@ -5290,6 +5397,10 @@
       ],
       "documents": [
         {
+          "slug": "network-shares",
+          "anchor": "open-links-to-streaming-services"
+        },
+        {
           "slug": "home-and-navigation"
         },
         {
@@ -5304,6 +5415,8 @@
     },
     "Sources/AppShelliOS/PlozziOSItemDetailView.swift": {
       "sources": [
+        "Sources/CoreUI/ExternalMediaOpening.swift",
+        "Sources/CoreModels/ExternalMediaLink.swift",
         "Sources/CoreModels/MediaItem+Trailer.swift",
         "Sources/CoreModels/HeroCTA.swift",
         "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
@@ -5388,9 +5501,21 @@
         "iPad"
       ],
       "navigation": "Open a movie, show, season, or episode from mobile browsing/search.",
-      "experience": "Choose a version, play a file, inspect episodes and extras, manage downloads, or request missing seasons.",
+      "experience": "Choose a version, play a file, open an imported title link in its destination app/browser, inspect episodes and extras, manage eligible file downloads, or request missing seasons. External title links bypass the player/resume dialog, do not download or automatically return watch progress, and show Couldn't Open Link on failure.",
       "conditions": "iPhone/iPad. Play/download requires authorized available library files. Seerr requests require a matched title and request identity; status buttons, download quality, and season actions reflect provider and current state.",
       "controls": [
+        {
+          "text": "Open Link",
+          "source": "Sources/CoreModels/HeroCTA.swift"
+        },
+        {
+          "text": "Couldn't Open Link",
+          "source": "Sources/CoreUI/ExternalMediaOpening.swift"
+        },
+        {
+          "text": "OK",
+          "source": "Sources/CoreUI/ExternalMediaOpening.swift"
+        },
         {
           "text": "Trailer",
           "source": "Sources/CoreModels/MediaItem+Trailer.swift"
@@ -5453,7 +5578,7 @@
         },
         {
           "text": "Loading show…",
-          "source": "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
+          "source": "Sources/AppShelliOS/PlozziOSHeroViews.swift"
         },
         {
           "text": "Loading details…",
@@ -5969,6 +6094,10 @@
         }
       ],
       "documents": [
+        {
+          "slug": "network-shares",
+          "anchor": "open-links-to-streaming-services"
+        },
         {
           "slug": "library",
           "anchor": "save-titles-and-manage-history"
@@ -13116,9 +13245,9 @@
         "iPhone",
         "iPad"
       ],
-      "navigation": "Open the title source/version actions, including More actions on Apple TV.",
-      "experience": "Choose an authorized server copy or file version before playback.",
-      "conditions": "Server and Version drill-ins appear only with multiple eligible sources or versions respectively; their destination headings are Servers and Versions. Server names and edition descriptions are dynamic. A matching validated offline copy on mobile can take precedence; changing server does not force streaming.",
+      "navigation": "Open a title's ellipsis More actions menu on Apple TV or iPhone/iPad.",
+      "experience": "Choose an authorized server copy, playable file version or imported external title link.",
+      "conditions": "Server appears only with multiple server choices. With multiple versions, Source replaces Version if any version is an external link; its destination heading is Sources instead of Versions. Server names, service names and edition descriptions are dynamic. Offline sources are disabled. The selected share's link opens outside Plozz, unlike a playable file. A matching validated offline copy on mobile can take precedence for playable media; changing server does not force streaming.",
       "controls": [
         {
           "text": "Servers",
@@ -13126,6 +13255,10 @@
         },
         {
           "text": "Versions",
+          "source": "Sources/CoreUI/PlaybackSourceMenu.swift"
+        },
+        {
+          "text": "Sources",
           "source": "Sources/CoreUI/PlaybackSourceMenu.swift"
         },
         {
@@ -13153,6 +13286,10 @@
           "source": "Sources/CoreUI/PlaybackSourceMenu.swift"
         },
         {
+          "text": "Source",
+          "source": "Sources/CoreUI/PlaybackSourceMenu.swift"
+        },
+        {
           "text": "Original",
           "source": "Sources/CoreUI/MediaVersionChoiceButton.swift"
         },
@@ -13170,6 +13307,10 @@
         }
       ],
       "documents": [
+        {
+          "slug": "network-shares",
+          "anchor": "open-links-to-streaming-services"
+        },
         {
           "slug": "playback",
           "anchor": "choose-audio-or-a-version"
@@ -14774,11 +14915,12 @@
     "Sources/CoreUI/TVBackButtonGuard.swift": {
       "sources": [
         "Sources/CoreUI/TVBackButtonGuard.swift",
+        "App/Plozz/PlozzApp.swift",
         "Sources/CoreUI/TVNavigationExitProtection.swift",
         "Sources/AppShell/MainTabView.swift"
       ],
-      "omitKind": "unreachable",
-      "omitReason": "This legacy Back-press guard and its extension have no product call site. Current navigation exit behavior is wired through TVNavigationExitProtection instead."
+      "omitKind": "implementation",
+      "omitReason": "PlozzApp installs tvBackButtonGuard at the Apple TV root. Its zero-size UIKit helper consumes Back while focus is absent or inside a native context menu, then leaves ordinary focused navigation alone. It has no visible controls or separate setup task. This automatic focus-transition protection is distinct from the user-configurable Prevent Accidental Exit behavior wired through TVNavigationExitProtection in MainTabView."
     },
     "Sources/CoreUI/TVFocusActivityObserver.swift": {
       "sources": [
@@ -16107,6 +16249,9 @@
     },
     "Sources/FeatureHome/HomeView.swift": {
       "sources": [
+        "Sources/CoreModels/HeroCTA.swift",
+        "Sources/CoreModels/ExternalMediaLink.swift",
+        "Sources/AppShell/HomeTab.swift",
         "Sources/CoreModels/HomeSectionIssue.swift",
         "Sources/FeatureHome/HomeView.swift",
         "Sources/CoreUI/MediaRowBrowseCard.swift",
@@ -16196,6 +16341,10 @@
       "experience": "Browse hero choices and ordered rows, select a trailing See all card for an eligible row's larger grid, inspect unavailable sections, and open titles.",
       "conditions": "Apple TV. Active libraries, provider feeds, profile row layout, Discovery eligibility and watched-content filtering affect the result. An eligible row has more titles, nonempty results, no loading/failure, and no section issue. A trailing See all card opens row browsing; the global Watchlist shortcut opens its dedicated page. Combined Continue Watching stays unbounded in its rail without this shortcut, and Live TV rows are not row-browser feeds. Featured rows stop trailer previews before navigation. Source/profile changes invalidate an open browser.",
       "controls": [
+        {
+          "text": "Open Link",
+          "source": "Sources/CoreModels/HeroCTA.swift"
+        },
         {
           "text": "No titles to show",
           "source": "Sources/CoreModels/HomeSectionIssue.swift"
@@ -16363,6 +16512,10 @@
       ],
       "documents": [
         {
+          "slug": "network-shares",
+          "anchor": "open-links-to-streaming-services"
+        },
+        {
           "slug": "home-and-navigation",
           "anchor": "choose-home-rows"
         },
@@ -16460,9 +16613,13 @@
         "Apple TV"
       ],
       "navigation": "Open a movie or episode from Apple TV browsing or Search.",
-      "experience": "Play an authorized file/version, inspect extras and related titles, or use Watchlist/watched actions.",
+      "experience": "Play an authorized file/version or open a supported imported title link in its destination app; inspect extras and related titles, or use Watchlist/watched actions. The selected external source uses a destination-specific primary action or Open Link fallback, not built-in playback.",
       "conditions": "Apple TV. Actions follow media kind, provider support, profile authorization and current library availability. Discovery information does not itself supply playback.",
       "controls": [
+        {
+          "text": "Open Link",
+          "source": "Sources/CoreModels/HeroCTA.swift"
+        },
         {
           "text": "Trailer",
           "source": "Sources/CoreModels/MediaItem+Trailer.swift"
@@ -16721,6 +16878,10 @@
         }
       ],
       "documents": [
+        {
+          "slug": "network-shares",
+          "anchor": "open-links-to-streaming-services"
+        },
         {
           "slug": "library",
           "anchor": "save-titles-and-manage-history"
@@ -17114,9 +17275,13 @@
         "Apple TV"
       ],
       "navigation": "Open a show from Apple TV browsing or Search.",
-      "experience": "Browse seasons/episodes, continue watching, and request eligible missing seasons.",
+      "experience": "Browse seasons/episodes, continue watching, open a selected imported external episode link in its destination app, and request eligible missing seasons. External-source primary actions use a dynamic service name or Open Link fallback rather than launching the Plozz player.",
       "conditions": "Apple TV. Episode files must be available to the selected server user; Seerr actions additionally require matched identity and request permissions.",
       "controls": [
+        {
+          "text": "Open Link",
+          "source": "Sources/CoreModels/HeroCTA.swift"
+        },
         {
           "text": "Trailer",
           "source": "Sources/CoreModels/MediaItem+Trailer.swift"
@@ -17311,6 +17476,10 @@
         }
       ],
       "documents": [
+        {
+          "slug": "network-shares",
+          "anchor": "open-links-to-streaming-services"
+        },
         {
           "slug": "library",
           "anchor": "save-titles-and-manage-history"
@@ -21172,6 +21341,8 @@
     },
     "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift": {
       "sources": [
+        "Sources/FeaturePlayback/SystemCaptionAppearance.swift",
+        "Sources/FeaturePlayback/SubtitleControlsFrame.swift",
         "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift",
         "Sources/FeaturePlayback/SubtitleOverlayView.swift",
         "Sources/CoreModels/SubtitleStyle.swift",
@@ -21195,7 +21366,7 @@
       ],
       "navigation": "On iPhone/iPad, open Subtitles > Advanced… > Appearance > Style, or customize captions from Settings.",
       "experience": "Edit caption text, shadow/outline, background, dual-track style and subtitle file formatting.",
-      "conditions": "iPhone/iPad text styling and conditional image-caption placement; dual-track settings require eligible video playback and are absent for Live TV. Show second subtitle controls only the Settings preview; actual tracks are chosen during playback. Matching device style replaces the custom look after confirmation. Font weights depend on the chosen font; system font names are dynamic. Position selects Bottom of screen or Bottom of video; Vertical offset measures upward from that reference; Extra Line Position's Above/Center/Below choices govern wrapped-line growth, not second-track placement. Bottom of video follows the detected active picture when available and otherwise the video frame. Text offset spans -5% to 100% in 0.5% steps; clamping keeps the block visible within 0-100%, while negative positions can crop it. The movie player's Subtitles > Advanced… > Appearance link is named Position for an image primary, not Style. That editor shows Vertical offset only with Bottom of video; it moves eligible lower dialogue while preserving image size and fixed artwork, not restyling images or enabling dual subtitles. SubtitleOverlayView checks safe bounds and collisions. Actual primary/secondary text styling and timing remain track/path-dependent.",
+      "conditions": "iPhone/iPad text styling and conditional image-caption placement; dual-track settings require eligible video playback and are absent for Live TV. Show second subtitle controls only the Settings preview; actual tracks are chosen during playback. Matching device style replaces the custom look after confirmation; appearance edits leave matching, but changing only Auto-Move Away from Controls preserves it. Font weights depend on the chosen font; system font names are dynamic. Position selects Bottom of screen or Bottom of video; Vertical offset measures upward from that reference; Extra Line Position's Above/Center/Below choices govern wrapped-line growth, not second-track placement. Default-on Auto-Move Away from Controls follows those rows and temporarily lifts colliding Plozz-rendered captions; disabling permits overlap. Bottom of video follows the detected active picture when available and otherwise the video frame. Text offset spans -5% to 100% in 0.5% steps; clamping keeps the block visible within 0-100%, while negative positions can crop it. Subtitles > Advanced… > Appearance links to Position for an image primary, not Style. That editor shows Vertical offset only with Bottom of video, followed by Auto-Move Away from Controls; it moves eligible lower dialogue while preserving image size and fixed artwork, not restyling images or enabling dual subtitles. SubtitleOverlayView uses measured control frames only while avoidance is enabled. Actual primary/secondary text styling and timing remain track/path-dependent.",
       "controls": [
         {
           "text": "Match Device Subtitle Style",
@@ -21251,6 +21422,10 @@
         },
         {
           "text": "Below",
+          "source": "Sources/CoreModels/SubtitleStyle.swift"
+        },
+        {
+          "text": "Auto-Move Away from Controls",
           "source": "Sources/CoreModels/SubtitleStyle.swift"
         },
         {
@@ -22783,6 +22958,8 @@
     },
     "Sources/FeaturePlayback/SubtitleStylePanel.swift": {
       "sources": [
+        "Sources/FeaturePlayback/SystemCaptionAppearance.swift",
+        "Sources/FeaturePlayback/SubtitleControlsFrame.swift",
         "Sources/FeaturePlayback/SubtitleStylePanel.swift",
         "Sources/FeaturePlayback/SubtitleOverlayView.swift",
         "Sources/CoreModels/SubtitleStyle.swift",
@@ -22806,7 +22983,7 @@
       ],
       "navigation": "In Apple TV video controls, open Subtitles > Style; also used by the Settings caption preview.",
       "experience": "Adjust font, placement, colors, edges, backgrounds and supported second-track style, or override file formatting.",
-      "conditions": "Apple TV style panels. Image captions keep their font/colors and offer placement only; dual subtitles are excluded for Live TV. Show second subtitle controls only the Settings preview; actual tracks are chosen during playback. Matching the system style needs confirmation and editing stops matching. HDR brightness appears only when relevant. Available font weights depend on the selected font. Position selects Bottom of screen or Bottom of video; Vertical offset measures upward from that reference; Extra Line Position's Above/Center/Below choices govern wrapped-line growth, not second-track placement. Clamping applies within 0-100%; negative positions can crop text. System font choices are dynamic. Bottom of video follows the detected active picture when available and otherwise the video frame. Text offset spans -5% to 100% in 0.5% steps, with negative text placement able to crop. Image-primary Style shows Position and only shows Vertical offset with Bottom of video; it moves eligible lower dialogue while preserving image size and fixed artwork, not restyling images or enabling dual subtitles. SubtitleOverlayView checks safe bounds and collisions. Actual primary/secondary text styling and timing remain track/path-dependent.",
+      "conditions": "Apple TV style panels. Image captions keep their font/colors and offer placement only; dual subtitles are excluded for Live TV. Show second subtitle controls only the Settings preview; actual tracks are chosen during playback. Matching system style needs confirmation; appearance edits leave matching, but changing only Auto-Move Away from Controls preserves it. HDR brightness appears only when relevant. Available font weights depend on the selected font. Position selects Bottom of screen or Bottom of video; Vertical offset measures upward from that reference; Extra Line Position's Above/Center/Below choices govern wrapped-line growth, not second-track placement. Default-on Auto-Move Away from Controls follows those rows and temporarily lifts colliding Plozz-rendered captions; disabling permits overlap. Clamping applies within 0-100%; negative positions can crop text. System font choices are dynamic. Bottom of video follows the detected active picture when available and otherwise the video frame. Text offset spans -5% to 100% in 0.5% steps. Image-primary Style shows Position, Vertical offset only with Bottom of video, then Auto-Move Away from Controls; it moves eligible lower dialogue while preserving image size and fixed artwork, not restyling images or enabling dual subtitles. SubtitleOverlayView uses measured control frames only while avoidance is enabled. Actual primary/secondary text styling and timing remain track/path-dependent.",
       "controls": [
         {
           "text": "Match Apple TV Subtitle Style",
@@ -22858,6 +23035,10 @@
         },
         {
           "text": "Below",
+          "source": "Sources/CoreModels/SubtitleStyle.swift"
+        },
+        {
+          "text": "Auto-Move Away from Controls",
           "source": "Sources/CoreModels/SubtitleStyle.swift"
         },
         {
@@ -28997,22 +29178,6 @@
       ],
       "omitKind": "shared-component",
       "omitReason": "Reusable SkipMarkerSettingsControl.swift is wired into Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
-    },
-    "Sources/FeatureSettings/SpatialAudioControl.swift": {
-      "sources": [
-        "Sources/FeatureSettings/SpatialAudioControl.swift",
-        "Sources/FeatureSettings/PreferenceDetailViews.swift"
-      ],
-      "omitKind": "editorial-scope",
-      "omitReason": "This audio-output control is outside the explicit editorial scope; omit its settings and availability rather than manufacturing a reader workflow."
-    },
-    "Sources/FeatureSettings/SpatialAudioLayoutControl.swift": {
-      "sources": [
-        "Sources/FeatureSettings/SpatialAudioLayoutControl.swift",
-        "Sources/FeatureSettings/PreferenceDetailViews.swift"
-      ],
-      "omitKind": "editorial-scope",
-      "omitReason": "This audio-output layout control belongs to the explicitly excluded editorial area, so neither its choices nor availability are documented."
     },
     "Sources/FeatureSettings/SubtitleStyleSettingsDestination.swift": {
       "sources": [

@@ -46,7 +46,7 @@ Keep both devices on the same local network and allow Plozz Local Network access
 
 On the configured device, open **Settings > iCloud Sync**. On Apple TV, also choose **Set Up Another Device**.
 
-Select the nearby receiver or enter its code. An iPhone/iPad can scan its QR code with Camera permission; use the code instead if unavailable. Alternatively, scan the configured Apple TV's QR code with a new iPhone/iPad.
+Select the nearby receiver or enter its code. On iPhone/iPad, choose **Enter Code** or **Scan QR Code**; scanning needs Camera permission. Alternatively, scan the configured Apple TV's QR code with a new iPhone/iPad.
 
 When verification codes are shown, approve only a match. Same-iCloud-account pairing can verify the device without this comparison. Setup transfers only supported sign-ins; check **Needs sign-in** afterward.
 

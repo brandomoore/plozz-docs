@@ -219,39 +219,39 @@
     "slug": "network-shares",
     "title": "Network shares",
     "seoTitle": "Add SMB, NFS, WebDAV, SFTP, or FTP libraries in Plozz",
-    "description": "Connect a network folder, choose its content type, scan files, and check authentication, matching, and share-specific limits.",
+    "description": "Connect and scan network folders, open imported streaming-service links, and resolve authentication, matching, or WebDAV playback problems.",
     "section": "Connect",
-    "kind": "guide",
+    "kind": "reference",
     "file": "network-shares.md",
     "sources": [
       "Sources/CoreModels/ProviderKind.swift",
-      "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift",
       "Sources/AppShell/UnifiedAddShareView.swift",
       "Sources/CoreModels/MediaItemAction.swift",
       "Sources/FeatureSettings/ServerDetailView.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-      "Sources/FeatureShareOnboarding/UnifiedAddShareModel.swift",
-      "Sources/AppRuntime/MediaShareTransportComposition.swift",
-      "Sources/MediaTransportHTTP/WebDAVClient.swift",
-      "Sources/AppShelliOS/PlozziOSUnifiedAddShareView.swift",
-      "Sources/FeatureShareOnboarding/MediaShareTransportCatalog.swift",
       "Sources/ProviderShare/ShareScanner.swift",
-      "Sources/CoreModels/MediaShareLibraryConfiguration.swift",
       "Sources/MediaTransportNFS/NFSMediaTransport.swift",
       "Sources/MediaTransportWebDAV/WebDAVMediaTransport.swift",
       "Sources/MediaTransportSFTP/SFTPMediaTransport.swift",
       "Sources/CoreUI/SettingsCopy.swift",
-      "Sources/AppShell/AddAccountView.swift",
-      "Sources/MediaTransportFTP/FTPMediaTransport.swift",
-      "Sources/MediaTransportFTP/FTPNetworkBackend.swift"
+      "Sources/MediaTransportFTP/FTPNetworkBackend.swift",
+      "Sources/ProviderShare/ShareMediaParser.swift",
+      "Sources/ProviderShare/ShareProvider.swift",
+      "Sources/CoreModels/ExternalMediaLink.swift",
+      "Sources/CoreModels/HeroCTA.swift",
+      "Sources/CoreUI/ExternalMediaOpening.swift",
+      "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
+      "Sources/AppShelliOS/PlozziOSHeroViews.swift",
+      "Sources/FeatureHome/DetailHeroView.swift",
+      "Sources/CoreUI/PlaybackSourceMenu.swift"
     ],
     "watch": [
       "Sources/FeatureShareOnboarding/",
       "Sources/ProviderShare/",
       "Sources/MediaTransport",
-      "Sources/TransportNFS/",
-      "Sources/CoreModels/MediaShareLibraryConfiguration.swift",
-      "Sources/CoreUI/SettingsCopy.swift"
+      "Sources/CoreModels/ExternalMediaLink.swift",
+      "Sources/CoreUI/ExternalMediaOpening.swift",
+      "Sources/CoreUI/PlaybackSourceMenu.swift"
     ],
     "platforms": [
       "Apple TV",
@@ -260,6 +260,26 @@
     ],
     "ui": {
       "references": [
+        {
+          "text": "More actions",
+          "source": "Sources/FeatureHome/DetailHeroView.swift"
+        },
+        {
+          "text": "Server",
+          "source": "Sources/CoreUI/PlaybackSourceMenu.swift"
+        },
+        {
+          "text": "Source",
+          "source": "Sources/CoreUI/PlaybackSourceMenu.swift"
+        },
+        {
+          "text": "Open Link",
+          "source": "Sources/CoreModels/HeroCTA.swift"
+        },
+        {
+          "text": "Couldn't Open Link",
+          "source": "Sources/CoreUI/ExternalMediaOpening.swift"
+        },
         {
           "text": "Media Share",
           "source": "Sources/CoreModels/ProviderKind.swift"
@@ -357,9 +377,9 @@
       "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
       "Sources/FeatureHome/LibraryBrowseView.swift",
       "Sources/CoreModels/LibraryQuery.swift",
-      "Sources/FeatureSearch/SearchView.swift",
       "Sources/AppShelliOS/PlozziOSLibraryView.swift",
-      "Sources/AppRuntime/UniversalWatchlistRuntime.swift"
+      "Sources/CoreModels/ExternalMediaLink.swift",
+      "Sources/CoreUI/ExternalMediaOpening.swift"
     ],
     "watch": [
       "Sources/FeatureHome",
@@ -1445,14 +1465,14 @@
       "Sources/AppRuntime/ExternalPlayerSupport.swift",
       "Sources/AppRuntime/WatchMutationFactory.swift",
       "Sources/AppRuntime/WatchMutationApplier.swift",
-      "Sources/TraktService/TraktScrobbler.swift",
       "Sources/AppShell/PlayerPresentation.swift",
-      "Sources/AppShell/AppState.swift",
       "Sources/AppShell/RootView.swift",
       "Sources/AppShelliOS/PlozziOSPlayerView.swift",
       "Sources/AppShelliOS/PlozziOSAppModel.swift",
       "Sources/AppShelliOS/PlozziOSRootView.swift",
-      "App/Resources/Info.plist"
+      "App/Resources/Info.plist",
+      "Sources/CoreUI/ExternalMediaOpening.swift",
+      "Sources/CoreModels/ExternalMediaLink.swift"
     ],
     "watch": [
       "Sources/CoreModels/ExternalPlayer",
@@ -1829,7 +1849,7 @@
     "slug": "subtitles",
     "title": "Subtitles",
     "seoTitle": "Choose, style, and synchronize subtitles in Plozz",
-    "description": "Choose or find subtitles, place captions near the video, use a second text track, and adjust style, language, SDH, or timing.",
+    "description": "Choose or find subtitles, keep captions clear of player controls, use two languages, and adjust appearance, placement, SDH, or timing.",
     "section": "Playback",
     "kind": "reference",
     "file": "subtitles.md",
@@ -1849,11 +1869,11 @@
       "Sources/CoreModels/SubtitleSearchPreference.swift",
       "Sources/CoreUI/ProfileSettingsCategory.swift",
       "Sources/FeaturePlayback/SubtitleTrackController.swift",
-      "Sources/FeaturePlayback/SubtitleStyleSettingsView.swift",
       "Sources/FeaturePlayback/SubtitleOverlayView.swift",
       "Sources/CoreModels/SubtitleBehavior.swift",
       "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
-      "Sources/FeaturePlayback/VideoPresentationView.swift"
+      "Sources/FeaturePlayback/SystemCaptionAppearance.swift",
+      "Sources/CoreModels/SubtitleStyleStore.swift"
     ],
     "watch": [
       "Sources/FeaturePlayback/",
@@ -1870,6 +1890,10 @@
     ],
     "ui": {
       "references": [
+        {
+          "text": "Auto-Move Away from Controls",
+          "source": "Sources/CoreModels/SubtitleStyle.swift"
+        },
         {
           "text": "Position",
           "source": "Sources/FeaturePlayback/SubtitleStylePanel.swift"
@@ -2080,6 +2104,10 @@
         {
           "text": "Music",
           "source": "Sources/AppShell/MainTabView.swift"
+        },
+        {
+          "text": "Music player",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
           "text": "Settings",
@@ -3624,6 +3652,14 @@
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
         {
+          "text": "Add Profile",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Edit Profiles",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
           "text": "Kids Profile",
           "source": "Sources/CoreUI/ProfileLockCopy.swift"
         },
@@ -3633,6 +3669,10 @@
         },
         {
           "text": "Create a Parental PIN",
+          "source": "Sources/CoreUI/ProfileLockCopy.swift"
+        },
+        {
+          "text": "Profile Lock",
           "source": "Sources/CoreUI/ProfileLockCopy.swift"
         },
         {
@@ -3724,6 +3764,14 @@
         },
         {
           "text": "Set Up From Another Device",
+          "source": "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift"
+        },
+        {
+          "text": "Enter Code",
+          "source": "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift"
+        },
+        {
+          "text": "Scan QR Code",
           "source": "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift"
         },
         {

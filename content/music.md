@@ -17,7 +17,7 @@ Playing an album or playlist creates a queue and advances through its tracks. St
 
 Use previous/next, play/pause, Shuffle, and Repeat. Repeat cycles through Off, the full queue, and one track. The on-screen confirmation distinguishes queue repeat from repeat-one.
 
-Return to browsing while music continues, then select the current-track card to reopen Now Playing. The card scrolls with the page. Under **Screens & Navigation**, Apple TV also offers music-player presentation choices.
+Return to browsing while music continues, then select the current-track card to reopen Now Playing. The card scrolls with the page. To change the full-screen player's look, open **Settings > Screens & Navigation > Music player**.
 
 Music can continue while the Apple TV screensaver is showing. Open Apple TV Control Center's **Now Playing** card to control the current session; available transport controls follow the queue.
 

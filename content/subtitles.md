@@ -22,7 +22,7 @@ AetherEngine can decode embedded second text tracks; Apple's native player needs
 
 Open **Settings > Subtitles** and choose **Customize subtitle style**—under **Subtitle style** on Apple TV.
 
-In Style, **Match Apple TV Subtitle Style** (**Match Device Subtitle Style** on mobile) replaces your custom look after confirmation. Editing a control stops matching. Placement and dual-subtitle settings remain Plozz-specific.
+In Style, **Match Apple TV Subtitle Style** (**Match Device Subtitle Style** on mobile) replaces your custom look after confirmation. New profiles start by matching the device style. Other style edits stop matching, except the control-avoidance switch explained below. Placement and dual-subtitle settings remain Plozz-specific.
 
 In the player, open **Style** on Apple TV, or **Subtitles > Advanced… > Appearance > Style** on iPhone/iPad. Adjust font, size, colors, and outline for text captions. With image subtitles, the mobile link is **Position** instead of Style: you can move captions, not restyle their text.
 
@@ -35,6 +35,8 @@ In Style, **Position** chooses **Bottom of screen** or **Bottom of video**. Scre
 Then adjust **Vertical offset** upward from that bottom edge. For text, 0%-100% stays within the screen; negative values can crop it. **Extra Line Position** makes wrapped lines grow **Above**, around the **Center**, or **Below** the chosen position, not a second-language track.
 
 For image subtitles, Bottom of video can move lower dialogue without resizing it or moving fixed signs/artwork. Its Vertical offset appears only in this mode.
+
+**Auto-Move Away from Controls** defaults on in the same editor. Plozz-rendered captions move up only as needed to avoid visible player controls, then return when those controls disappear. Turn it off to keep your chosen position, even if controls overlap it. This switch does not stop matching the device subtitle style.
 
 If file formatting overrides your choices, open **Subtitle file formatting**. Turn off **Use File Positions**, **Use File Colors**, or **Use Bold and Italic** to use your chosen style instead.
 

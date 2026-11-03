@@ -23,6 +23,8 @@ Detail pages include cast, related titles, and source-supplied **Extras**. Choos
 
 Upcoming dates and unaired placeholders are schedule information, not playable files or promised additions.
 
+Network shares can hold [streaming-service shortcuts](/network-shares/#open-links-to-streaming-services).
+
 ## Watch a trailer
 
 On details, **Trailer** plays an accessible server-owned file in Plozz. These files also supply automatic Home/detail previews. **Watch on YouTube** opens an online link outside Plozz, independently of your external-player preference.
