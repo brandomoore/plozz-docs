@@ -504,6 +504,123 @@
     }
   },
   {
+    "slug": "discover",
+    "title": "Discover movies and shows",
+    "seoTitle": "Discover popular and upcoming movies and shows in Plozz",
+    "description": "Open Discover, browse popular and upcoming titles, filter for playable library copies or unwatched suggestions, and request missing titles through Seerr.",
+    "section": "Library",
+    "kind": "guide",
+    "file": "discover.md",
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "sources": [
+      "Sources/AppShell/HomeTab.swift",
+      "Sources/AppShelliOS/PlozziOSRootView.swift",
+      "Sources/AppShelliOS/PlozziOSDiscoverView.swift",
+      "Sources/FeatureHomeCore/DiscoverBrowseView.swift",
+      "Sources/FeatureHomeCore/DiscoverBrowseModel.swift",
+      "Sources/AppRuntime/DiscoverRuntime.swift",
+      "Sources/AppRuntime/HeroDiscoveryRuntime.swift",
+      "Sources/MetadataKit/TMDbDiscoveryProvider.swift",
+      "Sources/SeerService/SeerService.swift",
+      "Sources/CoreModels/MediaItem.swift",
+      "Sources/CoreModels/DiscoverFeed.swift",
+      "Sources/CoreUI/DiscoverFilterMenu.swift",
+      "Sources/CoreUI/BrowseQueryControls.swift",
+      "Sources/CoreModels/NavigationStyleSettingsStore.swift",
+      "Sources/CoreModels/ProfileSettingsSnapshot.swift",
+      "Sources/FeatureSettings/NavigationLibrariesDetailView.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/CoreUI/ProfileSettingsCategory.swift",
+      "Sources/CoreUI/LiftableReorderList.swift"
+    ],
+    "watch": [
+      "Sources/FeatureHomeCore/Discover",
+      "Sources/AppRuntime/DiscoverRuntime.swift",
+      "Sources/CoreModels/DiscoverFeed.swift",
+      "Sources/CoreUI/DiscoverFilterMenu.swift",
+      "Sources/AppShelliOS/PlozziOSDiscoverView.swift",
+      "Sources/CoreModels/NavigationStyleSettingsStore.swift"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Discover",
+          "source": "Sources/FeatureSettings/NavigationLibrariesDetailView.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/FeatureSettings/NavigationLibrariesDetailView.swift"
+        },
+        {
+          "text": "Screens & Navigation",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        },
+        {
+          "text": "App navigation",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Hide or Reorder Navigation",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Show",
+          "source": "Sources/CoreUI/LiftableReorderList.swift"
+        },
+        {
+          "text": "More",
+          "source": "Sources/AppShelliOS/PlozziOSRootView.swift",
+          "system": "uikit-more"
+        },
+        {
+          "text": "Trending",
+          "source": "Sources/CoreModels/DiscoverFeed.swift"
+        },
+        {
+          "text": "Popular Movies",
+          "source": "Sources/CoreModels/DiscoverFeed.swift"
+        },
+        {
+          "text": "Upcoming Movies",
+          "source": "Sources/CoreModels/DiscoverFeed.swift"
+        },
+        {
+          "text": "Popular Series",
+          "source": "Sources/CoreModels/DiscoverFeed.swift"
+        },
+        {
+          "text": "Upcoming Series",
+          "source": "Sources/CoreModels/DiscoverFeed.swift"
+        },
+        {
+          "text": "All",
+          "source": "Sources/CoreUI/BrowseQueryControls.swift"
+        },
+        {
+          "text": "Available now",
+          "source": "Sources/CoreUI/DiscoverFilterMenu.swift"
+        },
+        {
+          "text": "Hide watched",
+          "source": "Sources/CoreUI/DiscoverFilterMenu.swift"
+        },
+        {
+          "text": "Clear Filters",
+          "source": "Sources/CoreUI/DiscoverFilterMenu.swift"
+        },
+        {
+          "text": "Try Again",
+          "source": "Sources/FeatureHomeCore/DiscoverBrowseView.swift"
+        }
+      ],
+      "emphasis": []
+    }
+  },
+  {
     "slug": "browse-home-rows",
     "title": "Browse more from Home",
     "seoTitle": "Browse and filter more titles from Plozz Home rows",
@@ -2174,10 +2291,10 @@
       "Sources/FeatureLiveTV/LiveTVPrototypeView.swift",
       "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift",
       "Sources/FeatureLiveTV/LiveTVProgramSearchView.swift",
+      "Sources/FeatureLiveTV/LiveTVPrototypeSearch.swift",
       "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift",
       "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift",
       "Sources/FeatureLiveTV/LiveTVMultiviewGuideActions.swift",
-      "Sources/FeatureLiveTV/LiveTVPrototypeSidebar.swift",
       "Sources/FeatureSettings/LiveTVSettingsView.swift",
       "Sources/FeatureLiveTV/LiveTVSourceAccessGate.swift",
       "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift",
@@ -2327,8 +2444,8 @@
           "source": "Sources/FeatureLiveTV/LiveTVMultiviewGuideActions.swift"
         },
         {
-          "text": "Manage channels",
-          "source": "Sources/FeatureLiveTV/LiveTVPrototypeSidebar.swift"
+          "text": "More",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
         },
         {
           "text": "Stop without Wi-Fi or Ethernet",
@@ -2436,9 +2553,9 @@
     "slug": "live-tv-channels",
     "title": "Organize channels and fix listings",
     "seoTitle": "Organize Plozz Live TV channels and correct guide listings",
-    "description": "Check IPTV guide progress, recover missing listings, manage channel visibility, correct guide matches, and restore saved channel identities.",
+    "description": "Browse Live TV categories, find mobile source and filter controls, recover hidden channels, correct guide matches, and restore saved channel identities.",
     "section": "Playback",
-    "kind": "guide",
+    "kind": "reference",
     "file": "live-tv-channels.md",
     "platforms": [
       "Apple TV",
@@ -2448,8 +2565,10 @@
     "sources": [
       "Sources/FeatureLiveTV/LiveTVPrototypeBrowse.swift",
       "Sources/FeatureLiveTV/LiveTVPrototypeSidebar.swift",
+      "Sources/FeatureLiveTV/LiveTVPrototypeView.swift",
+      "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift",
+      "Sources/FeatureLiveTV/LiveTVPrototypeCategories.swift",
       "Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift",
-      "Sources/FeatureSettings/LiveTVSettingsView.swift",
       "Sources/FeatureLiveTV/LiveTVSourcesView.swift",
       "Sources/FeatureLiveTV/LiveTVGuideMappingView.swift",
       "Sources/FeatureLiveTV/LiveTVIdentityReviewView.swift",
@@ -2460,8 +2579,6 @@
       "Sources/CoreUI/SettingsCopy.swift",
       "Sources/FeatureLiveTVCore/LiveTVGuidePreparationModel.swift",
       "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift",
-      "Sources/FeatureLiveTV/LiveTVGuidePreparationToast.swift",
-      "Sources/FeatureAuth/IPTVSignInView.swift",
       "Sources/AppRuntime/IPTVAccountGuideIndex.swift",
       "Sources/FeatureSettings/ServerDetailView.swift",
       "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift",
@@ -2476,6 +2593,42 @@
     ],
     "ui": {
       "references": [
+        {
+          "text": "All channels",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeCategories.swift"
+        },
+        {
+          "text": "Category",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
+        {
+          "text": "Categories",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
+        {
+          "text": "Source",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
+        {
+          "text": "All",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
+        {
+          "text": "More",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
+        {
+          "text": "Guide",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
+        {
+          "text": "Filters",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
+        {
+          "text": "Manage IPTV channels",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
         {
           "text": "Hide channel",
           "source": "Sources/FeatureLiveTV/LiveTVPrototypeBrowse.swift"
@@ -2530,11 +2683,11 @@
         },
         {
           "text": "Favorites only",
-          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
         },
         {
-          "text": "With guide listings",
-          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+          "text": "Channels with a guide",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
         },
         {
           "text": "TV Sources",
@@ -2652,15 +2805,17 @@
     ],
     "title": "Watch offline",
     "seoTitle": "Download videos for offline viewing in Plozz on iPhone and iPad",
-    "description": "Save and verify an offline copy, choose download quality and networks, manage storage, and understand background-transfer limits.",
+    "description": "Choose episodes, versions, and quality for offline viewing, verify saved copies, manage storage and networks, and understand background-transfer limits.",
     "section": "Playback",
-    "kind": "guide",
+    "kind": "reference",
     "file": "downloads.md",
     "sources": [
       "Sources/AppShelliOS/PlozziOSDownloadsView.swift",
       "Sources/AppShelliOS/PlozziOSDownloadActivity.swift",
       "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift",
       "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
+      "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift",
+      "Sources/FeatureHomeCore/EpisodeDownloadSelection.swift",
       "Sources/CoreModels/SeriesDownloadPresentation.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/AppShelliOS/PlozziOSDownloadsModel.swift",
@@ -2672,17 +2827,15 @@
       "Sources/ProviderSilo/SiloDownloads.swift",
       "Sources/AppShelliOS/PlozziOSDownloadNotifications.swift",
       "Sources/AppShelliOS/PlozziOSDownloadNotificationNavigation.swift",
-      "Sources/MediaDownloads/DownloadStorageCapacity.swift",
+      "Sources/CoreModels/MediaItemAction.swift",
       "Sources/MediaDownloads/DownloadedMediaRegistry.swift",
-      "Sources/FeatureHomeCore/PlaybackVersionChoiceModel.swift",
-      "Sources/AppShelliOS/PlozziOSPlayerView.swift",
-      "Sources/CoreModels/MediaItemAction.swift"
+      "Sources/AppShelliOS/PlozziOSPlayerView.swift"
     ],
     "watch": [
       "Sources/MediaDownloads/",
       "Sources/AppShelliOS/PlozziOSDownload",
-      "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
       "Sources/CoreModels/SeriesDownload",
+      "Sources/FeatureHomeCore/EpisodeDownloadSelection.swift",
       "Sources/AppShelliOS/SiloOfflineDownload.swift",
       "Sources/ProviderSilo/SiloDownloads.swift"
     ],
@@ -2781,8 +2934,40 @@
           "source": "Sources/AppShelliOS/PlozziOSDownloadActivity.swift"
         },
         {
-          "text": "Download Original",
+          "text": "Quality",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
+        },
+        {
+          "text": "Try Again",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
+        },
+        {
+          "text": "Cancel",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
+        },
+        {
+          "text": "Selected",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
+        },
+        {
+          "text": "Available",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
+        },
+        {
+          "text": "Size",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
+        },
+        {
+          "text": "Choose Versions",
           "source": "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift"
+        },
+        {
+          "text": "Ask Before Downloading",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Include Text Subtitles When Supported",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
         },
         {
           "text": "Download",
@@ -2801,9 +2986,7 @@
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         }
       ],
-      "emphasis": [
-        "Original only"
-      ]
+      "emphasis": []
     }
   },
   {
@@ -4055,23 +4238,23 @@
       "Sources/AppShell/HomeTab.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/CoreModels/PlaybackOrientation.swift",
+      "Sources/AppShelliOS/PlozziOSPlayerOrientation.swift",
+      "Sources/AppShelliOS/PlozziOSLandscapeMotion.swift",
       "Sources/AppShelliOS/PlozziOSLivePresentationControls.swift",
       "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
       "Sources/FeaturePlayback/InfoPanelView.swift",
       "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift",
       "Sources/CoreUI/ProfileSettingsCategory.swift",
-      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
-      "Sources/TopShelfKit/TopShelfItemResolver.swift",
       "Sources/FeaturePlayback/PlayerTouchGestureSurface.swift",
       "Sources/AppShelliOS/PlozziOSPictureInPictureController.swift"
     ],
     "watch": [
       "Sources/AppShelliOS/PlozziOSPlayer",
-      "Sources/AppShelliOS/PlozziOSLivePresentationControls.swift",
+      "Sources/AppShelliOS/PlozziOSLandscapeMotion.swift",
+      "Sources/CoreModels/PlaybackOrientation.swift",
       "Sources/FeaturePlayback/PlaybackDiagnostics",
       "Sources/TopShelfKit/",
-      "Sources/FeatureSettings/TopShelf",
-      "Sources/CoreModels/NavigationStyleSettingsStore.swift"
+      "Sources/FeatureSettings/TopShelf"
     ],
     "platforms": [
       "Apple TV",
@@ -4165,11 +4348,19 @@
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
         {
-          "text": "Auto",
+          "text": "Follow device orientation",
           "source": "Sources/CoreModels/PlaybackOrientation.swift"
         },
         {
-          "text": "Landscape",
+          "text": "Landscape auto",
+          "source": "Sources/CoreModels/PlaybackOrientation.swift"
+        },
+        {
+          "text": "Landscape left",
+          "source": "Sources/CoreModels/PlaybackOrientation.swift"
+        },
+        {
+          "text": "Landscape right",
           "source": "Sources/CoreModels/PlaybackOrientation.swift"
         },
         {
@@ -4383,12 +4574,12 @@
       "Sources/CoreUI/PlaybackFailureView.swift",
       "Sources/CoreModels/PlaybackDiagnosticReport.swift",
       "Sources/CoreModels/LibraryLoadDiagnostic.swift",
-      "Sources/FeatureHome/LibraryBrowseView.swift",
+      "Sources/CoreUI/ContentStateView.swift",
       "Sources/AppRuntime/PlexHomeUsersModel.swift",
-      "Sources/FeatureHomeCore/ItemDetailViewModel.swift",
+      "Sources/CoreModels/StreamingQuality.swift",
       "Sources/CoreUI/SettingsCopy.swift",
-      "Sources/FeatureLiveTVCore/LiveTVGuidePreparationModel.swift",
-      "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
+      "Sources/CoreUI/HomeSectionStatusView.swift",
+      "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
     ],
     "watch": [
       "Sources/CoreUI/Playback",
@@ -4436,6 +4627,38 @@
         {
           "text": "Hidden channels",
           "source": "Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift"
+        },
+        {
+          "text": "More",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
+        {
+          "text": "Filters",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
+        {
+          "text": "Manage IPTV channels",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
+        {
+          "text": "Maximum",
+          "source": "Sources/CoreModels/StreamingQuality.swift"
+        },
+        {
+          "text": "Try Again",
+          "source": "Sources/CoreUI/ContentStateView.swift"
+        },
+        {
+          "text": "Details",
+          "source": "Sources/CoreUI/ContentStateView.swift"
+        },
+        {
+          "text": "Details",
+          "source": "Sources/CoreUI/HomeSectionStatusView.swift"
+        },
+        {
+          "text": "Retry",
+          "source": "Sources/CoreUI/HomeSectionStatusView.swift"
         },
         {
           "text": "Details",

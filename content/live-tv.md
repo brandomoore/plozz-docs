@@ -1,6 +1,6 @@
 # IPTV and Live TV
 
-Bring IPTV and server channels together, or make scheduled channels from your library.
+Watch IPTV, server TV, or scheduled channels from your library.
 
 ## Add IPTV
 
@@ -11,9 +11,9 @@ Bring IPTV and server channels together, or make scheduled channels from your li
 
 On iPhone/iPad, **Playlist file** imports a local M3U catalogue from Files; reimport to update it. [Live TV source sync](/profiles-and-sync/#sync-live-tv-deliberately) differs.
 
-Plozz supplies no channels or subscriptions. Guide listings are optional.
+Plozz supplies no channels or subscriptions. If import fails, use a direct M3U link, not a web page. Prefer HTTPS.
 
-If import fails, use a direct M3U link, not a web page. Prefer HTTPS.
+On iPhone/iPad, open **More > TV Sources** from Live TV's toolbar.
 
 ## Find on-demand titles
 
@@ -21,13 +21,13 @@ Providers may supply separate **Movies** and **TV Shows** libraries. Enable them
 
 ## Use a connected server
 
-In **TV Sources > Media server**, select a connected Jellyfin, Emby, or Plex server enabled for this Plozz profile. Plozz checks access; choose **Add channels** when offered. **Add guide only** means listings are available but playback is unavailable for that connection.
+In **TV Sources > Media server**, select a connected Jellyfin, Emby, or Plex server enabled for this Plozz profile. Choose **Add channels** when offered. **Add guide only** supplies listings without playback for that connection.
 
-Server configuration, account permissions, and subscription requirements still apply. Native Silo Live TV is not offered.
+Server permissions and subscription requirements still apply. Native Silo Live TV is not offered.
 
 ## Search the guide
 
-Open Live TV's **Search**, choose **Channels** or **Programs**, and enter a name. Results cover retained listings, not an archive. **Watch channel** tunes live, not from the program's beginning.
+Open Live TV's **Search** and enter a name. Apple TV lets you choose **Channels** or **Programs**; iPhone/iPad shows matching categories, channels, and programs together. Program results cover current and upcoming retained listings, not an archive. **Watch channel** tunes live, not from the program's beginning.
 
 ## Approve playlist sources for Kids
 
@@ -39,13 +39,13 @@ Approval allows every channel in that source, not age-filtered programs. It stay
 
 ## Watch several channels
 
-Start a channel, open **Multiview**, add channels, then choose **Watch**. The limit is **four pictures**, with one audible pane. On Apple TV, focus a pane for sound; on iPhone/iPad, choose **Audio**. Provider stream/tuner limits may be lower.
+While watching, open **Multiview**, add channels, then choose **Watch**. The limit is **four pictures**, with one audible pane. On Apple TV, focus a pane for sound; on iPhone/iPad, choose **Audio**. Provider stream/tuner limits may be lower.
 
 Use **Favorite** to save channels/layout; reopen from **Favorite Multiviews**. This reserves no capacity.
 
 ## Organize channels and listings
 
-Hold a channel for favorites or hiding actions. **Manage channels** offers category, country/language, and hidden-channel choices. See [Organize channels and fix listings](/live-tv-channels/) for visibility rules and connection-specific guide tools.
+Hold a channel for favorites or hiding actions. See [Organize channels and fix listings](/live-tv-channels/) for category browsing, visibility choices, and connection-specific guide tools.
 
 Use **Refresh sources** after changes or **Retry** for errors.
 
@@ -57,7 +57,7 @@ Open **TV Sources**, select a standalone playlist, then **Connect as IPTV accoun
 
 ## Check unavailable channel links
 
-Standalone playlists offer **Check channel availability** under **TV Sources**. [Check unavailable links](/live-tv-channels/#check-unavailable-links) explains scanning and restoring channels hidden by a scan.
+Under a standalone playlist in **TV Sources**, use **Check channel availability**; [restore scan-hidden channels](/live-tv-channels/#check-unavailable-links) if needed.
 
 ## Stop unexpected channel previews
 
@@ -77,7 +77,7 @@ Use **Retry Plozz channels** after an error, or **Refresh Plozz channels** to re
 
 Changes wait until already-scheduled programs finish. Let the library catalogue [finish syncing](/profiles-and-sync/#sync-live-tv-deliberately) before expecting the same schedule on another device.
 
-Select a custom channel to edit it, or hold it for **Delete channel**. Your media files stay untouched.
+Select a custom channel to edit, or hold for **Delete channel**; media files stay untouched.
 
 **Update watch history** defaults off for this profile on this device. Turn it on to mark programs watched after viewing 90%; it does not save resume positions. [Cross-server history](/profiles-and-sync/#keep-watch-history-separate) and eligible [connected trackers](/trackers/) can receive completions. Channels play original files.
 

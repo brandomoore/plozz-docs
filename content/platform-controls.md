@@ -1,16 +1,16 @@
 # Device and system controls
 
-Use remote, touch, or system controls to seek, change the picture, or watch on another screen.
+Control playback and watch on another screen.
 
 ## Apple TV
 
-Use the remote to reveal playback controls. **Settings > Playback > Seeking > Skip Intervals** changes left/right jumps.
+Reveal controls with the remote. **Settings > Playback > Seeking > Skip Intervals** changes left/right jumps.
 
 **Seek without pausing** determines whether a playing video responds to scrubbing. When off, pause first, scrub to the position, then press Play. **Prevent Accidental Exit**, under Screens & Navigation's navigation settings, changes app-exit behavior rather than playback quality.
 
 **Fade on display changes** covers dynamic-range and frame-rate transitions, not TV matching settings. If matching is off on Apple TV, disabling fades can avoid needless delays.
 
-Each Apple TV user can [automatically open their remembered Plozz profile](/apple-tv-profiles/). With automatic sign-in off, [returning to browsing can require profile selection again](/apple-tv-profiles/#when-you-return-to-browsing).
+Apple TV users can [automatically open their remembered Plozz profile](/apple-tv-profiles/). With automatic sign-in off, [returning to browsing can require profile selection again](/apple-tv-profiles/#when-you-return-to-browsing).
 
 ## Live TV remote controls and rewind
 
@@ -26,23 +26,23 @@ For a channel with a usable rewind window, reveal controls and use the timeline 
 2. From an adult Plozz profile, open **Settings > Everyone > Top Shelf**. **Show Top Shelf** is on by default.
 3. Choose **Posters** or **Full Screen**, then set separate **Continue Watching** and **Recently Added** counts: four each by default, adjustable from one to 20.
 
-Posters is the default; select one to start watching. With Full Screen, swipe up to expand the shelf. Continue Watching appears before Recently Added, without repeated titles from the same source. Use the first button to start watching or the second to view details. Format badges describe the video file, not your TV's current output.
+Posters is the default; select one to start watching. With Full Screen, swipe up to expand the shelf. Continue Watching appears before Recently Added, without repeated titles from the same source. Use the first button to start watching or the second to view details. Format badges describe the file, not your TV's output.
 
-These preferences are shared by Plozz profiles on this Apple TV and do not sync. Turning Show Top Shelf off clears its media without forgetting your layout or counts.
+These preferences are shared on this Apple TV and do not sync. Turning Show Top Shelf off clears its media without forgetting your layout or counts.
 
-Top Shelf uses a saved Home snapshot, not live browsing. Short feeds are not padded; counts do not limit Plozz's Continue Watching. Finish any profile/PIN prompt first. If **Unable to Open Title** appears, check the original connection in Plozz.
+Top Shelf shows saved Home titles, sometimes fewer than you chose. Its counts do not limit Continue Watching in Plozz. Complete any profile/PIN prompt. If **Unable to Open Title** appears, check the original connection.
 
 Artwork follows [Appearance > Artwork](/appearance/); full-screen episode text and ratings respect [spoiler settings](/spoiler-protection/).
 
 ## iPhone and iPad
 
-Tap the video to reveal controls. On a hardware keyboard, press the space bar to play/pause or the left/right arrows to skip. Shortcuts yield while menus, sheets, or player interactions are active.
+Tap the video to reveal controls. With a keyboard, use the space bar to play/pause and left/right arrows to skip. Shortcuts yield while menus, sheets, or player interactions are active.
 
 During supported local playback, double-tap the left/right side to skip, hold the picture for a temporary speed boost, or pinch to switch Normal/Crop. Vertical drags near the left edge adjust brightness; near the right edge, volume. VoiceOver disables hold, pinch, side-tap, and level-drag shortcuts.
 
 Turn off **Settings > Playback > Volume and brightness gestures** to disable vertical drags.
 
-On iPhone, **Settings > Playback > Player orientation** offers Auto, Landscape, or Portrait for video and Live TV playback in a full-screen window. iPad follows system rotation. If changing orientation fails, use a full-screen window and retry.
+On iPhone, **Settings > Playback > Player orientation** controls full-screen video and Live TV. **Follow device orientation** respects the system rotation lock. **Portrait** stays upright. **Landscape auto** stays sideways, using device motion to choose the direction even with rotation lock on. **Landscape left**/**Landscape right** fixes the phone's top to that side. iPad follows system rotation. If rotation fails, use a full-screen window; if motion sensing is unavailable, choose a fixed landscape option.
 
 [Zoom modes](/playback/#speed-picture-and-other-navigation) change presentation, not quality. [Background Audio](/audio/#keep-audio-playing-on-iphone-or-ipad) controls listening while locked or outside Plozz.
 
@@ -52,9 +52,9 @@ On iPhone/iPad, use the player's **AirPlay** route picker for an available recei
 
 Controls can be restricted while video is playing elsewhere. The locally remuxed wireless AirPlay path does not expose selectable subtitle tracks; native streams can behave differently. Check captions on the receiving screen rather than assuming local subtitles will follow the video.
 
-Live TV permits external presentation only for an authorized, single-channel session. On supported paths it can enter Picture in Picture when you leave Plozz. Multiview disables AirPlay and Picture in Picture.
+Live TV permits external presentation only for an authorized, single-channel session. Supported paths can enter Picture in Picture when you leave Plozz. Multiview disables AirPlay and Picture in Picture.
 
-For travel, use [completed downloads](/downloads/); external presentation does not save video.
+For offline viewing, use [downloads](/downloads/).
 
 ## Read playback information
 
@@ -68,4 +68,4 @@ With AetherEngine, **AVPlayer time** and **AVPlayer window** describe its intern
 
 ## Open another player app
 
-For Infuse, VLC, or Apple TV's Native Player app, follow [Use another video player](/external-players/). This sends a video link to another app on this device, not an AirPlay receiver. It is a device-wide choice with source, privacy, and returned-progress limits.
+For Infuse, VLC, or Apple TV's Native Player app, follow [Use another video player](/external-players/). This device-wide choice sends a link to another app, not an AirPlay receiver; source, privacy, and returned-progress limits apply.

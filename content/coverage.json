@@ -248,6 +248,10 @@
         },
         {
           "slug": "downloads",
+          "anchor": "choose-episodes-and-versions"
+        },
+        {
+          "slug": "downloads",
           "anchor": "pause-resume-or-remove"
         }
       ],
@@ -255,6 +259,8 @@
         "Sources/AppShelliOS/PlozziOSDownloadsModel.swift",
         "Sources/AppShelliOS/PlozziOSDownloadsView.swift",
         "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
+        "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift",
+        "Sources/FeatureHomeCore/EpisodeDownloadSelection.swift",
         "Sources/CoreModels/SeriesDownloadPresentation.swift",
         "Sources/AppShelliOS/PlozziOSDownloadActivity.swift",
         "Sources/AppShelliOS/PlozziOSBackgroundHTTPDownloadEngine.swift",
@@ -265,7 +271,7 @@
         "Sources/MediaDownloads/DownloadedMediaRegistry.swift",
         "Sources/MediaDownloads/RegistryOfflinePlaybackResolver.swift"
       ],
-      "answer": "On iPhone/iPad, select a movie/episode's server and version if offered before downloading; for a show use Manage Seasons to download available episodes or choose a season/episode. Imported streaming-service links are not downloadable video files. Choose quality, wait for completed status in Downloads and test that copy's video, audio and subtitles offline. Playback prefers a usable matching download even with another server/version selected; changing servers alone does not force streaming. Eligible HTTP transfers use background sessions; in-process/share transfers need foreground execution unless the OS grants continued processing. Switching profiles pauses that profile's transfers; return to the owning profile to resume. iOS/iPadOS 26 Live Activities can be declined; cancellation/expiry pauses active work without deleting partial files. All received bytes still require offline validation. Network, speed, source and storage limits remain; Apple TV has no downloads."
+      "answer": "On iPhone/iPad, choose Download from movie/episode details; Manage Seasons prepares available show/season/episode files. Review episode selection circles and open rows for alternative versions: one recommended version starts selected per episode, multiple episode versions save separate files, and movies are single-select. Choose Versions on a saved episode adds another copy. Quality choices require support from all prepared items; Original can show a total Size only when all selected file sizes are known. Available shows device capacity when obtainable. Ask Before Downloading defaults on; disabling it skips confirmation only for one item with one version, never bulk or multiversion choices. Imported streaming-service links are not downloadable video files. Wait for completed status in Downloads and test that copy's video, audio and subtitles offline. Playback prefers a usable matching download even with another server/version selected; changing servers alone does not force streaming. Eligible HTTP transfers use background sessions; in-process/share transfers need foreground execution unless the OS grants continued processing. Switching profiles pauses that profile's transfers; return to the owning profile to resume. iOS/iPadOS 26 Live Activities can be declined; cancellation/expiry pauses active work without deleting partial files. All received bytes still require offline validation. Network, speed, source and storage limits remain; Apple TV has no downloads."
     },
     "cross-server-history": {
       "documents": [
@@ -354,9 +360,11 @@
         "Sources/AppShelliOS/PlozziOSPlayerView.swift",
         "Sources/AppShelliOS/PlozziOSAppModel.swift",
         "Sources/AppRuntime/ExternalPlaybackRuntime.swift",
-        "Sources/CoreModels/ExternalPlayer.swift"
+        "Sources/CoreModels/ExternalPlayer.swift",
+        "Sources/AppShelliOS/PlozziOSPlayerOrientation.swift",
+        "Sources/AppShelliOS/PlozziOSLandscapeMotion.swift"
       ],
-      "summary": "Local Network permission supports discovery/pairing; Camera is used for setup QR scanning with code entry as an alternative. Background audio, processing and download task identifiers support documented route- and OS-dependent behavior, not guaranteed execution. External-app query schemes support Infuse/VLC availability; the registered return URL is routed by the mobile root through validated external playback receipts into authorized viewer-owned watch mutations, not accepted as arbitrary progress."
+      "summary": "Local Network permission supports discovery/pairing; Camera is used for setup QR scanning with code entry as an alternative. NSMotionUsageDescription explains device motion for Landscape auto: only the active authorized compact-phone full-screen player leases CoreMotion updates, allowing landscape direction changes even with system rotation lock enabled. Missing motion support falls back to system landscape rotation; this is not an iPad orientation picker or a new guaranteed permission prompt. Background audio, processing and download task identifiers support documented route- and OS-dependent behavior, not guaranteed execution. External-app query schemes support Infuse/VLC availability; the registered return URL is routed by the mobile root through validated external playback receipts into authorized viewer-owned watch mutations, not accepted as arbitrary progress."
     },
     "App/PlozziOS/PlozziOS.branded.entitlements": {
       "omitReason": "Side-by-side development builds intentionally omit canonical cloud and associated-domain capabilities; these internal provisioning variants are not consumer setup features.",
@@ -525,6 +533,14 @@
     "library": {
       "documents": [
         {
+          "slug": "discover",
+          "anchor": "find-something-to-watch"
+        },
+        {
+          "slug": "discover",
+          "anchor": "narrow-the-recommendations"
+        },
+        {
           "slug": "network-shares",
           "anchor": "open-links-to-streaming-services"
         },
@@ -592,24 +608,24 @@
         "Sources/FeatureHomeCore/LibraryBrowseViewModel.swift",
         "Sources/FeatureSettings/LibraryPresentationSettingsView.swift",
         "Sources/CoreUI/LibraryFilterMenu.swift",
-        "Sources/CoreModels/LibraryQuery.swift",
         "Sources/AppShelliOS/PlozziOSLibraryView.swift",
         "Sources/FeatureSearch/SearchView.swift",
         "Sources/FeatureHome/WatchlistBrowseView.swift",
-        "Sources/AppShelliOS/PlozziOSRootView.swift",
         "Sources/CoreUI/WatchlistBrowseControls.swift",
-        "Sources/CoreModels/WatchlistBrowsePreferences.swift",
         "Sources/AppRuntime/UniversalWatchlistRuntime.swift",
-        "Sources/FeatureHome/DetailExtrasView.swift",
         "Sources/ProviderIPTV/IPTVProvider.swift",
         "Sources/AppRuntime/MediaItemActionCoordinator.swift",
-        "Sources/AppRuntime/WatchMutationApplier.swift",
         "Sources/FeatureHome/DetailHeroView.swift",
         "Sources/FeatureHomeCore/HomeRowBrowseModel.swift",
         "Sources/CoreUI/YouTubeTrailerOpening.swift",
-        "Sources/FeatureHomeCore/HomeRowBrowseFactory.swift"
+        "Sources/FeatureHomeCore/DiscoverBrowseView.swift",
+        "Sources/FeatureHomeCore/DiscoverBrowseModel.swift",
+        "Sources/AppRuntime/DiscoverRuntime.swift",
+        "Sources/AppRuntime/HeroDiscoveryRuntime.swift",
+        "Sources/CoreUI/DiscoverFilterMenu.swift",
+        "Sources/CoreModels/DiscoverFeed.swift"
       ],
-      "summary": "Browse, filter, sort and search enabled libraries; All Libraries combines them on Apple TV, iPhone and iPad, with explicit mobile shortcut visibility explained in the combined-library capability. Only Apple TV exposes the name-sort letter rail. Genre/year intersect quick filters; preparation, interrupted collections and failed facets retain cancellation/retry paths. Eligible Home row previews open a row-specific grid, not an unrestricted library query: TV uses a trailing See all card and mobile a heading chevron. Combined Recently Added, collection members and server recommendations retain their actual feeds; filter/sort changes load the remaining feed before publishing results, with Retry on failure. Watchlist shortcuts open the dedicated page and its saved preferences instead. Collections, playlists, extras, IPTV on-demand catalogues and source/version selection remain distinct from requests and schedule-only placeholders. Watchlist covers save/removal, filters, date/name sorting, profile ownership and connected-list effects; disabling sources does not erase explicit saves. History actions distinguish watched-state changes from Continue Watching dismissal/resume clearing and cross-server delivery. Library tabs and Recommended rows differ from Home/main shortcuts; Browse is the fallback, shares lack Recommended, and collection-cover shapes have independent library/row scopes. Server-owned trailers/previews play in Plozz; Watch on YouTube opens externally regardless of external-player preference, requiring the TV app or mobile app/web fallback without guaranteeing availability."
+      "summary": "Browse, filter, sort and search enabled libraries; All Libraries combines them on Apple TV, iPhone and iPad, with explicit mobile shortcut visibility explained in the combined-library capability. Only Apple TV exposes the name-sort letter rail. Genre/year intersect quick filters; preparation, interrupted collections and failed facets retain cancellation/retry paths. Eligible Home row previews open a row-specific grid, not an unrestricted library query: TV uses a trailing See all card and mobile a heading chevron. Combined Recently Added, collection members and server recommendations retain their actual feeds; filter/sort changes load the remaining feed before publishing results, with Retry on failure. Watchlist shortcuts open the dedicated page and its saved preferences instead. Dedicated Discover is a separate non-Kids destination with five ordered paged feeds, not Home's hero or its See all grids. Available now requires a currently validated playable copy in enabled accessible libraries and hides both upcoming feeds; Hide watched uses known completion history. Both filters default off, save per profile, and offer Clear Filters; row failures offer Try Again. Seerr can supply feeds but is not required for browsing, and requesting does not grant playback. Collections, playlists, extras, IPTV on-demand catalogues and source/version selection remain distinct from requests and schedule-only placeholders. Watchlist covers save/removal, filters, date/name sorting, profile ownership and connected-list effects; disabling sources does not erase explicit saves. History actions distinguish watched-state changes from Continue Watching dismissal/resume clearing and cross-server delivery. Library tabs and Recommended rows differ from Home/main shortcuts; Browse is the fallback, shares lack Recommended, and collection-cover shapes have independent library/row scopes. Server-owned trailers/previews play in Plozz; Watch on YouTube opens externally regardless of external-player preference, requiring the TV app or mobile app/web fallback without guaranteeing availability."
     },
     "home-navigation": {
       "documents": [
@@ -1047,11 +1063,17 @@
       "documents": [
         {
           "slug": "downloads"
+        },
+        {
+          "slug": "downloads",
+          "anchor": "choose-episodes-and-versions"
         }
       ],
       "sources": [
         "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift",
         "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
+        "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift",
+        "Sources/FeatureHomeCore/EpisodeDownloadSelection.swift",
         "Sources/CoreModels/SeriesDownloadPresentation.swift",
         "Sources/AppShelliOS/PlozziOSDownloadsModel.swift",
         "Sources/AppShelliOS/PlozziOSAppModel.swift",
@@ -1067,10 +1089,9 @@
         "Sources/MediaDownloads/DownloadedMediaRegistry.swift",
         "Sources/MediaDownloads/RegistryOfflinePlaybackResolver.swift",
         "Sources/AppShelliOS/PlozziOSPlayerView.swift",
-        "Sources/FeaturePlayback/PlayerViewModel.swift",
-        "Sources/FeatureHomeCore/PlaybackVersionChoiceModel.swift"
+        "Sources/FeaturePlayback/PlayerViewModel.swift"
       ],
-      "summary": "Select the intended source/version on mobile details before downloading and test the validated, completed copy offline. Playback prefers a usable matching download even with another server/version selected; check the saved edition rather than assuming a source switch forces streaming. Manage Seasons downloads available episodes, not placeholders. Preparing/Downloading/Finishing are not completion; all bytes still need offline validation. Distinguish background HTTP from in-process/share work and fallible iOS 26 continued processing. Cancelling the system download Live Activity pauses its transfers and preserves partial files; Resume in Plozz differs from deleting downloads. Switching profiles pauses outgoing transfers; return to the owning profile to resume, subject to network policy. Retain quality/network policy, provider preparation, track limits, speed caps and uncapped background behavior. Reduced Jellyfin/Emby copies require Download Speed > Limit > Unlimited. Storage in Download Settings shows download use and available device capacity. Cancel Active Downloads deletes unfinished copies but keeps completed ones; Delete All Downloads removes this profile's saved videos, not server originals. Pause preserves work; notifications need permission. Completion notices open the title or batch without autoplay and require authorization for the owning profile rather than bypassing its lock."
+      "summary": "Review the intended files in mobile download selection and test the validated, completed copy offline. Manage Seasons prepares available episodes, not placeholders. Episode circles choose inclusion; nested version rows allow several copies with separate storage, while movies remain single-select. Ask Before Downloading defaults on and cannot suppress bulk/multiversion confirmation. Reduced qualities require support from all prepared items; known Original file sizes and available capacity aid review. Preparation failures allow Try Again/Cancel. Management uses the selected physical-copy identity, while playback prefers any usable matching download with the requested version first; changing servers alone does not force streaming. Preparing/Downloading/Finishing are not completion; all bytes still need offline validation. Distinguish background HTTP from in-process/share work and fallible iOS 26 continued processing. Cancelling the system download Live Activity pauses its transfers and preserves partial files; Resume in Plozz differs from deleting downloads. Switching profiles pauses outgoing transfers; return to the owning profile to resume, subject to network policy. Retain quality/network policy, provider preparation, track limits, speed caps and uncapped background behavior. Reduced Jellyfin/Emby copies require Download Speed > Limit > Unlimited. Storage in Download Settings shows download use and available device capacity. Cancel Active Downloads deletes unfinished copies but keeps completed ones; Delete All Downloads removes this profile's saved videos, not server originals. Pause preserves work; notifications need permission. Completion notices open the title or batch without autoplay and require authorization for the owning profile rather than bypassing its lock."
     },
     "profiles": {
       "documents": [
@@ -1453,6 +1474,9 @@
         "Sources/FeaturePlayback/PlayerTouchGestureSurface.swift",
         "Sources/AppShelliOS/PlozziOSPlayerKeyboardControls.swift",
         "Sources/AppShelliOS/PlozziOSPlayerOrientation.swift",
+        "Sources/AppShelliOS/PlozziOSLandscapeMotion.swift",
+        "Sources/CoreModels/PlaybackOrientation.swift",
+        "App/PlozziOS/Info.plist",
         "Sources/AppShelliOS/PlozziOSSettingsView.swift",
         "Sources/AppShelliOS/PlozziOSPictureInPictureController.swift",
         "Sources/AppShelliOS/PlozziOSLivePresentationControls.swift",
@@ -1461,17 +1485,14 @@
         "Sources/CoreModels/LivePlaybackBuffer.swift",
         "Sources/FeaturePlayback/LiveChannelPlayerView.swift",
         "Sources/FeatureSettings/PreferenceDetailViews.swift",
-        "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
         "Sources/AppShell/LiveTVShellDestination.swift",
         "Sources/CoreModels/TopShelfSettings.swift",
         "Sources/FeatureSettings/TopShelfSettingsView.swift",
         "Sources/CoreModels/ProfileReturnPolicy.swift",
         "TopShelf/ContentProvider.swift",
-        "Sources/CoreModels/NavigationStyleSettingsStore.swift",
-        "Sources/CoreModels/PlaybackDiagnostics.swift",
         "Sources/CoreUI/NowPlayingSession.swift"
       ],
-      "summary": "Explain remote/touch/keyboard, VoiceOver, optional gestures, iPhone full-window orientation versus iPad system rotation, and TV fades that do not enable system matching. Mobile pinch switches Normal/Crop; the playback task explains session-only zoom modes. Link Apple TV's automatic-sign-in and background-browsing return checks, distinct from playback departures and brief inactive interruptions. Top Shelf offers shared local adult controls, Posters/Full Screen and 1-20 counts defaulting four; source-scoped snapshots retain authorization/spoiler limits. Trace Guide OS entry and music Now Playing commands. Distinguish live seeking/Go Live from library-channel Jump to now and recording. Live TV buffer applies on new live stream loads, not library files, and Go Live retains its latency/tuning tradeoffs. Conversion diagnostics separate active video/audio facts from original-source details; neither establishes physical speaker layout. Throughput is not encoded bitrate and temporary cache is not downloads. Retain remuxed AirPlay subtitle loss, Multiview/PiP limits and authorized external-player returns."
+      "summary": "Explain remote/touch/keyboard, VoiceOver, optional gestures, iPhone full-window orientation versus iPad system rotation, and TV fades that do not enable system matching. Player orientation choices are Follow device orientation, Portrait, Landscape auto, Landscape left and Landscape right. Follow device orientation respects system rotation lock; Landscape auto uses the active phone player's motion lease to follow sideways direction even with rotation lock enabled, with fixed choices retaining their direction. Trace NSMotionUsageDescription and the runtime full-window/phone checks rather than treating an entitlement or label as proof of iPad support. Mobile pinch switches Normal/Crop; the playback task explains session-only zoom modes. Link Apple TV's automatic-sign-in and background-browsing return checks, distinct from playback departures and brief inactive interruptions. Top Shelf offers shared local adult controls, Posters/Full Screen and 1-20 counts defaulting four; source-scoped snapshots retain authorization/spoiler limits. Trace Guide OS entry and music Now Playing commands. Distinguish live seeking/Go Live from library-channel Jump to now and recording. Live TV buffer applies on new live stream loads, not library files, and Go Live retains its latency/tuning tradeoffs. Conversion diagnostics separate active video/audio facts from original-source details; neither establishes physical speaker layout. Throughput is not encoded bitrate and temporary cache is not downloads. Retain remuxed AirPlay subtitle loss, Multiview/PiP limits and authorized external-player returns."
     }
   },
   "modules": {
@@ -1539,21 +1560,21 @@
         "Sources/FeatureHomeCore/HomeRowBrowseFactory.swift",
         "Sources/FeatureHome/WatchlistBrowseView.swift",
         "Sources/FeatureHome/DetailHeroView.swift",
-        "Sources/FeatureHome/SeriesDetailView.swift",
-        "Sources/FeatureHomeCore/ItemDetailViewModel.swift",
         "Sources/FeatureHomeCore/AllLibrariesProvider.swift",
         "Sources/FeatureHomeCore/HomeAggregator.swift",
-        "Sources/FeatureHomeCore/ThemeMusicController.swift",
-        "Sources/FeatureHome/ItemDetailView.swift",
         "Sources/FeatureHomeCore/ThemeMusicPlayback.swift",
         "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
         "Sources/CoreModels/MediaItem+Trailer.swift",
         "Sources/CoreUI/YouTubeTrailerOpening.swift",
         "Sources/CoreUI/HomeSectionStatusView.swift",
         "Sources/AppShell/HomeTab.swift",
-        "Sources/AppShelliOS/PlozziOSAllLibrariesDestinationView.swift"
+        "Sources/AppShelliOS/PlozziOSAllLibrariesDestinationView.swift",
+        "Sources/FeatureHomeCore/DiscoverBrowseView.swift",
+        "Sources/FeatureHomeCore/DiscoverBrowseModel.swift",
+        "Sources/AppRuntime/DiscoverRuntime.swift",
+        "Sources/AppShelliOS/PlozziOSDiscoverView.swift"
       ],
-      "summary": "Keep browsing, collection recovery, source/version selection, Watchlists and schedule-only placeholders together. Both shells resolve All Libraries through FeatureHomeCore's shared source inventory/merge policy; mobile has a reachable navigation destination but still no alphabet rail. Home row browsing is a separate reachable workflow: eligible TV See all cards/mobile headings open the original row feed through HomeRowBrowseFactory, while Watchlist routes to its existing page. Filtering/sorting waits for the full available row rather than sorting only the preview; server-feed identity and current profile visibility are retained. Name-sort rail behavior is TV-only; unused menu/observed feedback state is not a mobile jump control. Library presentation, collection covers and Home rows retain independent scopes and failure recovery. Account-wide history ignores disabled-library discovery. Both shells wire detail theme music and server trailers with lifecycle/authorization checks; online trailers open YouTube externally with mobile-only web fallback. The TV Home performance overlay supports stutter reporting, not a mobile overlay."
+      "summary": "Keep browsing, collection recovery, source/version selection, Watchlists and schedule-only placeholders together. Both shells resolve All Libraries through FeatureHomeCore's shared source inventory/merge policy; mobile has a reachable navigation destination but still no alphabet rail. Home row browsing is a separate reachable workflow: eligible TV See all cards/mobile headings open the original row feed through HomeRowBrowseFactory, while Watchlist routes to its existing page. Dedicated Discover instead uses DiscoverBrowseView/DiscoverRuntime in both shells, with ordered paged feeds and profile-saved Available now/Hide watched controls; its new focused guide explains access, title actions and row recovery separately from Home hero discovery. Filtering/sorting waits for the full available Home row rather than sorting only the preview; server-feed identity and current profile visibility are retained. Name-sort rail behavior is TV-only; unused menu/observed feedback state is not a mobile jump control. Library presentation, collection covers and Home rows retain independent scopes and failure recovery. Account-wide history ignores disabled-library discovery. Both shells wire detail theme music and server trailers with lifecycle/authorization checks; online trailers open YouTube externally with mobile-only web fallback. The TV Home performance overlay supports stutter reporting, not a mobile overlay."
     },
     "FeatureLiveTV": {
       "areas": [
@@ -1810,6 +1831,9 @@
       "sources": [
         "Sources/MediaDownloads/DownloadNetworkPolicy.swift",
         "Sources/MediaDownloads/DirectShareDownloadSource.swift",
+        "Sources/MediaDownloads/DownloadMediaIdentity.swift",
+        "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift",
+        "Sources/FeatureHomeCore/EpisodeDownloadSelection.swift",
         "Sources/AppShelliOS/PlozziOSDownloadsModel.swift",
         "Sources/AppShelliOS/PlozziOSAppModel.swift",
         "Sources/AppShelliOS/PlozziOSDownloadActivity.swift",
@@ -1822,7 +1846,7 @@
         "Sources/AppShelliOS/PlozziOSPlayerView.swift",
         "Sources/FeaturePlayback/PlayerViewModel.swift"
       ],
-      "summary": "Explain network/speed limits, provider copies and offline validation: Finishing/all bytes received is not completion. The registry/resolver tries compatible same-title copies with the requested version first, retaining another usable download when the preferred copy is incomplete or missing. Mobile version preparation and shared player routing prioritize that local asset over streaming, even when a different server/version was selected. Background HTTP differs from in-process share work; continued processing/Live Activities remain an OS decision. Profile transitions quiesce outgoing transfers and returning can resume them under normal network policy. Storage shows download use and available capacity. Movie/episode menus act on one copy; show menus pause/resume the group or remove its downloaded episodes after confirmation. Distinguish those from destructive bulk cancellation of unfinished copies and profile-scoped deletion of all saved downloads."
+      "summary": "Explain network/speed limits, provider copies and offline validation: Finishing/all bytes received is not completion. Download selection uses physical source/item/version identities; episodes may save multiple selected versions as separate files, while movie selection stays singular. Ask Before Downloading does not suppress bulk or multiple-version review. Management of an explicitly selected episode is copy-specific. Playback is different: the registry/resolver tries compatible same-title copies with the requested version first, retaining another usable download when the preferred copy is incomplete or missing. Mobile version preparation and shared player routing prioritize that local asset over streaming, even when a different server/version was selected. Background HTTP differs from in-process share work; continued processing/Live Activities remain an OS decision. Profile transitions quiesce outgoing transfers and returning can resume them under normal network policy. Storage shows download use and available capacity. Movie/episode menus act on one copy; show menus pause/resume the group or remove its downloaded episodes after confirmation. Distinguish those from destructive bulk cancellation of unfinished copies and profile-scoped deletion of all saved downloads."
     },
     "MediaTransportCore": {
       "omitReason": "Internal file-system capability and bounded-read contracts expose no independent reader setting or procedure. Protocol selection, authentication, scanning and download limits are documented under connections and offline viewing instead.",
@@ -1901,6 +1925,7 @@
     },
     "MetadataKit": {
       "areas": [
+        "library",
         "metadata",
         "home-navigation",
         "playback",
@@ -1917,7 +1942,9 @@
         "Sources/MetadataKit/TMDbMetadataProvider.swift",
         "Sources/MetadataKit/ExternalTitleMetadataResolver.swift",
         "Sources/FeatureHomeCore/ItemDetailViewModel.swift",
-        "Sources/MetadataKit/DetailMetadataResolver.swift"
+        "Sources/MetadataKit/DetailMetadataResolver.swift",
+        "Sources/MetadataKit/TMDbDiscoveryProvider.swift",
+        "Sources/AppRuntime/DiscoverRuntime.swift"
       ],
       "summary": "Keep provider ordering/cache controls in metadata, lyric availability and LRCLIB title/artist/duration sharing in music, and community skips in playback. The music area traces the device-wide toggle into the lyric resolver's online-query gate. Home explains selecting public Discovery catalogues independently of Seerr requests, with Kids restrictions and no implied playable ownership. This is recommendation discovery, not the FeatureDiscovery module's LAN server search. Marker requests include applicable title/episode metadata and runtime, not video uploads; server markers and third-party coverage remain distinct. Regional releases/watch offers are populated only for external/discovery details and rendered independently of Seerr; explain them beside title requests without requiring a request connection. TMDB's authorized videos API can supply trailer links after server-owned files and server metadata are considered; it does not verify YouTube availability. Explain the reachable external handoff in library, not a nonexistent streaming-trailer provider or scraping workflow."
     },
@@ -2034,12 +2061,16 @@
     "SeerService": {
       "areas": [
         "requests",
-        "profiles"
+        "profiles",
+        "library"
       ],
       "sources": [
         "Sources/SeerService/SeerService.swift",
-        "Sources/SeerService/SeerMapper.swift"
-      ]
+        "Sources/SeerService/SeerMapper.swift",
+        "Sources/AppRuntime/DiscoverRuntime.swift",
+        "Sources/FeatureHomeCore/DiscoverBrowseView.swift"
+      ],
+      "summary": "Keep request permissions and profile-user mapping in media requests. A configured connection also supplies the separate Discover destination's movie/show feeds; browsing can use public metadata discovery when no Seerr connection is configured. A configured connection's failure stays visible rather than switching providers, and its availability flags do not replace verification of playable library copies."
     },
     "SimklService": {
       "areas": [
@@ -2281,6 +2312,243 @@
     }
   },
   "screens": {
+    "Sources/AppShelliOS/PlozziOSDiscoverView.swift": {
+      "sources": [
+        "Sources/AppShelliOS/PlozziOSDiscoverView.swift",
+        "Sources/FeatureHomeCore/DiscoverBrowseView.swift",
+        "Sources/AppShelliOS/PlozziOSRootView.swift",
+        "Sources/AppRuntime/DiscoverRuntime.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Mobile destination wrapper mounts the shared DiscoverBrowseView and existing settings toolbar only for an authorized non-Kids profile. DiscoverBrowseView inventories its feed headings, filter menu and row recovery; PlozziOSRootView owns destination/overflow navigation and Settings access. The wrapper supplies mobile poster rails and invalidates their feed when profile, server access, library visibility, language or Seerr connection changes; it adds no separate settings screen."
+    },
+    "Sources/FeatureHomeCore/DiscoverBrowseView.swift": {
+      "sources": [
+        "Sources/FeatureHomeCore/DiscoverBrowseView.swift",
+        "Sources/FeatureHomeCore/DiscoverBrowseModel.swift",
+        "Sources/CoreModels/DiscoverFeed.swift",
+        "Sources/CoreModels/MediaItem.swift",
+        "Sources/CoreUI/DiscoverFilterMenu.swift",
+        "Sources/CoreUI/BrowseQueryControls.swift",
+        "Sources/AppRuntime/DiscoverRuntime.swift",
+        "Sources/AppRuntime/HeroDiscoveryRuntime.swift",
+        "Sources/AppShell/HomeTab.swift",
+        "Sources/AppShelliOS/PlozziOSDiscoverView.swift",
+        "Sources/CoreModels/NavigationStyleSettingsStore.swift",
+        "Sources/CoreModels/ProfileSettingsSnapshot.swift"
+      ],
+      "platforms": [
+        "Apple TV",
+        "iPhone",
+        "iPad"
+      ],
+      "navigation": "Open Discover from main navigation; if hidden, use Settings > Screens & Navigation > App navigation > Hide or Reorder Navigation, hold Discover and choose Show. Compact mobile navigation may place a shown destination under More.",
+      "experience": "Browse five ordered, horizontally paged movie/show feeds; open accessible library copies, save titles to Watchlist or use eligible Seerr request actions on details. The top filter menu combines Available now and Hide watched. Each failed row offers Try Again; a filtered-empty row offers Clear Filters.",
+      "conditions": "Only authorized non-Kids profiles. Seerr configuration automatically shows the destination unless explicitly hidden; without Seerr it is automatically hidden unless explicitly shown. Explicit Show does not override Kids policy. Configured Seerr supplies feeds; otherwise public TMDB discovery is used, so Seerr is not required for browsing. A failed configured Seerr request does not silently switch providers. Both filters default off and persist per profile; the filter key is transferable with supported profile settings. Available now requires freshly validated playable library identity and enabled/accessible sources, not a Seerr status flag, and removes Upcoming Movies/Upcoming Series entirely. Hide watched uses known Plozz watched state. Apple TV shows the filter summary, initially All; mobile uses a funnel icon in the top toolbar. Filters and feed order are independent of Home hero discovery/filtering. Titles, artwork, source names and request availability are dynamic; opening a card follows ordinary authorized detail actions.",
+      "controls": [
+        {
+          "text": "Discover",
+          "source": "Sources/FeatureHomeCore/DiscoverBrowseView.swift"
+        },
+        {
+          "text": "All",
+          "source": "Sources/CoreUI/BrowseQueryControls.swift"
+        },
+        {
+          "text": "Available now",
+          "source": "Sources/CoreUI/DiscoverFilterMenu.swift"
+        },
+        {
+          "text": "Hide watched",
+          "source": "Sources/CoreUI/DiscoverFilterMenu.swift"
+        },
+        {
+          "text": "Clear Filters",
+          "source": "Sources/CoreUI/DiscoverFilterMenu.swift"
+        },
+        {
+          "text": "Trending",
+          "source": "Sources/CoreModels/DiscoverFeed.swift"
+        },
+        {
+          "text": "Popular Movies",
+          "source": "Sources/CoreModels/DiscoverFeed.swift"
+        },
+        {
+          "text": "Upcoming Movies",
+          "source": "Sources/CoreModels/DiscoverFeed.swift"
+        },
+        {
+          "text": "Popular Series",
+          "source": "Sources/CoreModels/DiscoverFeed.swift"
+        },
+        {
+          "text": "Upcoming Series",
+          "source": "Sources/CoreModels/DiscoverFeed.swift"
+        },
+        {
+          "text": "Try Again",
+          "source": "Sources/FeatureHomeCore/DiscoverBrowseView.swift"
+        },
+        {
+          "text": "No titles match these filters.",
+          "source": "Sources/FeatureHomeCore/DiscoverBrowseView.swift"
+        },
+        {
+          "text": "Clear Filters",
+          "source": "Sources/FeatureHomeCore/DiscoverBrowseView.swift"
+        },
+        {
+          "text": "No titles yet.",
+          "source": "Sources/FeatureHomeCore/DiscoverBrowseView.swift"
+        }
+      ],
+      "documents": [
+        {
+          "slug": "discover",
+          "anchor": "open-discover"
+        },
+        {
+          "slug": "discover",
+          "anchor": "find-something-to-watch"
+        },
+        {
+          "slug": "discover",
+          "anchor": "narrow-the-recommendations"
+        },
+        {
+          "slug": "discover",
+          "anchor": "if-a-row-will-not-load"
+        }
+      ]
+    },
+    "Sources/CoreUI/DiscoverFilterMenu.swift": {
+      "sources": [
+        "Sources/CoreUI/DiscoverFilterMenu.swift",
+        "Sources/CoreUI/BrowseQueryControls.swift",
+        "Sources/FeatureHomeCore/DiscoverBrowseView.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Shared menu mounted in DiscoverBrowseView's Apple TV header and mobile toolbar. The parent inventories All, Available now, Hide watched and conditional Clear Filters in menu order. Its summary and active-filter count are dynamic; mobile uses icon-only styling, not a separately titled Filter button."
+    },
+    "Sources/CoreUI/MediaRowPagination.swift": {
+      "sources": [
+        "Sources/CoreUI/MediaRowPagination.swift",
+        "Sources/CoreUI/MediaRowView.swift",
+        "Sources/FeatureHomeCore/DiscoverBrowseView.swift"
+      ],
+      "omitKind": "implementation",
+      "omitReason": "Noninteractive modifier loads another page when a visible horizontal rail approaches its trailing loaded edge. MediaRowView and the Discover destination supply the actual rows and recovery controls. It defines no screen, toggle, See all button or named Load more action."
+    },
+    "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift": {
+      "sources": [
+        "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift",
+        "Sources/FeatureHomeCore/EpisodeDownloadSelection.swift",
+        "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift",
+        "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
+        "Sources/AppShelliOS/PlozziOSDownloadsModel.swift",
+        "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+      ],
+      "platforms": [
+        "iPhone",
+        "iPad"
+      ],
+      "navigation": "Choose Download on movie/episode details, use Manage Seasons for a show/season batch, or Choose Versions on an eligible saved episode.",
+      "experience": "Review quality, selected-file count, known Original size and available device space, then select episodes and their nested version rows before Download. Episode circles include/exclude an episode; alternative rows let episodes select several versions, each saving a separate file. A movie permits one version. Cancel returns without enqueueing. Preparation errors offer Try Again/Cancel outside the sheet; enqueue errors inside it offer OK.",
+      "conditions": "Authorized active mobile profile and playable source files only. Ask Before Downloading defaults on. Disabling it bypasses presentation only for one item with one version; bulk or multiple options still require confirmation. Reduced qualities require support from every prepared item; custom quality appears only if saved. Size is available only for Original when every selected version has a valid known size; Available requires obtainable device capacity. A single item shows Versions where meaningful; batches group by dynamic season or Episodes. Row titles, numbered versions, source/server names, share-relative folders and technical facts are dynamic. Spoiler policy hides episode names and file paths when needed. One recommended version is initially selected per episode; same-provider episode alternatives require matching identity/episode ranges, not cross-server name matching. Download is disabled with no selection; submitting disables controls and interactive dismissal. Profile change or lost authorization closes the sheet and prevents enqueueing.",
+      "controls": [
+        {
+          "text": "Download",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
+        },
+        {
+          "text": "Quality",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
+        },
+        {
+          "text": "Original",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
+        },
+        {
+          "text": "1080p • 20 Mbps",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
+        },
+        {
+          "text": "720p • 4 Mbps",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
+        },
+        {
+          "text": "480p • 1.5 Mbps",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
+        },
+        {
+          "text": "Selected",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
+        },
+        {
+          "text": "Size",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
+        },
+        {
+          "text": "Available",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
+        },
+        {
+          "text": "Versions",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
+        },
+        {
+          "text": "Episodes",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
+        },
+        {
+          "text": "Episode",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
+        },
+        {
+          "text": "Not selected",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
+        },
+        {
+          "text": "Selected server",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
+        },
+        {
+          "text": "Recommended",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
+        },
+        {
+          "text": "Cancel",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
+        },
+        {
+          "text": "Download Failed",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
+        },
+        {
+          "text": "Try Again",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
+        },
+        {
+          "text": "OK",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
+        }
+      ],
+      "documents": [
+        {
+          "slug": "downloads",
+          "anchor": "save-a-video"
+        },
+        {
+          "slug": "downloads",
+          "anchor": "choose-episodes-and-versions"
+        },
+        {
+          "slug": "downloads",
+          "anchor": "choose-quality-and-networks"
+        }
+      ]
+    },
     "Sources/AppShelliOS/PlozziOSHeroKeyboardControls.swift": {
       "sources": [
         "Sources/AppShelliOS/PlozziOSHeroKeyboardControls.swift",
@@ -2586,6 +2854,8 @@
       "sources": [
         "Sources/ProviderIPTV/IPTVProvider.swift",
         "Sources/AppShell/MainTabView.swift",
+        "Sources/CoreModels/NavigationStyleSettingsStore.swift",
+        "Sources/FeatureHomeCore/DiscoverBrowseView.swift",
         "Sources/CoreModels/AllLibrariesBrowse.swift",
         "Sources/CoreModels/NavigationStyle.swift",
         "Sources/AppRuntime/HomeLiveTVRuntime.swift",
@@ -2638,8 +2908,8 @@
         "Apple TV"
       ],
       "navigation": "Enter browsing after selecting a Plozz profile; use the sidebar or top bar.",
-      "experience": "Open Home, Search, libraries, Watchlist, Live TV, Music, Settings, or profile switching.",
-      "conditions": "Apple TV. Destinations follow the active profile layout; Music requires accessible music, combined libraries require multiple eligible video libraries, and Live TV follows enabled sources.",
+      "experience": "Open Home, Search, libraries, Watchlist, Discover, Live TV, Music, Settings, or profile switching.",
+      "conditions": "Apple TV. Destination order follows the active profile's saved local layout; Music requires accessible music, combined libraries require multiple eligible video libraries, and Live TV follows enabled sources. Discover is excluded for Kids profiles; otherwise it is automatically shown with Seerr or hidden without it until an explicit Show/Hide choice overrides automatic visibility. Its shared destination owns feed/filter controls rather than adding them to navigation.",
       "controls": [
         {
           "text": "Movies",
@@ -2659,6 +2929,10 @@
         },
         {
           "text": "Watchlist",
+          "source": "Sources/AppShell/MainTabView.swift"
+        },
+        {
+          "text": "Discover",
           "source": "Sources/AppShell/MainTabView.swift"
         },
         {
@@ -2825,6 +3099,7 @@
     "Sources/AppShell/NavigationRailView.swift": {
       "sources": [
         "Sources/AppShell/NavigationRailView.swift",
+        "Sources/CoreModels/NavigationStyleSettingsStore.swift",
         "Sources/AppShell/NavigationRowFocusRequester.swift",
         "Sources/CoreUI/ArtworkEnvironment.swift",
         "Sources/CoreUI/FallbackAsyncImage.swift",
@@ -2838,7 +3113,7 @@
       ],
       "navigation": "On Apple TV, use the sidebar navigation chosen in Screens & Navigation.",
       "experience": "Choose visible shortcuts, libraries, settings, or another profile.",
-      "conditions": "Sidebar layouts only; dynamic server and library names follow the active profile. Hidden destinations do not become visible by navigating into the sidebar.",
+      "conditions": "Sidebar layouts only; dynamic server and library names and destination order follow the active profile's saved layout. Hidden destinations do not become visible by navigating into the sidebar. Discover follows the non-Kids discovery policy and Seerr-aware automatic visibility; explicit Show does not override Kids restrictions.",
       "controls": [
         {
           "text": "Offline",
@@ -2854,6 +3129,10 @@
         },
         {
           "text": "Watchlist",
+          "source": "Sources/AppShell/NavigationRailView.swift"
+        },
+        {
+          "text": "Discover",
           "source": "Sources/AppShell/NavigationRailView.swift"
         },
         {
@@ -4382,10 +4661,11 @@
     "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift": {
       "sources": [
         "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift",
-        "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
+        "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
+        "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Reusable PlozziOSDetailDownloadButton.swift is wired into Sources/AppShelliOS/PlozziOSItemDetailView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitReason": "Mobile detail-toolbar component is mounted by PlozziOSItemDetailView, which inventories its state-dependent download, pause/resume, saved-movie replacement and removal controls. A new copy opens PlozziOSDownloadSelectionSheet, whose own reader-facing record inventories preparation errors and confirmation. A completed episode instead offers removal confirmation and a Choose Versions context action to reopen selection. The completed-movie dialog retains Use Original/reduced-quality replacement choices; these are not the initial-download workflow."
     },
     "Sources/AppShelliOS/PlozziOSDetectedSetupView.swift": {
       "sources": [
@@ -5420,6 +5700,8 @@
         "Sources/CoreModels/MediaItem+Trailer.swift",
         "Sources/CoreModels/HeroCTA.swift",
         "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
+        "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift",
+        "Sources/FeatureHomeCore/EpisodeDownloadSelection.swift",
         "Sources/CoreUI/SeasonEpisodeActions.swift",
         "Sources/CoreModels/SeriesDownloadPresentation.swift",
         "Sources/CoreModels/MediaItemAction.swift",
@@ -5502,7 +5784,7 @@
       ],
       "navigation": "Open a movie, show, season, or episode from mobile browsing/search.",
       "experience": "Choose a version, play a file, open an imported title link in its destination app/browser, inspect episodes and extras, manage eligible file downloads, or request missing seasons. External title links bypass the player/resume dialog, do not download or automatically return watch progress, and show Couldn't Open Link on failure.",
-      "conditions": "iPhone/iPad. Play/download requires authorized available library files. Seerr requests require a matched title and request identity; status buttons, download quality, and season actions reflect provider and current state.",
+      "conditions": "iPhone/iPad. Play/download requires authorized available library files. New downloads and show/season batches use the separately inventoried download-selection sheet. Ask Before Downloading can skip only a single-file, single-item non-bulk review; episodes can choose multiple physical versions, movies one. Manage Seasons contains dynamic season/episode groups and selection remains within the authorized source. A completed episode's download button removes that copy after confirmation; holding it offers Choose Versions. Completed movies retain a replacement-quality dialog with Use Original/reduced copies or Remove Download. Seerr requests require a matched title and request identity; status buttons, download quality, and season actions reflect provider and current state.",
       "controls": [
         {
           "text": "Open Link",
@@ -5533,7 +5815,11 @@
           "source": "Sources/CoreModels/MediaItemAction.swift"
         },
         {
-          "text": "Download Original",
+          "text": "Use Original",
+          "source": "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift"
+        },
+        {
+          "text": "Choose Versions",
           "source": "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift"
         },
         {
@@ -5721,15 +6007,7 @@
           "source": "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
         },
         {
-          "text": "1080p • 20 Mbps",
-          "source": "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
-        },
-        {
-          "text": "720p • 4 Mbps",
-          "source": "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
-        },
-        {
-          "text": "480p • 1.5 Mbps",
+          "text": "Choose Versions",
           "source": "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
         },
         {
@@ -5789,10 +6067,6 @@
           "source": "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
         },
         {
-          "text": "Original",
-          "source": "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
-        },
-        {
           "text": "Paused",
           "source": "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
         },
@@ -5826,6 +6100,14 @@
         },
         {
           "text": "Load Season Status",
+          "source": "Sources/CoreUI/SeasonEpisodeActions.swift"
+        },
+        {
+          "text": "Checking episode availability…",
+          "source": "Sources/CoreUI/SeasonEpisodeActions.swift"
+        },
+        {
+          "text": "Library episodes",
           "source": "Sources/CoreUI/SeasonEpisodeActions.swift"
         },
         {
@@ -7801,6 +8083,9 @@
     "Sources/AppShelliOS/PlozziOSRootView.swift": {
       "sources": [
         "Sources/AppShelliOS/PlozziOSRootView.swift",
+        "Sources/AppShelliOS/PlozziOSDiscoverView.swift",
+        "Sources/CoreModels/NavigationStyleSettingsStore.swift",
+        "Sources/CoreModels/AllLibrariesBrowse.swift",
         "Sources/CoreModels/WatchlistBrowsePreferences.swift",
         "Sources/CoreModels/MediaProvider.swift",
         "Sources/AppRuntime/ExternalPlayerSupport.swift",
@@ -7895,19 +8180,11 @@
         "iPad"
       ],
       "navigation": "Launch Plozz on iPhone/iPad, finish required setup, then use its tabs or sidebar.",
-      "experience": "Open shown shortcuts, switch profiles, or connect media when Home is empty.",
-      "conditions": "Compact UIKit navigation puts excess shown shortcuts under More; it does not reveal hidden shortcuts. iPad can use regular-width navigation. Profile authorization applies before browsing. Watchlist shows sorting before filtering on mobile; its fields are Date Added, Release Date and Name only. Choosing a field resets its direction: Name starts ascending, dates descending. Clear Filters appears only with a movie/show filter; filtered-empty results also offer it. The no-account Home destination passes hasAccounts false to the shared empty state and supplies both Add Source and Set Up from Another Device. Connected empty Home instead shows Nothing to watch yet in its separately inventoried HomeView. After explicit IPTV setup/refresh, a shared guide notice can remain across navigation while the account is authorized. It is hidden behind another transient message. Dismiss hides only the notice; terminal notices also auto-dismiss after five seconds. Percentages describe the current stage, not total work. Profile/account authorization changes cancel and remove scoped work; this does not promise OS background execution.",
+      "experience": "Open shown shortcuts, including eligible Discover or All Libraries, switch profiles, or connect media when Home is empty.",
+      "conditions": "Compact UIKit navigation puts excess shown shortcuts under More; it does not reveal hidden shortcuts. iPad can use regular-width navigation. Destination order is saved per profile on this device. Profile authorization applies before browsing. Discover is absent for Kids; for other profiles Seerr automatically shows it unless explicitly hidden, while no Seerr connection automatically hides it unless explicitly shown. Its mobile wrapper mounts the separately inventoried shared DiscoverBrowseView. Watchlist shows sorting before filtering on mobile; its fields are Date Added, Release Date and Name only. Choosing a field resets its direction: Name starts ascending, dates descending. Clear Filters appears only with a movie/show filter; filtered-empty results also offer it. The no-account Home destination passes hasAccounts false to the shared empty state and supplies both Add Source and Set Up from Another Device. Connected empty Home instead shows Nothing to watch yet in its separately inventoried HomeView. After explicit IPTV setup/refresh, a shared guide notice can remain across navigation while the account is authorized. It is hidden behind another transient message. Dismiss hides only the notice; terminal notices also auto-dismiss after five seconds. Percentages describe the current stage, not total work. Profile/account authorization changes cancel and remove scoped work; this does not promise OS background execution.",
       "controls": [
         {
-          "text": "AirPlay",
-          "source": "Sources/AppShelliOS/PlozziOSLivePresentationControls.swift"
-        },
-        {
-          "text": "Settings",
-          "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
-        },
-        {
-          "text": "Open Settings",
+          "text": "Home",
           "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
         },
         {
@@ -7915,7 +8192,40 @@
           "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
         },
         {
+          "text": "Search",
+          "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
+        },
+        {
           "text": "Watchlist",
+          "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
+        },
+        {
+          "text": "Discover",
+          "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
+        },
+        {
+          "text": "Live TV",
+          "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
+        },
+        {
+          "text": "Libraries",
+          "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
+        },
+        {
+          "text": "All Libraries",
+          "source": "Sources/CoreModels/AllLibrariesBrowse.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
+        },
+        {
+          "text": "More",
+          "source": "Sources/AppShelliOS/PlozziOSRootView.swift",
+          "system": "uikit-more"
+        },
+        {
+          "text": "Open Settings",
           "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
         },
         {
@@ -7931,13 +8241,8 @@
           "source": "Sources/AppShelliOS/PlozziOSHomeView.swift"
         },
         {
-          "text": "Home",
-          "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
-        },
-        {
-          "text": "More",
-          "source": "Sources/AppShelliOS/PlozziOSRootView.swift",
-          "system": "uikit-more"
+          "text": "AirPlay",
+          "source": "Sources/AppShelliOS/PlozziOSLivePresentationControls.swift"
         },
         {
           "text": "External playback",
@@ -8596,6 +8901,9 @@
         "Sources/CoreUI/ProfileLockCopy.swift",
         "Sources/CoreModels/PlaybackVersionSelectionMode.swift",
         "Sources/CoreModels/PlaybackOrientation.swift",
+        "Sources/AppShelliOS/PlozziOSPlayerOrientation.swift",
+        "Sources/AppShelliOS/PlozziOSLandscapeMotion.swift",
+        "App/PlozziOS/Info.plist",
         "Sources/AppRuntime/LiveTVLibraryRuntimeView.swift",
         "Sources/AppShelliOS/PlozziOSLiveTVDestination.swift",
         "Sources/AppRuntime/LiveTVSourcesLibraryView.swift",
@@ -8676,7 +8984,7 @@
       ],
       "navigation": "Open Settings from iPhone/iPad navigation; choose a profile category or household section.",
       "experience": "Change playback, captions, Live TV, libraries, presentation, trackers, language, and authorized household services.",
-      "conditions": "iPhone/iPad compact and regular-width layouts. Category order is Playback, Subtitles, Live TV, Libraries, Appearance, Screens & Navigation, Trackers, Language. Everyone is absent for Kids; Libraries and Manage Profile are sealed by an enforced Parental PIN. Edit/Done reflects SwiftUI list-editing state. Internal developer actions require deliberate version-based activation and are not reader setup steps. On Kids profiles, Name & Avatar replaces the ordinary Libraries category; protected Libraries and Manage Profile move into Parental Controls. Appearance order is Theme, Cards, Artwork, Circadian Mode. Cards contains Labels, Watch indicators, Style, Display Size; Focus is Apple TV-only. Label presets replace overrides; Custom is a readout in the compact picker when no preset matches. Customize labels from Cards offers all nine Page choices; from Movie & show details it contains Episodes, Related titles and Extras without a Page picker. Home/Recommended use Default with On/Off/Mixed, followed by Overrides; Continue Watching and Home's Libraries use Use default/On/Off. Other pages use On/Off only. The color picker is hidden with Hidden watch indicators; Episode count style appears only with episode counts enabled. Settings search is available from the root; the Apple TV link precedes the profile categories; selecting a result focuses the control on TV or briefly highlights it on mobile and still checks parental authorization. It never enables a prerequisite automatically. After explicit IPTV setup/refresh, a shared guide notice can remain across navigation while the account is authorized. It is hidden behind another transient message. Dismiss hides only the notice; terminal notices also auto-dismiss after five seconds. Percentages describe the current stage, not total work. Profile/account authorization changes cancel and remove scoped work; this does not promise OS background execution.",
+      "conditions": "iPhone/iPad compact and regular-width layouts. Category order is Playback, Subtitles, Live TV, Libraries, Appearance, Screens & Navigation, Trackers, Language. Player orientation appears only on iPhone, in enum order: Follow device orientation, Portrait, Landscape auto, Landscape left, Landscape right. Runtime enforcement requires a full-screen compact-phone window. Follow device orientation respects system rotation lock; Landscape auto leases motion updates only for the active eligible player and can follow sideways direction despite rotation lock. Fixed landscape choices refer to the top of the phone; iPad uses system rotation with no picker. Everyone is absent for Kids; Libraries and Manage Profile are sealed by an enforced Parental PIN. Edit/Done reflects SwiftUI list-editing state. Internal developer actions require deliberate version-based activation and are not reader setup steps. On Kids profiles, Name & Avatar replaces the ordinary Libraries category; protected Libraries and Manage Profile move into Parental Controls. Appearance order is Theme, Cards, Artwork, Circadian Mode. Cards contains Labels, Watch indicators, Style, Display Size; Focus is Apple TV-only. Label presets replace overrides; Custom is a readout in the compact picker when no preset matches. Customize labels from Cards offers all nine Page choices; from Movie & show details it contains Episodes, Related titles and Extras without a Page picker. Home/Recommended use Default with On/Off/Mixed, followed by Overrides; Continue Watching and Home's Libraries use Use default/On/Off. Other pages use On/Off only. The color picker is hidden with Hidden watch indicators; Episode count style appears only with episode counts enabled. Settings search is available from the root; the Apple TV link precedes the profile categories; selecting a result focuses the control on TV or briefly highlights it on mobile and still checks parental authorization. It never enables a prerequisite automatically. After explicit IPTV setup/refresh, a shared guide notice can remain across navigation while the account is authorized. It is hidden behind another transient message. Dismiss hides only the notice; terminal notices also auto-dismiss after five seconds. Percentages describe the current stage, not total work. Profile/account authorization changes cancel and remove scoped work; this does not promise OS background execution.",
       "controls": [
         {
           "text": "Search settings",
@@ -9441,15 +9749,23 @@
           "source": "Sources/CoreModels/PlaybackVersionSelectionMode.swift"
         },
         {
-          "text": "Auto",
-          "source": "Sources/CoreModels/PlaybackOrientation.swift"
-        },
-        {
-          "text": "Landscape",
+          "text": "Follow device orientation",
           "source": "Sources/CoreModels/PlaybackOrientation.swift"
         },
         {
           "text": "Portrait",
+          "source": "Sources/CoreModels/PlaybackOrientation.swift"
+        },
+        {
+          "text": "Landscape auto",
+          "source": "Sources/CoreModels/PlaybackOrientation.swift"
+        },
+        {
+          "text": "Landscape left",
+          "source": "Sources/CoreModels/PlaybackOrientation.swift"
+        },
+        {
+          "text": "Landscape right",
           "source": "Sources/CoreModels/PlaybackOrientation.swift"
         },
         {
@@ -18410,7 +18726,7 @@
         "iPhone",
         "iPad"
       ],
-      "navigation": "Open Manage channels from the Live TV guide.",
+      "navigation": "From Live TV, choose Manage channels in the Apple TV sidebar. On iPhone/iPad, use More > Filters > Manage IPTV channels.",
       "experience": "Show/hide categories, select country/language filters, restore individual channels, or reset regional/category rules.",
       "conditions": "Active profile only. Country OR language tags match; playlists must supply tags. Individual Show and category Show override regional filtering. Reset does not undo individual hiding or scan exclusions.",
       "controls": [
@@ -19266,9 +19582,9 @@
         "iPhone",
         "iPad"
       ],
-      "navigation": "Choose Search in Live TV and switch between Channels and Programs.",
+      "navigation": "Choose Search in Live TV and enter a name. Apple TV offers Channels/Programs scopes; mobile shows categories, channels and programs together. Open a listing for Program details.",
       "experience": "Find a station or listing, favorite a channel, and tune its current broadcast.",
-      "conditions": "Only enabled/allowed sources and supplied guide windows are searched. Past/future program selection tunes live, not playback from the listed program start. Program details offers Watch channel and a state-dependent Add to Favorites/Remove from Favorites only when the caller provides that favorite action. Library-title details require an available library item and navigation callback.",
+      "conditions": "Only enabled/allowed sources and supplied guide windows are searched. Search requests current/future retained listings and excludes programs whose end is no longer after now; a 28-day query does not create missing listings. The shared details card can also show Earlier for a past listing opened from the guide, not from program-search results. Any Watch channel action tunes live, not playback from the listed program start. Program details offers state-dependent Add to Favorites/Remove from Favorites only when the caller provides that favorite action. Library-title details require an available library item and navigation callback.",
       "controls": [
         {
           "text": "Programs",
@@ -19337,7 +19653,7 @@
         "Sources/FeatureLiveTV/LiveTVPrototypeView.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Reusable LiveTVPrototypeCategories.swift is wired into Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitReason": "LiveTVPrototypeView mounts the category directory on narrow mobile layouts and reuses category tiles in mobile search. The parent inventories Categories and All channels; actual group names and channel counts are dynamic. Choosing a tile opens that category's guide rather than another settings page."
     },
     "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift": {
       "sources": [
@@ -19347,7 +19663,7 @@
         "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Reusable LiveTVPrototypeControls.swift is wired into Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureLiveTV/LiveTVSourcesView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitReason": "Shared production guide toolbar and modal-content builders are mounted by LiveTVPrototypeView, whose record inventories their controls and conditional mobile branches. The mobile app-defined More menu is distinct from UIKit tab overflow. More > Filters mounts the filter form; Manage IPTV channels opens LiveTVChannelOrganizationView, whose own reader record inventories its nested visibility editors. Source-management content routes to LiveTVSourcesView rather than treating its internal fallback form as a new supported connection workflow."
     },
     "Sources/FeatureLiveTV/LiveTVPrototypeNativeSearch.swift": {
       "sources": [
@@ -19379,7 +19695,7 @@
         "Sources/FeatureLiveTV/LiveTVPrototypeNativeSearch.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Reusable LiveTVPrototypeSearch.swift is wired into Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift, Sources/FeatureLiveTV/LiveTVPrototypeView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitReason": "LiveTVPrototypeView mounts this native search presenter on mobile and the file defines the TV-only Channels/Programs scope type. The parent inventories Search, the app-defined Close and conditional Clear search accessibility labels, Categories and the platform-specific search choices. Mobile disables UIKit's automatic Cancel button and independently clears the query without dismissing search; its results are combined rather than using the TV scope picker."
     },
     "Sources/FeatureLiveTV/LiveTVPrototypeSidebar.swift": {
       "sources": [
@@ -19466,11 +19782,39 @@
         "iPad"
       ],
       "navigation": "Open Live TV from navigation or Home, after enabling an available source.",
-      "experience": "Browse the production channel guide, search channels/programs, and tune a channel.",
-      "conditions": "Despite its filename, this is the wired production guide on all platforms. Source use, standalone-playlist parental approvals, provider limits, region/category filtering and network policy determine visible/playable channels. Recently watched requires its preference enabled and visible recent entries; Favorites requires visible favorites. Channels includes all visible channels, including entries repeated in those shortcut sections. Their headings come from LiveTVPrototypeStyle through PrototypeGuideSectionLabel.",
+      "experience": "Browse categories and the production channel guide, search channels/programs, manage source/filter choices, and tune a channel.",
+      "conditions": "Despite its filename, this is the wired production guide on all platforms. Source use, standalone-playlist parental approvals, provider limits, region/category filtering and network policy determine visible/playable channels. Mobile narrow layouts switch between a category directory and guide; wider layouts keep the sidebar. The Source menu offers All, enabled dynamic source names and Add Source; the narrow guide instead shows a Categories back action and Category menu. Mobile More offers Guide only from the directory, Filters, Multiviews only when appropriate without a sidebar/directory or selection, TV Sources and Settings only when a callback exists. More > Filters > Manage IPTV channels opens channel organization. Native mobile Search replaces the toolbar, with app-defined Close and conditional Clear search rather than a Cancel caption; results combine categories/channels/programs. Apple TV alone shows Channels/Programs search scopes. Recently watched requires its preference enabled and visible recent entries; Favorites requires visible favorites. Channels includes all visible channels, including entries repeated in those shortcut sections. Their headings come from LiveTVPrototypeStyle through PrototypeGuideSectionLabel.",
       "controls": [
         {
+          "text": "Source",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
+        {
+          "text": "All",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
+        {
+          "text": "Add Source",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
+        },
+        {
           "text": "Search",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
+        {
+          "text": "More",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
+        {
+          "text": "TV Sources",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
+        {
+          "text": "All channels",
           "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
         },
         {
@@ -19480,10 +19824,6 @@
         {
           "text": "Remove from Favorites",
           "source": "Sources/FeatureLiveTV/LiveTVPrototypeBrowse.swift"
-        },
-        {
-          "text": "Live TV",
-          "source": "Sources/FeatureLiveTV/LiveTVPrototypeView.swift"
         },
         {
           "text": "Recently watched",
@@ -19906,11 +20246,19 @@
           "source": "Sources/FeatureLiveTV/LiveTVPrototypePreview.swift"
         },
         {
-          "text": "Cancel",
+          "text": "Close",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeSearch.swift"
+        },
+        {
+          "text": "Clear search",
           "source": "Sources/FeatureLiveTV/LiveTVPrototypeSearch.swift"
         },
         {
           "text": "Categories",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeSearch.swift"
+        },
+        {
+          "text": "Channels",
           "source": "Sources/FeatureLiveTV/LiveTVPrototypeSearch.swift"
         },
         {
@@ -26401,6 +26749,7 @@
     "Sources/FeatureSettings/NavigationLibrariesDetailView.swift": {
       "sources": [
         "Sources/FeatureSettings/NavigationLibrariesDetailView.swift",
+        "Sources/CoreModels/NavigationStyleSettingsStore.swift",
         "Sources/CoreModels/AllLibrariesBrowse.swift",
         "Sources/CoreModels/NavigationStyle.swift",
         "Sources/CoreUI/LiftableReorderList.swift",
@@ -26416,7 +26765,7 @@
       ],
       "navigation": "Open Settings > Screens & Navigation > App navigation > Hide or Reorder Navigation.",
       "experience": "Show, hide and reorder eligible main shortcuts/libraries, or reset navigation.",
-      "conditions": "Per profile on this device. Music remains TV-only, All Libraries needs multiple eligible video libraries. Hidden shortcuts do not appear in mobile More; mobile defaults show Home, Downloads and Search. This editor arranges destinations; the navigation-style picker is on its parent App navigation page, not here. Row order is saved by the viewer, with hidden rows below Hidden. The last visible destination cannot be hidden; sidebars keep Settings visible. Mobile supports dragging; both platforms offer long-press row actions.",
+      "conditions": "Per profile on this device. Music remains TV-only, All Libraries needs multiple eligible video libraries. Hidden shortcuts do not appear in mobile More; mobile defaults show Home, Downloads and Search. Discover is excluded from available rows for Kids; otherwise Seerr-aware automatic visibility shows it with a connection and hides it without one until explicit Show/Hide overrides that decision. This editor arranges destinations; the navigation-style picker is on its parent App navigation page, not here. Row order is saved by the viewer, with hidden rows below Hidden. The last visible destination cannot be hidden; sidebars keep Settings visible. Mobile supports dragging; both platforms offer long-press row actions.",
       "controls": [
         {
           "text": "Home",
@@ -26428,6 +26777,10 @@
         },
         {
           "text": "Watchlist",
+          "source": "Sources/FeatureSettings/NavigationLibrariesDetailView.swift"
+        },
+        {
+          "text": "Discover",
           "source": "Sources/FeatureSettings/NavigationLibrariesDetailView.swift"
         },
         {

@@ -1,8 +1,8 @@
 # Find and organize media
 
-Start in a library to browse what your connected account can access. **Search** finds movies, shows, and episodes across your available sources.
+Browse the libraries your connected account can access. **Search** finds movies, shows, and episodes across your available sources.
 
-With [Seerr](/media-requests/), **Not in Your Library** results are requestable, not playable; request permissions apply.
+With [Seerr](/media-requests/), **Not in Your Library** results are requestable, not playable; permissions apply. Use [Discover](/discover/) for popular and upcoming titles.
 
 ## Browse a library
 

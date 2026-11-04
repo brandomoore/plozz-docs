@@ -5,7 +5,7 @@ Save videos on iPhone/iPad for offline viewing. Apple TV has no offline download
 ## Save a video
 
 1. Open a movie or episode's details, select the server/version if offered, then choose **Download**.
-2. If prompted, choose **Download Original** or a smaller copy.
+2. Review the selected files and **Quality** when prompted, then choose **Download**.
 3. Open **Downloads** and wait until your copy is ready to play.
 4. Play it from Downloads.
 
@@ -16,6 +16,16 @@ Plozz prefers a usable matching download even if you select another server/versi
 > [!TIP]
 > Before travelling, test the completed copy offline, including audio and subtitles.
 
+## Choose episodes and versions
+
+For a show or season, review the episode list before confirming. Use an episode's selection circle to include or exclude it; open its row to change the selected versions.
+
+Plozz initially selects one recommended version per episode. You can select more than one: each downloads a separate file and uses more storage. A movie allows only one version. On a saved episode's details, hold the download button for **Choose Versions** to add another copy.
+
+Check **Selected** and free device space under **Available**. **Size** appears for Original when all selected file sizes are known. Smaller quality choices appear only when all listed items support them.
+
+If preparation fails, check the source connection, then choose **Try Again**. **Cancel** returns without starting a download.
+
 ## Choose quality and networks
 
 Open **Downloads > Download Settings**, or **Settings > Downloads**, for this profile.
@@ -24,9 +34,13 @@ Start with **Allow Cellular Downloads** and **Pause in Low Data Mode**. Cellular
 
 Next, **Download Speed > Limit** caps downloads, not playback. Reduced-quality Jellyfin/Emby downloads cannot be capped: choose Original or set **Limit** to **Unlimited**. With a cap, background downloads pause by default; **Continue at Full Speed** temporarily removes the cap.
 
-Then choose **Default Quality**, independently of streaming quality. **Original** saves the existing file; smaller copies require provider support and preparation. Network shares support **Original only**.
+Then choose **Default Quality**, independently of streaming quality. **Original** saves the existing file; smaller copies require provider support and preparation. Network shares support **Original** only.
+
+Leave **Ask Before Downloading** on to review every download. Turning it off skips confirmation only for a single item with one version; batches and multiple-version choices still ask.
 
 Reduced Plex, Jellyfin, and Emby copies use your preferred audio language. Plex and Silo reduced copies keep one audio track. **Include All Audio Tracks** cannot override that limit: turn it off or choose Original. Plex reduced copies keep at most one text subtitle; external sidecars remain on the server. Silo downloads require server permission.
+
+**Include Text Subtitles When Supported** saves supported text tracks with the video; check the completed copy offline.
 
 Under **Notifications**, set completion/failure switches and allow system notifications. Notices can summarize a batch. Tapping a completion notice opens the title or batch without autoplaying; unlock the owning profile if asked.
 

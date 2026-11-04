@@ -2,6 +2,12 @@
 
 Organize [Live TV](/live-tv/) channels and fix their listings.
 
+## Browse categories on iPhone and iPad
+
+Choose a category or **All channels** to open its guide. On a narrow layout, use the **Category** menu to switch groups, or the **Categories** back button to return to the directory. Wider layouts keep categories in a sidebar.
+
+In the directory or a sidebar layout, the **Source** menu selects an enabled source or **All**. From the directory, **More > Guide** opens the guide for all channels. Use **More > Filters** to narrow results.
+
 ## Wait for an IPTV guide
 
 Your IPTV guide loads while you browse. Dismissing its progress notice does not cancel it; percentages describe individual stages. Keep Plozz open.
@@ -12,13 +18,13 @@ Your IPTV guide loads while you browse. Dismissing its progress notice does not 
 
 Press and hold a channel for **Add to Favorites**, **Remove from Favorites**, or **Hide channel**.
 
-Open **Manage channels** in Live TV, then:
+On Apple TV, open **Manage channels** in Live TV's sidebar. On iPhone/iPad, open **More > Filters > Manage IPTV channels**, then:
 
 - In **Categories**, **Show** overrides regional filtering; **Hide** hides that group; **Automatic** follows your regional choices.
 - In **Countries and languages**, enable **Filter IPTV by country or language** and select the tags you want. A country OR language match is enough. Tags come from the playlist; Plozz does not guess from names.
 - In **Hidden channels**, use **Show channel** to make an individual exception. **Reset category and region visibility** keeps individually hidden channels and scan exclusions.
 
-Regional filtering can hide untagged channels. Check **Favorites only**, **With guide listings**, and the selected source too. Unavailable favorites stay saved.
+Regional filtering can hide untagged channels. Check **Favorites only**, **Channels with a guide**, and the selected source too. Unavailable favorites stay saved.
 
 ## Correct a channel's guide
 

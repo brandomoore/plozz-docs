@@ -1,6 +1,24 @@
 # Home and navigation
 
-Keep favorite titles and shortcuts within reach. Choose your Plozz profile before changing these settings.
+Keep favorite titles and shortcuts within reach. Choose your profile before changing settings.
+
+## Choose the hero
+
+Open **Settings > Screens & Navigation > Home > Hero**. The hero is the featured carousel above your rows, for browsing a few titles.
+
+On Apple TV, choose **On** or **Off**; on mobile, use **Show hero**. Hiding it keeps your saved rows and row style.
+
+With the hero on, choose sizes, then **Content sources** on Apple TV or **Hero content sources** on mobile. Select **Continue Watching**, **Recently Added**, **Watchlist**, **Random from Library**, **Collections**, or **Discovery**. Set **Items to show** and **Advance automatically**, then open **Ratings** or **Trailers** for scores and [server-trailer previews](/library/#watch-a-trailer).
+
+Enable Discovery to open **Discovery providers**. Recommendations can include titles outside your libraries; Seerr is needed only to request them. New profiles follow the Seerr connection until you explicitly toggle Discovery. Kids profiles exclude Discovery. [Discover](/discover/) is a separate destination with its own filters.
+
+For Continue Watching cards, see [Spoiler protection](/spoiler-protection/#change-continue-watching-cards).
+
+## Choose row style on Apple TV
+
+Below Hero, open **Row style**. **Showcase** fills the background with the focused title; **Classic** keeps conventional rows. Either works with the hero on or off.
+
+Showcase has separate logo/text sizes; its ratings controls also affect the hero. With the hero off, **Discovery row** can add recommendations; open **Discovery providers** beneath it to choose services. Kids profiles have no Discovery row. This choice does not change library pages.
 
 ## Choose Home rows
 
@@ -28,30 +46,12 @@ Continue Watching has no age or count limit, including merged Next Up titles. Se
 
 Under **Rows > Continue Watching**, **Include Next Up** defaults on. Turn it off to arrange separate Next Up rows. Removing Continue Watching suspends merging.
 
-## Choose the hero
-
-Open **Settings > Screens & Navigation > Home > Hero**. The hero is the featured carousel above your rows, useful for browsing a small selection of titles.
-
-On Apple TV, choose **On** or **Off**; on mobile, use **Show hero**. Hiding it keeps your saved rows and row style.
-
-With the hero on, choose sizes, then **Content sources** on Apple TV or **Hero content sources** on mobile. Select **Continue Watching**, **Recently Added**, **Watchlist**, **Random from Library**, **Collections**, or **Discovery**. Set **Items to show** and **Advance automatically**, then open **Ratings** or **Trailers** for scores and [server-trailer previews](/library/#watch-a-trailer).
-
-Enable Discovery to open **Discovery providers**. Recommendations can include titles outside your libraries; Seerr is needed only to request them. New profiles follow the Seerr connection until you explicitly toggle Discovery. Kids profiles exclude Discovery.
-
-For Continue Watching cards/actions, see [Spoiler protection](/spoiler-protection/#change-continue-watching-cards).
-
-## Choose row style on Apple TV
-
-Below Hero, open **Row style**. **Showcase** fills the background with the focused title; **Classic** keeps conventional rows. Either works with the hero on or off.
-
-Showcase has separate logo/text sizes; its ratings controls also affect the hero. With the hero off, **Discovery row** can add recommendations; open **Discovery providers** beneath it to choose services. Kids profiles have no Discovery row. This choice does not change library pages.
-
 ## Hide watched Home suggestions
 
 Open **Settings > Screens & Navigation > Home > Filtering**. Under **Hide watched content**, choose independently:
 
 - **Recently Added**: hides completed titles from Home's Recently Added rows. It defaults off. In-progress videos and shows with unwatched episodes remain eligible.
-- **Hero & discovery**: excludes previously watched titles from eligible hero and Discovery suggestions. It defaults on.
+- **Hero & discovery**: excludes watched titles from Home's hero and Discovery suggestions. It defaults on.
 
 These filters do not change history, restrict access, filter library Browse, or clear Continue Watching. Recently Added previews check a limited window; a short row does not prove there are no older unwatched titles. Turn its filter off to compare.
 
@@ -71,7 +71,7 @@ Under **Hide or Reorder Navigation**, hold to hide/show/move; mobile uses draggi
 
 Settings remains visible in Apple TV's sidebars. Top Bar lets you move or hide it; the profile picker still offers **Settings**.
 
-On iPhone/iPad, Home, Downloads, and Search start visible when available. Libraries and other destinations, including eligible **All Libraries**, start under **Hidden**: hold and choose **Show**. Compact layouts put excess destinations under **More**; More does not reveal shortcuts still hidden. Use the profile button if Settings has no tab.
+On iPhone/iPad, Home, Downloads, and Search start visible when available. Libraries and eligible **All Libraries** start under **Hidden**: hold and choose **Show**. Discover can appear automatically with Seerr. Compact layouts put excess destinations under **More**; More does not reveal hidden shortcuts. Use the profile button if Settings has no tab.
 
 Set navigation separately for each profile on each device. Home preferences can [sync](/profiles-and-sync/); the main shortcut arrangement does not.
 
