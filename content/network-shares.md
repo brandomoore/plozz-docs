@@ -33,6 +33,14 @@ Shares do not offer server-based streaming-quality controls; [offline downloads]
 
 For NFO sidecars and local artwork, see [Metadata and ratings](/metadata-and-ratings/#use-local-metadata-for-network-shares).
 
+## Keep your place
+
+Plozz saves share progress and watched status for this profile on this device. They survive reopening the app, but iCloud Sync does not copy this history to another device.
+
+For each share, Plozz keeps at most 2,000 recent history entries per profile, sometimes fewer to fit its storage limit. As you watch more titles, older resume positions and watched marks can be removed.
+
+**Remove from Continue Watching** hides a share title without losing your place. Playing it again can return it to the row. With [cross-server history](/profiles-and-sync/#keep-watch-history-separate) enabled, the action can also affect matching copies.
+
 ## Open links to streaming services
 
 Keep shortcuts to streaming-service titles alongside your own videos using `.strmlnk` files. These small text files open the destination outside Plozz instead of playing video in Plozz.

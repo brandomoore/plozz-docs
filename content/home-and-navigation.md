@@ -1,36 +1,40 @@
 # Home and navigation
 
-Keep favorite titles and shortcuts within reach. Choose your profile before changing settings.
+Keep your favorite rows and shortcuts within reach. These choices belong to your active profile.
 
 ## Choose the hero
 
-Open **Settings > Screens & Navigation > Home > Hero**. The hero is the featured carousel above your rows, for browsing a few titles.
+Open **Settings > Screens & Navigation > Home > Hero** for the featured carousel above your rows.
 
 On Apple TV, choose **On** or **Off**; on mobile, use **Show hero**. Hiding it keeps your saved rows and row style.
 
-With the hero on, choose sizes, then **Content sources** on Apple TV or **Hero content sources** on mobile. Select **Continue Watching**, **Recently Added**, **Watchlist**, **Random from Library**, **Collections**, or **Discovery**. Set **Items to show** and **Advance automatically**, then open **Ratings** or **Trailers** for scores and [server-trailer previews](/library/#watch-a-trailer).
+With the hero on, choose sizes, then **Content sources** on Apple TV or **Hero content sources** on mobile. Select **Continue Watching**, **Recently Added**, **Watchlist**, **Random from Library**, **Collections**, or **Discovery**. Set **Items to show** and **Advance automatically**; **Ratings** and **Trailers** control scores and [server-trailer previews](/library/#watch-a-trailer).
 
-Enable Discovery to open **Discovery providers**. Recommendations can include titles outside your libraries; Seerr is needed only to request them. New profiles follow the Seerr connection until you explicitly toggle Discovery. Kids profiles exclude Discovery. [Discover](/discover/) is a separate destination with its own filters.
-
-For Continue Watching cards, see [Spoiler protection](/spoiler-protection/#change-continue-watching-cards).
+Enable Discovery to choose **Discovery providers**. Suggestions can include titles outside your libraries; only requests need Seerr. New profiles follow the Seerr connection until you choose otherwise. Kids profiles exclude Discovery. [Discover](/discover/) has separate filters.
 
 ## Choose row style on Apple TV
 
-Below Hero, open **Row style**. **Showcase** fills the background with the focused title; **Classic** keeps conventional rows. Either works with the hero on or off.
+Open **Row style** below Hero. **Showcase** fills the background with the focused title; **Classic** keeps separate rows. Either works with or without the hero.
 
-Showcase has separate logo/text sizes; its ratings controls also affect the hero. With the hero off, **Discovery row** can add recommendations; open **Discovery providers** beneath it to choose services. Kids profiles have no Discovery row. This choice does not change library pages.
+Showcase has separate logo/text sizes but shares hero ratings controls. With the hero off, enable **Discovery row** and choose **Discovery providers**. Kids profiles cannot use this row.
 
 ## Choose Home rows
 
-To explore more, use a row's **See all** card on Apple TV or its heading chevron on mobile. See [Browse more from Home](/browse-home-rows/).
+Open [larger row grids](/browse-home-rows/) with **See all** on Apple TV or a heading chevron on mobile.
 
 Open **Settings > Screens & Navigation > Home > Rows**.
 
-Choose **Match server** to follow your servers' arrangements, or **Combined rows** to bring libraries together. Either replaces your custom arrangement after confirmation without editing your servers. Common rows can combine across servers; others stay separate. Plex supplies promoted rows, not another client's pinned libraries.
+Choose **Match server** to follow server arrangements, or **Combined rows** to bring libraries together. Confirmation replaces your custom arrangement, not server settings. Common rows can combine; others stay separate. Plex supplies promoted rows, not another client's pinned libraries.
 
-Use **Add row**, or open a row and choose **Remove from Home**. Choose **Edit**, reorder, then **Done**; holding a row also offers **Reorder**. Mix combined, library, and server rows. Editing saves **Custom** instead of following server order.
+Use **Add row**, or open a row and choose **Remove from Home**. Choose **Edit**, reorder, then **Done**; holding a row also offers **Reorder**. Mix combined, library, and server rows. Changes switch the arrangement to **Custom**.
 
-Removing a row hides it from Home without restricting access to its titles. Unavailable rows stay saved: open **Details**, check the source and server user, then choose **Retry**. **No titles to show** means empty results, not a connection error. **Section unavailable in the latest refresh** can mean an empty or changed server row.
+Removing a row does not restrict access to its titles. Unavailable rows stay saved: open **Details**, check the source and server user, then **Retry**. **Section unavailable in the latest refresh** can mean an empty or changed server row.
+
+## Clear an empty-row message
+
+In Apple TV's **Classic** Home and mobile Home, **No titles to show** means nothing matched your Home settings.
+
+Choose **Dismiss** to hide the message, not future titles. **Customize Home** opens Home settings. To restore the message, open **Settings > Screens & Navigation > Home > Rows**, select the row, then **Show empty message**. Showcase does not display empty messages.
 
 ## Add a collection section
 
@@ -38,22 +42,26 @@ Removing a row hides it from Home without restricting access to its titles. Unav
 2. Select **Posters**, **Landscape**, or **Featured**.
 3. Optionally enter a **Row name**, then **Add to Home**.
 
-Reopen to change **Content** or the name, then **Save changes**. Sections remain tied to their server user; changing users grants no access.
+Reopen to change **Content** or the name, then **Save changes**. The collection still needs access through its original server user.
 
 ## Keep older Continue Watching titles
 
-Continue Watching has no age or count limit, including merged Next Up titles. Separate Next Up rows preview up to 20; an eligible [row shortcut](/browse-home-rows/) can show more. Disabling a library for browsing does not hide its account-wide history. Titles still depend on the source, watched state, dismissals, enabled servers, and server-user permissions.
+Continue Watching does not trim available titles by age or card count, including merged Next Up. It still depends on what each source remembers; [share history has a storage limit](/network-shares/#keep-your-place). Watched status, dismissals, enabled servers, and server-user access also matter. Disabling library browsing does not hide account-wide history.
 
-Under **Rows > Continue Watching**, **Include Next Up** defaults on. Turn it off to arrange separate Next Up rows. Removing Continue Watching suspends merging.
+Separate Next Up rows preview up to 20; an eligible [row shortcut](/browse-home-rows/) can show more.
+
+A brief play can save your place without adding a card. Started videos need one minute of progress. For videos under 20 minutes, it is 5% of their length, with a five-second minimum. Trailers stay out.
+
+Under **Rows > Continue Watching**, **Include Next Up** defaults on. Turn it off for separate Next Up rows. Removing Continue Watching suspends merging; **Continue Watching settings** remains available.
 
 ## Hide watched Home suggestions
 
 Open **Settings > Screens & Navigation > Home > Filtering**. Under **Hide watched content**, choose independently:
 
-- **Recently Added**: hides completed titles from Home's Recently Added rows. It defaults off. In-progress videos and shows with unwatched episodes remain eligible.
-- **Hero & discovery**: excludes watched titles from Home's hero and Discovery suggestions. It defaults on.
+- **Recently Added**: hides completed titles. It defaults off; in-progress videos and shows with unwatched episodes remain.
+- **Hero & discovery**: hides watched hero and Discovery suggestions. It defaults on.
 
-These filters do not change history, restrict access, filter library Browse, or clear Continue Watching. Recently Added previews check a limited window; a short row does not prove there are no older unwatched titles. Turn its filter off to compare.
+These affect Home suggestions, not history, access, library Browse, or Continue Watching. Recently Added checks a limited window; turn its filter off to compare if the row seems short.
 
 ## Arrange shortcuts and details
 
@@ -65,16 +73,16 @@ Open **Settings > Screens & Navigation > App navigation**. On Apple TV, choose a
 | **Sidebar** | The native sidebar opens from the top left. |
 | **Top Bar** | Destinations scroll across the top. |
 
-Leave Settings to see the new layout. All three offer library shortcuts and [All Libraries](/combined-libraries/) when eligible, preserving your arrangement.
+Leave Settings to see the layout. All support library shortcuts and [All Libraries](/combined-libraries/).
 
-Under **Hide or Reorder Navigation**, hold to hide/show/move; mobile uses dragging to reorder. Unused Home, Search, or Watchlist shortcuts can hide automatically; **Show** retains one. **Reset Navigation** restores shortcut order/visibility, not library tabs or access.
+Use **Hide or Reorder Navigation** to show, hide, or move shortcuts; drag to reorder on mobile. Use **Show** to keep Home, Search, or Watchlist visible. **Reset Navigation** restores shortcuts, not library tabs or access.
 
-Settings remains visible in Apple TV's sidebars. Top Bar lets you move or hide it; the profile picker still offers **Settings**.
+Apple TV sidebars always retain **Settings**; if hidden in Top Bar, use the profile picker.
 
-On iPhone/iPad, Home, Downloads, and Search start visible when available. Libraries and eligible **All Libraries** start under **Hidden**: hold and choose **Show**. Discover can appear automatically with Seerr. Compact layouts put excess destinations under **More**; More does not reveal hidden shortcuts. Use the profile button if Settings has no tab.
+On mobile, available Home, Downloads, and Search shortcuts start shown. Libraries and **All Libraries** start **Hidden**: hold and choose **Show**. Seerr can reveal Discover. Compact **More** holds overflow, not hidden shortcuts. The profile button opens Settings without a tab.
 
-Set navigation separately for each profile on each device. Home preferences can [sync](/profiles-and-sync/); the main shortcut arrangement does not.
+Navigation stays local to each profile on each device; Home preferences can [sync](/profiles-and-sync/).
 
 Under **Screens & Navigation > Movie & show details**, choose artwork, trailers, or [theme music and its volume preview](/audio/#control-detail-page-music) independently of Home. Review-score and age-recommendation controls are here.
 
-See [library tabs and rows](/customize-libraries/) and [appearance sizing](/appearance/).
+See [library tabs and rows](/customize-libraries/), [appearance sizing](/appearance/), and [Continue Watching artwork](/spoiler-protection/#change-continue-watching-cards).

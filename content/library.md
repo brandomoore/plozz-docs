@@ -13,13 +13,13 @@ With [Seerr](/media-requests/), **Not in Your Library** results are requestable,
 
 Apple TV's name-sorted Browse can show an [A-Z rail](/combined-libraries/#jump-through-a-large-library); other sorts and collection-member lists do not.
 
-Some choices need **Preparing library filter…** before showing results. Wait, or choose **Cancel**; this does not change your library. If filter options fail, choose **Try Again**.
+Some choices show **Preparing library filter…** before the results are ready. Wait, or choose **Cancel**; neither changes your library. If filter options fail, choose **Couldn't load filter options. Try Again**.
 
 **Checking collections...** means results are incomplete. Choose **Try Again** after interruption; include **Details** when [reporting failures](/troubleshooting/#report-a-problem).
 
 Press and hold a card on Apple TV, or touch and hold on iPhone/iPad, for actions. **Go to Show**, **Go to Movie**, and **Go to Episode** open details; a share's **Browse Files** opens original folders.
 
-Detail pages include cast, related titles, and source-supplied **Extras**. Choose a copy with the server/version selector, when offered; Apple TV uses the header's **More actions**.
+Detail pages include cast and related titles. Choose a copy with the server/version selector, when offered; Apple TV uses the header's **More actions**.
 
 Upcoming dates and unaired placeholders are schedule information, not playable files or promised additions.
 
@@ -29,7 +29,15 @@ Network shares can hold [streaming-service shortcuts](/network-shares/#open-link
 
 On details, **Trailer** plays an accessible server-owned file in Plozz. These files also supply automatic Home/detail previews. **Watch on YouTube** opens an online link outside Plozz, independently of your external-player preference.
 
-Apple TV needs the YouTube app; iPhone/iPad can fall back to its website. For **Couldn't open YouTube**, check that app. YouTube controls video availability and restrictions. Missing trailer metadata can leave no button; a visible link does not guarantee playback.
+Apple TV needs the YouTube app; iPhone/iPad can fall back to its website. For **Couldn't open YouTube**, check that app. YouTube controls availability and restrictions. A trailer button appears only when a trailer is found; a visible link does not guarantee playback.
+
+## Watch extras
+
+For behind-the-scenes clips or other bonus videos, scroll to **Extras** on the title's details and select a video. If that row fails to load, use its **Try Again** button.
+
+Extras belong to the selected source: another copy may offer different videos. The row disappears when the source returns no extras. Reopen an extra to resume when its source supports it. Plex can keep recent extra progress for this profile and server user on this device; older positions can be dropped as that local history fills.
+
+Watching an extra or trailer does not mark the main movie or episode watched, copy progress to matching titles on other servers, or send a watch to connected trackers. Trailers never appear in Continue Watching.
 
 ## Save titles and manage history
 

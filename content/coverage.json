@@ -113,6 +113,10 @@
         {
           "slug": "home-and-navigation",
           "anchor": "keep-older-continue-watching-titles"
+        },
+        {
+          "slug": "network-shares",
+          "anchor": "keep-your-place"
         }
       ],
       "sources": [
@@ -121,9 +125,11 @@
         "Sources/FeatureHomeCore/HomeViewModel.swift",
         "Sources/CoreModels/HomeLibraryVisibility.swift",
         "Sources/FeatureSettings/ContinueWatchingNextUpControl.swift",
-        "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        "Sources/FeatureSettings/HomeRowsSettingsView.swift",
+        "Sources/CoreNetworking/LocalMediaWatchStore.swift",
+        "Sources/ProviderShare/ShareProvider.swift"
       ],
-      "answer": "Continue Watching, including merged Next Up titles, defaults to an unbounded provider feed with no age cutoff. Separate Next Up rows are previews of up to 20 titles, not the complete feed. Account-wide Continue Watching and server Next Up are queried independently of disabled library/catalogue discovery switches. Provider results, watched/dismissal state, account inclusion and server-user authorization still apply; hiding a library is not access control. Include Next Up defaults on in Screens & Navigation > Home > Rows > Continue Watching, folding source-supplied next episodes into Continue Watching and hiding separate editor rows. Disable it to arrange those separately; removing Continue Watching suspends merging. The Rows editor retains Continue Watching settings while the row is hidden."
+      "answer": "The Continue Watching row, including merged Next Up titles, does not impose an age or card-count cutoff on available history. This does not guarantee unlimited history retention: LocalMediaWatchStore keeps at most 2,000 newest records per profile/source store, fewer when needed to fit its payload budget. Old share resume positions and watched marks can therefore disappear as new history is saved. Provider queries and retained server history also determine available titles. ContinueWatchingPolicy.admits excludes trailers and invalid positions. Started videos need min(60, max(5, duration * 0.05)) seconds, or 60 seconds when duration is unknown; saved resume progress is independent. Zero-position episodes remain eligible as unstarted Next Up suggestions. Separate Next Up rows preview up to 20 titles, not the complete feed. Account-wide history queries ignore disabled library browsing switches, but watched/dismissal state, account inclusion and server-user authorization still apply. Include Next Up defaults on in Screens & Navigation > Home > Rows > Continue Watching; turn it off for separate rows. Removing Continue Watching suspends merging, while Continue Watching settings remains reachable in Rows."
     },
     "alphabet-navigation": {
       "documents": [
@@ -572,6 +578,14 @@
           "anchor": "watch-a-trailer"
         },
         {
+          "slug": "library",
+          "anchor": "watch-extras"
+        },
+        {
+          "slug": "network-shares",
+          "anchor": "keep-your-place"
+        },
+        {
           "slug": "customize-libraries",
           "anchor": "arrange-library-tabs"
         },
@@ -612,7 +626,7 @@
         "Sources/FeatureSearch/SearchView.swift",
         "Sources/FeatureHome/WatchlistBrowseView.swift",
         "Sources/CoreUI/WatchlistBrowseControls.swift",
-        "Sources/AppRuntime/UniversalWatchlistRuntime.swift",
+        "Sources/CoreNetworking/LocalMediaWatchStore.swift",
         "Sources/ProviderIPTV/IPTVProvider.swift",
         "Sources/AppRuntime/MediaItemActionCoordinator.swift",
         "Sources/FeatureHome/DetailHeroView.swift",
@@ -621,11 +635,11 @@
         "Sources/FeatureHomeCore/DiscoverBrowseView.swift",
         "Sources/FeatureHomeCore/DiscoverBrowseModel.swift",
         "Sources/AppRuntime/DiscoverRuntime.swift",
-        "Sources/AppRuntime/HeroDiscoveryRuntime.swift",
+        "Sources/AppRuntime/WatchMutationFactory.swift",
         "Sources/CoreUI/DiscoverFilterMenu.swift",
-        "Sources/CoreModels/DiscoverFeed.swift"
+        "Sources/CoreModels/MediaExtra.swift"
       ],
-      "summary": "Browse, filter, sort and search enabled libraries; All Libraries combines them on Apple TV, iPhone and iPad, with explicit mobile shortcut visibility explained in the combined-library capability. Only Apple TV exposes the name-sort letter rail. Genre/year intersect quick filters; preparation, interrupted collections and failed facets retain cancellation/retry paths. Eligible Home row previews open a row-specific grid, not an unrestricted library query: TV uses a trailing See all card and mobile a heading chevron. Combined Recently Added, collection members and server recommendations retain their actual feeds; filter/sort changes load the remaining feed before publishing results, with Retry on failure. Watchlist shortcuts open the dedicated page and its saved preferences instead. Dedicated Discover is a separate non-Kids destination with five ordered paged feeds, not Home's hero or its See all grids. Available now requires a currently validated playable copy in enabled accessible libraries and hides both upcoming feeds; Hide watched uses known completion history. Both filters default off, save per profile, and offer Clear Filters; row failures offer Try Again. Seerr can supply feeds but is not required for browsing, and requesting does not grant playback. Collections, playlists, extras, IPTV on-demand catalogues and source/version selection remain distinct from requests and schedule-only placeholders. Watchlist covers save/removal, filters, date/name sorting, profile ownership and connected-list effects; disabling sources does not erase explicit saves. History actions distinguish watched-state changes from Continue Watching dismissal/resume clearing and cross-server delivery. Library tabs and Recommended rows differ from Home/main shortcuts; Browse is the fallback, shares lack Recommended, and collection-cover shapes have independent library/row scopes. Server-owned trailers/previews play in Plozz; Watch on YouTube opens externally regardless of external-player preference, requiring the TV app or mobile app/web fallback without guaranteeing availability."
+      "summary": "Browse, filter, sort and search enabled libraries; All Libraries combines them on Apple TV, iPhone and iPad, with explicit mobile shortcut visibility explained in the combined-library capability. Only Apple TV exposes the name-sort letter rail. Genre/year intersect quick filters; preparation, interrupted collections and failed facets retain cancellation/retry paths, including the exact Couldn't load filter options. Try Again menu action. Eligible Home row previews open a row-specific grid, not an unrestricted library query: TV uses a trailing See all card and mobile a heading chevron. Combined Recently Added, collection members and server recommendations retain their actual feeds; filter/sort changes load the remaining feed before publishing results, with Retry on failure. Watchlist shortcuts open the dedicated page and its saved preferences instead. Dedicated Discover is a separate non-Kids destination with five ordered paged feeds, not Home's hero or its See all grids. Available now requires a currently validated playable copy in enabled accessible libraries and hides both upcoming feeds; Hide watched uses known completion history. Both filters default off, save per profile, and offer Clear Filters; row failures offer Try Again. Seerr can supply feeds but is not required for browsing, and requesting does not grant playback. Collections, playlists, extras, IPTV on-demand catalogues and source/version selection remain distinct from requests and schedule-only placeholders. Watchlist covers save/removal, filters, date/name sorting, profile ownership and connected-list effects; disabling sources does not erase explicit saves. History actions distinguish watched-state changes from Continue Watching dismissal/resume clearing and cross-server delivery. Library tabs and Recommended rows differ from Home/main shortcuts; Browse is the fallback, shares lack Recommended, and collection-cover shapes have independent library/row scopes. Server-owned trailers/previews play in Plozz; Watch on YouTube opens externally regardless of external-player preference, requiring the TV app or mobile app/web fallback without guaranteeing availability. The Watch extras section explains source-dependent bonus videos, row retry, supported resuming and device/profile-local Plex fallback progress. Extras/trailers do not complete the main title, fan out to matching copies or scrobble trackers; trailers never enter Continue Watching. Share history persists locally per profile/device; dismissing a share preserves its resume position, and later playback can restore its card."
     },
     "home-navigation": {
       "documents": [
@@ -662,6 +676,10 @@
         {
           "slug": "home-and-navigation",
           "anchor": "choose-row-style-on-apple-tv"
+        },
+        {
+          "slug": "home-and-navigation",
+          "anchor": "clear-an-empty-row-message"
         }
       ],
       "sources": [
@@ -686,7 +704,7 @@
         "Sources/FeatureSettings/HomeHeroEnabledPicker.swift",
         "Sources/FeatureSettings/HomeRowStylePicker.swift"
       ],
-      "summary": "Screens & Navigation separates Home layout/hero, Rows, Filtering, main shortcuts and movie/show details. Presets replace custom Home arrangements after confirmation without editing servers; collection sections retain source identity, presentation choices and failure recovery. The Home browsing guide explains eligible expanded rows separately from the arranger: TV See all cards versus mobile row headings, platform control order, original-feed membership and retry. Plain combined Continue Watching remains unbounded in its rail and does not gain this shortcut merely from its item count; Live TV rows are not row-browser feeds. History feeds ignore library discovery switches, with no age/count cap for Continue Watching/merged Next Up and separate Next Up previews capped at 20. Recently Added and Hero & discovery filters are presentation-only with different defaults and candidate limits. Showcase and the carousel remain separate. Discovery recommendations do not require Seerr, but a new profile's carousel follows its connection until Discovery is explicitly toggled; Kids policy still excludes Discovery. All three TV navigation layouts offer eligible library shortcuts; changes retain saved order. Mobile starts with Home, Downloads and Search subject to availability; other destinations, including individual libraries and All Libraries, start Hidden until explicitly shown. Compact More contains overflow of shown destinations, not hidden shortcuts. TV sidebars retain Settings, Top Bar has a profile-picker escape, and mobile retains the profile-button route. Reset Navigation does not reset library tabs or access. Main layout/shortcuts stay local per profile/device; Home preferences transfer."
+      "summary": "Screens & Navigation separates Home layout/hero, Rows, Filtering, main shortcuts and movie/show details. Presets replace custom Home arrangements after confirmation without editing servers; collection sections retain source identity, presentation choices and failure recovery. Classic TV/mobile Home empty messages expose Dismiss and Customize Home. Dismiss saves a per-profile empty-message preference, not row removal or content filtering; new nonempty results can appear. Rows > the affected row > Show empty message reverses dismissal outside Showcase. Unavailable/failing rows retain Details and Retry; usable cached/partial rows can remain while diagnostics appear in the editor. The Home browsing guide explains eligible expanded rows separately from the arranger: TV See all cards versus mobile row headings, platform control order, original-feed membership and retry. Plain combined Continue Watching remains unbounded in its rail and does not gain this shortcut merely from its item count; Live TV rows are not row-browser feeds. History feeds ignore library discovery switches, with no age/count cap for eligible Continue Watching/merged Next Up and separate Next Up previews capped at 20. Brief-play eligibility is separate from resume storage; trailers are excluded. Recently Added and Hero & discovery filters are presentation-only with different defaults and candidate limits. Showcase and the carousel remain separate. Discovery recommendations do not require Seerr, but a new profile's carousel follows its connection until Discovery is explicitly toggled; Kids policy still excludes Discovery. All three TV navigation layouts offer eligible library shortcuts; changes retain saved order. Mobile starts with Home, Downloads and Search subject to availability; other destinations, including individual libraries and All Libraries, start Hidden until explicitly shown. Compact More contains overflow of shown destinations, not hidden shortcuts. TV sidebars retain Settings, Top Bar has a profile-picker escape, and mobile retains the profile-button route. Reset Navigation does not reset library tabs or access. Main layout/shortcuts stay local per profile/device; Home preferences transfer."
     },
     "appearance": {
       "documents": [
@@ -732,7 +750,7 @@
         "Sources/CoreModels/ProfileSettingsSnapshot.swift",
         "Sources/FeatureHome/FocusHeroHomeView.swift"
       ],
-      "summary": "Keep themes, density, focus, artwork and language distinctions in one guide. Customize labels selects Page; Home/Recommended have page Default plus row Overrides. Mixed hides captions on series artwork and in TV Showcase. Continue Watching's Use default inherits its context; On/Off applies to both Home and Recommended. Home Libraries has its own override; contextual editors share the same preference store and collection/playlist members use Browse. Watch indicators now explicitly distinguish unstarted flags, completed checks and Hidden, separately from episode counts, count style and Show progress bars. Hiding marks/bars neither changes history nor clears resume; these profile-owned settings are transfer-allowlisted. Retain Liquid Glass, independent header sizes, profile artwork versus shared metadata sources, saved download artwork, and interface language versus media language/device region."
+      "summary": "Keep themes, density, focus, artwork and language distinctions in one guide. Artwork > Customize by view offers per-area Library/Metadata providers choices, plus Mixed for title details; selecting another preset replaces overrides. Apple TV's contextual help illustrations are reachable and informational, not an omitted destination. Customize labels selects Page; Home/Recommended have page Default plus row Overrides. Mixed hides captions on series artwork and in TV Showcase. Continue Watching's Use default inherits its context; On/Off applies to both Home and Recommended. Home Libraries has its own override; contextual editors share the same preference store and collection/playlist members use Browse. Watch indicators now explicitly distinguish unstarted flags, completed checks and Hidden, separately from episode counts, count style and Show progress bars. Hiding marks/bars neither changes history nor clears resume; these profile-owned settings are transfer-allowlisted. Retain Liquid Glass, independent header sizes, profile artwork versus shared metadata sources, saved download artwork, and interface language versus media language/device region."
     },
     "spoilers": {
       "documents": [
@@ -1180,11 +1198,19 @@
         {
           "slug": "external-players",
           "anchor": "return-watch-progress"
+        },
+        {
+          "slug": "profiles-and-sync",
+          "anchor": "keep-watch-history-separate"
+        },
+        {
+          "slug": "network-shares",
+          "anchor": "keep-your-place"
         }
       ],
       "sources": [
         "Sources/FeatureSyncCloud/CloudConfigSyncService.swift",
-        "Sources/CoreModels/NavigationLibraryLayout.swift",
+        "Sources/CoreModels/WatchStateReconciler.swift",
         "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift",
         "Sources/FeatureSettings/SyncEraseDataView.swift",
         "Sources/AppShell/AppState+CloudSync.swift",
@@ -1193,10 +1219,10 @@
         "Sources/FeatureSyncSetup/SyncSetupPairingModel.swift",
         "Sources/CoreUI/LiveTVPortableSyncSettings.swift",
         "Sources/AppRuntime/LiveTVSourceSyncBridge.swift",
-        "Sources/CoreModels/ProfileSettingsSnapshot.swift",
-        "Sources/CoreModels/LosslessAudioSettings.swift",
+        "Sources/CoreNetworking/LocalMediaWatchStore.swift",
+        "Sources/ProviderPlex/PlexExtraWatchState.swift",
         "Sources/FeatureSettings/SettingsView.swift",
-        "Sources/CoreModels/CrashReportingSettings.swift",
+        "Sources/AppRuntime/WatchMutationFactory.swift",
         "Sources/CoreModels/SyncDataInventory.swift",
         "Sources/FeatureSettings/SyncDataBreakdown.swift",
         "Sources/FeatureAuth/IPTVSignInView.swift",
@@ -1204,7 +1230,7 @@
         "Sources/CoreModels/LiveTVSourceApproval.swift",
         "App/PlozziOS/PlozziOS.entitlements"
       ],
-      "summary": "Distinguish CloudKit configuration, encrypted tracker tokens, mobile Keychain adoption, provider-limited nearby transfer and Silo approval. Apple TV fetches enabled cloud sync on foreground rather than relying on background delivery. Explain network/permission/code-verification requirements and separate cross-server history. Watchlist filters and sort order are transferable profile preferences, separately from membership; the allowlisted WatchlistBrowsePreferencesStore key travels with profile snapshots. Display Size, navigation style and main shortcut arrangement stay local per profile, as does Apple TV accidental-exit prevention, rather than syncing or transferring; library-tab order does transfer. Downloads/startup/Video buffer/Live TV buffer/Top Shelf remain local too. Prefer lossless audio stays local across Plozz profiles and is excluded from transfer because it depends on connected equipment. Diagnostics consent is neither synced nor transferred and is not profile-owned. External-player selection is device-wide and local; returned progress stays with the authorized original viewer/server. Live TV source copies sync encrypted per profile; account-imported M3U files and Kids approvals stay local, schedules need snapshots, and legacy source import differs from account import. Refresh Breakdown shows encoded local payload/count snapshots, not iCloud storage: include pending uploads/catalogue schedules; exclude pending deletions/downloaded IPTV guides and separate Keychain/Trakt records. On all three platforms iCloud Sync > Troubleshooting offers Reload From iCloud and destructive Reset Sync; distinguish downloading shared settings from replacing them with this device's copy. Retain erase/re-upload prevention and mobile Keychain erasure. Transferable presentation preferences grant neither access nor unsupported modes."
+      "summary": "Distinguish CloudKit configuration, encrypted tracker tokens, mobile Keychain adoption, provider-limited nearby transfer and Silo approval. Apple TV fetches enabled cloud sync on foreground rather than relying on background delivery. Explain network/permission/code-verification requirements and separate cross-server history. Default-on cross-server history mirrors eligible normal-title changes only to matching accessible copies; extras/trailers remain origin-only and do not emit tracker history. Queued failures retry with the captured original profile/server identities authorized; local card changes do not prove every server accepted an update. Share progress and Plex-extra fallback records persist per profile/account/viewer on the current device, not through iCloud configuration sync. Watchlist filters and sort order are transferable profile preferences, separately from membership; the allowlisted WatchlistBrowsePreferencesStore key travels with profile snapshots. Display Size, navigation style and main shortcut arrangement stay local per profile, as does Apple TV accidental-exit prevention, rather than syncing or transferring; library-tab order does transfer. Downloads/startup/Video buffer/Live TV buffer/Top Shelf remain local too. Prefer lossless audio stays local across Plozz profiles and is excluded from transfer because it depends on connected equipment. Diagnostics consent is neither synced nor transferred and is not profile-owned. External-player selection is device-wide and local; returned progress stays with the authorized original viewer/server. Live TV source copies sync encrypted per profile; account-imported M3U files and Kids approvals stay local, schedules need snapshots, and legacy source import differs from account import. Refresh Breakdown shows encoded local payload/count snapshots, not iCloud storage: include pending uploads/catalogue schedules; exclude pending deletions/downloaded IPTV guides and separate Keychain/Trakt records. On all three platforms iCloud Sync > Troubleshooting offers Reload From iCloud and destructive Reset Sync; distinguish downloading shared settings from replacing them with this device's copy. Retain erase/re-upload prevention and mobile Keychain erasure. Transferable presentation preferences grant neither access nor unsupported modes."
     },
     "tracking": {
       "documents": [
@@ -1991,15 +2017,20 @@
         "library",
         "quality",
         "music",
-        "metadata"
+        "metadata",
+        "sync"
       ],
       "sources": [
         "Sources/ProviderPlex/PlexProvider.swift",
         "Sources/ProviderPlex/PlexStreamingQuality.swift",
         "Sources/ProviderPlex/PlexMusicProvider.swift",
         "Sources/ProviderPlex/PlexCommonSenseMedia.swift",
-        "Sources/ProviderPlex/PlexClient.swift"
-      ]
+        "Sources/ProviderPlex/PlexClient.swift",
+        "Sources/ProviderPlex/PlexExtraWatchState.swift",
+        "Sources/CoreNetworking/LocalMediaWatchStore.swift",
+        "Sources/AppRuntime/WatchMutationFactory.swift"
+      ],
+      "summary": "Plex library, quality, music and guidance remain provider-specific. Extras retain their own identity and do not complete the main title or fan out to trackers/matching copies. Explicitly classified Plex extras receive durable local progress fallback isolated by profile, account and server user, surviving provider refresh on this device. LocalMediaWatchStore keeps at most 2,000 newest records within its payload budget, so older fallback positions can be evicted. A newer usable server history record takes precedence. The library extras section and sync history section explain the reader-visible behavior without promising unlimited retention or cloud transfer of local fallback."
     },
     "ProviderShare": {
       "areas": [
@@ -2007,7 +2038,8 @@
         "library",
         "metadata",
         "playback",
-        "offline"
+        "offline",
+        "sync"
       ],
       "sources": [
         "Sources/ProviderShare/ShareScanner.swift",
@@ -2025,9 +2057,11 @@
         "Sources/CoreUI/ExternalMediaOpening.swift",
         "Sources/AppShell/HomeTab.swift",
         "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
-        "Sources/AppShelliOS/PlozziOSDownloadsModel.swift"
+        "Sources/AppShelliOS/PlozziOSDownloadsModel.swift",
+        "Sources/CoreNetworking/LocalMediaWatchStore.swift",
+        "Sources/AppRuntime/WatchMutationFactory.swift"
       ],
-      "summary": "Network shares covers connection/scanning, Personal Videos and local NFO/artwork association. Its Open links to streaming services section explains the additional imported-title workflow: scan a UTF-8 .strmlnk file up to 8192 bytes containing one allowlisted HTTPS title URL, select its source/version when mixed with playable copies, then use the destination-specific action or Open Link fallback. ExternalMediaLink validates actual service hosts/title paths, not arbitrary streaming URLs. Apple TV requests an installed destination app through universalLinksOnly; mobile uses normal app/browser routing. Opening rechecks active authorization and reports Couldn't Open Link rather than starting a stream. No external-player callback session is created, so no automatic returned watch progress; download eligibility and the mobile download guard reject external sources. Destination access, regional availability and restrictions remain outside Plozz. Local metadata precedence and ambiguous-folder rejection remain source-verified rather than inferred from sidecar filenames."
+      "summary": "Network shares covers connection/scanning, Personal Videos and local NFO/artwork association. Keep your place explains durable profile/account-local watched and resume state on this device, separate from iCloud preferences and optional matching-copy history propagation. LocalMediaWatchStore retains at most 2,000 newest records per profile/source store and may retain fewer to fit its payload budget; eviction can remove old resume positions and watched marks. Dismissing a share from Continue Watching preserves its stored resume offset; newer playback restores eligibility. Its Open links to streaming services section explains the additional imported-title workflow: scan a UTF-8 .strmlnk file up to 8192 bytes containing one allowlisted HTTPS title URL, select its source/version when mixed with playable copies, then use the destination-specific action or Open Link fallback. ExternalMediaLink validates actual service hosts/title paths, not arbitrary streaming URLs. Apple TV requests an installed destination app through universalLinksOnly; mobile uses normal app/browser routing. Opening rechecks active authorization and reports Couldn't Open Link rather than starting a stream. No external-player callback session is created, so no automatic returned watch progress; download eligibility and the mobile download guard reject external sources. Destination access, regional availability and restrictions remain outside Plozz. Local metadata precedence and ambiguous-folder rejection remain source-verified rather than inferred from sidecar filenames."
     },
     "ProviderSilo": {
       "areas": [
@@ -2272,7 +2306,7 @@
         "Sources/CoreModels/NavigationStyleSettingsStore.swift",
         "Sources/CoreUI/DetailNavigationTransition.swift"
       ],
-      "summary": "Screens & Navigation uses Home, Libraries and Movie & show details. Home separates TV Layout/mobile Hero, Rows and Filtering; preserve presets, source-qualified collections, default-on Next Up merging and saved-row recovery. Recently Added hides completed titles only when enabled; Hero & discovery hides watched suggestions by default. These independent filters change suggestions, not history/access/Continue Watching. App navigation owns Pinned Sidebar/Sidebar/Top Bar, delayed style application, library shortcuts, explicit Show and Settings recovery; layout/shortcuts stay local. Libraries edits supported profile tabs, Recommended rows and collection covers, not Home/shortcuts. Collection-only directories omit Recommended editing; library/Recommended/Home cover controls are independent and do not style member titles. Logo/Text sizing and contextual labels belong with appearance. All screens owns spoilers/classification display, not scores/restrictions. Movie & show details > Background offers mutually exclusive Trailer/Theme music/Off on all platforms, independently of Home trailers; audio explains volume, preview/generated fallback and mobile session mute. DetailNavigationTransition is internal animation plumbing, not a user-facing settings workflow; the retired transition key in ProfileSettingsSnapshot does not establish an available control."
+      "summary": "Screens & Navigation uses Home, Libraries and Movie & show details. Home orders Hero, Apple TV-only Row style, Card labels, Rows and Filtering. Hero uses On/Off on Apple TV and Show hero on mobile; Classic/Showcase row style is independent of hero visibility. Preserve presets, source-qualified collections, default-on Next Up merging and saved-row recovery. Recently Added hides completed titles only when enabled; Hero & discovery hides watched suggestions by default. These independent filters change suggestions, not history/access/Continue Watching. App navigation owns Pinned Sidebar/Sidebar/Top Bar, delayed style application, library shortcuts, explicit Show and Settings recovery; layout/shortcuts stay local. Libraries edits supported profile tabs, Recommended rows and collection covers, not Home/shortcuts. Collection-only directories omit Recommended editing; library/Recommended/Home cover controls are independent and do not style member titles. Logo/Text sizing and contextual labels belong with appearance. All screens owns spoilers/classification display, not scores/restrictions. Movie & show details > Background offers mutually exclusive Trailer/Theme music/Off on all platforms, independently of Home trailers; audio explains volume, preview/generated fallback and mobile session mute. DetailNavigationTransition is internal animation plumbing, not a user-facing settings workflow; the retired transition key in ProfileSettingsSnapshot does not establish an available control."
     },
     "subtitles": {
       "areas": [
@@ -4682,8 +4716,28 @@
       ],
       "navigation": "Launch Plozz on iPhone/iPad when synced servers or accounts still need sign-in on this device.",
       "experience": "Review the detected server/account groups and start receiving setup from another device, or leave these connections for Settings.",
-      "conditions": "This cold-launch invitation comes from unresolved synced connection descriptors, not proof that a sender is nearby. The heading and import action depend on whether new servers, accounts for existing servers, or both are detected. Receiving setup still needs an authorized device; comparison codes are required when supplied, while verified same-account pairing can omit them.",
+      "conditions": "This cold-launch invitation comes from unresolved synced connection descriptors, not proof that a sender is nearby. The heading and import action depend on whether new servers, accounts for existing servers, or both are detected. Headings use detected device names when available; the generic another device captions below appear when no name is known. Receiving setup still needs an authorized device; comparison codes are required when supplied, while verified same-account pairing can omit them.",
       "controls": [
+        {
+          "text": "Import your server from another device?",
+          "source": "Sources/CoreUI/ServerImportHeading.swift"
+        },
+        {
+          "text": "Import your servers from another device?",
+          "source": "Sources/CoreUI/ServerImportHeading.swift"
+        },
+        {
+          "text": "Import your account from another device?",
+          "source": "Sources/CoreUI/ServerImportHeading.swift"
+        },
+        {
+          "text": "Import your accounts from another device?",
+          "source": "Sources/CoreUI/ServerImportHeading.swift"
+        },
+        {
+          "text": "Import your setup from another device?",
+          "source": "Sources/CoreUI/ServerImportHeading.swift"
+        },
         {
           "text": "Import server",
           "source": "Sources/CoreUI/ServerImportHeading.swift"
@@ -5378,6 +5432,9 @@
     },
     "Sources/AppShelliOS/PlozziOSHomeView.swift": {
       "sources": [
+        "Sources/CoreModels/HomeLibraryVisibilityStore.swift",
+        "Sources/CoreModels/ContinueWatchingPolicy.swift",
+        "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
         "Sources/CoreModels/HeroCTA.swift",
         "Sources/CoreModels/ExternalMediaLink.swift",
         "Sources/CoreUI/ExternalMediaOpening.swift",
@@ -5475,8 +5532,8 @@
         "iPad"
       ],
       "navigation": "Open Home from iPhone/iPad navigation.",
-      "experience": "Browse profile rows and hero suggestions, tap an eligible row's heading chevron for its larger grid, play accessible media or open an imported title link in its destination app/browser. A failed link shows Couldn't Open Link. Retry failed Home loading or connect a source when none exists.",
-      "conditions": "iPhone/iPad. Home content follows enabled libraries, source availability, profile presentation, watched-content filtering, and eligible Discovery providers. Row-heading browsing requires more available titles, nonempty results, no loading/failure, and no section issue. The row title is the action label, including dynamic server/collection names, not a separate See all caption. The global Watchlist action opens the dedicated Watchlist page; combined Continue Watching and Live TV rows do not gain a row browser. Source/profile changes invalidate an open browser. The connected Home empty state passes hasAccounts true and shows Nothing to watch yet with Add Source. The same file defines Build your library and Set Up from Another Device for the no-account RootView caller; those are not additional actions on connected Home.",
+      "experience": "Browse profile rows and hero suggestions, tap an eligible row's heading chevron for its larger grid, play accessible media or open an imported title link in its destination app/browser. A failed link shows Couldn't Open Link. Dismiss an empty-row message without removing its row, or open Customize Home to change Home settings. Retry failed Home loading or connect a source when none exists.",
+      "conditions": "iPhone/iPad. Home content follows enabled libraries, source availability, profile presentation, watched-content filtering, and eligible Discovery providers. An empty section can show No titles to show with Dismiss and Customize Home; these callbacks are wired on Home, not on settings diagnostics. Dismiss stores only the active profile's empty-message preference, so nonempty titles can still appear. Home settings > Rows > the row > Show empty message reverses it. Unavailable/failing status rows instead show Details/Retry. A separate See all button in PlozziOSMediaSection's status heading can open a retained browse item, not a larger row grid; the inner HomeSectionStatusView receives no onSeeAll callback. Normal row-heading browsing requires more titles, nonempty results, no loading/failure, and no section issue; it uses the dynamic row title plus chevron, not a See all caption. The global Watchlist action opens the dedicated Watchlist page; combined Continue Watching and Live TV rows do not gain a row browser. Source/profile changes invalidate an open browser. The connected Home empty state passes hasAccounts true and shows Nothing to watch yet with Add Source. The same file defines Build your library and Set Up from Another Device for the no-account RootView caller; those are not additional actions on connected Home.",
       "controls": [
         {
           "text": "Open Link",
@@ -5623,15 +5680,19 @@
           "source": "Sources/CoreUI/HomeLiveTVCard.swift"
         },
         {
+          "text": "Dismiss",
+          "source": "Sources/CoreUI/HomeSectionStatusView.swift"
+        },
+        {
+          "text": "Customize Home",
+          "source": "Sources/CoreUI/HomeSectionStatusView.swift"
+        },
+        {
           "text": "Details",
           "source": "Sources/CoreUI/HomeSectionStatusView.swift"
         },
         {
           "text": "Retry",
-          "source": "Sources/CoreUI/HomeSectionStatusView.swift"
-        },
-        {
-          "text": "See all",
           "source": "Sources/CoreUI/HomeSectionStatusView.swift"
         },
         {
@@ -5684,6 +5745,10 @@
           "slug": "home-and-navigation"
         },
         {
+          "slug": "home-and-navigation",
+          "anchor": "clear-an-empty-row-message"
+        },
+        {
           "slug": "library",
           "anchor": "browse-a-library"
         },
@@ -5695,6 +5760,11 @@
     },
     "Sources/AppShelliOS/PlozziOSItemDetailView.swift": {
       "sources": [
+        "Sources/CoreModels/MediaExtra.swift",
+        "Sources/ProviderPlex/PlexExtraWatchState.swift",
+        "Sources/CoreNetworking/LocalMediaWatchStore.swift",
+        "Sources/AppRuntime/WatchMutationFactory.swift",
+        "Sources/FeaturePlayback/WatchProgressReporter.swift",
         "Sources/CoreUI/ExternalMediaOpening.swift",
         "Sources/CoreModels/ExternalMediaLink.swift",
         "Sources/CoreModels/MediaItem+Trailer.swift",
@@ -5784,7 +5854,7 @@
       ],
       "navigation": "Open a movie, show, season, or episode from mobile browsing/search.",
       "experience": "Choose a version, play a file, open an imported title link in its destination app/browser, inspect episodes and extras, manage eligible file downloads, or request missing seasons. External title links bypass the player/resume dialog, do not download or automatically return watch progress, and show Couldn't Open Link on failure.",
-      "conditions": "iPhone/iPad. Play/download requires authorized available library files. New downloads and show/season batches use the separately inventoried download-selection sheet. Ask Before Downloading can skip only a single-file, single-item non-bulk review; episodes can choose multiple physical versions, movies one. Manage Seasons contains dynamic season/episode groups and selection remains within the authorized source. A completed episode's download button removes that copy after confirmation; holding it offers Choose Versions. Completed movies retain a replacement-quality dialog with Use Original/reduced copies or Remove Download. Seerr requests require a matched title and request identity; status buttons, download quality, and season actions reflect provider and current state.",
+      "conditions": "iPhone/iPad. Play/download requires authorized available library files. Source-supplied Extras has loading/error states with Try Again, hides when empty, and selecting a card plays that extra directly. Resume chips require supportsResume. Extras/trailers keep distinct history, do not complete the main title, and do not propagate to peer servers or trackers. Plex can use durable profile/account/viewer-local fallback progress on this device. New downloads and show/season batches use the separately inventoried download-selection sheet. Ask Before Downloading can skip only a single-file, single-item non-bulk review; episodes can choose multiple physical versions, movies one. Manage Seasons contains dynamic season/episode groups and selection remains within the authorized source. A completed episode's download button removes that copy after confirmation; holding it offers Choose Versions. Completed movies retain a replacement-quality dialog with Use Original/reduced copies or Remove Download. Seerr requests require a matched title and request identity; status buttons, download quality, and season actions reflect provider and current state.",
       "controls": [
         {
           "text": "Open Link",
@@ -6383,6 +6453,10 @@
         {
           "slug": "library",
           "anchor": "save-titles-and-manage-history"
+        },
+        {
+          "slug": "library",
+          "anchor": "watch-extras"
         },
         {
           "slug": "downloads",
@@ -9319,6 +9393,10 @@
           "source": "Sources/CoreModels/ArtworkSettings.swift"
         },
         {
+          "text": "Customize by view",
+          "source": "Sources/FeatureSettings/ViewCustomizationControls.swift"
+        },
+        {
           "text": "Hero",
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
@@ -12221,13 +12299,16 @@
     "Sources/CoreUI/HomeSectionStatusView.swift": {
       "sources": [
         "Sources/CoreUI/HomeSectionStatusView.swift",
+        "Sources/AppShelliOS/PlozziOSMediaSection.swift",
+        "Sources/CoreUI/MediaRowView.swift",
+        "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
         "Sources/AppShelliOS/PlozziOSHomeView.swift",
         "Sources/FeatureSettings/HomeRowsSettingsView.swift",
         "Sources/CoreUI/HomeSectionStatusRow.swift",
         "Sources/FeatureHome/HomeView.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Reusable HomeSectionStatusView.swift is wired into Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/FeatureSettings/HomeRowsSettingsView.swift, Sources/FeatureHome/HomeView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitReason": "Shared status content is inventoried on its actual Home/settings parents. Mobile Home and TV Home through HomeSectionStatusRow wire Dismiss and Customize Home for empty rows; settings diagnostics pass neither callback. Empty-message restoration belongs to HomeSectionSettingsView. Details/Retry apply to unavailable/failing rows. No app caller supplies this view's optional onSeeAll callback: outer status headings own any retained-item See all action, through PlozziOSMediaSection on mobile or MediaRowHeader on TV, not this unused internal button."
     },
     "Sources/CoreUI/HomeVerticalMotion.swift": {
       "sources": [
@@ -16565,6 +16646,9 @@
     },
     "Sources/FeatureHome/HomeView.swift": {
       "sources": [
+        "Sources/CoreModels/HomeLibraryVisibilityStore.swift",
+        "Sources/CoreModels/ContinueWatchingPolicy.swift",
+        "Sources/AppShell/MainTabView.swift",
         "Sources/CoreModels/HeroCTA.swift",
         "Sources/CoreModels/ExternalMediaLink.swift",
         "Sources/AppShell/HomeTab.swift",
@@ -16654,8 +16738,8 @@
         "Apple TV"
       ],
       "navigation": "Open Home after selecting a profile on Apple TV.",
-      "experience": "Browse hero choices and ordered rows, select a trailing See all card for an eligible row's larger grid, inspect unavailable sections, and open titles.",
-      "conditions": "Apple TV. Active libraries, provider feeds, profile row layout, Discovery eligibility and watched-content filtering affect the result. An eligible row has more titles, nonempty results, no loading/failure, and no section issue. A trailing See all card opens row browsing; the global Watchlist shortcut opens its dedicated page. Combined Continue Watching stays unbounded in its rail without this shortcut, and Live TV rows are not row-browser feeds. Featured rows stop trailer previews before navigation. Source/profile changes invalidate an open browser.",
+      "experience": "Browse hero choices and ordered rows, select a trailing See all card for an eligible row's larger grid, inspect unavailable sections, and open titles. In Classic, dismiss just an empty-row message or use Customize Home to open Home settings.",
+      "conditions": "Apple TV. Active libraries, provider feeds, profile row layout, Discovery eligibility and watched-content filtering affect the result. Classic can show No titles to show with Dismiss and Customize Home; Showcase passes showsEmptySectionMessages false and never displays these empty messages. HomeSectionStatusRow receives dismissal from the profile visibility store and customization through MainTabView's navigation environment. Dismiss does not remove the row or hide later nonempty results. An unavailable/failing status offers Details/Retry. Its outer MediaRowHeader can show See all for a retained browse item; the inner HomeSectionStatusView receives no onSeeAll callback. This is separate from row-grid eligibility, which requires more titles, nonempty results, no loading/failure, and no section issue. A trailing See all card opens row browsing; the global Watchlist shortcut opens its dedicated page. Combined Continue Watching has no app age/count trim for eligible titles and excludes trailers/brief progress without deleting saved resume; it has no larger-grid shortcut. Live TV rows are not row-browser feeds. Featured rows stop trailer previews before navigation. Source/profile changes invalidate an open browser.",
       "controls": [
         {
           "text": "Open Link",
@@ -16730,15 +16814,19 @@
           "source": "Sources/CoreUI/HomeLiveTVCard.swift"
         },
         {
+          "text": "Dismiss",
+          "source": "Sources/CoreUI/HomeSectionStatusView.swift"
+        },
+        {
+          "text": "Customize Home",
+          "source": "Sources/CoreUI/HomeSectionStatusView.swift"
+        },
+        {
           "text": "Details",
           "source": "Sources/CoreUI/HomeSectionStatusView.swift"
         },
         {
           "text": "Retry",
-          "source": "Sources/CoreUI/HomeSectionStatusView.swift"
-        },
-        {
-          "text": "See all",
           "source": "Sources/CoreUI/HomeSectionStatusView.swift"
         },
         {
@@ -16836,6 +16924,10 @@
           "anchor": "choose-home-rows"
         },
         {
+          "slug": "home-and-navigation",
+          "anchor": "clear-an-empty-row-message"
+        },
+        {
           "slug": "browse-home-rows",
           "anchor": "open-a-larger-grid"
         }
@@ -16843,6 +16935,11 @@
     },
     "Sources/FeatureHome/ItemDetailView.swift": {
       "sources": [
+        "Sources/CoreModels/MediaExtra.swift",
+        "Sources/ProviderPlex/PlexExtraWatchState.swift",
+        "Sources/CoreNetworking/LocalMediaWatchStore.swift",
+        "Sources/AppRuntime/WatchMutationFactory.swift",
+        "Sources/FeaturePlayback/WatchProgressReporter.swift",
         "Sources/CoreModels/MediaItem+Trailer.swift",
         "Sources/CoreModels/HeroCTA.swift",
         "Sources/FeatureHome/ItemDetailView.swift",
@@ -16930,7 +17027,7 @@
       ],
       "navigation": "Open a movie or episode from Apple TV browsing or Search.",
       "experience": "Play an authorized file/version or open a supported imported title link in its destination app; inspect extras and related titles, or use Watchlist/watched actions. The selected external source uses a destination-specific primary action or Open Link fallback, not built-in playback.",
-      "conditions": "Apple TV. Actions follow media kind, provider support, profile authorization and current library availability. Discovery information does not itself supply playback.",
+      "conditions": "Apple TV. Actions follow media kind, provider support, profile authorization and current library availability. Extras belongs to the selected source: empty rows disappear, failed rows offer Try Again, and choosing a card plays that extra. Source resume support and Plex's device/profile/account/viewer-local fallback determine available extra progress. Extras/trailers do not complete the main title or fan out to peer servers/trackers. Discovery information does not itself supply playback.",
       "controls": [
         {
           "text": "Open Link",
@@ -17201,6 +17298,10 @@
         {
           "slug": "library",
           "anchor": "save-titles-and-manage-history"
+        },
+        {
+          "slug": "library",
+          "anchor": "watch-extras"
         }
       ]
     },
@@ -17506,6 +17607,11 @@
     },
     "Sources/FeatureHome/SeriesDetailView.swift": {
       "sources": [
+        "Sources/CoreModels/MediaExtra.swift",
+        "Sources/ProviderPlex/PlexExtraWatchState.swift",
+        "Sources/CoreNetworking/LocalMediaWatchStore.swift",
+        "Sources/AppRuntime/WatchMutationFactory.swift",
+        "Sources/FeaturePlayback/WatchProgressReporter.swift",
         "Sources/CoreModels/MediaItem+Trailer.swift",
         "Sources/CoreModels/HeroCTA.swift",
         "Sources/FeatureHome/SeriesDetailView.swift",
@@ -17592,7 +17698,7 @@
       ],
       "navigation": "Open a show from Apple TV browsing or Search.",
       "experience": "Browse seasons/episodes, continue watching, open a selected imported external episode link in its destination app, and request eligible missing seasons. External-source primary actions use a dynamic service name or Open Link fallback rather than launching the Plozz player.",
-      "conditions": "Apple TV. Episode files must be available to the selected server user; Seerr actions additionally require matched identity and request permissions.",
+      "conditions": "Apple TV. Episode files must be available to the selected server user; Seerr actions additionally require matched identity and request permissions. Source-supplied Extras hides when empty and offers Try Again after failure; selecting a card plays the extra, with resumability determined by source support. Plex's fallback progress is local to this profile/account/server viewer on this device. Extra/trailer history does not complete normal episodes or propagate to matching copies/trackers.",
       "controls": [
         {
           "text": "Open Link",
@@ -17799,6 +17905,10 @@
         {
           "slug": "library",
           "anchor": "save-titles-and-manage-history"
+        },
+        {
+          "slug": "library",
+          "anchor": "watch-extras"
         },
         {
           "slug": "media-requests",
@@ -21100,6 +21210,9 @@
     },
     "Sources/FeatureMusic/NowPlayingView.swift": {
       "sources": [
+        "Sources/CoreModels/ThemeSettings.swift",
+        "Sources/FeatureMusic/AudioPlaybackController.swift",
+        "Sources/FeatureMusic/MusicTabView.swift",
         "Sources/FeatureMusic/NowPlayingView.swift",
         "Sources/CoreUI/NowPlayingSession.swift",
         "Sources/CoreUI/ArtworkEnvironment.swift",
@@ -21120,7 +21233,7 @@
       ],
       "navigation": "Open the mini player or the current track while music is playing on Apple TV.",
       "experience": "Seek, skip, shuffle/repeat, inspect the queue or show available lyrics.",
-      "conditions": "Apple TV and an active music session. Lyrics require enabled online lookup and a match; the device-level lyrics setting and current track affect visibility. The transport and lyrics toggle are icon-only; do not invent English button captions. The controls inventory records supplied text/statuses and the separately verified system Now Playing interface.",
+      "conditions": "Apple TV and an active music session. The panel requires the device-wide lyrics preference, default on, and usable synchronized lyrics. MusicTabView checks provider lyrics and optional LRCLIB results; AudioPlaybackController rejects unsynchronized results even though the reusable view can render them. The icon-only speech-bubble toggle is dimmed only while lyrics are on but none are usable; it stays enabled when off, and re-enabling refreshes the current track. Disabling skips future LRCLIB lookups, which can otherwise send track title, artist, album and duration. Provider lookup is not the same as LRCLIB consent. The transport and lyrics toggle have no invented English button captions; the controls inventory records supplied text/statuses and the separately verified system Now Playing interface.",
       "controls": [
         {
           "text": "Searching for lyrics…",
@@ -24568,11 +24681,145 @@
     "Sources/FeatureSettings/ArtworkSettingsControls.swift": {
       "sources": [
         "Sources/FeatureSettings/ArtworkSettingsControls.swift",
+        "Sources/CoreModels/ArtworkSettings.swift",
+        "Sources/FeatureSettings/ViewCustomizationControls.swift",
+        "Sources/FeatureSettings/ViewCustomizationHelpCard.swift",
+        "Sources/CoreUI/SettingsPageHeader.swift",
         "Sources/AppShelliOS/PlozziOSSettingsView.swift",
         "Sources/FeatureSettings/PreferenceDetailViews.swift"
       ],
-      "omitKind": "shared-component",
-      "omitReason": "Reusable ArtworkSettingsControls.swift is wired into Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "platforms": [
+        "Apple TV",
+        "iPhone",
+        "iPad"
+      ],
+      "navigation": "Open Settings > Appearance > Artwork, then Customize by view to reach Artwork by view.",
+      "experience": "Choose a whole-app artwork preset or prefer library/metadata-provider artwork separately for each area. Selecting a preset replaces individual overrides.",
+      "conditions": "Presets and customization are available for the active profile on all documented platforms. Artwork by view orders Home, Libraries and Across the app sections. Apple TV omits Downloads; mobile omits Recommended hero, Music and Top Shelf. Each row offers Library and Metadata providers; Title detail pages additionally offers Mixed, combining metadata-provider backgrounds/logos with library related-title posters. Use default exists in the model but is not offered by these customization controls. Apple TV selections cycle the choices and focus shows an explanatory illustration; mobile uses menus without that help card. Custom is a readout when overrides replace a uniform preset. Changes affect future artwork selection, not existing download images or source files.",
+      "controls": [
+        {
+          "text": "Recommended",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Prefer my library's artwork",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Prefer artwork from metadata providers",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Customize by view",
+          "source": "Sources/FeatureSettings/ViewCustomizationControls.swift"
+        },
+        {
+          "text": "Custom",
+          "source": "Sources/FeatureSettings/ViewCustomizationControls.swift"
+        },
+        {
+          "text": "Artwork by view",
+          "source": "Sources/FeatureSettings/ArtworkSettingsControls.swift"
+        },
+        {
+          "text": "Back",
+          "source": "Sources/CoreUI/SettingsPageHeader.swift"
+        },
+        {
+          "text": "Home",
+          "source": "Sources/FeatureSettings/ArtworkSettingsControls.swift"
+        },
+        {
+          "text": "Showcase / hero",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Library",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Metadata providers",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Other Home rows",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Libraries",
+          "source": "Sources/FeatureSettings/ArtworkSettingsControls.swift"
+        },
+        {
+          "text": "Recommended hero",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Recommended rows",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Browse",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Collections",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Playlists",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Across the app",
+          "source": "Sources/FeatureSettings/ArtworkSettingsControls.swift"
+        },
+        {
+          "text": "Continue Watching rows",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Search results",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Watchlist page",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Title detail pages",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Mixed",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Episode browser",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Video player artwork",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Music",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Top Shelf",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Downloads",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        }
+      ],
+      "documents": [
+        {
+          "slug": "appearance",
+          "anchor": "choose-artwork"
+        }
+      ]
     },
     "Sources/FeatureSettings/CardAppearanceControls.swift": {
       "sources": [
@@ -25299,7 +25546,7 @@
       ],
       "navigation": "Open Settings > Screens & Navigation > Home.",
       "experience": "Open Hero, Apple TV Row style, Card labels, Rows and Filtering in UI order. Change the featured carousel independently of Classic/Showcase rows; edit row arrangement and recover source errors without changing library access.",
-      "conditions": "All platforms, active-profile preferences. Root order is Hero, then Row style on Apple TV only, Card labels, Rows and Filtering. Hero summarizes On/Off; Apple TV Row style summarizes Showcase/Classic. Card labels opens the Home-only editor without Page: Default offers On/Off/Mixed, then Continue Watching and Libraries overrides with Use default/On/Off. The Continue Watching override also applies on Recommended. Row discovery/loading exposes retries; Edit/Done and Reorder follow editing state. With Showcase selected and Hero off, Discovery is managed by Row style and its row cannot be reordered or removed here; this managed row is absent in Kids profiles. Collection choices require accessible collections. Filtering orders Recently Added before Hero & discovery and does not alter history or access.",
+      "conditions": "All platforms, active-profile preferences. Root order is Hero, then Row style on Apple TV only, Card labels, Rows and Filtering. Hero summarizes On/Off; Apple TV Row style summarizes Showcase/Classic. Card labels opens the Home-only editor without Page: Default offers On/Off/Mixed, then Continue Watching and Libraries overrides with Use default/On/Off. The Continue Watching override also applies on Recommended. Row discovery/loading exposes retries; Edit/Done and Reorder follow editing state. Diagnostic HomeSectionStatusView calls supply only Retry, not Dismiss, Customize Home or See all; Details/OK remain available for unavailable/failing issues. A hidden Continue Watching row retains Continue Watching settings, and ordinary row links open the editor that conditionally offers Show empty message. With Showcase selected and Hero off, Discovery is managed by Row style and its row cannot be reordered or removed here; this managed row is absent in Kids profiles. Collection choices require accessible collections. Filtering orders Recently Added before Hero & discovery and does not alter history or access.",
       "controls": [
         {
           "text": "Home",
@@ -25442,10 +25689,6 @@
           "source": "Sources/CoreUI/HomeSectionStatusView.swift"
         },
         {
-          "text": "See all",
-          "source": "Sources/CoreUI/HomeSectionStatusView.swift"
-        },
-        {
           "text": "OK",
           "source": "Sources/CoreUI/HomeSectionStatusView.swift"
         },
@@ -25495,6 +25738,7 @@
     },
     "Sources/FeatureSettings/HomeSectionSettingsViews.swift": {
       "sources": [
+        "Sources/CoreModels/HomeLibraryVisibilityStore.swift",
         "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
         "Sources/CoreModels/CardCaptionSettings.swift",
         "Sources/CoreModels/CollectionSection.swift",
@@ -25553,8 +25797,8 @@
         "iPad"
       ],
       "navigation": "Open Settings > Screens & Navigation > Home, then Hero, Row style on Apple TV, or Rows and an editable row. Add row opens available rows or From a collection.",
-      "experience": "Enable or hide the featured hero, select its content, sizes, advancement, ratings and trailers; independently choose Showcase/Classic rows on Apple TV. Configure individual Home rows, Continue Watching presentation and actions, and row presets.",
-      "conditions": "This file owns multiple nested Home pages. Hero appears on all platforms: TV On/Off and mobile Show hero gate the following sizes, Content sources (TV) or Hero content sources (mobile), item count, advancement, Ratings and Trailers links. Title-source order is Continue Watching, Recently Added, Watchlist, Random from Library, Collections, Discovery; enabled sources reveal their respective nested choices. Random libraries are enabled non-music Home libraries and the last selected library cannot be deselected. Kids profiles exclude Discovery. TV Row style selects Showcase/Classic independently of Hero; only Showcase exposes its own sizes and rating controls. Discovery row is available only in Showcase with Hero off and a non-Kids profile; its providers require the row enabled. Mobile always uses the carousel and has no Row style destination. Continue Watching appearance applies to Home and Recommended; Labels uses Use default/On/Off, never Mixed. Include Next Up precedes tap/center-button action. Collection covers require applicable rows. Preset replacement requires confirmation and preserves server settings. Dynamic library, account, collection and row names come from the source, not constant control captions. Showcase logo/text sizes are independent, but Show ratings, age guidance and review-score count bind to the same hero settings as the featured carousel; the isShowcase argument only changes search anchors.",
+      "experience": "Enable or hide the featured hero, select its content, sizes, advancement, ratings and trailers; independently choose Showcase/Classic rows on Apple TV. Configure individual Home rows, Continue Watching presentation and actions, restore a dismissed empty message, or replace row arrangements with a preset.",
+      "conditions": "This file owns multiple nested Home pages. Hero appears on all platforms: TV On/Off and mobile Show hero gate the following sizes, Content sources (TV) or Hero content sources (mobile), item count, advancement, Ratings and Trailers links. Title-source order is Continue Watching, Recently Added, Watchlist, Random from Library, Collections, Discovery; enabled sources reveal their respective nested choices. Random libraries are enabled non-music Home libraries and the last selected library cannot be deselected. Kids profiles exclude Discovery. TV Row style selects Showcase/Classic independently of Hero; only Showcase exposes its own sizes and rating controls. Discovery row is available only in Showcase with Hero off and a non-Kids profile; its providers require the row enabled. Mobile always uses the carousel and has no Row style destination. Continue Watching appearance applies to Home and Recommended; Labels uses Use default/On/Off, never Mixed. Include Next Up precedes tap/center-button action. Collection covers require applicable rows. Show empty message appears after row-specific controls and before Remove from Home only for an already-dismissed row outside Showcase; it clears that profile visibility marker, not row membership. The hidden Continue Watching settings entry can open this editor without a Remove from Home action. Preset replacement requires confirmation and preserves server settings. Dynamic library, account, collection and row names come from the source, not constant control captions. Showcase logo/text sizes are independent, but Show ratings, age guidance and review-score count bind to the same hero settings as the featured carousel; the isShowcase argument only changes search anchors.",
       "controls": [
         {
           "text": "Hero",
@@ -25749,6 +25993,10 @@
           "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
         },
         {
+          "text": "Show empty message",
+          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+        },
+        {
           "text": "Remove from Home",
           "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
         },
@@ -25891,6 +26139,10 @@
           "anchor": "choose-home-rows"
         },
         {
+          "slug": "home-and-navigation",
+          "anchor": "clear-an-empty-row-message"
+        },
+        {
           "slug": "spoiler-protection",
           "anchor": "change-continue-watching-cards"
         },
@@ -25906,6 +26158,10 @@
     },
     "Sources/FeatureSettings/IntegrationsDetailView.swift": {
       "sources": [
+        "Sources/AppRuntime/WatchMutationFactory.swift",
+        "Sources/CoreModels/WatchStateReconciler.swift",
+        "Sources/AppRuntime/WatchOutboxConnectivity.swift",
+        "Sources/AppShell/AppState.swift",
         "Sources/FeatureSettings/IntegrationsDetailView.swift",
         "Sources/CoreUI/AmbientGradientBackground.swift",
         "Sources/CoreUI/SettingsSurfaces.swift",
@@ -25931,7 +26187,7 @@
       ],
       "navigation": "Open Trackers from the active profile Settings.",
       "experience": "Connect eligible video trackers or Last.fm and choose supported watch-state propagation.",
-      "conditions": "Apple TV tracker settings. Services have independent identities, title/track matching and app configuration. Last.fm music scrobbling requires sufficient listening time; it does not store video progress.",
+      "conditions": "Apple TV tracker settings. Services have independent identities, title/track matching and app configuration. Sync across all my servers requires at least two servers and affects eligible matching-copy history, not iCloud settings. Extra/trailer updates remain origin-only and omit tracker history. Pending delivery retries only with the captured original profile/server-user identities authorized; connectivity alone does not prove a server accepted the update. Last.fm music scrobbling requires sufficient listening time; it does not store video progress.",
       "controls": [
         {
           "text": "Last.fm",
@@ -27354,6 +27610,10 @@
         {
           "text": "Prefer artwork from metadata providers",
           "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Customize by view",
+          "source": "Sources/FeatureSettings/ViewCustomizationControls.swift"
         },
         {
           "text": "Screens & Navigation",
@@ -29725,10 +29985,16 @@
     "Sources/FeatureSettings/ViewCustomizationHelpCard.swift": {
       "sources": [
         "Sources/FeatureSettings/ViewCustomizationHelpCard.swift",
-        "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        "Sources/FeatureSettings/ViewCustomizationControls.swift",
+        "Sources/FeatureSettings/ArtworkSettingsControls.swift",
+        "Sources/FeatureSettings/CardCaptionCustomizationContent.swift",
+        "Sources/FeatureSettings/PreferenceDetailViews.swift",
+        "Sources/FeatureSettings/HomeRowsSettingsView.swift",
+        "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
+        "Sources/FeatureSettings/LibraryPresentationSettingsView.swift"
       ],
-      "omitKind": "implementation",
-      "omitReason": "Internal explanatory customization card has no product construction call in the frozen source; do not invent a settings help destination."
+      "omitKind": "shared-component",
+      "omitReason": "ViewCustomizationList actively renders this informational help card in its Apple TV branch, inline or pinned below the list. ArtworkSettingsControls and CardCaptionCustomizationContent supply explanations and decorative scope illustrations for Appearance > Artwork > Customize by view and contextual card-label editors in Appearance, Home, library presentation and detail settings. Those parent records inventory the interactive controls. The help card has no independent controls or destination; its Movies/TV shows illustration labels do not establish another screen. Mobile ViewCustomizationList does not render this card."
     },
     "Sources/FeatureSettings/WatchIndicatorColorPicker.swift": {
       "sources": [

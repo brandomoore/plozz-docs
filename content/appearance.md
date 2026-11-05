@@ -1,6 +1,6 @@
 # Appearance and language
 
-Make cards, labels, and artwork easier to read without changing your library. Select the profile you want to customize, then open **Settings > Appearance**.
+Make cards and artwork easier to read. Open **Settings > Appearance** in the profile you want to customize.
 
 ## Make cards easier to read
 
@@ -20,7 +20,7 @@ Under **Cards > Watch indicators**, **Unwatched** marks unstarted titles with a 
 
 **Show unwatched episode count**, its badge style, and **Show progress bars** are independent. Hiding bars does not clear saved positions or stop history updates. These choices follow your profile through [sync](/profiles-and-sync/).
 
-Farther down **Cards**, Apple TV's focus appearance emphasizes the selected card. **Display Size** changes card size, columns, and spacing, not video resolution. Try larger cards and clearer labels before hiding content.
+Farther down **Cards**, Apple TV's focus appearance emphasizes your selection. **Display Size** changes card size, columns, and spacing, not video resolution.
 
 ## Choose artwork
 
@@ -30,7 +30,7 @@ In **Artwork**, start with a preset:
 - **Prefer my library's artwork**: use library images first, with online fallback when missing.
 - **Prefer artwork from metadata providers**: use online images first, falling back to the library. Extra lookups can make browsing slower.
 
-Home's Watchlist row and the Watchlist page have separate artwork choices. Downloads keep their saved images.
+Choose **Customize by view**, then **Library** or **Metadata providers** for each area. Home's Watchlist row and the Watchlist page are separate; existing downloads keep their images. Choosing another preset replaces your changes.
 
 Shared [Metadata Providers](/metadata-and-ratings/) are separate; preferences cannot create missing artwork.
 
@@ -38,7 +38,7 @@ Shared [Metadata Providers](/metadata-and-ratings/) are separate; preferences ca
 
 Under **Settings > Screens & Navigation**, adjust **Logo size** and **Text size** in **Home > Hero** (with the hero enabled) and **Movie & show details**. Apple TV's **Home > Row style > Showcase** has separate sizes; [library Recommended headers](/customize-libraries/#adjust-the-apple-tv-library-header) are independent too.
 
-Text size scales titles, descriptions, and metadata, not cards/menus; Apple TV details also resize episode titles/synopses. The center is default; constrained headers can fit smaller.
+Text size changes titles, descriptions, and metadata, not cards or menus. Apple TV details also resize episode text. The center is default; tight spaces may use smaller sizes.
 
 ## Change language or nighttime appearance
 

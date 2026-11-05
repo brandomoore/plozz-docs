@@ -219,7 +219,7 @@
     "slug": "network-shares",
     "title": "Network shares",
     "seoTitle": "Add SMB, NFS, WebDAV, SFTP, or FTP libraries in Plozz",
-    "description": "Connect and scan network folders, open imported streaming-service links, and resolve authentication, matching, or WebDAV playback problems.",
+    "description": "Connect network folders, refresh files, understand device-local progress, open streaming-service links, and fix WebDAV playback.",
     "section": "Connect",
     "kind": "reference",
     "file": "network-shares.md",
@@ -235,7 +235,7 @@
       "Sources/MediaTransportSFTP/SFTPMediaTransport.swift",
       "Sources/CoreUI/SettingsCopy.swift",
       "Sources/MediaTransportFTP/FTPNetworkBackend.swift",
-      "Sources/ProviderShare/ShareMediaParser.swift",
+      "Sources/CoreNetworking/LocalMediaWatchStore.swift",
       "Sources/ProviderShare/ShareProvider.swift",
       "Sources/CoreModels/ExternalMediaLink.swift",
       "Sources/CoreModels/HeroCTA.swift",
@@ -250,7 +250,7 @@
       "Sources/ProviderShare/",
       "Sources/MediaTransport",
       "Sources/CoreModels/ExternalMediaLink.swift",
-      "Sources/CoreUI/ExternalMediaOpening.swift",
+      "Sources/CoreNetworking/LocalMediaWatchStore.swift",
       "Sources/CoreUI/PlaybackSourceMenu.swift"
     ],
     "platforms": [
@@ -329,6 +329,10 @@
           "source": "Sources/CoreModels/MediaItemAction.swift"
         },
         {
+          "text": "Remove from Continue Watching",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
+        },
+        {
           "text": "Scan now",
           "source": "Sources/FeatureSettings/ServerDetailView.swift"
         },
@@ -355,9 +359,9 @@
     ],
     "title": "Find and organize media",
     "seoTitle": "Browse, search, and organize your media in Plozz",
-    "description": "Browse titles and collections, combine filters, watch trailers, choose a copy, manage history, and recover missing or incomplete library results.",
+    "description": "Browse and filter libraries, manage history, watch trailers and bonus videos, choose a copy, and recover incomplete results.",
     "section": "Library",
-    "kind": "guide",
+    "kind": "reference",
     "file": "library.md",
     "sources": [
       "Sources/AppShell/MainTabView.swift",
@@ -372,22 +376,22 @@
       "Sources/CoreModels/MediaItem+Trailer.swift",
       "Sources/CoreUI/YouTubeTrailerOpening.swift",
       "Sources/CoreUI/SettingsCopy.swift",
-      "Sources/AppRuntime/MediaItemActionCoordinator.swift",
+      "Sources/FeaturePlayback/WatchProgressReporter.swift",
       "Sources/FeatureHomeCore/LibraryBrowseViewModel.swift",
       "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
       "Sources/FeatureHome/LibraryBrowseView.swift",
-      "Sources/CoreModels/LibraryQuery.swift",
+      "Sources/CoreNetworking/LocalMediaWatchStore.swift",
       "Sources/AppShelliOS/PlozziOSLibraryView.swift",
-      "Sources/CoreModels/ExternalMediaLink.swift",
-      "Sources/CoreUI/ExternalMediaOpening.swift"
+      "Sources/AppRuntime/WatchMutationFactory.swift",
+      "Sources/ProviderPlex/PlexExtraWatchState.swift"
     ],
     "watch": [
       "Sources/FeatureHome",
       "Sources/FeatureWatchlistCore/",
       "Sources/AppRuntime/WatchMutation",
-      "Sources/CoreUI/YouTubeTrailerOpening.swift",
-      "Sources/MetadataKit/DetailMetadataResolver.swift",
-      "Sources/MetadataKit/TMDbMetadataProvider.swift"
+      "Sources/ProviderPlex/PlexExtraWatchState.swift",
+      "Sources/CoreNetworking/LocalMediaWatchStore.swift",
+      "Sources/MetadataKit/DetailMetadataResolver.swift"
     ],
     "ui": {
       "references": [
@@ -421,6 +425,10 @@
         },
         {
           "text": "Preparing library filter…",
+          "source": "Sources/CoreUI/LibraryFilterMenu.swift"
+        },
+        {
+          "text": "Couldn't load filter options. Try Again",
           "source": "Sources/CoreUI/LibraryFilterMenu.swift"
         },
         {
@@ -477,6 +485,10 @@
         },
         {
           "text": "Extras",
+          "source": "Sources/FeatureHome/ExtrasRowView.swift"
+        },
+        {
+          "text": "Try Again",
           "source": "Sources/FeatureHome/ExtrasRowView.swift"
         },
         {
@@ -1050,7 +1062,7 @@
     "slug": "home-and-navigation",
     "title": "Home and navigation",
     "seoTitle": "Customize Plozz Home rows, hero, and navigation",
-    "description": "Arrange Home rows, choose hero sources and Apple TV row styles, filter watched suggestions, and restore hidden navigation shortcuts.",
+    "description": "Arrange Home rows and Apple TV styles, dismiss empty messages, understand Continue Watching, and restore hidden shortcuts.",
     "section": "Library",
     "kind": "reference",
     "file": "home-and-navigation.md",
@@ -1059,7 +1071,7 @@
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/FeatureSettings/HomeRowsSettingsView.swift",
       "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
-      "Sources/CoreModels/CardCaptionSettings.swift",
+      "Sources/CoreModels/ContinueWatchingPolicy.swift",
       "Sources/FeatureSettings/CollectionSectionSettingsView.swift",
       "Sources/CoreModels/CollectionSection.swift",
       "Sources/CoreUI/HomeSectionStatusView.swift",
@@ -1082,7 +1094,7 @@
       "Sources/CoreModels/Home",
       "Sources/CoreModels/Navigation",
       "Sources/FeatureSettings/Collection",
-      "Sources/FeatureSettings/NavigationLibrariesDetailView.swift"
+      "Sources/FeatureHomeCore/HomePresentationRow.swift"
     ],
     "platforms": [
       "Apple TV",
@@ -1180,10 +1192,6 @@
           "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
         },
         {
-          "text": "Continue Watching",
-          "source": "Sources/CoreModels/CardCaptionSettings.swift"
-        },
-        {
           "text": "Row name",
           "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
         },
@@ -1218,6 +1226,22 @@
         {
           "text": "Retry",
           "source": "Sources/CoreUI/HomeSectionStatusView.swift"
+        },
+        {
+          "text": "Dismiss",
+          "source": "Sources/CoreUI/HomeSectionStatusView.swift"
+        },
+        {
+          "text": "Customize Home",
+          "source": "Sources/CoreUI/HomeSectionStatusView.swift"
+        },
+        {
+          "text": "Show empty message",
+          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+        },
+        {
+          "text": "Continue Watching settings",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
         },
         {
           "text": "No titles to show",
@@ -2132,6 +2156,14 @@
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
+          "text": "Remember per series",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Remember subtitles per series",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
           "text": "Match Apple TV Subtitle Style",
           "source": "Sources/FeaturePlayback/SystemCaptionStyleConfirmation.swift"
         },
@@ -2199,7 +2231,7 @@
       "Sources/LastFmService/LastFmService.swift",
       "App/Resources/Info.plist",
       "Sources/AppShell/MusicAvailabilityScope.swift",
-      "Sources/AppShell/AppState.swift",
+      "Sources/CoreModels/ThemeSettings.swift",
       "Sources/FeatureMusic/MusicAggregator.swift",
       "Sources/MetadataKit/LRCLIBLyricsProvider.swift",
       "Sources/FeatureMusic/AudioPlaybackController.swift",
@@ -3018,7 +3050,7 @@
       "Sources/FeatureSettings/AppLanguagePicker.swift",
       "Sources/CoreUI/AppLanguageScope.swift",
       "Sources/CoreModels/ThemeSettings.swift",
-      "Sources/FeatureSettings/LibraryPresentationSettingsView.swift",
+      "Sources/FeatureSettings/ViewCustomizationControls.swift",
       "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
       "Sources/FeatureSettings/HeroSettingsControls.swift",
       "Sources/CoreModels/WatchStatusIndicatorSettingsStore.swift",
@@ -3030,7 +3062,7 @@
       "Sources/CoreModels/CardCaptionSettings.swift",
       "Sources/FeatureSettings/Hero",
       "Sources/CoreModels/WatchStatusIndicator",
-      "Sources/FeatureSettings/LibraryPresentationSettingsView.swift"
+      "Sources/FeatureSettings/ViewCustomizationControls.swift"
     ],
     "ui": {
       "references": [
@@ -3172,6 +3204,18 @@
         },
         {
           "text": "Recommended",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Customize by view",
+          "source": "Sources/FeatureSettings/ViewCustomizationControls.swift"
+        },
+        {
+          "text": "Library",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Metadata providers",
           "source": "Sources/CoreModels/ArtworkSettings.swift"
         },
         {
@@ -3896,15 +3940,15 @@
       "Sources/FeatureSettings/IntegrationsDetailView.swift",
       "Sources/FeatureSettings/SyncDataBreakdown.swift",
       "Sources/FeatureSyncSetup/SyncSetupService.swift",
-      "Sources/FeatureSyncSetup/SyncSetupCoordinator.swift",
+      "Sources/CoreModels/WatchStateReconciler.swift",
       "Sources/AppShelliOS/PlozziOSAppModel+KeychainSync.swift",
       "Sources/FeatureSyncCloud/CloudConfigSyncService.swift",
       "App/PlozziOS/PlozziOS.entitlements",
-      "Sources/AppShell/SyncSetupSenderPicker.swift",
-      "Sources/FeatureSyncSetup/SyncSetupPairingModel.swift",
+      "Sources/CoreNetworking/LocalMediaWatchStore.swift",
+      "Sources/AppRuntime/WatchMutationFactory.swift",
       "Sources/FeatureSettings/SyncEraseDataView.swift",
       "Sources/CoreModels/LiveTVSourceApproval.swift",
-      "Sources/CoreModels/ProfileSettingsSnapshot.swift"
+      "Sources/ProviderPlex/PlexExtraWatchState.swift"
     ],
     "watch": [
       "Sources/FeatureSyncSetup/",
@@ -4004,6 +4048,14 @@
         {
           "text": "Sync across all my servers",
           "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        },
+        {
+          "text": "Trackers",
+          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        },
+        {
+          "text": "Playback",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
         {
           "text": "Sync Data on This Device",

@@ -48,7 +48,7 @@ On iPhone/iPad, **Preferred language code** accepts a code such as `en` for Engl
 
 Set movie, TV, and anime rules where offered. Forced tracks cover selected dialogue/signs; SDH includes sound descriptions. **Prefer SDH** allows regular fallback; **Only SDH** leaves automatic subtitles off when unavailable and excludes non-SDH search/download results. Neither creates tracks.
 
-Disable **Remember subtitles per series** in **Settings > Subtitles** on Apple TV, or **Settings > Playback**, under **Tracks**, on iPhone/iPad to stop reusing choices.
+To stop reusing series choices, on Apple TV open **Settings > Subtitles > Remember subtitles per series** and turn off **Remember per series**. On iPhone/iPad, open **Settings > Playback**, then turn off **Remember subtitles per series** under **Tracks**.
 
 For mistimed text, use the **Subtitle Sync** clock button on Apple TV or **Subtitles > Advanced… > Subtitle Delay** on iPhone/iPad. Timing controls appear only when Plozz can shift the track; some player-rendered embedded tracks cannot shift.
 

@@ -1,10 +1,10 @@
 # Profiles and sync
 
-Plozz profiles separate app preferences. iCloud Sync, nearby device setup, and watch-history updates solve different problems.
+Bring your preferences to another device with iCloud Sync, or use nearby setup to help it sign in. Your viewing progress follows separate rules.
 
 ## Use the right profile
 
-Use the profile header at the top of **Settings** to switch profiles before changing libraries or preferences. Open **Settings > Profiles** to manage them.
+Use the profile header in **Settings** to switch before changing libraries or preferences. Open **Settings > Profiles** to manage profiles.
 
 For server users, Kids profiles, locks, and automatic sign-in, see [Profiles, kids, and locks](/profiles-and-locks/).
 
@@ -14,31 +14,29 @@ For server users, Kids profiles, locks, and automatic sign-in, see [Profiles, ki
 2. Use **Sync Now** to request an update.
 3. Review servers marked **Needs sign-in** on that page and complete their setup.
 
-iCloud Sync carries profiles, preferences, server details, watchlist state, supported Live TV configuration, and tracker sign-ins. It does not transfer downloaded videos or universally authorize media servers.
+iCloud Sync carries profiles, preferences, server details, watchlist state, supported Live TV configuration, and tracker sign-ins. It does not copy downloaded videos or sign you into every media server.
 
-Keep Plozz open on Apple TV to receive changes; it checks iCloud when brought to the foreground rather than relying on background delivery.
+On Apple TV, open Plozz to receive changes; it checks iCloud when you return to the app.
 
-[Library tab order and Recommended-row layouts](/customize-libraries/) are transferable profile preferences too. They do not make an unsupported tab or inaccessible library available on another device.
-
-[Watchlist filters and sort order](/watchlist/#filter-and-sort-the-page) also follow the profile, separately from its saved titles.
+[Library tabs and Recommended rows](/customize-libraries/), plus [Watchlist filters and sorting](/watchlist/#filter-and-sort-the-page), follow the profile too. They do not grant access to libraries on another device.
 
 With sync and iCloud Keychain available, iPhone/iPad can automatically adopt supported Jellyfin, Plex, Emby, share, and Seerr credentials. Apple TV does not use this iCloud Keychain path; use nearby setup or sign in there. **Silo requires approval on each device**, regardless of sync.
 
 ## Keep device-specific choices local
 
-For each profile, **Display Size**, navigation style, and the main shortcut arrangement stay local. Apple TV's **Prevent Accidental Exit** does too. Unlike library-tab order, none sync or transfer; set them on each device.
+For each profile, **Display Size**, navigation style, and main shortcuts stay local, as does Apple TV's **Prevent Accidental Exit**. Set these on each device; they neither sync nor transfer.
 
-Downloads, automatic sign-in, [Video buffer](/streaming-quality/), [Live TV buffer](/platform-controls/#live-tv-remote-controls-and-rewind), [Top Shelf preferences](/platform-controls/#launch-from-apple-tv-top-shelf), and the [external-player choice](/external-players/) also remain device-local. The player choice applies across Plozz profiles, not per viewer. [Diagnostics consent](/feedback-and-bugs/#choose-diagnostics-sharing) is neither synced nor transferred.
+Downloads, automatic sign-in, [Video buffer](/streaming-quality/), [Live TV buffer](/platform-controls/#live-tv-remote-controls-and-rewind), and [Top Shelf preferences](/platform-controls/#launch-from-apple-tv-top-shelf) also stay local. So do the device-wide [external-player choice](/external-players/) and [diagnostics consent](/feedback-and-bugs/#choose-diagnostics-sharing).
 
-[Prefer lossless audio](/audio/#choose-output-compatibility) also stays on this device and applies across Plozz profiles, because compatibility depends on the connected audio equipment.
+[Prefer lossless audio](/audio/#choose-output-compatibility) applies across profiles on this device, matching its audio equipment.
 
 ## Sync Live TV deliberately
 
-Live TV follows iCloud Sync for the same Plozz profile: source addresses, channel settings, guide mappings, and library schedules can sync. Playlist/guide addresses and supported imported source copies use encrypted iCloud storage. Library channels also need their catalogue to finish syncing before devices can reproduce the same schedule.
+For the same profile, Live TV source addresses, channel settings, guide mappings, and library schedules can sync. Playlist/guide addresses and supported imported source copies use encrypted iCloud storage. Library channels also need their catalogue synced to reproduce the same schedule.
 
 The **Playlist file** option in IPTV account sign-in is different: those account-imported M3U files stay on the importing device. Use a playlist URL or import again elsewhere.
 
-Kids-profile [standalone playlist approvals](/live-tv/#approve-playlist-sources-for-kids) remain local and must be granted on each device; they do not cover IPTV accounts. If iCloud Sync shows **Set up IPTV source**, enter its address or update the older sending app. Synced source details alone may not be enough to connect.
+Grant Kids-profile [standalone playlist approvals](/live-tv/#approve-playlist-sources-for-kids) on each device; they do not cover IPTV accounts. For **Set up IPTV source**, enter its address or update the older sending app. Synced details alone may not connect.
 
 ## Set up another device
 
@@ -48,17 +46,23 @@ On the configured device, open **Settings > iCloud Sync**. On Apple TV, also cho
 
 Select the nearby receiver or enter its code. On iPhone/iPad, choose **Enter Code** or **Scan QR Code**; scanning needs Camera permission. Alternatively, scan the configured Apple TV's QR code with a new iPhone/iPad.
 
-When verification codes are shown, approve only a match. Same-iCloud-account pairing can verify the device without this comparison. Setup transfers only supported sign-ins; check **Needs sign-in** afterward.
+Approve only matching verification codes. Same-iCloud-account pairing can verify the device without this comparison. Only supported sign-ins transfer; check **Needs sign-in** afterward.
 
 ## Keep watch history separate
 
-Your server stores history for its selected user. **Sync across all my servers** under Trackers, also exposed in mobile Playback as **Sync watch state across servers**, copies watched-state and resume updates to matching accessible copies on other servers. It defaults to on; Apple TV enables the control with multiple servers. Turn it off for independent server histories. [Tracker scrobbling](/trackers/) sends activity to external services instead; it is not iCloud configuration sync.
+Media servers store progress for the selected server user, not simply the Plozz profile name.
+
+On Apple TV, open **Settings > Trackers > Sync across all my servers**; you can change it when multiple servers are connected. On iPhone/iPad, use **Settings > Playback > Sync watch state across servers**. This defaults on and updates matching accessible copies when you watch, resume, mark watched/unwatched, or remove a title from Continue Watching. Turn it off before making changes you want kept on one server.
+
+These updates can wait while a source is unreachable. Reopen Plozz with the original profile and server user authorized, restore the connection, and let it retry. A changed card is not confirmation from every server.
+
+[Network-share history](/network-shares/#keep-your-place) and Plex's saved fallback progress for extras stay on this device. iCloud Sync does not copy them. [Tracker scrobbling](/trackers/) sends activity to external accounts instead of copying your configuration.
 
 ## Understand sync data sizes
 
 Open **Settings > iCloud Sync > Troubleshooting** and inspect **Sync Data on This Device**. **Refresh Breakdown** updates the snapshot; if it fails, retry without resetting your setup.
 
-Counts include pending uploads and exclude pending deletions. Sizes measure encoded local sync data, not your iCloud storage usage or downloaded videos. Plozz Channels schedules include the library catalogue needed to align devices; downloaded IPTV guides are excluded. iCloud Keychain logins and Trakt's shared sign-in records are stored separately and excluded too.
+Counts include pending uploads, not pending deletions. Sizes describe this device's prepared sync data, not iCloud storage usage or downloaded videos. Plozz Channels includes its library catalogue; downloaded IPTV guides, iCloud Keychain logins, and separately stored Trakt sign-ins are excluded.
 
 ## Recover sync without erasing your setup
 
