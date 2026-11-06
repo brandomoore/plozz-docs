@@ -1,16 +1,16 @@
 # Appearance and language
 
-Make cards and artwork easier to read. Open **Settings > Appearance** in the profile you want to customize.
+Choose readable cards and your preferred artwork in **Settings > Appearance**.
 
 ## Make cards easier to read
 
-In **Theme**, choose colors and gradient backgrounds. Set **Liquid Glass** to **Off** for solid backgrounds, or follow system Reduce Transparency.
+In **Theme**, choose colors and gradients. **Liquid Glass > Off** uses solid backgrounds; you can also follow system Reduce Transparency.
 
-Then open **Cards > Labels**. Choose **App default**, **Show labels everywhere**, or **Hide labels everywhere**. Selecting a preset replaces your individual label choices.
+Open **Cards > Labels** and choose **App default**, **Show labels everywhere**, or **Hide labels everywhere**. A preset replaces your individual choices.
 
-Open **Customize labels**, then choose **Page**. Home and Recommended have a **Default** plus row **Overrides**. **Mixed** hides labels on series artwork and in Apple TV's Showcase, showing them elsewhere.
+For finer control, open **Customize labels**, then **Page**. Home and Recommended have **Default** and row **Overrides**. **Mixed** hides labels on series artwork and in Apple TV's Showcase, showing them elsewhere.
 
-Continue Watching's **Use default** follows its Home/Recommended context; **On** or **Off** overrides both. Home's **Libraries** override controls library-card labels.
+Continue Watching's **Use default** follows Home or Recommended; **On** or **Off** overrides both. Home's **Libraries** override controls library-card labels.
 
 Titles inside collections/playlists use **Browse**, not [cover labels](/customize-libraries/#choose-collection-cover-shapes). Under **Screens & Navigation**, **Home > Card labels** and **Customize labels** in **Libraries** or **Movie & show details** edit these same preferences.
 
@@ -20,19 +20,19 @@ Under **Cards > Watch indicators**, **Unwatched** marks unstarted titles with a 
 
 **Show unwatched episode count**, its badge style, and **Show progress bars** are independent. Hiding bars does not clear saved positions or stop history updates. These choices follow your profile through [sync](/profiles-and-sync/).
 
-Farther down **Cards**, Apple TV's focus appearance emphasizes your selection. **Display Size** changes card size, columns, and spacing, not video resolution.
+Apple TV's focus appearance highlights your selection. **Display Size** changes card size, columns, and spacing, not video resolution.
 
 ## Choose artwork
 
-In **Artwork**, start with a preset:
+In **Artwork**, presets replace your custom choices:
 
 - **Recommended**: Plozz chooses artwork to suit each area.
 - **Prefer my library's artwork**: use library images first, with online fallback when missing.
 - **Prefer artwork from metadata providers**: use online images first, falling back to the library. Extra lookups can make browsing slower.
 
-Choose **Customize by view**, then **Library** or **Metadata providers** for each area. Home's Watchlist row and the Watchlist page are separate; existing downloads keep their images. Choosing another preset replaces your changes.
+Choose **Customize by view**, then **Library** or **Metadata providers** for each area. **Title detail pages** also offers **Mixed**: online backgrounds and logos with library posters for related titles. Home's Watchlist row and page are separate. Existing downloads keep their images.
 
-Shared [Metadata Providers](/metadata-and-ratings/) are separate; preferences cannot create missing artwork.
+[Metadata Providers](/metadata-and-ratings/) settings are shared; artwork choices are per-profile.
 
 ## Resize title logos
 
@@ -44,6 +44,6 @@ Text size changes titles, descriptions, and metadata, not cards or menus. Apple 
 
 **Settings > Language** changes interface language, separately from [audio](/audio/) and [subtitle language](/subtitles/).
 
-**System** follows device languages. Server titles/descriptions are not translated; dates/numbers follow device region. System-drawn controls and permission prompts retain device language.
+**System** follows device languages. Server titles and descriptions are not translated; dates and numbers follow device region. System controls and permission prompts retain device language.
 
 See [Spoiler protection](/spoiler-protection/), [Circadian Mode](/circadian-mode/), and [Home/navigation](/home-and-navigation/).

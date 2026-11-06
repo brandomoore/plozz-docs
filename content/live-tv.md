@@ -13,25 +13,25 @@ On iPhone/iPad, **Playlist file** imports a local M3U catalogue from Files; reim
 
 Plozz supplies no channels or subscriptions. If import fails, use a direct M3U link, not a web page. Prefer HTTPS.
 
-On iPhone/iPad, open **More > TV Sources** from Live TV's toolbar.
+On iPhone/iPad, Live TV's toolbar uses **More > TV Sources**.
 
 ## Find on-demand titles
 
-Providers may supply separate **Movies** and **TV Shows** libraries. Enable them under **Settings > Libraries**, then [browse normally](/library/). Channel access does not guarantee an on-demand catalogue.
+Providers may supply **Movies** and **TV Shows** libraries. Enable them under **Settings > Libraries**, then [browse normally](/library/). Channel access does not guarantee an on-demand catalogue.
 
 ## Use a connected server
 
 In **TV Sources > Media server**, select a connected Jellyfin, Emby, or Plex server enabled for this Plozz profile. Choose **Add channels** when offered. **Add guide only** supplies listings without playback for that connection.
 
-Server permissions and subscription requirements still apply. Native Silo Live TV is not offered.
+Server permissions and subscription requirements apply. Silo has no native Live TV.
 
 ## Search the guide
 
-Open Live TV's **Search** and enter a name. Apple TV lets you choose **Channels** or **Programs**; iPhone/iPad shows matching categories, channels, and programs together. Program results cover current and upcoming retained listings, not an archive. **Watch channel** tunes live, not from the program's beginning.
+Open Live TV's **Search**. On Apple TV, choose **Channels** or **Programs**; iPhone/iPad combines matching categories, channels, and programs. Program results cover current and upcoming retained listings, not an archive. **Watch channel** tunes live, not from the program's beginning.
 
 ## Approve playlist sources for Kids
 
-These approvals protect standalone playlists, not IPTV accounts connected through **IPTV provider**. For accounts, [choose suitable sources for the Kids profile](/parental-controls/#choose-suitable-media-sources).
+Approvals protect standalone playlists, not accounts connected through **IPTV provider**. For accounts, [choose suitable sources for the Kids profile](/parental-controls/#choose-suitable-media-sources).
 
 Set a [Parental PIN](/parental-controls/), switch to the Kids profile, and open **TV Sources**. Enter the PIN when prompted; choose **Unlock TV sources** first if offered. Select an enabled standalone playlist, choose **Approve this source**, and enter the PIN again.
 
@@ -39,15 +39,13 @@ Approval allows every channel in that source, not age-filtered programs. It stay
 
 ## Watch several channels
 
-While watching, open **Multiview**, add channels, then choose **Watch**. The limit is **four pictures**, with one audible pane. On Apple TV, focus a pane for sound; on iPhone/iPad, choose **Audio**. Provider stream/tuner limits may be lower.
+While watching, open **Multiview**. Choose **Add channel** on Apple TV or **Add** on iPhone/iPad, then **Watch**. You can show **four pictures**, subject to provider stream/tuner limits. One pane supplies sound: focus it on Apple TV or use **Audio** on mobile.
 
-Use **Favorite** to save channels/layout; reopen from **Favorite Multiviews**. This reserves no capacity.
+Save with **Favorite** (Apple TV) or **More > Favorite** (mobile). The guide's **Multiviews** reopens saved layouts; on narrow mobile screens, look under **More**. Saving reserves no capacity.
 
 ## Organize channels and listings
 
-Hold a channel for favorites or hiding actions. See [Organize channels and fix listings](/live-tv-channels/) for category browsing, visibility choices, and connection-specific guide tools.
-
-Use **Refresh sources** after changes or **Retry** for errors.
+Hold a channel to favorite or hide it. [Organize channels and fix listings](/live-tv-channels/) covers categories, visibility, and guide tools. After changes, use **Refresh sources**; for errors, choose **Retry**.
 
 On mobile, **Stop without Wi-Fi or Ethernet** in **Settings > Live TV** stops playback after detected network changes; brief cellular use remains possible. Low Data Mode pauses Live TV even on Wi-Fi; use an unrestricted connection.
 

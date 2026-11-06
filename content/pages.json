@@ -359,7 +359,7 @@
     ],
     "title": "Find and organize media",
     "seoTitle": "Browse, search, and organize your media in Plozz",
-    "description": "Browse and filter libraries, manage history, watch trailers and bonus videos, choose a copy, and recover incomplete results.",
+    "description": "Browse libraries, expand title details, watch extras, choose a copy, and manage history or incomplete results in Plozz.",
     "section": "Library",
     "kind": "reference",
     "file": "library.md",
@@ -376,14 +376,13 @@
       "Sources/CoreModels/MediaItem+Trailer.swift",
       "Sources/CoreUI/YouTubeTrailerOpening.swift",
       "Sources/CoreUI/SettingsCopy.swift",
-      "Sources/FeaturePlayback/WatchProgressReporter.swift",
       "Sources/FeatureHomeCore/LibraryBrowseViewModel.swift",
       "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
       "Sources/FeatureHome/LibraryBrowseView.swift",
-      "Sources/CoreNetworking/LocalMediaWatchStore.swift",
       "Sources/AppShelliOS/PlozziOSLibraryView.swift",
-      "Sources/AppRuntime/WatchMutationFactory.swift",
-      "Sources/ProviderPlex/PlexExtraWatchState.swift"
+      "Sources/CoreUI/DetailInformationSections.swift",
+      "Sources/CoreUI/DetailMoreContent.swift",
+      "Sources/CoreModels/MediaItem.swift"
     ],
     "watch": [
       "Sources/FeatureHome",
@@ -504,12 +503,183 @@
           "source": "Sources/CoreModels/MediaItem+Trailer.swift"
         },
         {
+          "text": "Libraries",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
+        },
+        {
+          "text": "About",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Ratings",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Details",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Crew",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Playback",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Total Seasons",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Total Episodes",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Release & Availability",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "MORE",
+          "source": "Sources/CoreUI/DetailMoreContent.swift"
+        },
+        {
+          "text": "Done",
+          "source": "Sources/CoreUI/DetailMoreContent.swift"
+        }
+      ],
+      "emphasis": []
+    }
+  },
+  {
+    "slug": "trailers-and-previews",
+    "title": "Trailers and previews",
+    "seoTitle": "Choose trailer sources, autoplay, and previews in Plozz",
+    "description": "Watch server or YouTube trailers, open Apple TV previews full screen, and choose separate Home autoplay and detail-page sound settings.",
+    "kind": "guide",
+    "file": "trailers-and-previews.md",
+    "section": "Playback",
+    "sources": [
+      "Sources/CoreModels/MediaItem+Trailer.swift",
+      "Sources/CoreUI/YouTubeTrailerOpening.swift",
+      "Sources/FeatureHome/HeroTrailerFullscreen.swift",
+      "Sources/CoreModels/NavigationStyle.swift",
+      "Sources/CoreUI/ProfileSettingsCategory.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/FeatureSettings/HomeRowsSettingsView.swift",
+      "Sources/FeatureSettings/HeroSettingsControls.swift",
+      "Sources/CoreModels/HeroBackgroundSettings.swift",
+      "Sources/FeatureHomeCore/ItemDetailViewModel.swift",
+      "Sources/FeatureHomeCore/FastHeroTrailerResolver.swift",
+      "Sources/FeatureHomeCore/HeroTrailerController.swift",
+      "Sources/FeaturePlayback/BorrowedTrailerPlayer.swift",
+      "Sources/FeatureHome/HomeHeroView.swift",
+      "Sources/FeatureHome/DetailHeroView.swift",
+      "Sources/FeaturePlayback/CustomPlayerContainer.swift",
+      "Sources/AppShell/MainTabView.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+    ],
+    "watch": [
+      "Sources/FeatureSettings/HeroSettingsControls.swift",
+      "Sources/CoreModels/HeroBackgroundSettings.swift",
+      "Sources/FeatureHome/HeroTrailerFullscreen.swift",
+      "Sources/FeatureHomeCore/ItemDetailViewModel.swift",
+      "Sources/FeatureHomeCore/HeroTrailerController.swift",
+      "Sources/CoreUI/YouTubeTrailerOpening.swift"
+    ],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Trailer",
+          "source": "Sources/CoreModels/MediaItem+Trailer.swift"
+        },
+        {
+          "text": "Watch on YouTube",
+          "source": "Sources/CoreModels/MediaItem+Trailer.swift"
+        },
+        {
           "text": "Couldn't open YouTube",
           "source": "Sources/CoreUI/YouTubeTrailerOpening.swift"
         },
         {
-          "text": "Libraries",
-          "source": "Sources/CoreUI/SettingsCopy.swift"
+          "text": "Up for playback controls",
+          "source": "Sources/FeatureHome/HeroTrailerFullscreen.swift"
+        },
+        {
+          "text": "Pinned Sidebar",
+          "source": "Sources/CoreModels/NavigationStyle.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShell/MainTabView.swift"
+        },
+        {
+          "text": "Screens & Navigation",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        },
+        {
+          "text": "Movie & show details",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Home",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Hero",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Trailers & music",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Trailers",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/CoreModels/HeroBackgroundSettings.swift"
+        },
+        {
+          "text": "Server only",
+          "source": "Sources/CoreModels/HeroBackgroundSettings.swift"
+        },
+        {
+          "text": "Server + YouTube",
+          "source": "Sources/CoreModels/HeroBackgroundSettings.swift"
+        },
+        {
+          "text": "Home",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Home autoplay",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Start muted",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Details",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Detail background",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Trailer",
+          "source": "Sources/CoreModels/HeroBackgroundSettings.swift"
+        },
+        {
+          "text": "Theme music",
+          "source": "Sources/CoreModels/HeroBackgroundSettings.swift"
         }
       ],
       "emphasis": []
@@ -640,7 +810,11 @@
     "section": "Library",
     "kind": "guide",
     "file": "browse-home-rows.md",
-    "platforms": ["Apple TV", "iPhone", "iPad"],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
     "sources": [
       "Sources/AppShell/MainTabView.swift",
       "Sources/FeatureHome/HomeView.swift",
@@ -672,25 +846,82 @@
     ],
     "ui": {
       "references": [
-        {"text": "Home", "source": "Sources/AppShell/MainTabView.swift"},
-        {"text": "See all", "source": "Sources/CoreUI/MediaRowBrowseCard.swift"},
-        {"text": "Recently Added", "source": "Sources/FeatureHomeCore/HomeRow.swift"},
-        {"text": "Watchlist", "source": "Sources/FeatureHomeCore/HomeRow.swift"},
-        {"text": "Filter", "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"},
-        {"text": "All", "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"},
-        {"text": "Movies", "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"},
-        {"text": "TV Shows", "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"},
-        {"text": "Unwatched", "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"},
-        {"text": "In Progress", "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"},
-        {"text": "Sort By", "source": "Sources/CoreUI/BrowseQueryControls.swift"},
-        {"text": "Name", "source": "Sources/CoreModels/MediaProvider.swift"},
-        {"text": "Date Added", "source": "Sources/CoreModels/MediaProvider.swift"},
-        {"text": "Release Date", "source": "Sources/CoreModels/MediaProvider.swift"},
-        {"text": "Runtime", "source": "Sources/CoreModels/MediaProvider.swift"},
-        {"text": "Order", "source": "Sources/CoreUI/BrowseQueryControls.swift"},
-        {"text": "Default", "source": "Sources/CoreUI/BrowseQueryControls.swift"},
-        {"text": "No titles to show", "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"},
-        {"text": "Retry", "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"}
+        {
+          "text": "Home",
+          "source": "Sources/AppShell/MainTabView.swift"
+        },
+        {
+          "text": "See all",
+          "source": "Sources/CoreUI/MediaRowBrowseCard.swift"
+        },
+        {
+          "text": "Recently Added",
+          "source": "Sources/FeatureHomeCore/HomeRow.swift"
+        },
+        {
+          "text": "Watchlist",
+          "source": "Sources/FeatureHomeCore/HomeRow.swift"
+        },
+        {
+          "text": "Filter",
+          "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"
+        },
+        {
+          "text": "All",
+          "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"
+        },
+        {
+          "text": "Movies",
+          "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"
+        },
+        {
+          "text": "TV Shows",
+          "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"
+        },
+        {
+          "text": "Unwatched",
+          "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"
+        },
+        {
+          "text": "In Progress",
+          "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"
+        },
+        {
+          "text": "Sort By",
+          "source": "Sources/CoreUI/BrowseQueryControls.swift"
+        },
+        {
+          "text": "Name",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Date Added",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Release Date",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Runtime",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Order",
+          "source": "Sources/CoreUI/BrowseQueryControls.swift"
+        },
+        {
+          "text": "Default",
+          "source": "Sources/CoreUI/BrowseQueryControls.swift"
+        },
+        {
+          "text": "No titles to show",
+          "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"
+        },
+        {
+          "text": "Retry",
+          "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"
+        }
       ],
       "emphasis": []
     }
@@ -1196,6 +1427,14 @@
           "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
         },
         {
+          "text": "Layout",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
+          "text": "Logo",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
           "text": "Add to Home",
           "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
         },
@@ -1288,7 +1527,7 @@
           "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
         },
         {
-          "text": "Trailers",
+          "text": "Trailers & music",
           "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
         },
         {
@@ -1860,12 +2099,12 @@
       "Sources/FeatureHomeCore/ThemeMusicPlayback.swift",
       "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift",
       "Sources/FeatureHomeCore/ThemeMusicController.swift",
-      "Sources/FeatureHome/ItemDetailView.swift",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
       "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
       "Sources/FeaturePlayback/NativeVideoEngine.swift",
       "Sources/CoreModels/PlaybackSettings.swift",
-      "Sources/FeaturePlayback/SeriesTrackMemory.swift"
+      "Sources/FeaturePlayback/SeriesTrackMemory.swift",
+      "Sources/FeatureSettings/HeroSettingsControls.swift"
     ],
     "watch": [
       "Sources/FeatureHomeCore/ThemeMusic",
@@ -1915,8 +2154,20 @@
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
         {
-          "text": "Background",
-          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+          "text": "Trailers & music",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Details",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Detail background",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Home autoplay",
+          "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
         },
         {
           "text": "Prefer lossless audio",
@@ -2323,7 +2574,7 @@
       "Sources/FeatureLiveTV/LiveTVPrototypeView.swift",
       "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift",
       "Sources/FeatureLiveTV/LiveTVProgramSearchView.swift",
-      "Sources/FeatureLiveTV/LiveTVPrototypeSearch.swift",
+      "Sources/FeatureLiveTV/LiveTVMultiviewTouchChrome.swift",
       "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift",
       "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift",
       "Sources/FeatureLiveTV/LiveTVMultiviewGuideActions.swift",
@@ -2468,12 +2719,32 @@
           "source": "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift"
         },
         {
-          "text": "Audio",
+          "text": "Add channel",
           "source": "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift"
         },
         {
-          "text": "Favorite Multiviews",
-          "source": "Sources/FeatureLiveTV/LiveTVMultiviewGuideActions.swift"
+          "text": "Add",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewTouchChrome.swift"
+        },
+        {
+          "text": "Watch",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewTouchChrome.swift"
+        },
+        {
+          "text": "Audio",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewTouchChrome.swift"
+        },
+        {
+          "text": "More",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewTouchChrome.swift"
+        },
+        {
+          "text": "Favorite",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewTouchChrome.swift"
+        },
+        {
+          "text": "Multiviews",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
         },
         {
           "text": "More",
@@ -3133,6 +3404,14 @@
         {
           "text": "Mixed",
           "source": "Sources/CoreModels/CardCaptionSettings.swift"
+        },
+        {
+          "text": "Mixed",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Title detail pages",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
         },
         {
           "text": "On",

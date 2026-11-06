@@ -1,6 +1,6 @@
 # Home and navigation
 
-Keep your favorite rows and shortcuts within reach. These choices belong to your active profile.
+Keep favorite rows and shortcuts within reach. These choices belong to your active profile.
 
 ## Choose the hero
 
@@ -8,9 +8,9 @@ Open **Settings > Screens & Navigation > Home > Hero** for the featured carousel
 
 On Apple TV, choose **On** or **Off**; on mobile, use **Show hero**. Hiding it keeps your saved rows and row style.
 
-With the hero on, choose sizes, then **Content sources** on Apple TV or **Hero content sources** on mobile. Select **Continue Watching**, **Recently Added**, **Watchlist**, **Random from Library**, **Collections**, or **Discovery**. Set **Items to show** and **Advance automatically**; **Ratings** and **Trailers** control scores and [server-trailer previews](/library/#watch-a-trailer).
+With the hero on, choose sizes, then **Content sources** on Apple TV or **Hero content sources** on mobile. Select **Continue Watching**, **Recently Added**, **Watchlist**, **Random from Library**, **Collections**, or **Discovery**. Set **Items to show** and **Advance automatically**; **Ratings** controls scores. **Trailers & music** opens [trailer-source and autoplay choices](/trailers-and-previews/#choose-trailers-and-previews).
 
-Enable Discovery to choose **Discovery providers**. Suggestions can include titles outside your libraries; only requests need Seerr. New profiles follow the Seerr connection until you choose otherwise. Kids profiles exclude Discovery. [Discover](/discover/) has separate filters.
+Enable Discovery to choose **Discovery providers**. Suggestions can include titles outside your libraries; only requests need Seerr. New profiles follow the Seerr connection until you choose otherwise. Kids profiles exclude Discovery; [Discover's filters](/discover/) are separate.
 
 ## Choose row style on Apple TV
 
@@ -39,10 +39,10 @@ Choose **Dismiss** to hide the message, not future titles. **Customize Home** op
 ## Add a collection section
 
 1. Choose **Add row > From a collection**, then an available source and collection.
-2. Select **Posters**, **Landscape**, or **Featured**.
+2. Set **Layout** to **Posters**, **Landscape**, or **Featured**. Landscape also offers **Logo**: turn it on for title logos over the artwork.
 3. Optionally enter a **Row name**, then **Add to Home**.
 
-Reopen to change **Content** or the name, then **Save changes**. The collection still needs access through its original server user.
+Reopen to change **Content** or the name, then **Save changes**. Access still follows the original server user.
 
 ## Keep older Continue Watching titles
 
@@ -75,7 +75,7 @@ Open **Settings > Screens & Navigation > App navigation**. On Apple TV, choose a
 
 Leave Settings to see the layout. All support library shortcuts and [All Libraries](/combined-libraries/).
 
-Use **Hide or Reorder Navigation** to show, hide, or move shortcuts; drag to reorder on mobile. Use **Show** to keep Home, Search, or Watchlist visible. **Reset Navigation** restores shortcuts, not library tabs or access.
+Use **Hide or Reorder Navigation** to show, hide, or move shortcuts; drag to reorder on mobile. **Reset Navigation** restores shortcuts, not library tabs or access.
 
 Apple TV sidebars always retain **Settings**; if hidden in Top Bar, use the profile picker.
 
@@ -83,6 +83,6 @@ On mobile, available Home, Downloads, and Search shortcuts start shown. Librarie
 
 Navigation stays local to each profile on each device; Home preferences can [sync](/profiles-and-sync/).
 
-Under **Screens & Navigation > Movie & show details**, choose artwork, trailers, or [theme music and its volume preview](/audio/#control-detail-page-music) independently of Home. Review-score and age-recommendation controls are here.
+Under **Screens & Navigation > Movie & show details**, choose [Trailers & music](/trailers-and-previews/#choose-trailers-and-previews), review scores, and age recommendations.
 
 See [library tabs and rows](/customize-libraries/), [appearance sizing](/appearance/), and [Continue Watching artwork](/spoiler-protection/#change-continue-watching-cards).

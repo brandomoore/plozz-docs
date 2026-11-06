@@ -19,17 +19,23 @@ Some choices show **Preparing library filter…** before the results are ready. 
 
 Press and hold a card on Apple TV, or touch and hold on iPhone/iPad, for actions. **Go to Show**, **Go to Movie**, and **Go to Episode** open details; a share's **Browse Files** opens original folders.
 
-Detail pages include cast and related titles. Choose a copy with the server/version selector, when offered; Apple TV uses the header's **More actions**.
+Choose a copy with the detail page's server/version selector, when offered; Apple TV uses the header's **More actions**.
 
 Upcoming dates and unaired placeholders are schedule information, not playable files or promised additions.
 
 Network shares can hold [streaming-service shortcuts](/network-shares/#open-links-to-streaming-services).
 
+## Read more about a title
+
+Below the videos and cast, read **About**, **Ratings**, [Release & Availability](/media-requests/#read-release-and-availability-information), **Details**, **Crew**, and **Playback**, when available. Playback describes the selected file, not measured connection speed. **Total Seasons** and **Total Episodes** count the whole show, not your available or unwatched episodes.
+
+Select a shortened description or a field marked **MORE** to read its full information. On iPhone/iPad, **Done** closes an expanded group; the full-description reader has a close button. On Apple TV, press Back.
+
+Cast members and related titles open their own pages. A listed credit is not necessarily in your library.
+
 ## Watch a trailer
 
-On details, **Trailer** plays an accessible server-owned file in Plozz. These files also supply automatic Home/detail previews. **Watch on YouTube** opens an online link outside Plozz, independently of your external-player preference.
-
-Apple TV needs the YouTube app; iPhone/iPad can fall back to its website. For **Couldn't open YouTube**, check that app. YouTube controls availability and restrictions. A trailer button appears only when a trailer is found; a visible link does not guarantee playback.
+On details, **Trailer** plays a server file in Plozz; **Watch on YouTube** opens an external link when allowed. [Trailers and previews](/trailers-and-previews/) explains source choices, autoplay, sound, and Apple TV's full-screen preview controls.
 
 ## Watch extras
 
