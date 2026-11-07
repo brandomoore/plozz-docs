@@ -951,7 +951,7 @@
       "Sources/AppShell/ProfileServerIdentityPromptView.swift",
       "Sources/FeatureWatchlistCore/WatchlistModel.swift",
       "Sources/AppRuntime/UniversalWatchlistRuntime.swift",
-      "Sources/CoreModels/ProfileSettingsSnapshot.swift",
+      "Sources/AppShelliOS/PlozziOSOfflineModeView.swift",
       "Sources/CoreModels/MediaItemActionCatalog.swift",
       "Sources/FeatureHomeCore/WatchlistBrowseModel.swift",
       "Sources/FeatureHomeCore/HomeViewModel.swift",
@@ -1035,6 +1035,10 @@
         {
           "text": "Don't use this server's watchlist",
           "source": "Sources/AppShell/ProfileServerIdentityPromptView.swift"
+        },
+        {
+          "text": "Offline Mode",
+          "source": "Sources/AppShelliOS/PlozziOSOfflineModeView.swift"
         }
       ],
       "emphasis": [
@@ -1618,8 +1622,8 @@
   {
     "slug": "playback",
     "title": "Player controls",
-    "seoTitle": "Use Plozz seeking, zoom, versions, chapters, and skip markers",
-    "description": "Seek with the Apple TV remote, crop black bars, choose editions, set autoplay and skip behavior, and jump to chapters while watching.",
+    "seoTitle": "Use Plozz player controls, Continue Watching, and song identification",
+    "description": "Seek, choose editions, set autoplay and skip markers, navigate player tabs, resume another Continue Watching title, and identify songs while watching.",
     "section": "Playback",
     "kind": "reference",
     "file": "playback.md",
@@ -1636,22 +1640,22 @@
       "Sources/FeaturePlayback/PlayerMoreMenu.swift",
       "Sources/FeaturePlayback/CastPanelView.swift",
       "Sources/MetadataKit/CommunitySkipMarkers.swift",
-      "Sources/FeatureHomeCore/PlaybackVersionChoiceModel.swift",
-      "Sources/FeatureHomeCore/DetailPlaybackSelection.swift",
-      "Sources/CoreModels/PlaybackSettings.swift",
-      "Sources/FeaturePlayback/PlayerChapterPanel.swift",
+      "Sources/AppShelliOS/PlozziOSOfflineModeView.swift",
+      "Sources/CoreModels/PlayerOptionalTab.swift",
+      "Sources/AppShell/MainTabView.swift",
+      "Sources/FeatureSettings/PlayerTabSettingsControls.swift",
       "Sources/FeaturePlayback/PlayerViewModel.swift",
-      "Sources/FeaturePlayback/CustomPlayerContainer.swift",
+      "Sources/FeaturePlayback/SongRecognition.swift",
       "Sources/FeaturePlayback/RemoteSeekScan.swift",
-      "Sources/FeaturePlayback/VideoPresentationView.swift"
+      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
     ],
     "watch": [
       "Sources/FeaturePlayback/Player",
       "Sources/AppShelliOS/PlozziOSPlayer",
       "Sources/FeaturePlayback/Remote",
-      "Sources/FeaturePlayback/Video",
-      "Sources/FeaturePlayback/CustomPlayerContainer.swift",
-      "Sources/EnginePlozzigen/PlozzigenNativePictureAnalyzer.swift"
+      "Sources/FeatureSettings/PlayerTabSettingsControls.swift",
+      "Sources/FeaturePlayback/SongRecognition",
+      "Sources/CoreModels/PlayerOptionalTab.swift"
     ],
     "platforms": [
       "Apple TV",
@@ -1665,8 +1669,20 @@
           "source": "Sources/FeaturePlayback/PlayerControls.swift"
         },
         {
+          "text": "Playback",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Playback",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
           "text": "Audio",
           "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "Audio",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
           "text": "Subtitles",
@@ -1674,15 +1690,15 @@
         },
         {
           "text": "Chapters",
-          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+          "source": "Sources/CoreModels/PlayerOptionalTab.swift"
         },
         {
           "text": "Episodes",
-          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+          "source": "Sources/CoreModels/PlayerOptionalTab.swift"
         },
         {
           "text": "Playlist",
-          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+          "source": "Sources/CoreModels/PlayerOptionalTab.swift"
         },
         {
           "text": "Version",
@@ -1690,7 +1706,7 @@
         },
         {
           "text": "Cast",
-          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+          "source": "Sources/CoreModels/PlayerOptionalTab.swift"
         },
         {
           "text": "Playback options",
@@ -1819,6 +1835,38 @@
         {
           "text": "Settings",
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShell/MainTabView.swift"
+        },
+        {
+          "text": "Continue Watching",
+          "source": "Sources/CoreModels/PlayerOptionalTab.swift"
+        },
+        {
+          "text": "Player tabs",
+          "source": "Sources/FeatureSettings/PlayerTabSettingsControls.swift"
+        },
+        {
+          "text": "Player tabs",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Info",
+          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "Identify songs",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Identify songs",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Offline Mode",
+          "source": "Sources/AppShelliOS/PlozziOSOfflineModeView.swift"
         }
       ],
       "emphasis": []
@@ -2090,7 +2138,7 @@
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/FeatureSettings/LosslessAudioControl.swift",
       "Sources/FeaturePlayback/SystemPlaybackAudio.swift",
-      "Sources/CoreModels/HeroBackgroundSettings.swift",
+      "Sources/FeaturePlayback/SongRecognition.swift",
       "Sources/FeatureSettings/ThemeMusicVolumeControl.swift",
       "Sources/AppShelliOS/PlozziOSHeroViews.swift",
       "Sources/CoreUI/ProfileSettingsCategory.swift",
@@ -2100,7 +2148,7 @@
       "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift",
       "Sources/FeatureHomeCore/ThemeMusicController.swift",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
-      "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
+      "Sources/CoreModels/HeroBackgroundSettings.swift",
       "Sources/FeaturePlayback/NativeVideoEngine.swift",
       "Sources/CoreModels/PlaybackSettings.swift",
       "Sources/FeaturePlayback/SeriesTrackMemory.swift",
@@ -2111,7 +2159,7 @@
       "Sources/FeaturePlayback/SystemPlaybackAudio.swift",
       "Sources/FeaturePlayback/Player",
       "Sources/FeatureSettings/LosslessAudioControl.swift",
-      "Sources/AppShelliOS/PlozziOSHeroViews.swift",
+      "Sources/FeaturePlayback/SongRecognition",
       "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
     ],
     "platforms": [
@@ -2131,6 +2179,10 @@
         },
         {
           "text": "Preferred audio language",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Set separately for movies, TV shows & anime",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
@@ -2285,6 +2337,14 @@
         {
           "text": "Auto-Move Away from Controls",
           "source": "Sources/CoreModels/SubtitleStyle.swift"
+        },
+        {
+          "text": "Set separately for movies, TV shows & anime",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Show subtitles",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
           "text": "Position",
@@ -3107,8 +3167,8 @@
       "iPad"
     ],
     "title": "Watch offline",
-    "seoTitle": "Download videos for offline viewing in Plozz on iPhone and iPad",
-    "description": "Choose episodes, versions, and quality for offline viewing, verify saved copies, manage storage and networks, and understand background-transfer limits.",
+    "seoTitle": "Download videos and use Plozz Offline Mode on iPhone and iPad",
+    "description": "Save and verify videos, browse only your downloads with Offline Mode, prepare Plex Home access, and manage quality, storage, and background transfers.",
     "section": "Playback",
     "kind": "reference",
     "file": "downloads.md",
@@ -3118,29 +3178,29 @@
       "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift",
       "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
       "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift",
-      "Sources/FeatureHomeCore/EpisodeDownloadSelection.swift",
+      "Sources/AppShelliOS/PlozziOSOfflineModeView.swift",
       "Sources/CoreModels/SeriesDownloadPresentation.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/AppShelliOS/PlozziOSDownloadsModel.swift",
       "Sources/AppShelliOS/PlozziOSBackgroundHTTPDownloadEngine.swift",
       "Sources/MediaDownloads/RegistryOfflinePlaybackResolver.swift",
-      "Sources/MediaDownloads/DirectShareDownloadSource.swift",
+      "Sources/MediaDownloads/OfflineMediaProvider.swift",
       "Sources/AppShelliOS/PlozziOSAppModel.swift",
       "Sources/MediaDownloads/DownloadNetworkPolicy.swift",
       "Sources/ProviderSilo/SiloDownloads.swift",
-      "Sources/AppShelliOS/PlozziOSDownloadNotifications.swift",
+      "Sources/AppShelliOS/PlozziOSProfilePickerView.swift",
       "Sources/AppShelliOS/PlozziOSDownloadNotificationNavigation.swift",
       "Sources/CoreModels/MediaItemAction.swift",
-      "Sources/MediaDownloads/DownloadedMediaRegistry.swift",
-      "Sources/AppShelliOS/PlozziOSPlayerView.swift"
+      "Sources/AppRuntime/PlexHomeUsersModel.swift",
+      "Sources/AppShelliOS/PlozziOSRootView.swift"
     ],
     "watch": [
       "Sources/MediaDownloads/",
       "Sources/AppShelliOS/PlozziOSDownload",
-      "Sources/CoreModels/SeriesDownload",
-      "Sources/FeatureHomeCore/EpisodeDownloadSelection.swift",
-      "Sources/AppShelliOS/SiloOfflineDownload.swift",
-      "Sources/ProviderSilo/SiloDownloads.swift"
+      "Sources/AppShelliOS/PlozziOSOfflineModeView.swift",
+      "Sources/CoreModels/OfflineMode.swift",
+      "Sources/AppRuntime/OfflinePlexSignInStore.swift",
+      "Sources/AppRuntime/PlexHomeUsersModel.swift"
     ],
     "ui": {
       "references": [
@@ -3287,6 +3347,42 @@
         {
           "text": "Settings",
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Downloaded",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Offline Mode",
+          "source": "Sources/AppShelliOS/PlozziOSOfflineModeView.swift"
+        },
+        {
+          "text": "More",
+          "source": "Sources/AppShelliOS/PlozziOSProfilePickerView.swift"
+        },
+        {
+          "text": "Home",
+          "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
+        },
+        {
+          "text": "Search",
+          "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
+        },
+        {
+          "text": "Watchlist",
+          "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
+        },
+        {
+          "text": "Discover",
+          "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
+        },
+        {
+          "text": "Live TV",
+          "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
+        },
+        {
+          "text": "No Network Connection",
+          "source": "Sources/AppShelliOS/PlozziOSOfflineModeView.swift"
         }
       ],
       "emphasis": []
@@ -3708,6 +3804,7 @@
       "Sources/CoreUI/ProfileSettingsCategory.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/CoreModels/NightShiftSettings.swift",
+      "Sources/CoreModels/NightShiftSettingsStore.swift",
       "Sources/CoreModels/NightShiftRegion.swift",
       "Sources/CoreUI/NightShiftOverlay.swift"
     ],
@@ -3726,7 +3823,43 @@
     "ui": {
       "references": [
         {
+          "text": "Auto",
+          "source": "Sources/CoreModels/NightShiftSettings.swift"
+        },
+        {
+          "text": "Manual",
+          "source": "Sources/CoreModels/NightShiftSettings.swift"
+        },
+        {
+          "text": "Always On",
+          "source": "Sources/CoreModels/NightShiftSettings.swift"
+        },
+        {
+          "text": "Location",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Turns on",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Turns off",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Warmth",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Fade",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
           "text": "Circadian Mode",
+          "source": "Sources/FeatureSettings/NightShiftDetailView.swift"
+        },
+        {
+          "text": "Location",
           "source": "Sources/FeatureSettings/NightShiftDetailView.swift"
         },
         {
@@ -3952,14 +4085,16 @@
       "Sources/CoreSecureStore/Keychain.swift",
       "Sources/CoreModels/ProfileReturnPolicy.swift",
       "Sources/AppShell/LiveTVShellDestination.swift",
-      "Sources/AppRuntime/ExternalPlaybackRuntime.swift"
+      "Sources/AppRuntime/ExternalPlaybackRuntime.swift",
+      "Sources/AppRuntime/OfflinePlexSignInStore.swift",
+      "Sources/CoreModels/RuntimeFeatureFlags.swift"
     ],
     "watch": [
       "App/Resources/Plozz.entitlements",
       "Sources/CoreModels/Profile",
       "Sources/AppRuntime/AutomaticSignInStore.swift",
       "Sources/AppRuntime/PlexHomeUsersModel.swift",
-      "Sources/AppShell/Profile",
+      "Sources/AppRuntime/OfflinePlexSignInStore.swift",
       "Sources/AppShell/TVProfileForegroundProtection.swift"
     ],
     "ui": {
@@ -4222,11 +4357,11 @@
       "Sources/CoreModels/WatchStateReconciler.swift",
       "Sources/AppShelliOS/PlozziOSAppModel+KeychainSync.swift",
       "Sources/FeatureSyncCloud/CloudConfigSyncService.swift",
-      "App/PlozziOS/PlozziOS.entitlements",
+      "Sources/AppShelliOS/PlozziOSAppModel+CloudSync.swift",
       "Sources/CoreNetworking/LocalMediaWatchStore.swift",
       "Sources/AppRuntime/WatchMutationFactory.swift",
       "Sources/FeatureSettings/SyncEraseDataView.swift",
-      "Sources/CoreModels/LiveTVSourceApproval.swift",
+      "Sources/AppShelliOS/PlozziOSOfflineModeView.swift",
       "Sources/ProviderPlex/PlexExtraWatchState.swift"
     ],
     "watch": [
@@ -4235,7 +4370,7 @@
       "Sources/AppShelliOS/PlozziOSSyncSetup",
       "Sources/CoreModels/ProfileSettingsSnapshot.swift",
       "Sources/AppShell/AppState+CloudSync.swift",
-      "Sources/AppRuntime/LiveTV"
+      "Sources/AppShelliOS/PlozziOSAppModel+"
     ],
     "platforms": [
       "Apple TV",
@@ -4347,6 +4482,10 @@
         {
           "text": "Settings",
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Offline Mode",
+          "source": "Sources/AppShelliOS/PlozziOSOfflineModeView.swift"
         }
       ],
       "emphasis": [
@@ -4901,7 +5040,7 @@
       "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
-      "App/PlozziOS/Info.plist",
+      "Sources/AppShelliOS/PlozziOSOfflineModeView.swift",
       "Sources/CoreUI/PlaybackFailureView.swift",
       "Sources/CoreModels/PlaybackDiagnosticReport.swift",
       "Sources/CoreModels/LibraryLoadDiagnostic.swift",
@@ -5030,6 +5169,10 @@
         {
           "text": "Refresh guide",
           "source": "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        },
+        {
+          "text": "Offline Mode",
+          "source": "Sources/AppShelliOS/PlozziOSOfflineModeView.swift"
         }
       ],
       "emphasis": [

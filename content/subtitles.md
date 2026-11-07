@@ -46,7 +46,9 @@ If file formatting overrides your choices, open **Subtitle file formatting**. Tu
 
 On iPhone/iPad, **Preferred language code** accepts a code such as `en` for English; leave it blank to follow the device language.
 
-Set movie, TV, and anime rules where offered. Forced tracks cover selected dialogue/signs; SDH includes sound descriptions. **Prefer SDH** allows regular fallback; **Only SDH** leaves automatic subtitles off when unavailable and excludes non-SDH search/download results. Neither creates tracks.
+Enable **Set separately for movies, TV shows & anime** to give each its own rule; otherwise **Show subtitles** applies to everything.
+
+Forced tracks cover selected dialogue/signs; SDH includes sound descriptions. **Prefer SDH** allows regular fallback; **Only SDH** leaves automatic subtitles off when unavailable and excludes non-SDH search/download results. Neither creates tracks.
 
 To stop reusing series choices, on Apple TV open **Settings > Subtitles > Remember subtitles per series** and turn off **Remember per series**. On iPhone/iPad, open **Settings > Playback**, then turn off **Remember subtitles per series** under **Tracks**.
 

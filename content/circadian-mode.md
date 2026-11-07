@@ -6,20 +6,21 @@ Circadian Mode warms and dims Plozz on a schedule, including its player. It chan
 
 Open **Settings > Appearance > Circadian Mode** in the profile you want to change.
 
-On Apple TV, choose a mode directly. On iPhone/iPad, enable **Circadian Mode**, then choose **Schedule**:
+On Apple TV, choose a mode directly; **Off** disables the effect. On iPhone/iPad, enable **Circadian Mode**, then choose **Schedule**. Turn off the master switch to disable it.
 
-- **Auto**: follows sunset and sunrise for the location selected in the settings. Choose the appropriate region; do not assume it follows your current travel location.
+- **Auto**: choose your region in **Location** to follow its sunset and sunrise. Change it when you travel; it does not follow your current location automatically.
 - **Manual**: set **Turns on** and **Turns off** for your daily schedule.
 - **Always On**: applies the chosen strength throughout the day.
-- **Off** on Apple TV, or the disabled master switch on mobile: removes the effect.
 
 ## Adjust the picture
 
-Set **Warmth** and **Darkness** on Apple TV; the mobile darkness control is called **Dimness**. These control color warmth and darkening separately.
+On Apple TV, use **Fade** to make the scheduled transition gradual, then set **Darkness** and **Warmth** independently.
 
-**Fade** controls the transition into and out of the scheduled effect. It is not available with Always On because there is no scheduled transition.
+On iPhone/iPad, set **Warmth** and **Dimness** independently, then adjust **Fade** for a gradual transition.
 
-Use **Preview a day** on Apple TV, or **Preview a Day** on mobile, to see the schedule over a simulated day. Mobile also offers **Preview at Full Strength**. Leaving the settings stops the preview; it does not disable your saved schedule.
+Fade is hidden with Always On because there is no scheduled transition.
+
+On Apple TV, choose **Preview a day** to see a simulated day. On iPhone/iPad, use **Preview at Full Strength** to check the strongest effect, or **Preview a Day** to see the schedule. Leaving settings stops the preview without disabling your saved schedule.
 
 ## The picture is unexpectedly warm or dark
 

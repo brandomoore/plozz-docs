@@ -26,7 +26,7 @@ With sync and iCloud Keychain available, iPhone/iPad can automatically adopt sup
 
 For each profile, **Display Size**, navigation style, and main shortcuts stay local, as does Apple TV's **Prevent Accidental Exit**. Set these on each device; they neither sync nor transfer.
 
-Downloads, automatic sign-in, [Video buffer](/streaming-quality/), [Live TV buffer](/platform-controls/#live-tv-remote-controls-and-rewind), and [Top Shelf preferences](/platform-controls/#launch-from-apple-tv-top-shelf) also stay local. So do the device-wide [external-player choice](/external-players/) and [diagnostics consent](/feedback-and-bugs/#choose-diagnostics-sharing).
+Downloads, [Offline Mode](/downloads/#browse-only-your-downloads), automatic sign-in, [Video buffer](/streaming-quality/), [Live TV buffer](/platform-controls/#live-tv-remote-controls-and-rewind), and [Top Shelf preferences](/platform-controls/#launch-from-apple-tv-top-shelf) also stay local. So do the device-wide [external-player choice](/external-players/) and [diagnostics consent](/feedback-and-bugs/#choose-diagnostics-sharing).
 
 [Prefer lossless audio](/audio/#choose-output-compatibility) applies across profiles on this device, matching its audio equipment.
 
@@ -54,7 +54,7 @@ Media servers store progress for the selected server user, not simply the Plozz 
 
 On Apple TV, open **Settings > Trackers > Sync across all my servers**; you can change it when multiple servers are connected. On iPhone/iPad, use **Settings > Playback > Sync watch state across servers**. This defaults on and updates matching accessible copies when you watch, resume, mark watched/unwatched, or remove a title from Continue Watching. Turn it off before making changes you want kept on one server.
 
-These updates can wait while a source is unreachable. Reopen Plozz with the original profile and server user authorized, restore the connection, and let it retry. A changed card is not confirmation from every server.
+Updates wait while offline or a source is unreachable. On iPhone/iPad, turn **Offline Mode** off. Reconnect and reopen the original authorized profile and server user to retry; a changed card is not confirmation from every server.
 
 [Network-share history](/network-shares/#keep-your-place) and Plex's saved fallback progress for extras stay on this device. iCloud Sync does not copy them. [Tracker scrobbling](/trackers/) sends activity to external accounts instead of copying your configuration.
 

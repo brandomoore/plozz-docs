@@ -35,4 +35,6 @@ Watchlist combines explicit Plozz saves with enabled servers' and [trackers'](/t
 
 Disabling a server retracts its contributed entries, not explicit Plozz saves. **Don't use this server's watchlist** excludes that list without disabling browsing/playback; [server-user selection](/profiles-and-locks/#choose-a-server-user) explains how to reconsider.
 
+On iPhone/iPad, [Offline Mode](/downloads/#browse-only-your-downloads) shows only saved entries with usable downloads for the current profile and server user. Missing entries are not deleted from your online lists.
+
 For missing entries, clear filters and check the profile, server identity, enabled sources, and tracker connection. For an entry without a playable copy, check [library access](/library/#a-title-or-library-is-missing) or [Seerr requests](/media-requests/).

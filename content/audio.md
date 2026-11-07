@@ -1,12 +1,12 @@
 # Audio tracks and output
 
-Choose your language, improve dialogue where supported, and match audio to your equipment.
+Choose your language, improve dialogue, match audio to your equipment, or [identify a song](/playback/#identify-a-song-in-a-movie-or-show).
 
 ## Select a language or track
 
 Open **Audio** in the player controls. In portrait on iPhone/iPad, use the ellipsis **Playback options > Audio** menu.
 
-Set **Preferred audio language** in **Settings > Playback > Audio** on Apple TV, or Playback's **Tracks** section on iPhone/iPad. Choose original language, device language, or a specific language, with separate movie, TV, and anime rules.
+Set **Preferred audio language** in **Settings > Playback > Audio** on Apple TV, or Playback's **Tracks** section on iPhone/iPad. Choose a language, or enable **Set separately for movies, TV shows & anime** to use different preferences.
 
 **Remember audio language per series** reuses your language for matching shows across servers, not an exact mix. Choose commentary or a different surround track in the player.
 

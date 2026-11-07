@@ -6,7 +6,7 @@ Save videos on iPhone/iPad for offline viewing. Apple TV has no offline download
 
 1. Open a movie or episode's details, select the server/version if offered, then choose **Download**.
 2. Review the selected files and **Quality** when prompted, then choose **Download**.
-3. Open **Downloads** and wait until your copy is ready to play.
+3. Open **Downloads** and wait for **Downloaded**, not just a full progress bar.
 4. Play it from Downloads.
 
 For shows, open **Manage Seasons**, then choose **Download All Available Episodes**, a season, or an episode. Only available video files can download, not [streaming-service links](/network-shares/#open-links-to-streaming-services).
@@ -15,6 +15,23 @@ Plozz prefers a usable matching download even if you select another server/versi
 
 > [!TIP]
 > Before travelling, test the completed copy offline, including audio and subtitles.
+
+## Browse only your downloads
+
+Use **Offline Mode** to browse saved videos without connecting to your sources, even when this device still has a network connection.
+
+1. Finish downloading while online, then open **Settings > Downloads > Offline Mode** and turn it on. You can also use the profile picker's ellipsis **More > Offline Mode** menu.
+2. Choose the profile that owns the downloads and complete any Profile Lock or Plex PIN prompt.
+3. Browse **Home**, your libraries, **Search**, or **Watchlist**, or play directly from **Downloads**.
+
+Only completed, usable copies for the authorized profile and server user appear. Missing online descriptions or related titles may remain unavailable. **Discover** and **Live TV** cannot connect.
+
+> [!IMPORTANT]
+> Sign in to the intended Plex Home user online on this device before travelling. If Plozz asks you to sign in online once, turn Offline Mode off, reconnect, and sign in. A changed profile or server identity can require this again.
+
+Offline Mode is shared by profiles on this device and is not synced. It pauses downloads, iCloud updates, and online tracking. Turn it off to reconnect; saved progress can then [retry its updates](/profiles-and-sync/#keep-watch-history-separate).
+
+**No Network Connection** reports lost connectivity; it does not turn Offline Mode on. Dismissing either notice hides the message, not the condition.
 
 ## Choose episodes and versions
 

@@ -1,20 +1,20 @@
 # Player controls
 
-Use the player to choose an edition, return to your place, skip an intro, or jump to another scene.
+Choose an edition, resume another title, skip an intro, or identify a song while watching.
 
 ## Reach the controls
 
 On Apple TV, press up from the timeline for **Playback**, **Audio**, and **Subtitles**; press down for information and navigation. On iPhone/iPad, tap the video. In portrait, open the ellipsis **Playback options** menu; landscape shows separate controls.
 
-See [device controls](/platform-controls/) for seeking, touch, keyboard, and **Seek without pausing**.
+See [device controls](/platform-controls/) for touch and keyboard shortcuts.
 
 ## Seek on Apple TV
 
-With playback options closed, click the remote's left/right edge to jump by your saved skip interval. Swipe horizontally to scrub; **Seek without pausing** determines whether you need to pause first.
+With playback options closed, click the remote's left/right edge to jump by your skip interval. Swipe to scrub; **Seek without pausing** determines whether to pause first.
 
-To cross a longer stretch, hold a left/right click to start scanning. Scanning continues after you release. Click the same direction to speed up, or the opposite direction to slow down and eventually reverse. Watch the timeline and preview, when available.
+Hold a left/right click to start scanning, which continues after release. Click the same direction to speed up, or the opposite to slow down and eventually reverse. Watch the timeline and available preview.
 
-Press the center button to use the selected position, or play/pause to use it and resume. Press Back to cancel without moving from your original place. Wait for loading to finish before seeking.
+Press the center button to use the selected position, or play/pause to use it and resume. Press Back to cancel. Wait for loading before seeking.
 
 ## Choose audio or a version
 
@@ -49,7 +49,25 @@ With skipping enabled, **Use community markers** (default on) checks IntroDB/The
 
 Open **Chapters** below the timeline; mobile tabs scroll horizontally. Choose a chapter; paused playback stays paused.
 
-Plex, Jellyfin, and Emby can supply chapters; Plozz can also read them from supported files, including shares and downloads. Not every video has chapters or chapter images. Intro and credits markers are separate.
+Chapters can come from Plex, Jellyfin, Emby, or supported files, including shares and downloads. Some videos lack chapters or images; intro and credits markers are separate.
+
+## Switch to another Continue Watching title
+
+Open **Continue Watching** below the timeline to resume another title. On Apple TV, press down; on iPhone/iPad, scroll the tabs if needed.
+
+Select a card. Plozz saves your current position and resumes that title from its own place, using its own source. Version choices and access checks still apply.
+
+It shows titles already loaded on Home, excluding the current item and other episodes of its show from that source. It hides when none remain.
+
+Use **Episodes** or **Playlist** to choose another entry.
+
+Under **Settings > Playback > Player tabs**, choose which of **Chapters**, **Cast**, **Episodes**, **Playlist**, and **Continue Watching** to show. They still need matching content; **Info** remains available.
+
+## Identify a song in a movie or show
+
+Open **Info** while a song plays. With **Settings > Playback > Audio > Identify songs** enabled, a recognized song appears with the title information. Select its card to open an available Apple Music link; that service's access requirements apply.
+
+Identification uses Shazam and the audio Plozz is playing, not your microphone. It needs internet and supported in-app playback; on iPhone/iPad, turn **Offline Mode** off. Apple's native playback and some server-converted streams cannot supply it. No match simply means no song card. Identify songs starts on; turn it off to stop recognition.
 
 ## Speed, picture, and other navigation
 
@@ -61,8 +79,6 @@ Adjust speed where offered. Open **Playback > Zoom Mode** on Apple TV, or **Vide
 - **Custom** lets you set 50%-200% zoom.
 
 Zoom lasts this session and does not change streaming quality. Detection works during supported local playback, not AirPlay or Picture in Picture. Return to **Normal (Default)** if the crop is unhelpful.
-
-**Episodes** and **Playlist** navigate the sequence.
 
 ## Explore the cast
 

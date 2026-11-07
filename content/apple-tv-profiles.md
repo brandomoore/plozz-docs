@@ -13,15 +13,15 @@ apple-tv-profiles
 1. **Choose the Apple TV user.** Select the person's user in Apple TV Control Center.
 2. **Choose their Plozz profile.** Open Plozz and select the profile they should use. Complete any Profile Lock or Plex PIN check.
 3. **Enable automatic sign-in.** Open **Settings > Profiles** and enable **Automatically Sign In**.
-4. **Repeat for each person.** Switch to their Apple TV user before setting up their Plozz profile.
+4. **Repeat for each person.** Switch to their Apple TV user first.
 
 Automatic sign-in defaults off. Once enabled, opening Plozz restores that Apple TV user's last authorized profile. Choosing another changes the remembered selection, not a permanent assignment.
 
 ## What stays shared
 
-The household's server sign-ins and Plozz profile roster remain shared. The remembered profile, automatic-sign-in preference, and trusted startup session are local to the current Apple TV user. They are not an iCloud setting copied to every device.
+Server sign-ins and the profile roster stay shared. Each Apple TV user's remembered profile, automatic-sign-in choice and trusted startup access stay on this device, not in iCloud.
 
-This does not create server accounts, change server permissions, or assign a different Plex or Jellyfin user automatically. Configure the desired server identity and libraries within each [Plozz profile](/profiles-and-locks/).
+It does not create server accounts, change permissions, or choose server users automatically. Configure the desired server identity and libraries within each [Plozz profile](/profiles-and-locks/).
 
 ## Keep authorization deliberate
 
@@ -29,6 +29,8 @@ This does not create server accounts, change server permissions, or assign a dif
 > Automatic sign-in can restore previously verified Profile Lock and Plex PIN access without asking again at startup. Enable it only if people who can use that Apple TV user should have that access.
 
 Manual profile switches still check authorization. If the saved profile, lock, server binding, or credentials change, Plozz may require selection or authentication again instead of trusting the old session.
+
+Plex Home can check a saved user's PIN during a network outage only after an online sign-in under this Apple TV user.
 
 Turn off **Automatically Sign In** for that Apple TV user to stop restoration; others keep their choice.
 
