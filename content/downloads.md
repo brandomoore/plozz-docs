@@ -11,7 +11,7 @@ Save videos on iPhone/iPad for offline viewing. Apple TV has no offline download
 
 For shows, open **Manage Seasons**, then choose **Download All Available Episodes**, a season, or an episode. Only available video files can download, not [streaming-service links](/network-shares/#open-links-to-streaming-services).
 
-Plozz prefers a usable matching download even if you select another server/version. Check the saved edition; changing servers does not force streaming.
+While online, Plozz prefers a usable matching download even if you select another server/version. Changing servers does not force streaming. In Offline Mode, an explicitly selected version needs its own saved copy.
 
 > [!TIP]
 > Before travelling, test the completed copy offline, including audio and subtitles.
@@ -47,19 +47,27 @@ If preparation fails, check the source connection, then choose **Try Again**. **
 
 Open **Downloads > Download Settings**, or **Settings > Downloads**, for this profile.
 
-Start with **Allow Cellular Downloads** and **Pause in Low Data Mode**. Cellular connections and personal hotspots are blocked by default; Low Data Mode pauses downloads.
+Under **Network**, set **Use Cellular** and **Pause in Low Data Mode**. Cellular connections and personal hotspots are blocked by default; Low Data Mode pauses downloads.
 
-Next, **Download Speed > Limit** caps downloads, not playback. Reduced-quality Jellyfin/Emby downloads cannot be capped: choose Original or set **Limit** to **Unlimited**. With a cap, background downloads pause by default; **Continue at Full Speed** temporarily removes the cap.
+Under **Speed**, **Limit** caps downloads, not playback. Reduced-quality Jellyfin/Emby copies cannot be capped: choose Original or **Unlimited**. With a cap, **In Background** defaults to pausing; **Continue at Full Speed** temporarily removes the cap.
 
-Then choose **Default Quality**, independently of streaming quality. **Original** saves the existing file; smaller copies require provider support and preparation. Network shares support **Original** only.
+Under **Quality**, choose **Default**, independently of streaming quality. **Original** keeps the file intact; smaller copies need provider support and preparation. Shares support Original only.
 
-Leave **Ask Before Downloading** on to review every download. Turning it off skips confirmation only for a single item with one version; batches and multiple-version choices still ask.
+Leave **Ask Each Time** on to review downloads. Turning it off skips confirmation only for one item with one version; batches and multiple-version choices still ask.
 
-Reduced Plex, Jellyfin, and Emby copies use your preferred audio language. Plex and Silo reduced copies keep one audio track. **Include All Audio Tracks** cannot override that limit: turn it off or choose Original. Plex reduced copies keep at most one text subtitle; external sidecars remain on the server. Silo downloads require server permission.
+Reduced copies use your preferred audio language; Plex and Silo keep one audio track. Choose Original for all embedded tracks. Plex reduced copies keep at most one embedded text subtitle. Silo needs server download permission.
 
-**Include Text Subtitles When Supported** saves supported text tracks with the video; check the completed copy offline.
+Supported separate text subtitle files are saved with the video. Check captions offline before relying on them.
 
-Under **Notifications**, set completion/failure switches and allow system notifications. Notices can summarize a batch. Tapping a completion notice opens the title or batch without autoplaying; unlock the owning profile if asked.
+Under **Notifications**, choose completion/failure notices and allow system notifications. A completion notice opens its title or batch without autoplaying; unlock the owning profile if asked.
+
+## Update offline subtitles
+
+If a download warns that some subtitles could not be saved, the video can still be complete.
+
+Reconnect, turn **Offline Mode** off, and open the movie/episode's menu in **Downloads**. Choose **Retry Subtitles**, or **Update Subtitles** to fetch changed subtitle files. Keep Plozz open under the owning profile; download network and speed limits still apply. This does not download the video again.
+
+Unsupported or oversized subtitle files can remain unavailable. Play the copy offline and check **Subtitles** afterward.
 
 ## Pause, resume, or remove
 

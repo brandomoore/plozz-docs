@@ -1873,10 +1873,127 @@
     }
   },
   {
+    "slug": "disc-playback",
+    "title": "Play Blu-ray folders",
+    "seoTitle": "Play Blu-ray folders, disc menus, and disc videos in Plozz",
+    "description": "Open Blu-ray folders from network shares, choose main-video or supported menu playback, navigate disc videos, and understand history and recovery limits.",
+    "section": "Playback",
+    "kind": "guide",
+    "file": "disc-playback.md",
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "sources": [
+      "Sources/CoreModels/DiscPlayback.swift",
+      "Sources/CoreModels/PlaybackSettings.swift",
+      "Sources/ProviderShare/ShareBluRayFolder.swift",
+      "Sources/ProviderShare/ShareProvider.swift",
+      "Sources/ProviderShare/SharePlaybackSourceService.swift",
+      "Sources/CoreUI/DiscPlaybackAction.swift",
+      "Sources/FeatureHome/DetailHeroView.swift",
+      "Sources/AppShelliOS/PlozziOSHeroViews.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/FeaturePlayback/DiscMenuPlayerContent.swift",
+      "Sources/FeaturePlayback/DiscVideoPicker.swift",
+      "Sources/FeaturePlayback/PlayerDiscControlsButton.swift",
+      "Sources/FeaturePlayback/PlayerViewModel.swift",
+      "Sources/FeaturePlayback/PlayerView.swift",
+      "Sources/CoreModels/NetworkDiscLocator.swift",
+      "Sources/EnginePlozzigen/DiscMenuSession.swift",
+      "Sources/CoreModels/ProviderKind.swift",
+      "Sources/AppShell/MainTabView.swift",
+      "Sources/CoreUI/ProfileSettingsCategory.swift"
+    ],
+    "watch": [
+      "Sources/CoreModels/Disc",
+      "Sources/CoreUI/DiscPlaybackAction.swift",
+      "Sources/FeaturePlayback/Disc",
+      "Sources/FeaturePlayback/PlayerDiscControlsButton.swift",
+      "Sources/ProviderShare/ShareBluRayFolder.swift",
+      "Sources/ProviderShare/SharePlaybackSourceService.swift"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Media Share",
+          "source": "Sources/CoreModels/ProviderKind.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShell/MainTabView.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Playback",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        },
+        {
+          "text": "Discs",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Discs",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Disc playback",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Disc playback",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Play video",
+          "source": "Sources/CoreModels/DiscPlayback.swift"
+        },
+        {
+          "text": "Open disc menu",
+          "source": "Sources/CoreModels/DiscPlayback.swift"
+        },
+        {
+          "text": "Disc menu",
+          "source": "Sources/FeaturePlayback/DiscMenuPlayerContent.swift"
+        },
+        {
+          "text": "Select",
+          "source": "Sources/FeaturePlayback/DiscMenuPlayerContent.swift"
+        },
+        {
+          "text": "Close player",
+          "source": "Sources/FeaturePlayback/DiscMenuPlayerContent.swift"
+        },
+        {
+          "text": "Disc videos",
+          "source": "Sources/FeaturePlayback/DiscVideoPicker.swift"
+        },
+        {
+          "text": "Disc menu unavailable",
+          "source": "Sources/FeaturePlayback/DiscMenuPlayerContent.swift"
+        },
+        {
+          "text": "Retry",
+          "source": "Sources/FeaturePlayback/DiscMenuPlayerContent.swift"
+        },
+        {
+          "text": "Try another region",
+          "source": "Sources/FeaturePlayback/DiscMenuPlayerContent.swift"
+        }
+      ],
+      "emphasis": []
+    }
+  },
+  {
     "slug": "external-players",
     "title": "Use another video player",
     "seoTitle": "Use Infuse, VLC, or Native Player with Plozz",
-    "description": "Choose an external video player, check supported sources, protect server access links, and understand resume, returned progress, and fallback limits.",
+    "description": "Set a default or choose a player for one video, protect server access links, and understand supported sources, returned progress, and fallback limits.",
     "section": "Playback",
     "kind": "guide",
     "file": "external-players.md",
@@ -1898,17 +2015,17 @@
       "Sources/AppShelliOS/PlozziOSPlayerView.swift",
       "Sources/AppShelliOS/PlozziOSAppModel.swift",
       "Sources/AppShelliOS/PlozziOSRootView.swift",
-      "App/Resources/Info.plist",
-      "Sources/CoreUI/ExternalMediaOpening.swift",
-      "Sources/CoreModels/ExternalMediaLink.swift"
+      "Sources/CoreUI/DiscPlaybackAction.swift",
+      "Sources/FeatureHome/DetailHeroView.swift",
+      "Sources/AppShelliOS/PlozziOSHeroViews.swift"
     ],
     "watch": [
       "Sources/CoreModels/ExternalPlayer",
       "Sources/AppRuntime/ExternalPlay",
-      "Sources/AppRuntime/WatchMutation",
+      "Sources/CoreUI/DiscPlaybackAction.swift",
       "Sources/FeatureSettings/ExternalPlayerSettingsView.swift",
-      "Sources/AppShell/PlayerPresentation.swift",
-      "Sources/AppShelliOS/PlozziOSRootView.swift"
+      "Sources/FeatureHome/DetailHeroView.swift",
+      "Sources/AppShelliOS/PlozziOSHeroViews.swift"
     ],
     "platforms": [
       "Apple TV",
@@ -1952,6 +2069,10 @@
         {
           "text": "Plozz",
           "source": "Sources/CoreModels/ExternalPlayer.swift"
+        },
+        {
+          "text": "Play in",
+          "source": "Sources/CoreUI/DiscPlaybackAction.swift"
         },
         {
           "text": "Maximum",
@@ -3168,7 +3289,7 @@
     ],
     "title": "Watch offline",
     "seoTitle": "Download videos and use Plozz Offline Mode on iPhone and iPad",
-    "description": "Save and verify videos, browse only your downloads with Offline Mode, prepare Plex Home access, and manage quality, storage, and background transfers.",
+    "description": "Save and verify videos, browse in Offline Mode, update saved subtitles, prepare Plex Home access, and manage download quality, storage, and background transfers.",
     "section": "Playback",
     "kind": "reference",
     "file": "downloads.md",
@@ -3182,14 +3303,14 @@
       "Sources/CoreModels/SeriesDownloadPresentation.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/AppShelliOS/PlozziOSDownloadsModel.swift",
-      "Sources/AppShelliOS/PlozziOSBackgroundHTTPDownloadEngine.swift",
+      "Sources/AppShelliOS/PlozziOSOfflineSubtitles.swift",
       "Sources/MediaDownloads/RegistryOfflinePlaybackResolver.swift",
-      "Sources/MediaDownloads/OfflineMediaProvider.swift",
+      "Sources/MediaDownloads/OfflineSubtitleStore.swift",
       "Sources/AppShelliOS/PlozziOSAppModel.swift",
       "Sources/MediaDownloads/DownloadNetworkPolicy.swift",
-      "Sources/ProviderSilo/SiloDownloads.swift",
+      "Sources/MediaDownloads/DownloadQueue.swift",
       "Sources/AppShelliOS/PlozziOSProfilePickerView.swift",
-      "Sources/AppShelliOS/PlozziOSDownloadNotificationNavigation.swift",
+      "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
       "Sources/CoreModels/MediaItemAction.swift",
       "Sources/AppRuntime/PlexHomeUsersModel.swift",
       "Sources/AppShelliOS/PlozziOSRootView.swift"
@@ -3198,7 +3319,7 @@
       "Sources/MediaDownloads/",
       "Sources/AppShelliOS/PlozziOSDownload",
       "Sources/AppShelliOS/PlozziOSOfflineModeView.swift",
-      "Sources/CoreModels/OfflineMode.swift",
+      "Sources/AppShelliOS/PlozziOSOfflineSubtitles.swift",
       "Sources/AppRuntime/OfflinePlexSignInStore.swift",
       "Sources/AppRuntime/PlexHomeUsersModel.swift"
     ],
@@ -3213,7 +3334,7 @@
           "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
         },
         {
-          "text": "Default Quality",
+          "text": "Default",
           "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
         },
         {
@@ -3221,7 +3342,7 @@
           "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
         },
         {
-          "text": "Allow Cellular Downloads",
+          "text": "Use Cellular",
           "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
         },
         {
@@ -3229,11 +3350,11 @@
           "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
         },
         {
-          "text": "Include All Audio Tracks",
+          "text": "Network",
           "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
         },
         {
-          "text": "Download Speed",
+          "text": "Speed",
           "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
         },
         {
@@ -3246,6 +3367,10 @@
         },
         {
           "text": "Continue at Full Speed",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "In Background",
           "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
         },
         {
@@ -3325,12 +3450,20 @@
           "source": "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift"
         },
         {
-          "text": "Ask Before Downloading",
+          "text": "Ask Each Time",
           "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
         },
         {
-          "text": "Include Text Subtitles When Supported",
+          "text": "Retry Subtitles",
           "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Update Subtitles",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Subtitles",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
         },
         {
           "text": "Download",
@@ -3934,7 +4067,7 @@
     "slug": "metadata-and-ratings",
     "title": "Metadata and ratings",
     "seoTitle": "Configure Plozz metadata, artwork sources, and ratings",
-    "description": "Choose metadata sources, verify a TMDB token, use local NFO files or Jellyfin plugin ratings, and distinguish review scores from family guidance.",
+    "description": "Choose metadata sources and rating order, verify a TMDB token, use local NFO or Jellyfin plugin ratings, and understand family guidance.",
     "section": "Personalize",
     "kind": "guide",
     "file": "metadata-and-ratings.md",
@@ -3958,15 +4091,15 @@
       "Sources/ProviderShare/ShareMetadataPipeline.swift",
       "Sources/MetadataKit/TMDBKeyValidator.swift",
       "Sources/RatingsService/RatingsServiceFactory.swift",
-      "Sources/RatingsService/RatingsServiceConfig.swift"
+      "Sources/CoreModels/DetailPageSettings.swift"
     ],
     "watch": [
       "Sources/MetadataKit/",
-      "Sources/RatingsService/",
       "Sources/FeatureSettings/Metadata",
       "Sources/AppShelliOS/PlozziOSMetadata",
-      "Sources/ProviderJellyfin/JellyfinServerRatings.swift",
-      "Sources/ProviderShare/Share"
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/CoreModels/DetailPageSettings.swift",
+      "Sources/ProviderJellyfin/JellyfinServerRatings.swift"
     ],
     "platforms": [
       "Apple TV",
@@ -4050,6 +4183,24 @@
         {
           "text": "Screens & Navigation",
           "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        },
+        {
+          "text": "Movie & show details",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Rating sources & order",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Edit",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+          "system": "swiftui-edit"
+        },
+        {
+          "text": "Done",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+          "system": "swiftui-done"
         }
       ],
       "emphasis": [
@@ -4738,7 +4889,11 @@
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
-          "text": "Skip Intervals",
+          "text": "Backward",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Forward",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
@@ -5041,7 +5196,7 @@
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
       "Sources/AppShelliOS/PlozziOSOfflineModeView.swift",
-      "Sources/CoreUI/PlaybackFailureView.swift",
+      "Sources/FeatureLiveTV/LiveTVServerSetupView.swift",
       "Sources/CoreModels/PlaybackDiagnosticReport.swift",
       "Sources/CoreModels/LibraryLoadDiagnostic.swift",
       "Sources/CoreUI/ContentStateView.swift",
@@ -5173,11 +5328,13 @@
         {
           "text": "Offline Mode",
           "source": "Sources/AppShelliOS/PlozziOSOfflineModeView.swift"
+        },
+        {
+          "text": "Guide only",
+          "source": "Sources/FeatureLiveTV/LiveTVServerSetupView.swift"
         }
       ],
-      "emphasis": [
-        "guide only"
-      ]
+      "emphasis": []
     }
   }
 ]

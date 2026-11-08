@@ -10,6 +10,8 @@ Choose captions while watching, then save your language and appearance preferenc
 
 Search requires server subtitle services; shares use existing subtitles. A **File match** badge means the server matched the subtitle to this video file, not just its title or language. Try a marked result when another release's captions drift.
 
+On iPhone/iPad, completed downloads can include separate text subtitle files. [Update offline subtitles](/downloads/#update-offline-subtitles) while connected, then test them without a network.
+
 ## Show two languages
 
 Dual subtitles show two text tracks together, useful when watching with someone who prefers another language. They are available for movies and episodes, not Live TV.

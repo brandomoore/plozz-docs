@@ -31,6 +31,8 @@ Routine scans can skip unchanged folders. Open **Settings > Sources** and select
 
 Shares do not offer server-based streaming-quality controls; [offline downloads](/downloads/) use Original quality only.
 
+Complete, decrypted Blu-ray folders can open as one title. See [disc playback](/disc-playback/) for main-video playback, supported menus, and history limits.
+
 For NFO sidecars and local artwork, see [Metadata and ratings](/metadata-and-ratings/#use-local-metadata-for-network-shares).
 
 ## Keep your place

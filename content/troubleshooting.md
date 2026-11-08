@@ -16,7 +16,7 @@ After [sync](/profiles-and-sync/), check **Settings > iCloud Sync** for **Needs 
 
 In [Live TV](/live-tv/)'s **TV Sources**, use **Retry** for errors. For failed or paused IPTV guides, select the source, then **Refresh guide**; [check guide progress](/live-tv-channels/#wait-for-an-iptv-guide).
 
-Check filters, then open **Manage channels > Hidden channels** on Apple TV, or **More > Filters > Manage IPTV channels > Hidden channels** on mobile. Missing listings need not prevent playback; a **guide only** connection cannot play channels.
+Check filters, then open **Manage channels > Hidden channels** on Apple TV, or **More > Filters > Manage IPTV channels > Hidden channels** on mobile. Missing listings need not prevent playback; a **Guide only** connection cannot play channels.
 
 ## A library, title, or picture is wrong
 

@@ -1,12 +1,14 @@
 # Player controls
 
-Choose an edition, resume another title, skip an intro, or identify a song while watching.
+Choose editions, resume titles, skip intros, or identify songs while watching.
 
 ## Reach the controls
 
 On Apple TV, press up from the timeline for **Playback**, **Audio**, and **Subtitles**; press down for information and navigation. On iPhone/iPad, tap the video. In portrait, open the ellipsis **Playback options** menu; landscape shows separate controls.
 
 See [device controls](/platform-controls/) for touch and keyboard shortcuts.
+
+For Blu-ray folders, see [disc menus and videos](/disc-playback/).
 
 ## Seek on Apple TV
 

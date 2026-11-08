@@ -25,6 +25,8 @@ Upcoming dates and unaired placeholders are schedule information, not playable f
 
 Network shares can hold [streaming-service shortcuts](/network-shares/#open-links-to-streaming-services).
 
+For a Blu-ray folder, use [disc playback](/disc-playback/) to choose the main video, a supported menu, or a numbered disc playlist.
+
 ## Read more about a title
 
 Below the videos and cast, read **About**, **Ratings**, [Release & Availability](/media-requests/#read-release-and-availability-information), **Details**, **Crew**, and **Playback**, when available. Playback describes the selected file, not measured connection speed. **Total Seasons** and **Total Episodes** count the whole show, not your available or unwatched episodes.

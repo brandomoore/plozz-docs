@@ -4,7 +4,7 @@ Control playback and watch on another screen.
 
 ## Apple TV
 
-Reveal controls with the remote. **Settings > Playback > Seeking > Skip Intervals** changes left/right jumps.
+Reveal controls with the remote. Change left/right jumps with **Backward** and **Forward** under **Settings > Playback > Seeking**.
 
 **Seek without pausing** determines whether a playing video responds to scrubbing. When off, pause first, scrub to the position, then press Play. **Prevent Accidental Exit**, under Screens & Navigation's navigation settings, changes app-exit behavior rather than playback quality.
 
@@ -68,4 +68,4 @@ With AetherEngine, **AVPlayer time** and **AVPlayer window** describe its intern
 
 ## Open another player app
 
-For Infuse, VLC, or Apple TV's Native Player app, follow [Use another video player](/external-players/). This device-wide choice sends a link to another app, not an AirPlay receiver; source, privacy, and returned-progress limits apply.
+Follow [Use another video player](/external-players/) to set a default or choose Infuse, VLC, or Apple TV's Native Player for one video. This sends a video link, not AirPlay; source, privacy, and returned-progress limits apply.

@@ -1,6 +1,6 @@
 # Metadata and ratings
 
-Choose where Plozz gets descriptions, artwork, and ratings, or correct information that does not match a title.
+Choose sources for descriptions, artwork, and ratings, or correct a mismatched title.
 
 For regional dates and watch offers, see [Release & Availability](/media-requests/#read-release-and-availability-information).
 
@@ -19,7 +19,7 @@ Switching back to Recommended keeps your custom order saved. Results depend on c
 
 Under **Your Own TMDB Key**, enter a **TMDB v4 API Read Access Token**, choose **Save Key**, then **Verify Key**. It stays on this device.
 
-This optional token uses your TMDB rate limit. It is not a server credential; never post it publicly.
+This optional token uses your TMDB rate limit. Never share it publicly.
 
 ## Use local metadata for network shares
 
@@ -29,9 +29,9 @@ For movie/TV shares, NFO files alongside videos and images such as `poster.jpg`/
 
 ## Understand scores and age information
 
-Scores vary by provider. AniList anime scores need no key; TMDB needs a usable token, and OMDb needs a key configured in the app build.
+Set review-score counts and Common Sense age display in [Home/detail settings](/home-and-navigation/). On iPhone/iPad, open **Settings > Screens & Navigation > Movie & show details > Rating sources & order**. Enable sources, use **Edit** to reorder them, then **Done**. Available header scores follow your order, except Jellyfin plugin scores below.
 
-Set review-score counts and Common Sense age display in [Home/detail settings](/home-and-navigation/). For eligible Plex movies/shows, open the Common Sense tile under **Ratings**; detailed guidance needs the viewing account's Plex Pass. This informs viewing choices, not access restrictions. [Spoiler settings](/spoiler-protection/) can hide scores until watched.
+For eligible Plex movies/shows, open the Common Sense tile under **Ratings**; detailed guidance needs the viewing account's Plex Pass. This informs viewing choices, not access restrictions. [Spoiler settings](/spoiler-protection/) can hide scores until watched.
 
 ### Read Jellyfin plugin ratings
 
