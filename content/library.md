@@ -31,7 +31,7 @@ For a Blu-ray folder, use [disc playback](/disc-playback/) to choose the main vi
 
 Below the videos and cast, read **About**, **Ratings**, [Release & Availability](/media-requests/#read-release-and-availability-information), **Details**, **Crew**, and **Playback**, when available. Playback describes the selected file, not measured connection speed. **Total Seasons** and **Total Episodes** count the whole show, not your available or unwatched episodes.
 
-Select a shortened description or a field marked **MORE** to read its full information. On iPhone/iPad, **Done** closes an expanded group; the full-description reader has a close button. On Apple TV, press Back.
+Select a shortened description or a field marked **MORE** to read its full information. On iPhone/iPad, choose **Done** in an expanded group or the **Close** button in the full-description reader. On Apple TV, press Back.
 
 Cast members and related titles open their own pages. A listed credit is not necessarily in your library.
 

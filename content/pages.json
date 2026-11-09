@@ -545,6 +545,10 @@
         {
           "text": "Done",
           "source": "Sources/CoreUI/DetailMoreContent.swift"
+        },
+        {
+          "text": "Close",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
         }
       ],
       "emphasis": []
@@ -853,6 +857,14 @@
         {
           "text": "See all",
           "source": "Sources/CoreUI/MediaRowBrowseCard.swift"
+        },
+        {
+          "text": "See all",
+          "source": "Sources/CoreUI/MediaRowView.swift"
+        },
+        {
+          "text": "See all",
+          "source": "Sources/AppShelliOS/PlozziOSMediaSection.swift"
         },
         {
           "text": "Recently Added",
@@ -1640,12 +1652,12 @@
       "Sources/FeaturePlayback/PlayerMoreMenu.swift",
       "Sources/FeaturePlayback/CastPanelView.swift",
       "Sources/MetadataKit/CommunitySkipMarkers.swift",
-      "Sources/AppShelliOS/PlozziOSOfflineModeView.swift",
+      "Sources/CoreUI/AutomaticVersionInfoButton.swift",
       "Sources/CoreModels/PlayerOptionalTab.swift",
-      "Sources/AppShell/MainTabView.swift",
+      "Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift",
       "Sources/FeatureSettings/PlayerTabSettingsControls.swift",
       "Sources/FeaturePlayback/PlayerViewModel.swift",
-      "Sources/FeaturePlayback/SongRecognition.swift",
+      "Sources/FeaturePlayback/PlayerSongCard.swift",
       "Sources/FeaturePlayback/RemoteSeekScan.swift",
       "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
     ],
@@ -1655,7 +1667,7 @@
       "Sources/FeaturePlayback/Remote",
       "Sources/FeatureSettings/PlayerTabSettingsControls.swift",
       "Sources/FeaturePlayback/SongRecognition",
-      "Sources/CoreModels/PlayerOptionalTab.swift"
+      "Sources/FeatureHomeCore/PlaybackVersion"
     ],
     "platforms": [
       "Apple TV",
@@ -1719,6 +1731,14 @@
         {
           "text": "Choose automatically",
           "source": "Sources/CoreModels/PlaybackVersionSelectionMode.swift"
+        },
+        {
+          "text": "Use first from server",
+          "source": "Sources/CoreModels/PlaybackVersionSelectionMode.swift"
+        },
+        {
+          "text": "How automatic selection works",
+          "source": "Sources/CoreUI/AutomaticVersionInfoButton.swift"
         },
         {
           "text": "Remember series version choices",
@@ -1837,10 +1857,6 @@
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
         {
-          "text": "Settings",
-          "source": "Sources/AppShell/MainTabView.swift"
-        },
-        {
           "text": "Continue Watching",
           "source": "Sources/CoreModels/PlayerOptionalTab.swift"
         },
@@ -1865,8 +1881,105 @@
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
         {
+          "text": "Open song",
+          "source": "Sources/FeaturePlayback/PlayerSongCard.swift"
+        }
+      ],
+      "emphasis": []
+    }
+  },
+  {
+    "slug": "identify-songs",
+    "title": "Identify a song while watching",
+    "seoTitle": "Identify songs and open music services while watching in Plozz",
+    "description": "Recognize a song in a movie or show, open a music service or Apple TV QR link, and understand identification, privacy, and playback limits.",
+    "section": "Playback",
+    "kind": "guide",
+    "file": "identify-songs.md",
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "sources": [
+      "Sources/FeaturePlayback/PlayerSongCard.swift",
+      "Sources/FeaturePlayback/InfoPanelView.swift",
+      "Sources/FeaturePlayback/PlayerControls.swift",
+      "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/FeaturePlayback/SongRecognition.swift",
+      "Sources/FeaturePlayback/SongRecognitionController.swift",
+      "Sources/FeaturePlayback/PlayerViewModel.swift",
+      "Sources/CoreModels/PlaybackSettings.swift",
+      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
+      "Sources/AppShelliOS/PlozziOSOfflineModeView.swift"
+    ],
+    "watch": [
+      "Sources/FeaturePlayback/PlayerSongCard.swift",
+      "Sources/FeaturePlayback/SongRecognition",
+      "Sources/FeaturePlayback/InfoPanelView.swift",
+      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
+      "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
+      "Sources/CoreModels/PlaybackSettings.swift"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Playback",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Audio",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Identify songs",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
           "text": "Offline Mode",
           "source": "Sources/AppShelliOS/PlozziOSOfflineModeView.swift"
+        },
+        {
+          "text": "Info",
+          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "Open song",
+          "source": "Sources/FeaturePlayback/PlayerSongCard.swift"
+        },
+        {
+          "text": "Search Spotify",
+          "source": "Sources/FeaturePlayback/PlayerSongCard.swift"
+        },
+        {
+          "text": "Apple Music",
+          "source": "Sources/FeaturePlayback/PlayerSongCard.swift"
+        },
+        {
+          "text": "Search YouTube Music",
+          "source": "Sources/FeaturePlayback/PlayerSongCard.swift"
+        },
+        {
+          "text": "Search Amazon Music",
+          "source": "Sources/FeaturePlayback/PlayerSongCard.swift"
+        },
+        {
+          "text": "Search Deezer",
+          "source": "Sources/FeaturePlayback/PlayerSongCard.swift"
+        },
+        {
+          "text": "Search TIDAL",
+          "source": "Sources/FeaturePlayback/PlayerSongCard.swift"
+        },
+        {
+          "text": "Done",
+          "source": "Sources/FeaturePlayback/PlayerSongCard.swift"
         }
       ],
       "emphasis": []
@@ -1993,39 +2106,39 @@
     "slug": "external-players",
     "title": "Use another video player",
     "seoTitle": "Use Infuse, VLC, or Native Player with Plozz",
-    "description": "Set a default or choose a player for one video, protect server access links, and understand supported sources, returned progress, and fallback limits.",
+    "description": "Choose a player for library videos, check server and network-share support, protect access links, and understand quality limits and returned progress.",
     "section": "Playback",
-    "kind": "guide",
+    "kind": "reference",
     "file": "external-players.md",
     "sources": [
       "Sources/FeatureSettings/ExternalPlayerSettingsView.swift",
       "Sources/CoreModels/ExternalPlayer.swift",
-      "Sources/CoreModels/StreamingQuality.swift",
-      "Sources/AppShelliOS/PlozziOSStreamingQuality.swift",
+      "Sources/ProviderSilo/SiloStreamingQuality.swift",
+      "Sources/ProviderSilo/SiloPlayback.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/CoreUI/ProfileSettingsCategory.swift",
       "Sources/AppRuntime/ExternalPlaybackRuntime.swift",
       "Sources/CoreModels/ExternalPlayerSettingsModel.swift",
-      "Sources/FeatureSettings/PreferenceDetailViews.swift",
-      "Sources/AppRuntime/ExternalPlayerSupport.swift",
-      "Sources/AppRuntime/WatchMutationFactory.swift",
-      "Sources/AppRuntime/WatchMutationApplier.swift",
+      "Sources/ProviderIPTV/IPTVProvider.swift",
+      "Sources/ProviderShare/ShareProvider.swift",
+      "Sources/MediaTransportWebDAV/WebDAVMediaTransport.swift",
+      "Sources/MediaTransportFTP/FTPMediaTransport.swift",
       "Sources/AppShell/PlayerPresentation.swift",
-      "Sources/AppShell/RootView.swift",
+      "Sources/AppRuntime/ExternalPlaybackRelay.swift",
       "Sources/AppShelliOS/PlozziOSPlayerView.swift",
-      "Sources/AppShelliOS/PlozziOSAppModel.swift",
-      "Sources/AppShelliOS/PlozziOSRootView.swift",
+      "Sources/AppRuntime/ExternalPlaybackExecution.swift",
+      "App/PlozziOS/Info.plist",
       "Sources/CoreUI/DiscPlaybackAction.swift",
       "Sources/FeatureHome/DetailHeroView.swift",
-      "Sources/AppShelliOS/PlozziOSHeroViews.swift"
+      "Sources/AppRuntime/ExternalPlaybackByteServer.swift"
     ],
     "watch": [
       "Sources/CoreModels/ExternalPlayer",
       "Sources/AppRuntime/ExternalPlay",
       "Sources/CoreUI/DiscPlaybackAction.swift",
       "Sources/FeatureSettings/ExternalPlayerSettingsView.swift",
-      "Sources/FeatureHome/DetailHeroView.swift",
-      "Sources/AppShelliOS/PlozziOSHeroViews.swift"
+      "Sources/ProviderShare/ShareProvider.swift",
+      "Sources/ProviderSilo/SiloStreamingQuality.swift"
     ],
     "platforms": [
       "Apple TV",
@@ -2075,14 +2188,6 @@
           "source": "Sources/CoreUI/DiscPlaybackAction.swift"
         },
         {
-          "text": "Maximum",
-          "source": "Sources/CoreModels/StreamingQuality.swift"
-        },
-        {
-          "text": "Force transcoding",
-          "source": "Sources/AppShelliOS/PlozziOSStreamingQuality.swift"
-        },
-        {
           "text": "Settings",
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
@@ -2093,7 +2198,7 @@
       ],
       "emphasis": [
         "Install the player",
-        "Start a supported movie or episode",
+        "Start a supported video",
         "Infuse 8.4.7 or later"
       ]
     }
@@ -3304,11 +3409,11 @@
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/AppShelliOS/PlozziOSDownloadsModel.swift",
       "Sources/AppShelliOS/PlozziOSOfflineSubtitles.swift",
-      "Sources/MediaDownloads/RegistryOfflinePlaybackResolver.swift",
-      "Sources/MediaDownloads/OfflineSubtitleStore.swift",
-      "Sources/AppShelliOS/PlozziOSAppModel.swift",
-      "Sources/MediaDownloads/DownloadNetworkPolicy.swift",
-      "Sources/MediaDownloads/DownloadQueue.swift",
+      "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift",
+      "Sources/MediaDownloads/README.md",
+      "Sources/ProviderSilo/SiloDownloads.swift",
+      "Sources/AppShelliOS/EmbyOfflineAudioDownload.swift",
+      "Sources/MediaDownloads/ManagedHTTPDownloadSource.swift",
       "Sources/AppShelliOS/PlozziOSProfilePickerView.swift",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
       "Sources/CoreModels/MediaItemAction.swift",
@@ -3320,8 +3425,8 @@
       "Sources/AppShelliOS/PlozziOSDownload",
       "Sources/AppShelliOS/PlozziOSOfflineModeView.swift",
       "Sources/AppShelliOS/PlozziOSOfflineSubtitles.swift",
-      "Sources/AppRuntime/OfflinePlexSignInStore.swift",
-      "Sources/AppRuntime/PlexHomeUsersModel.swift"
+      "Sources/AppShelliOS/EmbyOfflineAudioDownload.swift",
+      "Sources/ProviderSilo/SiloDownloads.swift"
     ],
     "ui": {
       "references": [
@@ -3516,6 +3621,24 @@
         {
           "text": "No Network Connection",
           "source": "Sources/AppShelliOS/PlozziOSOfflineModeView.swift"
+        },
+        {
+          "text": "Edit",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift",
+          "system": "swiftui-edit"
+        },
+        {
+          "text": "Select All",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift"
+        },
+        {
+          "text": "Remove Download",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift"
+        },
+        {
+          "text": "Done",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift",
+          "system": "swiftui-done"
         }
       ],
       "emphasis": []
@@ -3607,6 +3730,10 @@
           "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
         },
         {
+          "text": "Episode count style",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
           "text": "Show progress bars",
           "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
         },
@@ -3668,6 +3795,10 @@
         },
         {
           "text": "Page",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Only show descriptions on focus",
           "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
         },
         {

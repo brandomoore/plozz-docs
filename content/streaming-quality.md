@@ -14,7 +14,7 @@ Under **Advanced**, choose a transcoding codec or **Force transcoding**, even at
 
 **Custom…** takes a maximum resolution and a total bitrate in whole-number Kbps. For **Invalid custom quality**, choose a preset or correct the limit.
 
-A limit below Maximum or Force transcoding prevents [external-player handoff](/external-players/), even if the original fits.
+Compatible [external players](/external-players/#check-your-source) can receive server-converted streams too. Plozz keeps your saved quality limit when preparing the link; an incompatible handoff falls back to Plozz.
 
 ## Change one video
 

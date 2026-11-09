@@ -1,6 +1,6 @@
 # Player controls
 
-Choose editions, resume titles, skip intros, or identify songs while watching.
+Choose editions, resume titles, skip intros, or find a song you hear while watching.
 
 ## Reach the controls
 
@@ -24,16 +24,19 @@ Open **Audio** for tracks or **Version** for files/editions.
 
 Changing versions keeps the selected server account and your position, though different cuts may not line up exactly.
 
-The first multi-version video asks; change **Settings > Playback > Version selection**:
+The first multi-version video asks how to choose. Change **Settings > Playback > Version selection**:
 
 - **Ask every time**: choose before multi-version videos, including autoplay.
 - **Choose automatically**: use a remembered or device-recommended version without the picker.
+- **Use first from server**: follow the selected server's version order, ignoring remembered preferences unless you explicitly choose a version.
 
-**Remember series version choices** (Apple TV: **Remember per series**) reuses your version type for later episodes. Turn it off to stop reusing that choice. Automatic mode chooses an available alternative if the remembered type is missing.
+**How automatic selection works** explains how resolution, HDR, bitrate, and device compatibility guide the choice.
+
+**Remember series version choices** (Apple TV: **Remember per series**) reuses your version type for later episodes in automatic mode, or preselects it when asked. Turn it off to stop reusing it. Automatic mode chooses an alternative if that type is missing.
 
 ## Resume or start over
 
-Enable **Ask to resume or start over** in **Settings > Playback** to choose before resuming. **Resume** shows time remaining; **Start Over** shows full runtime, when known.
+Enable **Settings > Playback > Ask to resume or start over** to choose before resuming. **Resume** shows time remaining; **Start Over** shows full runtime, when known.
 
 **Rewind on resume** (mobile: **Resume rewind**) defaults to five seconds, adjustable from zero to 60.
 
@@ -67,9 +70,9 @@ Under **Settings > Playback > Player tabs**, choose which of **Chapters**, **Cas
 
 ## Identify a song in a movie or show
 
-Open **Info** while a song plays. With **Settings > Playback > Audio > Identify songs** enabled, a recognized song appears with the title information. Select its card to open an available Apple Music link; that service's access requirements apply.
+Open **Info** while a song plays. With **Settings > Playback > Audio > Identify songs** enabled, a recognized song card appears. Select it for **Open song** and choose a music service.
 
-Identification uses Shazam and the audio Plozz is playing, not your microphone. It needs internet and supported in-app playback; on iPhone/iPad, turn **Offline Mode** off. Apple's native playback and some server-converted streams cannot supply it. No match simply means no song card. Identify songs starts on; turn it off to stop recognition.
+[Identify a song while watching](/identify-songs/) explains searches, QR fallback, privacy, and requirements.
 
 ## Speed, picture, and other navigation
 

@@ -8,7 +8,7 @@ Found a useful recommendation row? Open its larger grid to look beyond the Home 
 2. On Apple TV, move to the end of an eligible row and select **See all**. On iPhone/iPad, tap the row heading with a chevron.
 3. Scroll through the grid, then select a title to open its details.
 
-This shortcut appears only when a loaded row has more titles to browse. **Recently Added**, supported server recommendations, and your custom collection rows can offer it. A loading, empty, or failed row does not.
+Loaded rows with more titles can offer a larger grid: **Recently Added**, supported server recommendations, and custom collection rows. Loading, empty, or failed rows do not offer that grid. A collection heading's separate **See all** link can still open the collection when its preview is empty or unavailable.
 
 The Home **Watchlist** shortcut opens the regular [Watchlist page](/watchlist/#filter-and-sort-the-page), with its saved browse preferences.
 

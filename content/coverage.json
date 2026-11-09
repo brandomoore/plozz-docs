@@ -277,24 +277,24 @@
         "Sources/AppShelliOS/PlozziOSDownloadsView.swift",
         "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
         "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift",
-        "Sources/CoreModels/SeriesDownloadPresentation.swift",
+        "Sources/MediaDownloads/ManagedHTTPDownloadSource.swift",
         "Sources/AppShelliOS/PlozziOSDownloadActivity.swift",
         "Sources/AppShelliOS/PlozziOSBackgroundHTTPDownloadEngine.swift",
         "App/PlozziOS/Info.plist",
-        "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift",
+        "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift",
         "Sources/AppShelliOS/PlozziOSAppModel.swift",
         "Sources/MediaDownloads/DownloadedMediaRegistry.swift",
         "Sources/MediaDownloads/RegistryOfflinePlaybackResolver.swift",
         "Sources/AppShelliOS/PlozziOSOfflineModeView.swift",
-        "Sources/CoreModels/OfflineMode.swift",
+        "Sources/AppShelliOS/EmbyOfflineAudioDownload.swift",
         "Sources/AppRuntime/OfflinePlexSignInStore.swift",
         "Sources/AppRuntime/PlexHomeUsersModel.swift",
-        "Sources/AppShelliOS/PlozziOSAppModel+CloudSync.swift",
+        "Sources/ProviderSilo/SiloDownloads.swift",
         "Sources/AppShelliOS/PlozziOSOfflineSubtitles.swift",
         "Sources/MediaDownloads/OfflineSubtitleStore.swift",
         "Sources/MediaDownloads/DownloadQueue.swift"
       ],
-      "answer": "On iPhone/iPad, choose Download from movie/episode details or Manage Seasons for available episodes. Review selection circles and open episode rows for versions: one recommended version starts selected, multiple episode versions save separate files, and movies allow one copy. Choose Versions adds a copy to a saved episode. Quality choices need support from all prepared items; Original Size requires known file sizes and Available shows device capacity. Ask Each Time defaults on; disabling it skips only single-item, single-version confirmation, never bulk/multiversion review. Streaming-service links are not downloadable. Wait for Downloaded in Downloads, not merely all bytes received or a Finishing Live Activity, and test video/audio/subtitles offline. While online, matching usable downloads can remain preferred after another server/version is selected. Offline Mode requires a saved copy of an explicitly selected version. Eligible HTTP transfers use background sessions; in-process/share transfers need the foreground unless continued processing is granted. Switching profiles pauses transfers; return to the owner to resume. iOS/iPadOS 26 Live Activities are optional and cancellation/expiry pauses work without deleting partial files. Network, speed, provider, storage and track limits still apply; Apple TV has no downloads. In Settings > Downloads, Offline Mode is the first feature-gated toggle; the profile picker's app-defined More menu offers it too. It is initially off, shared by profiles on this device and not synced. Enabling it pauses downloads, iCloud/network work and online tracking, replacing Home, library, Search and Watchlist content with authorized completed copies. Discover/Live TV cannot connect. Plex Home needs a prior online sign-in on this device for an unchanged binding, with any protected PIN checked locally; new identities and rejected credentials cannot use that proof. Turn the mode off and reconnect to retry saved progress updates. No Network Connection does not activate the mode; dismissing a notice changes no network or mode setting. New download settings use Use Cellular, Speed > Limit, In Background and Quality > Default/Ask Each Time. Original preserves embedded tracks, while reduced copies use preferred audio and supported text; old inclusion switches are absent. Completed video can remain usable after a sidecar warning. Update Subtitles/Retry Subtitles in Downloads fetch supported sidecars without downloading video again, under foreground profile authorization and download network/rate policy."
+      "answer": "On iPhone/iPad, choose Download from movie/episode details or Manage Seasons for available episodes. Review selection circles and open episode rows for versions: one recommended version starts selected, multiple episode versions save separate files, and movies allow one copy. Choose Versions adds a copy to a saved episode. Quality choices need support from all prepared items; Original Size requires known file sizes and Available shows device capacity. Ask Each Time defaults on; disabling it skips only single-item, single-version confirmation, never bulk/multiversion review. Streaming-service links are not downloadable. Wait for Downloaded in Downloads, not merely all bytes received or a Finishing Live Activity, and test video/audio/subtitles offline. While online, matching usable downloads can remain preferred after another server/version is selected. Offline Mode requires a saved copy of an explicitly selected version. Eligible HTTP transfers use background sessions; in-process/share transfers need the foreground unless continued processing is granted. Switching profiles pauses transfers; return to the owner to resume. iOS/iPadOS 26 Live Activities are optional and cancellation/expiry pauses work without deleting partial files. Network, speed, provider, storage and track limits still apply; Apple TV has no downloads. In Settings > Downloads, Offline Mode is the first feature-gated toggle; the profile picker's app-defined More menu offers it too. It is initially off, shared by profiles on this device and not synced. Enabling it pauses downloads, iCloud/network work and online tracking, replacing Home, library, Search and Watchlist content with authorized completed copies. Discover/Live TV cannot connect. Plex Home needs a prior online sign-in on this device for an unchanged binding, with any protected PIN checked locally; new identities and rejected credentials cannot use that proof. Turn the mode off and reconnect to retry saved progress updates. No Network Connection does not activate the mode; dismissing a notice changes no network or mode setting. New download settings use Use Cellular, Speed > Limit, In Background and Quality > Default/Ask Each Time. Original preserves embedded tracks. New reduced Plex/Emby/Silo copies retain all reported audio, though conversion can change formats and Emby preparation needs temporary space; Jellyfin may retain one audio track. Saved older preparations keep their original track choices on retry. Reduced Jellyfin and Emby preparations without all-audio support require Unlimited or Original, while new all-audio Emby transfers support the cap. Inclusion switches are absent. Completed video can remain usable after a sidecar warning. Update Subtitles/Retry Subtitles fetch sidecars without downloading video again, under foreground owner authorization and download network/rate policy. In a saved show, native Edit, Select All and Remove select and confirm deletion of local episode copies; Done clears selection. Top-level show menus retain Pause Show/Resume Show separately from season Pause/Resume."
     },
     "cross-server-history": {
       "documents": [
@@ -329,6 +329,10 @@
       ],
       "sources": [
         "Sources/FeatureHomeCore/PlaybackVersionChoiceModel.swift",
+        "Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift",
+        "Sources/CoreModels/PlaybackVersionSelectionMode.swift",
+        "Sources/CoreUI/AutomaticVersionInfoButton.swift",
+        "Sources/CoreModels/VersionSelectionAssessment.swift",
         "Sources/CoreModels/VersionPreferenceStore.swift",
         "Sources/FeatureHomeCore/DetailPlaybackSelection.swift",
         "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
@@ -336,7 +340,7 @@
         "Sources/MediaDownloads/DownloadedMediaRegistry.swift",
         "Sources/MediaDownloads/RegistryOfflinePlaybackResolver.swift"
       ],
-      "answer": "Use the first-use Ask every time or Choose automatically choice and the title/player version controls where supported. Series-version memory is independent of prompt mode. Automatic mode can use a device recommendation when the remembered type is missing; it does not promise that every episode has the same file. On mobile while online, a usable matching download takes precedence over streaming even with another source/version selected; check the saved edition rather than assuming a source switch forces streaming. Offline Mode requires a saved copy of an explicitly selected version instead of substituting a different downloaded version."
+      "answer": "The first multi-version movie/episode asks How should versions be selected? Choose Ask every time, Choose automatically or Use first from server, and change it later under Settings > Playback > Version selection. Automatic selection weighs resolution, HDR, bitrate and device compatibility; How automatic selection works explains the ranking. With Remember series version choices enabled, a matching remembered type takes priority in automatic mode and is preselected in ask mode. Missing types fall back to the device recommendation without promising identical episode files. Use first from server follows the selected account's version order, excludes external-service shortcuts and ignores remembered choices; an explicit title/player version choice still wins. On mobile while online, a usable matching download takes precedence over streaming even with another source/version selected; check the saved edition rather than assuming a source switch forces streaming. Offline Mode requires a saved copy of an explicitly selected version instead of substituting a different downloaded version."
     },
     "device-setup": {
       "documents": [
@@ -383,12 +387,15 @@
         "Sources/AppShelliOS/PlozziOSPlayerView.swift",
         "Sources/AppShelliOS/PlozziOSAppModel.swift",
         "Sources/AppRuntime/ExternalPlaybackRuntime.swift",
+        "Sources/AppRuntime/ExternalPlaybackExecution.swift",
+        "Sources/AppRuntime/ExternalPlaybackRelay.swift",
+        "Sources/AppRuntime/ExternalPlaybackByteServer.swift",
         "Sources/CoreModels/ExternalPlayer.swift",
         "Sources/AppShelliOS/PlozziOSPlayerOrientation.swift",
         "Sources/AppShelliOS/PlozziOSLandscapeMotion.swift",
         "Sources/CoreUI/DiscPlaybackAction.swift"
       ],
-      "summary": "Local Network permission supports discovery/pairing; Camera is used for setup QR scanning with code entry as an alternative. NSMotionUsageDescription explains device motion for Landscape auto: only the active authorized compact-phone full-screen player leases CoreMotion updates, allowing landscape direction changes even with system rotation lock enabled. Missing motion support falls back to system landscape rotation; this is not an iPad orientation picker or a new guaranteed permission prompt. Background audio, processing and download task identifiers support documented route- and OS-dependent behavior, not guaranteed execution. External-app query schemes support Infuse/VLC availability; the registered return URL is routed by the mobile root through validated external playback receipts into authorized viewer-owned watch mutations, not accepted as arbitrary progress. Installed Infuse/VLC scheme checks also populate the one-time detail Play in menu; this does not bypass launch-time eligibility or share disc folders."
+      "summary": "Local Network permission supports discovery/pairing; Camera is used for setup QR scanning with code entry as an alternative. NSMotionUsageDescription explains device motion for Landscape auto: only the active authorized compact-phone full-screen player leases CoreMotion updates, allowing landscape direction changes even with system rotation lock enabled. Missing motion support falls back to system landscape rotation; this is not an iPad orientation picker or a guaranteed new permission prompt. Background audio/processing modes and download identifiers do not guarantee execution. The permitted external-stream.* identifier is wired through ExternalPlaybackExecution to an actual iOS/iPadOS 26 continued-processing grant, unavailable on tvOS/Catalyst. ExternalPlaybackRelay serves only authorized immutable regular share files and eligible SRT files over tokenized loopback URLs; it is not a LAN proxy or arbitrary upstream fetcher. Source/profile changes, grant expiry/cancellation, failure or returning Plozz to the foreground stop it. Custom apps, playlists, streaming-link/disc files and actual local downloads cannot use this relay. Infuse/VLC query schemes populate installed-player checks and the one-time Play in menu. The return URL routes through the mobile root and validated receipts into owner-authorized watch mutations, never arbitrary progress. Neither installation nor a background declaration bypasses source/launch eligibility."
     },
     "App/PlozziOS/PlozziOS.branded.entitlements": {
       "omitReason": "Side-by-side development builds intentionally omit canonical cloud and associated-domain capabilities; these internal provisioning variants are not consumer setup features.",
@@ -784,7 +791,7 @@
         "Sources/CoreModels/ProfileSettingsSnapshot.swift",
         "Sources/FeatureHome/FocusHeroHomeView.swift"
       ],
-      "summary": "Keep themes, density, focus, artwork and language distinctions in one guide. Artwork > Customize by view offers per-area Library/Metadata providers choices, plus Mixed for title details; selecting another preset replaces overrides. Apple TV's contextual help illustrations are reachable and informational, not an omitted destination. Customize labels selects Page; Home/Recommended have page Default plus row Overrides. Mixed hides captions on series artwork and in TV Showcase. Continue Watching's Use default inherits its context; On/Off applies to both Home and Recommended. Home Libraries has its own override; contextual editors share the same preference store and collection/playlist members use Browse. Watch indicators now explicitly distinguish unstarted flags, completed checks and Hidden, separately from episode counts, count style and Show progress bars. Hiding marks/bars neither changes history nor clears resume; these profile-owned settings are transfer-allowlisted. Retain Liquid Glass, independent header sizes, profile artwork versus shared metadata sources, saved download artwork, and interface language versus media language/device region."
+      "summary": "Keep themes, density, focus, artwork and language distinctions in one guide. Artwork > Customize by view offers per-area Library/Metadata providers choices, plus Mixed for title details; selecting another preset replaces overrides. Apple TV's contextual help illustrations are reachable and informational, not an omitted destination. Customize labels selects Page; Home/Recommended have page Default plus row Overrides. Mixed hides captions on series artwork and in TV Showcase. Continue Watching's Use default inherits its context; On/Off applies to both Home and Recommended. Home Libraries has its own override; contextual editors share the same preference store and collection/playlist members use Browse. On Apple TV only, Page > Movie & show details offers Only show descriptions on focus after Episodes; it defaults off, needs episode labels on and collapses unfocused episode synopses without relaxing spoiler policy. Watch indicators distinguish unstarted flags, completed checks and Hidden, separately from episode counts, count style and Show progress bars. Hiding marks/bars neither changes history nor clears resume; these profile-owned settings are transfer-allowlisted. Retain Liquid Glass, independent header sizes, profile artwork versus shared metadata sources, saved download artwork, and interface language versus media language/device region."
     },
     "spoilers": {
       "documents": [
@@ -888,6 +895,14 @@
         {
           "slug": "external-players",
           "anchor": "choose-a-player-just-once"
+        },
+        {
+          "slug": "identify-songs",
+          "anchor": "find-and-open-a-song"
+        },
+        {
+          "slug": "identify-songs",
+          "anchor": "if-no-song-appears"
         }
       ],
       "sources": [
@@ -906,13 +921,13 @@
         "Sources/FeaturePlayback/CastPanelView.swift",
         "Sources/FeatureSettings/SkipMarkerSettingsControl.swift",
         "Sources/FeaturePlayback/RemoteSeekScan.swift",
-        "Sources/FeaturePlayback/SongRecognition.swift",
+        "Sources/FeaturePlayback/PlayerSongCard.swift",
         "Sources/CoreModels/DiscPlayback.swift",
         "Sources/CoreUI/DiscPlaybackAction.swift",
         "Sources/FeaturePlayback/DiscMenuPlayerContent.swift",
         "Sources/FeaturePlayback/DiscVideoPicker.swift"
       ],
-      "summary": "Use remote/mobile controls, same-account versions, prompt/automatic selection and independent series memory. Ask to resume or start over is a separate opt-in control: before an in-progress video, Resume shows remaining time and Start Over the full runtime when known; resume rewind remains independent. The shared prompt is wired through the TV player host and mobile Home/details without dropping the pending request. Keep autoplay, Up Next, category/marker-specific skipping and community privacy/coverage limits. Player tabs orders Chapters, Cast, Episodes, Playlist, Continue Watching; they default on per profile but still require available content. Info is retained. Continue Watching uses loaded Home progress, excludes the current title and same-source episodes of its show, and replaces playback with the selected title's authorized source/version and position. Info can show ShazamKit song matches with an optional Apple Music link. Identify songs defaults on per profile, needs internet and a supported decoded-audio route, uses no microphone and cannot run in Offline Mode or native/server-converted remote-HLS playback. Chapters needs usable source/file chapters with optional images; zoom is session-only and cast-page navigation ends playback. External handoff stays in its focused guide with direct-source eligibility, token sharing, fallback and authorized progress-return limits. Network-share BDMV folders add profile-level Disc playback and a held detail play-button alternative. HDMV menus use directions/select and explicit return/close actions, with Retry and region recovery; production does not support BD-J menus. Disc videos lists dynamic numbered playlists with durations and chapters, starts selected entries at zero, and invalidates choices after source changes. Menu and selected-playlist playback suppress normal title progress, history, trackers, skip markers and autoplay; Play video restores ordinary feature viewing. The held Play in menu is a one-time installed-player choice, not a changed default."
+      "summary": "Use remote/mobile controls and same-account versions with Ask every time, Choose automatically or Use first from server; the third mode preserves server order and ignores independent series memory. Ask to resume or start over is a separate opt-in control: Resume shows remaining time and Start Over full runtime when known, independently of resume rewind. The shared prompt is wired through TV and mobile hosts without dropping the pending request. Keep autoplay, Up Next, marker/category rules and community privacy limits. Player tabs orders default-on Chapters, Cast, Episodes, Playlist and Continue Watching per profile, still requiring available content; Info is retained. Continue Watching uses loaded Home progress, excludes the current title and same-source show episodes, and switches to the selected authorized source/version and position. Song recognition defaults on per profile, uses Shazam and decoded playback audio rather than the microphone, and needs internet and a supported route; Offline Mode, native playback and remote bypass cannot supply it. Every match card opens Open song with Spotify search, conditional Apple Music, YouTube Music, Amazon Music, Deezer and TIDAL searches. TV universal-link failure shows a phone QR code; mobile opens an app/browser. The focused song guide distinguishes recognition from service access and library music. Chapters needs usable source/file chapters; images are optional, zoom is session-only, and cast-page navigation ends playback. The external-player reference explains compatible original/converted streams from supported servers, eligible on-demand IPTV and share routes, mobile quality limits, token/password sharing, fallback and authorized progress returns. Mobile share relay requires a real OS continued-processing grant and stops on foreground return, cancellation/expiry or authorization changes. Network-share BDMV folders add profile-level Disc playback and a held detail play-button alternative. HDMV menus use directions/select and explicit return/close actions, Retry and region recovery; production does not support BD-J menus. Disc videos lists dynamic numbered playlists with durations/chapters, starts selected entries at zero, and invalidates after source changes. Menu/selected-playlist playback suppresses title progress, history, trackers, skipping and autoplay; Play video restores ordinary viewing. Held Play in is one-time, not a new default."
     },
     "quality": {
       "documents": [
@@ -954,7 +969,7 @@
         "Sources/CoreModels/LivePlaybackBuffer.swift",
         "Sources/FeaturePlayback/LiveChannelPlayerView.swift"
       ],
-      "summary": "Set profile-owned mobile network defaults or a Video > Quality session limit. Maximum removes the app's reduction limit, not server compatibility decisions; lower limits permit originals only with fitting known dimensions/bitrate, otherwise conversion can be required. Custom limits take a supported resolution and whole-number total Kbps; invalid saved limits must be replaced rather than treated as Maximum. HEVC preference can fall back to H.264 at the same limit. Playing in SDR identifies an SDR conversion; Current stream uses active facts, Declared stream bitrate is not throughput, and missing facts remain Not available. Preserve server permission/capacity, Silo resolution/codec limits, forced-conversion recovery and external-handoff exclusions. Device-local Video buffer applies on new sessions across all platforms, not quality/downloads, with space/native-path limits; Live TV buffer is a separate cushion, not recording."
+      "summary": "Set profile-owned mobile network defaults or a Video > Quality session limit. Maximum removes the app's reduction limit, not server compatibility decisions; lower limits permit originals only with fitting known dimensions/bitrate, otherwise conversion can be required. Custom limits take a supported resolution and whole-number total Kbps; invalid saved limits must be replaced rather than treated as Maximum. HEVC preference can fall back to H.264 at the same limit. Playing in SDR identifies an SDR conversion; Current stream uses active facts, Declared stream bitrate is not throughput, and missing facts remain Not available. Preserve server permission/capacity, Silo resolution/codec limits and forced-conversion recovery. Compatible converted streams can now hand off to an external player; mobile quality limits remain in the preparation request rather than being bypassed. Native routes with separate audio or incompatible authorization still stay in Plozz. Device-local Video buffer applies on new sessions across all platforms, not quality/downloads, with space/native-path limits; Live TV buffer is a separate cushion, not recording."
     },
     "audio": {
       "documents": [
@@ -1170,8 +1185,8 @@
         "Sources/ProviderSilo/SiloDownloads.swift",
         "Sources/AppShelliOS/PlozziOSDownloadActivity.swift",
         "Sources/AppShelliOS/PlozziOSBackgroundHTTPDownloadEngine.swift",
-        "Sources/AppRuntime/OfflinePlexSignInStore.swift",
-        "Sources/AppShelliOS/PlozziOSDownloadNotificationNavigation.swift",
+        "Sources/AppShelliOS/EmbyOfflineAudioDownload.swift",
+        "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift",
         "App/PlozziOS/Info.plist",
         "Sources/MediaDownloads/DownloadedMediaRegistry.swift",
         "Sources/MediaDownloads/RegistryOfflinePlaybackResolver.swift",
@@ -1179,7 +1194,7 @@
         "Sources/MediaDownloads/OfflineSubtitleStore.swift",
         "Sources/MediaDownloads/DownloadQueue.swift"
       ],
-      "summary": "On iPhone/iPad, review available episodes and versions, select download quality, wait for Downloaded and test video/audio/subtitles offline. Ask Each Time does not suppress bulk or multiversion review. Online playback can prefer a matching usable download; Offline Mode requires the explicitly selected version to be saved. Settings order is Offline Mode, Network (Use Cellular, Pause in Low Data Mode), Speed (Limit, conditional In Background), Quality (Default, Ask Each Time and conditional resolution/bitrate), Notifications, In Progress and Storage. Original preserves embedded tracks; reduced copies use preferred audio and available text tracks with provider limits. There are no audio/subtitle inclusion switches for new downloads. Sidecars use supported text formats with per-file, total-size and track-count limits; unsupported/image tracks can trigger a partial subtitle warning without removing the completed video. Downloads and saved-show episode menus offer Update Subtitles or Retry Subtitles without retransferring video. Refresh requires the foreground authorized owner, online mode and download network/rate policy. Old preparation records excluding text do not expose it. Background HTTP and in-process/share work differ; iOS 26 continued processing remains an OS decision and Finishing is not complete. Activity cancellation or profile switches pause work and retain partial files. Bulk cancellation deletes unfinished copies; Delete All Downloads removes this profile copies, never server originals. Completion notices open authorized details without autoplay. Offline Mode is device-local and shared, pauses transfers and online services, and restricts Home/libraries/Search/Watchlist to authorized usable copies. Plex Home needs prior online sign-in for its unchanged binding, with protected PIN checks retained. Dismissing a network/mode notice changes neither; reconnect with the mode off for pending history updates. Apple TV has no downloads."
+      "summary": "On iPhone/iPad, review available episodes/versions and quality, wait for Downloaded and test video/audio/subtitles offline. Ask Each Time does not suppress bulk or multiversion review. Online playback can prefer a usable matching download; Offline Mode needs the explicitly selected version saved. Settings order is Offline Mode, Network, Speed, Quality, Notifications, In Progress and Storage. Original preserves embedded tracks; new reduced Plex/Emby/Silo copies retain all reported audio, though formats can change and Emby preparation needs temporary space. Jellyfin reduced copies may retain one audio track. Saved older preparations keep their track choices on retry, and reduced Jellyfin/some Emby copies cannot use a speed cap. New all-audio Emby transfers support caps. No new-download audio/subtitle inclusion switches exist. Supported text sidecars have per-file, total-size and count limits; partial warnings keep usable video. Downloads and saved-show episode menus offer Update Subtitles/Retry Subtitles without retransferring video, requiring the foreground authorized owner, online mode and download network/rate policy. Old preparations excluding text omit it. In a saved show, native Edit opens episode selection, Select All and Remove allow confirmed bulk deletion, and Done clears selection. Season controls remain separate from top-level Pause Show/Resume Show. Background HTTP differs from in-process/share work; iOS 26 continued processing is an OS decision and Finishing is incomplete. Activity cancellation/profile switches pause work and retain partial files. Bulk cancellation deletes unfinished copies; Delete All Downloads removes this profile's saved videos, never server originals. Completion notices open authorized details without autoplay. Offline Mode is shared on this device, pauses transfers/online services and restricts Home/libraries/Search/Watchlist to authorized usable copies. Plex Home needs prior online sign-in for its unchanged binding and retains protected PIN checks. Dismissing a notice changes neither mode nor connectivity; reconnect with the mode off for pending history updates. Apple TV has no downloads."
     },
     "profiles": {
       "documents": [
@@ -1745,7 +1760,7 @@
         "Sources/FeaturePlayback/SystemPlaybackAudio.swift",
         "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
         "Sources/FeaturePlayback/SeriesTrackMemory.swift",
-        "Sources/FeaturePlayback/SongRecognition.swift",
+        "Sources/FeaturePlayback/PlayerSongCard.swift",
         "Sources/FeaturePlayback/LiveChannelPlayerView.swift",
         "Sources/FeaturePlayback/CastPanelView.swift",
         "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift",
@@ -1754,7 +1769,7 @@
         "Sources/FeaturePlayback/DiscMenuPlayerContent.swift",
         "Sources/FeaturePlayback/DiscVideoPicker.swift"
       ],
-      "summary": "Use task sections for player preferences, text/image/dual-subtitle limits, confirmed caption-style replacement and live rewind. Mobile menus consolidate in portrait and separate in landscape; Advanced… owns second subtitles, delay and style, while Video owns Quality/zoom. Session-only Normal (Default)/Auto-crop black bars/Crop/Stretch/Custom zoom has an explained 50%-200% range. Chapters needs usable provider/file chapters; seeking preserves play/pause intent and episode spoilers, and thumbnails are optional. Default-on profile preferences gate Chapters, Cast, Episodes, Playlist and Continue Watching cards while retaining Info. Continue Watching uses loaded Home progress, excluding the current item and same-source episodes of its show. TV and mobile hosts prepare the selected title's authorized source/version before saving outgoing progress and replacing playback at its own position. Identify songs defaults on per profile and shows confirmed ShazamKit matches alongside Info, stacked vertically on narrow cards. Only a supplied Apple Music URL makes the song actionable. Recognition consumes played decoded audio, not microphone input, needs internet and cannot run in Offline Mode, the native engine or the remote-bypass HLS route. Series audio memory stores language, not an exact mix. Prefer lossless audio selects the AetherEngine adapter's lossless/surroundCompat request at each video/live load; neither the native engine nor an external app consumes this device preference, and requested mode does not guarantee actual output. Live TV buffer is a new-load cushion with latency/tuning costs, separate from library files. Neither wired engine advertises audio-delay or engine-local dialogue processing; the TV system bridge separately exposes output-gated global Reduce Loud Sounds/Enhance Dialogue and recovery. Cast page navigation ends playback. Diagnostics separate active conversion facts, original sources, measured throughput, player-window/buffer values and temporary cache without claiming physical speaker layout. PlayerScreenshotHook and LiveChannelScreenshotHook only preselect panels for internal capture; they expose no reader screenshot workflow. BorrowedTrailerPlayer supplies standard TV transport to an existing hero preview without a provider session, track menus or watch-history reporting; speed and zoom are its advertised engine capabilities."
+      "summary": "Use task sections for player preferences, text/image/dual-subtitle limits, confirmed caption-style replacement and live rewind. Mobile menus consolidate in portrait and separate in landscape; Advanced… owns second subtitles, delay and style, while Video owns Quality/zoom. Session-only Normal (Default)/Auto-crop black bars/Crop/Stretch/Custom zoom has an explained 50%-200% range. Chapters needs usable provider/file chapters; seeking preserves play/pause intent and episode spoilers, and thumbnails are optional. Default-on profile preferences gate Chapters, Cast, Episodes, Playlist and Continue Watching cards while retaining Info. Continue Watching uses loaded Home progress, excluding the current item and same-source episodes of its show. TV and mobile hosts prepare the selected title's authorized source/version before saving outgoing progress and replacing playback at its own position. Identify songs defaults on per profile and shows confirmed ShazamKit matches alongside Info, stacked vertically on narrow cards. Every match card opens Open song: Spotify search, conditional Apple Music, YouTube Music, Amazon Music, Deezer and TIDAL searches. TV app-opening failure shows a phone QR link; mobile opens an app/browser. Recognition consumes decoded playback audio, not microphone input, needs internet and cannot run in Offline Mode, the native engine or remote-bypass HLS. Series audio memory stores language, not an exact mix. Prefer lossless audio selects the AetherEngine adapter's lossless/surroundCompat request at each video/live load; neither the native engine nor an external app consumes this device preference, and requested mode does not guarantee actual output. Live TV buffer is a new-load cushion with latency/tuning costs, separate from library files. Neither wired engine advertises audio-delay or engine-local dialogue processing; the TV system bridge separately exposes output-gated global Reduce Loud Sounds/Enhance Dialogue and recovery. Cast page navigation ends playback. Diagnostics separate active conversion facts, original sources, measured throughput, player-window/buffer values and temporary cache without claiming physical speaker layout. PlayerScreenshotHook and LiveChannelScreenshotHook only preselect panels for internal capture; they expose no reader screenshot workflow. BorrowedTrailerPlayer supplies standard TV transport to an existing hero preview without a provider session, track menus or watch-history reporting; speed and zoom are its advertised engine capabilities."
     },
     "FeatureProfiles": {
       "areas": [
@@ -1934,7 +1949,7 @@
       "sources": [
         "Sources/MediaDownloads/DownloadNetworkPolicy.swift",
         "Sources/MediaDownloads/DirectShareDownloadSource.swift",
-        "Sources/MediaDownloads/DownloadMediaIdentity.swift",
+        "Sources/MediaDownloads/ManagedHTTPDownloadSource.swift",
         "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift",
         "Sources/AppShelliOS/PlozziOSDownloadsModel.swift",
         "Sources/AppShelliOS/PlozziOSAppModel.swift",
@@ -1943,8 +1958,8 @@
         "Sources/MediaDownloads/DownloadStorageCapacity.swift",
         "Sources/AppShelliOS/PlozziOSDownloadsView.swift",
         "Sources/MediaDownloads/DownloadedMediaRegistry.swift",
-        "Sources/MediaDownloads/RegistryOfflinePlaybackResolver.swift",
-        "Sources/FeatureHomeCore/PlaybackVersionChoiceModel.swift",
+        "Sources/MediaDownloads/OfflineAudioDownload.swift",
+        "Sources/MediaDownloads/OfflineAudioRenditionValidator.swift",
         "Sources/MediaDownloads/OfflineMediaProvider.swift",
         "Sources/CoreModels/OfflineMode.swift",
         "Sources/AppShelliOS/PlozziOSOfflineModeView.swift",
@@ -1953,7 +1968,7 @@
         "Sources/MediaDownloads/OfflineSubtitleStore.swift",
         "Sources/MediaDownloads/DownloadQueue.swift"
       ],
-      "summary": "Explain network/speed/provider limits and completed-copy validation: Finishing or all bytes received is not Downloaded. Selection uses physical source/item/version identities; episodes can save several copies while movies are single-select, and Ask Before Downloading cannot bypass batch or multiversion review. Management is copy-specific; playback tries matching usable copies with the requested version first, even after another server is selected. Background HTTP differs from in-process share work; continued processing remains an OS decision. Profile changes pause transfers and returning can resume under network policy. Storage shows download use and capacity. Movie/episode menus manage a copy; show menus manage a group, separately from deleting unfinished work or all this profile's saved videos. OfflineMediaProvider reconstructs authorized movies, shows, seasons and episodes exclusively from completed physically usable records, with saved artwork, supported local subtitles and local progress writes. The feature-gated Offline Mode toggle replaces mobile browsing providers and filters Watchlist to such copies without deleting online saves. It is device-local and shared by profiles; disabling it reconnects online work. Plex Home's separate prior-online-sign-in proof is device-local, binding-specific and does not bypass a protected PIN or authorize a new identity. Offline sidecars share the video version/profile folder and removal lifecycle. Supported SRT/VTT/ASS/SSA text, 64 tracks, 16 MiB per file and 64 MiB total are implementation limits; partial warnings retain usable video and good prior sidecars. Subtitle-only updates preserve video and recheck authorization, network and speed policy. Explicit-version offline selection does not silently use another saved version."
+      "summary": "Explain network/speed/provider limits and completed-copy validation: Finishing or all bytes received is not Downloaded. Selection uses source/item/version identities; episodes can save several copies while movies are single-select, and Ask Each Time cannot bypass batch/multiversion review. Original keeps embedded tracks. New reduced Plex/Emby/Silo copies require all reported audio, validated before completion; formats can change. Emby packages separately prepared compressed audio with converted video and needs temporary storage. Silo rejects an incomplete or changed exact-file audio inventory. Jellyfin reduced copies may keep one track; saved older preparations retain inclusion flags on retry. Jellyfin and Emby without all-audio support require uncapped rendition transfer; new all-audio Emby uses rate-limited/background HTTP. Management is copy-specific; playback tries matching usable copies with the requested version first, even after another server is selected. Background HTTP differs from share work and continued processing remains an OS decision. Profile changes pause transfers; returning resumes under network policy. Movie/episode menus manage a copy; show menus manage a group, and the saved-show Edit/Select All/Remove flow confirms selected episode deletion without touching originals. OfflineMediaProvider reconstructs authorized movies/shows/seasons/episodes from completed physically usable records, artwork, supported local subtitles and local progress. Offline Mode replaces mobile browsing and filters Watchlist without deleting online saves; it is shared on this device. Plex Home's prior-online-sign-in proof is binding-specific and never bypasses a protected PIN or authorizes a new identity. Sidecars share the version/profile folder and removal lifecycle. Supported SRT/VTT/ASS/SSA text, 64 tracks, 16 MiB per file and 64 MiB total are implementation limits; partial warnings keep usable video/good prior sidecars. Subtitle-only updates recheck authorization/network/speed without retransferring video. Explicit-version offline selection never silently substitutes another saved version."
     },
     "MediaTransportCore": {
       "omitReason": "Internal file-system capability and bounded-read contracts expose no independent reader setting or procedure. Protocol selection, authentication, scanning and download limits are documented under connections and offline viewing instead.",
@@ -1965,7 +1980,8 @@
     "MediaTransportFTP": {
       "areas": [
         "connections",
-        "offline"
+        "offline",
+        "playback"
       ],
       "sources": [
         "Sources/MediaTransportFTP/FTPMediaTransport.swift",
@@ -1973,7 +1989,7 @@
         "Sources/FeatureShareOnboarding/UnifiedAddShareModel.swift",
         "Sources/AppRuntime/MediaShareTransportComposition.swift"
       ],
-      "summary": "Cover FTP and manually addressed implicit FTPS in the share task; composition does not produce explicit AUTH TLS connections."
+      "summary": "Cover FTP and manually addressed implicit FTPS in the share task; composition does not produce explicit AUTH TLS connections. Direct external playback is VLC-only for compatible plain FTP and credential encoding, not FTPS. Other eligible regular files can instead use the separately documented authorized mobile share relay; Apple TV has no such background relay."
     },
     "MediaTransportHTTP": {
       "omitReason": "Shared HTTP sessions and trust/range plumbing are not a separately selectable library type in the add-share UI. Document their consequential range/validator requirements in network-shares#webdav-lists-files-but-will-not-play, not as another source or an internal-settings procedure.",
@@ -2018,7 +2034,8 @@
     "MediaTransportWebDAV": {
       "areas": [
         "connections",
-        "offline"
+        "offline",
+        "playback"
       ],
       "sources": [
         "Sources/MediaTransportWebDAV/WebDAVMediaTransport.swift",
@@ -2028,7 +2045,7 @@
         "Sources/MediaTransportHTTP/WebDAVClient.swift",
         "Sources/FeatureShareOnboarding/MediaShareTransportCatalog.swift"
       ],
-      "summary": "A wired share transport, not a media server. Successful listings can lack the validators required for playback. Network shares explains valid bounded HTTP responses, strong ETag or valid Last-Modified, administrator/proxy checks and rescan/reopen after file replacement. Source identity changes fail closed rather than silently continuing another representation."
+      "summary": "A wired share transport, not a media server. Successful listings can lack required playback validators. Network shares explains bounded HTTP responses, strong ETag or valid Last-Modified, administrator/proxy checks and rescan/reopen after replacement. Source changes fail closed. Direct external playback requires an independent compatible HTTP URL with supported anonymous/signed or Basic authorization and system certificate trust; custom links exclude password-bearing URLs. Pinned trust, bearer/custom headers and incompatible password encoding prevent direct handoff. Eligible mobile regular files can use the separate authorized background relay instead."
     },
     "MetadataKit": {
       "areas": [
@@ -2059,10 +2076,12 @@
       "areas": [
         "connections",
         "live-tv",
-        "library"
+        "library",
+        "playback"
       ],
       "sources": [
         "Sources/ProviderIPTV/IPTVProvider.swift",
+        "Sources/AppRuntime/ExternalPlaybackRuntime.swift",
         "Sources/ProviderIPTV/IPTVCatalog.swift",
         "Sources/FeatureAuth/IPTVSignInView.swift",
         "Sources/FeatureAuthCore/IPTVAuthViewModel.swift",
@@ -2071,7 +2090,7 @@
         "Sources/AppRuntime/IPTVAccountGuideIndex.swift",
         "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift"
       ],
-      "summary": "Keep playlist/Xtream and EPG setup, scoped guide credentials, local account-file imports, guide-only operation and optional on-demand catalogues in existing source/library tasks. HTTP/proxy/parsing diagnostics do not add a new selectable source type. Explicit account setup starts authorized guide preparation beyond the sheet lifetime; stage/current-listing status and Refresh guide recovery are documented separately from channel availability."
+      "summary": "Keep playlist/Xtream and EPG setup, scoped guide credentials, local account-file imports, guide-only operation and optional on-demand catalogues in existing source/library tasks. HTTP/proxy/parsing diagnostics do not add a selectable source type. Explicit account setup starts authorized guide preparation beyond the sheet lifetime; stage/current-listing status and Refresh guide recovery differ from channel availability. External-player handoff admits on-demand movies/episodes only when their playable URL needs no extra headers and the request needs no reduced/forced conversion; it excludes live channels and does not add IPTV downloads."
     },
     "ProviderJellyfin": {
       "areas": [
@@ -2132,7 +2151,7 @@
         "Sources/ProviderShare/ShareMediaParser.swift",
         "Sources/ProviderShare/ShareProvider.swift",
         "Sources/CoreModels/ExternalMediaLink.swift",
-        "Sources/CoreModels/MediaVersion.swift",
+        "Sources/AppRuntime/ExternalPlaybackRelay.swift",
         "Sources/CoreModels/MediaItemActionCatalog.swift",
         "Sources/AppShell/HomeTab.swift",
         "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
@@ -2141,10 +2160,10 @@
         "Sources/AppRuntime/WatchMutationFactory.swift",
         "Sources/ProviderShare/ShareBluRayFolder.swift",
         "Sources/ProviderShare/SharePlaybackSourceService.swift",
-        "Sources/CoreModels/NetworkDiscLocator.swift",
+        "Sources/AppRuntime/ExternalPlaybackExecution.swift",
         "Sources/CoreModels/DiscPlayback.swift"
       ],
-      "summary": "Network shares covers connection/scanning, Personal Videos and local NFO/artwork association. Keep your place explains durable profile/account-local watched and resume state on this device, separate from iCloud preferences and optional matching-copy history propagation. LocalMediaWatchStore retains at most 2,000 newest records per profile/source store and may retain fewer to fit its payload budget; eviction can remove old resume positions and watched marks. Dismissing a share from Continue Watching preserves its stored resume offset; newer playback restores eligibility. Its Open links to streaming services section explains the additional imported-title workflow: scan a UTF-8 .strmlnk file up to 8192 bytes containing one allowlisted HTTPS title URL, select its source/version when mixed with playable copies, then use the destination-specific action or Open Link fallback. ExternalMediaLink validates actual service hosts/title paths, not arbitrary streaming URLs. Apple TV requests an installed destination app through universalLinksOnly; mobile uses normal app/browser routing. Opening rechecks active authorization and reports Couldn't Open Link rather than starting a stream. No external-player callback session is created, so no automatic returned watch progress; download eligibility and the mobile download guard reject external sources. Destination access, regional availability and restrictions remain outside Plozz. Local metadata precedence and ambiguous-folder rejection remain source-verified rather than inferred from sidecar filenames. Complete decrypted BDMV folders are catalogued as one title using the real index identity and movie-root metadata association. Menus/direct playlist browsing are documented in disc-playback; disc-folder downloads and external handoff are not offered."
+      "summary": "Network shares covers connection/scanning, Personal Videos and local NFO/artwork association. Keep your place explains durable profile/account-local watched/resume state on this device, separate from iCloud preferences and matching-copy history propagation. LocalMediaWatchStore retains at most 2,000 newest records per profile/source and may retain fewer within its payload budget; eviction can remove old marks/positions. Dismissal from Continue Watching preserves resume; later playback restores eligibility. Imported streaming-service titles use one allowlisted HTTPS title URL in a UTF-8 .strmlnk file up to 8192 bytes; select its source/version and the destination-specific action or Open Link. ExternalMediaLink validates service hosts/title paths. TV requires an installed universal-link app; mobile uses app/browser routing. Opening rechecks authorization and reports Couldn't Open Link rather than starting a stream. Such links create no external-player receipt or automatic returned progress and cannot download; service access/regions remain outside Plozz. Ordinary playable share files separately support compatible direct WebDAV/plain-FTP handoff or a mobile relay. The relay requires a real iOS/iPadOS 26 background grant, a regular immutable file and a noncustom installed player. It excludes playlists, .strm links, ISO and BDMV; returning Plozz to foreground or losing execution/authorization stops the connection. Local metadata precedence and ambiguous-folder rejection are source-verified. Complete decrypted BDMV folders are one title using the index identity and movie-root metadata; disc-playback explains menus/videos, which never gain downloads or external handoff."
     },
     "ProviderSilo": {
       "areas": [
@@ -2152,7 +2171,8 @@
         "quality",
         "offline",
         "sync",
-        "live-tv"
+        "live-tv",
+        "playback"
       ],
       "sources": [
         "Sources/ProviderSilo/SiloAuthentication.swift",
@@ -2160,10 +2180,12 @@
         "Sources/ProviderSilo/SiloDownloads.swift",
         "Sources/ProviderSilo/SiloLibraryChannels.swift",
         "Sources/ProviderSilo/SiloPlayback.swift",
+        "Sources/ProviderSilo/SiloClient.swift",
+        "Sources/AppRuntime/ExternalPlaybackRuntime.swift",
         "Sources/AppRuntime/LiveTVLibraryRuntime.swift",
         "Sources/FeatureLiveTVCore/LibraryChannelService.swift"
       ],
-      "summary": "Silo library channels are reachable on all platforms through the shared library runtime and automatic/custom channel management. Server capability/permission checks require available protocol-3 original-file delivery; eligible single-file versions with reliable runtime/size are catalogued and validated before playback. Transport sessions suppress ordinary resume writes; default-off channel completion reporting is separate. This does not enable native Silo Live TV, IPTV channels or external-player handoff."
+      "summary": "Silo library channels are reachable on all platforms through shared automatic/custom channel management. Server capability/permission checks require available protocol-3 original-file delivery; eligible single-file versions need reliable runtime/size and are revalidated before playback. Channel transport suppresses ordinary resume writes; default-off completion reporting is separate. Silo still has no native Live TV. Separately, on-demand original/converted streams now support external handoff when account authorization and the playback grant cover the full duration plus the safety margin; incompatible delivery stays in Plozz. New reduced downloads require the complete exact-file audio inventory and reject incomplete/changed prepared tracks; older saved preparations keep their inclusion flags."
     },
     "RatingsService": {
       "areas": [
@@ -2358,7 +2380,7 @@
         "Sources/FeaturePlayback/PlayerViewModel.swift",
         "Sources/CoreModels/DiscPlayback.swift"
       ],
-      "summary": "Cover version mode/series memory, autoplay/skips, quality, audio, background listening, orientation/gestures and history with platform/provider gates. Explain the optional Ask to resume or start over prompt independently of resume rewind and version selection. Player tabs follows autoplay on both platforms, with profile-owned default-on Chapters, Cast, Episodes, Playlist and Continue Watching switches in that order; content availability still gates player cards and Info cannot be hidden. Audio includes default-on Identify songs, consuming played decoded audio through ShazamKit rather than microphone input; matches appear in Info with an Apple Music action only when supplied. Internet, active supported playback and engine/route checks apply; Offline Mode prevents recognition. Skip settings distinguish enablement, content categories, button/automatic delay and per-marker Off; community requests remain separately controllable. Remember audio language per series stores language, not exact commentary/mix. Default-on Prefer lossless audio is shared on this device, not synced/transferred; turning it off requests compressed surround-compatible AetherEngine output for newly loaded video/live streams, not a guaranteed hardware format or a native/external-player setting. Video buffer is temporary read-ahead, while independent local Live TV buffer requests a live-edge cushion; both are new-load choices, not offline downloads. Missing remembered versions fall back automatically in automatic mode. Advanced > External player is device-wide rather than profile-owned; its focused guide explains platform apps, custom templates, direct-play fallback, access-token sharing and authorized progress returns. Discs > Disc playback precedes Advanced; profile default is Play video, with Open disc menu for attemptable share folders. One-time alternatives belong to held detail play buttons. HDMV-only compatibility and suppressed menu/video-list history are explained in the disc guide."
+      "summary": "Cover version mode/series memory, autoplay/skips, quality, audio, background listening, orientation/gestures and history with platform/provider gates. Ask to resume or start over is independent of resume rewind/version selection. Player tabs follows autoplay on both platforms, ordering default-on Chapters, Cast, Episodes, Playlist and Continue Watching; content still gates cards and Info cannot be hidden. Audio includes default-on Identify songs using Shazam and decoded playback audio, not the microphone. Every Info match card opens service choices; Apple Music alone needs a supplied song URL. Internet, active supported playback and route checks apply; Offline Mode prevents recognition. Skip settings distinguish enablement, categories, button/delay and per-marker Off; community requests are separate. Series audio memory stores language, not commentary/mix. Default-on Prefer lossless audio is shared on this device, not synced/transferred; disabling requests compressed surround-compatible AetherEngine output for newly loaded video/live streams, not a guaranteed hardware format or native/external setting. Video buffer and separate Live TV buffer affect new loads, not downloads. Version selection offers ask, automatic and server order; automatic uses remembered type or device ranking, while server order ignores memory. Its information action explains ranking without another mode. Advanced > External player is device-wide; the reference explains compatible original/converted streams, expanded provider/share routes, actual mobile background-grant requirements, token/password sharing, fallback and authorized progress returns. Discs precedes Advanced; the profile defaults to Play video, with Open disc menu for attemptable share folders and one-time held-play alternatives. HDMV-only compatibility and suppressed menu/video-list history remain in the disc guide."
     },
     "screensNavigation": {
       "areas": [
@@ -2698,8 +2720,62 @@
         "Sources/FeatureSettings/PreferenceDetailViews.swift",
         "Sources/AppShelliOS/PlozziOSSettingsView.swift"
       ],
-      "omitKind": "shared-component",
-      "omitReason": "InfoPanelView mounts this optional song card beside its title information on all three platforms. A confirmed Shazam match supplies dynamic song/artist text and artwork; an Apple Music URL makes the card actionable, otherwise it is informational. The parent Info screen inventories the card's behavior and settings parents inventory Identify songs. Recognition consumes playback audio, not the microphone, defaults on per profile, needs internet, and is disabled in Offline Mode or on unsupported native/remote-bypass playback routes. No match is absence of a card, not a new error screen."
+      "platforms": [
+        "Apple TV",
+        "iPhone",
+        "iPad"
+      ],
+      "navigation": "While watching a movie or episode, open Info and select a recognized song card to open Open song.",
+      "experience": "Read the matched song and artist, open its Apple Music link when supplied, or search another service. A failed app opening shows a phone QR link; Done closes the chooser without changing library music.",
+      "conditions": "Identify songs is on by default for the profile. Recognition uses playback audio through Shazam, not the microphone, and requires internet plus a supported decoded-audio route; native playback, remote bypass and mobile Offline Mode do not provide it. Every recognized card now opens the chooser, even without an Apple Music URL. Service options follow source order: Spotify, conditional Apple Music, YouTube Music, Amazon Music, Deezer, TIDAL. Search URLs carry title/artist, not audio. Apple TV requests a universal-link app and shows QR on failure; mobile opens an app/browser and shows QR if opening fails. Service accounts, subscriptions and regional availability are independent.",
+      "controls": [
+        {
+          "text": "Open song",
+          "source": "Sources/FeaturePlayback/PlayerSongCard.swift"
+        },
+        {
+          "text": "Done",
+          "source": "Sources/FeaturePlayback/PlayerSongCard.swift"
+        },
+        {
+          "text": "Search Spotify",
+          "source": "Sources/FeaturePlayback/PlayerSongCard.swift"
+        },
+        {
+          "text": "Apple Music",
+          "source": "Sources/FeaturePlayback/PlayerSongCard.swift"
+        },
+        {
+          "text": "Search YouTube Music",
+          "source": "Sources/FeaturePlayback/PlayerSongCard.swift"
+        },
+        {
+          "text": "Search Amazon Music",
+          "source": "Sources/FeaturePlayback/PlayerSongCard.swift"
+        },
+        {
+          "text": "Search Deezer",
+          "source": "Sources/FeaturePlayback/PlayerSongCard.swift"
+        },
+        {
+          "text": "Search TIDAL",
+          "source": "Sources/FeaturePlayback/PlayerSongCard.swift"
+        },
+        {
+          "text": "This app couldn’t open the link. Scan with your phone.",
+          "source": "Sources/FeaturePlayback/PlayerSongCard.swift"
+        }
+      ],
+      "documents": [
+        {
+          "slug": "identify-songs",
+          "anchor": "find-and-open-a-song"
+        },
+        {
+          "slug": "identify-songs",
+          "anchor": "if-no-song-appears"
+        }
+      ]
     },
     "Sources/FeatureSettings/PlayerTabSettingsControls.swift": {
       "sources": [
@@ -5307,6 +5383,7 @@
     "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift": {
       "sources": [
         "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift",
+        "Sources/CoreModels/MediaItemAction.swift",
         "Sources/CoreUI/AmbientGradientBackground.swift",
         "Sources/CoreUI/ThemePalette.swift",
         "Sources/CoreUI/DetailOpenFeedback.swift",
@@ -5323,36 +5400,54 @@
         "iPad"
       ],
       "navigation": "Open a downloaded show from the mobile Downloads list.",
-      "experience": "Browse saved seasons/episodes, play a completed copy, pause/resume a show, or remove its local downloads.",
-      "conditions": "iPhone/iPad and an existing download batch. Removing this show does not delete server files or request missing episodes. Each completed episode menu shares PlozziOSDownloadSubtitleAction with Downloads: Update Subtitles normally, Retry Subtitles after a sidecar warning. The action is disabled while refreshing and omitted when saved preparation excluded text subtitles. It needs the owning authorized profile, active app, online mode and permitted network; existing video and successfully saved sidecars remain usable.",
+      "experience": "Browse downloaded seasons and episodes, use season pause/resume or removal, and choose Edit to select episodes for confirmed bulk removal. Done clears the selection without deleting downloads; tapping a row in editing mode selects it rather than navigating.",
+      "conditions": "iPhone/iPad, an authorized owning profile/server user, and an existing downloaded show. Native Edit/Done follows edit mode; Select All and Remove appear only while editing, with Remove disabled for an empty selection. Changing profile/authorization ends editing. Season Pause requires active work and Resume resumable work. Episode menus order Play, conditional Go to Show, Pause/Resume, subtitle update/retry and Remove Download. Play requires a completed copy with an available authorized provider; Go to Show needs resolvable parent navigation. Subtitle refresh requires the foreground authorized owner, online mode and permitted network; excluded text preparations omit it. Bulk/season removal confirms affected copies, with dynamic episode/download counts; individual episode menu/swipe removal is immediate. None deletes server originals. Toolbar and body controls below are grouped by their normal/editing, season, episode, confirmation and unavailable states.",
       "controls": [
         {
-          "text": "Details Unavailable",
+          "text": "Edit",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift",
+          "system": "swiftui-edit"
+        },
+        {
+          "text": "Select All",
           "source": "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift"
         },
         {
-          "text": "Pause Show",
+          "text": "Remove",
           "source": "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift"
         },
         {
-          "text": "Resume Show",
-          "source": "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift"
-        },
-        {
-          "text": "Remove Show",
-          "source": "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift"
-        },
-        {
-          "text": "No Downloads",
-          "source": "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift"
-        },
-        {
-          "text": "Cancel",
-          "source": "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift"
+          "text": "Done",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift",
+          "system": "swiftui-done"
         },
         {
           "text": "Episodes",
           "source": "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift"
+        },
+        {
+          "text": "Pause",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift"
+        },
+        {
+          "text": "Resume",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift"
+        },
+        {
+          "text": "More actions",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift"
+        },
+        {
+          "text": "Remove",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift"
+        },
+        {
+          "text": "Play",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift"
+        },
+        {
+          "text": "Go to Show",
+          "source": "Sources/CoreModels/MediaItemAction.swift"
         },
         {
           "text": "Pause",
@@ -5371,11 +5466,27 @@
           "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
         },
         {
-          "text": "Remove",
+          "text": "Remove Download",
           "source": "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift"
         },
         {
-          "text": "More actions",
+          "text": "Remove Downloads?",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
+        },
+        {
+          "text": "Cancel",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift"
+        },
+        {
+          "text": "No Downloads",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift"
+        },
+        {
+          "text": "Details Unavailable",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift"
+        },
+        {
+          "text": "Server unavailable",
           "source": "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift"
         }
       ],
@@ -5424,7 +5535,7 @@
       ],
       "navigation": "Open Downloads from mobile navigation, then Download Settings for transfer preferences.",
       "experience": "Monitor downloads, pause/resume/remove items or batches, and configure storage, network, speed, quality, and notifications.",
-      "conditions": "iPhone/iPad only. The list and transfer settings follow the active profile; Offline Mode is shared by profiles on this device. Download Settings order is the feature-gated Offline Mode toggle, Network, Speed, Quality, Notifications, In Progress, Storage. Custom speed reveals a numeric Mbps stepper (1–1000) before In Background; the background picker requires a cap. Quality shows a dynamic custom-height option for non-preset saved quality and resolution/bitrate steppers only for reduced quality, after Ask Each Time. Those interpolated captions are data, not constant UI labels. Resolution permits 144–2160 in 120-pixel steps; video bitrate permits 0.5–100 Mbps in 0.5-Mbps steps. These advanced controls fit the existing quality/network section and do not need a separate guide or exhaustive numeric reference. In Progress requires active transfers. Offline Mode pauses transfers and shows only authorized, completed, physically usable copies; an explicitly selected version needs its own saved copy. Turn the mode off before resuming online work. Provider conversion/track limits, network conditions, notification permission and transfer state gate controls. Original keeps embedded tracks; reduced copies use preferred audio and available text tracks, with Plex/Silo single-audio limits. The old audio/subtitle inclusion toggles are absent. Completed copies permit Update Subtitles or Retry Subtitles unless their saved preparation explicitly excluded text subtitles; refresh uses the owning profile, foreground, network and rate policy without retransferring video. Subtitle failures retain the usable video and previously saved sidecars. The iOS/iPadOS 26+ footer explains background Live Activities: cancellation pauses tracked downloads and retains partial files, unlike Cancel Active Downloads. Finishing is an activity status, not completion or a Downloads-list label.",
+      "conditions": "iPhone/iPad only. Transfer settings follow the profile; Offline Mode is shared on this device. Download Settings order is feature-gated Offline Mode, Network, Speed, Quality, Notifications, In Progress, Storage. Custom speed reveals a numeric Mbps stepper (1–1000) before the cap-only In Background picker. Quality shows dynamic custom height and reduced-quality resolution/bitrate steppers after Ask Each Time; interpolated captions are data, not constant labels. Resolution permits 144–2160 in 120-pixel steps and video bitrate 0.5–100 Mbps in 0.5-Mbps steps; these fit the existing guide section without a numeric reference. In Progress requires active work. Offline Mode pauses transfers and exposes authorized completed usable copies; an explicit version needs its own saved copy. Turn it off to resume online work. Conversion/track limits, network, notification permission and transfer state gate controls. Original keeps embedded tracks; new reduced Plex/Emby/Silo copies retain all reported audio with possible format changes. Emby preparation needs temporary storage; Jellyfin reduced copies may retain one track. Saved older preparations keep their track flags on retry, including Emby preparations that still need uncapped delivery. All-audio Emby transfers support speed caps. Old inclusion toggles are absent. Completed copies allow Update Subtitles/Retry Subtitles unless preparation excluded text; refresh needs the foreground authorized owner and network/rate policy, preserves video and good prior sidecars. Top-level show menus retain Pause Show/Resume Show; opening a show leads to separately inventoried native Edit/Done episode selection. The iOS/iPadOS 26 footer explains Live Activities: cancellation pauses work and retains partial files, unlike Cancel Active Downloads. Finishing is not completion or a Downloads-list label.",
       "controls": [
         {
           "text": "Finishing",
@@ -6868,6 +6979,10 @@
           "source": "Sources/CoreUI/DetailInformationSections.swift"
         },
         {
+          "text": "Close",
+          "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
           "text": "Ratings",
           "source": "Sources/CoreUI/DetailInformationSections.swift"
         },
@@ -7902,7 +8017,7 @@
         "iPad"
       ],
       "navigation": "Tap the playing mobile video; portrait consolidates options, while landscape separates menus.",
-      "experience": "Seek, choose audio/subtitles, adjust supported speed/zoom, or open advanced subtitle and track options. The shared lower cards appear in Info, Chapters, Cast, Episodes, Playlist, Continue Watching order, subject to per-profile toggles and usable content. Continue Watching resumes a loaded Home title on its own source after saving outgoing progress; Info can show a confirmed song with an available Apple Music link.",
+      "experience": "Seek, choose audio/subtitles, adjust supported speed/zoom, or open advanced subtitle and track options. Shared lower cards appear in Info, Chapters, Cast, Episodes, Playlist, Continue Watching order, gated by profile toggles and usable content. Continue Watching saves outgoing progress and resumes the chosen Home title on its own source. A matched Info song card opens the shared Open song chooser for service searches or a supplied Apple Music song link; PlayerSongCard inventories its controls and mobile app/browser behavior.",
       "conditions": "iPhone/iPad. Menu visibility follows engine capabilities, available tracks, orientation, current route and online subtitle services. Neither shipped movie engine enables adjustable audio delay. In Subtitles > Advanced… > Appearance, text primaries offer Style and image primaries offer Position; image primaries disable Second Track. The touch card strip shares Info/Cast/chapter/sequence content, but not Apple TV track/style cards. Cast requires metadata; Chapters requires chapters; Episodes/Playlist require their active sequence context. Brightness/Volume meters appear during enabled edge gestures in active local playback, not with VoiceOver or while interaction is blocked. Their unavailable captions report a route/device limit, not another setting. Auto-crop black bars appears only when the supplied engine supports active-picture analysis; both production movie-engine factories wire this support. Picture sampling requires local, ready, visible playback and is suspended for external playback or Picture in Picture. Missing/invalid detection falls back to normal fit. Cropping preserves picture proportions and need not fill every screen edge; zoom remains session-only. Mobile uses Video; Apple TV uses Playback > Zoom Mode. The optical-disc button appears only during disc-menu playback or when the active source exposes network-disc videos. Its primary action returns to Disc menu in menu mode, otherwise opens Disc videos. Holding it offers Disc videos/Play video/Try another region during menu playback, or Play video for a selected disc playlist. Disc-menu overlays have their own direction input and action dialog; the mobile ordinary controls start hidden in menu mode. These paths do not update ordinary title history.",
       "controls": [
         {
@@ -9712,6 +9827,7 @@
         "Sources/CoreUI/NativeTVMediaControls.swift",
         "Sources/CoreUI/SystemCardFocus.swift",
         "Sources/CoreUI/PlaybackVersionPreferencePicker.swift",
+        "Sources/CoreUI/AutomaticVersionInfoButton.swift",
         "Sources/CoreUI/PlozzControlButtonStyle.swift",
         "Sources/CoreUI/SettingsPageHeader.swift",
         "Sources/FeatureSettings/SettingsFormLayout.swift",
@@ -9750,7 +9866,7 @@
         "iPad"
       ],
       "navigation": "Open Settings from iPhone/iPad navigation. The control inventory walks the root first, then Playback, Subtitles, Live TV/Libraries, Appearance, Screens & Navigation, Language, Profiles and account details. Within each destination it follows visible order, placing nested picker choices and conditional branches beside their parent. Playback starts with the separately inventoried PlozziOSStreamingQuality controls before the buffers. Other child pages retain their own screen records. A busy share's scan status appears above the profile header; guide-preparation notices can overlay the root or a destination. Search can open child settings directly, subject to their normal authorization.",
-      "experience": "Change playback, captions, Live TV, libraries, presentation, trackers, language, and authorized household services. Playback places Player tabs after its Playback group and before Tracks: Chapters, Cast, Episodes, Playlist and Continue Watching are independent per-profile toggles, default on. Tabs still need corresponding content and Info remains available. Audio places Identify songs after Prefer lossless audio; recognition defaults on, needs internet and supported playback, and uses Shazam with playback audio rather than the microphone.",
+      "experience": "Change playback, captions, Live TV, libraries, presentation, trackers, language, and authorized household services. Playback places Player tabs after its Playback group and before Tracks: Chapters, Cast, Episodes, Playlist and Continue Watching are independent per-profile toggles, default on. Tabs still need corresponding content and Info remains available. Audio places Identify songs after Prefer lossless audio; recognition defaults on, needs internet and supported playback, and uses Shazam with playback audio rather than the microphone. Version selection offers Choose on first play while unset, then Ask every time, Choose automatically and Use first from server in enum order; its How automatic selection works button appears only with automatic mode selected and closes with Done. Focus-only episode descriptions are Apple TV-only and absent here.",
       "conditions": "iPhone/iPad compact and regular-width layouts. Category order is Playback, Subtitles, Live TV, Libraries, Appearance, Screens & Navigation, Trackers, Language. Player orientation appears only on iPhone, in enum order: Follow device orientation, Portrait, Landscape auto, Landscape left, Landscape right. Runtime enforcement requires a full-screen compact-phone window. Follow device orientation respects system rotation lock; Landscape auto leases motion updates only for the active eligible player and can follow sideways direction despite rotation lock. Fixed landscape choices refer to the top of the phone; iPad uses system rotation with no picker. Everyone is absent for Kids. Only Kids profiles with a household Parental PIN replace the ordinary Libraries category with Name & Avatar and move Libraries/Manage Profile into Parental Controls, where they require unlock. Without that PIN, Kids retains ordinary Libraries and Manage Profile. Edit/Done reflects SwiftUI list-editing state on Rating sources & order; profile management instead uses the app's Edit Profiles/Done Editing. Internal developer actions require deliberate version-based activation and are not reader setup steps. Appearance order is Theme, Cards, Artwork, Circadian Mode. Theme uses AppTheme.allCases: System, Light, Dark, Black; Liquid Glass separately uses System, On, Off. Cards contains Labels, Watch indicators, Style, Display Size; Focus is Apple TV-only. Label presets replace overrides; Custom is a readout in the compact picker when no preset matches. Customize labels from Cards offers all nine Page choices; from Movie & show details it contains Episodes, Related titles and Extras without a Page picker. Home/Recommended use Default with On/Off/Mixed, followed by Overrides; Continue Watching and Home's Libraries use Use default/On/Off. Other pages use On/Off only. The color picker is hidden with Hidden watch indicators; Episode count style appears only with episode counts enabled. Circadian Mode has a master switch followed by Schedule (Auto, Manual, Always On). With the switch off, Schedule is disabled and the other controls are hidden. Auto reveals Location; Manual reveals Turns on/Turns off in device-local time. Region names and clock values are data, not fixed captions. Picture then shows Warmth, Dimness and Fade; Fade is hidden for Always On. Preview has Preview at Full Strength, Preview a Day and a conditional Simulated time readout. Turning the mode off or leaving stops preview. Separate audio/subtitle rules replace the base picker with Movies, TV Shows, Anime and Everything else; language names are supplied by the language catalogue. Up Next lead time needs Show Up Next card; Customize Live TV subtitles needs a separate Live TV style. Subtitle download settings remain visible, but downloads still need a supported server. Skip-marker Customize requires skipping enabled; its content-category switches gate each marker's overrides, and Use default/Off are per-marker choices. Settings search is available from the root; selecting a result briefly highlights the control and still checks parental authorization. It never enables a prerequisite automatically. After explicit IPTV setup/refresh, a shared guide notice can remain across navigation while the account is authorized. It is hidden behind another transient message. Dismiss hides only the notice; terminal notices also auto-dismiss after five seconds. Percentages describe the current stage, not total work. Profile/account authorization changes cancel and remove scoped work; this does not promise OS background execution. Trailers & music is the shared nested destination, reached from Movie & show details or an enabled Home hero. Nested controls are audited here and on HeroSettingsControls in UI order: Trailers policy (Off, Server only, Server + YouTube), Home autoplay with its conditional Start muted, then Details with Detail background (Off, Trailer, Theme music), its separate conditional Start muted, or Theme music volume and preview controls. Off disables trailers/autoplay but not music or other extras; YouTube is manual/external only. The settings are profile-specific and the Home/detail choices are independent. Playback exposes Discs before Advanced. Disc playback defaults to Play video and is a profile preference; Open disc menu affects attemptable network-share BDMV folders only. The helper warns that only HDMV menus are supported and menu videos do not update watch progress. Unsupported menu metadata selects video instead; the DEBUG-only BD-J switch is not production support.",
       "controls": [
         {
@@ -10144,6 +10260,18 @@
         {
           "text": "Choose automatically",
           "source": "Sources/CoreModels/PlaybackVersionSelectionMode.swift"
+        },
+        {
+          "text": "Use first from server",
+          "source": "Sources/CoreModels/PlaybackVersionSelectionMode.swift"
+        },
+        {
+          "text": "How automatic selection works",
+          "source": "Sources/CoreUI/AutomaticVersionInfoButton.swift"
+        },
+        {
+          "text": "Done",
+          "source": "Sources/CoreUI/AutomaticVersionInfoButton.swift"
         },
         {
           "text": "Remember series version choices",
@@ -12881,7 +13009,7 @@
         "Sources/MetadataKit/DetailMetadataResolver.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Shared About, Ratings, release/availability, descriptive facts, crew and selected-file Playback sections inside the mobile, Apple TV movie and Apple TV series detail pages. Their exact headings, field labels, Show Ratings, MORE and mobile Done are inventoried on those parents. Groups/facts depend on available data and privacy preferences; catalogue totals do not represent playable episode counts."
+      "omitReason": "Shared About, Ratings, release/availability, descriptive facts, crew and selected-file Playback sections inside the mobile, Apple TV movie and Apple TV series detail pages. Their exact headings, field labels, Show Ratings and MORE are inventoried on those parents. Mobile expanded groups use Done; the separate full-description reader uses the icon-only Close button. Apple TV readers close with remote Back. Groups/facts depend on available data and privacy preferences; catalogue totals do not represent playable episode counts."
     },
     "Sources/CoreUI/DetailMoreContent.swift": {
       "sources": [
@@ -14878,11 +15006,26 @@
     "Sources/CoreUI/PlaybackVersionPreferencePicker.swift": {
       "sources": [
         "Sources/CoreUI/PlaybackVersionPreferencePicker.swift",
+        "Sources/CoreModels/PlaybackVersionSelectionMode.swift",
+        "Sources/CoreUI/AutomaticVersionInfoButton.swift",
         "Sources/AppShelliOS/PlozziOSSettingsView.swift",
         "Sources/FeatureSettings/PreferenceDetailViews.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Reusable PlaybackVersionPreferencePicker.swift is wired into Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitReason": "The shared Version selection picker is embedded by PlozziOSSettingsView and the non-TV branch of PreferenceDetailViews; the TV branch renders equivalent enum options directly. Inventory Choose on first play, Ask every time, Choose automatically and Use first from server on both settings parents. Mobile shows AutomaticVersionInfoButton only when automatic mode is selected, while TV has that button as the row's description accessory. Its information alert and Done are inventoried on those parents and the first-use choice screen."
+    },
+    "Sources/CoreUI/AutomaticVersionInfoButton.swift": {
+      "sources": [
+        "Sources/CoreUI/AutomaticVersionInfoButton.swift",
+        "Sources/CoreUI/PlaybackVersionPreferencePicker.swift",
+        "Sources/FeatureSettings/PreferenceDetailViews.swift",
+        "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+        "Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift",
+        "Sources/FeatureHomeCore/DetailPlaybackSelection.swift",
+        "Sources/CoreModels/VersionSelectionAssessment.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "This accessible information button opens How automatic selection works and closes with Done. Its parents inventory both controls: the first-use PlaybackVersionChoiceView on all platforms, the Apple TV Version selection row in PreferenceDetailViews, and the automatic-mode picker embedded in PlozziOSSettingsView on iPhone/iPad. The explanation describes resolution/HDR/bitrate and device compatibility plus enabled remembered-series priority; it is not another selection mode or a freestanding navigation destination."
     },
     "Sources/CoreUI/PlayerControlButton.swift": {
       "sources": [
@@ -20107,6 +20250,10 @@
     "Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift": {
       "sources": [
         "Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift",
+        "Sources/FeatureHomeCore/PlaybackVersionChoiceModel.swift",
+        "Sources/CoreModels/PlaybackVersionSelectionMode.swift",
+        "Sources/CoreUI/AutomaticVersionInfoButton.swift",
+        "Sources/FeatureHomeCore/DetailPlaybackSelection.swift",
         "Sources/CoreUI/DialogPresentation.swift",
         "Sources/CoreUI/SettingsSurfaces.swift",
         "Sources/CoreUI/FirstUseChoiceView.swift",
@@ -20122,8 +20269,32 @@
       ],
       "navigation": "Start a title with multiple eligible files/editions when version selection asks.",
       "experience": "Choose a version, set selection behavior, or cancel before playback starts.",
-      "conditions": "Multiple authorized versions and the profile selection preference determine visibility; remembered series choices may preselect a version type.",
+      "conditions": "The first authorized multi-version movie/episode with an unset preference shows the selection-mode introduction. Ask every time then opens the list, including during autoplay. Automatic and server-order modes bypass it on later plays. Use first from server preserves the selected account's version order, excludes external-service shortcuts and ignores remembered choices unless the viewer explicitly chooses a version. Automatic selection weighs resolution, HDR, bitrate and device compatibility, with a matching remembered series type taking priority when enabled. The information button is present in the introduction, always on Apple TV's Version selection settings row, and beside the mobile picker in automatic mode. The shared alert closes with Done; list Close is mobile-only and Cancel is Apple TV-only.",
       "controls": [
+        {
+          "text": "How should versions be selected?",
+          "source": "Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift"
+        },
+        {
+          "text": "How automatic selection works",
+          "source": "Sources/CoreUI/AutomaticVersionInfoButton.swift"
+        },
+        {
+          "text": "Done",
+          "source": "Sources/CoreUI/AutomaticVersionInfoButton.swift"
+        },
+        {
+          "text": "Ask every time",
+          "source": "Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift"
+        },
+        {
+          "text": "Choose automatically",
+          "source": "Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift"
+        },
+        {
+          "text": "Use first from server",
+          "source": "Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift"
+        },
         {
           "text": "Choose a version",
           "source": "Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift"
@@ -20133,16 +20304,12 @@
           "source": "Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift"
         },
         {
-          "text": "Cancel",
-          "source": "Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift"
-        },
-        {
-          "text": "Do you want to choose a version every time?",
-          "source": "Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift"
-        },
-        {
           "text": "Original",
           "source": "Sources/CoreUI/MediaVersionChoiceButton.swift"
+        },
+        {
+          "text": "Cancel",
+          "source": "Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift"
         }
       ],
       "documents": [
@@ -23127,8 +23294,8 @@
         "iPad"
       ],
       "navigation": "Open the player Info card. Playback Info opens stream measurements; any recognized song appears on Info without entering that diagnostic card.",
-      "experience": "Read source facts, current stream and diagnostic information without assuming a physical output layout. When Identify songs is enabled and a supported playback-audio tap confirms a Shazam match, a song card appears alongside the title information, below it in the vertical card layout. Its dynamic title/artist are not fixed control labels; select it to open Apple Music only when a URL is supplied.",
-      "conditions": "Facts depend on supplied provider/probed/current-stream data. Conversion details are distinct from original file facts; missing values are not fabricated. Song identification needs internet and the per-profile Identify songs preference, default on. Offline Mode, the native engine and the AetherEngine remote-bypass route cannot provide recognition. It consumes playback audio, not microphone capture. No match leaves the card absent; Apple Music access and URL availability are separate from recognizing a song.",
+      "experience": "Read source facts, current stream and diagnostic information without assuming a physical output layout. With Identify songs enabled and a supported Shazam match, a song card appears alongside the title information, below it in vertical layouts. Its dynamic song/artist text opens the Open song chooser inventoried on PlayerSongCard, not Apple Music directly.",
+      "conditions": "Facts depend on supplied provider/probed/current-stream data. Conversion facts differ from original-file facts and missing values are not invented. Song identification needs internet and the per-profile preference, default on. Offline Mode, the native engine and remote-bypass playback cannot supply decoded audio; no microphone is used. A missing match leaves no card. Every matched card opens service choices; only Apple Music requires a supplied song URL. External service availability is independent of recognition.",
       "controls": [
         {
           "text": "Reading stream details…",
@@ -26691,7 +26858,7 @@
         "Sources/FeatureSettings/LibraryPresentationSettingsView.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Reusable CardCaptionCustomizationContent.swift is wired into Sources/FeatureSettings/HomeRowsSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/LibraryPresentationSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/HomeRowsSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/LibraryPresentationSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/HomeRowsSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/LibraryPresentationSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/HomeRowsSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/LibraryPresentationSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/FeatureSettings/HomeRowsSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/LibraryPresentationSettingsView.swift, Sources/FeatureSettings/PreferenceDetailViews.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitReason": "Cards, Home rows, library presentation and Movie & show details embed this shared editor with their allowed Page scope; parent inventories carry the exact controls. Page selection appears only when more than one page is allowed. Movie & show details exposes Episodes, Related titles and Extras. Only on Apple TV, Only show descriptions on focus follows Episodes and is disabled when episode labels are off; it starts off and affects synopsis visibility, not spoiler permissions. This platform-specific control is inventoried on PreferenceDetailViews, not the mobile parent. Home/Recommended instead use Default plus row Overrides; other pages use their On/Off choices."
     },
     "Sources/FeatureSettings/CollectionSectionSettingsView.swift": {
       "sources": [
@@ -29460,6 +29627,7 @@
         "Sources/CoreUI/NavigationStyleSwatch.swift",
         "Sources/FeatureSettings/CompactNavigationPicker.swift",
         "Sources/CoreUI/PlaybackVersionPreferencePicker.swift",
+        "Sources/CoreUI/AutomaticVersionInfoButton.swift",
         "Sources/CoreUI/PlozzControlButtonStyle.swift",
         "Sources/CoreUI/SettingsPageHeader.swift",
         "Sources/FeatureSettings/SettingsFormLayout.swift",
@@ -29493,7 +29661,7 @@
         "Apple TV"
       ],
       "navigation": "Choose Playback, Subtitles, Appearance, Screens & Navigation or Language in Apple TV Settings. The control inventory walks those workspaces in that order, keeping nested picker choices beside their parent and alternative branches together. Appearance's Circadian Mode opens the separately inventoried NightShiftDetailView pane; Home, Libraries, artwork customization and other child screens retain their own records. Row-builder titles that are not rendered by the active workspace are not extra visible headings.",
-      "experience": "Navigate profile settings workspaces in visible order. Playback begins with Audio, Autoplay & Up Next, then Player tabs before version selection and buffers. Player tabs lists Chapters, Cast, Episodes, Playlist and Continue Watching, default on per profile; usable content still gates tabs and Info is always retained. Audio places Identify songs after Prefer lossless audio; default-on Shazam recognition needs internet and supported playback and does not use microphone capture.",
+      "experience": "Navigate profile settings workspaces in visible order. Playback begins with Audio, Autoplay & Up Next, then Player tabs before version selection and buffers. Player tabs lists Chapters, Cast, Episodes, Playlist and Continue Watching, default on per profile; usable content still gates tabs and Info is always retained. Audio places Identify songs after Prefer lossless audio; default-on Shazam recognition needs internet and supported playback and does not use microphone capture. Version selection offers Choose on first play while unset, then Ask every time, Choose automatically and Use first from server in enum order; its information accessory always opens How automatic selection works on Apple TV and the alert closes with Done. In Customize labels, Only show descriptions on focus follows Episodes only on Apple TV's Movie & show details page; it starts off, is disabled when episode labels are off, and changes synopsis visibility without changing spoiler policy.",
       "conditions": "Apple TV workspace order: Playback has Audio, Autoplay & Up Next, Player tabs, Version selection, Remember series version choices, Video buffer, Live TV buffer, Skip intros, credits & more, Seeking, Fade on display changes, Discs, Advanced. Audio defaults, Autoplay and Skip Intervals are internal row-builder titles, not separate headings in this workspace. Separate audio/subtitle rules replace the base picker with Movies, TV Shows, Anime and Everything else; language names come from the language catalogue. Time before the end needs Show Up Next card. Subtitle order is Show subtitles, Subtitle style, Live TV subtitle style, Subtitle language, SDH subtitles, Downloading subtitles, Remember subtitles per series. Customize Live TV subtitles requires a separate style. Downloading subtitles appears for supported server profiles; unsupported profiles see its prerequisite only through a matching search. Skip-marker Customize requires skipping enabled; category switches gate marker-specific rules, where Use default and Off appear. Appearance has Theme, Cards, Artwork, Circadian Mode; Screens & Navigation has App navigation, All screens, Home, Libraries, Movie & show details, Music player. Theme uses AppTheme.pickerOrder: Black, Dark, Light, System. Music player instead uses Dark, Pure Black, Light, Match Theme, followed by Show album, quality & lyrics source. Provider management shortcuts are hidden without permission; engine/platform conditions gate playback and subtitle options. Cards contains Labels, Watch indicators, Focus, Style, Display Size; Focus choices are System, Highlight, Outline. Presets replace label overrides; the compact Custom readout is iOS-only. Customize labels from Cards offers all nine Page choices; from Movie & show details it contains Episodes, Related titles and Extras without a Page picker. Home/Recommended use Default with On/Off/Mixed, followed by Overrides; Continue Watching and Home's Libraries use Use default/On/Off. Other pages use On/Off only. Apple TV cycles these row choices on selection; mobile presents a picker. The color picker is hidden with Hidden watch indicators; Episode count style appears only with episode counts enabled. Trailers & music is the shared nested destination, reached from Movie & show details or an enabled Home hero. Nested controls are audited here and on HeroSettingsControls in UI order: Trailers policy (Off, Server only, Server + YouTube), Home autoplay with its conditional Start muted, then Details with Detail background (Off, Trailer, Theme music), its separate conditional Start muted, or Theme music volume and preview controls. Off disables trailers/autoplay but not music or other extras; YouTube is manual/external only. The settings are profile-specific and the Home/detail choices are independent. Playback exposes Discs before Advanced. Disc playback defaults to Play video and is a profile preference; Open disc menu affects attemptable network-share BDMV folders only. The helper warns that only HDMV menus are supported and menu videos do not update watch progress. Unsupported menu metadata selects video instead; the DEBUG-only BD-J switch is not production support.",
       "controls": [
         {
@@ -29611,6 +29779,18 @@
         {
           "text": "Choose automatically",
           "source": "Sources/CoreModels/PlaybackVersionSelectionMode.swift"
+        },
+        {
+          "text": "Use first from server",
+          "source": "Sources/CoreModels/PlaybackVersionSelectionMode.swift"
+        },
+        {
+          "text": "How automatic selection works",
+          "source": "Sources/CoreUI/AutomaticVersionInfoButton.swift"
+        },
+        {
+          "text": "Done",
+          "source": "Sources/CoreUI/AutomaticVersionInfoButton.swift"
         },
         {
           "text": "Remember series version choices",
@@ -30082,6 +30262,10 @@
         },
         {
           "text": "Episodes",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Only show descriptions on focus",
           "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
         },
         {
