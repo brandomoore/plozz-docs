@@ -810,7 +810,7 @@
     "slug": "browse-home-rows",
     "title": "Browse more from Home",
     "seoTitle": "Browse and filter more titles from Plozz Home rows",
-    "description": "Open a Home row's larger grid on Apple TV, iPhone, or iPad, filter unwatched titles, change sorting, and recover row-loading errors.",
+    "description": "Open and filter larger Home row grids, use the row-editing shortcut on iPhone or iPad, and recover loading errors without changing your library's settings.",
     "section": "Library",
     "kind": "guide",
     "file": "browse-home-rows.md",
@@ -850,6 +850,14 @@
     ],
     "ui": {
       "references": [
+        {
+          "text": "Edit",
+          "source": "Sources/CoreUI/BrowseRowHeading.swift"
+        },
+        {
+          "text": "Setting unavailable",
+          "source": "Sources/AppShelliOS/PlozziOSHomeView.swift"
+        },
         {
           "text": "Home",
           "source": "Sources/AppShell/MainTabView.swift"
@@ -1309,7 +1317,7 @@
     "slug": "home-and-navigation",
     "title": "Home and navigation",
     "seoTitle": "Customize Plozz Home rows, hero, and navigation",
-    "description": "Arrange Home rows and Apple TV styles, dismiss empty messages, understand Continue Watching, and restore hidden shortcuts.",
+    "description": "Arrange and rename Home rows and shortcuts, choose Apple TV layouts, restore empty messages, and understand Continue Watching.",
     "section": "Library",
     "kind": "reference",
     "file": "home-and-navigation.md",
@@ -1318,7 +1326,6 @@
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/FeatureSettings/HomeRowsSettingsView.swift",
       "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
-      "Sources/CoreModels/ContinueWatchingPolicy.swift",
       "Sources/FeatureSettings/CollectionSectionSettingsView.swift",
       "Sources/CoreModels/CollectionSection.swift",
       "Sources/CoreUI/HomeSectionStatusView.swift",
@@ -1333,7 +1340,8 @@
       "Sources/CoreUI/LiftableReorderList.swift",
       "Sources/AppShelliOS/PlozziOSRootView.swift",
       "Sources/CoreUI/ProfileSettingsCategory.swift",
-      "Sources/CoreModels/HeroSourceKind.swift"
+      "Sources/CoreModels/HeroSourceKind.swift",
+      "Sources/FeatureSettings/HomeEditorAutosavingNameInput.swift"
     ],
     "watch": [
       "Sources/FeatureSettings/Home",
@@ -1432,6 +1440,10 @@
         },
         {
           "text": "Custom",
+          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+        },
+        {
+          "text": "Preset",
           "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
         },
         {
@@ -1626,6 +1638,26 @@
         {
           "text": "Advance automatically",
           "source": "Sources/FeatureSettings/HeroSettingsControls.swift"
+        },
+        {
+          "text": "Rename",
+          "source": "Sources/CoreUI/LiftableReorderList.swift"
+        },
+        {
+          "text": "Name",
+          "source": "Sources/FeatureSettings/NavigationLibrariesDetailView.swift"
+        },
+        {
+          "text": "Couldn't save",
+          "source": "Sources/FeatureSettings/HomeEditorAutosavingNameInput.swift"
+        },
+        {
+          "text": "Retry",
+          "source": "Sources/FeatureSettings/HomeEditorAutosavingNameInput.swift"
+        },
+        {
+          "text": "Row name",
+          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
         }
       ],
       "emphasis": []
@@ -2747,40 +2779,42 @@
   {
     "slug": "music",
     "platforms": [
-      "Apple TV"
+      "Apple TV",
+      "iPhone",
+      "iPad"
     ],
     "title": "Listen to music",
-    "seoTitle": "Play server music, playlists, and lyrics in Plozz on Apple TV",
-    "description": "Play eligible server music on Apple TV, control album and playlist queues, manage online lyric lookups, and connect Last.fm.",
+    "seoTitle": "Play music in Plozz on Apple TV and supported mobile builds",
+    "description": "Play server albums and playlists, arrange the mobile queue, rate songs, read lyrics, and understand beta-only mobile access and Apple TV Last.fm tracking.",
     "section": "Playback",
-    "kind": "guide",
+    "kind": "reference",
     "file": "music.md",
     "sources": [
-      "Sources/AppShell/MainTabView.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/FeatureMusic/MusicScreens.swift",
       "Sources/CoreUI/NowPlayingSession.swift",
       "Sources/FeatureSettings/IntegrationsDetailView.swift",
-      "Sources/CoreUI/SettingsCopy.swift",
-      "Sources/CoreUI/ProfileSettingsCategory.swift",
-      "Sources/FeatureMusic/MusicTabView.swift",
       "Sources/FeatureMusic/NowPlayingView.swift",
-      "Sources/LastFmService/LastFmService.swift",
-      "App/Resources/Info.plist",
-      "Sources/AppShell/MusicAvailabilityScope.swift",
       "Sources/CoreModels/ThemeSettings.swift",
-      "Sources/FeatureMusic/MusicAggregator.swift",
-      "Sources/MetadataKit/LRCLIBLyricsProvider.swift",
-      "Sources/FeatureMusic/AudioPlaybackController.swift",
-      "Sources/FeatureMusic/MiniPlayerView.swift",
-      "Sources/ProviderPlex/PlexMusicProvider.swift",
-      "Sources/ProviderJellyfin/JellyfinMusicProvider.swift",
-      "Sources/CoreModels/ProviderKind.swift"
+      "Sources/FeatureMusic/MusicScrubBar.swift",
+      "Sources/AppShelliOS/PlozziOSAppModel.swift",
+      "Sources/FeatureMusic/iOS/MusicPlayerAdapter.swift",
+      "Sources/AppShelliOS/PlozziOSRootView.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/AppShelliOS/PlozziOSOfflineModeView.swift",
+      "Sources/CoreUI/LiftableReorderList.swift",
+      "Sources/CoreUI/ContentStateView.swift",
+      "Sources/FeatureMusic/iOS/NowPlayingMorph.swift",
+      "Sources/FeatureMusic/iOS/PlayerQueue.swift",
+      "Sources/FeatureMusic/iOS/PlayerSupport.swift",
+      "Sources/FeatureMusic/iOS/PlayerLikeControl.swift",
+      "Sources/FeatureMusic/iOS/FluidRatingControl.swift",
+      "Sources/FeatureSettings/CompactMusicStylePicker.swift"
     ],
     "watch": [
       "Sources/FeatureMusic/",
-      "Sources/CoreUI/NowPlayingSession.swift",
-      "App/Resources/Info.plist",
+      "Sources/AppShelliOS/PlozziOSMusic",
+      "Sources/CoreModels/CrashReportingSettings.swift",
       "Sources/ProviderPlex/PlexMusicProvider.swift",
       "Sources/ProviderJellyfin/JellyfinMusicProvider.swift",
       "Sources/LastFmService/"
@@ -2789,7 +2823,7 @@
       "references": [
         {
           "text": "Music",
-          "source": "Sources/AppShell/MainTabView.swift"
+          "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
         },
         {
           "text": "Music player",
@@ -2797,7 +2831,7 @@
         },
         {
           "text": "Settings",
-          "source": "Sources/AppShell/MainTabView.swift"
+          "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
         },
         {
           "text": "App navigation",
@@ -2826,19 +2860,163 @@
         },
         {
           "text": "Libraries",
-          "source": "Sources/CoreUI/SettingsCopy.swift"
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
           "text": "Screens & Navigation",
-          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
           "text": "Trackers",
-          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        },
+        {
+          "text": "Offline Mode",
+          "source": "Sources/AppShelliOS/PlozziOSOfflineModeView.swift"
+        },
+        {
+          "text": "More",
+          "source": "Sources/AppShelliOS/PlozziOSRootView.swift",
+          "system": "uikit-more"
+        },
+        {
+          "text": "Show",
+          "source": "Sources/CoreUI/LiftableReorderList.swift"
+        },
+        {
+          "text": "Playlists",
+          "source": "Sources/FeatureMusic/MusicScreens.swift"
+        },
+        {
+          "text": "Albums",
+          "source": "Sources/FeatureMusic/MusicScreens.swift"
+        },
+        {
+          "text": "Artists",
+          "source": "Sources/FeatureMusic/MusicScreens.swift"
+        },
+        {
+          "text": "Genres",
+          "source": "Sources/FeatureMusic/MusicScreens.swift"
+        },
+        {
+          "text": "Recently Played",
+          "source": "Sources/FeatureMusic/MusicScreens.swift"
+        },
+        {
+          "text": "Try Again",
+          "source": "Sources/CoreUI/ContentStateView.swift"
+        },
+        {
+          "text": "Retry",
+          "source": "Sources/FeatureMusic/iOS/MusicPlayerAdapter.swift"
+        },
+        {
+          "text": "Queue",
+          "source": "Sources/FeatureMusic/iOS/NowPlayingMorph.swift"
+        },
+        {
+          "text": "Shuffle",
+          "source": "Sources/FeatureMusic/iOS/NowPlayingMorph.swift"
+        },
+        {
+          "text": "Repeat",
+          "source": "Sources/FeatureMusic/iOS/NowPlayingMorph.swift"
+        },
+        {
+          "text": "Background Audio",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Move Up",
+          "source": "Sources/FeatureMusic/iOS/PlayerQueue.swift"
+        },
+        {
+          "text": "Move Down",
+          "source": "Sources/FeatureMusic/iOS/PlayerQueue.swift"
+        },
+        {
+          "text": "History",
+          "source": "Sources/FeatureMusic/iOS/PlayerQueue.swift"
+        },
+        {
+          "text": "Clear",
+          "source": "Sources/FeatureMusic/iOS/PlayerQueue.swift"
+        },
+        {
+          "text": "Clear",
+          "source": "Sources/FeatureMusic/iOS/FluidRatingControl.swift"
+        },
+        {
+          "text": "More actions",
+          "source": "Sources/FeatureMusic/iOS/NowPlayingMorph.swift"
+        },
+        {
+          "text": "Go to Album",
+          "source": "Sources/FeatureMusic/iOS/PlayerSupport.swift"
+        },
+        {
+          "text": "Go to Artist",
+          "source": "Sources/FeatureMusic/iOS/PlayerSupport.swift"
+        },
+        {
+          "text": "Clear Up Next",
+          "source": "Sources/FeatureMusic/iOS/PlayerSupport.swift"
+        },
+        {
+          "text": "Stop Playing",
+          "source": "Sources/FeatureMusic/iOS/PlayerSupport.swift"
+        },
+        {
+          "text": "Like",
+          "source": "Sources/FeatureMusic/iOS/PlayerLikeControl.swift"
+        },
+        {
+          "text": "Unlike",
+          "source": "Sources/FeatureMusic/iOS/PlayerLikeControl.swift"
+        },
+        {
+          "text": "Lyrics",
+          "source": "Sources/FeatureMusic/iOS/NowPlayingMorph.swift"
+        },
+        {
+          "text": "No lyrics for this song",
+          "source": "Sources/FeatureMusic/iOS/NowPlayingMorph.swift"
+        },
+        {
+          "text": "Appearance",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Match App Theme",
+          "source": "Sources/CoreModels/ThemeSettings.swift"
+        },
+        {
+          "text": "Artwork",
+          "source": "Sources/CoreModels/ThemeSettings.swift"
+        },
+        {
+          "text": "Black",
+          "source": "Sources/CoreModels/ThemeSettings.swift"
+        },
+        {
+          "text": "Dark",
+          "source": "Sources/CoreModels/ThemeSettings.swift"
+        },
+        {
+          "text": "Light",
+          "source": "Sources/CoreModels/ThemeSettings.swift"
+        },
+        {
+          "text": "Gradient Backgrounds",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Show album, quality & lyrics source",
+          "source": "Sources/FeatureSettings/CompactMusicStylePicker.swift"
         }
       ],
       "emphasis": [
-        "Apple TV",
         "LRCLIB"
       ]
     }
@@ -3182,6 +3360,30 @@
     ],
     "ui": {
       "references": [
+        {
+          "text": "Language",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
+        {
+          "text": "Country",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
+        {
+          "text": "Sort",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
+        {
+          "text": "Channel number",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
+        {
+          "text": "Name",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
+        {
+          "text": "Reset filters",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
         {
           "text": "All channels",
           "source": "Sources/FeatureLiveTV/LiveTVPrototypeCategories.swift"
@@ -3655,7 +3857,7 @@
     "seoTitle": "Change Plozz themes, cards, artwork, and interface language",
     "description": "Customize card labels, watch marks, episode counts and progress bars, resize headers, choose artwork, and keep app language separate from media languages.",
     "section": "Personalize",
-    "kind": "guide",
+    "kind": "reference",
     "file": "appearance.md",
     "sources": [
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
@@ -3683,9 +3885,9 @@
       "Sources/FeatureSettings/Card",
       "Sources/FeatureSettings/ArtworkSettingsControls.swift",
       "Sources/CoreModels/CardCaptionSettings.swift",
-      "Sources/FeatureSettings/Hero",
+      "Sources/CoreModels/ThemeSettings.swift",
       "Sources/CoreModels/WatchStatusIndicator",
-      "Sources/FeatureSettings/ViewCustomizationControls.swift"
+      "Sources/FeatureSettings/CompactThemePicker.swift"
     ],
     "ui": {
       "references": [
@@ -3699,6 +3901,26 @@
         },
         {
           "text": "Theme",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Black",
+          "source": "Sources/CoreModels/ThemeSettings.swift"
+        },
+        {
+          "text": "Dark",
+          "source": "Sources/CoreModels/ThemeSettings.swift"
+        },
+        {
+          "text": "Light",
+          "source": "Sources/CoreModels/ThemeSettings.swift"
+        },
+        {
+          "text": "System",
+          "source": "Sources/CoreModels/ThemeSettings.swift"
+        },
+        {
+          "text": "Gradient Backgrounds",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
@@ -4641,10 +4863,10 @@
       "Sources/FeatureSyncCloud/CloudConfigSyncService.swift",
       "Sources/AppShelliOS/PlozziOSAppModel+CloudSync.swift",
       "Sources/CoreNetworking/LocalMediaWatchStore.swift",
-      "Sources/AppRuntime/WatchMutationFactory.swift",
+      "Sources/CoreModels/ProfileSettingsSnapshot.swift",
       "Sources/FeatureSettings/SyncEraseDataView.swift",
       "Sources/AppShelliOS/PlozziOSOfflineModeView.swift",
-      "Sources/ProviderPlex/PlexExtraWatchState.swift"
+      "Sources/CoreModels/NavigationLibraryLayout.swift"
     ],
     "watch": [
       "Sources/FeatureSyncSetup/",

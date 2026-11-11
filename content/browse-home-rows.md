@@ -12,6 +12,12 @@ Loaded rows with more titles can offer a larger grid: **Recently Added**, suppor
 
 The Home **Watchlist** shortcut opens the regular [Watchlist page](/watchlist/#filter-and-sort-the-page), with its saved browse preferences.
 
+## Edit a Home row on iPhone/iPad
+
+Hold a row heading on Home and choose **Edit** to open that row's settings. This is a shortcut to [renaming or changing the row](/home-and-navigation/#rename-rows-and-shortcuts), not editing your server's library. Tapping the chevron still opens the larger grid.
+
+If **Setting unavailable** appears after your profile or available rows change, return to Home and try again.
+
 ## Narrow or rearrange the results
 
 Apple TV places filtering before sorting above the grid. On iPhone/iPad, use the sort and filter icons at the top right.

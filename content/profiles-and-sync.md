@@ -24,7 +24,7 @@ With sync and iCloud Keychain available, iPhone/iPad can automatically adopt sup
 
 ## Keep device-specific choices local
 
-For each profile, **Display Size**, navigation style, and main shortcuts stay local, as does Apple TV's **Prevent Accidental Exit**. Set these on each device; they neither sync nor transfer.
+For each profile, **Display Size**, navigation style, shortcut order and ordinary shortcut names stay local, as does Apple TV's **Prevent Accidental Exit**. They neither sync nor transfer. Home-row names do sync, including the shared Watchlist row/shortcut name.
 
 Downloads, [Offline Mode](/downloads/#browse-only-your-downloads), automatic sign-in, [Video buffer](/streaming-quality/), [Live TV buffer](/platform-controls/#live-tv-remote-controls-and-rewind), and [Top Shelf preferences](/platform-controls/#launch-from-apple-tv-top-shelf) also stay local. So do the device-wide [external-player choice](/external-players/) and [diagnostics consent](/feedback-and-bugs/#choose-diagnostics-sharing).
 

@@ -8,6 +8,8 @@ Choose a category or **All channels** to open its guide. On a narrow layout, use
 
 In the directory or a sidebar layout, the **Source** menu selects an enabled source or **All**. From the directory, **More > Guide** opens the guide for all channels. Use **More > Filters** to narrow results.
 
+Choose **Category**, **Language**, and **Country**, then optionally enable **Favorites only** or **Channels with a guide**. Under **Sort**, choose **Channel number** or **Name**. These filters narrow the displayed list; they do not restore hidden channels. **Reset filters** clears browse filters and the source selection, but keeps sorting and channel visibility.
+
 ## Wait for an IPTV guide
 
 Your IPTV guide loads while you browse. Dismissing its progress notice does not cancel it; percentages describe individual stages. Keep Plozz open.

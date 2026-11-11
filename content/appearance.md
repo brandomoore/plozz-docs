@@ -2,9 +2,11 @@
 
 Choose readable cards and artwork in **Settings > Appearance**.
 
-## Make cards easier to read
+## Choose colors and transparency
 
-In **Theme**, choose colors and gradients. **Liquid Glass > Off** uses solid backgrounds; you can also follow system Reduce Transparency.
+In **Theme**, choose **Black**, **Dark**, **Light**, or **System**. System follows the device's appearance. **Gradient Backgrounds** adds artwork-colored backgrounds; turn it off for flat colors. Under **Liquid Glass**, **Off** removes translucency; the system option follows Reduce Transparency.
+
+## Make cards easier to read
 
 Open **Cards > Labels** and choose **App default**, **Show labels everywhere**, or **Hide labels everywhere**. A preset replaces your individual choices.
 
@@ -35,6 +37,8 @@ In **Artwork**, presets replace your custom choices:
 Choose **Customize by view**, then **Library** or **Metadata providers** for each area. **Title detail pages** also offers **Mixed**: online backgrounds and logos with library posters for related titles. Home's Watchlist row and page are separate. Existing downloads keep their images.
 
 [Metadata Providers](/metadata-and-ratings/) settings are shared; artwork choices are per-profile.
+
+For the full-screen music player's separate colors and platform-specific settings path, see [Change the player's look](/music/#change-the-player-s-look).
 
 ## Resize title logos
 
