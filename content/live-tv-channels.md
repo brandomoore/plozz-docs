@@ -28,6 +28,26 @@ On Apple TV, open **Manage channels** in Live TV's sidebar. On iPhone/iPad, open
 
 Regional filtering can hide untagged channels. Check **Favorites only**, **Channels with a guide**, and the selected source too. Unavailable favorites stay saved.
 
+## Arrange and save a Multiview
+
+Use [Multiview](/live-tv/#watch-several-channels) to follow several channels without switching between them. Reveal its controls; on iPhone/iPad, choose **Edit layout** if needed.
+
+Open **Layout** and choose the arrangement:
+
+- **Side by side** shows two pictures together; in mobile portrait it is **Top and bottom**. With more pictures, this choice becomes **Grid**.
+- **Main picture** gives one picture more space, with the others alongside.
+- **Corner** overlays smaller pictures. Choose **Position** and **Size** to keep them away from something important.
+
+Only one picture supplies sound. Focus it on Apple TV, or select it under **Audio** on mobile. To give a channel the main picture, hold its picture on Apple TV and choose **Make main video**. On mobile, select its Audio entry, then **More > Make main** while editing.
+
+To change a channel, hold its picture on Apple TV and choose **Replace channel** or **Remove**. On mobile, select its **Audio** entry, then choose **More > Replace** or **More > Remove** while editing. Replacement opens the guide to choose another channel; removal leaves the other pictures playing. At least one picture must remain.
+
+Once channels load, choose **More > Favorite** to save the channels and layout for your profile. Reopen them from the guide's **Multiviews**; on narrow mobile layouts, check **More**. Hold a saved entry for **Remove from Favorites**. Saving reserves no streams or tuners, and missing channels may prevent reopening.
+
+If favorites cannot be loaded or saved, open **Multiviews** and choose **Retry** before relying on your changes.
+
+Multiview does not support AirPlay or Picture in Picture. Closing it leaves saved favorites available.
+
 ## Correct a channel's guide
 
 Guide correction, file editing, identity repair and scans below are for standalone playlists, not IPTV accounts. Accounts use **Refresh guide** and **Edit connection** instead.

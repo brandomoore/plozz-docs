@@ -10,7 +10,7 @@ On Apple TV, choose **On** or **Off**; on mobile, use **Show hero**. Hiding it p
 
 With the hero on, open **Content sources** on Apple TV or **Hero content sources** on mobile. Choose **Continue Watching**, **Recently Added**, **Watchlist**, **Random from Library**, **Collections**, or **Discovery**. Set **Items to show**, **Advance automatically**, and **Ratings**. **Trailers & music** opens [preview choices](/trailers-and-previews/#choose-trailers-and-previews).
 
-Enable Discovery to choose **Discovery providers**. Suggestions can include titles outside your library; requests need Seerr. New profiles follow the Seerr connection until you choose otherwise. Kids profiles exclude Discovery; [Discover filters](/discover/) are separate.
+Enable Discovery to choose **Discovery providers**. Suggestions can be outside your library; requests need Seerr. New profiles follow the Seerr connection until you choose otherwise. Kids profiles exclude Discovery; [Discover filters](/discover/) are separate.
 
 ## Choose row style on Apple TV
 
@@ -22,11 +22,11 @@ Showcase has separate logo/text sizes but shares hero ratings controls. With the
 
 Open **Settings > Screens & Navigation > Home > Rows**.
 
-Under **Preset**, choose **Match server** to follow server rows, or **Combined rows** to group libraries. Confirmation replaces your arrangement, not server settings. Some rows stay separate. Plex supplies promoted rows, not another client's pinned libraries.
+Under **Preset**, choose **Match server** to follow server rows, or **Combined rows** to group libraries. Confirmation replaces rows, not server settings. Some rows stay separate. Plex supplies promoted rows, not another client's pinned libraries.
 
-Choose **Add row** to include more, or open a row and choose **Remove from Home**. To rearrange rows, choose **Edit**, move them, then **Done**; holding a row also offers **Reorder**. Mixing combined, library, and server rows changes the preset to **Custom**.
+Choose **Add row**, or open a row and choose **Remove from Home**. Choose **Edit**, move rows, then **Done**; holding a row also offers **Reorder**. Mixing combined, library, and server rows changes the preset to **Custom**.
 
-Removing rows does not restrict access. Unavailable rows stay saved: open **Details**, check the source and server user, then **Retry**. **Section unavailable in the latest refresh** can mean the server's row is empty or has changed.
+Removing rows does not restrict access. Unavailable rows stay saved: open **Details**, check the source and server user, then **Retry**. **Section unavailable in the latest refresh** can mean an empty or changed server row.
 
 ## Clear an empty-row message
 
@@ -48,7 +48,7 @@ Under **Home > Rows**, open a row and edit **Row name**. For shortcuts, open **A
 
 On Apple TV, closing the name keyboard saves, even with Back; for **Couldn't save**, choose **Retry**. On mobile, use the **Save changes** checkmark. Leave the name blank to restore its default.
 
-Names change headings, not media or access. Home-row names can [sync](/profiles-and-sync/). Shortcut names stay local, except Watchlist uses its Home-row name.
+Names never change media or access. Home-row names can [sync](/profiles-and-sync/). Shortcut names stay local, except Watchlist uses its Home-row name.
 
 ## Keep older Continue Watching titles
 
@@ -79,7 +79,7 @@ Open **Settings > Screens & Navigation > App navigation**. On Apple TV, choose a
 | **Sidebar** | The native sidebar opens from the top left. |
 | **Top Bar** | Destinations scroll across the top. |
 
-Leave Settings to see it. All support library shortcuts and [All Libraries](/combined-libraries/).
+Leave Settings to apply. All support libraries and [All Libraries](/combined-libraries/).
 
 Use **Hide or Reorder Navigation** to arrange shortcuts; drag on mobile. **Reset Navigation** restores order/visibility, not names, library tabs, or access.
 
@@ -87,7 +87,7 @@ Navigation stays local to this profile and device.
 
 Apple TV sidebars always retain **Settings**; if hidden in Top Bar, use the profile picker.
 
-On mobile, Home, Downloads, and Search start shown. Libraries and **All Libraries** start **Hidden**: hold one and choose **Show**. Seerr can reveal Discover. Compact layouts put extra visible shortcuts under **More**, not hidden ones.
+On mobile, Home, Downloads, and Search normally start shown. Home, Search, or Watchlist can be absent without relevant content. Libraries and **All Libraries** start **Hidden**: hold one and choose **Show**. Seerr can reveal Discover. Compact layouts put extra visible shortcuts under **More**, not hidden ones.
 
 Under **Screens & Navigation > Movie & show details**, choose [Trailers & music](/trailers-and-previews/#choose-trailers-and-previews), review scores, and age recommendations.
 

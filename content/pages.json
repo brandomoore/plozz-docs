@@ -3,7 +3,7 @@
     "slug": "getting-started",
     "title": "Get started",
     "seoTitle": "Get started with Plozz on Apple TV, iPhone, and iPad",
-    "description": "Install Plozz, connect your own media, choose a profile, and use settings search to find the controls for your setup.",
+    "description": "Install Plozz, restore a setup with iCloud or connect your own media, choose a profile, and find settings on Apple TV, iPhone, and iPad.",
     "section": "Connect",
     "kind": "overview",
     "file": "getting-started.md",
@@ -16,7 +16,7 @@
       "Sources/AppShell/AddAccountView.swift",
       "Sources/AppShelliOS/PlozziOSOnboardingView.swift",
       "project.yml",
-      "README.md",
+      "Sources/CoreModels/SyncSetup.swift",
       "Sources/AppShell/FirstRunProfileView.swift",
       "Sources/AppShelliOS/PlozziOSFirstRunView.swift",
       "Sources/CoreUI/ProfileSettingsCategory.swift",
@@ -27,14 +27,14 @@
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/FeatureSettings/SettingsSearchResults.swift",
       "Sources/CoreModels/SettingsSearch.swift",
-      "Sources/CoreUI/SettingsSearchAnchor.swift"
+      "Sources/FeatureSettings/ICloudOnboardingView.swift"
     ],
     "watch": [
       "Sources/AppShell/FirstRun",
       "Sources/AppShelliOS/PlozziOSFirstRun",
       "Sources/FeatureSettings/SettingsSearch",
       "Sources/CoreModels/SettingsSearch",
-      "Sources/CoreUI/SettingsSearchAnchor.swift",
+      "Sources/FeatureSettings/ICloudOnboardingView.swift",
       "Sources/AppShelliOS/PlozziOSOnboardingView.swift"
     ],
     "platforms": [
@@ -91,6 +91,14 @@
         {
           "text": "Set Up from Another Device",
           "source": "Sources/AppShelliOS/PlozziOSOnboardingView.swift"
+        },
+        {
+          "text": "Enable iCloud Sync",
+          "source": "Sources/FeatureSettings/ICloudOnboardingView.swift"
+        },
+        {
+          "text": "Not now",
+          "source": "Sources/FeatureSettings/ICloudOnboardingView.swift"
         }
       ],
       "emphasis": [
@@ -98,21 +106,22 @@
         "Choose a source.",
         "Connect your media.",
         "Make it yours.",
-        "Start watching."
+        "Start watching.",
+        "Choose whether to sync."
       ]
     }
   },
   {
     "slug": "servers",
     "title": "Connect a server",
-    "seoTitle": "Connect Jellyfin, Plex, Emby, or Silo to Plozz",
-    "description": "Connect a media server, restore an expired sign-in, select libraries and server users, and manage trusted local or remote addresses.",
+    "seoTitle": "Connect video servers or Navidrome music to Plozz",
+    "description": "Connect Jellyfin, Plex, Emby, Silo, or beta Navidrome/Subsonic music, restore a sign-in, and manage trusted server addresses.",
     "section": "Connect",
-    "kind": "guide",
+    "kind": "reference",
     "file": "servers.md",
     "sources": [
-      "Sources/FeatureSettings/SettingsView.swift",
-      "Sources/FeatureSettings/ServersAndLibrariesDetailView.swift",
+      "Sources/FeatureAuth/SubsonicSignInView.swift",
+      "Sources/ProviderSubsonic/SubsonicClient.swift",
       "Sources/FeatureSettings/ServerDetailView.swift",
       "Sources/FeatureAuth/ServerAddressesView.swift",
       "Sources/CoreUI/ServerAddressSettingsLink.swift",
@@ -137,7 +146,7 @@
       "Sources/FeatureDiscovery/",
       "Sources/FeatureSettings/Server",
       "Sources/AppShelliOS/ServerOnboarding",
-      "Sources/CoreUI/SettingsCopy.swift",
+      "Sources/ProviderSubsonic/",
       "Sources/ProviderSilo/SiloAuthentication.swift"
     ],
     "platforms": [
@@ -210,6 +219,34 @@
         {
           "text": "Libraries",
           "source": "Sources/CoreUI/SettingsCopy.swift"
+        },
+        {
+          "text": "Navidrome (Subsonic)",
+          "source": "Sources/CoreModels/ProviderKind.swift"
+        },
+        {
+          "text": "Server address",
+          "source": "Sources/FeatureAuth/SubsonicSignInView.swift"
+        },
+        {
+          "text": "Username",
+          "source": "Sources/FeatureAuth/SubsonicSignInView.swift"
+        },
+        {
+          "text": "Sign in with",
+          "source": "Sources/FeatureAuth/SubsonicSignInView.swift"
+        },
+        {
+          "text": "Password",
+          "source": "Sources/FeatureAuth/SubsonicSignInView.swift"
+        },
+        {
+          "text": "API Key",
+          "source": "Sources/FeatureAuth/SubsonicSignInView.swift"
+        },
+        {
+          "text": "Sign In",
+          "source": "Sources/FeatureAuth/SubsonicSignInView.swift"
         }
       ],
       "emphasis": []
@@ -374,7 +411,7 @@
       "Sources/FeatureHome/ExtrasRowView.swift",
       "Sources/FeatureHome/DetailHeroView.swift",
       "Sources/CoreModels/MediaItem+Trailer.swift",
-      "Sources/CoreUI/YouTubeTrailerOpening.swift",
+      "Sources/FeatureHome/HomeView.swift",
       "Sources/CoreUI/SettingsCopy.swift",
       "Sources/FeatureHomeCore/LibraryBrowseViewModel.swift",
       "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
@@ -382,7 +419,8 @@
       "Sources/AppShelliOS/PlozziOSLibraryView.swift",
       "Sources/CoreUI/DetailInformationSections.swift",
       "Sources/CoreUI/DetailMoreContent.swift",
-      "Sources/CoreModels/MediaItem.swift"
+      "Sources/CoreModels/MediaItem.swift",
+      "Sources/FeatureHomeCore/ContentRefresh/ContentRefreshModels.swift"
     ],
     "watch": [
       "Sources/FeatureHome",
@@ -390,7 +428,7 @@
       "Sources/AppRuntime/WatchMutation",
       "Sources/ProviderPlex/PlexExtraWatchState.swift",
       "Sources/CoreNetworking/LocalMediaWatchStore.swift",
-      "Sources/MetadataKit/DetailMetadataResolver.swift"
+      "Sources/FeatureHomeCore/ContentRefresh/"
     ],
     "ui": {
       "references": [
@@ -549,6 +587,14 @@
         {
           "text": "Close",
           "source": "Sources/CoreUI/DetailInformationSections.swift"
+        },
+        {
+          "text": "Manage Seasons",
+          "source": "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
+        },
+        {
+          "text": "Refresh Episodes and Season Status",
+          "source": "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
         }
       ],
       "emphasis": []
@@ -2785,7 +2831,7 @@
     ],
     "title": "Listen to music",
     "seoTitle": "Play music in Plozz on Apple TV and supported mobile builds",
-    "description": "Play server albums and playlists, arrange the mobile queue, rate songs, read lyrics, and understand beta-only mobile access and Apple TV Last.fm tracking.",
+    "description": "Browse music from Plex, Jellyfin, Emby, or beta Navidrome/Subsonic, control queues and lyrics, and understand server favorites and listening history.",
     "section": "Playback",
     "kind": "reference",
     "file": "music.md",
@@ -2794,9 +2840,9 @@
       "Sources/FeatureMusic/MusicScreens.swift",
       "Sources/CoreUI/NowPlayingSession.swift",
       "Sources/FeatureSettings/IntegrationsDetailView.swift",
-      "Sources/FeatureMusic/NowPlayingView.swift",
+      "Sources/ProviderSubsonic/SubsonicProvider.swift",
       "Sources/CoreModels/ThemeSettings.swift",
-      "Sources/FeatureMusic/MusicScrubBar.swift",
+      "Sources/ProviderSubsonic/SubsonicListeningSession.swift",
       "Sources/AppShelliOS/PlozziOSAppModel.swift",
       "Sources/FeatureMusic/iOS/MusicPlayerAdapter.swift",
       "Sources/AppShelliOS/PlozziOSRootView.swift",
@@ -2814,7 +2860,7 @@
     "watch": [
       "Sources/FeatureMusic/",
       "Sources/AppShelliOS/PlozziOSMusic",
-      "Sources/CoreModels/CrashReportingSettings.swift",
+      "Sources/ProviderSubsonic/",
       "Sources/ProviderPlex/PlexMusicProvider.swift",
       "Sources/ProviderJellyfin/JellyfinMusicProvider.swift",
       "Sources/LastFmService/"
@@ -3025,7 +3071,7 @@
     "slug": "live-tv",
     "title": "IPTV and Live TV",
     "seoTitle": "Set up IPTV, guide listings, and library channels in Plozz",
-    "description": "Connect IPTV or server TV, restore channel identities, correct guides, check links, save Multiview layouts, and create library channels.",
+    "description": "Connect IPTV or server TV, search listings, start Multiview, approve Kids playlist sources, and create scheduled channels from supported libraries.",
     "section": "Playback",
     "kind": "reference",
     "file": "live-tv.md",
@@ -3176,11 +3222,7 @@
         },
         {
           "text": "Watch",
-          "source": "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift"
-        },
-        {
-          "text": "Favorite",
-          "source": "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift"
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewTouchChrome.swift"
         },
         {
           "text": "Add channel",
@@ -3191,24 +3233,8 @@
           "source": "Sources/FeatureLiveTV/LiveTVMultiviewTouchChrome.swift"
         },
         {
-          "text": "Watch",
-          "source": "Sources/FeatureLiveTV/LiveTVMultiviewTouchChrome.swift"
-        },
-        {
-          "text": "Audio",
-          "source": "Sources/FeatureLiveTV/LiveTVMultiviewTouchChrome.swift"
-        },
-        {
           "text": "More",
           "source": "Sources/FeatureLiveTV/LiveTVMultiviewTouchChrome.swift"
-        },
-        {
-          "text": "Favorite",
-          "source": "Sources/FeatureLiveTV/LiveTVMultiviewTouchChrome.swift"
-        },
-        {
-          "text": "Multiviews",
-          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
         },
         {
           "text": "More",
@@ -3320,7 +3346,7 @@
     "slug": "live-tv-channels",
     "title": "Organize channels and fix listings",
     "seoTitle": "Organize Plozz Live TV channels and correct guide listings",
-    "description": "Browse Live TV categories, find mobile source and filter controls, recover hidden channels, correct guide matches, and restore saved channel identities.",
+    "description": "Organize Live TV channels, arrange and save Multiview layouts, restore hidden stations, and correct guide listings for supported playlist sources.",
     "section": "Playback",
     "kind": "reference",
     "file": "live-tv-channels.md",
@@ -3340,23 +3366,24 @@
       "Sources/FeatureLiveTV/LiveTVGuideMappingView.swift",
       "Sources/FeatureLiveTV/LiveTVIdentityReviewView.swift",
       "Sources/FeatureLiveTV/LiveTVChannelScanViews.swift",
-      "Sources/CoreModels/LiveTVChannelOrganization.swift",
-      "Sources/FeatureLiveTVCore/LiveTVChannelScanCoordinator.swift",
+      "Sources/CoreModels/LiveTVMultiviewFavorite.swift",
+      "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift",
       "Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift",
       "Sources/CoreUI/SettingsCopy.swift",
-      "Sources/FeatureLiveTVCore/LiveTVGuidePreparationModel.swift",
+      "Sources/CoreUI/VideoCardFocus.swift",
       "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift",
-      "Sources/AppRuntime/IPTVAccountGuideIndex.swift",
+      "Sources/FeatureLiveTV/LiveTVMultiviewTouchChrome.swift",
       "Sources/FeatureSettings/ServerDetailView.swift",
-      "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift",
+      "Sources/FeatureLiveTV/LiveTVMultiviewGuideActions.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift"
     ],
     "watch": [
       "Sources/FeatureLiveTV/LiveTV",
-      "Sources/FeatureLiveTVCore/LiveTVGuide",
-      "Sources/FeatureLiveTVCore/LiveTVChannelScan",
+      "Sources/FeatureLiveTVCore/LiveTV",
+      "Sources/CoreModels/LiveTVMultiviewFavorite.swift",
       "Sources/AppRuntime/IPTVAccountGuideIndex.swift",
-      "Sources/CoreUI/SettingsCopy.swift"
+      "Sources/CoreUI/SettingsCopy.swift",
+      "Sources/CoreUI/VideoCardFocus.swift"
     ],
     "ui": {
       "references": [
@@ -3583,6 +3610,94 @@
         {
           "text": "Sources",
           "source": "Sources/CoreUI/SettingsCopy.swift"
+        },
+        {
+          "text": "Side by side",
+          "source": "Sources/CoreModels/LiveTVMultiviewFavorite.swift"
+        },
+        {
+          "text": "Top and bottom",
+          "source": "Sources/CoreModels/LiveTVMultiviewFavorite.swift"
+        },
+        {
+          "text": "Grid",
+          "source": "Sources/CoreModels/LiveTVMultiviewFavorite.swift"
+        },
+        {
+          "text": "Main picture",
+          "source": "Sources/CoreModels/LiveTVMultiviewFavorite.swift"
+        },
+        {
+          "text": "Corner",
+          "source": "Sources/CoreModels/LiveTVMultiviewFavorite.swift"
+        },
+        {
+          "text": "Layout",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift"
+        },
+        {
+          "text": "Position",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift"
+        },
+        {
+          "text": "Size",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift"
+        },
+        {
+          "text": "Make main video",
+          "source": "Sources/CoreUI/VideoCardFocus.swift"
+        },
+        {
+          "text": "Replace channel",
+          "source": "Sources/CoreUI/VideoCardFocus.swift"
+        },
+        {
+          "text": "Remove",
+          "source": "Sources/CoreUI/VideoCardFocus.swift"
+        },
+        {
+          "text": "More",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift"
+        },
+        {
+          "text": "Favorite",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift"
+        },
+        {
+          "text": "Edit layout",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewTouchChrome.swift"
+        },
+        {
+          "text": "Audio",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewTouchChrome.swift"
+        },
+        {
+          "text": "Make main",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewTouchChrome.swift"
+        },
+        {
+          "text": "More",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewTouchChrome.swift"
+        },
+        {
+          "text": "Replace",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewTouchChrome.swift"
+        },
+        {
+          "text": "Remove",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewTouchChrome.swift"
+        },
+        {
+          "text": "Remove from Favorites",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewGuideActions.swift"
+        },
+        {
+          "text": "Multiviews",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
+        {
+          "text": "Retry",
+          "source": "Sources/FeatureLiveTV/LiveTVMultiviewGuideActions.swift"
         }
       ],
       "emphasis": []
@@ -4842,7 +4957,7 @@
     "slug": "profiles-and-sync",
     "title": "Profiles and sync",
     "seoTitle": "Sync Plozz settings and set up another device safely",
-    "description": "Compare iCloud settings, nearby setup, Live TV sync, and watch history; interpret sync-data sizes and understand local state and reset effects.",
+    "description": "Restore profiles and supported sign-ins with iCloud, recover stalled setup, transfer from a nearby device, and keep viewing-history sync separate.",
     "section": "Accounts & sync",
     "kind": "reference",
     "file": "profiles-and-sync.md",
@@ -4858,21 +4973,21 @@
       "Sources/FeatureSettings/IntegrationsDetailView.swift",
       "Sources/FeatureSettings/SyncDataBreakdown.swift",
       "Sources/FeatureSyncSetup/SyncSetupService.swift",
-      "Sources/CoreModels/WatchStateReconciler.swift",
-      "Sources/AppShelliOS/PlozziOSAppModel+KeychainSync.swift",
+      "Sources/CoreModels/SyncSetup.swift",
+      "Sources/AppRuntime/ProviderCredentialSync.swift",
       "Sources/FeatureSyncCloud/CloudConfigSyncService.swift",
       "Sources/AppShelliOS/PlozziOSAppModel+CloudSync.swift",
-      "Sources/CoreNetworking/LocalMediaWatchStore.swift",
+      "Sources/ProviderSilo/SiloDeviceEnrollment.swift",
       "Sources/CoreModels/ProfileSettingsSnapshot.swift",
       "Sources/FeatureSettings/SyncEraseDataView.swift",
       "Sources/AppShelliOS/PlozziOSOfflineModeView.swift",
-      "Sources/CoreModels/NavigationLibraryLayout.swift"
+      "Sources/FeatureSettings/ICloudOnboardingView.swift"
     ],
     "watch": [
       "Sources/FeatureSyncSetup/",
       "Sources/FeatureSyncCloud/",
       "Sources/AppShelliOS/PlozziOSSyncSetup",
-      "Sources/CoreModels/ProfileSettingsSnapshot.swift",
+      "Sources/AppRuntime/ProviderCredentialSync.swift",
       "Sources/AppShell/AppState+CloudSync.swift",
       "Sources/AppShelliOS/PlozziOSAppModel+"
     ],
@@ -4894,6 +5009,14 @@
         {
           "text": "Sync watch state across servers",
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Sync With iCloud",
+          "source": "Sources/FeatureSettings/SettingsView.swift"
+        },
+        {
+          "text": "iCloud Sync",
+          "source": "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift"
         },
         {
           "text": "Sync Now",
@@ -4990,11 +5113,33 @@
         {
           "text": "Offline Mode",
           "source": "Sources/AppShelliOS/PlozziOSOfflineModeView.swift"
+        },
+        {
+          "text": "Enable iCloud Sync",
+          "source": "Sources/FeatureSettings/ICloudOnboardingView.swift"
+        },
+        {
+          "text": "Not now",
+          "source": "Sources/FeatureSettings/ICloudOnboardingView.swift"
+        },
+        {
+          "text": "Restoring setup from iCloud…",
+          "source": "Sources/FeatureSettings/ICloudOnboardingView.swift"
+        },
+        {
+          "text": "Couldn't restore your setup",
+          "source": "Sources/FeatureSettings/ICloudOnboardingView.swift"
+        },
+        {
+          "text": "Retry",
+          "source": "Sources/FeatureSettings/ICloudOnboardingView.swift"
+        },
+        {
+          "text": "Set up manually",
+          "source": "Sources/FeatureSettings/ICloudOnboardingView.swift"
         }
       ],
-      "emphasis": [
-        "Silo requires approval on each device"
-      ]
+      "emphasis": []
     }
   },
   {

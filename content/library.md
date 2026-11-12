@@ -58,3 +58,9 @@ Use **Add to Watchlist** on a movie/show. [Watchlist](/watchlist/) explains conn
 ## A title or library is missing
 
 Check the [profile and server user](/profiles-and-locks/), **Settings > Libraries**, and filters. Disabled libraries differ from hidden shortcuts or [Home rows](/home-and-navigation/). For shares, check [scanning and content type](/network-shares/); for wrong artwork or descriptions, see [Metadata and ratings](/metadata-and-ratings/).
+
+## Catch up after watching elsewhere
+
+If you watched on another device or changed your server's library, return to Plozz while connected. Home refreshes after about 15 seconds away; an open show's seasons and episodes refresh after about five minutes away. Movie and episode details recheck progress after that longer interval.
+
+For stale episode availability on iPhone/iPad, open **Manage Seasons**, select the season, then use **Refresh Episodes and Season Status** at the top. Unavailable episode entries describe the show's schedule, not downloadable files.

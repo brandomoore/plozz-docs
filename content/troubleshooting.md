@@ -10,7 +10,7 @@ Try these checks before resetting.
 
 If a Plex Home check fails, choose **Try Again** or **Sign In Again** when offered. Relink the original Plex account and retry the Home user; its PIN stays unchanged.
 
-After [sync](/profiles-and-sync/), check **Settings > iCloud Sync** for **Needs sign-in**. Synced entries are not authenticated connections.
+After [sync](/profiles-and-sync/), open **Settings > iCloud Sync** and finish setup for any server marked **Needs sign-in**.
 
 ## Channels or listings are missing
 

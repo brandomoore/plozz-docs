@@ -25,6 +25,17 @@ Plex Home users and Silo profiles determine server access and history. A Plozz p
 
 See [server-user selection](/profiles-and-locks/#choose-a-server-user), [device setup](/profiles-and-sync/), or [network folders](/network-shares/).
 
+## Connect Navidrome or Subsonic
+
+This music-only connection is offered in TestFlight and development builds on Apple TV, iPhone, and iPad, not App Store builds.
+
+1. Open **Settings > Sources > Add Source > Navidrome (Subsonic)**, or select it during setup.
+2. Enter **Server address**, including any port or subfolder, and **Username**. Prefer HTTPS; HTTP does not protect your connection.
+3. Under **Sign in with**, choose **Password** or **API Key**, then enter the matching secret. API keys require server support; the username is still required.
+4. Choose **Sign In**, then open [Music](/music/).
+
+This connection supplies music, not movie or TV libraries. Favorites and listening history belong to the server account. If sign-in fails, check the address and authentication method before retrying.
+
 ## Restore a saved sign-in
 
 In **Settings > Sources**, select the server and choose **Sign In Again** beside the sign-in. On iPhone/iPad, open its sign-in row first.
@@ -37,7 +48,7 @@ Select the server in **Settings > Sources**, then **Connection addresses > Add o
 
 Only add trusted addresses: they use your sign-in. HTTP is unencrypted. Silo requires approval at the new address using the same account and profile.
 
-Addresses belong to this sign-in on this device. Plozz prefers a reachable local address and tries saved alternatives after connection failures. Plex also discovers its own addresses.
+Addresses belong to this sign-in on this device. Plozz prefers a reachable local address and tries saved alternatives after connection failures. Plex also discovers its own addresses. Navidrome/Subsonic does not offer this address-management flow.
 
 ## Confirm access before changing settings
 

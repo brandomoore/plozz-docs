@@ -39,9 +39,9 @@ Approval allows every channel in that source, not age-filtered programs. It stay
 
 ## Watch several channels
 
-While watching, open **Multiview**. Choose **Add channel** on Apple TV or **Add** on iPhone/iPad, then **Watch**. You can show **four pictures**, subject to provider stream/tuner limits. One pane supplies sound: focus it on Apple TV or use **Audio** on mobile.
+While watching, open **Multiview**. Choose **Add channel** on Apple TV or **Add** on iPhone/iPad. You can show **four pictures**, subject to provider stream/tuner limits.
 
-Save with **Favorite** (Apple TV) or **More > Favorite** (mobile). The guide's **Multiviews** reopens saved layouts; on narrow mobile screens, look under **More**. Saving reserves no capacity.
+On Apple TV, controls fade after inactivity; on mobile, choose **Watch** to leave editing. [Arrange pictures, choose sound, and save layouts](/live-tv-channels/#arrange-and-save-a-multiview).
 
 ## Organize channels and listings
 
