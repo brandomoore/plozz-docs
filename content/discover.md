@@ -8,7 +8,7 @@ Choose **Discover** in the main navigation. If it is missing:
 
 1. Open **Settings > Screens & Navigation > App navigation > Hide or Reorder Navigation**.
 2. Press and hold **Discover**, then choose **Show**.
-3. Return to browsing and open Discover. On compact iPhone/iPad layouts, check **More** for extra visible destinations.
+3. Return to browsing and open Discover. On iPhone/iPad, check **More** in compact native navigation, or scroll the opaque bottom strip sideways.
 
 A Seerr connection can show Discover automatically; without one, it normally starts hidden. Kids profiles do not offer Discover.
 

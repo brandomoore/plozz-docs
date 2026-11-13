@@ -9,7 +9,7 @@ Play albums and playlists from Plex, Jellyfin, Emby, or a supported Navidrome/Su
 
 1. [Connect the server](/servers/) or [sign in to Navidrome/Subsonic](/servers/#connect-navidrome-or-subsonic).
 2. For Plex, Jellyfin, or Emby, select the correct server user and enable its music library under **Settings > Libraries**.
-3. Open **Music** from navigation; on compact mobile layouts, check **More**. If hidden, open **Settings > Screens & Navigation > App navigation > Hide or Reorder Navigation**, hold **Music**, and choose **Show**.
+3. Open **Music** from navigation. On mobile, check **More** in compact native navigation, or scroll the opaque bottom strip sideways. If hidden, open **Settings > Screens & Navigation > App navigation > Hide or Reorder Navigation**, hold **Music**, and choose **Show**.
 4. Choose **Playlists**, **Albums**, **Artists**, or **Genres**. Open an album or playlist, then choose **Play**, **Shuffle**, or a starting track.
 
 For a music-only Navidrome/Subsonic setup, Plozz can open Music directly; empty video destinations may be absent. Silo and ordinary shares do not supply Music. Check your build and connection if it is missing; use **Try Again** for a failed catalogue load.

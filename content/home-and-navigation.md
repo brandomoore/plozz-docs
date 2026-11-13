@@ -10,13 +10,13 @@ On Apple TV, choose **On** or **Off**; on mobile, use **Show hero**. Hiding it p
 
 With the hero on, open **Content sources** on Apple TV or **Hero content sources** on mobile. Choose **Continue Watching**, **Recently Added**, **Watchlist**, **Random from Library**, **Collections**, or **Discovery**. Set **Items to show**, **Advance automatically**, and **Ratings**. **Trailers & music** opens [preview choices](/trailers-and-previews/#choose-trailers-and-previews).
 
-Enable Discovery to choose **Discovery providers**. Suggestions can be outside your library; requests need Seerr. New profiles follow the Seerr connection until you choose otherwise. Kids profiles exclude Discovery; [Discover filters](/discover/) are separate.
+Enable Discovery to choose **Discovery providers**. Suggestions can be outside your library; requests need Seerr. Kids profiles exclude Discovery; [Discover filters](/discover/) are separate.
 
 ## Choose row style on Apple TV
 
 In **Home**, open **Row style**. **Showcase** fills the background with the focused title; **Classic** keeps separate rows. Either works without the hero.
 
-Showcase has separate logo/text sizes but shares hero ratings controls. With the hero off, enable **Discovery row** and choose **Discovery providers**.
+**Showcase** shares the hero's rating choices. With the hero off, its **Discovery row** switch reveals **Discovery providers**.
 
 ## Choose Home rows
 
@@ -36,15 +36,13 @@ In **Classic** or mobile Home, **No titles to show** means nothing matched your 
 
 ## Add a collection section
 
-1. Choose **Add row > From a collection**, then an available source and collection.
-2. Set **Layout** to **Posters**, **Landscape**, or **Featured**. Landscape also offers **Logo**: turn it on for title logos over the artwork.
-3. Optionally enter a **Row name**, then choose **Add to Home** (the checkmark on mobile).
+Choose **Add row > Custom row**, then **Content > Collections**. Select a source and one or more collections. Choose **Done** to return through each picker.
 
-Reopen the row to change **Content** or appearance. Apple TV saves edits automatically; on mobile, select the **Save changes** checkmark. Your server user determines access.
+Set **Name**, **Sort**, **Filter**, and **Layout**, then choose **Add to Home** (the checkmark on mobile). [Custom rows](/custom-home-rows/) can also combine playlists, libraries, Home feeds, and recommendations; that guide explains layouts and saving changes.
 
 ## Rename rows and shortcuts
 
-Under **Home > Rows**, open a row and edit **Row name**. For shortcuts, open **App navigation > Hide or Reorder Navigation**, hold one, choose **Rename**, then edit **Name**.
+Under **Home > Rows**, open a row and edit **Row name** (**Name** for custom rows). For shortcuts, open **App navigation > Hide or Reorder Navigation**, hold one, choose **Rename**, then edit Name.
 
 On Apple TV, closing the name keyboard saves, even with Back; for **Couldn't save**, choose **Retry**. On mobile, use the **Save changes** checkmark. Leave the name blank to restore its default.
 
@@ -54,7 +52,7 @@ Names never change media or access. Home-row names can [sync](/profiles-and-sync
 
 Continue Watching, including merged Next Up, does not trim titles by age or count. It depends on your sources' history; [shares have a storage limit](/network-shares/#keep-your-place). Watched status, dismissals, enabled servers, and server-user access still matter. Disabling library browsing does not hide account-wide history.
 
-Separate Next Up rows preview up to 20. **See all** on Apple TV or a mobile heading chevron opens a [larger grid](/browse-home-rows/) when available.
+Separate Next Up rows preview up to 20. [Open their larger grid](/browse-home-rows/) when available to see more.
 
 A brief play can save progress without adding a card. Videos need one minute, or 5% for videos under 20 minutes with a five-second minimum. Trailers stay out.
 
@@ -87,7 +85,9 @@ Navigation stays local to this profile and device.
 
 Apple TV sidebars always retain **Settings**; if hidden in Top Bar, use the profile picker.
 
-On mobile, Home, Downloads, and Search normally start shown. Home, Search, or Watchlist can be absent without relevant content. Libraries and **All Libraries** start **Hidden**: hold one and choose **Show**. Seerr can reveal Discover. Compact layouts put extra visible shortcuts under **More**, not hidden ones.
+On mobile, Home, Downloads, and Search normally start shown. Home, Search, or Watchlist can be absent without relevant content. Libraries and **All Libraries** start **Hidden**: hold one and choose **Show**. Seerr can reveal Discover.
+
+Compact native navigation puts extra visible shortcuts under **More**, not hidden ones. On iOS/iPadOS 26 or later, setting **Appearance > Liquid Glass** to **Off** can instead show an opaque bottom strip: scroll it sideways for extra shortcuts. The system's Reduce Transparency setting keeps native navigation.
 
 Under **Screens & Navigation > Movie & show details**, choose [Trailers & music](/trailers-and-previews/#choose-trailers-and-previews), review scores, and age recommendations.
 

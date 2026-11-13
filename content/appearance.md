@@ -6,6 +6,8 @@ Choose readable cards and artwork in **Settings > Appearance**.
 
 In **Theme**, choose **Black**, **Dark**, **Light**, or **System**. System follows the device's appearance. **Gradient Backgrounds** adds artwork-colored backgrounds; turn it off for flat colors. Under **Liquid Glass**, **Off** removes translucency; the system option follows Reduce Transparency.
 
+On iOS/iPadOS 26 or later, Off can also replace bottom tabs with an opaque, horizontally scrolling strip. See [mobile navigation](/home-and-navigation/#arrange-shortcuts-and-details) if you cannot find a shortcut.
+
 ## Make cards easier to read
 
 Open **Cards > Labels** and choose **App default**, **Show labels everywhere**, or **Hide labels everywhere**. A preset replaces your individual choices.

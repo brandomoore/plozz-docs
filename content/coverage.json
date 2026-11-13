@@ -109,7 +109,7 @@
         "Sources/FeatureHome/DetailHeroView.swift",
         "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
       ],
-      "answer": "All Libraries pages enabled non-music libraries across accounts on Apple TV, iPhone and iPad, preserving original-server ownership and merging matching identities where possible. More than one browsable library is required for its shortcut. All TV layouts support eligible shortcuts; mobile library shortcuts start hidden. In Screens & Navigation > App navigation > Hide or Reorder Navigation, hold All Libraries and choose Show, then open it from navigation or compact More. Individual mobile libraries can be shown there too; hiding shortcuts does not disable content. Choose an accessible copy through the title's server/version selector, in TV's header More actions when offered. Combined Home rows remain independent."
+      "answer": "All Libraries pages enabled non-music libraries across accounts on Apple TV, iPhone and iPad, preserving original-server ownership and merging matching identities where possible. More than one browsable library is required for its shortcut. All TV layouts support eligible shortcuts; mobile library shortcuts start hidden. In Screens & Navigation > App navigation > Hide or Reorder Navigation, hold All Libraries and choose Show, then open it from navigation. Compact native tabs can put it under More; the opaque bottom strip instead scrolls sideways. Individual mobile libraries can be shown there too; hiding shortcuts does not disable content. Choose an accessible copy through the title's server/version selector, in TV's header More actions when offered. Combined Home rows remain independent."
     },
     "continue-watching-retention": {
       "documents": [
@@ -708,6 +708,18 @@
     "home-navigation": {
       "documents": [
         {
+          "slug": "custom-home-rows",
+          "anchor": "choose-the-content"
+        },
+        {
+          "slug": "custom-home-rows",
+          "anchor": "set-the-order-and-appearance"
+        },
+        {
+          "slug": "custom-home-rows",
+          "anchor": "change-or-repair-a-row"
+        },
+        {
           "slug": "home-and-navigation"
         },
         {
@@ -761,26 +773,26 @@
       "sources": [
         "Sources/CoreModels/HomeLibraryVisibility.swift",
         "Sources/CoreModels/HomeLibraryVisibilityStore.swift",
-        "Sources/CoreModels/HomeRowCustomization.swift",
-        "Sources/CoreModels/NavigationLibraryLayout.swift",
-        "Sources/CoreModels/NavigationStyleSettingsStore.swift",
         "Sources/CoreModels/ProfileSettingsSnapshot.swift",
-        "Sources/CoreUI/NavigationTitles.swift",
         "Sources/FeatureSettings/HomeEditorAutosavingNameInput.swift",
         "Sources/FeatureSettings/HomeRowsSettingsView.swift",
         "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
         "Sources/FeatureSettings/HeroSettingsControls.swift",
         "Sources/FeatureSettings/NavigationLibrariesDetailView.swift",
-        "Sources/AppShelliOS/PlozziOSHomeView.swift",
         "Sources/FeatureHomeCore/HomeRowBrowseView.swift",
-        "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-        "Sources/FeatureSettings/HomeHeroEnabledPicker.swift",
-        "Sources/FeatureSettings/HomeRowStylePicker.swift",
-        "Sources/CoreModels/HeroBackgroundSettings.swift",
         "Sources/FeatureSettings/CollectionSectionSettingsView.swift",
-        "Sources/CoreModels/CollectionSection.swift"
+        "Sources/FeatureSettings/HomeContentPickerView.swift",
+        "Sources/FeatureSettings/HeroCollectionPickerView.swift",
+        "Sources/CoreUI/HomeContentQueryControls.swift",
+        "Sources/CoreModels/HomeContentSource.swift",
+        "Sources/CoreModels/HomeContentQuery.swift",
+        "Sources/CoreModels/HomeContentPager.swift",
+        "Sources/FeatureHomeCore/HomeRowBrowseFactory.swift",
+        "Sources/AppShelliOS/PlozziOSRootView.swift",
+        "Sources/CoreUI/OpaqueNavigationChrome.swift",
+        "Sources/CoreModels/ThemeSettings.swift"
       ],
-      "summary": "Screens & Navigation separates Home layout/hero, Rows, Filtering, main shortcuts and movie/show details. Presets replace custom Home arrangements after confirmation without editing servers; collection sections retain source identity, presentation choices and failure recovery. Classic TV/mobile Home empty messages expose Dismiss and Customize Home. Dismiss saves a per-profile empty-message preference, not row removal or content filtering; new nonempty results can appear. Rows > the affected row > Show empty message reverses dismissal outside Showcase. Unavailable/failing rows retain Details and Retry; usable cached/partial rows can remain while diagnostics appear in the editor. The Home browsing guide explains eligible expanded rows separately from the arranger: TV See all cards versus mobile row headings, platform control order, original-feed membership and retry. Plain combined Continue Watching remains unbounded in its rail and does not gain this shortcut merely from its item count; Live TV rows are not row-browser feeds. History feeds ignore library discovery switches, with no age/count cap for eligible Continue Watching/merged Next Up and separate Next Up previews capped at 20. Brief-play eligibility is separate from resume storage; trailers are excluded. Recently Added and Hero & discovery filters are presentation-only with different defaults and candidate limits. Showcase and the carousel remain separate. Discovery recommendations do not require Seerr, but a new profile's carousel follows its connection until Discovery is explicitly toggled; Kids policy still excludes Discovery. All three TV navigation layouts offer eligible library shortcuts; changes retain saved order. Mobile starts with Home, Downloads and Search subject to availability; other destinations, including individual libraries and All Libraries, start Hidden until explicitly shown. Compact More contains overflow of shown destinations, not hidden shortcuts. TV sidebars retain Settings, Top Bar has a profile-picker escape, and mobile retains the profile-button route. Reset Navigation does not reset library tabs, access or custom names. Main layout/shortcuts stay local per profile/device; Home preferences transfer. Hero and Movie & show details link to the same Trailers & music destination; Home autoplay and detail backgrounds are separate profile choices. Landscape collection sections alone expose Logo On/Off, default Off, before Content and Row name. Row name and shortcut Rename > Name change presentation, not source identity or access. Blank restores the default. Apple TV commits names when its keyboard closes and existing collection edits automatically; mobile uses Save changes. New collection rows still need Add to Home. Home-row names transfer/sync with visibility; ordinary shortcut names do not. Watchlist deliberately shares the Home-row name across both surfaces."
+      "summary": "Screens & Navigation separates Home hero/style, Card labels, Rows, Filtering, shortcuts and movie/show details. Presets replace arrangements after confirmation without editing servers. Add row > Custom row opens Content, Name, Sort, Filter, Layout and conditional Logo before a non-playing preview. Content can combine multiple collections, video playlists, whole libraries, Home feeds and recommendations from enabled accessible video sources; server-bound choices preserve user identity. The focused custom-row guide explains selection, Source order interleaving and matching-copy merging, full-feed loading for alternate sort/filter, layouts, explicit new-row saving, TV existing-row autosave versus mobile Save changes and unavailable-source recovery. Only a sole Watchlist source uses save dates for Date Added. Plain combined Continue Watching does not acquire a larger-grid shortcut from its count, but an explicitly created custom row can select its feed. Expanded grids start with a custom row's saved query; temporary browse changes do not rewrite Home. Shared controls now use Media, Watch status, conditional Clear Filters and Source order; Order is hidden without a sort field. Classic/mobile empty messages expose Dismiss and Customize Home; dismissal hides the message, not future content, and Rows > the row > Show empty message reverses it outside Showcase. Failed/unavailable rows retain Details/Retry. History ignores library-browsing switches: eligible Continue Watching/merged Next Up has no age/count cap, separate Next Up previews up to 20, brief-play eligibility differs from saved resume, and trailers stay out. Recently Added and Hero & discovery filters have separate defaults/candidate limits and change suggestions, not access. Showcase is independent of the hero, shares its rating settings but has separate sizes, and can manage Discovery with the hero off. Discovery needs no Seerr for browsing; a new profile's carousel follows that connection until explicitly changed and Kids policy excludes Discovery. TV layouts all support eligible library shortcuts. Mobile defaults, Hidden/Show and native More concern navigation, not library access. On iOS/iPadOS 26+ with app Liquid Glass Off, system Reduce Transparency off and no active sidebar/vertical toolbar, an opaque scrolling bottom strip replaces native tabs; scroll sideways for overflow instead of using More. System Reduce Transparency keeps native navigation. TV sidebars retain Settings and Top Bar has a profile-picker route. Reset Navigation preserves names, library tabs and access. Layout/shortcuts stay device-local; Home rows and names can transfer/sync. Ordinary row names use Row name, custom rows use Name, shortcuts use Rename > Name; blank restores defaults. TV saves names when the keyboard closes, including Back; mobile uses Save changes. Watchlist shares its Home-row and shortcut name. Hero and Movie & show details share Trailers & music with independent Home/detail choices."
     },
     "appearance": {
       "documents": [
@@ -1764,9 +1776,9 @@
         "Sources/FeatureHomeCore/DiscoverBrowseView.swift",
         "Sources/AppShelliOS/PlozziOSDiscoverView.swift",
         "Sources/CoreUI/DiscPlaybackAction.swift",
-        "Sources/CoreModels/DiscPlayback.swift"
+        "Sources/CoreModels/HomeContentPager.swift"
       ],
-      "summary": "Keep browsing, collection recovery, source/version selection, Watchlists and schedule-only placeholders together. Both shells resolve All Libraries through FeatureHomeCore's shared source inventory/merge policy; mobile has a reachable navigation destination but still no alphabet rail. Home row browsing is a separate reachable workflow: eligible TV See all cards/mobile headings open the original row feed through HomeRowBrowseFactory, while Watchlist routes to its existing page. Dedicated Discover instead uses DiscoverBrowseView/DiscoverRuntime in both shells, with ordered paged feeds and profile-saved Available now/Hide watched controls; its new focused guide explains access, title actions and row recovery separately from Home hero discovery. Filtering/sorting waits for the full available Home row rather than sorting only the preview; server-feed identity and current profile visibility are retained. Name-sort rail behavior is TV-only; unused menu/observed feedback state is not a mobile jump control. Library presentation, collection covers and Home rows retain independent scopes and failure recovery. Account-wide history ignores disabled-library discovery. Both shells wire detail theme music and server trailers with lifecycle/authorization checks; online trailers open YouTube externally with mobile-only web fallback. The TV Home performance overlay supports stutter reporting, not a mobile overlay. Eligible Apple TV Home/detail server previews now expand through Up with borrowed transport; Home requires Pinned Sidebar, and sound returns to the previous mute state afterward. Detail information groups expand into platform-specific readers; series catalogue totals are not available/unwatched counts."
+      "summary": "Keep browsing, collection recovery, source/version selection, Watchlists and schedule-only placeholders together. Both shells resolve All Libraries through FeatureHomeCore's shared source inventory/merge policy; mobile has a reachable navigation destination but still no alphabet rail. Home row browsing is a separate reachable workflow: eligible TV See all cards/mobile headings open the original row feed through HomeRowBrowseFactory, while Watchlist routes to its existing page. Custom rows can combine feeds through HomeContentPager, interleaving sources and merging matching copies. Their browser starts with the saved row query, but changes there remain temporary. Dedicated Discover instead uses DiscoverBrowseView/DiscoverRuntime in both shells, with ordered paged feeds and profile-saved Available now/Hide watched controls; its focused guide explains access, title actions and row recovery separately from Home hero discovery. Filtering/sorting waits for the full available Home row rather than sorting only the preview; server-feed identity and current profile visibility are retained. Name-sort rail behavior is TV-only; unused menu/observed feedback state is not a mobile jump control. Library presentation, collection covers and Home rows retain independent scopes and failure recovery. Account-wide history ignores disabled-library discovery. Both shells wire detail theme music and server trailers with lifecycle/authorization checks; online trailers open YouTube externally with mobile-only web fallback. The TV Home performance overlay supports stutter reporting, not a mobile overlay. Eligible Apple TV Home/detail server previews expand through Up with borrowed transport; Home requires Pinned Sidebar, and sound returns to the previous mute state afterward. Detail information groups expand into platform-specific readers; series catalogue totals are not available/unwatched counts."
     },
     "FeatureLiveTV": {
       "areas": [
@@ -1926,7 +1938,7 @@
         "Sources/FeatureSettings/ExternalPlayerSettingsView.swift",
         "Sources/FeatureSettings/CrashReportingConsentView.swift",
         "Sources/FeatureSettings/CollectionSectionSettingsView.swift",
-        "Sources/FeatureSettings/PrivacyPolicyLink.swift",
+        "Sources/FeatureSettings/HomeContentPickerView.swift",
         "Sources/FeatureSettings/LosslessAudioControl.swift",
         "Sources/FeatureSettings/ServerUserDetailView.swift",
         "Sources/FeatureSettings/PlexLinkedUserDetailView.swift",
@@ -1935,7 +1947,7 @@
         "Sources/FeatureSettings/SettingsView.swift",
         "Sources/CoreModels/DeveloperMode.swift"
       ],
-      "summary": "Group by task and platform/provider applicability, not by toggle. Preserve Home Rows/Add row, separate watched-content Filtering, current Home/Libraries/Movie & show details paths and TV navigation layouts/shortcut recovery. Keep shared Card labels, independent Logo/Text sizing, spoilers and classification controls distinct from restrictions. Collection-cover shapes have independent library/Recommended/Home scopes and do not style titles within collections. Detail music works in both shells; audio explains volume, preview/generated fallback and mobile session mute. Prefer lossless audio has an output-compatibility section, retaining default, device scope, adapter wiring, new-load timing and hardware limits. Profiles covers TV/mobile server users and adding shared sign-ins without creating users. Skipping, independent buffers, saved-sign-in recovery and sync-data sizes stay in their tasks. Feedback explains Share Diagnostics, Enable Sharing without submission, Message (required), Send to Developer and Submitted's SDK-handoff limit, plus privacy and TV Home stutter measurements. Reload/reset are reachable in both sync troubleshooting UIs. External-player choice retains its focused guide for device scope, eligibility, token sharing and returned progress. Low-risk sort/recently-watched controls need no new pages. Developer Mode and Reset to First Run are hidden diagnostic/setup-retest surfaces gated by DeveloperModeModel in both settings shells, not routine recovery procedures; omit their unlock/reset steps rather than recommending destructive setup erasure. Home hero and Movie & show details now share Trailers & music: source policy, independent Home autoplay and detail background, conditional mute controls and theme-volume preview. Landscape collection rows additionally expose Logo On/Off, default Off."
+      "summary": "Group by task and platform/provider applicability, not by toggle. Preserve Home Rows/Add row, separate watched-content Filtering, current Home/Libraries/Movie & show details paths and TV navigation layouts/shortcut recovery. Add row > Custom row is a multi-source editor, not a collection-only shortcut. Its Content picker selects collections, video playlists, enabled video libraries, Home feeds and recommendations; the focused guide explains saved queries, non-playing previews, provider/user restrictions, unavailable-source recovery, TV autosave and explicit mobile/new-row saves. Landscape custom rows alone expose Logo On/Off after Layout, default Off. Keep shared Card labels, independent Logo/Text sizing, spoilers and classification controls distinct from restrictions. Collection-cover shapes have independent library/Recommended/Home scopes and do not style titles within collections. Detail music works in both shells; audio explains volume, preview/generated fallback and mobile session mute. Prefer lossless audio retains its output-compatibility section, default, device scope, new-load timing and hardware limits. Profiles covers TV/mobile server users and adding shared sign-ins without creating users. Skipping, independent buffers, saved-sign-in recovery and sync-data sizes stay in their tasks. Feedback explains Share Diagnostics, Enable Sharing without submission, Message (required), Send to Developer and Submitted's SDK-handoff limit, plus privacy and TV Home stutter measurements. Reload/reset are reachable in both sync troubleshooting UIs. External-player choice keeps device scope, eligibility, token sharing and returned progress in its focused guide. Developer Mode and Reset to First Run are deliberately hidden diagnostic/setup-retest surfaces gated by DeveloperModeModel, not routine recovery; omit their unlock/reset steps. Home hero and Movie & show details share Trailers & music: source policy, independent Home autoplay/detail background, conditional mute controls and theme-volume preview."
     },
     "FeatureShareOnboarding": {
       "areas": [
@@ -2521,13 +2533,13 @@
         "Sources/CoreModels/NavigationContentAvailability.swift",
         "Sources/CoreModels/NavigationLibraryLayout.swift",
         "Sources/FeatureSettings/CollectionSectionSettingsView.swift",
+        "Sources/FeatureSettings/HomeContentPickerView.swift",
         "Sources/FeatureSettings/HeroSettingsControls.swift",
-        "Sources/CoreModels/ContentRatingSettings.swift",
         "Sources/FeatureSettings/ContentRatingToggle.swift",
         "Sources/CoreModels/NavigationStyleSettingsStore.swift",
         "Sources/CoreUI/DetailNavigationTransition.swift"
       ],
-      "summary": "Screens & Navigation uses Home, Libraries and Movie & show details. Home orders Hero, Apple TV-only Row style, Card labels, Rows and Filtering. Hero uses On/Off on Apple TV and Show hero on mobile; Classic/Showcase row style is independent of hero visibility. Preserve presets, source-qualified collections, default-on Next Up merging and saved-row recovery. Recently Added hides completed titles only when enabled; Hero & discovery hides watched suggestions by default. These independent filters change suggestions, not history/access/Continue Watching. App navigation owns Pinned Sidebar/Sidebar/Top Bar, delayed style application, library shortcuts, explicit Show and Settings recovery; layout/shortcuts stay local. Libraries edits supported profile tabs, Recommended rows and collection covers, not Home/shortcuts. Collection-only directories omit Recommended editing; library/Recommended/Home cover controls are independent and do not style member titles. Logo/Text sizing and contextual labels belong with appearance. All screens owns spoilers/classification display, not scores/restrictions. Movie & show details > Trailers & music opens the shared page: Trailers selects sources, Home contains Home autoplay and conditional Start muted, then Details contains Detail background and conditional Start muted or Theme music volume. Detail background offers mutually exclusive Trailer/Theme music/Off on all platforms, with Trailer dependent on allowed server trailers; audio explains volume, preview/generated fallback and mobile session mute. DetailNavigationTransition is internal animation plumbing, not a user-facing settings workflow; the retired transition key in ProfileSettingsSnapshot does not establish an available control."
+      "summary": "Screens & Navigation uses Home, Libraries and Movie & show details. Home orders Hero, Apple TV-only Row style, Card labels, Rows and Filtering. Hero uses On/Off on Apple TV and Show hero on mobile; Classic/Showcase row style is independent of hero visibility. Preserve presets, default-on Next Up merging and saved-row recovery. Rows > Add row > Custom row opens Content, Name, Sort, Filter, Layout, conditional Logo and preview. Content can combine multiple collections, video playlists, accessible enabled video libraries, Home feeds and recommendations. These saved row queries differ from temporary larger-grid changes; provider/account/user identity and failure recovery remain explicit. Recently Added hides completed titles only when enabled; Hero & discovery hides watched suggestions by default. These independent filters change suggestions, not history/access/Continue Watching. App navigation owns Pinned Sidebar/Sidebar/Top Bar, delayed style application, library shortcuts, explicit Show and Settings recovery; layout/shortcuts stay local. Libraries edits supported profile tabs, Recommended rows and collection covers, not Home/shortcuts. Collection-only directories omit Recommended editing; library/Recommended/Home cover controls are independent and do not style member titles. Logo/Text sizing and contextual labels belong with appearance. All screens owns spoilers/classification display, not scores/restrictions. Movie & show details > Trailers & music opens the shared page: Trailers selects sources, Home contains Home autoplay and conditional Start muted, then Details contains Detail background and conditional Start muted or Theme music volume. Detail background offers mutually exclusive Trailer/Theme music/Off on all platforms, with Trailer dependent on allowed server trailers; audio explains volume, preview/generated fallback and mobile session mute. DetailNavigationTransition is internal animation plumbing, not a user-facing settings workflow; the retired transition key in ProfileSettingsSnapshot does not establish an available control."
     },
     "subtitles": {
       "areas": [
@@ -2567,6 +2579,154 @@
     }
   },
   "screens": {
+    "Sources/CoreUI/FeaturedCardControl.swift": {
+      "sources": [
+        "Sources/CoreUI/FeaturedCardControl.swift",
+        "Sources/CoreUI/MediaItemContextMenu.swift",
+        "Sources/HeroUI/FeaturedMediaRow.swift",
+        "Sources/FeatureHome/HomeView.swift",
+        "Sources/AppShelliOS/PlozziOSHomeView.swift",
+        "Sources/CoreUI/HomeRowPreviewView.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Featured cards are selected through FeaturedMediaRow on the TV/mobile Home parents, whose records inventory their capability-dependent context actions. Titles are dynamic media names. The custom-row editor uses the same artwork with no selection handler and clears navigation/context-action environments in HomeRowPreviewView; it is a visual preview, not another playback destination."
+    },
+    "Sources/CoreUI/FeaturedMediaRowPresentation.swift": {
+      "sources": [
+        "Sources/CoreUI/FeaturedMediaRowPresentation.swift",
+        "Sources/HeroUI/FeaturedMediaRow.swift",
+        "Sources/CoreUI/BrowseRowHeading.swift",
+        "Sources/CoreUI/MediaRowBrowseCard.swift",
+        "Sources/FeatureHome/HomeView.swift",
+        "Sources/AppShelliOS/PlozziOSHomeView.swift",
+        "Sources/CoreUI/HomeRowPreviewView.swift",
+        "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Shared featured-row chrome is reached through FeaturedMediaRow on both Home parents and through HomeRowPreviewView in the custom editor. Production Home callers enable usesRowBrowsing, so mobile uses a dynamic BrowseRowHeading and TV a trailing MediaRowBrowseCard; their controls are inventoried on the parents. The component's legacy See all fallback is therefore not a separate reachable control. Custom-row empty/failure states route through Home section status, and the editor passes loaded items only; neither needs a new empty-collection workflow from this helper's generic caption. The editor clears editing/routing and its preview actions are no-ops."
+    },
+    "Sources/CoreUI/HomeContentQueryControls.swift": {
+      "sources": [
+        "Sources/CoreUI/HomeContentQueryControls.swift",
+        "Sources/CoreModels/HomeContentQuery.swift",
+        "Sources/CoreModels/WatchlistBrowsePreferences.swift",
+        "Sources/CoreModels/MediaProvider.swift",
+        "Sources/FeatureHomeCore/HomeRowBrowseView.swift",
+        "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "The expanded Home-row browser and custom-row editor both construct these options and inventory them on their parent records. Sort By starts with Source order; selecting a field reveals Order. Media precedes Watch status; Clear Filters appears only with an active filter. The browser's choices are temporary, whereas the editor saves them with its row."
+    },
+    "Sources/CoreUI/HomeRowPreviewView.swift": {
+      "sources": [
+        "Sources/CoreUI/HomeRowPreviewView.swift",
+        "Sources/CoreUI/FeaturedMediaRowPresentation.swift",
+        "Sources/CoreUI/FeaturedCardControl.swift",
+        "Sources/CoreUI/PlozziOSMediaSection.swift",
+        "Sources/CoreUI/MediaRowView.swift",
+        "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "CollectionSectionSettingsView owns this custom-row preview below its Content, Name, Sort, Filter and Layout choices. It reproduces poster, landscape or featured rows with profile artwork, captions and spoiler policy. Selection/routing/context actions are cleared and preview browse callbacks are no-ops; it cannot start a video or edit a second row. Parent controls and preview failure recovery are inventoried on that editor."
+    },
+    "Sources/CoreUI/OpaqueNavigationChrome.swift": {
+      "sources": [
+        "Sources/CoreUI/OpaqueNavigationChrome.swift",
+        "Sources/AppShelliOS/PlozziOSRootView.swift",
+        "Sources/FeatureSettings/PreferenceDetailViews.swift",
+        "Sources/CoreModels/ThemeSettings.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "The mobile root supplies destination labels and selection to PlozzOpaqueTabBar; its parent inventories those destinations. On iOS/iPadOS 26+, app-requested reduced transparency with system Reduce Transparency off can replace bottom tabs with this horizontally scrolling strip when neither a vertical toolbar nor sidebar is active. The navigation-controller bridge restyles existing buttons without changing captions or adding a settings destination. System reduced transparency retains native tabs."
+    },
+    "Sources/FeatureSettings/HomeContentPickerView.swift": {
+      "sources": [
+        "Sources/FeatureSettings/HomeContentPickerView.swift",
+        "Sources/FeatureSettings/CollectionSectionSettingsView.swift",
+        "Sources/FeatureSettings/HeroCollectionPickerView.swift",
+        "Sources/FeatureSettings/HeroCollectionListModel.swift",
+        "Sources/CoreModels/HomeLibraryVisibility.swift",
+        "Sources/CoreModels/HomeContentSource.swift",
+        "Sources/CoreModels/HomeSectionCatalogModel.swift",
+        "Sources/CoreModels/HomeSectionCatalog.swift"
+      ],
+      "platforms": [
+        "Apple TV",
+        "iPhone",
+        "iPad"
+      ],
+      "navigation": "Open Settings > Screens & Navigation > Home > Rows > Add row > Custom row > Content, or Content in an existing custom row.",
+      "experience": "Select several accessible Home feeds, whole libraries, recommendations, collections or video playlists for one custom Home row. Review Selected, undo selections, then use Done to return to the row editor without changing server-side lists.",
+      "conditions": "TV puts Done in its page header; mobile puts Done in the confirmation toolbar. When selections exist, Selected and removable dynamic source names precede Collections and Playlists, then the Home feeds Continue Watching, Watchlist and Recently Added, each enabled video library and its feeds, then any server-wide Recommended feeds. Libraries exclude music and retired collection shortcuts and require current account inclusion and library visibility. Collection/playlist destinations are capability-gated and preserve the selected server user. New rows allow clearing all choices; existing rows prevent removing the last source. Unavailable saved choices remain visible with Unavailable source; they do not grant access or silently bind to a different server user. Partial source discovery shows Some sources couldn't be loaded. and Retry. Dynamic library, collection, playlist and recommendation names are content, not constant control captions.",
+      "controls": [
+        {
+          "text": "Content",
+          "source": "Sources/FeatureSettings/HomeContentPickerView.swift"
+        },
+        {
+          "text": "Done",
+          "source": "Sources/FeatureSettings/HomeContentPickerView.swift"
+        },
+        {
+          "text": "Selected",
+          "source": "Sources/FeatureSettings/HomeContentPickerView.swift"
+        },
+        {
+          "text": "Remove",
+          "source": "Sources/FeatureSettings/HomeContentPickerView.swift"
+        },
+        {
+          "text": "Unavailable source",
+          "source": "Sources/FeatureSettings/HomeContentPickerView.swift"
+        },
+        {
+          "text": "Collections",
+          "source": "Sources/FeatureSettings/HomeContentPickerView.swift"
+        },
+        {
+          "text": "Playlists",
+          "source": "Sources/FeatureSettings/HomeContentPickerView.swift"
+        },
+        {
+          "text": "Home",
+          "source": "Sources/FeatureSettings/HomeContentPickerView.swift"
+        },
+        {
+          "text": "Continue Watching",
+          "source": "Sources/CoreModels/HomeLibraryVisibility.swift"
+        },
+        {
+          "text": "Watchlist",
+          "source": "Sources/CoreModels/HomeLibraryVisibility.swift"
+        },
+        {
+          "text": "Recently Added",
+          "source": "Sources/CoreModels/HomeLibraryVisibility.swift"
+        },
+        {
+          "text": "Recommended",
+          "source": "Sources/FeatureSettings/HomeContentPickerView.swift"
+        },
+        {
+          "text": "Some sources couldn't be loaded.",
+          "source": "Sources/FeatureSettings/HomeContentPickerView.swift"
+        },
+        {
+          "text": "Retry",
+          "source": "Sources/FeatureSettings/HomeContentPickerView.swift"
+        }
+      ],
+      "documents": [
+        {
+          "slug": "custom-home-rows",
+          "anchor": "choose-the-content"
+        },
+        {
+          "slug": "custom-home-rows",
+          "anchor": "change-or-repair-a-row"
+        }
+      ]
+    },
     "Sources/AppShell/PlaybackPresentationHost.swift": {
       "sources": [
         "Sources/AppShell/PlaybackPresentationHost.swift",
@@ -2591,7 +2751,7 @@
         "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Detail play-button context menus on ItemDetailView, SeriesDetailView and PlozziOSItemDetailView use these shared actions. Their parents inventory Play in, player names, Play video and Open disc menu. Disc alternatives require the selected BDMV version; installed external choices require an authorized Plex/Jellyfin/Emby movie or episode and omit the default. This is not a card-wide menu or a separate screen."
+      "omitReason": "Detail play-button context menus on ItemDetailView, SeriesDetailView and PlozziOSItemDetailView use these shared actions. Their parents inventory Play in, player names, Play video and Open disc menu. Disc alternatives require the selected BDMV version. ExternalPlaybackRuntime.availablePlayers accepts authorized movies, episodes and videos from Plex/Jellyfin/Emby or an ExternalPlaybackProviding Silo/IPTV/share provider, excluding disc folders and external-service links. Share choices additionally require a supported direct scheme or eligible mobile background delivery. Installed choices omit the default; source preparation still checks compatibility. This is not a card-wide menu or a separate screen."
     },
     "Sources/FeatureProfiles/ProfileChip.swift": {
       "sources": [
@@ -6079,7 +6239,7 @@
         "Sources/AppShelliOS/PlozziOSHomeSkeletonRail.swift",
         "Sources/AppShelliOS/PlozziOSHomeRailLayout.swift",
         "Sources/AppShelliOS/PlozziOSLibraryRoute.swift",
-        "Sources/AppShelliOS/PlozziOSMediaSection.swift",
+        "Sources/CoreUI/PlozziOSMediaSection.swift",
         "Sources/AppShelliOS/PlozziOSPlayerOrientation.swift",
         "Sources/AppShelliOS/PlozziOSPosterCard.swift",
         "Sources/AppShelliOS/PlozziOSRailInteraction.swift",
@@ -6154,7 +6314,8 @@
         "Sources/CoreUI/SettingsCopy.swift",
         "Sources/FeatureHomeCore/ContentRefresh/ContentRefreshCoordinator.swift",
         "Sources/FeatureHomeCore/ContentRefresh/ContentRefreshModels.swift",
-        "Sources/FeatureHomeCore/ContentRefresh/ContentRefreshSurfaceModifier.swift"
+        "Sources/FeatureHomeCore/ContentRefresh/ContentRefreshSurfaceModifier.swift",
+        "Sources/CoreUI/FeaturedMediaRowPresentation.swift"
       ],
       "platforms": [
         "iPhone",
@@ -6266,7 +6427,7 @@
         },
         {
           "text": "See all",
-          "source": "Sources/AppShelliOS/PlozziOSMediaSection.swift"
+          "source": "Sources/CoreUI/PlozziOSMediaSection.swift"
         },
         {
           "text": "Details",
@@ -6367,10 +6528,6 @@
         {
           "text": "View on WeTrakr",
           "source": "Sources/CoreUI/WetrakrWatchlistLink.swift"
-        },
-        {
-          "text": "See all",
-          "source": "Sources/HeroUI/FeaturedMediaRow.swift"
         }
       ],
       "documents": [
@@ -6429,7 +6586,7 @@
         "Sources/AppShelliOS/PlozziOSHeroViews.swift",
         "Sources/AppShelliOS/PlozziOSItemNavigation.swift",
         "Sources/AppShelliOS/PlozziOSLibraryRoute.swift",
-        "Sources/AppShelliOS/PlozziOSMediaSection.swift",
+        "Sources/CoreUI/PlozziOSMediaSection.swift",
         "Sources/AppShelliOS/PlozziOSRelatedSection.swift",
         "Sources/AppShelliOS/PlozziOSPlayerOrientation.swift",
         "Sources/AppShelliOS/PlozziOSPosterCard.swift",
@@ -6979,7 +7136,7 @@
         },
         {
           "text": "See all",
-          "source": "Sources/AppShelliOS/PlozziOSMediaSection.swift"
+          "source": "Sources/CoreUI/PlozziOSMediaSection.swift"
         },
         {
           "text": "Related",
@@ -7475,7 +7632,7 @@
         "Sources/AppShelliOS/PlozziOSLibraryView.swift",
         "Sources/AppShelliOS/PlozziOSItemNavigation.swift",
         "Sources/AppShelliOS/PlozziOSLibraryRoute.swift",
-        "Sources/AppShelliOS/PlozziOSMediaSection.swift",
+        "Sources/CoreUI/PlozziOSMediaSection.swift",
         "Sources/AppShelliOS/PlozziOSPosterCard.swift",
         "Sources/CoreUI/ArtworkEnvironment.swift",
         "Sources/CoreUI/PosterCardView.swift",
@@ -7596,7 +7753,7 @@
         },
         {
           "text": "See all",
-          "source": "Sources/AppShelliOS/PlozziOSMediaSection.swift"
+          "source": "Sources/CoreUI/PlozziOSMediaSection.swift"
         },
         {
           "text": "Sort By",
@@ -7730,9 +7887,9 @@
       "omitKind": "shared-component",
       "omitReason": "Reusable PlozziOSLiveTVDestination.swift is wired into Sources/AppShelliOS/PlozziOSRootView.swift, Sources/AppShelliOS/PlozziOSRootView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
     },
-    "Sources/AppShelliOS/PlozziOSMediaSection.swift": {
+    "Sources/CoreUI/PlozziOSMediaSection.swift": {
       "sources": [
-        "Sources/AppShelliOS/PlozziOSMediaSection.swift",
+        "Sources/CoreUI/PlozziOSMediaSection.swift",
         "Sources/AppShelliOS/PlozziOSHomeView.swift",
         "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
         "Sources/AppShelliOS/PlozziOSLibraryView.swift",
@@ -7741,7 +7898,7 @@
         "Sources/AppShelliOS/PlozziOSRelatedSection.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Reusable PlozziOSMediaSection.swift is wired into Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/AppShelliOS/PlozziOSSearchView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/AppShelliOS/PlozziOSHomeView.swift, Sources/AppShelliOS/PlozziOSItemDetailView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitReason": "Shared mobile row used by Home, title details, library pages and search, directly or through the cited RelatedSection wrapper. Parent records inventory its item actions, conditional See all fallback and editable Home headings. A browseable heading uses its dynamic row title plus a chevron, not a constant See all caption. Placeholder/skeleton uses add no controls. The move to CoreUI creates no separate reader destination."
     },
     "Sources/AppShelliOS/PlozziOSMetadataDiagnosticsView.swift": {
       "sources": [
@@ -9153,7 +9310,9 @@
         "Sources/FeatureSettings/ICloudOnboardingView.swift",
         "Sources/AppRuntime/ProviderCredentialSync.swift",
         "Sources/CoreModels/NavigationContentAvailability.swift",
-        "Sources/CoreModels/SyncSetup.swift"
+        "Sources/CoreModels/SyncSetup.swift",
+        "Sources/CoreUI/OpaqueNavigationChrome.swift",
+        "Sources/CoreModels/ThemeSettings.swift"
       ],
       "platforms": [
         "iPhone",
@@ -9161,7 +9320,7 @@
       ],
       "navigation": "Launch Plozz on iPhone/iPad, finish required setup, then use its tabs or sidebar.",
       "experience": "Open shown shortcuts, including eligible Discover or All Libraries, switch profiles, or connect media when Home is empty. Beta-only Music requires an authorized profile, an enabled supported music library and online access; production mobile builds do not construct its runtime. Its player overlay is inventoried on NowPlayingMorph, and profile/source authorization changes stop it. In Offline Mode, Home, libraries, Search and Watchlist use authorized completed downloads; Discover and Live TV show Unavailable Offline. The status notice does not replace profile authorization.",
-      "conditions": "Compact UIKit navigation puts excess shown shortcuts under More; it does not reveal hidden shortcuts. iPad can use regular-width navigation. Destination order is saved per profile on this device. Profile authorization applies before browsing. Discover is absent for Kids; for other profiles Seerr automatically shows it unless explicitly hidden, while no Seerr connection automatically hides it unless explicitly shown. Its mobile wrapper mounts the separately inventoried shared DiscoverBrowseView. Watchlist shows sorting before filtering on mobile; its fields are Date Added, Release Date and Name only. Choosing a field resets its direction: Name starts ascending, dates descending. Clear Filters appears only with a movie/show filter; filtered-empty results also offer it. The no-account Home destination passes hasAccounts false to the shared empty state and supplies both Add Source and Set Up from Another Device. Connected empty Home instead shows Nothing to watch yet in its separately inventoried HomeView. After explicit IPTV setup/refresh, a shared guide notice can remain across navigation while the account is authorized. It is hidden behind another transient message. Dismiss hides only the notice; terminal notices also auto-dismiss after five seconds. Percentages describe the current stage, not total work. Profile/account authorization changes cancel and remove scoped work; this does not promise OS background execution. New installations show the shared iCloud consent/restoration flow before normal setup. Both shells can restore supported server/share credentials through encrypted iCloud records, while Silo creates a separately authorized device session only when server capability and PIN-free profile checks succeed. Navigation suppresses Home/Search without relevant content and Watchlist without saved items. Music-only Subsonic connections can land on Music; live-only sources prefer Live TV. Unreachable established media servers retain remembered library navigation rather than treating failure as authoritative emptiness.",
+      "conditions": "Native compact UIKit navigation puts excess shown shortcuts under More; it does not reveal hidden shortcuts. On iOS/iPadOS 26+ the root instead mounts OpaqueNavigationChrome's bottom destination strip when app reduceTransparency is true, systemReduceTransparency is false, no vertical toolbar is in use and no sidebar is visible. This retains the same shown destinations and scrolls horizontally when they do not fit; it has no UIKit More destination. App Liquid Glass Off can trigger it; system Reduce Transparency retains native navigation. iPad can use regular-width navigation. Destination order is saved per profile on this device. Profile authorization applies before browsing. Discover is absent for Kids; for other profiles Seerr automatically shows it unless explicitly hidden, while no Seerr connection automatically hides it unless explicitly shown. Its mobile wrapper mounts the separately inventoried shared DiscoverBrowseView. Watchlist shows sorting before filtering on mobile; its fields are Date Added, Release Date and Name only. Choosing a field resets its direction: Name starts ascending, dates descending. Clear Filters appears only with a movie/show filter; filtered-empty results also offer it. The no-account Home destination passes hasAccounts false to the shared empty state and supplies both Add Source and Set Up from Another Device. Connected empty Home instead shows Nothing to watch yet in its separately inventoried HomeView. After explicit IPTV setup/refresh, a shared guide notice can remain across navigation while the account is authorized. It is hidden behind another transient message. Dismiss hides only the notice; terminal notices also auto-dismiss after five seconds. Percentages describe the current stage, not total work. Profile/account authorization changes cancel and remove scoped work; this does not promise OS background execution. New installations show the shared iCloud consent/restoration flow before normal setup. Both shells can restore supported server/share credentials through encrypted iCloud records, while Silo creates a separately authorized device session only when server capability and PIN-free profile checks succeed. Navigation suppresses Home/Search without relevant content and Watchlist without saved items. Music-only Subsonic connections can land on Music; live-only sources prefer Live TV. Unreachable established media servers retain remembered library navigation rather than treating failure as authoritative emptiness.",
       "controls": [
         {
           "text": "Home",
@@ -9475,7 +9634,7 @@
       "sources": [
         "Sources/FeatureSearchCore/SearchSection.swift",
         "Sources/AppShelliOS/PlozziOSSearchView.swift",
-        "Sources/AppShelliOS/PlozziOSMediaSection.swift",
+        "Sources/CoreUI/PlozziOSMediaSection.swift",
         "Sources/AppShelliOS/PlozziOSPosterCard.swift",
         "Sources/CoreUI/ArtworkEnvironment.swift",
         "Sources/CoreUI/PosterCardView.swift",
@@ -9555,7 +9714,7 @@
         },
         {
           "text": "See all",
-          "source": "Sources/AppShelliOS/PlozziOSMediaSection.swift"
+          "source": "Sources/CoreUI/PlozziOSMediaSection.swift"
         },
         {
           "text": "Watched",
@@ -12824,7 +12983,7 @@
     "Sources/CoreUI/BrowseRowHeading.swift": {
       "sources": [
         "Sources/CoreUI/BrowseRowHeading.swift",
-        "Sources/AppShelliOS/PlozziOSMediaSection.swift",
+        "Sources/CoreUI/PlozziOSMediaSection.swift",
         "Sources/HeroUI/FeaturedMediaRow.swift",
         "Sources/AppShelliOS/PlozziOSHomeView.swift",
         "Sources/FeatureHome/HomeView.swift",
@@ -13739,7 +13898,7 @@
     "Sources/CoreUI/HomeSectionStatusView.swift": {
       "sources": [
         "Sources/CoreUI/HomeSectionStatusView.swift",
-        "Sources/AppShelliOS/PlozziOSMediaSection.swift",
+        "Sources/CoreUI/PlozziOSMediaSection.swift",
         "Sources/CoreUI/MediaRowView.swift",
         "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
         "Sources/AppShelliOS/PlozziOSHomeView.swift",
@@ -20015,7 +20174,12 @@
         "Sources/AppShelliOS/PlozziOSHomeView.swift",
         "Sources/CoreUI/PosterCardView.swift",
         "Sources/AppShelliOS/PlozziOSPosterCard.swift",
-        "Sources/CoreModels/MediaItemAction.swift"
+        "Sources/CoreModels/MediaItemAction.swift",
+        "Sources/CoreUI/HomeContentQueryControls.swift",
+        "Sources/CoreModels/HomeContentQuery.swift",
+        "Sources/CoreModels/HomeContentPager.swift",
+        "Sources/CoreModels/HomeContentPageLoader.swift",
+        "Sources/CoreModels/HomeContentSource.swift"
       ],
       "platforms": [
         "Apple TV",
@@ -20024,11 +20188,11 @@
       ],
       "navigation": "From an eligible Home row, select the trailing See all card on Apple TV or tap the row heading with a chevron on iPhone/iPad. The global Watchlist row uses the separate Watchlist page instead.",
       "experience": "Browse that row's original feed in a larger title grid, combine media-kind and watch-state filters, choose a sort/order, open details, and retry loading failures without substituting another library list.",
-      "conditions": "Requires more titles and a loaded nonempty row without failure or section issue, plus current profile/source access and the original row's applicable visibility policy. Account-wide history is not filtered by disabled-library browsing switches. Row titles and source suffixes are supplied content. TV has filter then sort beside the heading; mobile toolbar has icon-only sort then filter. Media choices precede watch-state choices inside Filter. Sort By offers Default, Name, Date Added, Release Date and Runtime; Order is disabled for Default. Nondefault queries load all remaining available feed pages before showing the new projection. Default pages load incrementally; Load more appears only when more remain. No titles to show is the empty state; Retry follows a loading error. There is no Clear Filters button here: reset both Filter pickers to All. Combined Recently Added merges admitted sources; collections retain movie/show members; server rows retain their actual feed, limits and ownership. Plain combined Continue Watching and Live TV are not reachable through this browser. Browser choices are not stored as library or Watchlist preferences. Card actions remain kind/provider-capability dependent.",
+      "conditions": "Requires a loaded nonempty row with further content and no failure or section issue, current profile/source access and the original row's visibility policy. Account-wide history ignores disabled-library browsing switches. Row titles and suffixes are dynamic content. TV puts filtering before sorting; mobile has icon-only sort then filter. The shared filter menu puts Media before Watch status and shows Clear Filters only when either is active. Sort By offers Source order, Name, Date Added, Release Date and Runtime; Order appears only after a field is selected. Nondefault queries load the remaining feed before showing sorted/filtered results; Source order with no filters loads incrementally and can show Load more. No titles to show is empty, while Retry follows a load failure. Custom rows start with their saved query and use their selected feeds, combining matching copies; only a sole Watchlist source uses save dates for Date Added. Other source rows retain provider list membership and limits. Plain combined Continue Watching and Live TV do not gain this shortcut; an explicitly created custom row can select the Continue Watching feed. Query changes here are temporary and do not save Home, library or Watchlist preferences. Card actions remain kind/provider-capability dependent.",
       "controls": [
         {
-          "text": "Filter",
-          "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"
+          "text": "Media",
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
         },
         {
           "text": "All",
@@ -20043,24 +20207,32 @@
           "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"
         },
         {
+          "text": "Watch status",
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
+        },
+        {
           "text": "All",
-          "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
         },
         {
           "text": "Unwatched",
-          "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
         },
         {
           "text": "In Progress",
-          "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
+        },
+        {
+          "text": "Clear Filters",
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
         },
         {
           "text": "Sort By",
-          "source": "Sources/CoreUI/BrowseQueryControls.swift"
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
         },
         {
-          "text": "Default",
-          "source": "Sources/CoreUI/BrowseQueryControls.swift"
+          "text": "Source order",
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
         },
         {
           "text": "Name",
@@ -20080,7 +20252,7 @@
         },
         {
           "text": "Order",
-          "source": "Sources/CoreUI/BrowseQueryControls.swift"
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
         },
         {
           "text": "Ascending",
@@ -23098,6 +23270,8 @@
         "Sources/FeatureMusic/iOS/MobileMusicDetail.swift",
         "Sources/AppShelliOS/PlozziOSMusicRuntime.swift",
         "Sources/AppShelliOS/PlozziOSAppModel.swift",
+        "Sources/AppShelliOS/PlozziOSRootView.swift",
+        "Sources/CoreUI/OpaqueNavigationChrome.swift",
         "Sources/CoreModels/CrashReportingSettings.swift",
         "Sources/CoreUI/ArtworkEnvironment.swift",
         "Sources/CoreUI/FallbackAsyncImage.swift",
@@ -23132,7 +23306,7 @@
         "iPhone",
         "iPad"
       ],
-      "navigation": "Open Music in the main navigation, or compact mobile More, then Playlists, Albums, Artists or Genres; open an album or playlist to play it.",
+      "navigation": "Open Music in the main navigation, then Playlists, Albums, Artists or Genres; open an album or playlist to play it. In compact native mobile navigation, check More; scroll the opaque bottom strip sideways for extra shortcuts.",
       "experience": "Browse server music, open artist albums or playlists, and use Play, Shuffle or a starting track to replace the queue and open the player. Recently Played can start a single-track queue. Failed catalogue loads retain retry and diagnostic actions.",
       "conditions": "An authorized profile needs an enabled, accessible Plex/Jellyfin/Emby music library or a beta Navidrome/Subsonic connection. The Subsonic provider is music-only; it can be the landing destination without video Home/Search. Server favorites and listening reports remain tied to that account, independently of optional Last.fm. Mobile Music is constructed only for TestFlight/development builds and is unavailable in Offline Mode. App Store mobile builds do not create the runtime. Mobile detail pages use MobileMusicDetail; Apple TV retains its existing layouts and scrolling current-track card. Starting another album or playlist replaces rather than appends to the queue. Category buttons are Playlists, Albums, Artists, Genres in that order; visible landing sections also depend on saved layout and available data.",
       "controls": [
@@ -27334,16 +27508,25 @@
         "Sources/CoreUI/SystemCardFocus.swift",
         "Sources/CoreUI/SystemPosterCaption.swift",
         "Sources/CoreUI/TextTierStyle.swift",
-        "Sources/CoreUI/ThemePalette.swift"
+        "Sources/CoreUI/ThemePalette.swift",
+        "Sources/CoreUI/HomeContentQueryControls.swift",
+        "Sources/CoreModels/HomeContentQuery.swift",
+        "Sources/CoreModels/WatchlistBrowsePreferences.swift",
+        "Sources/CoreModels/MediaProvider.swift",
+        "Sources/CoreModels/HomeContentPager.swift",
+        "Sources/CoreModels/HomeContentPageLoader.swift",
+        "Sources/CoreModels/HomeContentSource.swift",
+        "Sources/FeatureSettings/HomeContentPickerView.swift",
+        "Sources/CoreUI/HomeRowPreviewView.swift"
       ],
       "platforms": [
         "Apple TV",
         "iPhone",
         "iPad"
       ],
-      "navigation": "Open Add row > From a collection or edit a custom collection row.",
-      "experience": "Choose content, name the row, select its card style, then add/save/remove it. Mobile's save action reports Saving… to accessibility while busy, disables editing until completion and offers Couldn't save changes on failure.",
-      "conditions": "An accessible collection is required. Collection source identity is preserved; row removal does not delete server content. Preview cards are disabled, supply neither download nor pending-removal state, and cannot open card action menus. After the preview, Layout offers Posters, Landscape, Featured. Only Landscape reveals Logo with On/Off, default Off. That choice overlays a title logo on collection-row artwork and is independent of ordinary Continue Watching artwork. Content and Row name follow. New rows require Add to Home, shown as a toolbar checkmark on mobile. Existing TV layout/logo/content edits autosave; closing the native name keyboard saves, including Back, with Saved or Couldn't save/Retry status. Existing mobile rows use the Save changes toolbar checkmark; failed saves show Couldn't save changes with OK and leave the editor available to retry. The shared Remove from Home action follows existing-row controls.",
+      "navigation": "Open Settings > Screens & Navigation > Home > Rows > Add row > Custom row, or reopen a custom row in Rows. Mobile Home also offers Edit on its row heading.",
+      "experience": "Combine accessible content, name the row, save sorting and filters, compare poster/landscape/featured layouts in a non-playing preview, then add or update the row. Removing it changes Home, not server media or lists.",
+      "conditions": "Editor order is Content, Name, Sort, Filter, Layout, conditional Logo, then preview and save/remove actions. Content opens HomeContentPickerView for multiple collections, video playlists, whole libraries, Home feeds or recommendations. At least one valid currently accessible selection is needed to save; source identities preserve the selected account/server user. Sort and Filter use shared HomeContentQueryControls: Source order alternates selected sources and matching copies can merge; nondefault queries require full feed loading. Date Added uses Watchlist save dates only with a sole Watchlist source. Preview uses the first 20 results, respects profile artwork/captions/spoilers and does not navigate, play or expose media actions. Empty, loading and partial/error states remain distinct with Retry. Layout offers Posters, Landscape and Featured; Landscape alone reveals Logo On/Off, default Off. New rows require Add to Home, a mobile checkmark; backing out of a changed new TV row offers Save this row? with Add to Home, Discard or Keep Editing. Existing TV content/query/layout/logo changes autosave with an explicit failure and Retry; Name saves when its keyboard closes, including Back, with Saved or Couldn't save/Retry. Existing mobile edits require Save changes; Saving… disables editing and a failure shows Couldn't save changes with OK so the save can be attempted again. Remove from Home appears only for existing rows.",
       "controls": [
         {
           "text": "Create row",
@@ -27352,6 +27535,106 @@
         {
           "text": "Edit row",
           "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
+          "text": "Content",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
+          "text": "Name",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
+          "text": "Saved",
+          "source": "Sources/FeatureSettings/HomeEditorAutosavingNameInput.swift"
+        },
+        {
+          "text": "Couldn't save",
+          "source": "Sources/FeatureSettings/HomeEditorAutosavingNameInput.swift"
+        },
+        {
+          "text": "Retry",
+          "source": "Sources/FeatureSettings/HomeEditorAutosavingNameInput.swift"
+        },
+        {
+          "text": "Sort",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
+          "text": "Sort By",
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
+        },
+        {
+          "text": "Source order",
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
+        },
+        {
+          "text": "Name",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Date Added",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Release Date",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Runtime",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Order",
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
+        },
+        {
+          "text": "Ascending",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Descending",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Filter",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
+          "text": "Media",
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
+        },
+        {
+          "text": "All",
+          "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"
+        },
+        {
+          "text": "Movies",
+          "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"
+        },
+        {
+          "text": "TV Shows",
+          "source": "Sources/CoreModels/WatchlistBrowsePreferences.swift"
+        },
+        {
+          "text": "Watch status",
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
+        },
+        {
+          "text": "All",
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
+        },
+        {
+          "text": "Unwatched",
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
+        },
+        {
+          "text": "In Progress",
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
+        },
+        {
+          "text": "Clear Filters",
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
         },
         {
           "text": "Layout",
@@ -27382,12 +27665,24 @@
           "source": "Sources/CoreModels/CollectionSection.swift"
         },
         {
-          "text": "Content",
+          "text": "Loading…",
           "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
         },
         {
-          "text": "Row name",
+          "text": "No titles in this row.",
           "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
+          "text": "Retry",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
+          "text": "Watched",
+          "source": "Sources/CoreUI/EpisodeWatchStatePill.swift"
+        },
+        {
+          "text": "Partly watched",
+          "source": "Sources/CoreUI/EpisodeWatchStatePill.swift"
         },
         {
           "text": "Add to Home",
@@ -27414,19 +27709,7 @@
           "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
         },
         {
-          "text": "Saved",
-          "source": "Sources/FeatureSettings/HomeEditorAutosavingNameInput.swift"
-        },
-        {
-          "text": "Couldn't save",
-          "source": "Sources/FeatureSettings/HomeEditorAutosavingNameInput.swift"
-        },
-        {
-          "text": "Retry",
-          "source": "Sources/FeatureSettings/HomeEditorAutosavingNameInput.swift"
-        },
-        {
-          "text": "Loading collection…",
+          "text": "Couldn't update this row. Try again.",
           "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
         },
         {
@@ -27434,15 +27717,31 @@
           "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
         },
         {
-          "text": "Watched",
-          "source": "Sources/CoreUI/EpisodeWatchStatePill.swift"
+          "text": "Save this row?",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
         },
         {
-          "text": "Partly watched",
-          "source": "Sources/CoreUI/EpisodeWatchStatePill.swift"
+          "text": "Discard",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
+          "text": "Keep Editing",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
         }
       ],
       "documents": [
+        {
+          "slug": "custom-home-rows",
+          "anchor": "choose-the-content"
+        },
+        {
+          "slug": "custom-home-rows",
+          "anchor": "set-the-order-and-appearance"
+        },
+        {
+          "slug": "custom-home-rows",
+          "anchor": "change-or-repair-a-row"
+        },
         {
           "slug": "home-and-navigation",
           "anchor": "add-a-collection-section"
@@ -27857,23 +28156,26 @@
         "Sources/CoreUI/SettingsRowFocusStyle.swift",
         "Sources/CoreUI/SettingsSwitchToggle.swift",
         "Sources/CoreUI/SettingsSurfaces.swift",
-        "Sources/CoreUI/TextTierStyle.swift"
+        "Sources/CoreUI/TextTierStyle.swift",
+        "Sources/FeatureSettings/HomeContentPickerView.swift",
+        "Sources/FeatureSettings/HeroCollectionListModel.swift",
+        "Sources/FeatureSettings/HeroSettingsControls.swift"
       ],
       "platforms": [
         "Apple TV",
         "iPhone",
         "iPad"
       ],
-      "navigation": "Choose a collection for a Home row or hero collection source.",
-      "experience": "Select an authorized library collection, retry failures, or cancel selection.",
-      "conditions": "Collection-capable accessible libraries only; dynamic collection names are supplied content, not constant control labels. The multi-select hero picker is Choose collections and shows Selected collections/Clear selection only with existing choices. A single-selection callback uses Choose collection without that summary. Source precedes Collections; an unavailable source offers Done instead of inventing collection rows.",
+      "navigation": "Open Collections or Playlists in a custom row's Content picker, or choose collections for the Home hero.",
+      "experience": "Choose an authorized source, then select or deselect several collections or video playlists. Load more choices or retry a failed page, then return to the parent editor.",
+      "conditions": "Provider capabilities gate personal/library collections and video playlists. Library-scoped choices require accessible movie/series libraries; the custom Content caller passes only enabled libraries. Personal collections require a capable account, not a selected library. Source names, account names and list names are dynamic. Hero multi-selection is Choose collections, with Selected collections and Clear selection before Source and Collections. Custom Content opens Choose collections or Choose playlists, suppresses the nested selection summary and preserves other kinds of selected content. Its binding prevents clearing an existing row's last source. Source precedes Collections or Playlists, then Retry, Load more or the appropriate empty message. TV has Done after the list for custom rows; mobile has Done in its confirmation toolbar. Choose collection belongs to an optional single-choice form with no production construction call; Selected playlists also has no reachable caller because the custom playlist route hides the summary. Do not invent those destinations. Saved choices preserve server-user identity and report Unavailable source if no longer accessible.",
       "controls": [
         {
           "text": "Choose collections",
           "source": "Sources/FeatureSettings/HeroCollectionPickerView.swift"
         },
         {
-          "text": "Choose collection",
+          "text": "Choose playlists",
           "source": "Sources/FeatureSettings/HeroCollectionPickerView.swift"
         },
         {
@@ -27881,7 +28183,15 @@
           "source": "Sources/FeatureSettings/HeroCollectionPickerView.swift"
         },
         {
+          "text": "Clear selection",
+          "source": "Sources/FeatureSettings/HeroCollectionPickerView.swift"
+        },
+        {
           "text": "Source",
+          "source": "Sources/FeatureSettings/HeroCollectionPickerView.swift"
+        },
+        {
+          "text": "Personal collections",
           "source": "Sources/FeatureSettings/HeroCollectionPickerView.swift"
         },
         {
@@ -27889,15 +28199,7 @@
           "source": "Sources/FeatureSettings/HeroCollectionPickerView.swift"
         },
         {
-          "text": "Clear selection",
-          "source": "Sources/FeatureSettings/HeroCollectionPickerView.swift"
-        },
-        {
-          "text": "Done",
-          "source": "Sources/FeatureSettings/HeroCollectionPickerView.swift"
-        },
-        {
-          "text": "Personal collections",
+          "text": "Playlists",
           "source": "Sources/FeatureSettings/HeroCollectionPickerView.swift"
         },
         {
@@ -27906,6 +28208,26 @@
         },
         {
           "text": "Load more",
+          "source": "Sources/FeatureSettings/HeroCollectionPickerView.swift"
+        },
+        {
+          "text": "No available collection sources.",
+          "source": "Sources/FeatureSettings/HeroCollectionPickerView.swift"
+        },
+        {
+          "text": "No available playlist sources.",
+          "source": "Sources/FeatureSettings/HeroCollectionPickerView.swift"
+        },
+        {
+          "text": "No collections in this source.",
+          "source": "Sources/FeatureSettings/HeroCollectionPickerView.swift"
+        },
+        {
+          "text": "No playlists in this source.",
+          "source": "Sources/FeatureSettings/HeroCollectionPickerView.swift"
+        },
+        {
+          "text": "Done",
           "source": "Sources/FeatureSettings/HeroCollectionPickerView.swift"
         },
         {
@@ -27921,6 +28243,10 @@
         {
           "slug": "home-and-navigation",
           "anchor": "add-a-collection-section"
+        },
+        {
+          "slug": "custom-home-rows",
+          "anchor": "choose-the-content"
         }
       ]
     },
@@ -28060,6 +28386,9 @@
       "sources": [
         "Sources/CoreModels/HomeSectionIssue.swift",
         "Sources/FeatureSettings/HomeRowsSettingsView.swift",
+        "Sources/FeatureSettings/CollectionSectionSettingsView.swift",
+        "Sources/FeatureSettings/HomeContentPickerView.swift",
+        "Sources/CoreModels/HomeContentSource.swift",
         "Sources/CoreModels/CardCaptionSettings.swift",
         "Sources/CoreUI/HomeSectionStatusView.swift",
         "Sources/CoreUI/HorizontalEdgeFadeMask.swift",
@@ -28098,7 +28427,7 @@
       ],
       "navigation": "Open Settings > Screens & Navigation > Home.",
       "experience": "Open Hero, Apple TV Row style, Card labels, Rows and Filtering in UI order. Change the featured carousel independently of Classic/Showcase rows; edit row arrangement and recover source errors without changing library access.",
-      "conditions": "All platforms, active-profile preferences. Root order is Hero, then Row style on Apple TV only, Card labels, Rows and Filtering. Hero summarizes On/Off; Apple TV Row style summarizes Showcase/Classic. Card labels opens the Home-only editor without Page: Default offers On/Off/Mixed, then Continue Watching and Libraries overrides with Use default/On/Off. The Continue Watching override also applies on Recommended. Row discovery/loading exposes retries; Edit/Done and Reorder follow editing state. Diagnostic HomeSectionStatusView calls supply only Retry, not Dismiss, Customize Home or See all; Details/OK remain available for unavailable/failing issues. A hidden Continue Watching row retains Continue Watching settings, and ordinary row links open the editor that conditionally offers Show empty message. With Showcase selected and Hero off, Discovery is managed by Row style and its row cannot be reordered or removed here; this managed row is absent in Kids profiles. Collection choices require accessible collections. Filtering orders Recently Added before Hero & discovery and does not alter history or access.",
+      "conditions": "All platforms, active-profile preferences. Root order is Hero, then Row style on Apple TV only, Card labels, Rows and Filtering. Hero summarizes On/Off; Apple TV Row style summarizes Showcase/Classic. Card labels opens the Home-only editor without Page: Default offers On/Off/Mixed, then Continue Watching and Libraries overrides with Use default/On/Off. The Continue Watching override also applies on Recommended. Row discovery/loading exposes retries; Edit/Done and Reorder follow editing state. Diagnostic HomeSectionStatusView calls supply only Retry, not Dismiss, Customize Home or See all; Details/OK remain available for unavailable/failing issues. A hidden Continue Watching row retains Continue Watching settings, and ordinary row links open the editor that conditionally offers Show empty message. With Showcase selected and Hero off, Discovery is managed by Row style and its row cannot be reordered or removed here; this managed row is absent in Kids profiles. Add row offers Custom row, not From a collection. Its Content picker combines Home feeds, enabled accessible video libraries, available recommendations and provider-supported collections/video playlists; it preserves server-user bindings and excludes music. Home history feeds still follow profile history even when libraries are hidden from browsing. Existing custom rows open CollectionSectionSettingsView rather than the ordinary Row name editor. Filtering orders Recently Added before Hero & discovery and does not alter history or access.",
       "controls": [
         {
           "text": "Home",
@@ -28283,6 +28612,10 @@
           "anchor": "choose-home-rows"
         },
         {
+          "slug": "custom-home-rows",
+          "anchor": "choose-the-content"
+        },
+        {
           "slug": "spoiler-protection",
           "anchor": "change-continue-watching-cards"
         }
@@ -28291,10 +28624,13 @@
     "Sources/FeatureSettings/HomeSectionSettingsViews.swift": {
       "sources": [
         "Sources/FeatureSettings/HomeEditorAutosavingNameInput.swift",
+        "Sources/FeatureSettings/CollectionSectionSettingsView.swift",
+        "Sources/FeatureSettings/HomeContentPickerView.swift",
         "Sources/CoreModels/HomeRowCustomization.swift",
         "Sources/CoreModels/HomeLibraryVisibilityStore.swift",
         "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
         "Sources/CoreModels/CardCaptionSettings.swift",
+        "Sources/CoreModels/CollectionCoverLayout.swift",
         "Sources/CoreModels/CollectionSection.swift",
         "Sources/CoreUI/ContinueWatchingPresentation.swift",
         "Sources/CoreUI/ContinueWatchingArtworkSwatch.swift",
@@ -28353,7 +28689,7 @@
         "iPhone",
         "iPad"
       ],
-      "navigation": "Open Settings > Screens & Navigation > Home, then Hero, Row style on Apple TV, or Rows and an editable row. Add row opens available rows or From a collection.",
+      "navigation": "Open Settings > Screens & Navigation > Home, then Hero, Row style on Apple TV, or Rows and an editable row. Add row opens available rows or Custom row; custom content is edited in CollectionSectionSettingsView and HomeContentPickerView.",
       "experience": "Enable or hide the featured hero, select its content, sizes, advancement, ratings and trailers; independently choose Showcase/Classic rows on Apple TV. Configure individual Home rows, Continue Watching presentation and actions, restore a dismissed empty message, or replace row arrangements with a preset. Row name changes the heading without changing source/access. Blank restores the default. TV commits on keyboard dismissal, including Back, and exposes Saved or Couldn't save/Retry; mobile commits with the Save changes checkmark. Names use profile Home visibility storage and the Watchlist shortcut shares its row name.",
       "conditions": "This file owns multiple nested Home pages. Hero appears on all platforms: TV On/Off and mobile Show hero gate the following sizes, Content sources (TV) or Hero content sources (mobile), item count, advancement, Ratings and Trailers & music links. Title-source order is Continue Watching, Recently Added, Watchlist, Random from Library, Collections, Discovery; enabled sources reveal their respective nested choices. Random libraries are enabled non-music Home libraries and the last selected library cannot be deselected. Kids profiles exclude Discovery. TV Row style selects Showcase/Classic independently of Hero; only Showcase exposes its own sizes and rating controls. Discovery row is available only in Showcase with Hero off and a non-Kids profile; its providers require the row enabled. Mobile always uses the carousel and has no Row style destination. Continue Watching appearance applies to Home and Recommended; Labels uses Use default/On/Off, never Mixed. Include Next Up precedes tap/center-button action. Collection covers require applicable rows. Show empty message appears after row-specific controls and before Remove from Home only for an already-dismissed row outside Showcase; it clears that profile visibility marker, not row membership. The hidden Continue Watching settings entry can open this editor without a Remove from Home action. Preset replacement requires confirmation and preserves server settings. Dynamic library, account, collection and row names come from the source, not constant control captions. Showcase logo/text sizes are independent, but Show ratings, age guidance and review-score count bind to the same hero settings as the featured carousel; the isShowcase argument only changes search anchors. Trailers & music is the shared nested destination, reached from Movie & show details or an enabled Home hero. Nested controls are audited here and on HeroSettingsControls in UI order: Trailers policy (Off, Server only, Server + YouTube), Home autoplay with its conditional Start muted, then Details with Detail background (Off, Trailer, Theme music), its separate conditional Start muted, or Theme music volume and preview controls. Off disables trailers/autoplay but not music or other extras; YouTube is manual/external only. The settings are profile-specific and the Home/detail choices are independent.",
       "controls": [
@@ -28650,7 +28986,7 @@
           "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
         },
         {
-          "text": "From a collection",
+          "text": "Custom row",
           "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
         },
         {
@@ -28686,16 +29022,16 @@
           "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
         },
         {
+          "text": "Auto",
+          "source": "Sources/CoreModels/CollectionCoverLayout.swift"
+        },
+        {
           "text": "Posters",
-          "source": "Sources/CoreModels/CollectionSection.swift"
+          "source": "Sources/CoreModels/CollectionCoverLayout.swift"
         },
         {
           "text": "Landscape",
-          "source": "Sources/CoreModels/CollectionSection.swift"
-        },
-        {
-          "text": "Featured",
-          "source": "Sources/CoreModels/CollectionSection.swift"
+          "source": "Sources/CoreModels/CollectionCoverLayout.swift"
         },
         {
           "text": "Detailed",

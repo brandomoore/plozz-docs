@@ -1,6 +1,6 @@
 # Streaming quality
 
-Use a smaller video stream to reduce data use or ease buffering. Quality limits apply to Plex, Jellyfin, Emby, and Silo movies/episodes on **iPhone and iPad**, not Apple TV, shares, music, or Live TV.
+Lower video quality to save data or reduce buffering. Quality limits apply to Plex, Jellyfin, Emby, and Silo movies/episodes on **iPhone and iPad**, not Apple TV, shares, music, or Live TV.
 
 ## Save network-specific limits
 
@@ -34,7 +34,7 @@ Shares have no server converting video; a missing Quality control can be expecte
 
 ## Adjust the video buffer
 
-On all three platforms, **Settings > Playback > Video buffer** changes temporary read-ahead, not quality/downloads. Larger buffers use more storage; duration depends on video and free space. Unavailable with Apple's native player, this device-wide preference neither transfers nor syncs. Start new playback after changes.
+On all platforms, **Settings > Playback > Video buffer** controls how much video Plozz loads ahead, using temporary storage. Video size and free space limit it. It is shared across this device's profiles but does not sync, transfer, or affect Apple's native player. Reopen the video afterward.
 
 A filled buffer can bridge brief interruptions, not fix a source that stays too slow. [Live TV buffer](/platform-controls/#live-tv-remote-controls-and-rewind) is separate.
 

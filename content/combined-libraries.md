@@ -13,9 +13,9 @@
 
 1. Enable at least two browsable libraries under **Settings > Libraries**.
 2. Open **Settings > Screens & Navigation > App navigation > Hide or Reorder Navigation**. Find **All Libraries** under **Hidden**, then hold it and choose **Show**. Individual library shortcuts can be shown here too.
-3. Open **All Libraries** from navigation; check **More** on compact layouts.
+3. Open **All Libraries**. In compact native navigation, check **More**; in the opaque bottom strip, scroll sideways.
 
-Mobile library shortcuts start hidden until you show them. Hiding a shortcut again does not disable its libraries.
+Mobile library shortcuts start hidden. Hiding a shortcut again does not disable its libraries.
 
 ## Choose among copies
 

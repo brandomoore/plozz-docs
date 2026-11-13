@@ -869,7 +869,7 @@
       "Sources/AppShell/MainTabView.swift",
       "Sources/FeatureHome/HomeView.swift",
       "Sources/AppShelliOS/PlozziOSHomeView.swift",
-      "Sources/AppShelliOS/PlozziOSMediaSection.swift",
+      "Sources/CoreUI/PlozziOSMediaSection.swift",
       "Sources/CoreUI/BrowseRowHeading.swift",
       "Sources/CoreUI/MediaRowBrowseCard.swift",
       "Sources/CoreUI/MediaRowView.swift",
@@ -880,19 +880,19 @@
       "Sources/FeatureHomeCore/HomeRowBrowseFactory.swift",
       "Sources/FeatureHomeCore/HomeRow.swift",
       "Sources/CoreUI/BrowseQueryControls.swift",
+      "Sources/CoreUI/HomeContentQueryControls.swift",
+      "Sources/CoreModels/HomeContentQuery.swift",
       "Sources/CoreModels/WatchlistBrowsePreferences.swift",
       "Sources/CoreModels/MediaProvider.swift",
-      "Sources/CoreModels/HomeRowFeed.swift",
-      "Sources/ProviderPlex/PlexHomeLayout.swift",
-      "Sources/ProviderJellyfin/JellyfinHomeLayout.swift"
+      "Sources/CoreModels/HomeRowFeed.swift"
     ],
     "watch": [
       "Sources/FeatureHomeCore/HomeRow",
-      "Sources/CoreUI/Browse",
-      "Sources/CoreUI/MediaRowBrowseCard.swift",
+      "Sources/CoreUI/HomeContent",
+      "Sources/CoreModels/HomeContentQuery.swift",
       "Sources/FeatureHome/HomeView.swift",
       "Sources/AppShelliOS/PlozziOSHomeView.swift",
-      "Sources/HeroUI/FeaturedMediaRow.swift"
+      "Sources/CoreUI/Browse"
     ],
     "ui": {
       "references": [
@@ -918,7 +918,7 @@
         },
         {
           "text": "See all",
-          "source": "Sources/AppShelliOS/PlozziOSMediaSection.swift"
+          "source": "Sources/CoreUI/PlozziOSMediaSection.swift"
         },
         {
           "text": "Recently Added",
@@ -929,8 +929,16 @@
           "source": "Sources/FeatureHomeCore/HomeRow.swift"
         },
         {
-          "text": "Filter",
-          "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"
+          "text": "Media",
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
+        },
+        {
+          "text": "Watch status",
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
+        },
+        {
+          "text": "Clear Filters",
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
         },
         {
           "text": "All",
@@ -946,15 +954,15 @@
         },
         {
           "text": "Unwatched",
-          "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
         },
         {
           "text": "In Progress",
-          "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
         },
         {
           "text": "Sort By",
-          "source": "Sources/CoreUI/BrowseQueryControls.swift"
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
         },
         {
           "text": "Name",
@@ -974,11 +982,11 @@
         },
         {
           "text": "Order",
-          "source": "Sources/CoreUI/BrowseQueryControls.swift"
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
         },
         {
-          "text": "Default",
-          "source": "Sources/CoreUI/BrowseQueryControls.swift"
+          "text": "Source order",
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
         },
         {
           "text": "No titles to show",
@@ -987,6 +995,199 @@
         {
           "text": "Retry",
           "source": "Sources/FeatureHomeCore/HomeRowBrowseView.swift"
+        }
+      ],
+      "emphasis": []
+    }
+  },
+  {
+    "slug": "custom-home-rows",
+    "title": "Create custom Home rows",
+    "seoTitle": "Create custom Plozz Home rows from libraries and lists",
+    "description": "Combine video collections, playlists, libraries, and recommendations in a Home row, save filters and sorting, preview layouts, and repair unavailable sources.",
+    "section": "Library",
+    "kind": "guide",
+    "file": "custom-home-rows.md",
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "sources": [
+      "Sources/FeatureSettings/HomeRowsSettingsView.swift",
+      "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
+      "Sources/FeatureSettings/CollectionSectionSettingsView.swift",
+      "Sources/FeatureSettings/HomeContentPickerView.swift",
+      "Sources/FeatureSettings/HeroCollectionPickerView.swift",
+      "Sources/FeatureSettings/HeroCollectionListModel.swift",
+      "Sources/CoreUI/ProfileSettingsCategory.swift",
+      "Sources/CoreUI/HomeContentQueryControls.swift",
+      "Sources/CoreUI/HomeRowPreviewView.swift",
+      "Sources/CoreUI/BrowseRowHeading.swift",
+      "Sources/CoreModels/CollectionSection.swift",
+      "Sources/CoreModels/HomeContentSource.swift",
+      "Sources/CoreModels/HomeContentQuery.swift",
+      "Sources/CoreModels/HomeContentPager.swift",
+      "Sources/CoreModels/HomeContentPageLoader.swift",
+      "Sources/CoreModels/HomeLibraryVisibility.swift",
+      "Sources/CoreModels/MediaProvider.swift",
+      "Sources/FeatureHomeCore/HomeRowBrowseFactory.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/AppShelliOS/PlozziOSHomeView.swift"
+    ],
+    "watch": [
+      "Sources/FeatureSettings/CollectionSectionSettingsView.swift",
+      "Sources/FeatureSettings/HomeContentPickerView.swift",
+      "Sources/FeatureSettings/HeroCollection",
+      "Sources/CoreUI/Home",
+      "Sources/CoreModels/HomeContent",
+      "Sources/FeatureHomeCore/HomeRowBrowse"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Screens & Navigation",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        },
+        {
+          "text": "Home",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Rows",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Add row",
+          "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
+        },
+        {
+          "text": "Custom row",
+          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+        },
+        {
+          "text": "Content",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
+          "text": "Collections",
+          "source": "Sources/FeatureSettings/HomeContentPickerView.swift"
+        },
+        {
+          "text": "Playlists",
+          "source": "Sources/FeatureSettings/HomeContentPickerView.swift"
+        },
+        {
+          "text": "Source",
+          "source": "Sources/FeatureSettings/HeroCollectionPickerView.swift"
+        },
+        {
+          "text": "Done",
+          "source": "Sources/FeatureSettings/HomeContentPickerView.swift"
+        },
+        {
+          "text": "Selected",
+          "source": "Sources/FeatureSettings/HomeContentPickerView.swift"
+        },
+        {
+          "text": "Watchlist",
+          "source": "Sources/CoreModels/HomeLibraryVisibility.swift"
+        },
+        {
+          "text": "Name",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
+          "text": "Sort",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
+          "text": "Source order",
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
+        },
+        {
+          "text": "Date Added",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Release Date",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Runtime",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Order",
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
+        },
+        {
+          "text": "Filter",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
+          "text": "Media",
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
+        },
+        {
+          "text": "Watch status",
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
+        },
+        {
+          "text": "Clear Filters",
+          "source": "Sources/CoreUI/HomeContentQueryControls.swift"
+        },
+        {
+          "text": "Layout",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
+          "text": "Posters",
+          "source": "Sources/CoreModels/CollectionSection.swift"
+        },
+        {
+          "text": "Landscape",
+          "source": "Sources/CoreModels/CollectionSection.swift"
+        },
+        {
+          "text": "Featured",
+          "source": "Sources/CoreModels/CollectionSection.swift"
+        },
+        {
+          "text": "Logo",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/CoreModels/CollectionSection.swift"
+        },
+        {
+          "text": "Add to Home",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
+          "text": "Edit",
+          "source": "Sources/CoreUI/BrowseRowHeading.swift"
+        },
+        {
+          "text": "Save changes",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
+          "text": "Remove from Home",
+          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+        },
+        {
+          "text": "Unavailable source",
+          "source": "Sources/FeatureSettings/HomeContentPickerView.swift"
+        },
+        {
+          "text": "Retry",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
         }
       ],
       "emphasis": []
@@ -1368,12 +1569,10 @@
     "kind": "reference",
     "file": "home-and-navigation.md",
     "sources": [
-      "Sources/CoreUI/MediaRowBrowseCard.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/FeatureSettings/HomeRowsSettingsView.swift",
       "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
       "Sources/FeatureSettings/CollectionSectionSettingsView.swift",
-      "Sources/CoreModels/CollectionSection.swift",
       "Sources/CoreUI/HomeSectionStatusView.swift",
       "Sources/CoreModels/HomeSectionIssue.swift",
       "Sources/FeatureSettings/ContinueWatchingNextUpControl.swift",
@@ -1387,7 +1586,9 @@
       "Sources/AppShelliOS/PlozziOSRootView.swift",
       "Sources/CoreUI/ProfileSettingsCategory.swift",
       "Sources/CoreModels/HeroSourceKind.swift",
-      "Sources/FeatureSettings/HomeEditorAutosavingNameInput.swift"
+      "Sources/FeatureSettings/HomeEditorAutosavingNameInput.swift",
+      "Sources/FeatureSettings/HomeContentPickerView.swift",
+      "Sources/CoreModels/ThemeSettings.swift"
     ],
     "watch": [
       "Sources/FeatureSettings/Home",
@@ -1395,7 +1596,7 @@
       "Sources/CoreModels/Home",
       "Sources/CoreModels/Navigation",
       "Sources/FeatureSettings/Collection",
-      "Sources/FeatureHomeCore/HomePresentationRow.swift"
+      "Sources/AppShelliOS/PlozziOSRootView.swift"
     ],
     "platforms": [
       "Apple TV",
@@ -1404,10 +1605,6 @@
     ],
     "ui": {
       "references": [
-        {
-          "text": "See all",
-          "source": "Sources/CoreUI/MediaRowBrowseCard.swift"
-        },
         {
           "text": "App navigation",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
@@ -1493,19 +1690,39 @@
           "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
         },
         {
-          "text": "From a collection",
+          "text": "Custom row",
           "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
         },
         {
-          "text": "Row name",
+          "text": "Name",
           "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
+          "text": "Collections",
+          "source": "Sources/FeatureSettings/HomeContentPickerView.swift"
+        },
+        {
+          "text": "Sort",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
+          "text": "Filter",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
+          "text": "Appearance",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        },
+        {
+          "text": "Liquid Glass",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/CoreModels/ThemeSettings.swift"
         },
         {
           "text": "Layout",
-          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
-        },
-        {
-          "text": "Logo",
           "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
         },
         {
@@ -1519,18 +1736,6 @@
         {
           "text": "Save changes",
           "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
-        },
-        {
-          "text": "Posters",
-          "source": "Sources/CoreModels/CollectionSection.swift"
-        },
-        {
-          "text": "Landscape",
-          "source": "Sources/CoreModels/CollectionSection.swift"
-        },
-        {
-          "text": "Featured",
-          "source": "Sources/CoreModels/CollectionSection.swift"
         },
         {
           "text": "Details",
@@ -3988,21 +4193,21 @@
       "Sources/CoreUI/ProfileSettingsCategory.swift",
       "Sources/FeatureSettings/ArtworkSettingsControls.swift",
       "Sources/FeatureSettings/AppLanguagePicker.swift",
-      "Sources/CoreUI/AppLanguageScope.swift",
       "Sources/CoreModels/ThemeSettings.swift",
       "Sources/FeatureSettings/ViewCustomizationControls.swift",
-      "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
       "Sources/FeatureSettings/HeroSettingsControls.swift",
       "Sources/CoreModels/WatchStatusIndicatorSettingsStore.swift",
-      "Sources/FeatureSettings/HomeRowStylePicker.swift"
+      "Sources/FeatureSettings/HomeRowStylePicker.swift",
+      "Sources/AppShelliOS/PlozziOSRootView.swift",
+      "Sources/CoreUI/OpaqueNavigationChrome.swift"
     ],
     "watch": [
       "Sources/FeatureSettings/Card",
       "Sources/FeatureSettings/ArtworkSettingsControls.swift",
-      "Sources/CoreModels/CardCaptionSettings.swift",
       "Sources/CoreModels/ThemeSettings.swift",
       "Sources/CoreModels/WatchStatusIndicator",
-      "Sources/FeatureSettings/CompactThemePicker.swift"
+      "Sources/AppShelliOS/PlozziOSRootView.swift",
+      "Sources/CoreUI/OpaqueNavigationChrome.swift"
     ],
     "ui": {
       "references": [

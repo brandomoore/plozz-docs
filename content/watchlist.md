@@ -6,7 +6,7 @@ Watchlist brings saved movies and shows together for the active **Plozz profile*
 
 1. Select the intended Plozz profile and [server user](/profiles-and-locks/#choose-a-server-user).
 2. Open a movie/show's details or hold its card, then choose **Add to Watchlist**.
-3. Open **Watchlist** from navigation. On compact mobile layouts, check **More**. If hidden, [show its shortcut](/home-and-navigation/#arrange-shortcuts-and-details).
+3. Open **Watchlist** from navigation. On mobile, check **More** in compact native navigation, or scroll the opaque bottom strip sideways. If hidden, [show its shortcut](/home-and-navigation/#arrange-shortcuts-and-details).
 4. Choose **Remove from Watchlist** to undo a save.
 
 On a show's details, the Watchlist action saves the show, not the highlighted episode.
