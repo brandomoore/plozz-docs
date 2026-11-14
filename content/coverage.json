@@ -355,6 +355,10 @@
         {
           "slug": "profiles-and-sync",
           "anchor": "restore-an-existing-setup"
+        },
+        {
+          "slug": "profiles-and-sync",
+          "anchor": "decide-which-sign-ins-to-save"
         }
       ],
       "sources": [
@@ -373,9 +377,12 @@
         "Sources/AppRuntime/InitialSetupRestoration.swift",
         "Sources/FeatureSettings/ICloudOnboardingView.swift",
         "Sources/AppShell/AppState+CloudSync.swift",
-        "Sources/AppShelliOS/PlozziOSAppModel+CloudSync.swift"
+        "Sources/AppShelliOS/PlozziOSAppModel+CloudSync.swift",
+        "Sources/CoreUI/SignInSyncPermission.swift",
+        "Sources/AppShell/RootView.swift",
+        "Sources/AppShelliOS/PlozziOSRootView.swift"
       ],
-      "answer": "First-run Enable iCloud Sync starts restoration of profiles, settings, servers and supported credentials; Not now starts locally without erasing an existing cloud household. Existing installations retain their previous sync choice. Restoring setup from iCloud… reports actual restoration stages; Retry retries a failed restoration, while Set up manually is offered after failure or stalled progress and pauses incoming restoration until authorized profile setup completes without turning sync off. The encrypted ProviderCredentialSync channel restores supported non-file credentials on Apple TV and iPhone/iPad; generated-key shares and IPTV account-imported files are not portable. Silo uses synced bootstrap authority only to enroll a distinct revocable device session: protocol 2 with session binding and an unchanged PIN-free Silo profile is required, otherwise manual sign-in remains. Nearby setup still needs the same local network and Local Network permission: choose Set up from another device on the receiver, then send from the configured device’s iCloud Sync page using nearby selection, code or QR. Camera permission is required only for scanning. Compare codes when prompted; same-iCloud rendezvous can authenticate without that comparison. Nearby secrets still exclude Silo credentials, so that route requires separate Silo approval. Needs sign-in entries identify remaining setup; no route bypasses server permissions or protected-profile authorization."
+      "answer": "Enable iCloud Sync starts first-run restoration; Not now leaves existing cloud data untouched. Retry repeats failed restoration; Set up manually pauses it until authorized setup finishes without turning sync off. Both platforms restore supported server/share sign-ins through encrypted ProviderCredentialSync records, not descriptors alone. Existing unowned sign-ins can trigger Save Sign-ins to iCloud? after setup: Save to iCloud permits publication to the verified current iCloud account; Keep on This Device declines that upload while settings still sync. Local sign-in under a verified iCloud identity records publication ownership; changing Apple Accounts does not automatically export sign-ins owned by the previous account. Generated-key shares and account-imported IPTV files are not portable. Silo requires bound protocol-2 enrollment and an unchanged PIN-free profile for automatic device authorization; otherwise complete its own sign-in. Nearby setup requires the same local network and Local Network permission: choose the receiver's platform-specific Set up from another device action, then send from the configured device's iCloud Sync page by nearby selection, code or QR. Scanning alone requires Camera permission. Compare codes when prompted; same-iCloud rendezvous can authenticate without comparison. Nearby transfer excludes Silo sign-ins and requires separate Silo approval. Needs sign-in identifies remaining setup; neither route bypasses source permissions or profile/Plex authorization."
     }
   },
   "systemIntegrations": {
@@ -1338,6 +1345,10 @@
           "slug": "profiles-and-sync"
         },
         {
+          "slug": "profiles-and-sync",
+          "anchor": "decide-which-sign-ins-to-save"
+        },
+        {
           "slug": "home-and-navigation",
           "anchor": "rename-rows-and-shortcuts"
         },
@@ -1391,7 +1402,7 @@
         "Sources/AppShell/AppState+CloudSync.swift",
         "Sources/AppShelliOS/PlozziOSAppModel+CloudSync.swift",
         "Sources/AppShelliOS/PlozziOSAppModel+KeychainSync.swift",
-        "Sources/FeatureSyncCloud/CloudSyncRecordMapping.swift",
+        "Sources/CoreUI/SignInSyncPermission.swift",
         "Sources/AppRuntime/LiveTVPortableSyncBridge.swift",
         "Sources/AppRuntime/LiveTVSourceSyncBridge.swift",
         "Sources/AppRuntime/WatchMutationFactory.swift",
@@ -1401,7 +1412,7 @@
         "Sources/FeatureSettings/SyncDataBreakdown.swift",
         "Sources/AppRuntime/TrackerTokenSyncBridge.swift",
         "Sources/CoreNetworking/LocalMediaWatchStore.swift",
-        "Sources/CoreModels/SyncDataInventory.swift"
+        "Sources/FeatureSyncCloud/CloudSyncStatus.swift"
       ],
       "summary": "Distinguish iCloud configuration, encrypted server/share and tracker sign-ins, provider-limited nearby transfer and server authorization. First-run consent gates automatic sync; Not now leaves cloud data untouched. Restoration exposes progress, Retry and Set up manually; manual setup pauses restoration until setup completes while sync stays enabled. Both shells restore supported credentials through ProviderCredentialSync. Silo enrolls a separate session only when its server supports bound protocol-2 enrollment and the saved Silo profile has no PIN; otherwise sign-in and approval remain required. Apple TV fetches enabled cloud sync on foreground rather than relying on background delivery. Explain network/permission/code-verification requirements and separate cross-server history. Default-on cross-server history mirrors eligible normal-title changes only to matching accessible copies; extras/trailers remain origin-only and do not emit tracker history. Queued failures retry with the captured original profile/server identities authorized; local card changes do not prove every server accepted an update. Share progress and Plex-extra fallback records persist per profile/account/viewer on the current device, not through iCloud configuration sync. Watchlist filters and sort order are transferable profile preferences, separately from membership; the allowlisted WatchlistBrowsePreferencesStore key travels with profile snapshots. Display Size, navigation style and main shortcut arrangement stay local per profile, as does Apple TV accidental-exit prevention, rather than syncing or transferring; library-tab order does transfer. Downloads/startup/Video buffer/Live TV buffer/Top Shelf remain local too. Prefer lossless audio stays local across Plozz profiles and is excluded from transfer because it depends on connected equipment. Diagnostics consent is neither synced nor transferred and is not profile-owned. External-player selection is device-wide and local; returned progress stays with the authorized original viewer/server. Live TV source copies sync encrypted per profile; account-imported M3U files and Kids approvals stay local, schedules need snapshots, and legacy source import differs from account import. Refresh Breakdown shows encoded local payload/count snapshots, not iCloud storage: include pending uploads/catalogue schedules; exclude pending deletions/downloaded IPTV guides and separate Keychain/Trakt records. On all three platforms iCloud Sync > Troubleshooting offers Reload From iCloud and destructive Reset Sync; distinguish downloading shared settings from replacing them with this device's copy. Retain erase/re-upload prevention and mobile Keychain erasure. Transferable presentation preferences grant neither access nor unsupported modes."
     },
@@ -1979,9 +1990,12 @@
         "Sources/AppShelliOS/PlozziOSAppModel+KeychainSync.swift",
         "Sources/AppRuntime/ProviderCredentialSync.swift",
         "Sources/ProviderSilo/SiloDeviceEnrollment.swift",
-        "Sources/FeatureSettings/ICloudOnboardingView.swift"
+        "Sources/FeatureSettings/ICloudOnboardingView.swift",
+        "Sources/CoreUI/SignInSyncPermission.swift",
+        "Sources/FeatureSyncCloud/CloudSyncStatus.swift",
+        "Sources/FeatureSyncCloud/CloudSyncFailures.swift"
       ],
-      "summary": "Separate settings/profile/media/tracker channels from the encrypted ProviderCredentialSync channel on both platforms and the legacy mobile Keychain adoption path. New-installation consent gates automatic sync; restoration progress, retry and manual handoff are first-run UI, not destructive reset. Profile snapshots explicitly include Watchlist filter/sort preferences, independently of saved-title membership. Profile preference capture excludes device-specific density, main navigation and exit/zoom settings; their per-profile stores do not make them transferable. Prefer lossless audio likewise stays local but is shared across profiles on the device. Offline Mode is also device-local and shared by profiles; mobile cloud publishing/loading and Keychain credential publishing/adoption are explicitly paused while it is active and resume after it is disabled. Live TV source secrets/imported source chunks are encrypted; sync cannot grant local parental approval or materialize an account-imported M3U on another device. Explain on-demand local payload/count snapshots and their exclusions without representing them as CloudKit storage usage. Keep destructive reset/erase warnings and schedule catalogue requirements."
+      "summary": "Separate settings/profile/media/tracker channels from encrypted provider credentials on both platforms and legacy mobile Keychain publication. First-run consent gates automatic sync. Existing sign-ins without publication ownership require the authorized post-setup Save Sign-ins to iCloud? choice; declining leaves settings sync enabled. Publication ownership is bound to the verified iCloud account and exact sign-in, not shared playback access. Account changes and stale prompt responses cannot authorize credential export. Temporary iCloud unavailability retains saved state and reports retry advice; local capture failures remain visible without representing absent data as deletion. Restoration Retry/Set up manually is not destructive reset. Profile snapshots carry Watchlist browse preferences, but exclude device-specific density, main navigation, exit/zoom and lossless-audio choices. Offline Mode pauses mobile cloud and credential updates. Live TV source data is encrypted; account-imported M3U files and Kids approvals stay local. Keep local data-breakdown exclusions, schedule-catalogue prerequisites, and reset/erase warnings."
     },
     "FeatureSyncSetup": {
       "areas": [
@@ -4172,6 +4186,7 @@
       "sources": [
         "Sources/AppRuntime/OfflinePlexSignInStore.swift",
         "Sources/AppShell/RootView.swift",
+        "Sources/CoreUI/SignInSyncPermission.swift",
         "Sources/AppRuntime/ExternalPlayerSupport.swift",
         "Sources/AppShell/TVProfileForegroundProtection.swift",
         "Sources/CoreUI/AmbientGradientBackground.swift",
@@ -4213,9 +4228,25 @@
         "Apple TV"
       ],
       "navigation": "Launch Plozz on Apple TV; RootView chooses setup, profile selection, browsing, or recovery.",
-      "experience": "Recover startup failures or set up a shared server connection before entering browsing.",
-      "conditions": "Apple TV only. Connection and profile state determine the presented destination; incoming playback and sync prompts require authorization. PlexPINEntryView delegates PIN submission and requirement retries to the shared Plex Home model. During an eligible network failure, an unchanged saved binding can use prior online-sign-in proof scoped to this Apple TV user; protected PINs still need local verification. A missing proof, new binding or rejected credential instead needs online recovery. Apple TV has no exposed Offline Mode toggle. After explicit IPTV setup/refresh, a shared guide notice can remain across navigation while the account is authorized. It is hidden behind another transient message. Dismiss hides only the notice; terminal notices also auto-dismiss after five seconds. Percentages describe the current stage, not total work. Profile/account authorization changes cancel and remove scoped work; this does not promise OS background execution. New installations show the shared iCloud consent/restoration flow before normal setup. Both shells can restore supported server/share credentials through encrypted iCloud records, while Silo creates a separately authorized device session only when server capability and PIN-free profile checks succeed. Navigation suppresses Home/Search without relevant content and Watchlist without saved items. Music-only Subsonic connections can land on Music; live-only sources prefer Live TV. Unreachable established media servers retain remembered library navigation rather than treating failure as authoritative emptiness.",
+      "experience": "Recover startup failures or set up a shared server connection before browsing. After setup, review the listed source/user names in Save Sign-ins to iCloud? and allow or decline uploading existing sign-ins. Keep on This Device leaves configuration sync enabled. Permission-save failure uses the root's explicit transient error rather than reporting success.",
+      "conditions": "Apple TV only. Connection and profile state determine the presented destination; incoming playback and sync prompts require authorization. PlexPINEntryView delegates PIN submission and requirement retries to the shared Plex Home model. During an eligible network failure, an unchanged saved binding can use prior online-sign-in proof scoped to this Apple TV user; protected PINs still need local verification. A missing proof, new binding or rejected credential instead needs online recovery. Apple TV has no exposed Offline Mode toggle. After explicit IPTV setup/refresh, a shared guide notice can remain across navigation while the account is authorized. It is hidden behind another transient message. Dismiss hides only the notice; terminal notices also auto-dismiss after five seconds. Percentages describe the current stage, not total work. Profile/account authorization changes cancel and remove scoped work; this does not promise OS background execution. New installations show the shared iCloud consent/restoration flow before normal setup. Both shells can restore supported server/share credentials through encrypted iCloud records, while Silo creates a separately authorized device session only when server capability and PIN-free profile checks succeed. Navigation suppresses Home/Search without relevant content and Watchlist without saved items. Music-only Subsonic connections can land on Music; live-only sources prefer Live TV. Unreachable established media servers retain remembered library navigation rather than treating failure as authoritative emptiness. Existing-sign-in publication permission requires startupPresentationReady, an authorized profile, no active or queued root presentation, Settings closed and no parental-management PIN gate. The service also requires enabled sync, a verified iCloud identity and unchanged eligible sign-ins without a current owner or declined decision.",
       "controls": [
+        {
+          "text": "Save Sign-ins to iCloud?",
+          "source": "Sources/CoreUI/SignInSyncPermission.swift"
+        },
+        {
+          "text": "Keep on This Device",
+          "source": "Sources/CoreUI/SignInSyncPermission.swift"
+        },
+        {
+          "text": "Save to iCloud",
+          "source": "Sources/CoreUI/SignInSyncPermission.swift"
+        },
+        {
+          "text": "Couldn't save sign-in sync permission.",
+          "source": "Sources/AppShell/RootView.swift"
+        },
         {
           "text": "Enter your Plex PIN",
           "source": "Sources/AppShell/RootView.swift"
@@ -4351,6 +4382,10 @@
         {
           "slug": "profiles-and-sync",
           "anchor": "restore-an-existing-setup"
+        },
+        {
+          "slug": "profiles-and-sync",
+          "anchor": "decide-which-sign-ins-to-save"
         }
       ]
     },
@@ -8264,6 +8299,7 @@
     },
     "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift": {
       "sources": [
+        "Sources/AppShelliOS/PlozziOSPictureInPictureController.swift",
         "Sources/CoreModels/PlayerOptionalTab.swift",
         "Sources/FeaturePlayback/PlayerViewModel.swift",
         "Sources/FeaturePlayback/PlayerContinueWatchingPanel.swift",
@@ -8307,9 +8343,33 @@
         "iPad"
       ],
       "navigation": "Tap the playing mobile video; portrait consolidates options, while landscape separates menus.",
-      "experience": "Seek, choose audio/subtitles, adjust supported speed/zoom, or open advanced subtitle and track options. Shared lower cards appear in Info, Chapters, Cast, Episodes, Playlist, Continue Watching order, gated by profile toggles and usable content. Continue Watching saves outgoing progress and resumes the chosen Home title on its own source. A matched Info song card opens the shared Open song chooser for service searches or a supplied Apple Music song link; PlayerSongCard inventories its controls and mobile app/browser behavior.",
+      "experience": "Seek, choose audio/subtitles, adjust supported speed/zoom, or open advanced subtitle and track options. Shared lower cards appear in Info, Chapters, Cast, Episodes, Playlist, Continue Watching order, gated by profile toggles and usable content. Continue Watching saves outgoing progress and resumes the chosen Home title on its own source. A matched Info song card opens the shared Open song chooser for service searches or a supplied Apple Music song link; PlayerSongCard inventories its controls and mobile app/browser behavior. Valid skip markers segment the timeline visually without changing seeking; unreadable short sections can be omitted. AirPlay/Picture in Picture replace the local picture with a noninteractive destination message. Returning after UIApplication.didEnterBackgroundNotification stops an active PiP window and restores the mounted player; brief inactive interruptions and PiP started without leaving Plozz do not invoke that return rule.",
       "conditions": "iPhone/iPad. Menu visibility follows engine capabilities, available tracks, orientation, current route and online subtitle services. Neither shipped movie engine enables adjustable audio delay. In Subtitles > Advanced… > Appearance, text primaries offer Style and image primaries offer Position; image primaries disable Second Track. The touch card strip shares Info/Cast/chapter/sequence content, but not Apple TV track/style cards. Cast requires metadata; Chapters requires chapters; Episodes/Playlist require their active sequence context. Brightness/Volume meters appear during enabled edge gestures in active local playback, not with VoiceOver or while interaction is blocked. Their unavailable captions report a route/device limit, not another setting. Auto-crop black bars appears only when the supplied engine supports active-picture analysis; both production movie-engine factories wire this support. Picture sampling requires local, ready, visible playback and is suspended for external playback or Picture in Picture. Missing/invalid detection falls back to normal fit. Cropping preserves picture proportions and need not fill every screen edge; zoom remains session-only. Mobile uses Video; Apple TV uses Playback > Zoom Mode. The optical-disc button appears only during disc-menu playback or when the active source exposes network-disc videos. Its primary action returns to Disc menu in menu mode, otherwise opens Disc videos. Holding it offers Disc videos/Play video/Try another region during menu playback, or Play video for a selected disc playlist. Disc-menu overlays have their own direction input and action dialog; the mobile ordinary controls start hidden in menu mode. These paths do not update ordinary title history.",
       "controls": [
+        {
+          "text": "Close player",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
+          "text": "AirPlay",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
+          "text": "Picture in Picture",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
+          "text": "Playing in Picture in Picture",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
+          "text": "Tap the window to bring playback back here.",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
+          "text": "Playing on AirPlay",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
         {
           "text": "Play",
           "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
@@ -8364,14 +8424,6 @@
         },
         {
           "text": "Skip forward",
-          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
-        },
-        {
-          "text": "Close player",
-          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
-        },
-        {
-          "text": "Picture in Picture",
           "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
         },
         {
@@ -9209,6 +9261,7 @@
     },
     "Sources/AppShelliOS/PlozziOSRootView.swift": {
       "sources": [
+        "Sources/CoreUI/SignInSyncPermission.swift",
         "Sources/FeatureMusic/MusicTabView.swift",
         "Sources/AppShelliOS/PlozziOSMusicRuntime.swift",
         "Sources/CoreModels/CrashReportingSettings.swift",
@@ -9319,9 +9372,25 @@
         "iPad"
       ],
       "navigation": "Launch Plozz on iPhone/iPad, finish required setup, then use its tabs or sidebar.",
-      "experience": "Open shown shortcuts, including eligible Discover or All Libraries, switch profiles, or connect media when Home is empty. Beta-only Music requires an authorized profile, an enabled supported music library and online access; production mobile builds do not construct its runtime. Its player overlay is inventoried on NowPlayingMorph, and profile/source authorization changes stop it. In Offline Mode, Home, libraries, Search and Watchlist use authorized completed downloads; Discover and Live TV show Unavailable Offline. The status notice does not replace profile authorization.",
-      "conditions": "Native compact UIKit navigation puts excess shown shortcuts under More; it does not reveal hidden shortcuts. On iOS/iPadOS 26+ the root instead mounts OpaqueNavigationChrome's bottom destination strip when app reduceTransparency is true, systemReduceTransparency is false, no vertical toolbar is in use and no sidebar is visible. This retains the same shown destinations and scrolls horizontally when they do not fit; it has no UIKit More destination. App Liquid Glass Off can trigger it; system Reduce Transparency retains native navigation. iPad can use regular-width navigation. Destination order is saved per profile on this device. Profile authorization applies before browsing. Discover is absent for Kids; for other profiles Seerr automatically shows it unless explicitly hidden, while no Seerr connection automatically hides it unless explicitly shown. Its mobile wrapper mounts the separately inventoried shared DiscoverBrowseView. Watchlist shows sorting before filtering on mobile; its fields are Date Added, Release Date and Name only. Choosing a field resets its direction: Name starts ascending, dates descending. Clear Filters appears only with a movie/show filter; filtered-empty results also offer it. The no-account Home destination passes hasAccounts false to the shared empty state and supplies both Add Source and Set Up from Another Device. Connected empty Home instead shows Nothing to watch yet in its separately inventoried HomeView. After explicit IPTV setup/refresh, a shared guide notice can remain across navigation while the account is authorized. It is hidden behind another transient message. Dismiss hides only the notice; terminal notices also auto-dismiss after five seconds. Percentages describe the current stage, not total work. Profile/account authorization changes cancel and remove scoped work; this does not promise OS background execution. New installations show the shared iCloud consent/restoration flow before normal setup. Both shells can restore supported server/share credentials through encrypted iCloud records, while Silo creates a separately authorized device session only when server capability and PIN-free profile checks succeed. Navigation suppresses Home/Search without relevant content and Watchlist without saved items. Music-only Subsonic connections can land on Music; live-only sources prefer Live TV. Unreachable established media servers retain remembered library navigation rather than treating failure as authoritative emptiness.",
+      "experience": "Open shown shortcuts, including eligible Discover or All Libraries, switch profiles, or connect media when Home is empty. Beta-only Music requires an authorized profile, an enabled supported music library and online access; production mobile builds do not construct its runtime. Its player overlay is inventoried on NowPlayingMorph, and profile/source authorization changes stop it. In Offline Mode, Home, libraries, Search and Watchlist use authorized completed downloads; Discover and Live TV show Unavailable Offline. The status notice does not replace profile authorization. After setup, review dynamic server/user names in Save Sign-ins to iCloud? and choose whether to upload those existing sign-ins. Declining leaves profiles/settings sync enabled; failed permission persistence reports an explicit transient error.",
+      "conditions": "Native compact UIKit navigation puts excess shown shortcuts under More; it does not reveal hidden shortcuts. On iOS/iPadOS 26+ the root instead mounts OpaqueNavigationChrome's bottom destination strip when app reduceTransparency is true, systemReduceTransparency is false, no vertical toolbar is in use and no sidebar is visible. This retains the same shown destinations and scrolls horizontally when they do not fit; it has no UIKit More destination. App Liquid Glass Off can trigger it; system Reduce Transparency retains native navigation. iPad can use regular-width navigation. Destination order is saved per profile on this device. Profile authorization applies before browsing. Discover is absent for Kids; for other profiles Seerr automatically shows it unless explicitly hidden, while no Seerr connection automatically hides it unless explicitly shown. Its mobile wrapper mounts the separately inventoried shared DiscoverBrowseView. Watchlist shows sorting before filtering on mobile; its fields are Date Added, Release Date and Name only. Choosing a field resets its direction: Name starts ascending, dates descending. Clear Filters appears only with a movie/show filter; filtered-empty results also offer it. The no-account Home destination passes hasAccounts false to the shared empty state and supplies both Add Source and Set Up from Another Device. Connected empty Home instead shows Nothing to watch yet in its separately inventoried HomeView. After explicit IPTV setup/refresh, a shared guide notice can remain across navigation while the account is authorized. It is hidden behind another transient message. Dismiss hides only the notice; terminal notices also auto-dismiss after five seconds. Percentages describe the current stage, not total work. Profile/account authorization changes cancel and remove scoped work; this does not promise OS background execution. New installations show the shared iCloud consent/restoration flow before normal setup. Both shells can restore supported server/share credentials through encrypted iCloud records, while Silo creates a separately authorized device session only when server capability and PIN-free profile checks succeed. Navigation suppresses Home/Search without relevant content and Watchlist without saved items. Music-only Subsonic connections can land on Music; live-only sources prefer Live TV. Unreachable established media servers retain remembered library navigation rather than treating failure as authoritative emptiness. Existing-sign-in publication permission additionally waits for setupPresentationReady, authorized completed profile setup, no parental-management PIN gate, finished diagnostics/iCloud consent/restoration, Settings closed, no startup release notes and no nearby setup offer. The service requires enabled sync, a verified iCloud identity and unchanged eligible sign-ins without a current owner or declined decision.",
       "controls": [
+        {
+          "text": "Save Sign-ins to iCloud?",
+          "source": "Sources/CoreUI/SignInSyncPermission.swift"
+        },
+        {
+          "text": "Keep on This Device",
+          "source": "Sources/CoreUI/SignInSyncPermission.swift"
+        },
+        {
+          "text": "Save to iCloud",
+          "source": "Sources/CoreUI/SignInSyncPermission.swift"
+        },
+        {
+          "text": "Couldn't save sign-in sync permission.",
+          "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
+        },
         {
           "text": "Home",
           "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
@@ -9627,6 +9696,10 @@
         {
           "slug": "profiles-and-sync",
           "anchor": "restore-an-existing-setup"
+        },
+        {
+          "slug": "profiles-and-sync",
+          "anchor": "decide-which-sign-ins-to-save"
         }
       ]
     },
@@ -16741,6 +16814,16 @@
       ],
       "omitKind": "shared-component",
       "omitReason": "Reusable ShareScanProgressViews.swift is wired into Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/MyLibrariesDetailView.swift, Sources/FeatureSettings/ServerDetailView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/FeatureHome/LibraryBrowseView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/FeatureHome/LibraryBrowseView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/AppShelliOS/PlozziOSLibraryView.swift, Sources/FeatureHome/LibraryBrowseView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+    },
+    "Sources/CoreUI/SignInSyncPermission.swift": {
+      "sources": [
+        "Sources/CoreUI/SignInSyncPermission.swift",
+        "Sources/AppShell/RootView.swift",
+        "Sources/AppShelliOS/PlozziOSRootView.swift",
+        "Sources/AppRuntime/ProviderCredentialSync.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "The shared alert is mounted by the Apple TV and mobile RootView parents, which inventory Save Sign-ins to iCloud?, Keep on This Device and Save to iCloud in alert order. It is not a navigable settings page. Sync must be enabled and the iCloud identity verified; existing exact sign-ins must lack publication ownership and not have a current declined decision. The roots defer presentation until setup/restoration and profile authorization finish, restricted parental management is unsealed, Settings is closed and competing presentations are absent; mobile also waits for startup release notes and nearby setup offers. Source/user names are dynamic descriptions, not invented captions. The service checks current credentials and iCloud ownership again on either response. Declining prevents this upload, not settings sync or local playback; errors remain explicit on the parent. A successful local sign-in clears the declined decision and records the verified current iCloud account, allowing the reader to reconsider through Sign In Again with sync enabled."
     },
     "Sources/CoreUI/Shimmer.swift": {
       "sources": [
@@ -25240,7 +25323,7 @@
         "Apple TV"
       ],
       "navigation": "From the Apple TV timeline, move up for playback/audio/subtitle controls and down for information/navigation.",
-      "experience": "Choose playback options or the lower cards in order: Info, Chapters, Cast, Episodes, Playlist, Continue Watching. Optional cards need their per-profile toggle enabled and usable content. Continue Watching uses the loaded Home list and resumes a selected title on its own source after saving outgoing progress; it excludes the current item and same-source episodes of its show.",
+      "experience": "Choose playback options or the lower cards in order: Info, Chapters, Cast, Episodes, Playlist, Continue Watching. Optional cards need their per-profile toggle enabled and usable content. Continue Watching uses the loaded Home list and resumes a selected title on its own source after saving outgoing progress; it excludes the current item and same-source episodes of its show. Valid skip-marker boundaries split the timeline visually, not into selectable chapters. Short sections can lack a visible gap without changing their actual timings or skip actions.",
       "conditions": "Apple TV. Tracks, chapters, sequence, versions and playback engine capabilities gate cards; missing data is not supplied by an unrelated provider. Apple TV surface controls distinguish edge clicks from center selection. Holding a left/right click starts persistent scanning; same-direction clicks accelerate and opposite-direction clicks slow or reverse. Center commits with prior playback intent; Play/Pause commits and resumes; Back cancels. Loading or missing/invalid duration blocks seeking. Seek without pausing gates swipe scrubbing, not the held-click scan. The optical-disc button appears only during disc-menu playback or when the active source exposes network-disc videos. Its primary action returns to Disc menu in menu mode, otherwise opens Disc videos. Holding it offers Disc videos/Play video/Try another region during menu playback, or Play video for a selected disc playlist. Disc-menu overlays have their own direction input and action dialog; the mobile ordinary controls start hidden in menu mode. These paths do not update ordinary title history.",
       "controls": [
         {
@@ -25419,7 +25502,7 @@
         "iPad"
       ],
       "navigation": "Tap Playback options in the portrait movie player, or the separate track/speed/video buttons in landscape.",
-      "experience": "Choose supported video/audio/subtitle or stream-quality options.",
+      "experience": "Choose audio and subtitle tracks, adjust playback speed and picture fit, or change supported streaming quality. Playback Speed offers presets and Custom…; 1x restores normal speed.",
       "conditions": "The consolidated menu orders Subtitles, Audio, Playback Speed, Video, Version, then Multiview when supplied. Subtitle tracks are dynamic, with Off; Search & Download… requires download support and precedes Advanced…. Secondary subtitles need an eligible text track. Audio offers track selection, with a single track shown disabled; engine-local dialogue enhancement and audio-delay UI remain capability-gated off for shipped movie engines. Speed presets precede Custom…. Video places available zoom modes before Quality, which requires provider conversion support. Auto-crop black bars requires active-picture support; Custom opens the zoom sheet. Version appears only for multiple versions. The movie overlay does not supply Multiview, but the live-channel transport can supply it.",
       "controls": [
         {
@@ -25507,6 +25590,10 @@
         {
           "slug": "streaming-quality",
           "anchor": "change-one-video"
+        },
+        {
+          "slug": "playback",
+          "anchor": "speed-picture-and-other-navigation"
         }
       ]
     },
@@ -25837,7 +25924,7 @@
         "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Reusable PlayerSkipMarkerTrack.swift is wired into Sources/FeaturePlayback/PlayerControls.swift, Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitReason": "Decorative timeline segmentation is wired through PlayerControlsSupport on Apple TV and PlayerTouchCardStrip in PlozziOSPlayerControlsOverlay on iPhone/iPad. It cuts the played/buffered/resting fills at valid skip-marker boundaries, not chapter boundaries. Overlapping ranges merge and visually unreadable short sections are omitted without moving their timings. The drawing is accessibility-hidden and noninteractive; seeking and skip actions belong to the inventoried parent controls, so no invented marker button or separate page is needed."
     },
     "Sources/FeaturePlayback/PlayerSkipMarkerVideo.swift": {
       "sources": [
@@ -30509,10 +30596,6 @@
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
-          "text": "Audio defaults",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
           "text": "Preferred audio language",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
@@ -30562,10 +30645,6 @@
         },
         {
           "text": "Autoplay & Up Next",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
-          "text": "Autoplay",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
@@ -30766,10 +30845,6 @@
         },
         {
           "text": "Seeking",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
-          "text": "Skip Intervals",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {

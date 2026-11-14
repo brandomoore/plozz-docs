@@ -139,7 +139,7 @@
       "Sources/FeatureDiscoveryCore/ServerValidator.swift",
       "Sources/CoreNetworking/ServerURLNormalizer.swift",
       "Sources/AppShelliOS/ServerOnboardingViews.swift",
-      "Sources/AppShell/AddAccountView.swift"
+      "Sources/AppRuntime/ProviderCredentialSync.swift"
     ],
     "watch": [
       "Sources/FeatureAuth/",
@@ -1937,7 +1937,7 @@
       "Sources/MetadataKit/CommunitySkipMarkers.swift",
       "Sources/CoreUI/AutomaticVersionInfoButton.swift",
       "Sources/CoreModels/PlayerOptionalTab.swift",
-      "Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift",
+      "Sources/FeaturePlayback/PlayerSkipMarkerTrack.swift",
       "Sources/FeatureSettings/PlayerTabSettingsControls.swift",
       "Sources/FeaturePlayback/PlayerViewModel.swift",
       "Sources/FeaturePlayback/PlayerSongCard.swift",
@@ -2126,6 +2126,14 @@
         {
           "text": "Zoom Mode",
           "source": "Sources/FeaturePlayback/PlaybackOptionsPane.swift"
+        },
+        {
+          "text": "Playback Speed",
+          "source": "Sources/FeaturePlayback/PlaybackOptionsPane.swift"
+        },
+        {
+          "text": "Playback Speed",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
         },
         {
           "text": "Video",
@@ -5162,7 +5170,7 @@
     "slug": "profiles-and-sync",
     "title": "Profiles and sync",
     "seoTitle": "Sync Plozz settings and set up another device safely",
-    "description": "Restore profiles and supported sign-ins with iCloud, recover stalled setup, transfer from a nearby device, and keep viewing-history sync separate.",
+    "description": "Choose which sign-ins to save to iCloud, restore Plozz profiles, set up a nearby device, and recover sync without unnecessarily erasing your setup.",
     "section": "Accounts & sync",
     "kind": "reference",
     "file": "profiles-and-sync.md",
@@ -5178,10 +5186,10 @@
       "Sources/FeatureSettings/IntegrationsDetailView.swift",
       "Sources/FeatureSettings/SyncDataBreakdown.swift",
       "Sources/FeatureSyncSetup/SyncSetupService.swift",
-      "Sources/CoreModels/SyncSetup.swift",
+      "Sources/CoreUI/SignInSyncPermission.swift",
       "Sources/AppRuntime/ProviderCredentialSync.swift",
       "Sources/FeatureSyncCloud/CloudConfigSyncService.swift",
-      "Sources/AppShelliOS/PlozziOSAppModel+CloudSync.swift",
+      "Sources/FeatureSyncCloud/CloudSyncStatus.swift",
       "Sources/ProviderSilo/SiloDeviceEnrollment.swift",
       "Sources/CoreModels/ProfileSettingsSnapshot.swift",
       "Sources/FeatureSettings/SyncEraseDataView.swift",
@@ -5342,6 +5350,18 @@
         {
           "text": "Set up manually",
           "source": "Sources/FeatureSettings/ICloudOnboardingView.swift"
+        },
+        {
+          "text": "Save Sign-ins to iCloud?",
+          "source": "Sources/CoreUI/SignInSyncPermission.swift"
+        },
+        {
+          "text": "Keep on This Device",
+          "source": "Sources/CoreUI/SignInSyncPermission.swift"
+        },
+        {
+          "text": "Save to iCloud",
+          "source": "Sources/CoreUI/SignInSyncPermission.swift"
         }
       ],
       "emphasis": []
@@ -5562,7 +5582,7 @@
       "Sources/AppShell/HomeTab.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/CoreModels/PlaybackOrientation.swift",
-      "Sources/AppShelliOS/PlozziOSPlayerOrientation.swift",
+      "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
       "Sources/AppShelliOS/PlozziOSLandscapeMotion.swift",
       "Sources/AppShelliOS/PlozziOSLivePresentationControls.swift",
       "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
@@ -5700,8 +5720,16 @@
           "source": "Sources/AppShelliOS/PlozziOSLivePresentationControls.swift"
         },
         {
+          "text": "AirPlay",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
           "text": "Picture in Picture",
           "source": "Sources/AppShelliOS/PlozziOSLivePresentationControls.swift"
+        },
+        {
+          "text": "Picture in Picture",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
         },
         {
           "text": "Playback Diagnostics Overlay",

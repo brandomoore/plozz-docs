@@ -1,20 +1,18 @@
 # Player controls
 
-Choose editions, resume titles, skip intros, or find a song you hear while watching.
+Resume titles, choose editions, and skip intros while watching.
 
 ## Reach the controls
 
 On Apple TV, press up from the timeline for **Playback**, **Audio**, and **Subtitles**; press down for information and navigation. On iPhone/iPad, tap the video. In portrait, open the ellipsis **Playback options** menu; landscape shows separate controls.
 
-See [device controls](/platform-controls/) for touch and keyboard shortcuts.
-
-For Blu-ray folders, see [disc menus and videos](/disc-playback/).
+See [touch and keyboard controls](/platform-controls/) or [Blu-ray menus](/disc-playback/).
 
 ## Seek on Apple TV
 
 With playback options closed, click the remote's left/right edge to jump by your skip interval. Swipe to scrub; **Seek without pausing** determines whether to pause first.
 
-Hold a left/right click to start scanning, which continues after release. Click the same direction to speed up, or the opposite to slow down and eventually reverse. Watch the timeline and available preview.
+Hold a left/right click to start scanning, which continues after release. Click the same direction to speed up, or the opposite to slow down and eventually reverse.
 
 Press the center button to use the selected position, or play/pause to use it and resume. Press Back to cancel. Wait for loading before seeking.
 
@@ -22,15 +20,15 @@ Press the center button to use the selected position, or play/pause to use it an
 
 Open **Audio** for tracks or **Version** for files/editions.
 
-Changing versions keeps the selected server account and your position, though different cuts may not line up exactly.
+Changing versions keeps your server account and position, though different cuts may not line up.
 
-The first multi-version video asks how to choose. Change **Settings > Playback > Version selection**:
+The first multi-version video asks your preference. Change **Settings > Playback > Version selection**:
 
 - **Ask every time**: choose before multi-version videos, including autoplay.
 - **Choose automatically**: use a remembered or device-recommended version without the picker.
 - **Use first from server**: follow the selected server's version order, ignoring remembered preferences unless you explicitly choose a version.
 
-**How automatic selection works** explains how resolution, HDR, bitrate, and device compatibility guide the choice.
+**How automatic selection works** explains choices based on files and device compatibility, not current connection speed.
 
 **Remember series version choices** (Apple TV: **Remember per series**) reuses your version type for later episodes in automatic mode, or preselects it when asked. Turn it off to stop reusing it. Automatic mode chooses an alternative if that type is missing.
 
@@ -46,7 +44,7 @@ Under **Settings > Playback**, next-episode and next-playlist-item autoplay defa
 
 Enable **Skip intros, credits & more**, then open **Customize**. Choose **Default behavior**: **Show skip button**, **Skip instantly**, or **Skip after** (1-30 seconds). Select movies, TV shows, or anime under **Enable for**.
 
-Open an intro, credits, recap, preview, or commercial marker's settings to change its behavior for each content category, including **Off**. **Use default** restores the shared behavior. Enable disabled categories on the previous page first. Skip actions appear only when timings are available.
+Open an intro, credits, recap, preview, or commercial marker's settings to change its behavior by content category, including **Off**. **Use default** restores the shared behavior. Enable disabled categories on the previous page first. Skip actions need timings. Timeline gaps can mark skip boundaries, not chapters; very short segments may have no gap.
 
 With skipping enabled, **Use community markers** (default on) checks IntroDB/TheIntroDB if intros or credits are missing. Lookups send IMDb/TMDB/TVDB identifiers and applicable episode numbers, ordering, name, and runtime, not video files. Disable it to stop community lookups, not server markers. Coverage and matching vary.
 
@@ -62,7 +60,7 @@ Open **Continue Watching** below the timeline to resume another title. On Apple 
 
 Select a card. Plozz saves your current position and resumes that title from its own place, using its own source. Version choices and access checks still apply.
 
-It shows titles already loaded on Home, excluding the current item and other episodes of its show from that source. It hides when none remain.
+It uses Home's loaded titles, excluding this video and other episodes of its show from that source. It hides when none remain.
 
 Use **Episodes** or **Playlist** to choose another entry.
 
@@ -70,13 +68,13 @@ Under **Settings > Playback > Player tabs**, choose which of **Chapters**, **Cas
 
 ## Identify a song in a movie or show
 
-Open **Info** while a song plays. With **Settings > Playback > Audio > Identify songs** enabled, a recognized song card appears. Select it for **Open song** and choose a music service.
-
-[Identify a song while watching](/identify-songs/) explains searches, QR fallback, privacy, and requirements.
+Open **Info** while a song plays, then select a recognized card for **Open song**. [Song identification](/identify-songs/) covers enabling **Settings > Playback > Audio > Identify songs**, choosing a service, and privacy.
 
 ## Speed, picture, and other navigation
 
-Adjust speed where offered. Open **Playback > Zoom Mode** on Apple TV, or **Video** on mobile, for picture choices:
+Use **Playback > Playback Speed** on Apple TV or **Playback Speed** on mobile to change supported videos' speed. Mobile portrait places it under **Playback options**. Choose 1x for normal speed.
+
+Open **Playback > Zoom Mode** on Apple TV, or **Video** on mobile, for picture choices:
 
 - **Normal (Default)** keeps the whole picture.
 - **Auto-crop black bars**, when offered, enlarges the detected picture without stretching it. Some bars may remain to preserve the picture's proportions. If detection is unavailable, it uses the normal fit.
@@ -87,6 +85,6 @@ Zoom lasts this session and does not change streaming quality. Detection works d
 
 ## Explore the cast
 
-In **Cast**, select a person to read their available biography and credits without leaving the video. Choose **See more** for their full page, or select a credit to open that title's details. Opening either page ends playback. A listed credit is not necessarily in your library.
+In **Cast**, select a person to read their biography and credits without leaving the video. Choose **See more** for their full page, or select a credit to open that title's details. Opening either page ends playback. A listed credit is not necessarily in your library.
 
 See [Streaming quality](/streaming-quality/), [Audio](/audio/), [Subtitles](/subtitles/), [AirPlay/Picture in Picture](/platform-controls/#airplay-and-picture-in-picture), or [external players](/external-players/).

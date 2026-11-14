@@ -19,6 +19,8 @@ Connect an account to browse libraries and save your progress.
 > [!WARNING]
 > Sign-ins are shared by profiles on this device. Turning off a server under **Libraries** affects only the active profile; removing a sign-in under **Sources** affects everyone using it. **Remove Everywhere**, when offered, also removes it from your other iCloud devices.
 
+With iCloud Sync on, supported sign-ins can restore on other devices. [Review which sign-ins to save](/profiles-and-sync/#decide-which-sign-ins-to-save) if Plozz asks permission.
+
 ## Keep identities separate
 
 Plex Home users and Silo profiles determine server access and history. A Plozz profile controls app preferences, not server-user creation.

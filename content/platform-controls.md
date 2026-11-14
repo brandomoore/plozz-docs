@@ -48,11 +48,13 @@ On iPhone, **Settings > Playback > Player orientation** controls full-screen vid
 
 ## AirPlay and Picture in Picture
 
-On iPhone/iPad, use the player's **AirPlay** route picker for an available receiver. **Picture in Picture** appears only when both the device and active engine path support it; software-decoded playback may not expose the required system player layer.
+On iPhone/iPad, use the player's **AirPlay** picker for a receiver. **Picture in Picture** needs device and playback support; some software-decoded videos cannot use it.
 
-Controls can be restricted while video is playing elsewhere. The locally remuxed wireless AirPlay path does not expose selectable subtitle tracks; native streams can behave differently. Check captions on the receiving screen rather than assuming local subtitles will follow the video.
+Leaving Plozz can start a Picture in Picture window. Returning to Plozz brings it back into the player. A window you start without leaving Plozz stays separate.
 
-Live TV permits external presentation only for an authorized, single-channel session. Supported paths can enter Picture in Picture when you leave Plozz. Multiview disables AirPlay and Picture in Picture.
+Controls can be restricted while playing elsewhere. Locally remuxed wireless AirPlay has no selectable subtitles; native streams can differ. Check captions on the receiving screen.
+
+Live TV needs an authorized, single-channel session; Multiview disables AirPlay and Picture in Picture.
 
 For offline viewing, use [downloads](/downloads/).
 
@@ -68,4 +70,4 @@ With AetherEngine, **AVPlayer time** and **AVPlayer window** describe its intern
 
 ## Open another player app
 
-Follow [Use another video player](/external-players/) to set a default or choose Infuse, VLC, or Apple TV's Native Player for one video. This sends a video link, not AirPlay; source, privacy, and returned-progress limits apply.
+Follow [Use another video player](/external-players/) for defaults, one-time choices, and privacy/progress limits. This sends a video link, not AirPlay.
