@@ -396,7 +396,7 @@
     ],
     "title": "Find and organize media",
     "seoTitle": "Browse, search, and organize your media in Plozz",
-    "description": "Browse libraries, expand title details, watch extras, choose a copy, and manage history or incomplete results in Plozz.",
+    "description": "Search your libraries, filter titles, expand details, watch extras, choose a copy, and manage viewing history in Plozz.",
     "section": "Library",
     "kind": "reference",
     "file": "library.md",
@@ -419,22 +419,38 @@
       "Sources/AppShelliOS/PlozziOSLibraryView.swift",
       "Sources/CoreUI/DetailInformationSections.swift",
       "Sources/CoreUI/DetailMoreContent.swift",
-      "Sources/CoreModels/MediaItem.swift",
+      "Sources/AppShelliOS/PlozziOSSearchView.swift",
       "Sources/FeatureHomeCore/ContentRefresh/ContentRefreshModels.swift"
     ],
     "watch": [
       "Sources/FeatureHome",
-      "Sources/FeatureWatchlistCore/",
       "Sources/AppRuntime/WatchMutation",
       "Sources/ProviderPlex/PlexExtraWatchState.swift",
       "Sources/CoreNetworking/LocalMediaWatchStore.swift",
-      "Sources/FeatureHomeCore/ContentRefresh/"
+      "Sources/AppShelliOS/PlozziOSSearchView.swift",
+      "Sources/FeatureSearchCore/"
     ],
     "ui": {
       "references": [
         {
           "text": "Search",
           "source": "Sources/AppShell/MainTabView.swift"
+        },
+        {
+          "text": "Search",
+          "source": "Sources/AppShelliOS/PlozziOSSearchView.swift"
+        },
+        {
+          "text": "Movies, shows, and episodes",
+          "source": "Sources/AppShelliOS/PlozziOSSearchView.swift"
+        },
+        {
+          "text": "Clear search",
+          "source": "Sources/AppShelliOS/PlozziOSSearchView.swift"
+        },
+        {
+          "text": "Cancel search",
+          "source": "Sources/AppShelliOS/PlozziOSSearchView.swift"
         },
         {
           "text": "Settings",
@@ -780,6 +796,10 @@
     "ui": {
       "references": [
         {
+          "text": "Upcoming",
+          "source": "Sources/FeatureSettings/NavigationLibrariesDetailView.swift"
+        },
+        {
           "text": "Discover",
           "source": "Sources/FeatureSettings/NavigationLibrariesDetailView.swift"
         },
@@ -853,6 +873,181 @@
     }
   },
   {
+    "slug": "upcoming",
+    "title": "Follow upcoming releases",
+    "seoTitle": "Follow upcoming episodes and movie releases in Plozz",
+    "description": "Use Upcoming and Home's Coming Soon row to follow shows you watch and movies you save or request, choose calendar filters, and hide or restore titles.",
+    "section": "Library",
+    "kind": "guide",
+    "file": "upcoming.md",
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "sources": [
+      "Sources/FeatureHomeCore/UpcomingView.swift",
+      "Sources/FeatureHomeCore/UpcomingFeedModel.swift",
+      "Sources/FeatureHomeCore/UpcomingFeedCache.swift",
+      "Sources/CoreModels/UpcomingRelease.swift",
+      "Sources/AppRuntime/UpcomingFeedLoader.swift",
+      "Sources/MetadataKit/SeriesScheduleResolver.swift",
+      "Sources/MetadataKit/ExternalTitleMetadataResolver.swift",
+      "Sources/SeerService/SeerService.swift",
+      "Sources/AppShell/HomeTab.swift",
+      "Sources/AppShelliOS/PlozziOSRootView.swift",
+      "Sources/AppShelliOS/PlozziOSAppModel.swift",
+      "Sources/FeatureSettings/NavigationLibrariesDetailView.swift",
+      "Sources/CoreUI/ProfileSettingsCategory.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/CoreUI/LiftableReorderList.swift",
+      "Sources/CoreUI/MediaRowBrowseCard.swift",
+      "Sources/AppShelliOS/PlozziOSOfflineModeView.swift"
+    ],
+    "watch": [
+      "Sources/FeatureHomeCore/Upcoming",
+      "Sources/CoreModels/UpcomingRelease.swift",
+      "Sources/AppRuntime/UpcomingFeedLoader.swift",
+      "Sources/MetadataKit/SeriesScheduleResolver.swift",
+      "Sources/SeerService/SeerPersonalRequests.swift",
+      "Sources/CoreModels/NavigationRailPlan.swift"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Upcoming",
+          "source": "Sources/FeatureHomeCore/UpcomingView.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSRootView.swift"
+        },
+        {
+          "text": "Screens & Navigation",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        },
+        {
+          "text": "App navigation",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Hide or Reorder Navigation",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Show",
+          "source": "Sources/CoreUI/LiftableReorderList.swift"
+        },
+        {
+          "text": "More",
+          "source": "Sources/AppShelliOS/PlozziOSRootView.swift",
+          "system": "uikit-more"
+        },
+        {
+          "text": "Coming Soon",
+          "source": "Sources/FeatureHomeCore/UpcomingView.swift"
+        },
+        {
+          "text": "See all",
+          "source": "Sources/CoreUI/MediaRowBrowseCard.swift"
+        },
+        {
+          "text": "Calendar",
+          "source": "Sources/FeatureHomeCore/UpcomingView.swift"
+        },
+        {
+          "text": "Hide calendar",
+          "source": "Sources/FeatureHomeCore/UpcomingView.swift"
+        },
+        {
+          "text": "Show calendar",
+          "source": "Sources/FeatureHomeCore/UpcomingView.swift"
+        },
+        {
+          "text": "Filters",
+          "source": "Sources/FeatureHomeCore/UpcomingView.swift"
+        },
+        {
+          "text": "Type",
+          "source": "Sources/FeatureHomeCore/UpcomingView.swift"
+        },
+        {
+          "text": "All",
+          "source": "Sources/CoreModels/UpcomingRelease.swift"
+        },
+        {
+          "text": "Shows",
+          "source": "Sources/CoreModels/UpcomingRelease.swift"
+        },
+        {
+          "text": "Movies",
+          "source": "Sources/CoreModels/UpcomingRelease.swift"
+        },
+        {
+          "text": "Interests",
+          "source": "Sources/FeatureHomeCore/UpcomingView.swift"
+        },
+        {
+          "text": "Watching",
+          "source": "Sources/CoreModels/UpcomingRelease.swift"
+        },
+        {
+          "text": "Watchlist",
+          "source": "Sources/CoreModels/UpcomingRelease.swift"
+        },
+        {
+          "text": "Requested",
+          "source": "Sources/CoreModels/UpcomingRelease.swift"
+        },
+        {
+          "text": "Season premieres only",
+          "source": "Sources/FeatureHomeCore/UpcomingView.swift"
+        },
+        {
+          "text": "Hide watched movies",
+          "source": "Sources/FeatureHomeCore/UpcomingView.swift"
+        },
+        {
+          "text": "Reset filters",
+          "source": "Sources/FeatureHomeCore/UpcomingView.swift"
+        },
+        {
+          "text": "Hide title",
+          "source": "Sources/FeatureHomeCore/UpcomingView.swift"
+        },
+        {
+          "text": "Undo hide",
+          "source": "Sources/FeatureHomeCore/UpcomingView.swift"
+        },
+        {
+          "text": "Restore hidden titles",
+          "source": "Sources/FeatureHomeCore/UpcomingView.swift"
+        },
+        {
+          "text": "Refresh",
+          "source": "Sources/FeatureHomeCore/UpcomingView.swift"
+        },
+        {
+          "text": "Retry",
+          "source": "Sources/FeatureHomeCore/UpcomingView.swift"
+        },
+        {
+          "text": "Some sources couldn't refresh.",
+          "source": "Sources/FeatureHomeCore/UpcomingView.swift"
+        },
+        {
+          "text": "No announced releases",
+          "source": "Sources/FeatureHomeCore/UpcomingView.swift"
+        },
+        {
+          "text": "Offline Mode",
+          "source": "Sources/AppShelliOS/PlozziOSOfflineModeView.swift"
+        }
+      ],
+      "emphasis": []
+    }
+  },
+  {
     "slug": "browse-home-rows",
     "title": "Browse more from Home",
     "seoTitle": "Browse and filter more titles from Plozz Home rows",
@@ -884,7 +1079,8 @@
       "Sources/CoreModels/HomeContentQuery.swift",
       "Sources/CoreModels/WatchlistBrowsePreferences.swift",
       "Sources/CoreModels/MediaProvider.swift",
-      "Sources/CoreModels/HomeRowFeed.swift"
+      "Sources/CoreModels/HomeRowFeed.swift",
+      "Sources/CoreModels/HomeLibraryVisibility.swift"
     ],
     "watch": [
       "Sources/FeatureHomeCore/HomeRow",
@@ -927,6 +1123,10 @@
         {
           "text": "Watchlist",
           "source": "Sources/FeatureHomeCore/HomeRow.swift"
+        },
+        {
+          "text": "Coming Soon",
+          "source": "Sources/CoreModels/HomeLibraryVisibility.swift"
         },
         {
           "text": "Media",
@@ -1606,6 +1806,10 @@
     "ui": {
       "references": [
         {
+          "text": "Upcoming",
+          "source": "Sources/FeatureSettings/NavigationLibrariesDetailView.swift"
+        },
+        {
           "text": "App navigation",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
@@ -1942,14 +2146,14 @@
       "Sources/FeaturePlayback/PlayerViewModel.swift",
       "Sources/FeaturePlayback/PlayerSongCard.swift",
       "Sources/FeaturePlayback/RemoteSeekScan.swift",
-      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
+      "Sources/FeaturePlayback/SeriesTrackMemory.swift"
     ],
     "watch": [
       "Sources/FeaturePlayback/Player",
       "Sources/AppShelliOS/PlozziOSPlayer",
       "Sources/FeaturePlayback/Remote",
       "Sources/FeatureSettings/PlayerTabSettingsControls.swift",
-      "Sources/FeaturePlayback/SongRecognition",
+      "Sources/FeaturePlayback/SeriesTrackMemory.swift",
       "Sources/FeatureHomeCore/PlaybackVersion"
     ],
     "platforms": [
@@ -2104,7 +2308,7 @@
           "source": "Sources/FeatureSettings/SkipMarkerSettingsControl.swift"
         },
         {
-          "text": "Normal (Default)",
+          "text": "Normal",
           "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
         },
         {
@@ -2676,7 +2880,7 @@
       "Sources/FeaturePlayback/SystemPlaybackAudio.swift",
       "Sources/FeaturePlayback/Player",
       "Sources/FeatureSettings/LosslessAudioControl.swift",
-      "Sources/FeaturePlayback/SongRecognition",
+      "Sources/FeaturePlayback/SeriesTrackMemory.swift",
       "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
     ],
     "platforms": [
@@ -3571,7 +3775,7 @@
     "sources": [
       "Sources/FeatureLiveTV/LiveTVPrototypeBrowse.swift",
       "Sources/FeatureLiveTV/LiveTVPrototypeSidebar.swift",
-      "Sources/FeatureLiveTV/LiveTVPrototypeView.swift",
+      "Sources/CoreUI/VideoCardFocus.swift",
       "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift",
       "Sources/FeatureLiveTV/LiveTVPrototypeCategories.swift",
       "Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift",
@@ -3583,7 +3787,7 @@
       "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift",
       "Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift",
       "Sources/CoreUI/SettingsCopy.swift",
-      "Sources/CoreUI/VideoCardFocus.swift",
+      "Sources/FeatureSettings/LiveTVSettingsView.swift",
       "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift",
       "Sources/FeatureLiveTV/LiveTVMultiviewTouchChrome.swift",
       "Sources/FeatureSettings/ServerDetailView.swift",
@@ -3596,10 +3800,30 @@
       "Sources/CoreModels/LiveTVMultiviewFavorite.swift",
       "Sources/AppRuntime/IPTVAccountGuideIndex.swift",
       "Sources/CoreUI/SettingsCopy.swift",
-      "Sources/CoreUI/VideoCardFocus.swift"
+      "Sources/CoreModels/IPTVChannelName.swift"
     ],
     "ui": {
       "references": [
+        {
+          "text": "Live TV",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "Channel names",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "Clean channel names",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "Preview",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "Example",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
         {
           "text": "Language",
           "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"

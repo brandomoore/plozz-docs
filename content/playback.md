@@ -10,17 +10,17 @@ See [touch and keyboard controls](/platform-controls/) or [Blu-ray menus](/disc-
 
 ## Seek on Apple TV
 
-With playback options closed, click the remote's left/right edge to jump by your skip interval. Swipe to scrub; **Seek without pausing** determines whether to pause first.
+Close playback options, then click the remote's left/right edge to jump by your skip interval. Swipe to scrub; **Seek without pausing** determines whether to pause first.
 
 Hold a left/right click to start scanning, which continues after release. Click the same direction to speed up, or the opposite to slow down and eventually reverse.
 
-Press the center button to use the selected position, or play/pause to use it and resume. Press Back to cancel. Wait for loading before seeking.
+Press the center button to seek, or play/pause to seek and resume. Back cancels. Wait for loading before seeking.
 
 ## Choose audio or a version
 
 Open **Audio** for tracks or **Version** for files/editions.
 
-Changing versions keeps your server account and position, though different cuts may not line up.
+Changing versions keeps your server account and position; different cuts may not line up.
 
 The first multi-version video asks your preference. Change **Settings > Playback > Version selection**:
 
@@ -40,7 +40,7 @@ Enable **Settings > Playback > Ask to resume or start over** to choose before re
 
 ## Autoplay and skipping
 
-Under **Settings > Playback**, next-episode and next-playlist-item autoplay default on. **Show Up Next card** controls the preview independently of autoplay. Its lead time is used when credits markers are unavailable.
+Under **Settings > Playback**, next-episode and next-playlist-item autoplay default on. **Show Up Next card** controls the preview separately; its lead time applies without credits markers.
 
 Enable **Skip intros, credits & more**, then open **Customize**. Choose **Default behavior**: **Show skip button**, **Skip instantly**, or **Skip after** (1-30 seconds). Select movies, TV shows, or anime under **Enable for**.
 
@@ -76,15 +76,15 @@ Use **Playback > Playback Speed** on Apple TV or **Playback Speed** on mobile to
 
 Open **Playback > Zoom Mode** on Apple TV, or **Video** on mobile, for picture choices:
 
-- **Normal (Default)** keeps the whole picture.
-- **Auto-crop black bars**, when offered, enlarges the detected picture without stretching it. Some bars may remain to preserve the picture's proportions. If detection is unavailable, it uses the normal fit.
+- **Normal** keeps the whole picture.
+- **Auto-crop black bars** starts selected for movies and episodes when supported. It enlarges the detected picture without stretching; some bars may remain. Without detection, it uses the normal fit.
 - **Crop** fills the screen by cutting off edges; **Stretch** fills it by changing proportions.
 - **Custom** lets you set 50%-200% zoom.
 
-Zoom lasts this session and does not change streaming quality. Detection works during supported local playback, not AirPlay or Picture in Picture. Return to **Normal (Default)** if the crop is unhelpful.
+Plozz remembers your choice for the movie or series in this profile, including matching copies across servers. Live channels start at Normal and do not remember it per channel. Zoom does not change quality. Detection needs supported local playback, not AirPlay or Picture in Picture. Choose **Normal** to stop automatic cropping.
 
 ## Explore the cast
 
-In **Cast**, select a person to read their biography and credits without leaving the video. Choose **See more** for their full page, or select a credit to open that title's details. Opening either page ends playback. A listed credit is not necessarily in your library.
+In **Cast**, select a person for their biography and credits without leaving the video. **See more** opens their full page; a credit opens that title's details. Either ends playback. Listed credits may be outside your library.
 
 See [Streaming quality](/streaming-quality/), [Audio](/audio/), [Subtitles](/subtitles/), [AirPlay/Picture in Picture](/platform-controls/#airplay-and-picture-in-picture), or [external players](/external-players/).

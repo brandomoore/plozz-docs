@@ -1,6 +1,6 @@
 # Audio tracks and output
 
-Choose your language, improve dialogue, match audio to your equipment, or [identify a song](/playback/#identify-a-song-in-a-movie-or-show).
+Choose your language, improve dialogue, match your equipment, or [identify a song](/playback/#identify-a-song-in-a-movie-or-show).
 
 ## Select a language or track
 
@@ -8,9 +8,9 @@ Open **Audio** in the player controls. In portrait on iPhone/iPad, use the ellip
 
 Set **Preferred audio language** in **Settings > Playback > Audio** on Apple TV, or Playback's **Tracks** section on iPhone/iPad. Choose a language, or enable **Set separately for movies, TV shows & anime** to use different preferences.
 
-**Remember audio language per series** reuses your language for matching shows across servers, not an exact mix. Choose commentary or a different surround track in the player.
+Plozz remembers a movie's manually chosen audio language. **Remember audio language per series** does the same for shows. Matching titles can reuse the language across servers, not an exact commentary track or mix.
 
-For the wrong language, check remembered choices. These cannot add missing tracks; [another version](/playback/) may have them.
+Remembered choices override your general preference. Choose again in **Audio**, or try [another version](/playback/) for missing tracks.
 
 ## Choose output compatibility
 
@@ -18,7 +18,7 @@ In **Settings > Playback**, find **Prefer lossless audio** under **Audio**. It d
 
 This affects AetherEngine video and Live TV, not Apple's native player or another app. Reopen the video or retune afterward. Output depends on the source and equipment.
 
-The choice is shared by Plozz profiles on this device; it does not sync or transfer.
+It is shared by this device's Plozz profiles, not synced or transferred.
 
 ## Improve dialogue on Apple TV
 
@@ -33,7 +33,7 @@ If changes fail, use Apple TV Settings.
 
 Plozz has no adjustable audio delay. [Subtitle delay](/subtitles/#set-automatic-choices) changes captions only.
 
-For lip-sync problems, compare tracks, titles, and output routes. For dropouts, use [Troubleshooting](/troubleshooting/).
+For lip-sync problems, compare tracks and output routes. See [Troubleshooting](/troubleshooting/) for dropouts.
 
 ## Keep audio playing on iPhone or iPad
 

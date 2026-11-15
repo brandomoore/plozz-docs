@@ -85,7 +85,7 @@ Navigation stays local to this profile and device.
 
 Apple TV sidebars always retain **Settings**; if hidden in Top Bar, use the profile picker.
 
-On mobile, Home, Downloads, and Search normally start shown. Home, Search, or Watchlist can be absent without relevant content. Libraries and **All Libraries** start **Hidden**: hold one and choose **Show**. Seerr can reveal Discover.
+On mobile, Home, Upcoming, Downloads, and Search normally start shown. Home, Search, or Watchlist can be absent without relevant content. Libraries and **All Libraries** start **Hidden**: hold one and choose **Show**. Seerr can reveal Discover.
 
 Compact native navigation puts extra visible shortcuts under **More**, not hidden ones. On iOS/iPadOS 26 or later, setting **Appearance > Liquid Glass** to **Off** can instead show an opaque bottom strip: scroll it sideways for extra shortcuts. The system's Reduce Transparency setting keeps native navigation.
 

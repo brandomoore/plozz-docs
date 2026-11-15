@@ -28,6 +28,10 @@ On Apple TV, open **Manage channels** in Live TV's sidebar. On iPhone/iPad, open
 
 Regional filtering can hide untagged channels. Check **Favorites only**, **Channels with a guide**, and the selected source too. Unavailable favorites stay saved.
 
+## Tidy channel names
+
+In **Settings > Live TV > Channel names**, enable **Clean channel names** to reduce extra symbols and spacing in IPTV names. Check **Preview** below it, or **Example** when no sample is available. It starts off; edited names, guide matching, and favorites stay unchanged.
+
 ## Arrange and save a Multiview
 
 Use [Multiview](/live-tv/#watch-several-channels) to follow several channels without switching between them. Reveal its controls; on iPhone/iPad, choose **Edit layout** if needed.
@@ -42,7 +46,7 @@ Only one picture supplies sound. Focus it on Apple TV, or select it under **Audi
 
 To change a channel, hold its picture on Apple TV and choose **Replace channel** or **Remove**. On mobile, select its **Audio** entry, then choose **More > Replace** or **More > Remove** while editing. Replacement opens the guide to choose another channel; removal leaves the other pictures playing. At least one picture must remain.
 
-Once channels load, choose **More > Favorite** to save the channels and layout for your profile. Reopen them from the guide's **Multiviews**; on narrow mobile layouts, check **More**. Hold a saved entry for **Remove from Favorites**. Saving reserves no streams or tuners, and missing channels may prevent reopening.
+Choose **More > Favorite** to save loaded channels and their layout for your profile. Reopen them from the guide's **Multiviews**; on narrow mobile layouts, check **More**. Hold a saved entry for **Remove from Favorites**. Saving reserves no streams or tuners; missing channels may prevent reopening.
 
 If favorites cannot be loaded or saved, open **Multiviews** and choose **Retry** before relying on your changes.
 
@@ -50,7 +54,7 @@ Multiview does not support AirPlay or Picture in Picture. Closing it leaves save
 
 ## Correct a channel's guide
 
-Guide correction, file editing, identity repair and scans below are for standalone playlists, not IPTV accounts. Accounts use **Refresh guide** and **Edit connection** instead.
+The tools below are for standalone playlists. For IPTV accounts, use **Refresh guide** and **Edit connection** instead.
 
 1. Under a standalone playlist in **TV Sources**, open **Guide options > Correct guide mapping** when offered.
 2. Select the channel, its guide source, and the correct station. Check the regional feed.

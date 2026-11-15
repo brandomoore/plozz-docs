@@ -1,8 +1,14 @@
 # Find and organize media
 
-Browse the libraries your connected account can access. **Search** finds movies, shows, and episodes across your available sources.
+Browse your connected libraries, find a particular title, or save something to watch later.
 
-With [Seerr](/media-requests/), **Not in Your Library** results are requestable, not playable; permissions apply. Use [Discover](/discover/) for popular and upcoming titles.
+## Search for a title
+
+Open **Search** and enter a movie, show, or episode name. Results update as you type; select a result to open its details.
+
+On iPhone/iPad, type in **Movies, shows, and episodes**. Tap outside the field to hide the keyboard without clearing your results. **Clear search**, inside the field, removes the text; **Cancel search**, beside it, also closes the keyboard.
+
+Search uses your enabled libraries and authorized server users. With [Seerr](/media-requests/), **Not in Your Library** results let you request missing titles if permitted; they do not grant playback. Use [Discover](/discover/) when you want suggestions instead.
 
 ## Browse a library
 

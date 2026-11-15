@@ -12,6 +12,8 @@ Loaded rows with more titles can offer a larger grid: **Recently Added**, suppor
 
 The Home **Watchlist** shortcut opens the regular [Watchlist page](/watchlist/#filter-and-sort-the-page), with its saved browse preferences.
 
+**Coming Soon** opens your [Upcoming calendar](/upcoming/), not the filterable grid described below.
+
 ## Edit a Home row on iPhone/iPad
 
 Hold a row heading on Home and choose **Edit** to open that row's settings. This is a shortcut to [renaming or changing the row](/home-and-navigation/#rename-rows-and-shortcuts), not editing your server's library. Tapping the chevron still opens the larger grid.

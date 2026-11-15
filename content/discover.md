@@ -8,7 +8,7 @@ Choose **Discover** in the main navigation. If it is missing:
 
 1. Open **Settings > Screens & Navigation > App navigation > Hide or Reorder Navigation**.
 2. Press and hold **Discover**, then choose **Show**.
-3. Return to browsing and open Discover. On iPhone/iPad, check **More** in compact native navigation, or scroll the opaque bottom strip sideways.
+3. Return to browsing and open Discover. On iPhone/iPad, check **More** if shown, or swipe the scrolling bottom shortcuts sideways.
 
 A Seerr connection can show Discover automatically; without one, it normally starts hidden. Kids profiles do not offer Discover.
 
@@ -17,6 +17,8 @@ A Seerr connection can show Discover automatically; without one, it normally sta
 Browse **Trending**, **Popular Movies**, **Upcoming Movies**, **Popular Series**, and **Upcoming Series**, in that order. Move along a row to load more titles.
 
 Open a title to see its details. An accessible library copy can play normally. You can save missing titles to your [Watchlist](/watchlist/) or [request them through Seerr](/media-requests/) when those actions are offered. Upcoming release information is not a playable file or a promised addition.
+
+To follow dates for shows you watch and movies you save or request, use your [Upcoming calendar](/upcoming/) instead.
 
 ## Narrow the recommendations
 
