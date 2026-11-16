@@ -20,7 +20,7 @@ While online, Plozz prefers a usable matching download even if you select anothe
 
 Use **Offline Mode** to browse saved videos without connecting to sources, even with a network available.
 
-1. Finish downloading while online, then open **Settings > Downloads > Offline Mode** and turn it on. You can also use the profile picker's ellipsis **More > Offline Mode** menu.
+1. Finish downloading while online, then use the profile picker's ellipsis **More > Offline Mode** menu to turn it on.
 2. Choose the profile that owns the downloads and complete any Profile Lock or Plex PIN prompt.
 3. Browse **Home**, your libraries, **Search**, or **Watchlist**, or play directly from **Downloads**.
 
@@ -45,7 +45,7 @@ If preparation fails, check the connection, then **Try Again**. **Cancel** start
 
 ## Choose quality and networks
 
-Open **Downloads > Download Settings**, or **Settings > Downloads**, for this profile.
+Open **Downloads > Download Settings** for this profile. Outside Kids profiles, **Settings > Downloads** offers the same settings, starting with **Offline Mode**.
 
 Under **Network**, set **Use Cellular** and **Pause in Low Data Mode**. Cellular connections and personal hotspots are blocked by default; Low Data Mode pauses downloads.
 

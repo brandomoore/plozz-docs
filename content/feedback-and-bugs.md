@@ -1,6 +1,6 @@
 # Feedback and bug reports
 
-Ask the community for help, report a problem, or send diagnostics privately.
+Ask for help, report a problem, or send diagnostics privately.
 
 ## Choose where to post
 
@@ -13,16 +13,16 @@ Mobile **Settings > Help & Diagnostics > Send Feedback** opens email, not a trac
 
 ## Report a bug
 
-Explain what happened and what you expected. Include:
+Explain what happened and what you expected, with:
 
 - Steps to reproduce.
 - Plozz version and build, device model, and operating-system version.
-- Affected sources, whether several fail, or whether it happens before setup.
+- Affected sources, or whether setup is incomplete.
 - Error message, frequency, and last working build if known.
 
 **Settings > Help & Diagnostics > Report a Problem** provides the link; scan its code on Apple TV.
 
-For logs, follow [Report a problem](/troubleshooting/#report-a-problem). Uploads do not post an issue or Discord message.
+For logs, follow [Report a problem](/troubleshooting/#report-a-problem).
 
 ## Choose diagnostics sharing
 
@@ -30,13 +30,13 @@ When **Help improve Plozz?** appears, choose **Share Diagnostics** or **Don't Sh
 
 Change it in **Settings > Help & Diagnostics > Share Diagnostics**. Consent is device-wide, neither synced nor transferred. Builds without a reporting endpoint cannot upload.
 
-Sharing sends crash, freeze, and failure diagnostics through Sentry: app/device information, screen categories, and performance measurements. Automatic reports exclude logins, server addresses, media titles, and viewing history.
+Sharing sends crash/failure diagnostics through Sentry, including app/device information and performance measurements. Automatic reports exclude logins, server addresses, media titles, and viewing history.
 
-Under **Send Diagnostics**, choose **Enable Sharing** if needed; consenting does not submit your report. Enter **Message (required)**, then **Send to Developer**. Submissions include filtered activity, search, connection, library-load, and playback evidence, not Recent Activity's displayed messages. Search evidence excludes query text. Playback/source evidence can survive restarts; reproduce first and send promptly. Your message is sent as written: exclude secrets/personal details.
+Under **Send Diagnostics**, choose **Enable Sharing** if needed; consenting does not submit your report. Enter **Message (required)**, then **Send to Developer**. Submissions include filtered technical activity, search, connection, and playback evidence, not Recent Activity's messages or search-query text. Reproduce the problem and send promptly. Your message is sent as written: exclude secrets/personal details.
 
 **Submitted** means accepted for delivery, not confirmed receipt. If submission fails, check sharing and retry.
 
-Read the [Privacy Policy](https://plozz.app/privacy/) from consent or Settings; Apple TV shows a code.
+Read the [Privacy Policy](https://plozz.app/privacy/); Apple TV shows a code.
 
 ## Diagnose Apple TV Home stutter
 
@@ -48,8 +48,10 @@ Open **Settings > Release Notes** to read changes. **Show release notes on start
 
 ## Suggest an improvement
 
-In a GitHub feature request, describe your task, obstacle, device, and attempted workarounds.
+Describe your task, obstacle, device, and workarounds in a feature request.
+
+For a translation correction, choose **Settings > Language > Send Feedback** when using a non-English interface. This opens a GitHub report, or a QR code on Apple TV. Include the screen and current/suggested wording.
 
 ## Share safely
 
-GitHub issues are public, and Discord community posts are shared with other members. Review screenshots and logs before posting. Remove personal information, passwords, tokens, pairing codes, and private or credential-bearing server and playlist URLs.
+GitHub issues are public; Discord posts are shared with members. Before posting, remove personal information, passwords, tokens, pairing codes, and private or credential-bearing server/playlist URLs from text, screenshots, and logs.

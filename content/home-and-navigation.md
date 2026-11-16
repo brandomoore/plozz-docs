@@ -1,10 +1,10 @@
 # Home and navigation
 
-Arrange rows and shortcuts for your profile.
+Keep favorite rows and shortcuts easy to reach.
 
 ## Choose the hero
 
-Open **Settings > Screens & Navigation > Home > Hero** for the featured carousel above your rows.
+Use **Settings > Screens & Navigation > Home > Hero** to change the featured carousel.
 
 On Apple TV, choose **On** or **Off**; on mobile, use **Show hero**. Hiding it preserves rows and row style.
 
@@ -22,7 +22,7 @@ In **Home**, open **Row style**. **Showcase** fills the background with the focu
 
 Open **Settings > Screens & Navigation > Home > Rows**.
 
-Under **Preset**, choose **Match server** to follow server rows, or **Combined rows** to group libraries. Confirmation replaces rows, not server settings. Some rows stay separate. Plex supplies promoted rows, not another client's pinned libraries.
+Under **Preset**, choose **Match server** to follow server rows, or **Combined rows** to group libraries. Confirm to replace your Home arrangement, not server settings. Some rows stay separate. Plex supplies promoted rows, not another client's pinned libraries.
 
 Choose **Add row**, or open a row and choose **Remove from Home**. Choose **Edit**, move rows, then **Done**; holding a row also offers **Reorder**. Mixing combined, library, and server rows changes the preset to **Custom**.
 
@@ -56,7 +56,7 @@ Separate Next Up rows preview up to 20. [Open their larger grid](/browse-home-ro
 
 A brief play can save progress without adding a card. Videos need one minute, or 5% for videos under 20 minutes with a five-second minimum. Trailers stay out.
 
-Under **Rows > Continue Watching**, turn off **Include Next Up** for separate rows. It defaults on. Removing Continue Watching suspends merging; **Continue Watching settings** remains available.
+Under **Rows > Continue Watching**, turn off **Include Next Up** for separate rows; it defaults on. Removing Continue Watching also separates Next Up; **Continue Watching settings** remains available.
 
 ## Hide watched Home suggestions
 
@@ -65,7 +65,7 @@ Under **Home > Filtering > Hide watched content**, choose independently:
 - **Recently Added**: hides completed titles. It defaults off; in-progress videos and shows with unwatched episodes remain.
 - **Hero & discovery**: hides watched hero and Discovery suggestions. It defaults on.
 
-These affect suggestions, not history, access, Browse, or Continue Watching. Recently Added checks only a limited selection; turn its filter off if the row seems too short.
+These affect suggestions, not history, access, Browse, or Continue Watching. Recently Added checks a limited selection; turn its filter off if too few titles appear.
 
 ## Arrange shortcuts and details
 
@@ -85,10 +85,10 @@ Navigation stays local to this profile and device.
 
 Apple TV sidebars always retain **Settings**; if hidden in Top Bar, use the profile picker.
 
-On mobile, Home, Upcoming, Downloads, and Search normally start shown. Home, Search, or Watchlist can be absent without relevant content. Libraries and **All Libraries** start **Hidden**: hold one and choose **Show**. Seerr can reveal Discover.
+On mobile, Home, Upcoming, Downloads, and Search normally start shown. Home, Search, Watchlist, or Upcoming can be absent without relevant content. Libraries and **All Libraries** start **Hidden**: hold one and choose **Show**. Seerr can reveal Discover.
 
 Compact native navigation puts extra visible shortcuts under **More**, not hidden ones. On iOS/iPadOS 26 or later, setting **Appearance > Liquid Glass** to **Off** can instead show an opaque bottom strip: scroll it sideways for extra shortcuts. The system's Reduce Transparency setting keeps native navigation.
 
-Under **Screens & Navigation > Movie & show details**, choose [Trailers & music](/trailers-and-previews/#choose-trailers-and-previews), review scores, and age recommendations.
+Under **Screens & Navigation > Movie & show details**, choose [Trailers & music](/trailers-and-previews/#choose-trailers-and-previews), scores, and age recommendations.
 
 See [library customization](/customize-libraries/), [appearance](/appearance/), and [Continue Watching artwork](/spoiler-protection/#change-continue-watching-cards).

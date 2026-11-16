@@ -20,17 +20,15 @@ While libraries load, **Choose later** continues setup; return to **Settings > L
 
 ## Find a setting
 
-Select your profile before changing **Settings**. On Apple TV, use the **Search settings** field. On iPhone/iPad, use the settings search field.
+Select your profile before changing **Settings**. Personal categories include **Playback**, **Appearance**, and **Seerr**; **Manage Plozz** groups shared sources, profiles, and sync. Kids profiles hide some choices.
 
-Enter a setting or task, then select a result. Plozz opens its page and focuses the control on Apple TV, or briefly highlights it on mobile.
+In **Search settings**, enter a setting or task, then select a result. Plozz focuses the control on Apple TV, or briefly highlights it on mobile.
 
 Some controls need a feature enabled first; search can take you to that prerequisite instead. Search does not turn it on or bypass a Parental PIN.
 
 ## Make the setup yours
 
-Choose [Home rows and shortcuts](/home-and-navigation/) or [cards, artwork, and language](/appearance/). Apple TV can [remember your profile](/apple-tv-profiles/).
-
-For children, configure [parental controls](/parental-controls/); hiding a row is not access control.
+Arrange [Home](/home-and-navigation/) or change [appearance and language](/appearance/). Apple TV can [remember your profile](/apple-tv-profiles/). For children, configure [parental controls](/parental-controls/); hiding rows does not restrict access.
 
 ## While watching
 

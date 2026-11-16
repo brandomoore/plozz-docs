@@ -1,10 +1,10 @@
 # Profiles and sync
 
-Bring profiles, preferences, and supported sign-ins to another device with iCloud Sync or nearby setup. Viewing progress follows separate rules.
+Bring profiles, preferences, and supported sign-ins to another device. Servers store progress separately.
 
 ## Use the right profile
 
-Use the **Settings** header to switch profiles; **Settings > Profiles** manages [profiles and authorization](/profiles-and-locks/).
+Use the **Settings** header to switch; **Settings > Profiles** manages [profiles and authorization](/profiles-and-locks/).
 
 ## Sync settings
 
@@ -13,11 +13,11 @@ Use the **Settings** header to switch profiles; **Settings > Profiles** manages 
 
 iCloud Sync carries profiles, preferences, server details, watchlist state, supported Live TV configuration, and tracker sign-ins—not downloaded videos.
 
-Synced sign-ins use encrypted iCloud storage. Your server must still be reachable and allow access.
+Sign-ins use encrypted iCloud storage. You still need access to each server.
 
 A compatible Silo server can approve this device automatically for a PIN-free Silo profile. Otherwise, sign in and obtain approval; saved PIN authorization is not copied.
 
-[Library arrangements](/customize-libraries/) and [Watchlist browse choices](/watchlist/#filter-and-sort-the-page) follow the profile. Open Plozz on Apple TV to receive changes. Turning sync off stops updates without erasing cloud data.
+[Library arrangements](/customize-libraries/) and [Watchlist browse choices](/watchlist/#filter-and-sort-the-page) follow your profile. Open Plozz on Apple TV to receive changes. Turning sync off keeps cloud data.
 
 ## Decide which sign-ins to save
 
@@ -30,7 +30,7 @@ New sign-ins can sync without prompting after Plozz verifies the iCloud account.
 
 ## Restore an existing setup
 
-After enabling sync during first setup, **Restoring setup from iCloud…** shows progress through profiles, servers, and supported sign-ins.
+During first setup, **Restoring setup from iCloud…** shows progress through profiles, servers, and sign-ins.
 
 For **Couldn't restore your setup**, check internet and iCloud sign-in, then **Retry**. If restoration stalls or fails, **Set up manually** pauses restoration while you finish setup yourself. Sync stays on; this does not reset cloud data.
 
@@ -58,7 +58,7 @@ On the configured device, open **Settings > iCloud Sync**. On Apple TV, also cho
 
 Select the receiver, use **Enter Code**, or **Scan QR Code** on mobile; scanning needs Camera permission. A configured Apple TV can show a code for a new iPhone/iPad.
 
-Approve only matching verification codes; same-iCloud pairing can verify without comparison. Only supported sign-ins transfer. Silo needs separate approval through this route. Check **Needs sign-in** afterward.
+Approve only matching verification codes; same-iCloud pairing can verify without comparison. Only supported sign-ins transfer. Silo needs separate approval. Seerr account sessions stay local; supported API-key connections can transfer for their profiles without replacing existing connections. Older apps can need manual Seerr setup. Check **Needs sign-in** afterward.
 
 ## Keep watch history separate
 
@@ -74,11 +74,11 @@ Updates wait while offline or a source is unreachable. On iPhone/iPad, turn **Of
 
 Under **Settings > iCloud Sync > Troubleshooting**, **Sync Data on This Device** shows prepared data; **Refresh Breakdown** updates it.
 
-Counts include pending uploads, not deletions. Sizes aren't iCloud storage usage or downloads. Plozz Channels includes its catalogue; downloaded guides, iCloud Keychain logins, and separate Trakt sign-ins are excluded.
+Counts include pending uploads, not deletions. Sizes don't show iCloud storage usage or downloads. Plozz Channels includes its catalogue; downloaded guides, iCloud Keychain logins, and separate Trakt sign-ins are excluded.
 
 ## Recover sync without erasing your setup
 
-Check the iCloud account and **Needs sign-in**, then try **Sync Now**. If iCloud is temporarily unavailable, wait and retry rather than reset. A local-data preparation error does not mean your saved data was removed.
+Check the iCloud account and **Needs sign-in**, then try **Sync Now**. For a temporary iCloud outage, wait rather than reset. A data-preparation error does not mean saved data was removed.
 
 Under **Settings > iCloud Sync > Troubleshooting**, **Reload From iCloud** retries shared settings. **Reset Sync** replaces iCloud data with this device's copy; choose the setup you intend to keep.
 

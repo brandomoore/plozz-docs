@@ -19,6 +19,8 @@ Search uses your enabled libraries and authorized server users. With [Seerr](/me
 
 Apple TV's name-sorted Browse can show an [A-Z rail](/combined-libraries/#jump-through-a-large-library); other sorts and collection-member lists do not.
 
+With the **All** filter, **Name** sorting, and no genre/year filter, movies may be grouped into the server's collections. Open a collection to see its members. Not every source supports this; All Libraries can mix collections and individual movies.
+
 Some choices show **Preparing library filter…** before the results are ready. Wait, or choose **Cancel**; neither changes your library. If filter options fail, choose **Couldn't load filter options. Try Again**.
 
 **Checking collections...** means results are incomplete. Choose **Try Again** after interruption; include **Details** when [reporting failures](/troubleshooting/#report-a-problem).
@@ -39,7 +41,7 @@ Below the videos and cast, read **About**, **Ratings**, [Release & Availability]
 
 Select a shortened description or a field marked **MORE** to read its full information. On iPhone/iPad, choose **Done** in an expanded group or the **Close** button in the full-description reader. On Apple TV, press Back.
 
-Cast members and related titles open their own pages. A listed credit is not necessarily in your library.
+Select a cast member for a biography and **Known for** titles, followed by credits grouped under your library names. Select **MORE** on a shortened biography, or a credit to open its details. Known for can include titles outside your library; a credit does not grant playback. Related titles open their own detail pages too.
 
 ## Watch a trailer
 

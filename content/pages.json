@@ -99,6 +99,22 @@
         {
           "text": "Not now",
           "source": "Sources/FeatureSettings/ICloudOnboardingView.swift"
+        },
+        {
+          "text": "Playback",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        },
+        {
+          "text": "Appearance",
+          "source": "Sources/AppShelliOS/PlozziOSFirstRunView.swift"
+        },
+        {
+          "text": "Seerr",
+          "source": "Sources/FeatureSettings/SettingsView.swift"
+        },
+        {
+          "text": "Manage Plozz",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         }
       ],
       "emphasis": [
@@ -411,24 +427,24 @@
       "Sources/FeatureHome/ExtrasRowView.swift",
       "Sources/FeatureHome/DetailHeroView.swift",
       "Sources/CoreModels/MediaItem+Trailer.swift",
-      "Sources/FeatureHome/HomeView.swift",
       "Sources/CoreUI/SettingsCopy.swift",
       "Sources/FeatureHomeCore/LibraryBrowseViewModel.swift",
       "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
-      "Sources/FeatureHome/LibraryBrowseView.swift",
-      "Sources/AppShelliOS/PlozziOSLibraryView.swift",
       "Sources/CoreUI/DetailInformationSections.swift",
       "Sources/CoreUI/DetailMoreContent.swift",
       "Sources/AppShelliOS/PlozziOSSearchView.swift",
-      "Sources/FeatureHomeCore/ContentRefresh/ContentRefreshModels.swift"
+      "Sources/FeatureHomeCore/PersonDetailView.swift",
+      "Sources/CoreModels/MediaProvider.swift",
+      "Sources/CoreModels/LibraryQuery.swift",
+      "Sources/CoreUI/ExpandableOverviewText.swift"
     ],
     "watch": [
       "Sources/FeatureHome",
       "Sources/AppRuntime/WatchMutation",
-      "Sources/ProviderPlex/PlexExtraWatchState.swift",
-      "Sources/CoreNetworking/LocalMediaWatchStore.swift",
       "Sources/AppShelliOS/PlozziOSSearchView.swift",
-      "Sources/FeatureSearchCore/"
+      "Sources/FeatureSearchCore/",
+      "Sources/ProviderPlex/PlexLibraryQuery.swift",
+      "Sources/ProviderJellyfin/JellyfinLibraryQuery.swift"
     ],
     "ui": {
       "references": [
@@ -611,6 +627,22 @@
         {
           "text": "Refresh Episodes and Season Status",
           "source": "Sources/AppShelliOS/PlozziOSItemDetailView.swift"
+        },
+        {
+          "text": "All",
+          "source": "Sources/CoreModels/LibraryQuery.swift"
+        },
+        {
+          "text": "Name",
+          "source": "Sources/CoreModels/MediaProvider.swift"
+        },
+        {
+          "text": "Known for",
+          "source": "Sources/FeatureHomeCore/PersonDetailView.swift"
+        },
+        {
+          "text": "MORE",
+          "source": "Sources/CoreUI/ExpandableOverviewText.swift"
         }
       ],
       "emphasis": []
@@ -984,10 +1016,6 @@
           "source": "Sources/CoreModels/UpcomingRelease.swift"
         },
         {
-          "text": "Interests",
-          "source": "Sources/FeatureHomeCore/UpcomingView.swift"
-        },
-        {
           "text": "Watching",
           "source": "Sources/CoreModels/UpcomingRelease.swift"
         },
@@ -1036,12 +1064,16 @@
           "source": "Sources/FeatureHomeCore/UpcomingView.swift"
         },
         {
-          "text": "No announced releases",
+          "text": "Offline Mode",
+          "source": "Sources/AppShelliOS/PlozziOSOfflineModeView.swift"
+        },
+        {
+          "text": "Nothing upcoming yet",
           "source": "Sources/FeatureHomeCore/UpcomingView.swift"
         },
         {
-          "text": "Offline Mode",
-          "source": "Sources/AppShelliOS/PlozziOSOfflineModeView.swift"
+          "text": "No matching releases",
+          "source": "Sources/FeatureHomeCore/UpcomingView.swift"
         }
       ],
       "emphasis": []
@@ -1686,7 +1718,7 @@
       "Sources/AppShell/MainTabView.swift",
       "Sources/CoreUI/SettingsCopy.swift",
       "Sources/CoreUI/ProfileSettingsCategory.swift",
-      "Sources/FeatureHomeCore/AggregatedLibraryProvider.swift",
+      "Sources/CoreModels/MediaProvider.swift",
       "Sources/AppShelliOS/PlozziOSAllLibrariesDestinationView.swift",
       "Sources/FeatureHomeCore/LibraryAlphabetState.swift",
       "Sources/CoreUI/LibraryAlphabetMenu.swift",
@@ -1710,6 +1742,10 @@
         {
           "text": "All Libraries",
           "source": "Sources/CoreModels/AllLibrariesBrowse.swift"
+        },
+        {
+          "text": "Name",
+          "source": "Sources/CoreModels/MediaProvider.swift"
         },
         {
           "text": "App navigation",
@@ -4427,19 +4463,19 @@
       "Sources/FeatureSettings/AppLanguagePicker.swift",
       "Sources/CoreModels/ThemeSettings.swift",
       "Sources/FeatureSettings/ViewCustomizationControls.swift",
-      "Sources/FeatureSettings/HeroSettingsControls.swift",
       "Sources/CoreModels/WatchStatusIndicatorSettingsStore.swift",
       "Sources/FeatureSettings/HomeRowStylePicker.swift",
-      "Sources/AppShelliOS/PlozziOSRootView.swift",
-      "Sources/CoreUI/OpaqueNavigationChrome.swift"
+      "Sources/MetadataKit/WikipediaLocalizedText.swift",
+      "Sources/MetadataKit/DetailMetadataResolver.swift",
+      "Sources/CoreUI/AppLanguageScope.swift"
     ],
     "watch": [
       "Sources/FeatureSettings/Card",
       "Sources/FeatureSettings/ArtworkSettingsControls.swift",
       "Sources/CoreModels/ThemeSettings.swift",
       "Sources/CoreModels/WatchStatusIndicator",
-      "Sources/AppShelliOS/PlozziOSRootView.swift",
-      "Sources/CoreUI/OpaqueNavigationChrome.swift"
+      "Sources/CoreModels/AppLanguage.swift",
+      "Sources/FeatureSettings/AppLanguagePicker.swift"
     ],
     "ui": {
       "references": [
@@ -5413,12 +5449,12 @@
       "Sources/CoreUI/SignInSyncPermission.swift",
       "Sources/AppRuntime/ProviderCredentialSync.swift",
       "Sources/FeatureSyncCloud/CloudConfigSyncService.swift",
-      "Sources/FeatureSyncCloud/CloudSyncStatus.swift",
       "Sources/ProviderSilo/SiloDeviceEnrollment.swift",
       "Sources/CoreModels/ProfileSettingsSnapshot.swift",
       "Sources/FeatureSettings/SyncEraseDataView.swift",
       "Sources/AppShelliOS/PlozziOSOfflineModeView.swift",
-      "Sources/FeatureSettings/ICloudOnboardingView.swift"
+      "Sources/FeatureSettings/ICloudOnboardingView.swift",
+      "Sources/FeatureSyncSetup/SyncSecrets.swift"
     ],
     "watch": [
       "Sources/FeatureSyncSetup/",
@@ -5674,39 +5710,39 @@
     "slug": "media-requests",
     "title": "Request movies and shows",
     "seoTitle": "Request movies and TV seasons through Seerr in Plozz",
-    "description": "Connect Seerr, map request users, request missing seasons of library shows, interpret regional availability, and resolve permissions or relinking.",
+    "description": "Connect Seerr accounts to a Plozz profile, choose request destinations, request movies or seasons, and recover sign-in or permission problems.",
     "section": "Accounts & sync",
-    "kind": "guide",
+    "kind": "reference",
     "file": "media-requests.md",
     "sources": [
       "Sources/FeatureSettings/SettingsView.swift",
-      "Sources/FeatureSettings/SeerDetailView.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/FeatureSettings/ProfileSeerrSetupView.swift",
+      "Sources/FeatureSettings/SeerConnectionsView.swift",
+      "Sources/FeatureSettings/SeerSignInForm.swift",
+      "Sources/SeerService/SeerService.swift",
+      "Sources/SeerService/SeerAuthentication.swift",
+      "Sources/AppRuntime/SeerProfileAuthentication.swift",
+      "Sources/SeerService/SeerConnectionStore.swift",
+      "Sources/FeatureSyncSetup/SyncSecrets.swift",
+      "Sources/AppShelliOS/PlozziOSAppModel+KeychainSync.swift",
       "Sources/CoreModels/HeroCTA.swift",
       "Sources/FeatureHome/DetailHeroView.swift",
       "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
       "Sources/CoreUI/SeasonRequestMenuContent.swift",
+      "Sources/CoreUI/SeasonEpisodeActions.swift",
       "Sources/CoreUI/DetailInformationSections.swift",
-      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-      "Sources/FeatureSettings/ProfileSeerrSetupView.swift",
-      "Sources/AppShelliOS/PlozziOSSeerrSettingsView.swift",
-      "Sources/AppShell/HomeTab.swift",
-      "Sources/SeerService/SeerService.swift",
-      "Sources/SeerService/SeerMapper.swift",
-      "Sources/CoreModels/SeerRequestIdentity.swift",
-      "Sources/CoreModels/SeasonRequestPresentation.swift",
-      "Sources/CoreModels/SeriesDownloadPresentation.swift",
       "Sources/FeatureHome/SeriesDetailView.swift",
-      "Sources/FeatureHome/ItemDetailView.swift",
-      "Sources/FeatureHomeCore/ItemDetailViewModel.swift",
+      "Sources/CoreModels/SeasonRequestPresentation.swift",
       "Sources/MetadataKit/ExternalTitleMetadataResolver.swift"
     ],
     "watch": [
       "Sources/SeerService/",
-      "Sources/AppShelliOS/PlozziOSSeerrSettingsView.swift",
-      "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
-      "Sources/CoreUI/DetailInformationSections.swift",
-      "Sources/FeatureHome/SeriesDetailView.swift",
-      "Sources/MetadataKit/TMDbMetadataProvider.swift"
+      "Sources/FeatureSettings/Seer",
+      "Sources/CoreUI/Season",
+      "Sources/FeatureSettings/ProfileSeerrSetupView.swift",
+      "Sources/AppRuntime/SeerProfileAuthentication.swift",
+      "Sources/FeatureSyncSetup/SyncSecrets.swift"
     ],
     "platforms": [
       "Apple TV",
@@ -5718,26 +5754,6 @@
         {
           "text": "Seerr",
           "source": "Sources/FeatureSettings/SettingsView.swift"
-        },
-        {
-          "text": "Admin API key",
-          "source": "Sources/FeatureSettings/SeerDetailView.swift"
-        },
-        {
-          "text": "API key",
-          "source": "Sources/AppShelliOS/PlozziOSSeerrSettingsView.swift"
-        },
-        {
-          "text": "Requests are made as",
-          "source": "Sources/FeatureSettings/SeerDetailView.swift"
-        },
-        {
-          "text": "Admin — unrestricted",
-          "source": "Sources/FeatureSettings/SeerDetailView.swift"
-        },
-        {
-          "text": "Relink required",
-          "source": "Sources/FeatureSettings/SeerDetailView.swift"
         },
         {
           "text": "Requested · Unreleased",
@@ -5778,6 +5794,94 @@
         {
           "text": "Settings",
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Seerr server address",
+          "source": "Sources/FeatureSettings/SeerSignInForm.swift"
+        },
+        {
+          "text": "Choose existing account",
+          "source": "Sources/FeatureSettings/SeerSignInForm.swift"
+        },
+        {
+          "text": "Sign in with Plex",
+          "source": "Sources/FeatureSettings/SeerSignInForm.swift"
+        },
+        {
+          "text": "Sign in with Jellyfin",
+          "source": "Sources/FeatureSettings/SeerSignInForm.swift"
+        },
+        {
+          "text": "Sign in with Emby",
+          "source": "Sources/FeatureSettings/SeerSignInForm.swift"
+        },
+        {
+          "text": "Seerr account",
+          "source": "Sources/FeatureSettings/SeerSignInForm.swift"
+        },
+        {
+          "text": "Use this account",
+          "source": "Sources/FeatureSettings/SeerSignInForm.swift"
+        },
+        {
+          "text": "Open Plex sign-in",
+          "source": "Sources/FeatureSettings/SeerSignInForm.swift"
+        },
+        {
+          "text": "Set up manually",
+          "source": "Sources/FeatureSettings/SeerSignInForm.swift"
+        },
+        {
+          "text": "Not now",
+          "source": "Sources/FeatureSettings/ProfileSeerrSetupView.swift"
+        },
+        {
+          "text": "Use API key",
+          "source": "Sources/FeatureSettings/SeerSignInForm.swift"
+        },
+        {
+          "text": "Request as",
+          "source": "Sources/FeatureSettings/ProfileSeerrSetupView.swift"
+        },
+        {
+          "text": "Admin",
+          "source": "Sources/FeatureSettings/SeerConnectionsView.swift"
+        },
+        {
+          "text": "Add account",
+          "source": "Sources/FeatureSettings/SeerConnectionsView.swift"
+        },
+        {
+          "text": "Sign in again",
+          "source": "Sources/FeatureSettings/SeerConnectionsView.swift"
+        },
+        {
+          "text": "Remove connection",
+          "source": "Sources/FeatureSettings/SeerConnectionsView.swift"
+        },
+        {
+          "text": "Ask each time",
+          "source": "Sources/FeatureSettings/SeerConnectionsView.swift"
+        },
+        {
+          "text": "Default account",
+          "source": "Sources/FeatureSettings/SeerConnectionsView.swift"
+        },
+        {
+          "text": "Use last account",
+          "source": "Sources/FeatureSettings/SeerConnectionsView.swift"
+        },
+        {
+          "text": "Try again",
+          "source": "Sources/FeatureSettings/ProfileSeerrSetupView.swift"
+        },
+        {
+          "text": "Edit connection",
+          "source": "Sources/FeatureSettings/SeerConnectionsView.swift"
+        },
+        {
+          "text": "Choose the request account again.",
+          "source": "Sources/FeatureSettings/ProfileSeerrSetupView.swift"
         }
       ],
       "emphasis": [
@@ -5874,10 +5978,6 @@
         {
           "text": "Automatic",
           "source": "Sources/CoreModels/LivePlaybackBuffer.swift"
-        },
-        {
-          "text": "Everyone",
-          "source": "Sources/CoreUI/SettingsCopy.swift"
         },
         {
           "text": "Top Shelf",
@@ -6010,6 +6110,10 @@
         {
           "text": "Playback",
           "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        },
+        {
+          "text": "Manage Plozz",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
         }
       ],
       "emphasis": []
@@ -6042,16 +6146,16 @@
       "Sources/CoreModels/LiveTVSourceDiagnostics.swift",
       "Sources/FeatureSettings/PrivacyPolicyLink.swift",
       "Sources/FeatureHome/HomePerfOverlay.swift",
-      "Sources/FeatureHome/HomeView.swift",
-      "Sources/AppShell/MainTabView.swift"
+      "Sources/AppShell/MainTabView.swift",
+      "Sources/FeatureSettings/AppLanguagePicker.swift"
     ],
     "watch": [
       "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
       "Sources/FeatureSettings/SendDiagnosticsCard.swift",
       "Sources/CrashReporting/",
-      "Sources/FeatureSettings/RecentActivityDetailView.swift",
       "Sources/CoreNetworking/PlozzLog.swift",
-      "Sources/CoreModels/SearchDiagnosticJournal.swift"
+      "Sources/CoreModels/SearchDiagnosticJournal.swift",
+      "Sources/FeatureSettings/AppLanguagePicker.swift"
     ],
     "platforms": [
       "Apple TV",
@@ -6123,6 +6227,14 @@
         {
           "text": "Settings",
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Language",
+          "source": "Sources/FeatureSettings/SettingsView.swift"
+        },
+        {
+          "text": "Send Feedback",
+          "source": "Sources/FeatureSettings/AppLanguagePicker.swift"
         }
       ],
       "emphasis": [

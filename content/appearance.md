@@ -52,6 +52,6 @@ Text size changes titles, descriptions, metadata, and Apple TV episode text, not
 
 **Settings > Language** changes interface language, separately from [audio](/audio/) and [subtitle language](/subtitles/).
 
-**System** follows device languages without translating server information. Dates and numbers follow device region; system prompts retain device language.
+**System** follows device languages. External descriptions, biographies, and discovery suggestions use your selected language where available, with original/English fallback. Existing server descriptions and NFO text are not translated or replaced. Dates and numbers follow device region; system prompts retain device language.
 
 See [Spoiler protection](/spoiler-protection/), [Circadian Mode](/circadian-mode/), and [Home/navigation](/home-and-navigation/).

@@ -23,7 +23,7 @@ For a channel with a usable rewind window, reveal controls and use the timeline 
 ## Launch from Apple TV Top Shelf
 
 1. Put Plozz in the Apple TV Home Screen's top row.
-2. From an adult Plozz profile, open **Settings > Everyone > Top Shelf**. **Show Top Shelf** is on by default.
+2. From a non-Kids Plozz profile, open **Settings > Manage Plozz > Top Shelf**. **Show Top Shelf** is on by default.
 3. Choose **Posters** or **Full Screen**, then set separate **Continue Watching** and **Recently Added** counts: four each by default, adjustable from one to 20.
 
 Posters is the default; select one to start watching. With Full Screen, swipe up to expand the shelf. Continue Watching appears before Recently Added, without repeated titles from the same source. Use the first button to start watching or the second to view details. Format badges describe the file, not your TV's output.

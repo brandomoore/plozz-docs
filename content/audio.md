@@ -16,7 +16,7 @@ Remembered choices override your general preference. Choose again in **Audio**, 
 
 In **Settings > Playback**, find **Prefer lossless audio** under **Audio**. It defaults on. Turn it off to request compressed surround-compatible output, particularly with regular HDMI ARC.
 
-This affects AetherEngine video and Live TV, not Apple's native player or another app. Reopen the video or retune afterward. Output depends on the source and equipment.
+This affects AetherEngine video and Live TV, not Apple's native player or another app. Start the video or channel again after changing it. Output depends on the source and equipment.
 
 It is shared by this device's Plozz profiles, not synced or transferred.
 

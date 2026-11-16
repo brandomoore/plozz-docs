@@ -27,9 +27,9 @@ Open the title and use its server/version selector where offered. On Apple TV, t
 
 ## Jump through a large library
 
-On Apple TV, sort a library's **Browse** view by name, then scroll a few rows down to reveal the right-hand letter rail when an index is available. Move focus onto a letter to jump to its titles. This also works in All Libraries. Other sorts and collection-member lists do not expose the index.
+On Apple TV, sort a library's **Browse** view by **Name**, then scroll a few rows down to reveal the right-hand letter rail when an index is available. Move focus onto a letter to jump to its titles. This also works in All Libraries. Other sorts and collection-member lists do not expose the index.
 
-A deep jump can need more loading, especially with Silo or combined libraries. Wait for the destination to load. If a jump fails, select the letter again. If the index fails to load, change to another sort and back to name to rebuild it; an error does not mean that letter has no titles.
+A deep jump can need more loading, especially with Silo or combined libraries. Wait for the destination to load. If a jump fails, select the letter again. If the index fails to load, change to another sort and back to **Name** to rebuild it; an error does not mean that letter has no titles.
 
 > [!NOTE]
 > iPhone and iPad have All Libraries, but not Apple TV's letter rail. Use filters, scrolling, or **Search** instead.
