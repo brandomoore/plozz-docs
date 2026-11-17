@@ -1,6 +1,6 @@
 # Organize channels and fix listings
 
-Organize [Live TV](/live-tv/) channels and fix their listings.
+Keep favorite [Live TV](/live-tv/) stations easy to find and repair missing program listings without removing your sources.
 
 ## Browse categories on iPhone and iPad
 
@@ -8,13 +8,15 @@ Choose a category or **All channels** to open its guide. On a narrow layout, use
 
 In the directory or a sidebar layout, the **Source** menu selects an enabled source or **All**. From the directory, **More > Guide** opens the guide for all channels. Use **More > Filters** to narrow results.
 
-Choose **Category**, **Language**, and **Country**, then optionally enable **Favorites only** or **Channels with a guide**. Under **Sort**, choose **Channel number** or **Name**. These filters narrow the displayed list; they do not restore hidden channels. **Reset filters** clears browse filters and the source selection, but keeps sorting and channel visibility.
+Choose **Category**, **Language**, and **Country**, then optionally enable **Favorites only** or **Channels with a guide**. Under **Sort**, choose **Channel number** or **Name**. **Reset filters** clears browse filters and the source selection, but keeps sorting and channel visibility.
 
 ## Wait for an IPTV guide
 
-Your IPTV guide loads while you browse. Dismissing its progress notice does not cancel it; percentages describe individual stages. Keep Plozz open.
+Keep Plozz open while your IPTV guide loads. Dismissing its progress notice does not cancel it; percentages describe individual stages.
 
 **Guide ready** means current listings were found, not that every channel has them. For **Guide update failed** or **Guide update paused**, open **TV Sources**, select the IPTV account's source, then **Refresh guide**. For **No guide configured**, add a guide address using **Edit connection** under **Settings > Sources**.
+
+Use **Settings > Live TV > Guide preferences > Refresh while open** to update saved IPTV channel lists and guides regularly. It defaults to **Every 12 hours**; **Off** still updates when you use Live TV. The choice stays with this profile on this device. Updates need Plozz on screen and a previously used guide.
 
 ## Find hidden channels
 
@@ -30,36 +32,36 @@ Regional filtering can hide untagged channels. Check **Favorites only**, **Chann
 
 ## Tidy channel names
 
-In **Settings > Live TV > Channel names**, enable **Clean channel names** to reduce extra symbols and spacing in IPTV names. Check **Preview** below it, or **Example** when no sample is available. It starts off; edited names, guide matching, and favorites stay unchanged.
+In **Settings > Live TV > Channel names**, **Clean channel names** reduces extra symbols and spacing in IPTV names. It starts on; turn it off to keep original names. Check **Preview**, or **Example** without a sample. Edited names, guide matching, and favorites stay unchanged.
 
 ## Arrange and save a Multiview
 
-Use [Multiview](/live-tv/#watch-several-channels) to follow several channels without switching between them. Reveal its controls; on iPhone/iPad, choose **Edit layout** if needed.
+Use [Multiview](/live-tv/#watch-several-channels) to follow several channels at once. Reveal its controls; on iPhone/iPad, choose **Edit layout** if needed.
 
-Open **Layout** and choose the arrangement:
+Under **Layout**, choose:
 
-- **Side by side** shows two pictures together; in mobile portrait it is **Top and bottom**. With more pictures, this choice becomes **Grid**.
+- **Side by side** shows two pictures; mobile portrait uses **Top and bottom**. More pictures use **Grid**.
 - **Main picture** gives one picture more space, with the others alongside.
 - **Corner** overlays smaller pictures. Choose **Position** and **Size** to keep them away from something important.
 
-Only one picture supplies sound. Focus it on Apple TV, or select it under **Audio** on mobile. To give a channel the main picture, hold its picture on Apple TV and choose **Make main video**. On mobile, select its Audio entry, then **More > Make main** while editing.
+Only one picture supplies sound: focus it on Apple TV or select it under **Audio** on mobile. To choose the main picture, hold it on Apple TV for **Make main video**; on mobile, select its Audio entry, then **More > Make main** while editing.
 
-To change a channel, hold its picture on Apple TV and choose **Replace channel** or **Remove**. On mobile, select its **Audio** entry, then choose **More > Replace** or **More > Remove** while editing. Replacement opens the guide to choose another channel; removal leaves the other pictures playing. At least one picture must remain.
+To change a channel, hold its picture on Apple TV for **Replace channel** or **Remove**. On mobile, select its **Audio** entry, then **More > Replace** or **More > Remove** while editing. Replacement opens the guide; removal keeps other pictures playing. One picture must remain.
 
 Choose **More > Favorite** to save loaded channels and their layout for your profile. Reopen them from the guide's **Multiviews**; on narrow mobile layouts, check **More**. Hold a saved entry for **Remove from Favorites**. Saving reserves no streams or tuners; missing channels may prevent reopening.
 
-If favorites cannot be loaded or saved, open **Multiviews** and choose **Retry** before relying on your changes.
+If favorites fail, choose **Multiviews > Retry**.
 
-Multiview does not support AirPlay or Picture in Picture. Closing it leaves saved favorites available.
+Multiview does not support AirPlay or Picture in Picture.
 
 ## Correct a channel's guide
 
-The tools below are for standalone playlists. For IPTV accounts, use **Refresh guide** and **Edit connection** instead.
+These tools are for standalone playlists; IPTV accounts use **Refresh guide** and **Edit connection**.
 
 1. Under a standalone playlist in **TV Sources**, open **Guide options > Correct guide mapping** when offered.
 2. Select the channel, its guide source, and the correct station. Check the regional feed.
 
-Corrections survive guide refreshes. **Use automatic matching** removes your override.
+Corrections survive refreshes; **Use automatic matching** removes them.
 
 Under **Guide options**, **Keep previous days** and **Look ahead** set how many days to keep. They cannot create missing listings; earlier listings are not recordings.
 

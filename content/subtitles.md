@@ -54,7 +54,7 @@ Forced tracks cover selected dialogue/signs; SDH includes sound descriptions. **
 
 To stop reusing series choices, on Apple TV open **Settings > Subtitles > Remember subtitles per series** and turn off **Remember per series**. On iPhone/iPad, open **Settings > Playback**, then turn off **Remember subtitles per series** under **Tracks**.
 
-For mistimed text, use the **Subtitle Sync** clock button on Apple TV or **Subtitles > Advanced… > Subtitle Delay** on iPhone/iPad. Timing controls appear only when Plozz can shift the track; some player-rendered embedded tracks cannot shift.
+For mistimed text, use the **Subtitle Sync** clock button on Apple TV or **Subtitles > Advanced… > Subtitle Delay** on iPhone/iPad. Increase the delay if captions appear too early; decrease it if they arrive late. On Apple TV, **Reset** returns to zero. Timing controls appear only when Plozz can shift the track; some player-rendered embedded tracks cannot shift.
 
 ## Missing, wrong, or drifting subtitles
 

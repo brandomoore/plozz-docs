@@ -294,7 +294,7 @@
       "Sources/CoreModels/HeroCTA.swift",
       "Sources/CoreUI/ExternalMediaOpening.swift",
       "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
-      "Sources/AppShelliOS/PlozziOSHeroViews.swift",
+      "Sources/MediaTransportHTTP/WebDAVClient.swift",
       "Sources/FeatureHome/DetailHeroView.swift",
       "Sources/CoreUI/PlaybackSourceMenu.swift"
     ],
@@ -2158,7 +2158,7 @@
     "slug": "playback",
     "title": "Player controls",
     "seoTitle": "Use Plozz player controls, Continue Watching, and song identification",
-    "description": "Seek, choose editions, set autoplay and skip markers, navigate player tabs, resume another Continue Watching title, and identify songs while watching.",
+    "description": "Seek, check a video's finish time, choose editions, set autoplay and skip markers, resume another Continue Watching title, and identify songs while watching.",
     "section": "Playback",
     "kind": "reference",
     "file": "playback.md",
@@ -2170,26 +2170,26 @@
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/CoreUI/PlaybackResumePrompt.swift",
       "Sources/FeatureSettings/SkipMarkerSettingsControl.swift",
-      "Sources/FeaturePlayback/PlayerVideoZoom.swift",
+      "Sources/FeaturePlayback/CustomPlayerContainer.swift",
       "Sources/FeaturePlayback/PlaybackOptionsPane.swift",
       "Sources/FeaturePlayback/PlayerMoreMenu.swift",
       "Sources/FeaturePlayback/CastPanelView.swift",
       "Sources/MetadataKit/CommunitySkipMarkers.swift",
       "Sources/CoreUI/AutomaticVersionInfoButton.swift",
       "Sources/CoreModels/PlayerOptionalTab.swift",
-      "Sources/FeaturePlayback/PlayerSkipMarkerTrack.swift",
+      "Sources/FeaturePlayback/PlayerTimelineClock.swift",
       "Sources/FeatureSettings/PlayerTabSettingsControls.swift",
       "Sources/FeaturePlayback/PlayerViewModel.swift",
       "Sources/FeaturePlayback/PlayerSongCard.swift",
       "Sources/FeaturePlayback/RemoteSeekScan.swift",
-      "Sources/FeaturePlayback/SeriesTrackMemory.swift"
+      "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
     ],
     "watch": [
       "Sources/FeaturePlayback/Player",
       "Sources/AppShelliOS/PlozziOSPlayer",
       "Sources/FeaturePlayback/Remote",
       "Sources/FeatureSettings/PlayerTabSettingsControls.swift",
-      "Sources/FeaturePlayback/SeriesTrackMemory.swift",
+      "Sources/FeaturePlayback/CustomPlayerContainer.swift",
       "Sources/FeatureHomeCore/PlaybackVersion"
     ],
     "platforms": [
@@ -2344,26 +2344,6 @@
           "source": "Sources/FeatureSettings/SkipMarkerSettingsControl.swift"
         },
         {
-          "text": "Normal",
-          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
-        },
-        {
-          "text": "Auto-crop black bars",
-          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
-        },
-        {
-          "text": "Crop",
-          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
-        },
-        {
-          "text": "Stretch",
-          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
-        },
-        {
-          "text": "Custom",
-          "source": "Sources/FeaturePlayback/PlayerVideoZoom.swift"
-        },
-        {
           "text": "Zoom Mode",
           "source": "Sources/FeaturePlayback/PlaybackOptionsPane.swift"
         },
@@ -2414,6 +2394,14 @@
         {
           "text": "Open song",
           "source": "Sources/FeaturePlayback/PlayerSongCard.swift"
+        },
+        {
+          "text": "Elapsed time",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
+          "text": "Remaining time",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
         }
       ],
       "emphasis": []
@@ -2882,42 +2870,179 @@
     }
   },
   {
-    "slug": "audio",
-    "title": "Audio tracks and output",
-    "seoTitle": "Plozz audio tracks, output compatibility, and dialogue controls",
-    "description": "Choose audio languages and lossless or compressed output, adjust Apple TV dialogue, use mobile background audio, and preview detail-page music.",
+    "slug": "video-picture",
+    "title": "Video framing and upscaling",
+    "seoTitle": "Adjust Plozz video zoom, black bars, and upscaling",
+    "description": "Choose picture framing, save separate zoom defaults for iPhone, iPad, and Apple TV, and enhance supported lower-resolution video.",
     "section": "Playback",
     "kind": "guide",
+    "file": "video-picture.md",
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "sources": [
+      "Sources/FeaturePlayback/PlayerControls.swift",
+      "Sources/FeaturePlayback/PlaybackOptionsPane.swift",
+      "Sources/FeaturePlayback/PlayerMoreMenu.swift",
+      "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift",
+      "Sources/FeaturePlayback/PlayerVideoZoom.swift",
+      "Sources/FeaturePlayback/PlayerZoomSettings.swift",
+      "Sources/FeaturePlayback/PlayerViewModel.swift",
+      "Sources/FeaturePlayback/SeriesTrackMemory.swift",
+      "Sources/FeaturePlayback/LiveChannelPlayerView.swift",
+      "Sources/FeaturePlayback/PlayerTouchGestureSurface.swift",
+      "Sources/FeatureSettings/DefaultVideoZoomControl.swift",
+      "Sources/FeatureSettings/VideoUpscalingControl.swift",
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/CoreModels/VideoZoomPreference.swift",
+      "Sources/CoreModels/VideoUpscaling.swift",
+      "Sources/CoreUI/ProfileSettingsCategory.swift",
+      "Sources/MetadataKit/ContentClassification.swift",
+      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
+      "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+    ],
+    "watch": [
+      "Sources/CoreModels/Video",
+      "Sources/FeatureSettings/DefaultVideoZoomControl.swift",
+      "Sources/FeatureSettings/VideoUpscalingControl.swift",
+      "Sources/FeaturePlayback/",
+      "Sources/MetadataKit/ContentClassification.swift",
+      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Playback",
+          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "Zoom Mode",
+          "source": "Sources/FeaturePlayback/PlaybackOptionsPane.swift"
+        },
+        {
+          "text": "Video",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Playback options",
+          "source": "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift"
+        },
+        {
+          "text": "Normal",
+          "source": "Sources/CoreModels/VideoZoomPreference.swift"
+        },
+        {
+          "text": "Auto-crop black bars",
+          "source": "Sources/CoreModels/VideoZoomPreference.swift"
+        },
+        {
+          "text": "Crop",
+          "source": "Sources/CoreModels/VideoZoomPreference.swift"
+        },
+        {
+          "text": "Stretch",
+          "source": "Sources/CoreModels/VideoZoomPreference.swift"
+        },
+        {
+          "text": "Custom",
+          "source": "Sources/CoreModels/VideoZoomPreference.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Playback",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        },
+        {
+          "text": "Default zoom",
+          "source": "Sources/FeatureSettings/DefaultVideoZoomControl.swift"
+        },
+        {
+          "text": "Zoom",
+          "source": "Sources/FeatureSettings/DefaultVideoZoomControl.swift"
+        },
+        {
+          "text": "Video upscaling",
+          "source": "Sources/FeatureSettings/VideoUpscalingControl.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/CoreModels/VideoUpscaling.swift"
+        },
+        {
+          "text": "Automatic",
+          "source": "Sources/CoreModels/VideoUpscaling.swift"
+        },
+        {
+          "text": "Standard",
+          "source": "Sources/CoreModels/VideoUpscaling.swift"
+        },
+        {
+          "text": "Animation",
+          "source": "Sources/CoreModels/VideoUpscaling.swift"
+        },
+        {
+          "text": "Upscaling",
+          "source": "Sources/FeaturePlayback/PlaybackOptionsPane.swift"
+        },
+        {
+          "text": "Upscaling",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Couldn't change upscaling",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
+          "text": "OK",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        }
+      ],
+      "emphasis": []
+    }
+  },
+  {
+    "slug": "audio",
+    "title": "Audio tracks and output",
+    "seoTitle": "Choose Plozz audio tracks, correct lip sync, and adjust output",
+    "description": "Choose audio languages and output compatibility, correct lip sync, adjust Apple TV dialogue, use mobile background audio, and preview detail-page music.",
+    "section": "Playback",
+    "kind": "reference",
     "file": "audio.md",
     "sources": [
       "Sources/FeaturePlayback/PlayerControls.swift",
+      "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/FeatureSettings/HeroSettingsControls.swift",
       "Sources/FeatureSettings/LosslessAudioControl.swift",
       "Sources/FeaturePlayback/SystemPlaybackAudio.swift",
-      "Sources/FeaturePlayback/SongRecognition.swift",
+      "Sources/CoreModels/HeroBackgroundSettings.swift",
       "Sources/FeatureSettings/ThemeMusicVolumeControl.swift",
       "Sources/AppShelliOS/PlozziOSHeroViews.swift",
       "Sources/CoreUI/ProfileSettingsCategory.swift",
-      "Sources/CoreModels/AudioPolicy.swift",
+      "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
+      "Sources/FeaturePlayback/PlayerMoreMenu.swift",
+      "Sources/FeaturePlayback/SubtitleDownloadPanel.swift",
       "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
-      "Sources/FeatureHomeCore/ThemeMusicPlayback.swift",
-      "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift",
-      "Sources/FeatureHomeCore/ThemeMusicController.swift",
+      "Sources/FeaturePlayback/PlayerAudioSyncAdjustment.swift",
+      "Sources/FeaturePlayback/LiveChannelTransport.swift",
+      "Sources/FeaturePlayback/PlayerViewModel.swift",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
-      "Sources/CoreModels/HeroBackgroundSettings.swift",
-      "Sources/FeaturePlayback/NativeVideoEngine.swift",
-      "Sources/CoreModels/PlaybackSettings.swift",
-      "Sources/FeaturePlayback/SeriesTrackMemory.swift",
-      "Sources/FeatureSettings/HeroSettingsControls.swift"
+      "Sources/FeaturePlayback/SeriesTrackMemory.swift"
     ],
     "watch": [
       "Sources/FeatureHomeCore/ThemeMusic",
-      "Sources/FeaturePlayback/SystemPlaybackAudio.swift",
-      "Sources/FeaturePlayback/Player",
+      "Sources/FeaturePlayback/",
       "Sources/FeatureSettings/LosslessAudioControl.swift",
-      "Sources/FeaturePlayback/SeriesTrackMemory.swift",
-      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
+      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
+      "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
+      "Sources/FeatureSettings/ThemeMusicVolumeControl.swift"
     ],
     "platforms": [
       "Apple TV",
@@ -3041,6 +3166,34 @@
         {
           "text": "Screens & Navigation",
           "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        },
+        {
+          "text": "Audio Sync",
+          "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
+        },
+        {
+          "text": "Audio Sync…",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Audio Delay",
+          "source": "Sources/FeaturePlayback/SubtitleDownloadPanel.swift"
+        },
+        {
+          "text": "Reset",
+          "source": "Sources/FeaturePlayback/SubtitleDownloadPanel.swift"
+        },
+        {
+          "text": "Audio Sync",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
+          "text": "Audio Delay",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
+          "text": "Reset",
+          "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
         }
       ],
       "emphasis": []
@@ -3070,7 +3223,7 @@
       "Sources/CoreModels/SubtitleSearchPreference.swift",
       "Sources/CoreUI/ProfileSettingsCategory.swift",
       "Sources/FeaturePlayback/SubtitleTrackController.swift",
-      "Sources/FeaturePlayback/SubtitleOverlayView.swift",
+      "Sources/FeaturePlayback/SubtitleDownloadPanel.swift",
       "Sources/CoreModels/SubtitleBehavior.swift",
       "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
       "Sources/FeaturePlayback/SystemCaptionAppearance.swift",
@@ -3210,6 +3363,10 @@
         {
           "text": "Subtitle Delay",
           "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
+          "text": "Reset",
+          "source": "Sources/FeaturePlayback/SubtitleDownloadPanel.swift"
         },
         {
           "text": "Customize subtitle style",
@@ -3809,34 +3966,34 @@
       "iPad"
     ],
     "sources": [
-      "Sources/FeatureLiveTV/LiveTVPrototypeBrowse.swift",
-      "Sources/FeatureLiveTV/LiveTVPrototypeSidebar.swift",
-      "Sources/CoreUI/VideoCardFocus.swift",
+      "Sources/FeatureSettings/LiveTVSettingsView.swift",
       "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift",
       "Sources/FeatureLiveTV/LiveTVPrototypeCategories.swift",
+      "Sources/FeatureLiveTV/LiveTVPrototypeBrowse.swift",
+      "Sources/FeatureLiveTV/LiveTVPrototypeSidebar.swift",
       "Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift",
+      "Sources/CoreUI/SettingsCopy.swift",
       "Sources/FeatureLiveTV/LiveTVSourcesView.swift",
+      "Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift",
       "Sources/FeatureLiveTV/LiveTVGuideMappingView.swift",
       "Sources/FeatureLiveTV/LiveTVIdentityReviewView.swift",
       "Sources/FeatureLiveTV/LiveTVChannelScanViews.swift",
+      "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift",
+      "Sources/FeatureSettings/ServerDetailView.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/CoreModels/LiveTVMultiviewFavorite.swift",
       "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift",
-      "Sources/FeatureLiveTV/LiveTVImportedPlaylistEditor.swift",
-      "Sources/CoreUI/SettingsCopy.swift",
-      "Sources/FeatureSettings/LiveTVSettingsView.swift",
-      "Sources/FeatureLiveTV/LiveTVGuidePreparationStatus.swift",
+      "Sources/CoreUI/VideoCardFocus.swift",
       "Sources/FeatureLiveTV/LiveTVMultiviewTouchChrome.swift",
-      "Sources/FeatureSettings/ServerDetailView.swift",
-      "Sources/FeatureLiveTV/LiveTVMultiviewGuideActions.swift",
-      "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+      "Sources/FeatureLiveTV/LiveTVMultiviewGuideActions.swift"
     ],
     "watch": [
       "Sources/FeatureLiveTV/LiveTV",
       "Sources/FeatureLiveTVCore/LiveTV",
-      "Sources/CoreModels/LiveTVMultiviewFavorite.swift",
+      "Sources/CoreModels/LiveTV",
       "Sources/AppRuntime/IPTVAccountGuideIndex.swift",
-      "Sources/CoreUI/SettingsCopy.swift",
-      "Sources/CoreModels/IPTVChannelName.swift"
+      "Sources/FeatureSettings/LiveTVSettingsView.swift",
+      "Sources/ProviderIPTV/"
     ],
     "ui": {
       "references": [
@@ -4171,6 +4328,22 @@
         {
           "text": "Retry",
           "source": "Sources/FeatureLiveTV/LiveTVMultiviewGuideActions.swift"
+        },
+        {
+          "text": "Guide preferences",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "Refresh while open",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "Every 12 hours",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
         }
       ],
       "emphasis": []
@@ -5904,29 +6077,29 @@
       "Sources/FeaturePlayback/LiveChannelPlayerView.swift",
       "Sources/FeatureSettings/PlaybackReadAheadControl.swift",
       "Sources/CoreModels/LivePlaybackBuffer.swift",
-      "Sources/CoreUI/SettingsCopy.swift",
       "Sources/FeatureSettings/TopShelfSettingsView.swift",
       "Sources/FeatureSettings/TopShelfStylePicker.swift",
       "Sources/AppShell/HomeTab.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/CoreModels/PlaybackOrientation.swift",
-      "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
-      "Sources/AppShelliOS/PlozziOSLandscapeMotion.swift",
       "Sources/AppShelliOS/PlozziOSLivePresentationControls.swift",
+      "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
       "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
       "Sources/FeaturePlayback/InfoPanelView.swift",
       "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift",
       "Sources/CoreUI/ProfileSettingsCategory.swift",
+      "Sources/CoreUI/SettingsCopy.swift",
+      "Sources/CoreModels/VideoZoomPreference.swift",
       "Sources/FeaturePlayback/PlayerTouchGestureSurface.swift",
-      "Sources/AppShelliOS/PlozziOSPictureInPictureController.swift"
+      "Sources/FeaturePlayback/PlayerVideoZoom.swift"
     ],
     "watch": [
       "Sources/AppShelliOS/PlozziOSPlayer",
-      "Sources/AppShelliOS/PlozziOSLandscapeMotion.swift",
       "Sources/CoreModels/PlaybackOrientation.swift",
-      "Sources/FeaturePlayback/PlaybackDiagnostics",
+      "Sources/FeaturePlayback/Player",
       "Sources/TopShelfKit/",
-      "Sources/FeatureSettings/TopShelf"
+      "Sources/FeatureSettings/TopShelf",
+      "Sources/CoreModels/VideoZoomPreference.swift"
     ],
     "platforms": [
       "Apple TV",
@@ -6114,6 +6287,18 @@
         {
           "text": "Manage Plozz",
           "source": "Sources/CoreUI/SettingsCopy.swift"
+        },
+        {
+          "text": "Auto-crop black bars",
+          "source": "Sources/CoreModels/VideoZoomPreference.swift"
+        },
+        {
+          "text": "Normal",
+          "source": "Sources/CoreModels/VideoZoomPreference.swift"
+        },
+        {
+          "text": "Crop",
+          "source": "Sources/CoreModels/VideoZoomPreference.swift"
         }
       ],
       "emphasis": []

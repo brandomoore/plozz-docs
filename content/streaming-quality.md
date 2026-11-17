@@ -38,4 +38,4 @@ On all platforms, **Settings > Playback > Video buffer** controls how much video
 
 A filled buffer can bridge brief interruptions, not fix a source that stays too slow. [Live TV buffer](/platform-controls/#live-tv-remote-controls-and-rewind) is separate.
 
-[Download quality](/downloads/) is independent; streaming defaults do not shrink saved copies. See [Plozz formats](https://plozz.app/formats) for codec/container support.
+Streaming limits don't shrink saved copies; [downloads](/downloads/) and [video upscaling](/video-picture/#enhance-lower-resolution-video) have separate settings. Check [supported formats](https://plozz.app/formats).

@@ -68,4 +68,8 @@ For wrong posters/descriptions, see [Metadata and ratings](/metadata-and-ratings
 
 ## WebDAV lists files but will not play
 
-Playback needs valid HTTP byte ranges and a strong ETag or valid Last-Modified header; successful folder browsing does not establish this. Ask the administrator to check the WebDAV server/proxy. After replacing a file, rescan and reopen it rather than repeatedly retrying the old playback.
+Browsing and playback use different requests. Ask the administrator to check HTTP byte-range support and file-change information (a strong ETag or valid Last-Modified date). Direct playback needs both.
+
+Supported redirects to a separate HTTPS delivery host can work without those headers on the final video response, provided the share still identifies the file reliably. Plozz does not send your share credentials to that host.
+
+After replacing a file, stop playback, rescan, and reopen it rather than repeatedly retrying the old playback.

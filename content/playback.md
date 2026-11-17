@@ -16,6 +16,15 @@ Hold a left/right click to start scanning, which continues after release. Click 
 
 Press the center button to seek, or play/pause to seek and resume. Back cancels. Wait for loading before seeking.
 
+## Check when a video will finish
+
+To see when a movie or episode will finish:
+
+- On Apple TV, close player menus. With the timeline visible, lightly tap the remote's touch surface without clicking for clock times. Another tap hides controls. If controls are hidden, a light tap reveals them first.
+- On iPhone/iPad, tap either time beside the timeline. VoiceOver calls these **Elapsed time** and **Remaining time**. Tap again to switch back.
+
+The estimate uses the remaining video and playback speed; it needs a known duration. Revealing hidden controls returns to elapsed and remaining times.
+
 ## Choose audio or a version
 
 Open **Audio** for tracks or **Version** for files/editions.
@@ -44,7 +53,7 @@ Under **Settings > Playback**, next-episode and next-playlist-item autoplay defa
 
 Enable **Skip intros, credits & more**, then open **Customize**. Choose **Default behavior**: **Show skip button**, **Skip instantly**, or **Skip after** (1-30 seconds). Select movies, TV shows, or anime under **Enable for**.
 
-Open an intro, credits, recap, preview, or commercial marker's settings to change its behavior by content category, including **Off**. **Use default** restores the shared behavior. Enable disabled categories on the previous page first. Skip actions need timings. Timeline gaps can mark skip boundaries, not chapters; very short segments may have no gap.
+Open an intro, credits, recap, preview, or commercial marker's settings to change its behavior by content category, including **Off**. **Use default** restores the shared behavior. Enable disabled categories on the previous page first. Skip actions need timings.
 
 With skipping enabled, **Use community markers** (default on) checks IntroDB/TheIntroDB if intros or credits are missing. Lookups send IMDb/TMDB/TVDB identifiers and applicable episode numbers, ordering, name, and runtime, not video files. Disable it to stop community lookups, not server markers. Coverage and matching vary.
 
@@ -64,7 +73,7 @@ It uses Home's loaded titles, excluding this video and other episodes of its sho
 
 Use **Episodes** or **Playlist** to choose another entry.
 
-Under **Settings > Playback > Player tabs**, choose which of **Chapters**, **Cast**, **Episodes**, **Playlist**, and **Continue Watching** to show. They still need matching content; **Info** remains available.
+Under **Settings > Playback > Player tabs**, choose which of **Chapters**, **Cast**, **Episodes**, **Playlist**, and **Continue Watching** to show. A tab appears only when it has content; **Info** remains available.
 
 ## Identify a song in a movie or show
 
@@ -74,14 +83,7 @@ Open **Info** while a song plays, then select a recognized card for **Open song*
 
 Use **Playback > Playback Speed** on Apple TV or **Playback Speed** on mobile to change supported videos' speed. Mobile portrait places it under **Playback options**. Choose 1x for normal speed.
 
-Open **Playback > Zoom Mode** on Apple TV, or **Video** on mobile, for picture choices:
-
-- **Normal** keeps the whole picture.
-- **Auto-crop black bars** starts selected for movies and episodes when supported. It enlarges the detected picture without stretching; some bars may remain. Without detection, it uses the normal fit.
-- **Crop** fills the screen by cutting off edges; **Stretch** fills it by changing proportions.
-- **Custom** lets you set 50%-200% zoom.
-
-Plozz remembers your choice for the movie or series in this profile, including matching copies across servers. Live channels start at Normal and do not remember it per channel. Zoom does not change quality. Detection needs supported local playback, not AirPlay or Picture in Picture. Choose **Normal** to stop automatic cropping.
+Open **Playback > Zoom Mode** on Apple TV, or **Video** on mobile, to change framing. [Video framing and upscaling](/video-picture/) explains black-bar cropping, saved defaults, remembered title choices, and enhancing lower-resolution video without changing streaming quality.
 
 ## Explore the cast
 

@@ -31,9 +31,15 @@ If changes fail, use Apple TV Settings.
 
 ## Correct timing
 
-Plozz has no adjustable audio delay. [Subtitle delay](/subtitles/#set-automatic-choices) changes captions only.
+If speech does not match lip movements, adjust audio timing during supported AetherEngine playback:
 
-For lip-sync problems, compare tracks and output routes. See [Troubleshooting](/troubleshooting/) for dropouts.
+1. On Apple TV, open **Audio**, then its **Audio Sync** clock button. On iPhone/iPad, choose **Audio > Audio Sync…**; portrait places Audio inside **Playback options**.
+2. Adjust **Audio Delay**. Positive values play sound later; negative values play it earlier. Use small changes and compare a speaking scene.
+3. Release the control and wait to hear the result before closing the panel.
+
+Choose **Reset** to undo your adjustment. Movies and episodes allow up to ten seconds either way; supported Live TV allows two. Changes can briefly skip or repeat audio, seek, or reload playback. The offset resets with a new stream.
+
+The control is absent in Apple's native player, AirPlay's remote playback path, and streams that cannot seek or adjust audio timing. Live TV needs a usable rewind window. If the control is unavailable, try another audio track or output device. [Subtitle delay](/subtitles/#set-automatic-choices) changes captions only.
 
 ## Keep audio playing on iPhone or iPad
 

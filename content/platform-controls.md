@@ -38,7 +38,7 @@ Artwork follows [Appearance > Artwork](/appearance/); full-screen episode text a
 
 Tap the video to reveal controls. With a keyboard, use the space bar to play/pause and left/right arrows to skip. Shortcuts yield while menus, sheets, or player interactions are active.
 
-During supported local playback, double-tap the left/right side to skip, hold the picture for a temporary speed boost, or pinch to switch Normal/Crop. Vertical drags near the left edge adjust brightness; near the right edge, volume. VoiceOver disables hold, pinch, side-tap, and level-drag shortcuts.
+During supported local playback, double-tap the left/right side to skip or hold the picture for a temporary speed boost. Pinching adjusts [framing](/video-picture/#choose-how-the-picture-fits) in **Auto-crop black bars**, or switches **Normal**/**Crop** in other modes. Vertical drags near the left edge adjust brightness; near the right edge, volume. VoiceOver disables hold, pinch, side-tap, and level-drag shortcuts.
 
 Turn off **Settings > Playback > Volume and brightness gestures** to disable vertical drags.
 
