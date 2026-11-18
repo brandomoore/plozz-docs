@@ -1,6 +1,6 @@
 # Home and navigation
 
-Keep favorite rows and shortcuts easy to reach.
+Keep favorite rows and shortcuts within reach.
 
 ## Choose the hero
 
@@ -36,9 +36,7 @@ In **Classic** or mobile Home, **No titles to show** means nothing matched your 
 
 ## Add a collection section
 
-Choose **Add row > Custom row**, then **Content > Collections**. Select a source and one or more collections. Choose **Done** to return through each picker.
-
-Set **Name**, **Sort**, **Filter**, and **Layout**, then choose **Add to Home** (the checkmark on mobile). [Custom rows](/custom-home-rows/) can also combine playlists, libraries, Home feeds, and recommendations; that guide explains layouts and saving changes.
+To gather collections in one row, choose **Add row > Custom row**. Follow [Create a custom row](/custom-home-rows/) to choose content, layout, and saving options.
 
 ## Rename rows and shortcuts
 
@@ -50,13 +48,15 @@ Names never change media or access. Home-row names can [sync](/profiles-and-sync
 
 ## Keep older Continue Watching titles
 
-Continue Watching, including merged Next Up, does not trim titles by age or count. It depends on your sources' history; [shares have a storage limit](/network-shares/#keep-your-place). Watched status, dismissals, enabled servers, and server-user access still matter. Disabling library browsing does not hide account-wide history.
+Continue Watching, including merged Next Up, does not remove titles because of their age or the row's size. Your sources' history, watched status, dismissals, and server access still matter; [shares have a storage limit](/network-shares/#keep-your-place). Disabling library browsing does not hide account-wide history.
 
 Separate Next Up rows preview up to 20. [Open their larger grid](/browse-home-rows/) when available to see more.
 
 A brief play can save progress without adding a card. Videos need one minute, or 5% for videos under 20 minutes with a five-second minimum. Trailers stay out.
 
 Under **Rows > Continue Watching**, turn off **Include Next Up** for separate rows; it defaults on. Removing Continue Watching also separates Next Up; **Continue Watching settings** remains available.
+
+If refreshing fails, older cards can remain. Select the exclamation-mark **Refresh details** button beside Continue Watching's heading, then **Try Again**. This reloads the row without resetting your history; see [when Home refreshes](/library/#catch-up-after-watching-elsewhere).
 
 ## Hide watched Home suggestions
 

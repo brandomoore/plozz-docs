@@ -8,6 +8,8 @@ Choose captions while watching, then save your language and appearance preferenc
 2. Select a listed track, or **Off**.
 3. To find another track, choose **Download subtitles…** on Apple TV or **Search & Download…** on iPhone/iPad, when offered. Select a result to download and use it.
 
+Tracks in the same language can retain their original names to help you choose the right version. An **auto** label means Plozz inferred the language from subtitle text, not that it translated the captions.
+
 Search requires server subtitle services; shares use existing subtitles. A **File match** badge means the server matched the subtitle to this video file, not just its title or language. Try a marked result when another release's captions drift.
 
 On iPhone/iPad, completed downloads can include separate text subtitle files. [Update offline subtitles](/downloads/#update-offline-subtitles) while connected, then test them without a network.

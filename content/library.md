@@ -69,6 +69,6 @@ Check the [profile and server user](/profiles-and-locks/), **Settings > Librarie
 
 ## Catch up after watching elsewhere
 
-If you watched on another device or changed your server's library, return to Plozz while connected. Home refreshes after about 15 seconds away; an open show's seasons and episodes refresh after about five minutes away. Movie and episode details recheck progress after that longer interval.
+If you watched elsewhere or changed your server's library, return to Plozz while connected. Home refreshes when you return to the app; revisiting Home within Plozz refreshes older results after about 15 seconds. After five minutes away, show details refresh seasons and episodes; movie and episode details recheck your progress.
 
 For stale episode availability on iPhone/iPad, open **Manage Seasons**, select the season, then use **Refresh Episodes and Season Status** at the top. Unavailable episode entries describe the show's schedule, not downloadable files.

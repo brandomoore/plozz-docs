@@ -428,7 +428,7 @@
       "Sources/FeatureHome/DetailHeroView.swift",
       "Sources/CoreModels/MediaItem+Trailer.swift",
       "Sources/CoreUI/SettingsCopy.swift",
-      "Sources/FeatureHomeCore/LibraryBrowseViewModel.swift",
+      "Sources/FeatureHomeCore/ContentRefresh/ContentRefreshModels.swift",
       "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
       "Sources/CoreUI/DetailInformationSections.swift",
       "Sources/CoreUI/DetailMoreContent.swift",
@@ -919,6 +919,7 @@
     ],
     "sources": [
       "Sources/FeatureHomeCore/UpcomingView.swift",
+      "Sources/FeatureHomeCore/UpcomingWeekCalendar.swift",
       "Sources/FeatureHomeCore/UpcomingFeedModel.swift",
       "Sources/FeatureHomeCore/UpcomingFeedCache.swift",
       "Sources/CoreModels/UpcomingRelease.swift",
@@ -986,6 +987,14 @@
         {
           "text": "Calendar",
           "source": "Sources/FeatureHomeCore/UpcomingView.swift"
+        },
+        {
+          "text": "Previous week",
+          "source": "Sources/FeatureHomeCore/UpcomingWeekCalendar.swift"
+        },
+        {
+          "text": "Next week",
+          "source": "Sources/FeatureHomeCore/UpcomingWeekCalendar.swift"
         },
         {
           "text": "Hide calendar",
@@ -1808,7 +1817,7 @@
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/FeatureSettings/HomeRowsSettingsView.swift",
       "Sources/FeatureSettings/HomeSectionSettingsViews.swift",
-      "Sources/FeatureSettings/CollectionSectionSettingsView.swift",
+      "Sources/CoreUI/MediaRowSection.swift",
       "Sources/CoreUI/HomeSectionStatusView.swift",
       "Sources/CoreModels/HomeSectionIssue.swift",
       "Sources/FeatureSettings/ContinueWatchingNextUpControl.swift",
@@ -1823,16 +1832,16 @@
       "Sources/CoreUI/ProfileSettingsCategory.swift",
       "Sources/CoreModels/HeroSourceKind.swift",
       "Sources/FeatureSettings/HomeEditorAutosavingNameInput.swift",
-      "Sources/FeatureSettings/HomeContentPickerView.swift",
+      "Sources/CoreUI/ContentStateView.swift",
       "Sources/CoreModels/ThemeSettings.swift"
     ],
     "watch": [
       "Sources/FeatureSettings/Home",
       "Sources/FeatureSettings/Hero",
       "Sources/CoreModels/Home",
-      "Sources/CoreModels/Navigation",
-      "Sources/FeatureSettings/Collection",
-      "Sources/AppShelliOS/PlozziOSRootView.swift"
+      "Sources/AppShelliOS/PlozziOSRootView.swift",
+      "Sources/CoreUI/MediaRowSection.swift",
+      "Sources/FeatureHomeCore/HomeViewModel.swift"
     ],
     "platforms": [
       "Apple TV",
@@ -1934,22 +1943,6 @@
           "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
         },
         {
-          "text": "Name",
-          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
-        },
-        {
-          "text": "Collections",
-          "source": "Sources/FeatureSettings/HomeContentPickerView.swift"
-        },
-        {
-          "text": "Sort",
-          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
-        },
-        {
-          "text": "Filter",
-          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
-        },
-        {
           "text": "Appearance",
           "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
         },
@@ -1962,20 +1955,16 @@
           "source": "Sources/CoreModels/ThemeSettings.swift"
         },
         {
-          "text": "Layout",
-          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
-        },
-        {
-          "text": "Add to Home",
-          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
-        },
-        {
-          "text": "Content",
-          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
-        },
-        {
           "text": "Save changes",
-          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+          "source": "Sources/FeatureSettings/HomeSectionSettingsViews.swift"
+        },
+        {
+          "text": "Refresh details",
+          "source": "Sources/CoreUI/MediaRowSection.swift"
+        },
+        {
+          "text": "Try Again",
+          "source": "Sources/CoreUI/ContentStateView.swift"
         },
         {
           "text": "Details",
@@ -3010,7 +2999,7 @@
     "slug": "audio",
     "title": "Audio tracks and output",
     "seoTitle": "Choose Plozz audio tracks, correct lip sync, and adjust output",
-    "description": "Choose audio languages and output compatibility, correct lip sync, adjust Apple TV dialogue, use mobile background audio, and preview detail-page music.",
+    "description": "Choose audio languages, commentary or audio description, correct lip sync, adjust output and Apple TV dialogue, and use background audio on iPhone or iPad.",
     "section": "Playback",
     "kind": "reference",
     "file": "audio.md",
@@ -3031,10 +3020,10 @@
       "Sources/FeaturePlayback/SubtitleDownloadPanel.swift",
       "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
       "Sources/FeaturePlayback/PlayerAudioSyncAdjustment.swift",
-      "Sources/FeaturePlayback/LiveChannelTransport.swift",
-      "Sources/FeaturePlayback/PlayerViewModel.swift",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
-      "Sources/FeaturePlayback/SeriesTrackMemory.swift"
+      "Sources/FeaturePlayback/SeriesTrackMemory.swift",
+      "Sources/FeaturePlayback/TrackMenuBuilder.swift",
+      "Sources/CoreModels/TrackLabeling.swift"
     ],
     "watch": [
       "Sources/FeatureHomeCore/ThemeMusic",
@@ -3042,7 +3031,7 @@
       "Sources/FeatureSettings/LosslessAudioControl.swift",
       "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
-      "Sources/FeatureSettings/ThemeMusicVolumeControl.swift"
+      "Sources/CoreModels/TrackLabeling.swift"
     ],
     "platforms": [
       "Apple TV",
@@ -3058,6 +3047,14 @@
         {
           "text": "Playback options",
           "source": "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift"
+        },
+        {
+          "text": "Commentary",
+          "source": "Sources/FeaturePlayback/TrackMenuBuilder.swift"
+        },
+        {
+          "text": "Audio Description",
+          "source": "Sources/FeaturePlayback/TrackMenuBuilder.swift"
         },
         {
           "text": "Preferred audio language",
@@ -3227,7 +3224,7 @@
       "Sources/CoreModels/SubtitleBehavior.swift",
       "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
       "Sources/FeaturePlayback/SystemCaptionAppearance.swift",
-      "Sources/CoreModels/SubtitleStyleStore.swift"
+      "Sources/CoreModels/TrackLabeling.swift"
     ],
     "watch": [
       "Sources/FeaturePlayback/",
@@ -3235,7 +3232,7 @@
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/CoreModels/Subtitle",
-      "Sources/AppRuntime/ExternalPlaybackRuntime.swift"
+      "Sources/CoreModels/TrackLabeling.swift"
     ],
     "platforms": [
       "Apple TV",
@@ -3244,6 +3241,10 @@
     ],
     "ui": {
       "references": [
+        {
+          "text": "auto",
+          "source": "Sources/FeaturePlayback/TrackMenuBuilder.swift"
+        },
         {
           "text": "Auto-Move Away from Controls",
           "source": "Sources/CoreModels/SubtitleStyle.swift"

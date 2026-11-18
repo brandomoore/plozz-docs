@@ -1,6 +1,6 @@
 # Follow upcoming releases
 
-Follow new episodes and digital movie releases for titles you watch, save, or request. **Upcoming** is your calendar; [Discover](/discover/) offers broader suggestions.
+Follow episodes and digital movie releases for titles you watch, save, or request. **Upcoming** is your calendar; [Discover](/discover/) offers broader suggestions.
 
 ## Open your calendar
 
@@ -10,23 +10,23 @@ Home's **Coming Soon** row previews upcoming titles. Open its **See all** card o
 
 ## Choose a date
 
-Open the **Calendar** button and select a day. On a wide iPad layout, the calendar appears beside the titles; **Hide calendar** and **Show calendar** collapse or restore it.
+On Apple TV, select a day in the week strip above the titles. Use **Previous week** or **Next week** to browse weeks, or **Calendar** to jump farther. Choosing a day moves to that date's releases; changing weeks alone does not.
 
-Apple TV shows today through 90 days ahead. iPhone/iPad also includes the past 30 days: choose an earlier date in Calendar, or deliberately pull down past Today. A short pull springs back; tapping Upcoming again returns to today.
+On iPhone/iPad, open **Calendar** and select a day. Wide iPad layouts show it beside the titles; **Hide calendar** and **Show calendar** collapse or restore it.
 
-Open a card for details. An announced date does not mean a playable copy has reached your library.
+Apple TV includes today through 90 days ahead. Mobile also includes the past 30 days: pull deliberately past Today to reveal them; a short pull springs back. Tap **Upcoming** again to return to today.
 
-Movie dates are digital releases for your device's region, not cinema dates or guaranteed streaming-subscription availability. Episodes released together can share one card.
+Open a card for details. A release date does not guarantee a playable copy in your library. Movie dates are digital releases for your device's region, not cinema dates or promised subscription availability. Episodes released together can share one card.
 
 ## Choose what appears
 
-Open **Filters**, then work through these choices:
+Open **Filters**:
 
 - **Type**: choose **All**, **Shows**, or **Movies**.
 - Keep **Watching** for shows with viewing history and in-progress movies, **Watchlist** for saved movies/shows, or **Requested** for this profile's pending or approved movie/show requests on its selected [Seerr account](/media-requests/#choose-between-accounts). Requests from other household users are not included.
 - **Season premieres only**: keep first-episode releases without removing movies. **Hide watched movies** removes completed movies.
 
-**Reset filters** restores all types and interests and turns both switches off. These calendar filters do not change Coming Soon.
+**Reset filters** restores all types and interests and turns both switches off, without changing Coming Soon.
 
 ## Hide or restore a title
 
@@ -36,6 +36,6 @@ Hidden titles are saved for this profile on this device. Hiding does not remove 
 
 ## If dates are missing
 
-In **Filters**, choose **Refresh**; use **Retry** after **Some sources couldn't refresh.** Existing dates can remain while a source is unavailable.
+Choose **Filters > Refresh**; use **Retry** after **Some sources couldn't refresh.** Existing dates can remain during an outage.
 
 For **Nothing upcoming yet**, check your profile, history, and saved titles. For **No matching releases**, reset filters or restore hidden titles. Dates depend on matching and announced schedules. Seerr is needed only for requests. On mobile, turn **Offline Mode** off to refresh.
