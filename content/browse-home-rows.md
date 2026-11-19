@@ -29,6 +29,8 @@ Apple TV places filtering before sorting above the grid. On iPhone/iPad, use the
 
 Changing filters or sorting may need to load the rest of the row before showing results. Wait for loading to finish. Custom rows start with their saved choices, but changes here do not rearrange Home or change your library's saved browse settings.
 
+With **Source order**, server recommendations keep their own ordering and grouping. For example, a Recently Added row can show a series because new episodes arrived, even when the series itself was added long ago.
+
 ## When the grid is empty or fails
 
 For **No titles to show**, use **Clear Filters** if offered, or choose **All** in both pickers. For a loading error, choose **Retry**.

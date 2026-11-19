@@ -59,6 +59,8 @@ Under a standalone playlist in **TV Sources**, use **Check channel availability*
 
 ## Stop unexpected channel previews
 
+On Apple TV, the first-use prompt offers **Turn on previews** or **Keep previews off**.
+
 On Apple TV, **Settings > Live TV > Guide preferences > Auto preview** plays the focused channel as you browse. **Keep watching while browsing** keeps the watched channel instead of changing previews; it requires Auto preview.
 
 On both platforms, **Preview after watching** keeps a channel behind the guide after leaving full screen. These controls are separate from [Home trailers](/home-and-navigation/#choose-the-hero).

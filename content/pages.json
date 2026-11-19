@@ -1109,27 +1109,27 @@
       "Sources/CoreUI/BrowseRowHeading.swift",
       "Sources/CoreUI/MediaRowBrowseCard.swift",
       "Sources/CoreUI/MediaRowView.swift",
-      "Sources/HeroUI/FeaturedMediaRow.swift",
-      "Sources/FeatureHomeCore/HomePresentationRow.swift",
       "Sources/FeatureHomeCore/HomeRowBrowseView.swift",
       "Sources/FeatureHomeCore/HomeRowBrowseModel.swift",
       "Sources/FeatureHomeCore/HomeRowBrowseFactory.swift",
       "Sources/FeatureHomeCore/HomeRow.swift",
-      "Sources/CoreUI/BrowseQueryControls.swift",
       "Sources/CoreUI/HomeContentQueryControls.swift",
-      "Sources/CoreModels/HomeContentQuery.swift",
       "Sources/CoreModels/WatchlistBrowsePreferences.swift",
       "Sources/CoreModels/MediaProvider.swift",
       "Sources/CoreModels/HomeRowFeed.swift",
-      "Sources/CoreModels/HomeLibraryVisibility.swift"
+      "Sources/CoreModels/HomeLibraryVisibility.swift",
+      "Sources/CoreModels/HomeContentPageLoader.swift",
+      "Sources/ProviderJellyfin/JellyfinHomeLayout.swift",
+      "Sources/ProviderPlex/PlexHomeLayout.swift",
+      "Sources/ProviderSilo/SiloHomeLayout.swift"
     ],
     "watch": [
       "Sources/FeatureHomeCore/HomeRow",
-      "Sources/CoreUI/HomeContent",
-      "Sources/CoreModels/HomeContentQuery.swift",
-      "Sources/FeatureHome/HomeView.swift",
-      "Sources/AppShelliOS/PlozziOSHomeView.swift",
-      "Sources/CoreUI/Browse"
+      "Sources/CoreUI/Browse",
+      "Sources/CoreModels/Home",
+      "Sources/ProviderJellyfin/JellyfinHomeLayout.swift",
+      "Sources/ProviderPlex/PlexHomeLayout.swift",
+      "Sources/ProviderSilo/SiloHomeLayout.swift"
     ],
     "ui": {
       "references": [
@@ -2189,7 +2189,7 @@
     "ui": {
       "references": [
         {
-          "text": "Playback",
+          "text": "More",
           "source": "Sources/FeaturePlayback/PlayerControls.swift"
         },
         {
@@ -2337,16 +2337,28 @@
           "source": "Sources/FeaturePlayback/PlaybackOptionsPane.swift"
         },
         {
-          "text": "Playback Speed",
+          "text": "Speed",
           "source": "Sources/FeaturePlayback/PlaybackOptionsPane.swift"
         },
         {
           "text": "Playback Speed",
+          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "Playback Speed",
           "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
         },
         {
-          "text": "Video",
+          "text": "Custom…",
           "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Zoom",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Playback settings",
+          "source": "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift"
         },
         {
           "text": "See more",
@@ -2740,19 +2752,19 @@
       "Sources/ProviderJellyfin/JellyfinStreamingQuality.swift",
       "Sources/ProviderPlex/PlexStreamingQuality.swift",
       "Sources/ProviderSilo/SiloStreamingQuality.swift",
+      "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
       "Sources/CoreModels/PlaybackReadAhead.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
-      "Sources/CoreModels/PlaybackSettings.swift",
       "Sources/FeaturePlayback/PlayerViewModel.swift",
       "Sources/FeaturePlayback/StreamingPlaybackFeedback.swift"
     ],
     "watch": [
       "Sources/CoreModels/Streaming",
-      "Sources/CoreModels/PlaybackReadAhead",
       "Sources/FeatureSettings/PlaybackReadAhead",
-      "Sources/FeaturePlayback/StreamingPlayback",
-      "Sources/EnginePlozzigen/",
-      "Sources/AppShelliOS/PlozziOSStreamingQuality"
+      "Sources/AppShelliOS/PlozziOSStreamingQuality",
+      "Sources/AppShelliOS/PlozziOSPlayer",
+      "Sources/FeaturePlayback/PlayerMoreMenu.swift",
+      "Sources/ProviderSilo/SiloStreamingQuality.swift"
     ],
     "ui": {
       "references": [
@@ -2785,10 +2797,6 @@
           "source": "Sources/AppShelliOS/PlozziOSStreamingQuality.swift"
         },
         {
-          "text": "Quality limit",
-          "source": "Sources/AppShelliOS/PlozziOSStreamingQuality.swift"
-        },
-        {
           "text": "Apply",
           "source": "Sources/AppShelliOS/PlozziOSStreamingQuality.swift"
         },
@@ -2809,12 +2817,16 @@
           "source": "Sources/CoreModels/StreamingQuality.swift"
         },
         {
-          "text": "Video",
+          "text": "Advanced…",
           "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
         },
         {
           "text": "Quality",
           "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Playback settings",
+          "source": "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift"
         },
         {
           "text": "Playback options",
@@ -2904,7 +2916,7 @@
     "ui": {
       "references": [
         {
-          "text": "Playback",
+          "text": "More",
           "source": "Sources/FeaturePlayback/PlayerControls.swift"
         },
         {
@@ -2912,8 +2924,12 @@
           "source": "Sources/FeaturePlayback/PlaybackOptionsPane.swift"
         },
         {
-          "text": "Video",
+          "text": "Zoom",
           "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Playback settings",
+          "source": "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift"
         },
         {
           "text": "Playback options",
@@ -3221,18 +3237,18 @@
       "Sources/CoreUI/ProfileSettingsCategory.swift",
       "Sources/FeaturePlayback/SubtitleTrackController.swift",
       "Sources/FeaturePlayback/SubtitleDownloadPanel.swift",
-      "Sources/CoreModels/SubtitleBehavior.swift",
-      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
-      "Sources/FeaturePlayback/SystemCaptionAppearance.swift",
-      "Sources/CoreModels/TrackLabeling.swift"
+      "Sources/CoreModels/TrackLabeling.swift",
+      "Sources/CoreModels/RemoteSubtitleContext.swift",
+      "Sources/FeaturePlayback/RemoteSubtitleAcquisition.swift",
+      "Sources/ProviderSilo/SiloSubtitles.swift"
     ],
     "watch": [
       "Sources/FeaturePlayback/",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
-      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/CoreModels/Subtitle",
-      "Sources/CoreModels/TrackLabeling.swift"
+      "Sources/CoreModels/RemoteSubtitleContext.swift",
+      "Sources/ProviderSilo/SiloSubtitles.swift"
     ],
     "platforms": [
       "Apple TV",
@@ -3698,8 +3714,8 @@
       "Sources/FeatureLiveTV/LiveTVMultiviewTouchChrome.swift",
       "Sources/FeatureLiveTV/LiveTVSourceApprovalControl.swift",
       "Sources/FeatureLiveTV/LiveTVMultiviewOverlay.swift",
-      "Sources/FeatureLiveTV/LiveTVMultiviewGuideActions.swift",
       "Sources/FeatureSettings/LiveTVSettingsView.swift",
+      "Sources/FeatureLiveTV/LiveTVPreviewIntroductionView.swift",
       "Sources/FeatureLiveTV/LiveTVSourceAccessGate.swift",
       "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift",
       "Sources/FeatureLiveTV/LibraryChannelEditorView.swift",
@@ -3864,6 +3880,14 @@
           "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
         },
         {
+          "text": "Turn on previews",
+          "source": "Sources/FeatureLiveTV/LiveTVPreviewIntroductionView.swift"
+        },
+        {
+          "text": "Keep previews off",
+          "source": "Sources/FeatureLiveTV/LiveTVPreviewIntroductionView.swift"
+        },
+        {
           "text": "Keep watching while browsing",
           "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
         },
@@ -4004,6 +4028,34 @@
         },
         {
           "text": "Channel names",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "Live TV opens to",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "Categories",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "Guide",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "Channel order",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "Channel number",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "Name",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "Recently watched",
           "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
         },
         {
@@ -6098,9 +6150,9 @@
       "Sources/AppShelliOS/PlozziOSPlayer",
       "Sources/CoreModels/PlaybackOrientation.swift",
       "Sources/FeaturePlayback/Player",
+      "Sources/FeaturePlayback/LiveChannel",
       "Sources/TopShelfKit/",
-      "Sources/FeatureSettings/TopShelf",
-      "Sources/CoreModels/VideoZoomPreference.swift"
+      "Sources/FeatureSettings/TopShelf"
     ],
     "platforms": [
       "Apple TV",
@@ -6138,7 +6190,7 @@
           "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
         },
         {
-          "text": "Go Live",
+          "text": "Jump to live",
           "source": "Sources/FeaturePlayback/LiveChannelPlayerView.swift"
         },
         {

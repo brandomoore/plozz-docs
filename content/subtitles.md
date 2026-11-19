@@ -60,7 +60,9 @@ For mistimed text, use the **Subtitle Sync** clock button on Apple TV or **Subti
 
 ## Missing, wrong, or drifting subtitles
 
-Check the version, language, and remembered series choice. For search failures, check the server's subtitle-service configuration.
+Check the version, language, and remembered series choice. If search is unavailable or incomplete, check your account permissions and the server's subtitle providers. Incomplete searches do not mean there are no matches.
+
+If results expire, search again. If a download cannot be confirmed, check the subtitle list before retrying; it may already have been added.
 
 A steady offset may be correctable with delay. Increasing drift can mean a different release or cut; try a matching track instead of increasing the offset.
 

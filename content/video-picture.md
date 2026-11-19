@@ -4,7 +4,7 @@ Fit the picture to your screen, reduce black borders, or enhance lower-resolutio
 
 ## Choose how the picture fits
 
-Reveal player controls. Open **Playback > Zoom Mode** on Apple TV, or **Video** on iPhone/iPad; portrait puts Video inside **Playback options**.
+Reveal player controls. On Apple TV, open **More > Zoom Mode**. On iPhone/iPad, choose **Zoom** inside **Playback options** in portrait or **Playback settings** in landscape; both menus use an ellipsis.
 
 - **Normal** fits the whole frame without stretching.
 - **Auto-crop black bars** enlarges the detected picture proportionally. Some bars can remain; without detection, it fits the whole frame.
@@ -36,6 +36,6 @@ Choose Standard or Animation yourself if the metadata leads to the wrong choice.
 
 Enhancement needs AetherEngine, supported hardware, and a larger display. HDR and 4K are not enhanced. It does not apply to Apple's native player or another player app. Choose Off to compare the original appearance.
 
-Settings apply to new playback, including Live TV. During eligible seekable video, **Playback > Upscaling** on Apple TV or **Video > Upscaling** on mobile changes only the current session. Playback reloads around your position; this is not an instant comparison. Live TV, disc menus, separate-audio videos, and some share connections do not offer that switch.
+Settings apply to new playback, including Live TV. During eligible seekable video, **More > Upscaling** on Apple TV or **Upscaling** in **Playback options**/**Playback settings** on mobile changes only the current session. Playback reloads around your position; this is not an instant comparison. Live TV, disc menus, separate-audio videos, and some share connections do not offer that switch.
 
 If **Couldn't change upscaling** appears, choose **OK**, then try again or reopen the video.

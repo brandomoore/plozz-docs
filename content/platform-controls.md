@@ -16,9 +16,9 @@ Apple TV users can [automatically open their remembered Plozz profile](/apple-tv
 
 On Apple TV, a remote's **Guide** button opens enabled Live TV; during full-screen channel playback, it opens the guide over the picture.
 
-For a channel with a usable rewind window, reveal controls and use the timeline to seek within that window. **Go Live** returns to the current broadcast. This is not a recording or a promise to restart any guide program. Scheduled library channels use **Jump to now** instead.
+For a channel with a usable rewind window, reveal controls and use the timeline to seek within that window. **Jump to live** returns to the current broadcast. This is not a recording or a promise to restart any guide program. Scheduled library channels use **Jump to now** instead.
 
-**Settings > Playback > Live TV buffer** defaults to **Automatic**. Choose 10, 20, 30, or 45 seconds to request a cushion behind live for new channel loads. More buffering can reduce interruptions but adds delay and may slow tuning. **Go Live** respects the cushion. It is device-local, independent of Video buffer, and cannot create a rewind window or affect scheduled library playback.
+**Settings > Playback > Live TV buffer** defaults to **Automatic**. Choose 10, 20, 30, or 45 seconds to request a cushion behind live for new channel loads. More buffering can reduce interruptions but adds delay and may slow tuning. **Jump to live** respects the cushion. It is device-local, independent of Video buffer, and cannot create a rewind window or affect scheduled library playback.
 
 ## Launch from Apple TV Top Shelf
 

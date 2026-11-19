@@ -336,11 +336,15 @@
         "Sources/CoreModels/VersionPreferenceStore.swift",
         "Sources/FeatureHomeCore/DetailPlaybackSelection.swift",
         "Sources/FeaturePlayback/PlayerOptionsPanel.swift",
+        "Sources/FeaturePlayback/PlayerControls.swift",
+        "Sources/FeaturePlayback/PlaybackOptionsPane.swift",
+        "Sources/FeaturePlayback/PlayerMoreMenu.swift",
+        "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift",
         "Sources/AppShelliOS/PlozziOSPlayerVersions.swift",
         "Sources/MediaDownloads/DownloadedMediaRegistry.swift",
         "Sources/MediaDownloads/RegistryOfflinePlaybackResolver.swift"
       ],
-      "answer": "The first multi-version movie/episode asks How should versions be selected? Choose Ask every time, Choose automatically or Use first from server, and change it later under Settings > Playback > Version selection. Automatic selection weighs resolution, HDR, bitrate and device compatibility; How automatic selection works explains the ranking. With Remember series version choices enabled, a matching remembered type takes priority in automatic mode and is preselected in ask mode. Missing types fall back to the device recommendation without promising identical episode files. Use first from server follows the selected account's version order, excludes external-service shortcuts and ignores remembered choices; an explicit title/player version choice still wins. On mobile while online, a usable matching download takes precedence over streaming even with another source/version selected; check the saved edition rather than assuming a source switch forces streaming. Offline Mode requires a saved copy of an explicitly selected version instead of substituting a different downloaded version."
+      "answer": "The first multi-version movie/episode asks How should versions be selected? Choose Ask every time, Choose automatically or Use first from server, and change it later under Settings > Playback > Version selection. During playback, Apple TV places Version inside More; mobile places it inside portrait Playback options or landscape Playback settings. Changing versions preserves the account and position, not timing alignment between different cuts. Automatic selection weighs resolution, HDR, bitrate and device compatibility; How automatic selection works explains the ranking. With Remember series version choices enabled, a matching remembered type takes priority in automatic mode and is preselected in ask mode. Missing types fall back to the device recommendation without promising identical episode files. Use first from server follows the selected account's version order, excludes external-service shortcuts and ignores remembered choices; an explicit title/player version choice still wins. On mobile while online, a usable matching download takes precedence over streaming even with another source/version selected; check the saved edition rather than assuming a source switch forces streaming. Offline Mode requires a saved copy of an explicitly selected version instead of substituting a different downloaded version."
     },
     "device-setup": {
       "documents": [
@@ -1057,7 +1061,6 @@
         "Sources/ProviderSilo/SiloStreamingQuality.swift",
         "Sources/CoreModels/PlaybackReadAhead.swift",
         "Sources/FeatureSettings/PlaybackReadAheadControl.swift",
-        "Sources/CoreModels/PlaybackSettings.swift",
         "Sources/FeaturePlayback/PlayerViewModel.swift",
         "Sources/FeaturePlayback/StreamingPlaybackFeedback.swift",
         "Sources/AppShelliOS/PlozziOSPlaybackEngineComposition.swift",
@@ -1067,9 +1070,10 @@
         "Sources/CoreModels/LivePlaybackBuffer.swift",
         "Sources/FeaturePlayback/LiveChannelPlayerView.swift",
         "Sources/FeatureSettings/VideoUpscalingControl.swift",
-        "Sources/CoreModels/VideoUpscaling.swift"
+        "Sources/CoreModels/VideoUpscaling.swift",
+        "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
       ],
-      "summary": "Set profile-owned mobile network defaults or a Video > Quality session limit. Maximum removes the app's reduction limit, not server compatibility decisions; lower limits permit originals only with fitting known dimensions/bitrate, otherwise conversion can be required. Custom limits take a supported resolution and whole-number total Kbps; invalid saved limits must be replaced rather than treated as Maximum. HEVC preference can fall back to H.264 at the same limit. Playing in SDR identifies an SDR conversion; Current stream uses active facts, Declared stream bitrate is not throughput, and missing facts remain Not available. Preserve server permission/capacity, Silo resolution/codec limits and forced-conversion recovery. Compatible converted streams can now hand off to an external player; mobile quality limits remain in the preparation request rather than being bypassed. Native routes with separate audio or incompatible authorization still stay in Plozz. Device-local Video buffer applies on new sessions across all platforms, not quality/downloads, with space/native-path limits; Live TV buffer is a separate cushion, not recording."
+      "summary": "Set profile-owned mobile network defaults or a session limit through Quality in portrait Playback options or landscape Playback settings. Presets apply immediately; Advanced… opens the sheet with Quality limit, Transcoding codec, Force transcoding and Apply. Maximum removes the app's reduction limit, not server compatibility decisions; lower limits permit originals only with fitting known dimensions/bitrate, otherwise conversion can be required. Custom limits take a supported resolution and whole-number total Kbps; invalid saved limits must be replaced rather than treated as Maximum. HEVC preference can fall back to H.264 at the same limit except for Silo, whose conversion is H.264 with mono/stereo AAC and supported height/bitrate limits. Playing in SDR identifies an SDR conversion; Current stream uses active facts, Declared stream bitrate is not throughput, and missing facts remain Not available. Preserve server permission/capacity and forced-conversion recovery. Compatible converted streams can hand off to an external player; mobile quality limits remain in the preparation request rather than being bypassed. Native routes with separate audio or incompatible authorization still stay in Plozz. Device-local Video buffer applies on new sessions across all platforms, not quality/downloads, with space/native-path limits; Live TV buffer is a separate cushion, not recording."
     },
     "audio": {
       "documents": [
@@ -1154,18 +1158,18 @@
         "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
         "Sources/AppShelliOS/PlozziOSSettingsView.swift",
         "Sources/CoreModels/SubtitleBehavior.swift",
-        "Sources/CoreModels/SubtitleSelection.swift",
         "Sources/CoreModels/SubtitleSearchPreference.swift",
         "Sources/FeaturePlayback/TrackMenuBuilder.swift",
         "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
         "Sources/FeaturePlayback/PlayerMoreMenu.swift",
         "Sources/CoreModels/SubtitleStyle.swift",
         "Sources/FeaturePlayback/SubtitleOverlayView.swift",
-        "Sources/FeaturePlayback/VideoPresentationView.swift",
         "Sources/CoreModels/TrackLabeling.swift",
-        "Sources/FeaturePlayback/SubtitleOverlayLoader.swift"
+        "Sources/CoreModels/RemoteSubtitleContext.swift",
+        "Sources/FeaturePlayback/RemoteSubtitleAcquisition.swift",
+        "Sources/ProviderSilo/SiloSubtitles.swift"
       ],
-      "summary": "Select/search tracks, distinguish forced/SDH and per-content policies, enter mobile language codes or follow device language, style text or Live TV, and manage second tracks. Mobile Subtitles > Advanced… contains Second Track, Subtitle Delay and Appearance > Style; Search & Download… opens search separately. Portrait starts in Playback options. Prefer SDH permits fallback; Only SDH makes automatic/search/download choices strict without overriding manual or remembered choices. Matching device caption style replaces custom appearance after confirmation; appearance edits leave matching, but control-avoidance-only edits preserve it. Position selects Bottom of screen or Bottom of video, and Vertical offset measures upward from that reference; Extra Line Position offers Above/Center/Below for wrapped-line growth, not second-track placement. Default-on Auto-Move Away from Controls follows those placement controls in both editors, lifts colliding Plozz-rendered text/eligible image captions while controls are visible, and returns them when controls disappear; disabling allows overlap. The picture-placement section retains active-picture detection with video-frame fallback, lower-dialogue image movement preserving size/fixed artwork, and file-formatting overrides. Explain embedded AetherEngine versus fetchable native text, image-primary exclusion, secondary Off, timing and AirPlay limits. External apps receive eligible fetchable SRT sidecars without Plozz styling/dual guarantees; custom templates receive no subtitle links. Choose a track explains retained source-authored names for same-language versions and the auto qualifier for an inferred language, not translated captions."
+      "summary": "Select/search tracks, distinguish forced/SDH and per-content policies, enter mobile language codes or follow device language, style text or Live TV, and manage second tracks. Mobile Subtitles > Advanced… contains Second Track, Subtitle Delay and Appearance > Style; Search & Download… opens search separately. Portrait starts in Playback options. Search needs account permission and configured server providers; unavailable/incomplete searches are not empty results. Expired results require another search; uncertain downloads require checking the track list before retry. Silo acquisition is bound to the active item/file/play session. Prefer SDH permits fallback; Only SDH makes automatic/search/download choices strict without overriding manual or remembered choices. Matching device caption style replaces custom appearance after confirmation; appearance edits leave matching, but control-avoidance-only edits preserve it. Position selects Bottom of screen or Bottom of video, and Vertical offset measures upward from that reference; Extra Line Position offers Above/Center/Below for wrapped-line growth, not second-track placement. Default-on Auto-Move Away from Controls follows those placement controls in both editors, lifts colliding Plozz-rendered text/eligible image captions while controls are visible, and returns them when controls disappear; disabling allows overlap. The picture-placement section retains active-picture detection with video-frame fallback, lower-dialogue image movement preserving size/fixed artwork, and file-formatting overrides. Explain embedded AetherEngine versus fetchable native text, image-primary exclusion, secondary Off, timing and AirPlay limits. External apps receive eligible fetchable SRT sidecars without Plozz styling/dual guarantees; custom templates receive no subtitle links. Choose a track explains retained source-authored names for same-language versions and the auto qualifier for an inferred language, not translated captions."
     },
     "music": {
       "documents": [
@@ -1225,6 +1229,10 @@
       "documents": [
         {
           "slug": "live-tv-channels",
+          "anchor": "choose-where-live-tv-opens"
+        },
+        {
+          "slug": "live-tv-channels",
           "anchor": "tidy-channel-names"
         },
         {
@@ -1280,12 +1288,12 @@
         "Sources/FeatureLiveTVCore/LiveTVGuidePreparationModel.swift",
         "Sources/AppRuntime/IPTVAccountGuideIndex.swift",
         "Sources/ProviderSilo/SiloLibraryChannels.swift",
-        "Sources/AppRuntime/LiveTVLibraryRuntime.swift",
         "Sources/CoreModels/LiveTVViewSettingsStore.swift",
         "Sources/FeatureLiveTV/LiveTVGuideAutoUpdateModifier.swift",
-        "Sources/FeatureLiveTVCore/LiveTVGuideAutoUpdate.swift"
+        "Sources/FeatureLiveTVCore/LiveTVGuideAutoUpdate.swift",
+        "Sources/FeatureLiveTV/LiveTVPreviewIntroductionView.swift"
       ],
-      "summary": "Set up IPTV or server channels using direct M3U catalogues rather than web pages or single-stream HLS. EPG URL (optional) accepts XMLTV; Advanced options adds guides, authentication and separate playlist/stream versus guide headers. Guide headers apply to the first guide URL's server; empty fields follow playlist credentials. Prefer HTTPS. Distinguish device-local IPTV account file imports from encrypted standalone source-copy sync. Current IPTV accounts expose Refresh guide and household Sources > Edit connection, not standalone Playlist and guides, guide mapping, identity repair or availability scans. Standalone Kids approvals grant the whole playlist locally; IPTV accounts are enrolled as server sources and do not use that approval, so account selection and content review remain essential. Connect as IPTV account preserves the older source/preferences but not its approval protection on the new account; disable the duplicate source afterward. Category overrides, country-OR-language filtering, individual hiding and scan exclusions have distinct recovery paths. Identity restoration requires same-station/feed confirmation and carries favorites, hiding and mappings. Guide retention is not recording. Search tunes the live channel rather than replaying a program. Multiview supports four pictures subject to provider limits, with focus-selected audio on Apple TV and Audio on mobile. Auto preview and Keep watching while browsing are TV-only; Preview after watching is shared. Mobile network restrictions react to detected changes and may briefly use cellular; Low Data Mode pauses Live TV even on Wi-Fi. Library channels admit eligible Plex/Jellyfin/Emby/Silo originals, not native Silo TV. Automatic channels offer Retry/Refresh but are not individually editable. Custom channels need valid durations, exact-rating rules and explicit handling of unrated titles; schedules wait for already-scheduled programs and catalogue sync. History is default-off, profile-scoped and device-local; 90%-viewed completions use normal cross-server/tracker updates without resume writes. Live TV buffer trades tuning latency for a new-load cushion, respects Go Live, and is not recording or buffering for scheduled library files. Authorized account guide updates report stage progress across navigation; dismissing is not cancellation, and Guide ready does not promise every channel/date."
+      "summary": "Set up IPTV or server channels using direct M3U catalogues rather than web pages or single-stream HLS. EPG URL (optional) accepts XMLTV; Advanced options adds guides, authentication and separate playlist/stream versus guide headers. Guide headers apply to the first guide URL's server; empty fields follow playlist credentials. Prefer HTTPS. Distinguish device-local IPTV account file imports from encrypted standalone source-copy sync. Current IPTV accounts expose Refresh guide and household Sources > Edit connection, not standalone Playlist and guides, guide mapping, identity repair or availability scans. Standalone Kids approvals grant the whole playlist locally; IPTV accounts are enrolled as server sources and do not use that approval, so account selection and content review remain essential. Connect as IPTV account preserves the older source/preferences but not its approval protection on the new account; disable the duplicate source afterward. Live TV opens to chooses Categories or Guide; Channel order and Guide preferences > Recently watched affect browsing, not source access. These view choices stay profile/device-local. Category overrides, country-OR-language filtering, individual hiding and scan exclusions have distinct recovery paths. Identity restoration requires same-station/feed confirmation and carries favorites, hiding and mappings. Guide retention is not recording. Search tunes live rather than replaying a program. Multiview supports four pictures subject to provider limits, with focus-selected audio on Apple TV and Audio on mobile. TV first-use offers Turn on previews/Keep previews off; later Auto preview and Keep watching while browsing are TV-only, while Preview after watching is shared. Mobile network restrictions react to detected changes and may briefly use cellular; Low Data Mode pauses Live TV even on Wi-Fi. Library channels admit eligible Plex/Jellyfin/Emby/Silo originals, not native Silo TV. Automatic channels offer Retry/Refresh but are not individually editable. Custom channels need valid durations, exact-rating rules and explicit handling of unrated titles; schedules wait for already-scheduled programs and catalogue sync. History is default-off, profile-scoped and device-local; 90%-viewed completions use normal cross-server/tracker updates without resume writes. Live TV buffer trades tuning latency for a new-load cushion, respects Jump to live, and is not recording or buffering for scheduled library files. Authorized account guide updates report stage progress across navigation; dismissing is not cancellation, and Guide ready does not promise every channel/date."
     },
     "offline": {
       "documents": [
@@ -1762,7 +1770,7 @@
         "Sources/CoreModels/VideoZoomPreference.swift",
         "Sources/FeaturePlayback/PlayerVideoZoom.swift"
       ],
-      "summary": "Explain remote/touch/keyboard, VoiceOver, optional gestures, iPhone full-window orientation versus iPad system rotation, and TV fades that do not enable system matching. Player orientation choices are Follow device orientation, Portrait, Landscape auto, Landscape left and Landscape right. Follow device orientation respects system rotation lock; Landscape auto uses the active phone player's motion lease to follow sideways direction even with rotation lock enabled, with fixed choices retaining their direction. Trace NSMotionUsageDescription and the runtime full-window/phone checks rather than treating an entitlement or label as proof of iPad support. Mobile pinch changes cutout-safe framing while in Auto-crop and switches Normal/Crop otherwise. The picture guide explains separate saved iPhone/iPad/Apple TV defaults, remembered movie/series overrides and live channel reset to the platform default. Link Apple TV's automatic-sign-in and background-browsing return checks, distinct from playback departures and brief inactive interruptions. Top Shelf offers shared local adult controls, Posters/Full Screen and 1-20 counts defaulting four; source-scoped snapshots retain authorization/spoiler limits. Trace Guide OS entry and music Now Playing commands. Distinguish live seeking/Go Live from library-channel Jump to now and recording. Live TV buffer applies on new live stream loads, not library files, and Go Live retains its latency/tuning tradeoffs. Conversion diagnostics separate active video/audio facts from original-source details; neither establishes physical speaker layout. Throughput is not encoded bitrate and temporary cache is not downloads. Retain remuxed AirPlay subtitle loss, Multiview/PiP limits and authorized external-player returns."
+      "summary": "Explain remote/touch/keyboard, VoiceOver, optional gestures, iPhone full-window orientation versus iPad system rotation, and TV fades that do not enable system matching. Player orientation choices are Follow device orientation, Portrait, Landscape auto, Landscape left and Landscape right. Follow device orientation respects system rotation lock; Landscape auto uses the active phone player's motion lease to follow sideways direction even with rotation lock enabled, with fixed choices retaining their direction. Trace NSMotionUsageDescription and the runtime full-window/phone checks rather than treating an entitlement or label as proof of iPad support. Mobile pinch changes cutout-safe framing while in Auto-crop and switches Normal/Crop otherwise. The picture guide explains separate saved iPhone/iPad/Apple TV defaults, remembered movie/series overrides and live channel reset to the platform default. Link Apple TV's automatic-sign-in and background-browsing return checks, distinct from playback departures and brief inactive interruptions. Top Shelf offers shared local adult controls, Posters/Full Screen and 1-20 counts defaulting four; source-scoped snapshots retain authorization/spoiler limits. Trace Guide OS entry and music Now Playing commands. Distinguish live seeking/Jump to live from library-channel Jump to now and recording. Live TV buffer applies on new live stream loads, not library files, and Jump to live retains its latency/tuning tradeoffs. Conversion diagnostics separate active video/audio facts from original-source details; neither establishes physical speaker layout. Throughput is not encoded bitrate and temporary cache is not downloads. Retain remuxed AirPlay subtitle loss, Multiview/PiP limits and authorized external-player returns."
     }
   },
   "modules": {
@@ -1929,13 +1937,13 @@
         "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift",
         "Sources/FeaturePlayback/PlayerContinueWatchingPanel.swift",
         "Sources/FeaturePlayback/DiscMenuPlayerContent.swift",
-        "Sources/FeaturePlayback/DiscVideoPicker.swift",
+        "Sources/FeaturePlayback/PlayerMoreMenu.swift",
         "Sources/FeaturePlayback/PlayerAudioSyncAdjustment.swift",
         "Sources/CoreModels/VideoZoomPreference.swift",
         "Sources/FeaturePlayback/TrackMenuBuilder.swift",
         "Sources/CoreModels/TrackLabeling.swift"
       ],
-      "summary": "Use task sections for player preferences, text/image/dual-subtitle limits, confirmed caption-style replacement and live rewind. Mobile menus consolidate in portrait and separate in landscape; Advanced… owns second subtitles, delay and style, while Video owns Quality/zoom. Normal/Auto-crop black bars/Crop/Stretch/Custom zoom has an explained 50%-200% range. Supported movies/episodes use their saved platform zoom default, initially Auto-crop when no explicit title choice exists; explicit movie/series choices persist per profile independently of track-memory switches and can follow strongly matched copies across servers. Live channel changes use the saved platform default without per-channel memory. Audio Sync is reachable for capability-advertising AetherEngine routes, including eligible buffered live playback; it is not native-player support. Conditional session Upscaling uses a preserving reload without changing the saved profile default. Chapters needs usable provider/file chapters; seeking preserves play/pause intent and episode spoilers, and thumbnails are optional. Default-on profile preferences gate Chapters, Cast, Episodes, Playlist and Continue Watching cards while retaining Info. Continue Watching uses loaded Home progress, excluding the current item and same-source episodes of its show. TV and mobile hosts prepare the selected title's authorized source/version before saving outgoing progress and replacing playback at its own position. Identify songs defaults on per profile and shows confirmed ShazamKit matches alongside Info, stacked vertically on narrow cards. Every match card opens Open song: Spotify search, conditional Apple Music, YouTube Music, Amazon Music, Deezer and TIDAL searches. TV app-opening failure shows a phone QR link; mobile opens an app/browser. Recognition consumes decoded playback audio, not microphone input, needs internet and cannot run in Offline Mode, the native engine or remote-bypass HLS. Movie audio language choices are remembered automatically; series audio language still requires its switch, and neither stores an exact mix. Prefer lossless audio selects the AetherEngine adapter's lossless/surroundCompat request at each video/live load; neither the native engine nor an external app consumes this device preference, and requested mode does not guarantee actual output. Live TV buffer is a new-load cushion with latency/tuning costs, separate from library files. AetherEngine advertises audio delay only on eligible retimeable/seekable audio routes; neither wired engine advertises engine-local dialogue processing; the TV system bridge separately exposes output-gated global Reduce Loud Sounds/Enhance Dialogue and recovery. Cast page navigation ends playback. Diagnostics separate active conversion facts, original sources, measured throughput, player-window/buffer values and temporary cache without claiming physical speaker layout. PlayerScreenshotHook and LiveChannelScreenshotHook only preselect panels for internal capture; they expose no reader screenshot workflow. BorrowedTrailerPlayer supplies standard TV transport to an existing hero preview without a provider session, track menus or watch-history reporting; speed and zoom are its advertised engine capabilities. Track labels preserve meaningful original names and regional/version details, while source-backed Commentary/Audio Description and inferred-language auto qualifiers are inventoried on their TV/mobile menu parents and explained in Audio/Subtitles."
+      "summary": "Use task sections for player preferences, text/image/dual-subtitle limits, confirmed caption-style replacement and live rewind. Apple TV orders Audio, Subtitles, the current-rate Playback Speed button and More; More owns Zoom Mode, eligible Upscaling and nested Version. Mobile uses portrait Playback options or landscape Audio/Subtitles/speed plus Playback settings, without a Video submenu. Quality presets apply directly; Advanced… opens its sheet. Subtitles > Advanced… owns second-track, delay and appearance controls. Normal/Auto-crop black bars/Crop/Stretch/Custom framing has a 50%-200% custom range. Platform defaults start at Normal; Auto-crop is opt-in. Movie/series choices persist per profile independently of track memory and can follow strongly matched copies across servers; new live channels use the default without per-channel memory. Conditional session Upscaling reloads around the position without changing saved defaults. Audio Sync needs eligible AetherEngine retiming/seek support, including supported buffered live routes, not native-player support. Shipped engines omit engine-local dialogue processing; Apple TV's separate system bridge exposes output-gated global Enhance Dialogue/Reduce Loud Sounds and recovery. Movie audio-language choices are remembered automatically; series language needs its switch and neither stores an exact mix. Prefer lossless audio selects the AetherEngine adapter's lossless/surroundCompat request at each video/live load; native/external apps do not consume it and actual output is not guaranteed. Chapters needs source/file chapters; images are optional, seeking preserves pause intent and spoilers, and cast-page navigation ends playback. Default-on profile toggles gate Chapters, Cast, Episodes, Playlist and Continue Watching while Info remains. Continue Watching uses loaded Home progress, excludes the current item/same-source show episodes and prepares an authorized target source/version before saving progress and switching. Song identification defaults on, uses decoded audio rather than the microphone, requires internet and a supported route, and is unavailable offline/native/remote-bypass. Confirmed Info cards open the shared service chooser; TV failures offer phone QR links and mobile uses app/browser. Live TV buffer is a new-load cushion with latency/tuning tradeoffs, not library-file buffering. Diagnostics distinguish active conversion facts, originals, measured throughput, window/buffer and temporary cache without claiming speaker layout. Internal screenshot hooks expose no reader capture task. BorrowedTrailerPlayer gives an existing hero preview TV transport with speed/zoom but no provider session, tracks or history. Track labels retain meaningful names and regional/version distinctions; Commentary/Audio Description qualifiers and inferred-language auto are inventoried on TV/mobile parents and explained in Audio/Subtitles."
     },
     "FeatureProfiles": {
       "areas": [
@@ -2556,7 +2564,7 @@
         "Sources/FeatureLiveTVCore/LiveTVGuideAutoUpdate.swift",
         "Sources/ProviderIPTV/IPTVProvider.swift"
       ],
-      "summary": "Keep guide previews, favorites/hidden channels, search and mobile cellular policy in the Live TV reference. Settings orders Guide & browsing before Channel names, then mobile Playback. Clean channel names defaults on and tidies only IPTV display labels; manually edited names win, Preview uses loaded samples and Example supplies a fallback. It does not change guide matching, favorite identity or source data. Distinguish the Wi-Fi-only setting's detected-transition limit from the independent Low Data Mode pause, which also applies on Wi-Fi. Explain local whole-source Kids approval and source-configuration sync separately; straightforward ordering/filter choices need no individual pages. Settings uses the shared TV Sources/Add TV Source labels; distinguish it from household Sources. Guide preparation/status and explicit Refresh guide need recovery instructions, not a page for every progress stage. Guide preferences ends with Refresh while open; Every 12 hours is the default. It controls foreground updates of already-saved IPTV account lineups/guides, remains profile/device-local and does not suppress normal on-use updates when Off."
+      "summary": "The channel guide's Choose where Live TV opens section explains Categories versus Guide, Channel order and Guide preferences > Recently watched, with profile/device-local persistence. Keep previews, favorites/hidden channels, search and mobile network policy in existing Live TV guides rather than separate toggle pages. Settings orders Guide & browsing before Channel names, then mobile Playback. Clean channel names defaults on and tidies only IPTV display labels; manual names win, Preview uses loaded samples and Example supplies a fallback without changing guide matching, favorites or source data. Distinguish the Wi-Fi-only setting's detected-transition limit from Low Data Mode's independent pause, including on Wi-Fi. Explain local whole-source Kids approval and source-configuration sync separately. Shared TV Sources/Add TV Source labels differ from household Sources. Guide preparation and Refresh guide need recovery instructions, not one page per progress stage. Guide preferences ends with Refresh while open, default Every 12 hours. It controls foreground updates of already-saved IPTV account lineups/guides, stays profile/device-local and preserves on-use updates when Off."
     },
     "playback": {
       "areas": [
@@ -2852,6 +2860,7 @@
         "Sources/CoreModels/DiscPlayback.swift",
         "Sources/CoreModels/ExternalPlayer.swift",
         "Sources/AppRuntime/ExternalPlayerSupport.swift",
+        "Sources/AppRuntime/ExternalPlaybackRuntime.swift",
         "Sources/FeatureHome/DetailHeroView.swift",
         "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
         "Sources/FeatureSettings/PreferenceDetailViews.swift",
@@ -2863,8 +2872,8 @@
         "iPad"
       ],
       "navigation": "Set the default in Settings > Playback > Discs > Disc playback; from eligible title/card actions choose its alternative disc action or Play in.",
-      "experience": "Choose the alternative Open menu/Play video action for a supported disc, or hand an eligible file to a listed installed player. The unavailable-disc reason remains visible when an alternative cannot run.",
-      "conditions": "Actions require disc-menu availability or nonempty external-player choices. The saved default determines which disc action is the alternative. Provider, file and platform capabilities still apply; live TV and library playback do not acquire external-player support merely from an installed app. The same DiscPlayback enum titles also populate the default-setting selector in the two settings shells; those are defaults, while the title action is a one-time alternative.",
+      "experience": "Choose the alternative Open disc menu or Play video action for a supported disc, or hand an eligible file to a listed installed player. The unavailable-disc reason remains visible when an alternative cannot run.",
+      "conditions": "Actions require disc-menu availability or nonempty external-player choices. The saved default determines which disc action is the alternative. Play in requires an authorized on-demand movie, episode or video and an eligible provider; external links and disc folders are excluded. It lists installed supported alternatives in platform order, omitting the current default. Plozz can appear when another app is the default; Native Player is Apple TV-only. Custom templates are not offered here. Provider, file and platform capabilities still apply; an installed app does not guarantee a compatible handoff. The same DiscPlayback enum titles also populate the default-setting selector in the two settings shells; those are defaults, while the title action is a one-time alternative.",
       "controls": [
         {
           "text": "Play video",
@@ -2883,19 +2892,15 @@
           "source": "Sources/CoreModels/ExternalPlayer.swift"
         },
         {
+          "text": "Native Player",
+          "source": "Sources/CoreModels/ExternalPlayer.swift"
+        },
+        {
           "text": "Infuse",
           "source": "Sources/CoreModels/ExternalPlayer.swift"
         },
         {
           "text": "VLC",
-          "source": "Sources/CoreModels/ExternalPlayer.swift"
-        },
-        {
-          "text": "Native Player",
-          "source": "Sources/CoreModels/ExternalPlayer.swift"
-        },
-        {
-          "text": "Custom",
           "source": "Sources/CoreModels/ExternalPlayer.swift"
         }
       ],
@@ -8033,6 +8038,9 @@
     "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift": {
       "sources": [
         "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
+        "Sources/CoreModels/RemoteSubtitleContext.swift",
+        "Sources/FeaturePlayback/RemoteSubtitleAcquisition.swift",
+        "Sources/ProviderSilo/SiloSubtitles.swift",
         "Sources/FeaturePlayback/PlayerTimelineClock.swift",
         "Sources/FeaturePlayback/PlayerControlsModel.swift",
         "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift",
@@ -8067,7 +8075,7 @@
       ],
       "navigation": "Tap the playing mobile video; portrait consolidates options, while landscape separates menus.",
       "experience": "Seek, choose audio/subtitles, adjust supported speed/zoom, or open advanced subtitle and track options. The numeric buttons beside the timeline have accessibility labels Elapsed time and Remaining time; tapping either toggles Current time and Estimated end time outside scrubbing. This resets when controls hide; valid duration and speed are needed for the estimate. Shared lower cards appear in Info, Chapters, Cast, Episodes, Playlist, Continue Watching order, gated by profile toggles and usable content. Continue Watching saves outgoing progress and resumes the chosen Home title on its own source. A matched Info song card opens the shared Open song chooser for service searches or a supplied Apple Music song link; PlayerSongCard inventories its controls and mobile app/browser behavior. Valid skip markers segment the timeline visually without changing seeking; unreadable short sections can be omitted. AirPlay/Picture in Picture replace the local picture with a noninteractive destination message. Returning after UIApplication.didEnterBackgroundNotification stops an active PiP window and restores the mounted player; brief inactive interruptions and PiP started without leaving Plozz do not invoke that return rule.",
-      "conditions": "iPhone/iPad. Menu visibility follows engine capabilities, available tracks, orientation, current route and online subtitle services. Audio Sync… appears only when the current AetherEngine audio route advertises adjustable delay; native/remote playback and non-retimeable streams omit it. The sheet offers Audio Delay and Reset, at 0.01-second steps within ±10 seconds. In Subtitles > Advanced… > Appearance, text primaries offer Style and image primaries offer Position; image primaries disable Second Track. The touch card strip shares Info/Cast/chapter/sequence content, but not Apple TV track/style cards. Cast requires metadata; Chapters requires chapters; Episodes/Playlist require their active sequence context. Brightness/Volume meters appear during enabled edge gestures in active local playback, not with VoiceOver or while interaction is blocked. Their unavailable captions report a route/device limit, not another setting. Auto-crop black bars appears only when the supplied engine supports active-picture analysis; both production movie-engine factories wire this support. Picture sampling requires local, ready, visible playback and is suspended for external playback or Picture in Picture. Missing/invalid detection falls back to normal fit. Cropping preserves proportions and need not fill every screen edge. Eligible movie/episode playback uses the saved platform default, initially Normal, unless an explicit movie/series choice exists. Explicit movie/series choices persist per profile and can follow strongly matched copies across servers, independently of audio/subtitle-memory switches. Live channel changes restore the saved platform default without per-channel memory. In Auto-crop, pinch changes the current device-type cutout-safe framing default rather than changing mode; outside Auto-crop it switches Normal/Crop. Mobile uses Video; Apple TV uses Playback > Zoom Mode. The optical-disc button appears only during disc-menu playback or when the active source exposes network-disc videos. Its primary action returns to Disc menu in menu mode, otherwise opens Disc videos. Holding it offers Disc videos/Play video/Try another region during menu playback, or Play video for a selected disc playlist. Disc-menu overlays have their own direction input and action dialog; the mobile ordinary controls start hidden in menu mode. These paths do not update ordinary title history. Track rows use TrackMenuBuilder on both platforms. Language/format labels retain meaningful source-authored names and regional/version distinctions when supplied; Commentary and Audio Description depend on track facts rather than a new preference. Format/channel labels describe the source, not output equipment. Untagged text subtitles can gain an on-device inferred language marked auto after parsing; this is not translation, and image tracks cannot supply text for that guess.",
+      "conditions": "iPhone/iPad. Portrait Playback options consolidates Subtitles, Audio, Playback Speed, Quality, Zoom, Version, Upscaling and applicable disc actions in source order. Landscape separates Audio, Subtitles and current speed; the remaining sections use Playback settings. No reachable Video submenu is wired. Each entry requires its tracks, engine capability or provider support; the movie overlay supplies no Multiview. Quality presets call setStreamingOptions immediately; Advanced… opens the quality sheet. Audio Sync… requires adjustable engine audio delay and offers Audio Delay/Reset in 0.01-second steps within ±10 seconds. In Subtitles > Advanced… > Appearance, text primaries offer Style and image primaries Position; image primaries disable Second Track. Subtitle search distinguishes unavailable/incomplete results from no matches; expired searches need refreshing and uncertain downloads must be checked before retry. The touch card strip shares Info/Cast/chapter/sequence content, not TV track/style cards. Cast needs metadata; Chapters needs chapters; Episodes/Playlist need their active sequence context. Brightness/Volume gestures need active local playback with no blocking interaction and no VoiceOver. Auto-crop needs engine active-picture support, wired by both production movie factories, and local ready visible playback; external playback/PiP suspends sampling. Invalid detection fits normally, and proportional cropping need not fill all edges. Eligible movie/episode framing starts from the platform default, initially Normal, unless an explicit profile-owned movie/series override exists; matched server copies can reuse that override independently of track memory. Auto-crop pinch changes the device-type cutout-safe default; other modes switch Normal/Crop. Mobile uses Zoom in its options/settings menu; TV uses More > Zoom Mode. Live channels have separate transport and default-only framing. The optical-disc button needs disc-menu playback or network-disc videos. Its main action returns to Disc menu or opens Disc videos; holding offers applicable Disc videos/Play video/Try another region actions. Disc-menu input is separate, ordinary controls start hidden, and these paths do not update title history. TrackMenuBuilder preserves meaningful names, language/format and accessibility qualifiers; source format/channels do not describe output equipment. Auto is an inferred subtitle language, not translation, and requires parsed text.",
       "controls": [
         {
           "text": "Close player",
@@ -8126,6 +8134,10 @@
           "source": "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift"
         },
         {
+          "text": "Playback settings",
+          "source": "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift"
+        },
+        {
           "text": "Subtitles",
           "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
         },
@@ -8162,11 +8174,23 @@
           "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
         },
         {
-          "text": "Video",
+          "text": "Quality",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Advanced…",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Zoom",
           "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
         },
         {
           "text": "Version",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Upscaling",
           "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
         },
         {
@@ -15399,7 +15423,15 @@
           "source": "Sources/FeatureHome/HeroTrailerFullscreen.swift"
         },
         {
-          "text": "Playback",
+          "text": "Playback Speed",
+          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "Speed",
+          "source": "Sources/FeaturePlayback/PlaybackOptionsPane.swift"
+        },
+        {
+          "text": "More",
           "source": "Sources/FeaturePlayback/PlayerControls.swift"
         },
         {
@@ -15420,10 +15452,6 @@
         },
         {
           "text": "Custom",
-          "source": "Sources/FeaturePlayback/PlaybackOptionsPane.swift"
-        },
-        {
-          "text": "Playback Speed",
           "source": "Sources/FeaturePlayback/PlaybackOptionsPane.swift"
         },
         {
@@ -16820,6 +16848,7 @@
     "Sources/FeatureHomeCore/HomeRowBrowseView.swift": {
       "sources": [
         "Sources/FeatureHomeCore/HomeRowBrowseView.swift",
+        "Sources/ProviderSilo/SiloHomeLayout.swift",
         "Sources/CoreUI/HomeContentQueryControls.swift",
         "Sources/CoreModels/MediaProvider.swift",
         "Sources/CoreModels/MediaItemAction.swift",
@@ -16846,7 +16875,7 @@
         "iPad"
       ],
       "navigation": "From an eligible Home row, select the trailing See all card on Apple TV or tap the row heading with a chevron on iPhone/iPad. The global Watchlist row uses the separate Watchlist page instead.",
-      "experience": "Browse that row's original feed in a larger title grid, combine media-kind and watch-state filters, choose a sort/order, open details, and retry loading failures without substituting another library list.",
+      "experience": "Browse that row's original feed in a larger grid, filter and sort, open details, or retry failures without substituting a catalogue query. Source order preserves server shelf membership/grouping; Recently Added can surface a series for newly added episodes rather than the series' own Date Added.",
       "conditions": "Requires a loaded nonempty row with further content and no failure or section issue, current profile/source access and the original row's visibility policy. Account-wide history ignores disabled-library browsing switches. Row titles and suffixes are dynamic content. TV puts filtering before sorting; mobile has icon-only sort then filter. The shared filter menu puts Media before Watch status and shows Clear Filters only when either is active. Sort By offers Source order, Name, Date Added, Release Date and Runtime; Order appears only after a field is selected. Nondefault queries load the remaining feed before showing sorted/filtered results; Source order with no filters loads incrementally and can show Load more. No titles to show is empty, while Retry follows a load failure. Custom rows start with their saved query and use their selected feeds, combining matching copies; only a sole Watchlist source uses save dates for Date Added. Other source rows retain provider list membership and limits. Plain combined Continue Watching and Live TV do not gain this shortcut; an explicitly created custom row can select the Continue Watching feed. Query changes here are temporary and do not save Home, library or Watchlist preferences. Card actions remain kind/provider-capability dependent. Both shell card builders inherit the root context-menu handler and navigation router. The grid supplies no ordered episode siblings, so Mark Watched Up to Here is absent. Download actions require the mobile shell; Apple TV has none. Home-origin mobile grids pass live download state and enable a resume chip for landscape cards; Apple TV grids use plain PosterCardView without either. Related grids retain their separately supplied cards. A mobile custom Watchlist feed can retain WeTrakr attribution and offer View on WeTrakr; this is absent from Apple TV card menus and ordinary un-attributed provider feeds.",
       "controls": [
         {
@@ -18517,14 +18546,17 @@
         "Sources/FeatureLiveTV/LiveTVPreviewIntroductionView.swift",
         "Sources/CoreUI/FirstUseChoiceView.swift",
         "Sources/CoreUI/NativeActionButton.swift",
-        "Sources/CoreUI/NavigationEntryFocus.swift"
+        "Sources/CoreUI/NavigationEntryFocus.swift",
+        "Sources/FeatureLiveTV/LiveTVPrototypeView.swift",
+        "Sources/FeatureSettings/LiveTVSettingsView.swift",
+        "Sources/CoreModels/LiveTVViewSettingsStore.swift"
       ],
       "platforms": [
         "Apple TV"
       ],
       "navigation": "Encounter the first-use preview choice when entering a supported Live TV guide.",
       "experience": "Choose whether guide browsing starts previews before watching.",
-      "conditions": "Apple TV only: the production modifier is a no-op on mobile. Appears for the first-use preview choice; only an explicit selection records it, and later changes use Settings > Live TV > Auto preview.",
+      "conditions": "Apple TV only: the modifier is a no-op on mobile. The first-use prompt requires no prior choice, active scene/destination, an authorized profile, loaded nonfailed sources, at least one channel and no other sheet, expanded preview or Multiview. Disabled content suppresses presentation. The buttons record an explicit choice; Back chooses false, while scene-driven dismissal does not record one. Later changes use Settings > Live TV > Guide preferences > Auto preview; Keep watching while browsing requires it.",
       "controls": [
         {
           "text": "Turn on live previews?",
@@ -18644,10 +18676,12 @@
         "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift",
         "Sources/FeatureLiveTV/LiveTVPrototypeView.swift",
         "Sources/FeatureLiveTV/LiveTVChannelOrganizationView.swift",
-        "Sources/FeatureLiveTV/LiveTVSourcesView.swift"
+        "Sources/FeatureLiveTV/LiveTVSourcesView.swift",
+        "Sources/AppShell/LiveTVShellDestination.swift",
+        "Sources/AppShelliOS/PlozziOSLiveTVDestination.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Shared production guide toolbar and modal-content builders are mounted by LiveTVPrototypeView, whose record inventories their controls and conditional mobile branches, including Back to guide during TV search. The mobile app-defined More menu is distinct from UIKit tab overflow. More > Filters mounts the filter form; Manage IPTV channels opens LiveTVChannelOrganizationView, whose own record inventories visibility editors. Source management routes to LiveTVSourcesView, not the internal fallback form. The 5,000-row scrolling toggle is DEBUG-only and is not a production setting."
+      "omitReason": "LiveTVPrototypeView inventories the reachable shared toolbar and modal controls, including Back to guide during TV search. PrototypeBrowseToolbar is constructed only inside a tvOS branch, so its obsolete iOS More filters action is unreachable; mobile uses PrototypeTouchBrowseToolbar's app-defined More menu, distinct from UIKit overflow. More > Filters mounts the filter form; Manage IPTV channels opens the separately inventoried organization view. Both production shells supply a nonoptional sourceStore, so sourceManagement always routes to LiveTVSourcesView: PrototypeSourcesForm and its fallback-only controls are not reader UI. Source address and guide-status helpers are reachable inside LiveTVSourcesView and inventoried there. The 5,000-row scrolling toggle is DEBUG-only."
     },
     "Sources/FeatureLiveTV/LiveTVPrototypeNativeSearch.swift": {
       "sources": [
@@ -18732,7 +18766,7 @@
       ],
       "navigation": "Open Live TV from navigation or Home, after enabling an available source.",
       "experience": "Browse categories and the production channel guide, search channels/programs, manage source/filter choices, and tune a channel.",
-      "conditions": "Despite its filename, this is the wired production guide on all platforms. Source use, standalone-playlist parental approvals, provider limits, region/category filtering and network policy determine visible/playable channels. Mobile narrow layouts switch between a category directory and guide; wider layouts keep the sidebar. The Source menu offers All, enabled dynamic source names and Add Source; the narrow guide instead shows a Categories back action and Category menu. Mobile More offers Guide only from the directory, Filters, Multiviews only when appropriate without a sidebar/directory or selection, TV Sources and Settings only when a callback exists. More > Filters > Manage IPTV channels opens channel organization. Native mobile Search replaces the toolbar, with app-defined Close and conditional Clear search rather than a Cancel caption; results combine categories/channels/programs. Apple TV alone shows Channels/Programs search scopes. Recently watched requires its preference enabled and visible recent entries; Favorites requires visible favorites. Channels includes all visible channels, including entries repeated in those shortcut sections. Their headings come from LiveTVPrototypeStyle through PrototypeGuideSectionLabel.",
+      "conditions": "Despite its filename, this is the wired production guide on all platforms. Source use, standalone-playlist parental approvals, provider limits, region/category filtering and network policy determine visible/playable channels. Mobile narrow layouts switch between a category directory and guide; wider layouts keep the sidebar. The Source menu offers enabled dynamic source names and Add Source; All is omitted with exactly one enabled source and no library channels. The narrow guide instead shows a Categories back action and Category menu. Mobile More offers Guide only from the directory, Filters, Multiviews only when appropriate without a sidebar/directory or selection, TV Sources and Settings only when a callback exists. More > Filters > Manage IPTV channels opens channel organization. The older toolbar's More filters and the fallback source form are not constructed by production mobile/source-management routes; their exclusions are traced in LiveTVPrototypeControls. Native mobile Search replaces the toolbar, with app-defined Close and conditional Clear search rather than a Cancel caption; results combine categories/channels/programs. Apple TV alone shows Channels/Programs search scopes. Recently watched requires its preference enabled and visible recent entries; Favorites requires visible favorites. Channels includes all visible channels, including entries repeated in those shortcut sections. Their headings come from LiveTVPrototypeStyle through PrototypeGuideSectionLabel.",
       "controls": [
         {
           "text": "Source",
@@ -19039,10 +19073,6 @@
           "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
         },
         {
-          "text": "More filters",
-          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
-        },
-        {
           "text": "Multiviews",
           "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
         },
@@ -19064,10 +19094,6 @@
         },
         {
           "text": "Guide time",
-          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
-        },
-        {
-          "text": "Live TV sources",
           "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
         },
         {
@@ -19140,54 +19166,6 @@
         },
         {
           "text": "Reset filters",
-          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
-        },
-        {
-          "text": "IPTV playlist",
-          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
-        },
-        {
-          "text": "Channels",
-          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
-        },
-        {
-          "text": "Show channels with guide listings",
-          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
-        },
-        {
-          "text": "Program guide",
-          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
-        },
-        {
-          "text": "Reload sources",
-          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
-        },
-        {
-          "text": "Guide selection could not be applied",
-          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
-        },
-        {
-          "text": "OK",
-          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
-        },
-        {
-          "text": "Source address unavailable",
-          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
-        },
-        {
-          "text": "Disabled",
-          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
-        },
-        {
-          "text": "Waiting to load",
-          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
-        },
-        {
-          "text": "Loading guide",
-          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
-        },
-        {
-          "text": "Keeping previously loaded listings",
           "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
         },
         {
@@ -20713,6 +20691,7 @@
       "sources": [
         "Sources/FeaturePlayback/LiveChannelPlayerView.swift",
         "Sources/FeaturePlayback/LiveChannelTransport.swift",
+        "Sources/FeaturePlayback/PlaybackOptionsPane.swift",
         "Sources/FeaturePlayback/SystemPlaybackAudio.swift",
         "Sources/FeaturePlayback/PlayerTouchGestureSurface.swift",
         "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift",
@@ -20745,24 +20724,8 @@
       ],
       "navigation": "Select a playable channel from Live TV, Search, Home, or an authorized guide overlay.",
       "experience": "Watch a live channel, reveal its guide, use an available rewind window, or return toward live.",
-      "conditions": "All platforms. Authorization, source availability, network policy and provider limits apply. Go Live respects the local buffer; scheduled library channels use Jump to now, not a recording. The shared transport exposes Info and On Now, plus Guide only when guide content is supplied. Playback Info in the Info card toggles diagnostics; its caption expands on TV focus and is an accessibility label on touch. Apple TV shows Audio for multiple tracks, adjustable audio delay, or available system-audio settings; iPhone/iPad shows it when an audio track or audio-delay control is available. Subtitles needs an available track and leads to separately inventoried settings. System Enhance Dialogue/Reduce Loud Sounds controls and levels are Apple TV-only and require the system availability signal. Live TV offers no dual-subtitle selection. Mobile Brightness/Volume meters require enabled gestures, active authorized full-screen local playback, a presented frame, and no blocking track/guide/diagnostic/scrub interaction; they are absent in Multiview and with VoiceOver. Auto-crop black bars appears only when the supplied engine supports active-picture analysis. Picture sampling requires local, ready, visible playback and is suspended for external playback or Picture in Picture. Missing/invalid detection falls back to normal fit. Cropping preserves proportions and need not fill every screen edge. New live channels use the saved platform zoom default, initially Normal, without remembering zoom per channel; movie/series zoom memory belongs to ordinary on-demand playback. Mobile uses Video; Apple TV uses Playback > Zoom Mode. Supported AetherEngine audio routes with a usable rewind/reload path expose Audio Sync on TV and Audio Sync… on mobile. Audio Delay is limited to ±2 seconds for Live TV; Reset returns to zero. Retiming can briefly interrupt, repeat or skip audio. Leaving, backgrounding or changing the source cancels uncommitted adjustments. Saved upscaling defaults can affect initial live playback, but Live TV offers no session-only Upscaling switch.",
+      "conditions": "All platforms. Authorization, source availability, network policy and provider limits apply. Jump to live respects the local buffer; scheduled library channels use Jump to now, not a recording. The transport exposes Info and On Now, plus Guide only when guide content exists. Playback Info in Info toggles diagnostics; its caption expands on TV focus and is an accessibility label on touch. Apple TV orders available Audio, Subtitles and More controls above the timeline; More contains conditional Multiview before Zoom Mode. Mobile portrait uses Playback options; landscape separates Audio/Subtitles and places Zoom and conditional Multiview in Playback settings. There is no live speed, quality, version, subtitle-search, dual-subtitle, session-upscaling or disc menu in this shared menu. Apple TV Audio requires multiple tracks, adjustable delay or system-audio settings; mobile requires an audio track or delay. Subtitles requires a track. Apple TV-only Enhance Dialogue/Reduce Loud Sounds needs system availability. Mobile Brightness/Volume gestures require enabled settings, authorized full-screen local playback, a presented frame, no blocking interaction and no VoiceOver; Multiview excludes them. Auto-crop requires engine active-picture support and local ready visible playback; external playback/PiP suspends sampling. Invalid detection fits normally; proportional cropping need not fill all edges. New channels use the platform zoom default, initially Normal, without per-channel memory. Supported AetherEngine routes with a rewind/reload path offer Audio Sync on TV or Audio Sync… on mobile, with Audio Delay within ±2 seconds and Reset. Retiming may briefly interrupt, repeat or skip audio; leaving/backgrounding/source changes cancel pending edits. Saved upscaling defaults can affect new live playback, but there is no session override.",
       "controls": [
-        {
-          "text": "Info",
-          "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
-        },
-        {
-          "text": "On Now",
-          "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
-        },
-        {
-          "text": "Guide",
-          "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
-        },
-        {
-          "text": "Playback Info",
-          "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
-        },
         {
           "text": "Audio",
           "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
@@ -20770,6 +20733,18 @@
         {
           "text": "Subtitles",
           "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
+        },
+        {
+          "text": "More",
+          "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
+        },
+        {
+          "text": "Multiview",
+          "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
+        },
+        {
+          "text": "Zoom Mode",
+          "source": "Sources/FeaturePlayback/PlaybackOptionsPane.swift"
         },
         {
           "text": "Paused",
@@ -20892,7 +20867,7 @@
           "source": "Sources/FeaturePlayback/PlayerTouchGestureSurface.swift"
         },
         {
-          "text": "Go Live",
+          "text": "Jump to live",
           "source": "Sources/FeaturePlayback/LiveChannelPlayerView.swift"
         },
         {
@@ -20912,11 +20887,27 @@
           "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
         },
         {
-          "text": "Playback",
+          "text": "Info",
+          "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
+        },
+        {
+          "text": "Playback Info",
+          "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
+        },
+        {
+          "text": "On Now",
+          "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
+        },
+        {
+          "text": "Guide",
           "source": "Sources/FeaturePlayback/LiveChannelTransport.swift"
         },
         {
           "text": "Playback options",
+          "source": "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift"
+        },
+        {
+          "text": "Playback settings",
           "source": "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift"
         },
         {
@@ -20928,11 +20919,11 @@
           "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
         },
         {
-          "text": "Video",
+          "text": "Multiview",
           "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
         },
         {
-          "text": "Multiview",
+          "text": "Zoom",
           "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
         },
         {
@@ -21043,11 +21034,10 @@
     "Sources/FeaturePlayback/LiveChannelTransport.swift": {
       "sources": [
         "Sources/FeaturePlayback/LiveChannelTransport.swift",
-        "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
         "Sources/FeaturePlayback/LiveChannelPlayerView.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Shared LiveChannelTransport.swift implementation constructed by Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift, Sources/FeaturePlayback/LiveChannelPlayerView.swift. It is not a separate destination; visible controls are accounted for in these parent surfaces and their named nested-screen audits. Other repeated uses do not create an additional reader workflow."
+      "omitReason": "LiveChannelPlayerView constructs this shared LiveChannelOverlay on Apple TV and iPhone/iPad. Its parent inventories Audio/Subtitles/More, mobile Playback options/Playback settings, live-return/timeline actions and Info/On Now/Guide cards with their platform/capability conditions. The on-demand mobile overlay shares PlayerMoreMenu, not this transport."
     },
     "Sources/FeaturePlayback/LiveSubtitleModel.swift": {
       "sources": [
@@ -21804,6 +21794,7 @@
     },
     "Sources/FeaturePlayback/PlaybackOptionsPane.swift": {
       "sources": [
+        "Sources/FeaturePlayback/PlayerControls.swift",
         "Sources/FeaturePlayback/PlayerViewModel.swift",
         "Sources/FeaturePlayback/SeriesTrackMemory.swift",
         "Sources/CoreModels/VideoZoomPreference.swift",
@@ -21823,10 +21814,38 @@
       "platforms": [
         "Apple TV"
       ],
-      "navigation": "On Apple TV, reveal controls and open Playback above the timeline; open Zoom Mode for picture choices.",
+      "navigation": "On Apple TV, move up from the timeline and select the current-rate Playback Speed button for Speed, or More for Zoom Mode, Upscaling and Version.",
       "experience": "Adjust playback speed, picture framing and eligible current-session upscaling. Custom changes zoom percentage without changing encoded quality.",
-      "conditions": "Apple TV card UI; each control requires its current engine capability; Upscaling additionally requires a ready, reloadable, seekable eligible on-demand stream. Quality conversion is configured in separate surfaces. Auto-crop black bars appears only when the supplied engine supports active-picture analysis; both production movie-engine factories wire support. Eligible movie/episode playback uses the saved platform default, initially Normal, unless an explicit movie/series choice exists. Manual zoom persists per profile for a movie or series and can follow strongly matched copies across servers, independently of track-memory switches. Extras/trailers and unidentified disc timelines are excluded from that title memory; live channel changes restore the saved platform default without per-channel memory. Picture sampling requires local, ready, visible playback and stops for external playback or Picture in Picture. Missing/invalid detection falls back to normal fit; cropping preserves proportions and need not fill every screen edge. Mobile uses Video; Apple TV uses Playback > Zoom Mode. Upscaling appears before Zoom Mode and Playback Speed. Off/Automatic/Standard/Animation change the current session only, with Applying… during a position-preserving reload; failure reports Couldn't change upscaling. Try again. Saved defaults are unchanged. Live TV, interactive disc menus, separate-audio streams and custom-reader share sources omit this session switch.",
+      "conditions": "Apple TV card UI. Speed is a separate speedOnly pane requiring playbackSpeed; it is not inside More. More places caller-supplied rows first, then Zoom Mode, Upscaling and Version when eligible. Each needs its engine/content capability; Upscaling additionally needs a ready, reloadable, seekable on-demand stream. Quality conversion uses separate mobile surfaces. Auto-crop needs active-picture support, wired in both production movie factories, and local ready visible playback; external playback/PiP stops sampling. Invalid detection fits normally; proportional cropping need not fill all edges. Movie/episode framing uses the platform default, initially Normal, unless a profile-owned movie/series override exists; strong matches across servers can reuse it independently of track memory. Extras/trailers and unidentified disc timelines do not use title memory; new live channels use the default without per-channel memory. TV uses More > Zoom Mode; mobile uses Zoom in Playback options/Playback settings. Upscaling's Off/Automatic/Standard/Animation choices affect only the current session, show Applying… during a position-preserving reload and report failure without changing the saved default. Live TV, disc menus, separate-audio and custom-reader share streams omit that session switch. Version opens a nested picker only for multiple versions.",
       "controls": [
+        {
+          "text": "Speed",
+          "source": "Sources/FeaturePlayback/PlaybackOptionsPane.swift"
+        },
+        {
+          "text": "Zoom Mode",
+          "source": "Sources/FeaturePlayback/PlaybackOptionsPane.swift"
+        },
+        {
+          "text": "Normal",
+          "source": "Sources/CoreModels/VideoZoomPreference.swift"
+        },
+        {
+          "text": "Auto-crop black bars",
+          "source": "Sources/CoreModels/VideoZoomPreference.swift"
+        },
+        {
+          "text": "Crop",
+          "source": "Sources/CoreModels/VideoZoomPreference.swift"
+        },
+        {
+          "text": "Stretch",
+          "source": "Sources/CoreModels/VideoZoomPreference.swift"
+        },
+        {
+          "text": "Custom",
+          "source": "Sources/FeaturePlayback/PlaybackOptionsPane.swift"
+        },
         {
           "text": "Upscaling",
           "source": "Sources/FeaturePlayback/PlaybackOptionsPane.swift"
@@ -21852,35 +21871,7 @@
           "source": "Sources/FeaturePlayback/PlaybackOptionsPane.swift"
         },
         {
-          "text": "Zoom Mode",
-          "source": "Sources/FeaturePlayback/PlaybackOptionsPane.swift"
-        },
-        {
-          "text": "Normal",
-          "source": "Sources/CoreModels/VideoZoomPreference.swift"
-        },
-        {
-          "text": "Auto-crop black bars",
-          "source": "Sources/CoreModels/VideoZoomPreference.swift"
-        },
-        {
-          "text": "Crop",
-          "source": "Sources/CoreModels/VideoZoomPreference.swift"
-        },
-        {
-          "text": "Stretch",
-          "source": "Sources/CoreModels/VideoZoomPreference.swift"
-        },
-        {
-          "text": "Custom",
-          "source": "Sources/CoreModels/VideoZoomPreference.swift"
-        },
-        {
-          "text": "Custom",
-          "source": "Sources/FeaturePlayback/PlaybackOptionsPane.swift"
-        },
-        {
-          "text": "Playback Speed",
+          "text": "Version",
           "source": "Sources/FeaturePlayback/PlaybackOptionsPane.swift"
         }
       ],
@@ -21979,12 +21970,24 @@
       "platforms": [
         "Apple TV"
       ],
-      "navigation": "From the Apple TV timeline, move up for playback/audio/subtitle controls and down for information/navigation.",
+      "navigation": "From the Apple TV timeline, move up for Audio, Subtitles, the current-rate Playback Speed button and More; move down for information/navigation.",
       "experience": "Choose playback options or the lower cards in order: Info, Chapters, Cast, Episodes, Playlist, Continue Watching. Optional cards need their per-profile toggle enabled and usable content. With the surface focused and no active scrub, a light stationary touch reveals a hidden timeline; the next shows current/estimated finish times and the next hides controls. A center click instead pauses/plays or commits a seek. The estimate needs valid duration/speed, and the next reveal resets to elapsed/remaining time. Continue Watching uses the loaded Home list and resumes a selected title on its own source after saving outgoing progress; it excludes the current item and same-source episodes of its show. Valid skip-marker boundaries split the timeline visually, not into selectable chapters. Short sections can lack a visible gap without changing their actual timings or skip actions.",
       "conditions": "Apple TV. Tracks, chapters, sequence, versions and playback engine capabilities gate cards; missing data is not supplied by an unrelated provider. Apple TV surface controls distinguish edge clicks from center selection. Holding a left/right click starts persistent scanning; same-direction clicks accelerate and opposite-direction clicks slow or reverse. Center commits with prior playback intent; Play/Pause commits and resumes; Back cancels. Loading or missing/invalid duration blocks seeking. Seek without pausing gates swipe scrubbing, not the held-click scan. The optical-disc button appears only during disc-menu playback or when the active source exposes network-disc videos. Its primary action returns to Disc menu in menu mode, otherwise opens Disc videos. Holding it offers Disc videos/Play video/Try another region during menu playback, or Play video for a selected disc playlist. Disc-menu overlays have their own direction input and action dialog; the mobile ordinary controls start hidden in menu mode. These paths do not update ordinary title history.",
       "controls": [
         {
-          "text": "Info",
+          "text": "Audio",
+          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "Subtitles",
+          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "Playback Speed",
+          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "More",
           "source": "Sources/FeaturePlayback/PlayerControls.swift"
         },
         {
@@ -22002,18 +22005,6 @@
         {
           "text": "Try another region",
           "source": "Sources/FeaturePlayback/PlayerDiscControlsButton.swift"
-        },
-        {
-          "text": "Playback",
-          "source": "Sources/FeaturePlayback/PlayerControls.swift"
-        },
-        {
-          "text": "Audio",
-          "source": "Sources/FeaturePlayback/PlayerControls.swift"
-        },
-        {
-          "text": "Subtitles",
-          "source": "Sources/FeaturePlayback/PlayerControls.swift"
         },
         {
           "text": "Version",
@@ -22034,6 +22025,30 @@
         {
           "text": "Estimated end time",
           "source": "Sources/FeaturePlayback/PlayerControlsSupport.swift"
+        },
+        {
+          "text": "Info",
+          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "Chapters",
+          "source": "Sources/CoreModels/PlayerOptionalTab.swift"
+        },
+        {
+          "text": "Cast",
+          "source": "Sources/CoreModels/PlayerOptionalTab.swift"
+        },
+        {
+          "text": "Episodes",
+          "source": "Sources/CoreModels/PlayerOptionalTab.swift"
+        },
+        {
+          "text": "Playlist",
+          "source": "Sources/CoreModels/PlayerOptionalTab.swift"
+        },
+        {
+          "text": "Continue Watching",
+          "source": "Sources/CoreModels/PlayerOptionalTab.swift"
         }
       ],
       "documents": [
@@ -22105,6 +22120,8 @@
     },
     "Sources/FeaturePlayback/PlayerMoreMenu.swift": {
       "sources": [
+        "Sources/AppShelliOS/PlozziOSStreamingQuality.swift",
+        "Sources/CoreModels/StreamingQuality.swift",
         "Sources/FeaturePlayback/PlayerViewModel.swift",
         "Sources/FeaturePlayback/SeriesTrackMemory.swift",
         "Sources/CoreModels/VideoZoomPreference.swift",
@@ -22128,12 +22145,16 @@
         "iPhone",
         "iPad"
       ],
-      "navigation": "Tap Playback options in the portrait movie player, or the separate track/speed/video buttons in landscape.",
+      "navigation": "Tap Playback options in portrait; landscape separates Audio, Subtitles and the current-rate Playback Speed button, with remaining options in Playback settings.",
       "experience": "Choose audio and subtitle tracks, adjust playback speed and picture fit, or change supported streaming quality. Playback Speed offers presets and Custom…; 1x restores normal speed.",
-      "conditions": "The consolidated menu orders Subtitles, Audio, Playback Speed, Video, Version, then Multiview when supplied. Subtitle tracks are dynamic, with Off; Search & Download… requires download support and precedes Advanced…. Secondary subtitles need an eligible text track. Audio offers track selection, with a single track shown disabled; Audio Sync… is appended after tracks only when the current engine route advertises adjustable audio delay; engine-local dialogue enhancement remains capability-gated off for shipped movie engines. Speed presets precede Custom…. Video places eligible Upscaling first, followed by available zoom modes and then Quality, which requires provider conversion support. Upscaling offers Off/Automatic/Standard/Animation for eligible seekable on-demand AetherEngine sessions, disables changes while applying and leaves the saved profile default unchanged. Live TV, disc menus, separate-audio and custom-reader shares omit that session override. Auto-crop black bars requires active-picture support; Custom opens the zoom sheet. Version appears only for multiple versions. The movie overlay does not supply Multiview, but the live-channel transport can supply it. Track rows use TrackMenuBuilder on both platforms. Language/format labels retain meaningful source-authored names and regional/version distinctions when supplied; Commentary and Audio Description depend on track facts rather than a new preference. Format/channel labels describe the source, not output equipment. Untagged text subtitles can gain an on-device inferred language marked auto after parsing; this is not translation, and image tracks cannot supply text for that guess.",
+      "conditions": "Shared menu order is Subtitles, Audio, Playback Speed, Quality, Multiview, Zoom, Version, Upscaling, then eligible disc actions. Landscape extracts Audio/Subtitles/speed into separate buttons and uses Playback settings for the remainder. No Video section is constructed; Kind.video's literal alone does not establish a path. Track lists are dynamic. Subtitles offers Off, conditional Search & Download…, then Advanced… for supported style/delay/second-track controls. Images cannot be second tracks. Audio shows a single track disabled; Audio Sync… requires adjustable engine delay. Shipped engines do not advertise the optional engine-local dialogue enhancement. Speed presets precede Custom… and respect the engine maximum. Quality requires supplied provider conversion support; supported presets apply directly and Advanced… opens the session sheet with Apply. Unsupported choices are filtered, except a current unsupported value can remain disabled. Custom captions are data-derived. The caller-owned quality sheet inventories all preset/codec/custom controls separately. Zoom contains supported modes; Custom opens the zoom sheet and Auto-crop needs active-picture support. Version needs multiple versions. Upscaling offers Off/Automatic/Standard/Animation on eligible seekable on-demand AetherEngine streams, disables changes while applying and preserves saved defaults; live, disc-menu, separate-audio and custom-reader share streams omit it. The movie overlay supplies no Multiview; live supplies optional Multiview and Zoom, but no speed/quality/version/search/session-upscaling/disc actions. Disc menu/Try another region need menu-navigation support; Disc videos needs a disc source; Play video also needs an eligible selection. TrackMenuBuilder retains meaningful names and language/format/accessibility qualifiers. Source format/channels are not output hardware. Auto denotes inferred text-subtitle language, not translation.",
       "controls": [
         {
           "text": "Playback options",
+          "source": "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift"
+        },
+        {
+          "text": "Playback settings",
           "source": "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift"
         },
         {
@@ -22193,28 +22214,48 @@
           "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
         },
         {
-          "text": "Video",
+          "text": "Quality",
           "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
         },
         {
-          "text": "Upscaling",
+          "text": "Maximum",
+          "source": "Sources/CoreModels/StreamingQuality.swift"
+        },
+        {
+          "text": "1080p · 20 Mbps",
+          "source": "Sources/CoreModels/StreamingQuality.swift"
+        },
+        {
+          "text": "1080p · 8 Mbps",
+          "source": "Sources/CoreModels/StreamingQuality.swift"
+        },
+        {
+          "text": "720p · 4 Mbps",
+          "source": "Sources/CoreModels/StreamingQuality.swift"
+        },
+        {
+          "text": "720p · 2 Mbps",
+          "source": "Sources/CoreModels/StreamingQuality.swift"
+        },
+        {
+          "text": "480p · 1 Mbps",
+          "source": "Sources/CoreModels/StreamingQuality.swift"
+        },
+        {
+          "text": "240p · 500 Kbps",
+          "source": "Sources/CoreModels/StreamingQuality.swift"
+        },
+        {
+          "text": "Advanced…",
           "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
         },
         {
-          "text": "Off",
-          "source": "Sources/CoreModels/VideoUpscaling.swift"
+          "text": "Multiview",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
         },
         {
-          "text": "Automatic",
-          "source": "Sources/CoreModels/VideoUpscaling.swift"
-        },
-        {
-          "text": "Standard",
-          "source": "Sources/CoreModels/VideoUpscaling.swift"
-        },
-        {
-          "text": "Animation",
-          "source": "Sources/CoreModels/VideoUpscaling.swift"
+          "text": "Zoom",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
         },
         {
           "text": "Zoom Mode",
@@ -22241,15 +22282,43 @@
           "source": "Sources/CoreModels/VideoZoomPreference.swift"
         },
         {
-          "text": "Quality",
-          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
-        },
-        {
           "text": "Version",
           "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
         },
         {
-          "text": "Multiview",
+          "text": "Upscaling",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/CoreModels/VideoUpscaling.swift"
+        },
+        {
+          "text": "Automatic",
+          "source": "Sources/CoreModels/VideoUpscaling.swift"
+        },
+        {
+          "text": "Standard",
+          "source": "Sources/CoreModels/VideoUpscaling.swift"
+        },
+        {
+          "text": "Animation",
+          "source": "Sources/CoreModels/VideoUpscaling.swift"
+        },
+        {
+          "text": "Disc menu",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Disc videos",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Play video",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Try another region",
           "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
         }
       ],
@@ -22304,7 +22373,7 @@
         "Sources/FeaturePlayback/PlayerMoreMenu.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Reusable PlayerOptionsMenuButton.swift is wired into Sources/FeaturePlayback/PlayerAudioMenu.swift, Sources/FeaturePlayback/PlayerMoreMenu.swift, Sources/FeaturePlayback/PlayerAudioMenu.swift, Sources/FeaturePlayback/PlayerMoreMenu.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitReason": "PlayerMoreMenu constructs the portrait Playback options or landscape Audio/Subtitles/Playback Speed/Playback settings buttons; PlayerAudioMenu also uses the shared button. Their parent inventories record the visible labels. Kind.video remains defined but is not selected by the reachable shared-menu wiring, so its Video literal is not a documented destination."
     },
     "Sources/FeaturePlayback/PlayerOptionsPanel.swift": {
       "sources": [
@@ -22333,30 +22402,10 @@
       "platforms": [
         "Apple TV"
       ],
-      "navigation": "Open an available Version, Playback, Audio or Subtitles panel above the Apple TV player's timeline.",
+      "navigation": "Move up from the Apple TV timeline for available Audio, Subtitles, Playback Speed and More panels. Version is nested in More.",
       "experience": "Select supported tracks, speed, zoom, subtitle style, search, or timing adjustments.",
-      "conditions": "Controls are grouped by the track-row order: Version, Playback, Audio, Subtitles. Version needs multiple versions and uses MediaVersionChoiceButton for its dynamic title or Original fallback. PlaybackOptionsPane owns speed and zoom controls. Supported AetherEngine audio routes advertise adjustable audio delay and show the Audio Sync clock button in the Audio header; engine-local Dialog Enhance remains unavailable in shipped engines; the standalone A/V Sync category is also omitted by PlayerControls. The separate Apple TV-wide Enhance Dialogue then Reduce Loud Sounds controls require SystemPlaybackAudio availability and precede selectable audio tracks. Enhance Dialogue opens levels when available or acts as a toggle; empty audio shows a Back action. In Subtitles, header actions Subtitle Sync and Style (or the conditional Dual Subtitles alternative) precede tracks and Download subtitles…. Timing, styling and download availability follow the active track and provider. Image primaries disable dual subtitles. Nested download/style controls have their own SubtitleDownloadPanel and SubtitleStylePanel records; their header labels are included here. Audio Sync opens AudioSyncScreen from SubtitleDownloadPanel. Positive Audio Delay plays audio later and negative earlier; Reset returns to zero. Ordinary video uses ±10 seconds, Live TV ±2 seconds. TV arrows/swipes step by 0.01 seconds with accelerated held repeats. Routes without immediate retiming commit after a short editing pause and may seek/reload; dismissal, backgrounding or source changes cancel uncommitted edits. Track rows use TrackMenuBuilder on both platforms. Language/format labels retain meaningful source-authored names and regional/version distinctions when supplied; Commentary and Audio Description depend on track facts rather than a new preference. Format/channel labels describe the source, not output equipment. Untagged text subtitles can gain an on-device inferred language marked auto after parsing; this is not translation, and image tracks cannot supply text for that guess.",
+      "conditions": "The visible track row orders Audio, Subtitles, Playback Speed and More, subject to capability/content. PlaybackOptionsPane owns the independent Speed pane and More's Zoom Mode/Upscaling/Version rows; it inventories their nested choices. Version needs multiple versions and uses MediaVersionChoiceButton for dynamic names or Original fallback, preserving position without promising cut alignment. Supported AetherEngine audio routes show the Audio Sync header clock. Engine-local dialogue enhancement and the standalone A/V Sync category are not offered by shipped wiring. Separate Apple TV system Enhance Dialogue then Reduce Loud Sounds controls require SystemPlaybackAudio availability and precede tracks; Enhance Dialogue opens levels or toggles, and empty audio offers Back. Subtitles places Subtitle Sync and Style (or conditional Dual Subtitles) before tracks and Download subtitles…. Active track/provider determines timing/style/search availability; image primaries disable dual subtitles. SubtitleDownloadPanel and SubtitleStylePanel inventory nested controls. AudioSyncScreen's positive delay plays audio later, negative earlier; Reset returns to zero. Ordinary video permits ±10 seconds, live ±2, with 0.01-second TV steps and accelerated repeats. Routes needing reload commit after a short pause; dismissal/backgrounding/source changes cancel pending edits. TrackMenuBuilder preserves meaningful names, language/format and accessibility qualifiers, not output-equipment facts. Auto denotes inferred text-subtitle language, not translation.",
       "controls": [
-        {
-          "text": "Version",
-          "source": "Sources/FeaturePlayback/PlayerControls.swift"
-        },
-        {
-          "text": "Resumes at the current position. Different cuts may have different timing.",
-          "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
-        },
-        {
-          "text": "Playback",
-          "source": "Sources/FeaturePlayback/PlayerControls.swift"
-        },
-        {
-          "text": "Zoom Mode",
-          "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
-        },
-        {
-          "text": "Couldn't change upscaling",
-          "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
-        },
         {
           "text": "Audio",
           "source": "Sources/FeaturePlayback/PlayerControls.swift"
@@ -22515,6 +22564,30 @@
         },
         {
           "text": "File Formatting",
+          "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
+        },
+        {
+          "text": "Playback Speed",
+          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "More",
+          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "Zoom Mode",
+          "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
+        },
+        {
+          "text": "Couldn't change upscaling",
+          "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
+        },
+        {
+          "text": "Version",
+          "source": "Sources/FeaturePlayback/PlayerControls.swift"
+        },
+        {
+          "text": "Resumes at the current position. Different cuts may have different timing.",
           "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
         }
       ],
@@ -22830,6 +22903,9 @@
     "Sources/FeaturePlayback/SubtitleDownloadPanel.swift": {
       "sources": [
         "Sources/FeaturePlayback/SubtitleDownloadPanel.swift",
+        "Sources/CoreModels/RemoteSubtitleContext.swift",
+        "Sources/FeaturePlayback/RemoteSubtitleAcquisition.swift",
+        "Sources/ProviderSilo/SiloSubtitles.swift",
         "Sources/FeaturePlayback/PlayerControls.swift",
         "Sources/CoreUI/SettingsStepper.swift",
         "Sources/FeaturePlayback/PlayerMenuRowStyle.swift",
@@ -22841,7 +22917,7 @@
         "Apple TV"
       ],
       "navigation": "Choose Download subtitles… from the Apple TV player's subtitle controls; its Subtitle Sync header opens this file's separate timing screen. The Audio header clock button opens this file's AudioSyncScreen instead.",
-      "experience": "Find and download an eligible subtitle track, or adjust the active subtitle's timing on the separate sync screen. On its separate Audio Sync screen, move audio earlier or later and reset the offset.",
+      "experience": "Find/download a subtitle or adjust subtitle timing on its separate sync screen. Unavailable/incomplete searches show actionable server-permission/provider messages rather than No subtitles found. Expired results require another search; uncertain downloads ask the viewer to check the track list before retry. The separate Audio Sync screen moves audio earlier/later or resets its offset.",
       "conditions": "Apple TV uses this subtitle download panel; mobile Search & Download… is implemented by PlozziOSPlayerControlsOverlay instead. A configured server subtitle service and supported context are required; shares use existing subtitles. Language/SDH preferences constrain results. File match appears only for a provider-confirmed video-file hash match; it is not a timing guarantee and an unmarked result may still work. The separate SubtitleSyncScreen requires adjustable subtitle delay and offers a single-focus Subtitle Delay stepper with arrows/swipes in 50 ms steps over ±10 seconds, followed by Reset. It applies immediately; positive values show subtitles later and negative earlier. Its title and Back action belong to PlayerOptionsPanel. The Done button in this file belongs only to a DEBUG preview. AudioSyncScreen is reachable when the parent advertises audioDelay, independently of subtitle-download support. The single-focus Audio Delay control uses arrows/swipes in 0.01-second steps, accelerating held repeats; Reset returns to zero. It uses ±10 seconds for ordinary video and ±2 for live, and cancels pending commits on dismissal, backgrounding or source changes. The Audio Sync title and Back action are supplied by PlayerOptionsPanel.",
       "controls": [
         {
@@ -26574,34 +26650,6 @@
           "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
         },
         {
-          "text": "Channel visibility",
-          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
-        },
-        {
-          "text": "Channel names",
-          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
-        },
-        {
-          "text": "Clean channel names",
-          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
-        },
-        {
-          "text": "Preview",
-          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
-        },
-        {
-          "text": "Example",
-          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
-        },
-        {
-          "text": "Playback",
-          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
-        },
-        {
-          "text": "Stop without Wi-Fi or Ethernet",
-          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
-        },
-        {
           "text": "Auto preview",
           "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
         },
@@ -26646,6 +26694,10 @@
           "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
         },
         {
+          "text": "Channel visibility",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
           "text": "Filters",
           "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
         },
@@ -26686,6 +26738,30 @@
           "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
         },
         {
+          "text": "Channel names",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "Clean channel names",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "Preview",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "Example",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "Playback",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
+          "text": "Stop without Wi-Fi or Ethernet",
+          "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
+        },
+        {
           "text": "Back",
           "source": "Sources/CoreUI/SettingsPageHeader.swift"
         }
@@ -26694,6 +26770,10 @@
         {
           "slug": "live-tv",
           "anchor": "stop-unexpected-channel-previews"
+        },
+        {
+          "slug": "live-tv-channels",
+          "anchor": "choose-where-live-tv-opens"
         },
         {
           "slug": "live-tv-channels",
