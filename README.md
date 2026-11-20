@@ -167,8 +167,9 @@ directory text. Results show the matched heading, guide and excerpt and link
 directly to the answer; arrow keys move through
 results, Enter opens one, and Escape closes the native dialog. Keyboard focus
 uses a softly tinted field with a rounded border; clicks and taps show the
-caret without the border. The panel and backdrop animate on open and close for
-both pointer and keyboard users. Reduced-motion mode skips the animations. Search loads
+caret without the border. The navigation search field expands in place, keeping
+its icon and label together as results open below it. Closing returns it to its
+original size. Reduced-motion mode skips the animations. Search loads
 on demand from a same-origin bundle scoped to the page's content revision.
 If the index is unavailable or updating, the dialog explains the problem and
 shows title-only matches. Navigation and the guide directory work without

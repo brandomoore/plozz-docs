@@ -200,36 +200,55 @@ footer .updated { margin: 0; }
 
 dialog { border: 1px solid var(--line); padding: 0; background: var(--panel); color: var(--text); }
 dialog::backdrop { background: rgb(0 0 0 / 72%); backdrop-filter: blur(3px); }
-.search-dialog { width: min(640px, calc(100% - 40px)); max-height: calc(100dvh - 64px); margin: min(16vh, 140px) auto auto; border-radius: 12px; box-shadow: 0 24px 100px rgb(0 0 0 / 50%); overflow: hidden; }
-.search-panel { display: flex; flex-direction: column; max-height: min(650px, 76dvh); }
-.search-input-row { display: flex; align-items: center; gap: 12px; padding: 14px 16px 14px 24px; }
+@property --search-expansion { syntax: "<number>"; inherits: true; initial-value: 0; }
+.search-dialog {
+  --expanded-width: min(600px, calc(100% - 24px));
+  --expanded-left: clamp(12px, var(--trigger-left), calc(100% - var(--expanded-width) - 12px));
+  --search-motion: 260ms cubic-bezier(.22, .72, .18, 1);
+  position: fixed; inset: var(--trigger-top) auto auto;
+  left: calc(var(--trigger-left) + (var(--expanded-left) - var(--trigger-left)) * var(--search-expansion));
+  width: calc(var(--trigger-width) + (var(--expanded-width) - var(--trigger-width)) * var(--search-expansion));
+  max-width: none; max-height: none; margin: 0; overflow: hidden;
+  border-radius: calc(8px + 4px * var(--search-expansion));
+  box-shadow: 0 12px 48px rgb(0 0 0 / calc(.42 * var(--search-expansion)));
+}
+.search-dialog[open]:not([data-closing]) { --search-expansion: 1; }
+/* The dialog paints the trigger's chrome during the handoff; keep its layout slot. */
+body:has(.search-dialog[open]) .search-trigger { opacity: 0; }
+.search-input-row {
+  display: flex; align-items: center; gap: 12px; padding-inline: 12px;
+  height: calc(var(--trigger-height) - 2px + 12px * var(--search-expansion));
+}
+.search-input-row > button { position: relative; margin-inline-end: -11px; }
+.search-input-row > button > :is(kbd, .icon) { position: absolute; }
+.search-input-row > button > kbd { opacity: calc(1 - var(--search-expansion)); }
+.search-input-row > button > .icon { opacity: var(--search-expansion); }
+.search-reveal { display: grid; grid-template-rows: 0fr; opacity: var(--search-expansion); }
+.search-dialog[open]:not([data-closing]) .search-reveal { grid-template-rows: 1fr; }
+.search-details { min-height: 0; max-height: min(65dvh, calc(100dvh - var(--trigger-top) - var(--trigger-height) - 30px)); overflow: hidden; display: flex; flex-direction: column; }
 .search-input-row > .icon { color: var(--muted); }
 .search-input-row:has(#guide-search:focus) > .icon { color: var(--text); }
 .search-input-row:has(#guide-search:focus-visible:not([data-focus-origin="pointer"])) > .icon { color: var(--accent); }
-#guide-search {
-  width: 100%; min-width: 0; height: 44px; padding-inline: 10px;
-  border: 1px solid transparent; border-radius: 8px; background: transparent;
-  color: var(--text); caret-color: var(--accent); font-size: 15px;
+.search-field {
+  display: grid; flex: 1; min-width: 0; align-items: center;
+  font-size: calc(13px + 2px * var(--search-expansion)); text-indent: calc(7px * var(--search-expansion));
 }
-#guide-search::placeholder { color: var(--muted); opacity: 1; }
+.search-field > * { grid-area: 1 / 1; }
+.search-field label { pointer-events: none; overflow: hidden; white-space: nowrap; color: var(--muted); }
+.search-field input:not(:placeholder-shown) + label { opacity: calc(1 - var(--search-expansion)); }
+#guide-search {
+  width: 100%; min-width: 0; height: 40px; padding: 0; text-indent: inherit;
+  border: 0; border-radius: 8px; background: transparent;
+  color: var(--text); caret-color: var(--accent); font-size: inherit; opacity: var(--search-expansion);
+}
 #guide-search:focus { outline: none; }
 #guide-search:focus-visible:not([data-focus-origin="pointer"]) {
-  border-color: color-mix(in srgb, var(--muted) 68%, var(--panel));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--muted) 68%, var(--panel));
   background-color: color-mix(in srgb, var(--text) 5%, var(--panel));
 }
 @media (prefers-reduced-motion: no-preference) {
-  .search-dialog {
-    opacity: 0;
-    transform: translateY(-8px) scale(.985);
-    transform-origin: top center;
-    transition: opacity 150ms ease-in, transform 150ms ease-in;
-  }
-  .search-dialog[open]:not([data-closing]) {
-    opacity: 1;
-    transform: none;
-    transition-duration: 240ms;
-    transition-timing-function: cubic-bezier(.2, .8, .2, 1);
-  }
+  .search-dialog { transition: --search-expansion var(--search-motion); }
+  .search-reveal { transition: grid-template-rows var(--search-motion); }
   .search-dialog::backdrop {
     opacity: 0;
     transition: opacity 150ms ease-in;
@@ -238,7 +257,8 @@ dialog::backdrop { background: rgb(0 0 0 / 72%); backdrop-filter: blur(3px); }
   #guide-search { transition: background-color 120ms ease-out; }
   .search-input-row > .icon { transition: color 120ms ease-out; }
   @starting-style {
-    .search-dialog[open]:not([data-closing]) { opacity: 0; transform: translateY(-18px) scale(.96); }
+    .search-dialog[open]:not([data-closing]) { --search-expansion: 0; }
+    .search-dialog[open]:not([data-closing]) .search-reveal { grid-template-rows: 0fr; }
     .search-dialog[open]:not([data-closing])::backdrop { opacity: 0; }
     .search-input-row:has(#guide-search:focus-visible:not([data-focus-origin="pointer"])) > .icon { color: var(--muted); }
   }
@@ -303,10 +323,14 @@ dialog::backdrop { background: rgb(0 0 0 / 72%); backdrop-filter: blur(3px); }
   .topic-card { padding: 20px 18px 12px; }
   .topic-card > p { min-height: 66px; }
   .quick-start { margin-top: 44px; }
-  .search-dialog { width: calc(100% - 24px); max-height: calc(100dvh - 24px); margin-top: 12px; }
-  .search-panel { max-height: calc(100dvh - 24px); }
-  .search-input-row { gap: 8px; padding: 12px; }
-  #guide-search { font-size: 16px; }
+  .search-dialog {
+    --expanded-width: calc(100% - 24px);
+    border-color: color-mix(in srgb, var(--line) calc(100% * var(--search-expansion)), transparent);
+    background-color: color-mix(in srgb, var(--panel) calc(100% * var(--search-expansion)), transparent);
+  }
+  .search-input-row { gap: 8px; padding-inline: 11px; }
+  .search-input-row > button > kbd { display: none; }
+  .search-field { font-size: 16px; opacity: var(--search-expansion); }
   .search-hints { display: none; }
 }
 @media (max-width: 540px) {

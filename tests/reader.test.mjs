@@ -34,9 +34,11 @@ function reader(loadIndex) {
   const results = element('UL');
   const status = element('P');
   const trigger = element('A');
+  trigger.getBoundingClientRect = () => ({ left: 180, top: 18, width: 280, height: 44 });
   const close = element('BUTTON');
   const dialog = Object.assign(element('DIALOG'), {
     open: false,
+    style: { setProperty(name, value) { this[name] = value; } },
     getAnimations() { return []; },
     showModal() { this.open = true; },
     close() { this.open = false; return this.emit('close'); },
@@ -44,7 +46,7 @@ function reader(loadIndex) {
     querySelectorAll: () => [input, close, ...results.querySelectorAll('a')],
   });
   const titleLink = Object.assign(element('A'), { dataset: { title: 'subtitles' }, textContent: 'Subtitles', href: '/subtitles/' });
-  const nodes = { '#guide-search': input, '#search-results': results, '#search-status': status, '#docs-search-dialog': dialog };
+  const nodes = { '.search-trigger': trigger, '#guide-search': input, '#search-results': results, '#search-status': status, '#docs-search-dialog': dialog };
   document.querySelector = selector => nodes[selector] ?? null;
   document.querySelectorAll = selector => ({
     '#docs-sidebar a[data-slug]': [titleLink],
@@ -54,7 +56,7 @@ function reader(loadIndex) {
   document.createElement = tag => element(tag.toUpperCase());
   const events = element();
   document.addEventListener = events.addEventListener;
-  const context = createContext({ document });
+  const context = createContext({ document, window: events });
   runInContext(script, context);
   context.loadIndex = loadIndex;
   const key = (value, extra = {}) => ({ key: value, preventDefault() { this.prevented = true; }, ...extra });
@@ -71,6 +73,7 @@ test('search shortcuts respect text input, composition and modified slash keys',
   assert.equal(r.dialog.open, false);
   await r.events.emit('keydown', r.key('/'));
   assert.equal(r.dialog.open, true);
+  assert.equal(r.dialog.style['--trigger-left'], '180px');
   assert.equal(r.document.activeElement, r.input);
   await r.dialog.close();
   await r.events.emit('keydown', r.key('K', { target: r.input, metaKey: true }));
@@ -141,7 +144,7 @@ test('closing preserves results during exit and reopening cancels an unfinished 
   const open = () => r.trigger.emit('click', { detail: 1, preventDefault() {} });
   const find = async () => { r.input.value = 'subtitles'; await r.input.emit('input'); };
   let finish;
-  r.dialog.getAnimations = () => [{ transitionProperty: 'opacity', finished: new Promise(resolve => { finish = resolve; }) }];
+  r.dialog.getAnimations = () => [{ transitionProperty: '--search-expansion', finished: new Promise(resolve => { finish = resolve; }) }];
   await open();
   await find();
   await r.close.emit('click');
