@@ -235,6 +235,13 @@ test('only the versioned Pagefind runtime and index assets are served', async ()
       assert.equal(path, supported ? base + file : '/404.html');
       return new Response('asset');
     });
+
+    test('a Worker deployed before Pages can still serve the previous search index', async () => {
+      const response = await handleRequest(new Request('https://docs.plozz.app/search-index.json'), async path =>
+        path === '/search-index.json' ? Response.json({ entries: [] }) : new Response(null, { status: 404 }));
+      assert.equal(response.status, 200);
+      assert.deepEqual(await response.json(), { entries: [] });
+    });
     assert.equal(response.status, supported ? 200 : 404);
     const csp = response.headers.get('Content-Security-Policy');
     assert.match(csp, /script-src 'self' 'wasm-unsafe-eval'; worker-src 'self';/);

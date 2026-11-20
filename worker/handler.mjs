@@ -65,7 +65,8 @@ const securityHeaders = {
   'Content-Security-Policy': "default-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'",
   'X-Plozz-Docs-Origin': 'github-pages',
 };
-const assets = new Set(['/docs.css', '/docs.js', '/logo.svg', '/manrope.woff2', '/font-license.txt', '/_source.json', '/sitemap.xml', '/robots.txt', '/404.html', '/index.html']);
+// The previous Pages build still needs its index during a staged rollout or rollback.
+const assets = new Set(['/docs.css', '/docs.js', '/logo.svg', '/manrope.woff2', '/font-license.txt', '/_source.json', '/search-index.json', '/sitemap.xml', '/robots.txt', '/404.html', '/index.html']);
 const searchAsset = /^\/pagefind\/[a-f0-9]{64}\/(?:pagefind(?:-worker)?\.js|pagefind-entry\.json|license\.txt|wasm\.(?:en|unknown)\.pagefind|pagefind\.en_[a-f0-9]+\.pf_meta|index\/en_[a-f0-9]+\.pf_index|fragment\/en_[a-f0-9]+\.pf_fragment)$/;
 
 export async function publishedAsset(path, { method = 'GET', version } = {}, request = fetch) {
