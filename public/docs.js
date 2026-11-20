@@ -93,16 +93,16 @@ search?.addEventListener('input', async () => {
 function bindDialog(selector, openSelector, closeSelector, onOpen) {
   const dialog = document.querySelector(selector);
   if (!dialog || typeof dialog.showModal !== 'function') return null;
-  const open = () => {
+  const open = event => {
     for (const other of document.querySelectorAll('dialog[open]')) {
       if (other !== dialog) other.close();
     }
     if (!dialog.open) dialog.showModal();
-    onOpen?.();
+    onOpen?.(event);
   };
   for (const trigger of document.querySelectorAll(openSelector)) trigger.addEventListener('click', event => {
     event.preventDefault();
-    open();
+    open(event);
   });
   dialog.querySelector(closeSelector).addEventListener('click', () => dialog.close());
   let backdropPointer = false;
@@ -130,7 +130,12 @@ function bindDialog(selector, openSelector, closeSelector, onOpen) {
   return { dialog, open };
 }
 
-const searchModal = bindDialog('#docs-search-dialog', '[data-open-search]', '[data-close-search]', () => {
+// Text inputs can match :focus-visible even after a mouse click or tap.
+search?.addEventListener('pointerdown', () => { search.dataset.focusOrigin = 'pointer'; });
+search?.addEventListener('blur', () => { delete search.dataset.focusOrigin; });
+const searchModal = bindDialog('#docs-search-dialog', '[data-open-search]', '[data-close-search]', event => {
+  if (event?.detail > 0) search.dataset.focusOrigin = 'pointer';
+  else delete search.dataset.focusOrigin;
   search.focus();
   search.select();
 });

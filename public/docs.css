@@ -202,11 +202,29 @@ dialog { border: 1px solid var(--line); padding: 0; background: var(--panel); co
 dialog::backdrop { background: rgb(0 0 0 / 72%); backdrop-filter: blur(3px); }
 .search-dialog { width: min(640px, calc(100% - 40px)); max-height: calc(100dvh - 64px); margin: min(16vh, 140px) auto auto; border-radius: 12px; box-shadow: 0 24px 100px rgb(0 0 0 / 50%); overflow: hidden; }
 .search-panel { display: flex; flex-direction: column; max-height: min(650px, 76dvh); }
-.search-input-row { display: flex; align-items: center; gap: 12px; padding: 14px 16px 14px 24px; }
+.search-input-row { --focus-ink: color-mix(in srgb, var(--accent) 65%, var(--panel)); display: flex; align-items: center; gap: 12px; padding: 14px 16px 14px 24px; }
 .search-input-row > .icon { color: var(--muted); }
-#guide-search { width: 100%; min-width: 0; height: 44px; border: 0; border-radius: 3px; background: transparent; color: var(--text); font-size: 15px; }
+.search-input-row:has(#guide-search:focus) > .icon { color: var(--text); }
+.search-input-row:has(#guide-search:focus-visible:not([data-focus-origin="pointer"])) > .icon { color: var(--accent); }
+#guide-search {
+  width: 100%; min-width: 0; height: 44px; border: 0; border-radius: 0;
+  background: linear-gradient(var(--focus-ink), var(--focus-ink)) left bottom / 0% 2px no-repeat;
+  color: var(--text); font-size: 15px;
+}
 #guide-search::placeholder { color: var(--muted); opacity: 1; }
-#guide-search:focus-visible { outline-offset: 0; }
+#guide-search:focus { outline: none; }
+#guide-search:focus-visible:not([data-focus-origin="pointer"]) { background-size: 100% 2px; }
+@media (prefers-reduced-motion: no-preference) {
+  #guide-search { transition: background-size 180ms cubic-bezier(.2, .8, .2, 1); }
+  .search-input-row > .icon { transition: color 120ms ease-out; }
+  @starting-style {
+    #guide-search:focus-visible:not([data-focus-origin="pointer"]) { background-size: 0% 2px; }
+    .search-input-row:has(#guide-search:focus-visible:not([data-focus-origin="pointer"])) > .icon { color: var(--muted); }
+  }
+}
+@media (forced-colors: active) {
+  #guide-search:focus-visible:not([data-focus-origin="pointer"]) { outline: 2px solid Highlight; outline-offset: 0; }
+}
 .search-content { overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
 #search-status { border-top: 1px solid var(--line); margin: 0; padding: 16px 24px 10px; font-size: 12px; line-height: 1.6; color: var(--muted); }
 #search-results { list-style: none; margin: 0; padding: 0 12px 12px; }

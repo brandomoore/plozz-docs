@@ -79,6 +79,22 @@ test('search shortcuts respect text input, composition and modified slash keys',
   assert.equal(r.dialog.open, true);
 });
 
+test('pointer focus stays quiet without suppressing subsequent keyboard focus', async () => {
+  const r = reader();
+  await r.trigger.emit('click', { detail: 1, preventDefault() {} });
+  assert.equal(r.document.activeElement, r.input);
+  assert.equal(r.input.dataset.focusOrigin, 'pointer');
+  await r.events.emit('keydown', r.key('k', { ctrlKey: true }));
+  assert.notEqual(r.input.dataset.focusOrigin, 'pointer');
+  await r.input.emit('pointerdown');
+  assert.equal(r.input.dataset.focusOrigin, 'pointer');
+  await r.input.emit('blur');
+  assert.notEqual(r.input.dataset.focusOrigin, 'pointer');
+  await r.dialog.close();
+  await r.trigger.emit('click', { detail: 0, preventDefault() {} });
+  assert.notEqual(r.input.dataset.focusOrigin, 'pointer');
+});
+
 test('full-text results are keyboard-accessible links and closing clears the query', async () => {
   const r = reader(async () => ({ search: async () => ({ results: [{ data: async () => ({
     url: '/subtitles/#timing', meta: { title: 'Timing', guide: 'Subtitles' }, plain_excerpt: 'Adjust subtitle timing.',
