@@ -90,31 +90,34 @@ search?.addEventListener('input', async () => {
   }
 });
 
-function bindDialog(selector, openSelector, closeSelector, onOpen) {
+function bindDialog(selector, openSelector, closeSelector, onOpen, dismiss = dialog => dialog.close()) {
   const dialog = document.querySelector(selector);
   if (!dialog || typeof dialog.showModal !== 'function') return null;
   const open = event => {
     for (const other of document.querySelectorAll('dialog[open]')) {
       if (other !== dialog) other.close();
     }
-    if (!dialog.open) dialog.showModal();
-    onOpen?.(event);
+    const alreadyOpen = dialog.open;
+    if (!alreadyOpen) dialog.showModal();
+    onOpen?.(event, alreadyOpen);
   };
   for (const trigger of document.querySelectorAll(openSelector)) trigger.addEventListener('click', event => {
     event.preventDefault();
     open(event);
   });
-  dialog.querySelector(closeSelector).addEventListener('click', () => dialog.close());
+  const close = () => dismiss(dialog);
+  dialog.querySelector(closeSelector).addEventListener('click', close);
+  dialog.addEventListener('cancel', event => { event.preventDefault(); close(); });
   let backdropPointer = false;
   dialog.addEventListener('pointerdown', event => { backdropPointer = event.target === dialog; });
   dialog.addEventListener('click', event => {
-    if (event.target === dialog && backdropPointer) dialog.close();
+    if (event.target === dialog && backdropPointer) close();
     backdropPointer = false;
   });
   dialog.addEventListener('keydown', event => {
     if (event.key === 'Escape' && !event.isComposing) {
       event.preventDefault();
-      dialog.close();
+      close();
       return;
     }
     if (event.key !== 'Tab' || event.metaKey || event.ctrlKey || event.altKey || event.isComposing) return;
@@ -133,14 +136,31 @@ function bindDialog(selector, openSelector, closeSelector, onOpen) {
 // Text inputs can match :focus-visible even after a mouse click or tap.
 search?.addEventListener('pointerdown', () => { search.dataset.focusOrigin = 'pointer'; });
 search?.addEventListener('blur', () => { delete search.dataset.focusOrigin; });
-const searchModal = bindDialog('#docs-search-dialog', '[data-open-search]', '[data-close-search]', event => {
+const searchModal = bindDialog('#docs-search-dialog', '[data-open-search]', '[data-close-search]', (event, alreadyOpen) => {
+  delete searchModal.dialog.dataset.closing;
+  if (!alreadyOpen) clearSearch();
   if (event?.detail > 0) search.dataset.focusOrigin = 'pointer';
   else delete search.dataset.focusOrigin;
   search.focus();
   search.select();
-});
+}, dismissSearch);
 const navigationModal = bindDialog('#docs-navigation-dialog', '[data-open-navigation]', '[data-close-navigation]');
-searchModal?.dialog.addEventListener('close', clearSearch);
+let exitTransition;
+function dismissSearch(dialog) {
+  if (dialog.dataset.closing) return;
+  dialog.dataset.closing = 'true';
+  // Keep the native backdrop and results visible until the fade actually ends.
+  const fade = dialog.getAnimations().find(animation => animation.transitionProperty === 'opacity');
+  exitTransition = fade;
+  if (!fade) return dialog.close();
+  const finish = () => {
+    if (dialog.open && dialog.dataset.closing && exitTransition === fade) dialog.close();
+  };
+  fade.finished.then(finish, finish);
+}
+searchModal?.dialog.addEventListener('close', () => {
+  if (!searchModal.dialog.open) clearSearch();
+});
 results?.addEventListener('click', event => {
   if (event.target.closest('a') && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) searchModal?.dialog.close();
 });

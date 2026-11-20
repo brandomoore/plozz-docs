@@ -37,6 +37,7 @@ function reader(loadIndex) {
   const close = element('BUTTON');
   const dialog = Object.assign(element('DIALOG'), {
     open: false,
+    getAnimations() { return []; },
     showModal() { this.open = true; },
     close() { this.open = false; return this.emit('close'); },
     querySelector: () => close,
@@ -133,6 +134,30 @@ test('failed full-text search shows usable title matches inside the dialog', asy
   await r.input.emit('input');
   assert.match(r.status.textContent, /No matching titles/);
   assert.equal(r.results.hidden, true);
+});
+
+test('closing preserves results during exit and reopening cancels an unfinished exit', async () => {
+  const r = reader(async () => { throw new Error('Offline'); });
+  const open = () => r.trigger.emit('click', { detail: 1, preventDefault() {} });
+  const find = async () => { r.input.value = 'subtitles'; await r.input.emit('input'); };
+  let finish;
+  r.dialog.getAnimations = () => [{ transitionProperty: 'opacity', finished: new Promise(resolve => { finish = resolve; }) }];
+  await open();
+  await find();
+  await r.close.emit('click');
+  assert(r.dialog.open);
+  assert.equal(r.results.querySelectorAll('a').length, 1);
+  await open();
+  finish();
+  await new Promise(resolve => setImmediate(resolve));
+  assert(r.dialog.open);
+  assert.equal(r.input.value, 'subtitles');
+  await r.close.emit('click');
+  finish();
+  await new Promise(resolve => setImmediate(resolve));
+  assert(!r.dialog.open);
+  assert.equal(r.input.value, '');
+  assert.equal(r.results.children.length, 0);
 });
 
 test('closing search discards an in-flight response instead of restoring stale results', async () => {

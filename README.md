@@ -166,8 +166,9 @@ index each guide introduction and section separately, without sidebar or
 directory text. Results show the matched heading, guide and excerpt and link
 directly to the answer; arrow keys move through
 results, Enter opens one, and Escape closes the native dialog. Keyboard focus
-draws an underline under the search field; clicks and taps show the caret
-without the underline. Reduced-motion mode skips the transition. Search loads
+uses a softly tinted field with a rounded border; clicks and taps show the
+caret without the border. The panel and backdrop animate on open and close for
+both pointer and keyboard users. Reduced-motion mode skips the animations. Search loads
 on demand from a same-origin bundle scoped to the page's content revision.
 If the index is unavailable or updating, the dialog explains the problem and
 shows title-only matches. Navigation and the guide directory work without
