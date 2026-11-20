@@ -336,7 +336,7 @@ body:has(.search-dialog[open]) .search-trigger { opacity: 0; }
   .topic-card { padding: 20px 18px 12px; }
   .topic-card > p { min-height: 66px; }
   .quick-start { margin-top: 44px; }
-  .search-input-row { gap: 8px; padding-inline: 11px; }
+  .search-input-row { height: auto; gap: 8px; padding: 5px; padding-inline-start: 11px; }
   .search-input-row > button { margin-inline-end: 0; }
   .search-input-row > button > kbd { display: none; }
   .search-field { font-size: 16px; }
