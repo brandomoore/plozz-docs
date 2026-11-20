@@ -159,6 +159,12 @@ hashes and the dates of guides that use them; changing only shared layout/CSS
 does not change article dates. Maintainers own new diagram definitions; the
 content bot may select and verify existing ones, not invent or alter them.
 
+Guide UI in `public/docs.css` uses shared corner tokens: `--radius-inline` for
+keycaps and inline text, `--radius-control` for controls and compact tiles,
+and `--radius-surface` for panels and cards. Where rounded edges run alongside
+one another, subtract the full edge inset (including the border) from the
+outer radius so the two curves have the same center.
+
 ### Navigation and search
 
 Header search opens with `/` or Command/Ctrl+K. The build uses Pagefind to
