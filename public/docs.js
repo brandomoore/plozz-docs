@@ -139,13 +139,29 @@ search?.addEventListener('blur', () => { delete search.dataset.focusOrigin; });
 const headerSearch = document.querySelector('.search-trigger');
 function anchorSearch() {
   const { left, top, width, height } = headerSearch.getBoundingClientRect();
-  const { style } = searchModal.dialog;
-  for (const [name, value] of Object.entries({ left, top, width, height })) style.setProperty(`--trigger-${name}`, `${value}px`);
+  const dialog = searchModal.dialog;
+  // Measure the final layout, not the transformed rectangle of an interrupted animation.
+  const w = dialog.offsetWidth, h = dialog.offsetHeight;
+  const dx = left - dialog.offsetLeft;
+  const rowY = (height - dialog.querySelector('.search-input-row').offsetHeight - 2) / 2;
+  dialog.style.setProperty('--trigger-top', `${top}px`);
+  dialog.style.setProperty('--return-x', `${dx}px`);
+  dialog.style.setProperty('--return-end-x', `${width - w}px`);
+  dialog.style.setProperty('--return-row-y', `${rowY}px`);
+  dialog.style.setProperty('--return-scale', `scale(${width / w}, ${height / h})`);
+  dialog.style.setProperty('--return-height', `${h}px`);
 }
 const searchModal = bindDialog('#docs-search-dialog', '[data-open-search]', '[data-close-search]', (event, alreadyOpen) => {
-  anchorSearch();
-  delete searchModal.dialog.dataset.closing;
-  if (!alreadyOpen) clearSearch();
+  const dialog = searchModal.dialog;
+  delete dialog.dataset.closing;
+  if (!alreadyOpen) {
+    clearSearch();
+    anchorSearch();
+    dialog.dataset.starting = '';
+    // Commit the source frame before allowing the compositor to move it.
+    getComputedStyle(dialog, '::before').transform;
+    delete dialog.dataset.starting;
+  }
   if (event?.detail > 0) search.dataset.focusOrigin = 'pointer';
   else delete search.dataset.focusOrigin;
   search.focus();
@@ -156,15 +172,16 @@ const navigationModal = bindDialog('#docs-navigation-dialog', '[data-open-naviga
 let exitTransition;
 function dismissSearch(dialog) {
   if (dialog.dataset.closing) return;
+  anchorSearch();
   dialog.dataset.closing = 'true';
   // Keep the native dialog in the top layer until its border reaches the trigger.
-  const morph = dialog.getAnimations().find(animation => animation.transitionProperty === '--search-expansion');
+  const transforms = dialog.getAnimations({ subtree: true }).filter(animation => animation.transitionProperty === 'transform');
+  if (!transforms.length) return dialog.close();
+  const morph = Promise.allSettled(transforms.map(animation => animation.finished));
   exitTransition = morph;
-  if (!morph) return dialog.close();
-  const finish = () => {
+  morph.then(() => {
     if (dialog.open && dialog.dataset.closing && exitTransition === morph) dialog.close();
-  };
-  morph.finished.then(finish, finish);
+  });
 }
 searchModal?.dialog.addEventListener('close', () => {
   if (!searchModal.dialog.open) clearSearch();

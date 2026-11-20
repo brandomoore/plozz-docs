@@ -49,6 +49,11 @@ a > .brand-icon { margin-right: 8px; }
 .search-trigger kbd { margin-left: auto; }
 kbd { display: inline-flex; justify-content: center; align-items: center; min-width: 21px; height: 23px; border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; font: 11px/1 ui-monospace, monospace; color: var(--muted); }
 .header-links { display: flex; align-items: center; gap: 26px; }
+@media (min-width: 761px) {
+  .header-inner { display: grid; grid-template-columns: 1fr minmax(0, min(36%, 360px)) 1fr; }
+  .header-inner > .search-trigger { width: 100%; margin: 0; }
+  .header-links { justify-self: end; }
+}
 .website-link { display: flex; align-items: center; gap: 6px; min-height: 44px; font-size: 13px; text-decoration: none; color: var(--muted); }
 .website-link .icon { width: 14px; height: 14px; }
 .button { display: inline-flex; justify-content: center; align-items: center; gap: 12px; min-height: 44px; border: 1px solid transparent; border-radius: 7px; padding: 9px 16px; font-size: 13px; font-weight: 700; line-height: 1.5; text-decoration: none; }
@@ -200,46 +205,44 @@ footer .updated { margin: 0; }
 
 dialog { border: 1px solid var(--line); padding: 0; background: var(--panel); color: var(--text); }
 dialog::backdrop { background: rgb(0 0 0 / 72%); backdrop-filter: blur(3px); }
-@property --search-expansion { syntax: "<number>"; inherits: true; initial-value: 0; }
 .search-dialog {
-  --expanded-width: min(600px, calc(100% - 24px));
-  --expanded-left: clamp(12px, var(--trigger-left), calc(100% - var(--expanded-width) - 12px));
-  --search-motion: 260ms cubic-bezier(.22, .72, .18, 1);
-  position: fixed; inset: var(--trigger-top) auto auto;
-  left: calc(var(--trigger-left) + (var(--expanded-left) - var(--trigger-left)) * var(--search-expansion));
-  width: calc(var(--trigger-width) + (var(--expanded-width) - var(--trigger-width)) * var(--search-expansion));
-  max-width: none; max-height: none; margin: 0; overflow: hidden;
-  border-radius: calc(8px + 4px * var(--search-expansion));
-  box-shadow: 0 12px 48px rgb(0 0 0 / calc(.42 * var(--search-expansion)));
+  --search-motion: 180ms cubic-bezier(.2, .75, .2, 1);
+  position: fixed; inset: var(--trigger-top, 12px) 0 auto;
+  width: min(600px, calc(100% - 24px)); max-width: none; max-height: none;
+  margin: 0 auto; padding: 1px; border: 0; background: transparent; overflow: visible;
+  isolation: isolate;
 }
-.search-dialog[open]:not([data-closing]) { --search-expansion: 1; }
+.search-dialog::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  border: 1px solid var(--line); border-radius: 12px; background: var(--panel);
+  box-shadow: 0 12px 48px rgb(0 0 0 / 42%); transform-origin: top left;
+}
+.search-dialog[data-closing] { height: var(--return-height); }
+.search-dialog::backdrop { backdrop-filter: none; }
 /* The dialog paints the trigger's chrome during the handoff; keep its layout slot. */
 body:has(.search-dialog[open]) .search-trigger { opacity: 0; }
 .search-input-row {
   display: flex; align-items: center; gap: 12px; padding-inline: 12px;
-  height: calc(var(--trigger-height) - 2px + 12px * var(--search-expansion));
+  height: 54px;
 }
 .search-input-row > button { position: relative; margin-inline-end: -11px; }
 .search-input-row > button > :is(kbd, .icon) { position: absolute; }
-.search-input-row > button > kbd { opacity: calc(1 - var(--search-expansion)); }
-.search-input-row > button > .icon { opacity: var(--search-expansion); }
-.search-reveal { display: grid; grid-template-rows: 0fr; opacity: var(--search-expansion); }
-.search-dialog[open]:not([data-closing]) .search-reveal { grid-template-rows: 1fr; }
-.search-details { min-height: 0; max-height: min(65dvh, calc(100dvh - var(--trigger-top) - var(--trigger-height) - 30px)); overflow: hidden; display: flex; flex-direction: column; }
+.search-input-row > button > kbd { opacity: 0; }
+.search-details { min-height: 0; max-height: min(65dvh, calc(100dvh - var(--trigger-top, 12px) - 70px)); overflow: hidden; display: flex; flex-direction: column; }
 .search-input-row > .icon { color: var(--muted); }
 .search-input-row:has(#guide-search:focus) > .icon { color: var(--text); }
 .search-input-row:has(#guide-search:focus-visible:not([data-focus-origin="pointer"])) > .icon { color: var(--accent); }
 .search-field {
   display: grid; flex: 1; min-width: 0; align-items: center;
-  font-size: calc(13px + 2px * var(--search-expansion)); text-indent: calc(7px * var(--search-expansion));
+  font-size: 15px; text-indent: 7px;
 }
 .search-field > * { grid-area: 1 / 1; }
 .search-field label { pointer-events: none; overflow: hidden; white-space: nowrap; color: var(--muted); }
-.search-field input:not(:placeholder-shown) + label { opacity: calc(1 - var(--search-expansion)); }
+.search-field input:not(:placeholder-shown) + label { opacity: 0; }
 #guide-search {
   width: 100%; min-width: 0; height: 40px; padding: 0; text-indent: inherit;
   border: 0; border-radius: 8px; background: transparent;
-  color: var(--text); caret-color: var(--accent); font-size: inherit; opacity: var(--search-expansion);
+  color: var(--text); caret-color: var(--accent); font-size: inherit;
 }
 #guide-search:focus { outline: none; }
 #guide-search:focus-visible:not([data-focus-origin="pointer"]) {
@@ -247,18 +250,28 @@ body:has(.search-dialog[open]) .search-trigger { opacity: 0; }
   background-color: color-mix(in srgb, var(--text) 5%, var(--panel));
 }
 @media (prefers-reduced-motion: no-preference) {
-  .search-dialog { transition: --search-expansion var(--search-motion); }
-  .search-reveal { transition: grid-template-rows var(--search-motion); }
+  .search-dialog, .search-dialog::before, .search-input-row, .search-field, .search-input-row > button { transition: transform var(--search-motion); }
+  .search-field { transform-origin: left center; }
+  .search-dialog:is([data-starting], [data-closing]) {
+    transform: translateX(var(--return-x));
+  }
+  .search-dialog:is([data-starting], [data-closing])::before { transform: var(--return-scale); }
+  .search-dialog:is([data-starting], [data-closing]) .search-input-row { transform: translateY(var(--return-row-y)); }
+  .search-dialog:is([data-starting], [data-closing]) .search-field { transform: translateX(-6px) scale(.86667); }
+  .search-dialog:is([data-starting], [data-closing]) [data-close-search] { transform: translateX(var(--return-end-x)); }
+  .search-reveal { transform-origin: left top; transition: opacity 90ms ease-out, transform var(--search-motion); }
+  .search-dialog:is([data-starting], [data-closing]) .search-reveal { transform: var(--return-scale); }
+  .search-input-row > button > *, .search-field > * { transition: opacity 110ms ease-out; }
+  .search-dialog:is([data-starting], [data-closing]) :is(.search-reveal, [data-close-search] > .icon, #guide-search) { opacity: 0; }
+  .search-dialog:is([data-starting], [data-closing]) :is([data-close-search] > kbd, .search-field label) { opacity: 1; }
+  .search-dialog[data-starting], .search-dialog[data-starting]::before, .search-dialog[data-starting] * { transition: none; }
   .search-dialog::backdrop {
     opacity: 0;
     transition: opacity 150ms ease-in;
   }
-  .search-dialog[open]:not([data-closing])::backdrop { opacity: 1; transition-duration: 240ms; transition-timing-function: ease-out; }
-  #guide-search { transition: background-color 120ms ease-out; }
+  .search-dialog[open]:not([data-closing])::backdrop { opacity: 1; transition-duration: 160ms; transition-timing-function: ease-out; }
   .search-input-row > .icon { transition: color 120ms ease-out; }
   @starting-style {
-    .search-dialog[open]:not([data-closing]) { --search-expansion: 0; }
-    .search-dialog[open]:not([data-closing]) .search-reveal { grid-template-rows: 0fr; }
     .search-dialog[open]:not([data-closing])::backdrop { opacity: 0; }
     .search-input-row:has(#guide-search:focus-visible:not([data-focus-origin="pointer"])) > .icon { color: var(--muted); }
   }
@@ -323,14 +336,12 @@ body:has(.search-dialog[open]) .search-trigger { opacity: 0; }
   .topic-card { padding: 20px 18px 12px; }
   .topic-card > p { min-height: 66px; }
   .quick-start { margin-top: 44px; }
-  .search-dialog {
-    --expanded-width: calc(100% - 24px);
-    border-color: color-mix(in srgb, var(--line) calc(100% * var(--search-expansion)), transparent);
-    background-color: color-mix(in srgb, var(--panel) calc(100% * var(--search-expansion)), transparent);
-  }
   .search-input-row { gap: 8px; padding-inline: 11px; }
   .search-input-row > button > kbd { display: none; }
-  .search-field { font-size: 16px; opacity: var(--search-expansion); }
+  .search-field { font-size: 16px; }
+  .search-dialog:is([data-starting], [data-closing]) .search-field label { opacity: 0; }
+  .search-dialog:is([data-starting], [data-closing])::before { opacity: 0; }
+  .search-dialog::before { transition-property: transform, opacity; }
   .search-hints { display: none; }
 }
 @media (max-width: 540px) {

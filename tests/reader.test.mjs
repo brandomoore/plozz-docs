@@ -36,13 +36,15 @@ function reader(loadIndex) {
   const trigger = element('A');
   trigger.getBoundingClientRect = () => ({ left: 180, top: 18, width: 280, height: 44 });
   const close = element('BUTTON');
+  const row = { offsetHeight: 54 };
   const dialog = Object.assign(element('DIALOG'), {
     open: false,
+    offsetWidth: 600, offsetHeight: 104, offsetLeft: 20,
     style: { setProperty(name, value) { this[name] = value; } },
     getAnimations() { return []; },
     showModal() { this.open = true; },
     close() { this.open = false; return this.emit('close'); },
-    querySelector: () => close,
+    querySelector: selector => selector === '.search-input-row' ? row : close,
     querySelectorAll: () => [input, close, ...results.querySelectorAll('a')],
   });
   const titleLink = Object.assign(element('A'), { dataset: { title: 'subtitles' }, textContent: 'Subtitles', href: '/subtitles/' });
@@ -56,7 +58,7 @@ function reader(loadIndex) {
   document.createElement = tag => element(tag.toUpperCase());
   const events = element();
   document.addEventListener = events.addEventListener;
-  const context = createContext({ document, window: events });
+  const context = createContext({ document, window: events, getComputedStyle: () => ({ transform: 'none' }) });
   runInContext(script, context);
   context.loadIndex = loadIndex;
   const key = (value, extra = {}) => ({ key: value, preventDefault() { this.prevented = true; }, ...extra });
@@ -73,7 +75,8 @@ test('search shortcuts respect text input, composition and modified slash keys',
   assert.equal(r.dialog.open, false);
   await r.events.emit('keydown', r.key('/'));
   assert.equal(r.dialog.open, true);
-  assert.equal(r.dialog.style['--trigger-left'], '180px');
+  assert.equal(r.dialog.style['--trigger-top'], '18px');
+  assert.equal(r.dialog.style['--return-row-y'], '-6px');
   assert.equal(r.document.activeElement, r.input);
   await r.dialog.close();
   await r.events.emit('keydown', r.key('K', { target: r.input, metaKey: true }));
@@ -143,20 +146,25 @@ test('closing preserves results during exit and reopening cancels an unfinished 
   const r = reader(async () => { throw new Error('Offline'); });
   const open = () => r.trigger.emit('click', { detail: 1, preventDefault() {} });
   const find = async () => { r.input.value = 'subtitles'; await r.input.emit('input'); };
-  let finish;
-  r.dialog.getAnimations = () => [{ transitionProperty: '--search-expansion', finished: new Promise(resolve => { finish = resolve; }) }];
+  let finish = [];
+  r.dialog.getAnimations = () => Array.from({ length: 2 }, () => ({
+    transitionProperty: 'transform', finished: new Promise(resolve => finish.push(resolve)),
+  }));
   await open();
   await find();
   await r.close.emit('click');
   assert(r.dialog.open);
   assert.equal(r.results.querySelectorAll('a').length, 1);
   await open();
-  finish();
+  finish.splice(0).forEach(resolve => resolve());
   await new Promise(resolve => setImmediate(resolve));
   assert(r.dialog.open);
   assert.equal(r.input.value, 'subtitles');
   await r.close.emit('click');
-  finish();
+  finish.shift()();
+  await new Promise(resolve => setImmediate(resolve));
+  assert(r.dialog.open, 'the shell must not disappear while the row is still returning');
+  finish.shift()();
   await new Promise(resolve => setImmediate(resolve));
   assert(!r.dialog.open);
   assert.equal(r.input.value, '');
