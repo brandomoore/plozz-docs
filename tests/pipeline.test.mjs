@@ -346,6 +346,7 @@ test('built search metadata and sitemap dates describe article changes, not sour
   const f = fixture(t);
   const state = f.state();
   state.verifiedAt = '2026-11-20T00:00:00Z';
+  state.baselineReviewedAt = '2026-11-19T00:00:00Z';
   state.pages[page.slug].updatedAt = '2026-10-01T00:00:00Z';
   f.save('source-state.json', state);
   const result = f.run('build.mjs');
@@ -370,10 +371,8 @@ test('built search metadata and sitemap dates describe article changes, not sour
   const sitemap = readFileSync(resolve(f.root, 'dist/sitemap.xml'), 'utf8');
   assert(sitemap.includes('<lastmod>2026-10-01</lastmod>'));
   assert(!sitemap.includes('2026-11-20'));
-  const search = f.read('dist/search-index.json');
-  assert.equal(search.entries[0].path, '/');
-  assert(search.entries[0].text.includes('Install Plozz'));
-  assert.equal(search.contentHash, state.contentHash);
+  const search = f.read(`dist/pagefind/${state.contentHash}/pagefind-entry.json`);
+  assert.equal(search.languages.en.page_count, 1);
 });
 
 test('finalization requires a real matching review receipt or unchanged-content proof', t => {

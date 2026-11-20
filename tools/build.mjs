@@ -1,5 +1,6 @@
 import { readFileSync, writeFileSync, mkdirSync, rmSync, copyFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import * as pagefind from 'pagefind';
 import { ROOT, SITE, readJson, readBaseline, validatePages, validateState, markdown, escapeHtml as e, pagePath, headingSlug, sha256, plainText as plain } from './lib.mjs';
 import { brandIcon, uiIcon as icon, platformIcons } from './visuals.mjs';
 
@@ -29,9 +30,10 @@ const data = pages.map(page => {
   const headings = tokens.flatMap((token, index) => token.type === 'heading_open' && token.tag === 'h2'
     ? [{ id: token.attrGet('id'), title: plain(tokens.slice(index, index + 3)), index }] : []);
   const sections = headings.map((heading, index) => ({
-    id: heading.id, title: heading.title, text: plain(tokens.slice(heading.index, headings[index + 1]?.index ?? tokens.length)),
+    id: heading.id, title: heading.title,
+    html: markdown.renderer.render(tokens.slice(heading.index + 3, headings[index + 1]?.index ?? tokens.length), markdown.options, {}),
   }));
-  return { ...page, tokens, sections, text: plain(tokens) };
+  return { ...page, tokens, sections, introText: plain(tokens.slice(3, headings[0]?.index ?? tokens.length)) };
 });
 const installLink = data.find(page => page.slug === 'getting-started').tokens
   .flatMap(token => token.children ?? [])
@@ -131,10 +133,29 @@ writeFileSync(resolve(output, '_source.json'), JSON.stringify({
   coverageHash: state.coverageHash, policyHash: state.policyHash, sourceSnapshotHash: state.discovery.snapshotHash,
   sourceFilesAvailable: state.discovery.fileCount, baselineAreas: policy.areas.length,
 }));
-writeFileSync(resolve(output, 'search-index.json'), JSON.stringify({
-  contentHash: state.contentHash,
-  entries: data.map(page => ({ slug: page.slug, path: pagePath(page.slug), title: page.title, description: page.description, text: page.text, sections: page.sections })),
-}));
+// Rank sections independently; navigation, related links and the directory aren't answers.
+function checked(result) {
+  if (result.errors.length) throw new Error(result.errors.join('\n'));
+  return result;
+}
+try {
+  const { index } = checked(await pagefind.createIndex({ excludeSelectors: ['[aria-hidden="true"]', 'svg'] }));
+  for (const page of data) {
+    const records = [{ title: page.title, html: `<p>${e(page.description)} ${e(page.introText)}</p>` }, ...page.sections];
+    for (const { id, title, html } of records) {
+      const body = html.replaceAll('<strong class="settings-path">', '<strong data-pagefind-weight="8">');
+      checked(await index.addHTMLFile({
+        url: pagePath(page.slug) + (id ? `#${id}` : ''),
+        content: `<html lang="en"><head><meta data-pagefind-meta="guide[content]" content="${e(page.title)}"></head><body><h1>${e(title)}</h1>${body}</body></html>`,
+      }));
+    }
+  }
+  const bundle = resolve(output, 'pagefind', state.contentHash);
+  checked(await index.writeFiles({ outputPath: bundle }));
+  copyFileSync(new URL('../LICENSE/LICENSE', import.meta.resolve('pagefind')), resolve(bundle, 'license.txt'));
+} finally {
+  await pagefind.close();
+}
 writeFileSync(resolve(output, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.map(page => `<url><loc>${SITE}${pagePath(page.slug)}</loc><lastmod>${state.pages[page.slug].updatedAt.slice(0, 10)}</lastmod></url>`).join('')}</urlset>`);
-writeFileSync(resolve(output, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /freshness.json\nDisallow: /_source.json\nDisallow: /search-index.json\nSitemap: ${SITE}/sitemap.xml\n`);
+writeFileSync(resolve(output, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /freshness.json\nDisallow: /_source.json\nDisallow: /pagefind/\nSitemap: ${SITE}/sitemap.xml\n`);
 console.log(`Built ${pages.length} source-checked pages covering ${policy.areas.length} reader-task areas.`);

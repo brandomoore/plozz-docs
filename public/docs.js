@@ -7,36 +7,29 @@ const normalize = value => value.toLowerCase().normalize('NFKD').replace(/\p{M}/
 let indexRequest;
 let searchGeneration = 0;
 
-function rankPages(entries, query) {
-  const terms = normalize(query).split(/\s+/).filter(Boolean);
-  return entries.flatMap(entry => {
-    const title = normalize(entry.title);
-    const description = normalize(entry.description);
-    const text = normalize(entry.text);
-    if (!terms.every(term => `${title} ${description} ${text}`.includes(term))) return [];
-    const score = terms.reduce((sum, term) => sum + (title.includes(term) ? 8 : 0) + (description.includes(term) ? 3 : 0) + (text.includes(term) ? 1 : 0), 0);
-    const section = entry.sections.find(section => terms.every(term => normalize(`${section.title} ${section.text}`).includes(term)));
-    const context = section?.text ?? entry.description;
-    const position = Math.max(0, normalize(context).indexOf(terms[0]) - 35);
-    return [{ title: entry.title, path: entry.path + (section ? `#${section.id}` : ''), snippet: `${position ? '…' : ''}${context.slice(position, position + 155)}${context.length > position + 155 ? '…' : ''}`, score }];
-  }).sort((a, b) => b.score - a.score || a.title.localeCompare(b.title));
+function searchTerms(query) {
+  // The guide calls this "server's version order"; library sorting is a different task.
+  if (/\bversions?\b/i.test(query) && /\bserver\b/i.test(query) && /\b(sort(?:ing)?|order(?:ing)?)\b/i.test(query)) {
+    return query.replace(/^(?:is there (?:any |a )?way to |how (?:can|do) i )/i, '')
+      .replace(/\b(?:preserve|keep)\b/gi, '').replace(/\bsort(?:ing)?\b/gi, 'order').trim();
+  }
+  return query;
 }
 
-function loadIndex() {
-  if (!indexRequest) {
-    indexRequest = fetch(`/search-index.json?v=${contentHash}`).then(async response => {
-      if (!response.ok) throw new Error('Search index unavailable');
-      const data = await response.json();
-      if (data.contentHash !== contentHash || !Array.isArray(data.entries) || !data.entries.every(entry =>
-        typeof entry.title === 'string' && typeof entry.description === 'string' && typeof entry.text === 'string'
-        && (entry.path === '/' || /^\/[a-z][a-z0-9-]{1,60}\/$/.test(entry.path))
-        && Array.isArray(entry.sections) && entry.sections.every(section => /^[a-z0-9-]+$/.test(section.id) && typeof section.title === 'string' && typeof section.text === 'string'))) {
-        throw new Error('Search index belongs to another documentation revision or has an invalid shape');
-      }
-      return data.entries;
-    }).catch(error => { indexRequest = null; throw error; });
-  }
-  return indexRequest;
+async function loadIndex(importModule = path => import(path)) {
+  const basePath = `/pagefind/${contentHash}/`;
+  const { createInstance } = await importModule(`${basePath}pagefind.js`);
+  const engine = createInstance({ basePath, baseUrl: '/', excerptLength: 48, excerptEllipsis: '…' });
+  await engine.init();
+  return engine;
+}
+
+function sectionMatch({ url, meta, plain_excerpt }) {
+  if (!/^\/(?:[a-z][a-z0-9-]{1,60}\/)?(?:#[a-z0-9-]+)?$/.test(url) || !meta.title) throw new Error('Invalid search result');
+  return {
+    path: url, title: meta.guide && meta.title !== meta.guide ? `${meta.title} · ${meta.guide}` : meta.title,
+    snippet: plain_excerpt.replaceAll('&gt;', '>').replaceAll('&lt;', '<'),
+  };
 }
 
 function renderMatches(matches) {
@@ -76,13 +69,17 @@ search?.addEventListener('input', async () => {
   if (!query) return;
   searchStatus.textContent = 'Searching guides and settings…';
   try {
-    const entries = await loadIndex();
+    indexRequest ??= loadIndex().catch(error => { indexRequest = null; throw error; });
+    const engine = await indexRequest;
     if (generation !== searchGeneration) return;
-    const matches = rankPages(entries, query);
+    const { results: hits } = await engine.search(searchTerms(query));
+    if (generation !== searchGeneration) return;
+    const matches = await Promise.all(hits.slice(0, 12).map(async hit => sectionMatch(await hit.data())));
+    if (generation !== searchGeneration) return;
     renderMatches(matches);
-    searchStatus.textContent = matches.length > 12
-      ? `Showing 12 of ${matches.length} matches. Refine your search for fewer results.`
-      : matches.length ? `${matches.length} matching ${matches.length === 1 ? 'guide' : 'guides'}.` : 'No matching guide. Try a feature, setting or symptom.';
+    searchStatus.textContent = hits.length > 12
+      ? `Showing 12 of ${hits.length} matches. Refine your search for fewer results.`
+      : hits.length ? `${hits.length} ${hits.length === 1 ? 'match' : 'matches'}.` : 'No matches. Try a feature, setting or symptom.';
   } catch {
     if (generation !== searchGeneration) return;
     const terms = normalize(query).split(/\s+/);
@@ -139,6 +136,9 @@ const searchModal = bindDialog('#docs-search-dialog', '[data-open-search]', '[da
 });
 const navigationModal = bindDialog('#docs-navigation-dialog', '[data-open-navigation]', '[data-close-navigation]');
 searchModal?.dialog.addEventListener('close', clearSearch);
+results?.addEventListener('click', event => {
+  if (event.target.closest('a') && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) searchModal?.dialog.close();
+});
 if (navigationModal) {
   const compact = matchMedia('(max-width: 760px)');
   compact.addEventListener('change', () => {

@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { runInNewContext, createContext, runInContext } from 'node:vm';
+import { runInNewContext } from 'node:vm';
 import { escapeHtml, markdown, validatePages, validateEditorialScope, validSourcePath, pagePath, pageAnchors, classifyChanges } from '../tools/lib.mjs';
 import { discoverSurfaces, productInputs } from '../tools/source-discovery.mjs';
 import { freshness, publishedAsset, handleRequest, PAGES_ORIGIN } from '../worker/handler.mjs';
@@ -164,28 +164,6 @@ test('mobile navigation closes when returning to desktop without source polling'
   assert.equal(navigation.open, false);
 });
 
-test('search keeps its version check without the removed freshness element', async () => {
-  const script = readFileSync(new URL('../public/docs.js', import.meta.url), 'utf8');
-  const requests = [];
-  let hash = 'old';
-  const context = createContext({
-    document: {
-      body: { dataset: { contentHash: 'hash' } },
-      querySelector: selector => selector === '.nav-shell' ? {} : null,
-      querySelectorAll: () => [],
-      addEventListener() {},
-    },
-    matchMedia: () => ({ matches: false, addEventListener() {} }),
-    fetch: async url => { requests.push(url); return Response.json({ contentHash: hash, entries: [] }); },
-  });
-  runInContext(script, context);
-  await assert.rejects(() => context.loadIndex(), /another documentation revision/);
-  hash = 'hash';
-  assert.equal((await context.loadIndex()).length, 0);
-  await context.loadIndex();
-  assert.deepEqual(requests, ['/search-index.json?v=hash', '/search-index.json?v=hash']);
-});
-
 test('published assets stay in the managed origin and never inherit caller credentials', async () => {
   await publishedAsset('/servers/', { version: 'a'.repeat(40) }, async (url, options) => {
     assert.equal(url.href, `${PAGES_ORIGIN}servers/?v=${'a'.repeat(40)}`);
@@ -250,24 +228,16 @@ test('live settings discovery handles grouped cases, values and comments without
   assert.throws(() => discoverSurfaces([], 'case appearance = unknownExpression', null), /Unsupported settings-category/);
 });
 
-test('documentation search finds article text and links to the relevant section', () => {
-  const script = readFileSync(new URL('../public/docs.js', import.meta.url), 'utf8');
-  const context = createContext({
-    document: {
-      body: { dataset: { contentHash: 'y' } },
-      querySelector: selector => selector === '.nav-shell' ? {} : null,
-      querySelectorAll: () => [],
-      addEventListener() {},
-    },
-    matchMedia: () => ({ matches: false, addEventListener() {} }),
-    fetch: async () => Response.json({ status: 'current', documentedCommit: 'x', contentHash: 'y' }),
-  });
-  runInContext(script, context);
-  const entries = [{ title: 'Appearance', description: 'Personalize the interface.', path: '/appearance/', text: 'Dim the interface at sunset.', sections: [{ id: 'scheduled-dimming', title: 'Scheduled dimming', text: 'Dim the interface at sunset.' }] }];
-  const matches = context.rankPages(entries, 'sunset');
-  assert.equal(matches.length, 1);
-  assert.equal(matches[0].path, '/appearance/#scheduled-dimming');
-  assert(matches[0].snippet.includes('sunset'));
-  assert.equal(context.rankPages(entries, 'unrelated').length, 0);
-  assert.doesNotMatch(script, /\.innerHTML\s*=/);
+test('only the versioned Pagefind runtime and index assets are served', async () => {
+  const base = `/pagefind/${'a'.repeat(64)}/`;
+  for (const [file, supported] of [['pagefind.js', true], ['pagefind-worker.js', true], ['wasm.en.pagefind', true], ['unrelated.js', false], ['misc/file.js', false]]) {
+    const response = await handleRequest(new Request(`https://docs.plozz.app${base}${file}`), async path => {
+      assert.equal(path, supported ? base + file : '/404.html');
+      return new Response('asset');
+    });
+    assert.equal(response.status, supported ? 200 : 404);
+    const csp = response.headers.get('Content-Security-Policy');
+    assert.match(csp, /script-src 'self' 'wasm-unsafe-eval'; worker-src 'self';/);
+    assert(!csp.includes("'unsafe-eval'"));
+  }
 });

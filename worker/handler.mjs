@@ -32,7 +32,7 @@ export async function handleRequest(request, load = publishedAsset, check = fres
       if (!/^[a-f0-9]{40}$/.test(metadata.commit) || !/^[a-f0-9]{64}$/.test(metadata.contentHash) || !Number.isFinite(Date.parse(metadata.verifiedAt))) throw new Error('Invalid published source metadata');
       response = await check(metadata);
     } else {
-      const supported = url.pathname === '/' || /^\/[a-z][a-z0-9-]{1,60}\/?$/.test(url.pathname) || assets.has(url.pathname);
+      const supported = url.pathname === '/' || /^\/[a-z][a-z0-9-]{1,60}\/?$/.test(url.pathname) || assets.has(url.pathname) || searchAsset.test(url.pathname);
       const upstream = await load(supported ? url.pathname : '/404.html', { method: request.method, version: url.searchParams.get('v') });
       const headers = new Headers(upstream.headers);
       const location = headers.get('Location');
@@ -62,10 +62,11 @@ const securityHeaders = {
   'X-Frame-Options': 'DENY',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
   'Permissions-Policy': 'geolocation=(), microphone=(), camera=()',
-  'Content-Security-Policy': "default-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'",
+  'Content-Security-Policy': "default-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'",
   'X-Plozz-Docs-Origin': 'github-pages',
 };
-const assets = new Set(['/docs.css', '/docs.js', '/logo.svg', '/manrope.woff2', '/font-license.txt', '/_source.json', '/search-index.json', '/sitemap.xml', '/robots.txt', '/404.html', '/index.html']);
+const assets = new Set(['/docs.css', '/docs.js', '/logo.svg', '/manrope.woff2', '/font-license.txt', '/_source.json', '/sitemap.xml', '/robots.txt', '/404.html', '/index.html']);
+const searchAsset = /^\/pagefind\/[a-f0-9]{64}\/(?:pagefind(?:-worker)?\.js|pagefind-entry\.json|license\.txt|wasm\.(?:en|unknown)\.pagefind|pagefind\.en_[a-f0-9]+\.pf_meta|index\/en_[a-f0-9]+\.pf_index|fragment\/en_[a-f0-9]+\.pf_fragment)$/;
 
 export async function publishedAsset(path, { method = 'GET', version } = {}, request = fetch) {
   const url = new URL(`.${path}`, PAGES_ORIGIN);

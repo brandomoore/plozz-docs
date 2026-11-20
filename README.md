@@ -161,10 +161,12 @@ content bot may select and verify existing ones, not invent or alter them.
 
 ### Navigation and search
 
-Header search opens with `/` or Command/Ctrl+K. Full-text results include
-article sections and link directly to an answer; arrow keys move through
+Header search opens with `/` or Command/Ctrl+K. The build uses Pagefind to
+index each guide introduction and section separately, without sidebar or
+directory text. Results show the matched heading, guide and excerpt and link
+directly to the answer; arrow keys move through
 results, Enter opens one, and Escape closes the native dialog. Search loads
-on demand and checks the page's content revision before showing results.
+on demand from a same-origin bundle scoped to the page's content revision.
 If the index is unavailable or updating, the dialog explains the problem and
 shows title-only matches. Navigation and the guide directory work without
 JavaScript. Stable heading anchors make reference material useful without

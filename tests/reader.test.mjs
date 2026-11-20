@@ -5,7 +5,7 @@ import { createContext, runInContext } from 'node:vm';
 
 const script = readFileSync(new URL('../public/docs.js', import.meta.url), 'utf8');
 
-function reader(fetch) {
+function reader(loadIndex) {
   const document = { activeElement: null, body: { dataset: { contentHash: 'hash' } } };
   function element(tagName = 'DIV') {
     const listeners = new Map();
@@ -53,8 +53,9 @@ function reader(fetch) {
   document.createElement = tag => element(tag.toUpperCase());
   const events = element();
   document.addEventListener = events.addEventListener;
-  const context = createContext({ document, fetch });
+  const context = createContext({ document });
   runInContext(script, context);
+  context.loadIndex = loadIndex;
   const key = (value, extra = {}) => ({ key: value, preventDefault() { this.prevented = true; }, ...extra });
   return { input, results, status, trigger, close, dialog, titleLink, document, events, key };
 }
@@ -79,15 +80,15 @@ test('search shortcuts respect text input, composition and modified slash keys',
 });
 
 test('full-text results are keyboard-accessible links and closing clears the query', async () => {
-  const r = reader(async () => Response.json({ contentHash: 'hash', entries: [
-    { title: 'Subtitles', description: 'Choose captions.', path: '/subtitles/', text: 'Adjust subtitle timing.', sections: [{ id: 'timing', title: 'Timing', text: 'Adjust subtitle timing.' }] },
-  ] }));
+  const r = reader(async () => ({ search: async () => ({ results: [{ data: async () => ({
+    url: '/subtitles/#timing', meta: { title: 'Timing', guide: 'Subtitles' }, plain_excerpt: 'Adjust subtitle timing.',
+  }) }] }) }));
   await r.trigger.emit('click', { preventDefault() {} });
   r.input.value = 'timing';
   await r.input.emit('input');
   const [link] = r.results.querySelectorAll('a');
   assert.equal(link.href, '/subtitles/#timing');
-  assert.equal(link.children[0].textContent, 'Subtitles');
+  assert.equal(link.children[0].textContent, 'Timing · Subtitles');
   assert.match(link.children[1].textContent, /timing/);
   await r.dialog.emit('keydown', r.key('ArrowDown'));
   assert.equal(r.document.activeElement, link);
@@ -105,7 +106,7 @@ test('full-text results are keyboard-accessible links and closing clears the que
 });
 
 test('failed full-text search shows usable title matches inside the dialog', async () => {
-  const r = reader(async () => new Response('', { status: 503 }));
+  const r = reader(async () => { throw new Error('Index unavailable'); });
   r.input.value = 'subtitles';
   await r.input.emit('input');
   assert.match(r.status.textContent, /Full-text search is unavailable/);
@@ -119,13 +120,14 @@ test('failed full-text search shows usable title matches inside the dialog', asy
 });
 
 test('closing search discards an in-flight response instead of restoring stale results', async () => {
-  let resolveFetch;
-  const r = reader(() => new Promise(resolve => { resolveFetch = resolve; }));
+  let resolveData;
+  const r = reader(async () => ({ search: async () => ({ results: [{ data: () => new Promise(resolve => { resolveData = resolve; }) }] }) }));
   await r.trigger.emit('click', { preventDefault() {} });
   r.input.value = 'captions';
   const pending = r.input.emit('input');
+  await new Promise(resolve => setImmediate(resolve));
   await r.dialog.close();
-  resolveFetch(Response.json({ contentHash: 'hash', entries: [] }));
+  resolveData({ url: '/subtitles/', meta: { title: 'Subtitles' }, plain_excerpt: 'Captions.' });
   await pending;
   assert.equal(r.results.children.length, 0);
   assert.equal(r.results.hidden, true);
