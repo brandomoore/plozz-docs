@@ -10,6 +10,12 @@ On iPhone/iPad, tap the video. Portrait uses the ellipsis **Playback options** m
 
 See [device controls](/platform-controls/) or [Blu-ray menus](/disc-playback/).
 
+## Keep controls visible
+
+Open **Settings > Playback > Auto-hide controls**. **While playing**, the default, keeps controls visible when paused. Choose **While playing or paused** for an unobstructed paused picture, or **Never** to keep controls visible until you hide them yourself.
+
+VoiceOver and Switch Control prevent automatic hiding in the movie/episode player.
+
 ## Seek on Apple TV
 
 Close playback options, then click the remote's left/right edge to jump by your skip interval. Swipe to scrub; **Seek without pausing** determines whether to pause first.
@@ -19,8 +25,6 @@ Hold a left/right click to start scanning, which continues after release. Click 
 Press the center button to seek, or play/pause to seek and resume. Back cancels. Wait for loading before seeking.
 
 ## Check when a video will finish
-
-To see when a movie or episode will finish:
 
 - On Apple TV, close menus. With the timeline visible, lightly tap the remote without clicking for clock times. Another tap hides controls. If hidden, a light tap reveals them first.
 - On iPhone/iPad, tap either time beside the timeline. VoiceOver calls these **Elapsed time** and **Remaining time**. Tap again to switch back.
@@ -61,31 +65,27 @@ With skipping enabled, **Use community markers** (default on) checks IntroDB/The
 
 ## Jump to a chapter
 
-Open **Chapters** below the timeline; mobile tabs scroll horizontally. Choose a chapter; paused playback stays paused.
-
-Chapters can come from Plex, Jellyfin, Emby, or supported files, including shares and downloads. Some videos lack chapters or images; intro and credits markers are separate.
+Open **Chapters** below the timeline and choose a chapter; paused playback stays paused. Mobile tabs scroll horizontally. Chapters need server or file support; some videos lack them or their images. Intro and credits markers are separate.
 
 ## Switch to another Continue Watching title
 
 Open **Continue Watching** below the timeline to resume another title. On Apple TV, press down; on iPhone/iPad, scroll the tabs if needed.
 
-Select a card to save your position and resume that title using its own source. Version choices and access checks still apply.
+Choose a card to save your position and resume that title after any access or version prompts.
 
 It uses Home's loaded titles, excluding this video and other episodes of its show from that source. It hides when none remain.
-
-Use **Episodes** or **Playlist** for another entry.
 
 Under **Settings > Playback > Player tabs**, choose which of **Chapters**, **Cast**, **Episodes**, **Playlist**, and **Continue Watching** to show. A tab appears only when it has content; **Info** remains available.
 
 ## Identify a song in a movie or show
 
-Open **Info** while a song plays, then select a recognized card for **Open song**. [Song identification](/identify-songs/) covers enabling **Settings > Playback > Audio > Identify songs**, choosing a service, and privacy.
+In **Info**, select a recognized song card for **Open song**. [Song identification](/identify-songs/) explains setup, services, and privacy.
 
 ## Speed, picture, and other navigation
 
 Select the current-rate **Playback Speed** button; mobile portrait places it under **Playback options**. On Apple TV, adjust **Speed**. Mobile offers presets and **Custom…** for finer control. Choose 1x for normal speed.
 
-Open **More > Zoom Mode** on Apple TV, or **Zoom** in **Playback options**/**Playback settings** on mobile, to change framing. [Video framing and upscaling](/video-picture/) explains cropping, defaults, remembered choices, and enhancement without changing streaming quality.
+For framing, open **More > Zoom Mode** on Apple TV, or **Zoom** in mobile **Playback options**/**Playback settings**. See [Video framing and upscaling](/video-picture/) for cropping and enhancement.
 
 ## Explore the cast
 

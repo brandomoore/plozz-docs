@@ -2170,14 +2170,14 @@
       "Sources/FeatureSettings/PlayerTabSettingsControls.swift",
       "Sources/FeaturePlayback/PlayerViewModel.swift",
       "Sources/FeaturePlayback/PlayerSongCard.swift",
-      "Sources/FeaturePlayback/RemoteSeekScan.swift",
+      "Sources/CoreModels/PlaybackSettings.swift",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
     ],
     "watch": [
       "Sources/FeaturePlayback/Player",
       "Sources/AppShelliOS/PlozziOSPlayer",
       "Sources/FeaturePlayback/Remote",
-      "Sources/FeatureSettings/PlayerTabSettingsControls.swift",
+      "Sources/FeaturePlayback/ControlsAutoHidePolicy.swift",
       "Sources/FeaturePlayback/CustomPlayerContainer.swift",
       "Sources/FeatureHomeCore/PlaybackVersion"
     ],
@@ -2385,12 +2385,24 @@
           "source": "Sources/FeaturePlayback/PlayerControls.swift"
         },
         {
-          "text": "Identify songs",
+          "text": "Auto-hide controls",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
-          "text": "Identify songs",
+          "text": "Auto-hide controls",
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "While playing",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
+        },
+        {
+          "text": "While playing or paused",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
+        },
+        {
+          "text": "Never",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
         },
         {
           "text": "Open song",
@@ -3216,7 +3228,7 @@
     "slug": "subtitles",
     "title": "Subtitles",
     "seoTitle": "Choose, style, and synchronize subtitles in Plozz",
-    "description": "Choose or find subtitles, keep captions clear of player controls, use two languages, and adjust appearance, placement, SDH, or timing.",
+    "description": "Choose or find subtitles, show two languages, preview your caption style, override file formatting, and adjust placement, SDH preferences, or timing.",
     "section": "Playback",
     "kind": "reference",
     "file": "subtitles.md",
@@ -3237,17 +3249,17 @@
       "Sources/CoreUI/ProfileSettingsCategory.swift",
       "Sources/FeaturePlayback/SubtitleTrackController.swift",
       "Sources/FeaturePlayback/SubtitleDownloadPanel.swift",
-      "Sources/CoreModels/TrackLabeling.swift",
-      "Sources/CoreModels/RemoteSubtitleContext.swift",
-      "Sources/FeaturePlayback/RemoteSubtitleAcquisition.swift",
-      "Sources/ProviderSilo/SiloSubtitles.swift"
+      "Sources/FeaturePlayback/SubtitleStyleSettingsView.swift",
+      "Sources/FeaturePlayback/SubtitlePreviewControls.swift",
+      "Sources/FeaturePlayback/SubtitleStylePreview.swift",
+      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
     ],
     "watch": [
       "Sources/FeaturePlayback/",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
       "Sources/FeatureSettings/PreferenceDetailViews.swift",
       "Sources/CoreModels/Subtitle",
-      "Sources/CoreModels/RemoteSubtitleContext.swift",
+      "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
       "Sources/ProviderSilo/SiloSubtitles.swift"
     ],
     "platforms": [
@@ -3344,6 +3356,34 @@
         {
           "text": "Use Bold and Italic",
           "source": "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift"
+        },
+        {
+          "text": "Override ASS/SSA styling",
+          "source": "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift"
+        },
+        {
+          "text": "Reset to App Default",
+          "source": "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift"
+        },
+        {
+          "text": "Preview",
+          "source": "Sources/FeaturePlayback/SubtitlePreviewControls.swift"
+        },
+        {
+          "text": "Full screen",
+          "source": "Sources/FeaturePlayback/SubtitlePreviewControls.swift"
+        },
+        {
+          "text": "Preview options",
+          "source": "Sources/FeaturePlayback/SubtitleStylePreview.swift"
+        },
+        {
+          "text": "Preview file formatting",
+          "source": "Sources/FeaturePlayback/SubtitlePreviewControls.swift"
+        },
+        {
+          "text": "Preview file formatting",
+          "source": "Sources/FeaturePlayback/SubtitleStylePreview.swift"
         },
         {
           "text": "Playback options",
@@ -5447,7 +5487,7 @@
     ],
     "title": "Profiles, kids, and locks",
     "seoTitle": "Set up Plozz profiles, choose server users, and manage profile locks",
-    "description": "Import Plex Home profiles, choose server users, add sign-ins, configure profile locks and Kids safeguards, and understand automatic sign-in.",
+    "description": "Add and finish setting up Plozz profiles, import Plex Home users, edit mobile profiles, choose server identities, and manage locks and Kids safeguards.",
     "section": "Accounts & sync",
     "kind": "guide",
     "file": "profiles-and-locks.md",
@@ -5470,8 +5510,8 @@
       "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift",
       "Sources/AppShelliOS/PlozziOSPlexHomeUserSettingsView.swift",
       "Sources/FeatureHomeCore/HomeAggregator.swift",
-      "Sources/AppShell/RootView.swift",
-      "Sources/CoreModels/ProfileStore.swift"
+      "Sources/AppShelliOS/PlozziOSProfilePickerView.swift",
+      "Sources/AppShelliOS/PlozziOSProfileSetupView.swift"
     ],
     "watch": [
       "Sources/FeatureProfiles/",
@@ -5489,11 +5529,23 @@
         },
         {
           "text": "Edit Profile",
-          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+          "source": "Sources/AppShelliOS/PlozziOSProfilePickerView.swift"
         },
         {
           "text": "Edit Profiles",
+          "source": "Sources/AppShelliOS/PlozziOSProfilePickerView.swift"
+        },
+        {
+          "text": "More",
+          "source": "Sources/AppShelliOS/PlozziOSProfilePickerView.swift"
+        },
+        {
+          "text": "Add Profile",
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Done",
+          "source": "Sources/AppShelliOS/PlozziOSProfileSetupView.swift"
         },
         {
           "text": "Automatically Sign In",
@@ -5512,14 +5564,6 @@
           "source": "Sources/CoreUI/PlexHomeOnboardingView.swift"
         },
         {
-          "text": "Profiles added",
-          "source": "Sources/CoreUI/PlexHomeOnboardingView.swift"
-        },
-        {
-          "text": "Profiles ready",
-          "source": "Sources/CoreUI/PlexHomeOnboardingView.swift"
-        },
-        {
           "text": "Choose your profile",
           "source": "Sources/CoreUI/PlexHomeOnboardingView.swift"
         },
@@ -5530,6 +5574,10 @@
         {
           "text": "Watching as",
           "source": "Sources/FeatureSettings/MyLibrariesDetailView.swift"
+        },
+        {
+          "text": "Watching as",
+          "source": "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift"
         },
         {
           "text": "Add Another User",

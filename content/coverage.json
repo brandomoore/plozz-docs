@@ -935,6 +935,10 @@
         },
         {
           "slug": "playback",
+          "anchor": "keep-controls-visible"
+        },
+        {
+          "slug": "playback",
           "anchor": "resume-or-start-over"
         },
         {
@@ -1145,6 +1149,10 @@
         {
           "slug": "subtitles",
           "anchor": "keep-captions-near-the-picture"
+        },
+        {
+          "slug": "subtitles",
+          "anchor": "use-your-style-instead-of-file-formatting"
         }
       ],
       "sources": [
@@ -1161,15 +1169,15 @@
         "Sources/CoreModels/SubtitleSearchPreference.swift",
         "Sources/FeaturePlayback/TrackMenuBuilder.swift",
         "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
-        "Sources/FeaturePlayback/PlayerMoreMenu.swift",
+        "Sources/FeaturePlayback/SubtitleStyleSettingsView.swift",
         "Sources/CoreModels/SubtitleStyle.swift",
         "Sources/FeaturePlayback/SubtitleOverlayView.swift",
         "Sources/CoreModels/TrackLabeling.swift",
-        "Sources/CoreModels/RemoteSubtitleContext.swift",
+        "Sources/FeaturePlayback/SubtitleStyleEditingContext.swift",
         "Sources/FeaturePlayback/RemoteSubtitleAcquisition.swift",
         "Sources/ProviderSilo/SiloSubtitles.swift"
       ],
-      "summary": "Select/search tracks, distinguish forced/SDH and per-content policies, enter mobile language codes or follow device language, style text or Live TV, and manage second tracks. Mobile Subtitles > Advanced… contains Second Track, Subtitle Delay and Appearance > Style; Search & Download… opens search separately. Portrait starts in Playback options. Search needs account permission and configured server providers; unavailable/incomplete searches are not empty results. Expired results require another search; uncertain downloads require checking the track list before retry. Silo acquisition is bound to the active item/file/play session. Prefer SDH permits fallback; Only SDH makes automatic/search/download choices strict without overriding manual or remembered choices. Matching device caption style replaces custom appearance after confirmation; appearance edits leave matching, but control-avoidance-only edits preserve it. Position selects Bottom of screen or Bottom of video, and Vertical offset measures upward from that reference; Extra Line Position offers Above/Center/Below for wrapped-line growth, not second-track placement. Default-on Auto-Move Away from Controls follows those placement controls in both editors, lifts colliding Plozz-rendered text/eligible image captions while controls are visible, and returns them when controls disappear; disabling allows overlap. The picture-placement section retains active-picture detection with video-frame fallback, lower-dialogue image movement preserving size/fixed artwork, and file-formatting overrides. Explain embedded AetherEngine versus fetchable native text, image-primary exclusion, secondary Off, timing and AirPlay limits. External apps receive eligible fetchable SRT sidecars without Plozz styling/dual guarantees; custom templates receive no subtitle links. Choose a track explains retained source-authored names for same-language versions and the auto qualifier for an inferred language, not translated captions."
+      "summary": "Select/search tracks, distinguish forced/SDH and per-content policies, enter mobile language codes or follow device language, style text or Live TV, and manage second tracks. Mobile Subtitles > Advanced… contains Second Track, Subtitle Delay and Appearance > Style; Search & Download… opens search separately. Portrait starts in Playback options. Search needs account permission and configured server providers; unavailable/incomplete searches are not empty results. Expired results require another search; uncertain downloads require checking the track list before retry. Silo acquisition is bound to the active item/file/play session. Prefer SDH permits fallback; Only SDH makes automatic/search/download choices strict without overriding manual or remembered choices. Matching device caption style replaces custom appearance after confirmation; appearance edits leave matching, but changes only to control avoidance or ASS/SSA override preserve it. Position selects Bottom of screen or Bottom of video, and Vertical offset measures upward from that reference; Extra Line Position offers Above/Center/Below for wrapped-line growth, not second-track placement. Default-on Auto-Move Away from Controls follows those placement controls in both editors, lifts colliding Plozz-rendered text/eligible image captions while controls are visible, and returns them when controls disappear; disabling allows overlap. The picture-placement section retains active-picture detection with video-frame fallback and lower-dialogue image movement preserving size/fixed artwork. Use your style instead of file formatting explains source-position/color/font choices and the default-off ASS/SSA override, available only in ordinary video Settings, not in-player or Live TV style. It replaces authored signs/karaoke where Plozz draws captions; turn it off to restore them because Reset to App Default preserves the override. Change appearance explains the platform-specific sample preview navigation. Explain embedded AetherEngine versus fetchable native text, image-primary exclusion, secondary Off, timing and AirPlay limits. External apps receive eligible fetchable SRT sidecars without Plozz styling/dual guarantees; custom templates receive no subtitle links. Choose a track explains retained source-authored names for same-language versions and the auto qualifier for an inferred language, not translated captions."
     },
     "music": {
       "documents": [
@@ -2650,9 +2658,14 @@
         "Sources/FeaturePlayback/SubtitleStylePanel.swift",
         "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift",
         "Sources/FeaturePlayback/SubtitleOverlayView.swift",
-        "Sources/FeaturePlayback/SubtitleControlsFrame.swift"
+        "Sources/FeaturePlayback/SubtitleControlsFrame.swift",
+        "Sources/FeaturePlayback/SubtitleStyleSettingsView.swift",
+        "Sources/FeaturePlayback/SubtitleStyleEditingContext.swift",
+        "Sources/FeaturePlayback/SubtitlePreviewControls.swift",
+        "Sources/FeaturePlayback/SubtitleStylePreview.swift",
+        "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
       ],
-      "summary": "Combine language codes/device fallback, per-content policies, SDH/search, remembered series choices and text/image styling limits rather than separate pages per preference. Explain Prefer SDH fallback versus strict Only SDH selection and matching device caption appearance with replacement confirmation. Appearance edits leave matching; changing only default-on Auto-Move Away from Controls preserves it. Keep captions near the picture explains that independent toggle in the editor's placement section, its temporary collision avoidance and the overlap tradeoff when disabled."
+      "summary": "Combine language codes/device fallback, per-content policies, SDH/search, remembered series choices and text/image styling limits rather than separate pages per preference. Explain Prefer SDH fallback versus strict Only SDH selection and matching device caption appearance with replacement confirmation. Appearance edits leave matching; changing only Auto-Move Away from Controls or Override ASS/SSA styling preserves it. Keep captions near the picture explains default-on control avoidance and the overlap tradeoff. Use your style instead of file formatting explains the three source-formatting toggles, the default-off ASS/SSA override in Settings-only non-Live-TV styling, loss of authored signs/karaoke and explicit restoration. Reset to App Default preserves that override. Change appearance explains Apple TV's full-screen preview and focused sample options versus mobile Preview options; the sample is not the reader's video."
     },
     "trackers": {
       "areas": [
@@ -2696,6 +2709,23 @@
     }
   },
   "screens": {
+    "Sources/CoreUI/PlozzPlaceholderRail.swift": {
+      "sources": [
+        "Sources/CoreUI/PlozzPlaceholderRail.swift",
+        "Sources/CoreUI/PlozzReservedPlaceholder.swift"
+      ],
+      "omitKind": "unreachable",
+      "omitReason": "The generic loading-rail helper declares no controls or reader destination. No production source instantiates PlozzPlaceholderRail in this snapshot; its example call is a comment, not an entry point. Existing Home, Discover and detail rails retain their own loading presentations and parent-screen controls."
+    },
+    "Sources/CoreUI/PlozzReservedPlaceholder.swift": {
+      "sources": [
+        "Sources/CoreUI/PlozzReservedPlaceholder.swift",
+        "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
+        "Sources/AppShelliOS/PlozziOSProfilePickerView.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Loading-space reservation and readiness/appearance fades support the mobile detail and profile-picker parents. They add no named control, setting or destination; the parents inventory playable cards, selection and recovery actions. Reduce Motion disables their entrance animation without changing those actions."
+    },
     "Sources/CoreUI/FeaturedCardControl.swift": {
       "sources": [
         "Sources/CoreUI/FeaturedCardControl.swift",
@@ -6335,6 +6365,7 @@
     "Sources/AppShelliOS/PlozziOSHomeView.swift": {
       "sources": [
         "Sources/AppShelliOS/PlozziOSHomeView.swift",
+        "Sources/AppShelliOS/PlozziOSProfileEditing.swift",
         "Sources/CoreUI/MediaRowSection.swift",
         "Sources/CoreUI/BrowseRowHeading.swift",
         "Sources/CoreModels/HeroCTA.swift",
@@ -6363,7 +6394,7 @@
         "iPhone",
         "iPad"
       ],
-      "navigation": "Open Home from iPhone/iPad navigation. Tap an eligible row heading's chevron to browse, or hold the heading and choose Edit to open that row's settings. The edit route retains the originating profile; a changed profile or missing row shows Setting unavailable.",
+      "navigation": "Open Home from iPhone/iPad navigation. The profile-avatar page action opens Settings, with the current profile's name in its dynamic caption; non-scrolling page-action layouts place it in the toolbar. Tap an eligible row heading's chevron to browse, or hold the heading and choose Edit to open that row's settings. The edit route retains the originating profile; a changed profile or missing row shows Setting unavailable.",
       "experience": "Browse profile rows and hero suggestions, tap an eligible row's heading chevron for its larger grid, play accessible media or open an imported title link in its destination app/browser. Coming Soon's heading instead opens Upcoming's calendar; its dated cards open title details. A failed link shows Couldn't Open Link. Dismiss an empty-row message without removing its row, or open Customize Home to change Home settings. Retry failed Home loading or connect a source when none exists. The loading skeleton has no interactive or accessible Loading Home caption. A loaded Continue Watching heading separately shows Refreshing during its refresh, or an exclamation-mark button with the accessibility label Refresh details and help text Unable to refresh after failure. The button opens the failure message and Try Again; a separate Details action appears only when a diagnostic report exists. This recovery reloads Home without resetting history, and retained cards do not prove the latest refresh succeeded.",
       "conditions": "iPhone/iPad. Home content follows enabled libraries, source availability, profile presentation, watched-content filtering, and eligible Discovery providers. An empty section can show No titles to show with Dismiss and Customize Home; these callbacks are wired on Home, not on settings diagnostics. Dismiss stores only the active profile's empty-message preference, so nonempty titles can still appear. Home settings > Rows > the row > Show empty message reverses it. Unavailable/failing status rows instead show Details/Retry. A separate See all button in PlozziOSMediaSection's status heading can open a retained browse item, not a larger row grid; the inner HomeSectionStatusView receives no onSeeAll callback. Normal row-heading browsing requires more titles, nonempty results, no loading/failure, and no section issue; it uses the dynamic row title plus chevron, not a See all caption. The global Watchlist action opens the dedicated Watchlist page; combined Continue Watching and Live TV rows do not gain a row browser. Source/profile changes invalidate an open browser. Outside Offline Mode, connected empty Home shows Nothing to watch yet with Add Source; the no-account RootView caller instead gets Build your library and Set Up from Another Device. Both callers pass isOfflineMode. When enabled, No Downloads replaces either empty title and hides Add Source/nearby setup, while loaded Home uses authorized usable downloads rather than online providers. The topmost visible Home/detail surface receives lifecycle refresh requests on either platform. Home refreshes on app foreground return, and in-app returns refresh results after 15 seconds. After 300 seconds away, a series refreshes seasons/episodes while a movie/episode refreshes watch state. Hidden/covered pages, cancelled requests and changed profiles cannot consume another page’s refresh. Shared card menus use the root action handler and a navigation router: actions vary by item kind, provider permissions, watchlist membership and resume position. Unaired placeholders have no actions; external discovery titles have no provider watch-state, refresh or download actions. These standalone card lists supply no ordered siblings, so they do not offer Mark Watched Up to Here. Download menu actions use the selected copy and its current transfer state, independently of whether the card draws a download badge.",
       "controls": [
@@ -8686,10 +8717,14 @@
       "sources": [
         "Sources/AppShelliOS/PlozziOSProfileEditing.swift",
         "Sources/FeatureProfiles/ProfileEditorView.swift",
-        "Sources/AppShelliOS/PlozziOSProfilePickerView.swift"
+        "Sources/AppShelliOS/PlozziOSProfilePickerView.swift",
+        "Sources/AppShelliOS/PlozziOSRootView.swift",
+        "Sources/AppShelliOS/PlozziOSHomeView.swift",
+        "Sources/AppShelliOS/PlozziOSSearchView.swift",
+        "Sources/AppShelliOS/PlozziOSLiveTVDestination.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Mobile creation and cosmetic-edit presentation delegates actual controls to ProfileEditorView and shared PIN flows; those screens own the inventories."
+      "omitReason": "Mobile creation/cosmetic editing delegates controls to ProfileEditorView and shared PIN flows. This file also defines the profile-avatar Settings toolbar entry used by Home, Search, Live TV and RootView's library destinations. Those parent records inventory the entry and describe its dynamic Settings-for-profile caption; it is not a separate destination or a generic gear."
     },
     "Sources/AppShelliOS/PlozziOSProfilePickerView.swift": {
       "sources": [
@@ -8711,8 +8746,8 @@
         "iPhone",
         "iPad"
       ],
-      "navigation": "Launch Plozz when profile selection is required or switch profiles from mobile navigation.",
-      "experience": "Choose an authorized profile, add a profile, or enter profile editing.",
+      "navigation": "Launch Plozz when profile selection is required or switch profiles from mobile navigation. Open More > Edit Profiles to enter management mode, then select the profile to edit; holding its tile also offers Edit Profile.",
+      "experience": "Choose an authorized profile, add a profile, or enter profile editing. Management requires an eligible non-Kids profile and any household authorization gate; More is disabled while verification is in flight.",
       "conditions": "iPhone/iPad. Profile locks and Plex PINs are independent; Kids restrictions can seal household management. Outside editing and covered authorization, the ellipsis More menu offers Edit Profiles when management is allowed, then Offline Mode when the runtime flag permits it. Offline Mode stays usable before choosing a profile and is disabled during a transition. An unchanged Plex Home binding needs a device-local prior online sign-in; protected users still verify their PIN offline. A new binding or rejected credential does not gain access through the cached proof.",
       "controls": [
         {
@@ -8774,6 +8809,8 @@
     "Sources/AppShelliOS/PlozziOSProfileSettingsView.swift": {
       "sources": [
         "Sources/AppShelliOS/PlozziOSProfileSettingsView.swift",
+        "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+        "Sources/AppShelliOS/PlozziOSProfilePickerView.swift",
         "Sources/CoreUI/PINEntry.swift",
         "Sources/CoreUI/ProfileLockCopy.swift",
         "Sources/FeatureProfiles/AutomaticSignInSettings.swift",
@@ -8798,7 +8835,7 @@
         "iPhone",
         "iPad"
       ],
-      "navigation": "From an adult mobile profile, open Settings > Profiles, then select a profile.",
+      "navigation": "From an adult mobile profile, open Settings > Profiles > Edit Profiles, then select a profile; alternatively hold its row and choose Edit Profile. The startup picker offers More > Edit Profiles or the tile's Edit Profile context action.",
       "experience": "Manage that profile appearance, lock, Kids status, and deletion.",
       "conditions": "iPhone/iPad. Editing a locked profile requires its PIN; restricted actions on the active Kids profile require the household Parental PIN. Cosmetics remain separately accessible.",
       "controls": [
@@ -8896,6 +8933,8 @@
     "Sources/AppShelliOS/PlozziOSProfileSetupView.swift": {
       "sources": [
         "Sources/AppShelliOS/PlozziOSProfileSetupView.swift",
+        "Sources/AppShelliOS/PlozziOSAppModel.swift",
+        "Sources/AppShelliOS/PlozziOSSettingsView.swift",
         "Sources/AppShelliOS/PlozziOSServerSettingsViews.swift",
         "Sources/CoreUI/AmbientGradientBackground.swift",
         "Sources/CoreUI/ThemePalette.swift",
@@ -8916,7 +8955,7 @@
         "iPad"
       ],
       "navigation": "Add a profile on iPhone/iPad and continue the guided setup.",
-      "experience": "Choose its server users, libraries, and optional Seerr identity before finishing.",
+      "experience": "Choose its server users and libraries, then use the explicit Done button to continue to optional Seerr, appearance and lock setup. An interrupted new-profile setup resumes when that profile is opened; it must finish before browsing and importing Watchlist contributions.",
       "conditions": "iPhone/iPad. The libraries step embeds PlozziOSMyLibrariesSettingsView with profileSetup presentation, followed by optional Seerr, theme and lock steps on their separately inventoried screens. Setup overrides the Libraries navigation title with the profile's name. Server/library names and Plex identity rows are dynamic; Watching as is a picker for multiple non-Plex, non-share sign-ins. Add Another Plex Account/Add Another User exclude shares. Add Source appears only with no server groups. Loading and recovery controls depend on discovery state. Setup cannot be dismissed by swiping. After explicit IPTV setup/refresh, a shared guide notice can remain across navigation while the account is authorized. It is hidden behind another transient message. Dismiss hides only the notice; terminal notices also auto-dismiss after five seconds. Percentages describe the current stage, not total work. Profile/account authorization changes cancel and remove scoped work; this does not promise OS background execution.",
       "controls": [
         {
@@ -8986,6 +9025,7 @@
     "Sources/AppShelliOS/PlozziOSRootView.swift": {
       "sources": [
         "Sources/AppShelliOS/PlozziOSRootView.swift",
+        "Sources/AppShelliOS/PlozziOSProfileEditing.swift",
         "Sources/CoreUI/SignInSyncPermission.swift",
         "Sources/FeatureMusic/MusicTabView.swift",
         "Sources/CoreModels/AllLibrariesBrowse.swift",
@@ -9010,7 +9050,7 @@
         "iPhone",
         "iPad"
       ],
-      "navigation": "Launch Plozz on iPhone/iPad, finish required setup, then use its tabs or sidebar.",
+      "navigation": "Launch Plozz on iPhone/iPad, finish required setup, then use its tabs or sidebar. If Settings has no visible navigation entry, library/All Libraries destinations offer the profile-avatar Settings action in their toolbar; vertical-toolbar layouts also include it. Its caption incorporates the current profile's name rather than a fixed literal.",
       "experience": "Open shown shortcuts, including Upcoming's calendar and eligible Discover or All Libraries, switch profiles, or connect media when Home is empty. Upcoming refresh requires authorization and Offline Mode off; its nested controls are inventoried on UpcomingView. Beta-only Music requires an authorized profile, an enabled supported music library and online access; production mobile builds do not construct its runtime. Its player overlay is inventoried on NowPlayingMorph, and profile/source authorization changes stop it. In Offline Mode, Home, libraries, Search and Watchlist use authorized completed downloads; Discover and Live TV show Unavailable Offline. The status notice does not replace profile authorization. After setup, review dynamic server/user names in Save Sign-ins to iCloud? and choose whether to upload those existing sign-ins. Declining leaves profiles/settings sync enabled; failed permission persistence reports an explicit transient error.",
       "conditions": "Native compact UIKit navigation puts excess shown shortcuts under More; it does not reveal hidden shortcuts. On iOS/iPadOS 26+ the root instead mounts OpaqueNavigationChrome's bottom destination strip when app reduceTransparency is true, systemReduceTransparency is false, no vertical toolbar is in use and no sidebar is visible. This retains the same shown destinations and scrolls horizontally when they do not fit; it has no UIKit More destination. App Liquid Glass Off can trigger it; system Reduce Transparency retains native navigation. iPad can use regular-width navigation. Destination order is saved per profile on this device. Profile authorization applies before browsing. Discover is absent for Kids; for other profiles Seerr automatically shows it unless explicitly hidden, while no Seerr connection automatically hides it unless explicitly shown. Its mobile wrapper mounts the separately inventoried shared DiscoverBrowseView. Watchlist shows sorting before filtering on mobile; its fields are Date Added, Release Date and Name only. Choosing a field resets its direction: Name starts ascending, dates descending. Clear Filters appears only with a movie/show filter; filtered-empty results also offer it. The no-account Home destination passes hasAccounts false to the shared empty state and supplies both Add Source and Set Up from Another Device. Connected empty Home instead shows Nothing to watch yet in its separately inventoried HomeView. After explicit IPTV setup/refresh, a shared guide notice can remain across navigation while the account is authorized. It is hidden behind another transient message. Dismiss hides only the notice; terminal notices also auto-dismiss after five seconds. Percentages describe the current stage, not total work. Profile/account authorization changes cancel and remove scoped work; this does not promise OS background execution. New installations show the shared iCloud consent/restoration flow before normal setup. Both shells can restore supported server/share credentials through encrypted iCloud records, while Silo creates a separately authorized device session only when server capability and PIN-free profile checks succeed. Navigation suppresses Home/Search without relevant content and Watchlist without saved items. Music-only Subsonic connections can land on Music; live-only sources prefer Live TV. Unreachable established media servers retain remembered library navigation rather than treating failure as authoritative emptiness. Existing-sign-in publication permission additionally waits for setupPresentationReady, authorized completed profile setup, no parental-management PIN gate, finished diagnostics/iCloud consent/restoration, Settings closed, no startup release notes and no nearby setup offer. The service requires enabled sync, a verified iCloud identity and unchanged eligible sign-ins without a current owner or declined decision. Shared card menus use the root action handler and a navigation router: actions vary by item kind, provider permissions, watchlist membership and resume position. Unaired placeholders have no actions; external discovery titles have no provider watch-state, refresh or download actions. These standalone card lists supply no ordered siblings, so they do not offer Mark Watched Up to Here. This record inventories the movie/show Watchlist cards; episode menus on separately registered detail destinations are inventoried there. Download menu actions use the selected copy and its current transfer state, independently of whether the card draws a download badge. Its own library/Watchlist poster construction does not pass download state, so the cards do not show download badges. Descendant detail and Home destinations have their own records.",
       "controls": [
@@ -9301,6 +9341,7 @@
     "Sources/AppShelliOS/PlozziOSSearchView.swift": {
       "sources": [
         "Sources/AppShelliOS/PlozziOSSearchView.swift",
+        "Sources/AppShelliOS/PlozziOSProfileEditing.swift",
         "Sources/FeatureSearchCore/SearchSection.swift",
         "Sources/CoreModels/MediaItemAction.swift",
         "Sources/FeatureSearchCore/SearchViewModel.swift",
@@ -9325,7 +9366,7 @@
         "iPhone",
         "iPad"
       ],
-      "navigation": "Choose Search in iPhone/iPad navigation.",
+      "navigation": "Choose Search in iPhone/iPad navigation. Without a visible Settings entry, the page header offers the profile-avatar Settings action unless vertical-toolbar or overflow presentation supplies it in the native toolbar. Its caption contains the active profile's name, not a constant UI label.",
       "experience": "Search enabled libraries and connected Seerr results, open a title's details, or hold a card for eligible actions. Clear search removes the query; Cancel search also dismisses the keyboard.",
       "conditions": "iPhone/iPad. Authorized server users and enabled libraries determine library results; connected Seerr supplies the separate discovery search, not the Discover-page switches. Clear search appears for nonempty input; Cancel search appears while focused or with a nonblank query. The profile-settings avatar is conditional on navigation layout and disappears from the header during active search. Section headings only dismiss the keyboard: Search supplies no See all handler. Its plain poster cards receive neither download state nor resume-chip options, so download badges and EpisodeWatchStatePill captions are absent. Root-installed context-menu actions still depend on provider, item kind, watchlist membership, resume position and download state; no ordered siblings means no Mark Watched Up to Here. Unaired entries have no actions. External discovery entries have no provider watch/refresh/download actions and do not grant playback. Result navigation requires an available provider. Search/library results and person-credit shelves do not pass through the universal Watchlist attribution builder; merely inheriting the shared menu does not establish a reachable View on WeTrakr link here.",
       "controls": [
@@ -9642,6 +9683,7 @@
     "Sources/AppShelliOS/PlozziOSSettingsView.swift": {
       "sources": [
         "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+        "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
         "Sources/CoreUI/ProfileSettingsCategory.swift",
         "Sources/CoreUI/SettingsCopy.swift",
         "Sources/CoreUI/ProfileLockCopy.swift",
@@ -9677,7 +9719,7 @@
       ],
       "navigation": "Open Settings from iPhone/iPad navigation. The control inventory walks the root first, then Playback, Subtitles, Live TV/Libraries, Appearance, Screens & Navigation, Language, Profiles and account details. Within each destination it follows visible order, placing nested picker choices and conditional branches beside their parent. Playback starts with the separately inventoried PlozziOSStreamingQuality controls before the buffers. Other child pages retain their own screen records. A busy share's scan status appears above the profile header; guide-preparation notices can overlay the root or a destination. Search can open child settings directly, subject to their normal authorization.",
       "experience": "Change playback, captions, Live TV, libraries, presentation, trackers, language, and authorized household services. Playback places Player tabs after its Playback group and before Tracks: Chapters, Cast, Episodes, Playlist and Continue Watching are independent per-profile toggles, default on. Tabs still need corresponding content and Info remains available. Audio places Identify songs after Prefer lossless audio; recognition defaults on, needs internet and supported playback, and uses Shazam with playback audio rather than the microphone. Version selection offers Choose on first play while unset, then Ask every time, Choose automatically and Use first from server in enum order; its How automatic selection works button appears only with automatic mode selected and closes with Done. Focus-only episode descriptions are Apple TV-only and absent here.",
-      "conditions": "iPhone/iPad compact and regular-width layouts. Category order is Playback, Subtitles, Live TV, Libraries, Downloads, Appearance, Screens & Navigation, Trackers, Seerr, Language. Downloads requires the mobile offline feature; Downloads and Seerr are hidden in Kids profiles. Player orientation appears only on iPhone, in enum order: Follow device orientation, Portrait, Landscape auto, Landscape left, Landscape right. Runtime enforcement requires a full-screen compact-phone window. Follow device orientation respects system rotation lock; Landscape auto leases motion updates only for the active eligible player and can follow sideways direction despite rotation lock. Fixed landscape choices refer to the top of the phone; iPad uses system rotation with no picker. Manage Plozz is absent for Kids. Only Kids profiles with a household Parental PIN replace the ordinary Libraries category with Name & Avatar and move Libraries/Manage Profile into Parental Controls, where they require unlock. Without that PIN, Kids retains ordinary Libraries and Manage Profile. Edit/Done reflects SwiftUI list-editing state on Rating sources & order; profile management instead uses the app's Edit Profiles/Done Editing. Internal developer actions require deliberate version-based activation and are not reader setup steps. Appearance starts with Theme: CompactThemePicker uses AppTheme.pickerOrder (Black, Dark, Light, System), then Gradient Backgrounds and Liquid Glass (System, On, Off). Only builds with the beta mobile music runtime expose Music player next in that group. Its nested picker uses Match App Theme, Artwork, Black, Dark, Light; Match follows the app palette and gradients, while overrides affect the full player only. Mobile has no Show album, quality & lyrics source switch. Cards, Artwork and Circadian Mode follow the Theme group. Cards contains Labels, Watch indicators, Style, Display Size; Focus is Apple TV-only. Label presets replace overrides; Custom is a readout in the compact picker when no preset matches. Customize labels from Cards offers all nine Page choices; from Movie & show details it contains Episodes, Related titles and Extras without a Page picker. Home/Recommended use Default with On/Off/Mixed, followed by Overrides; Continue Watching and Home's Libraries use Use default/On/Off. Other pages use On/Off only. The color picker is hidden with Hidden watch indicators; Episode count style appears only with episode counts enabled. Circadian Mode has a master switch followed by Schedule (Auto, Manual, Always On). With the switch off, Schedule is disabled and the other controls are hidden. Auto reveals Location; Manual reveals Turns on/Turns off in device-local time. Region names and clock values are data, not fixed captions. Picture then shows Warmth, Dimness and Fade; Fade is hidden for Always On. Preview has Preview at Full Strength, Preview a Day and a conditional Simulated time readout. Turning the mode off or leaving stops preview. Separate audio/subtitle rules replace the base picker with Movies, TV Shows, Anime and Everything else; language names are supplied by the language catalogue. Up Next lead time needs Show Up Next card; Customize Live TV subtitles needs a separate Live TV style. Subtitle download settings remain visible, but downloads still need a supported server. Skip-marker Customize requires skipping enabled; its content-category switches gate each marker's overrides, and Use default/Off are per-marker choices. Settings search is available from the root; selecting a result briefly highlights the control and still checks parental authorization. It never enables a prerequisite automatically. After explicit IPTV setup/refresh, a shared guide notice can remain across navigation while the account is authorized. It is hidden behind another transient message. Dismiss hides only the notice; terminal notices also auto-dismiss after five seconds. Percentages describe the current stage, not total work. Profile/account authorization changes cancel and remove scoped work; this does not promise OS background execution. Trailers & music is the shared nested destination, reached from Movie & show details or an enabled Home hero. Nested controls are audited here and on HeroSettingsControls in UI order: Trailers policy (Off, Server only, Server + YouTube), Home autoplay with its conditional Start muted, then Details with Detail background (Off, Trailer, Theme music), its separate conditional Start muted, or Theme music volume and preview controls. Off disables trailers/autoplay but not music or other extras; YouTube is manual/external only. The settings are profile-specific and the Home/detail choices are independent. Playback exposes Discs before Advanced. Disc playback defaults to Play video and is a profile preference; Open disc menu affects attemptable network-share BDMV folders only. The helper warns that only HDMV menus are supported and menu videos do not update watch progress. Unsupported menu metadata selects video instead; the DEBUG-only BD-J switch is not production support. Default zoom is profile-scoped, with independent phone/tablet/television values initially Normal. Custom reveals Zoom at 50%-200%; TV uses an accelerating stepper and mobile a slider. Explicit movie/series choices override the default; unidentified disc timelines use Normal, while a new live channel restores the platform default. Video upscaling is profile-scoped and defaults to Automatic, then resolves Animation from animation/anime metadata or Standard otherwise. Off, Automatic, Standard and Animation are in that order. Hardware, SDR, source dimensions, display size and engine eligibility determine actual enhancement; the saved preference applies to new playback, including Live TV. Session-only changes belong to the player, not these defaults. The mobile Playback order starts Streaming quality, Video upscaling, Video buffer, Live TV buffer, Default zoom, then iPhone-only Player orientation and skipping controls.",
+      "conditions": "iPhone/iPad compact and regular-width layouts. Category order is Playback, Subtitles, Live TV, Libraries, Downloads, Appearance, Screens & Navigation, Trackers, Seerr, Language. Downloads requires the mobile offline feature; Downloads and Seerr are hidden in Kids profiles. Player orientation appears only on iPhone, in enum order: Follow device orientation, Portrait, Landscape auto, Landscape left, Landscape right. Runtime enforcement requires a full-screen compact-phone window. Follow device orientation respects system rotation lock; Landscape auto leases motion updates only for the active eligible player and can follow sideways direction despite rotation lock. Fixed landscape choices refer to the top of the phone; iPad uses system rotation with no picker. Manage Plozz is absent for Kids. Only Kids profiles with a household Parental PIN replace the ordinary Libraries category with Name & Avatar and move Libraries/Manage Profile into Parental Controls, where they require unlock. Without that PIN, Kids retains ordinary Libraries and Manage Profile. Edit/Done reflects SwiftUI list-editing state on Rating sources & order; profile management instead uses the app's Edit Profiles/Done Editing. Internal developer actions require deliberate version-based activation and are not reader setup steps. Appearance starts with Theme: CompactThemePicker uses AppTheme.pickerOrder (Black, Dark, Light, System), then Gradient Backgrounds and Liquid Glass (System, On, Off). Only builds with the beta mobile music runtime expose Music player next in that group. Its nested picker uses Match App Theme, Artwork, Black, Dark, Light; Match follows the app palette and gradients, while overrides affect the full player only. Mobile has no Show album, quality & lyrics source switch. Cards, Artwork and Circadian Mode follow the Theme group. Cards contains Labels, Watch indicators, Style, Display Size; Focus is Apple TV-only. Label presets replace overrides; Custom is a readout in the compact picker when no preset matches. Customize labels from Cards offers all nine Page choices; from Movie & show details it contains Episodes, Related titles and Extras without a Page picker. Home/Recommended use Default with On/Off/Mixed, followed by Overrides; Continue Watching and Home's Libraries use Use default/On/Off. Other pages use On/Off only. The color picker is hidden with Hidden watch indicators; Episode count style appears only with episode counts enabled. Circadian Mode has a master switch followed by Schedule (Auto, Manual, Always On). With the switch off, Schedule is disabled and the other controls are hidden. Auto reveals Location; Manual reveals Turns on/Turns off in device-local time. Region names and clock values are data, not fixed captions. Picture then shows Warmth, Dimness and Fade; Fade is hidden for Always On. Preview has Preview at Full Strength, Preview a Day and a conditional Simulated time readout. Turning the mode off or leaving stops preview. Separate audio/subtitle rules replace the base picker with Movies, TV Shows, Anime and Everything else; language names are supplied by the language catalogue. Up Next lead time needs Show Up Next card; Customize Live TV subtitles needs a separate Live TV style. Subtitle download settings remain visible, but downloads still need a supported server. Skip-marker Customize requires skipping enabled; its content-category switches gate each marker's overrides, and Use default/Off are per-marker choices. Settings search is available from the root; selecting a result briefly highlights the control and still checks parental authorization. It never enables a prerequisite automatically. After explicit IPTV setup/refresh, a shared guide notice can remain across navigation while the account is authorized. It is hidden behind another transient message. Dismiss hides only the notice; terminal notices also auto-dismiss after five seconds. Percentages describe the current stage, not total work. Profile/account authorization changes cancel and remove scoped work; this does not promise OS background execution. Trailers & music is the shared nested destination, reached from Movie & show details or an enabled Home hero. Nested controls are audited here and on HeroSettingsControls in UI order: Trailers policy (Off, Server only, Server + YouTube), Home autoplay with its conditional Start muted, then Details with Detail background (Off, Trailer, Theme music), its separate conditional Start muted, or Theme music volume and preview controls. Off disables trailers/autoplay but not music or other extras; YouTube is manual/external only. The settings are profile-specific and the Home/detail choices are independent. Playback exposes Discs before Advanced. Disc playback defaults to Play video and is a profile preference; Open disc menu affects attemptable network-share BDMV folders only. The helper warns that only HDMV menus are supported and menu videos do not update watch progress. Unsupported menu metadata selects video instead; the DEBUG-only BD-J switch is not production support. Default zoom is profile-scoped, with independent phone/tablet/television values initially Normal. Custom reveals Zoom at 50%-200%; TV uses an accelerating stepper and mobile a slider. Explicit movie/series choices override the default; unidentified disc timelines use Normal, while a new live channel restores the platform default. Video upscaling is profile-scoped and defaults to Automatic, then resolves Animation from animation/anime metadata or Standard otherwise. Off, Automatic, Standard and Animation are in that order. Hardware, SDR, source dimensions, display size and engine eligibility determine actual enhancement; the saved preference applies to new playback, including Live TV. Session-only changes belong to the player, not these defaults. The mobile Playback order starts Streaming quality, Video upscaling, Video buffer, Live TV buffer, Default zoom, Auto-hide controls, then iPhone-only Player orientation and skipping controls. Auto-hide controls is profile-scoped and defaults to While playing, followed by While playing or paused and Never. VoiceOver and Switch Control prevent automatic hiding in the movie/episode overlay. This does not configure the separate music player.",
       "controls": [
         {
           "text": "Settings",
@@ -9930,6 +9972,22 @@
         {
           "text": "Zoom",
           "source": "Sources/FeatureSettings/DefaultVideoZoomControl.swift"
+        },
+        {
+          "text": "Auto-hide controls",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "While playing",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
+        },
+        {
+          "text": "While playing or paused",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
+        },
+        {
+          "text": "Never",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
         },
         {
           "text": "Player orientation",
@@ -10699,6 +10757,10 @@
         }
       ],
       "documents": [
+        {
+          "slug": "playback",
+          "anchor": "keep-controls-visible"
+        },
         {
           "slug": "music",
           "anchor": "change-the-player-s-look"
@@ -17100,8 +17162,16 @@
       ],
       "navigation": "Open a cast member, then See more when offered.",
       "experience": "Read biography/credits and open another title detail page.",
-      "conditions": "Available cast/metadata required. Opening the expanded person or credit destination from the player ends current playback; credits do not imply accessible copies. Shared card menus use the root action handler and a navigation router: actions vary by item kind, provider permissions, watchlist membership and resume position. Unaired placeholders have no actions; external discovery titles have no provider watch-state, refresh or download actions. These standalone card lists supply no ordered siblings, so they do not offer Mark Watched Up to Here. Download menu actions require the iPhone/iPad shell download handler; Apple TV has none. Search/library results and person-credit shelves do not pass through the universal Watchlist attribution builder; merely inheriting the shared menu does not establish a reachable View on WeTrakr link here.",
+      "conditions": "Available cast/metadata required. A biography longer than three lines offers MORE; this card-style caller does not expose the inline editor's More or Done. Known for appears after credit ranking finishes, before owned-credit shelves grouped by library; missing library names use Movies, TV Shows or In your library. Go Back is available in the creditless state, not the loading or populated shelves. Opening the expanded person or credit destination from the player ends current playback; credits do not imply accessible copies. Shared card menus use the root action handler and a navigation router: actions vary by item kind, provider permissions, watchlist membership and resume position. Unaired placeholders have no actions; external discovery titles have no provider watch-state, refresh or download actions. These standalone card lists supply no ordered siblings, so they do not offer Mark Watched Up to Here. Download menu actions require the iPhone/iPad shell download handler; Apple TV has none. Search/library results and person-credit shelves do not pass through the universal Watchlist attribution builder; merely inheriting the shared menu does not establish a reachable View on WeTrakr link here.",
       "controls": [
+        {
+          "text": "MORE",
+          "source": "Sources/CoreUI/ExpandableOverviewText.swift"
+        },
+        {
+          "text": "Known for",
+          "source": "Sources/FeatureHomeCore/PersonDetailView.swift"
+        },
         {
           "text": "Movies",
           "source": "Sources/FeatureHomeCore/PersonDetailView.swift"
@@ -19973,6 +20043,10 @@
       "conditions": "An authorized profile needs an enabled, accessible Plex/Jellyfin/Emby music library or a beta Navidrome/Subsonic connection. The Subsonic provider is music-only; it can be the landing destination without video Home/Search. Server favorites and listening reports remain tied to that account, independently of optional Last.fm. Mobile Music is constructed only for TestFlight/development builds and is unavailable in Offline Mode. App Store mobile builds do not create the runtime. Mobile detail pages use MobileMusicDetail; Apple TV retains its existing layouts and scrolling current-track card. Starting another album or playlist replaces rather than appends to the queue. Category buttons are Playlists, Albums, Artists, Genres in that order; visible landing sections also depend on saved layout and available data.",
       "controls": [
         {
+          "text": "Music",
+          "source": "Sources/FeatureMusic/MusicScreens.swift"
+        },
+        {
           "text": "Recently Played",
           "source": "Sources/FeatureMusic/MusicScreens.swift"
         },
@@ -21142,7 +21216,9 @@
         "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
         "Sources/EnginePlozzigen/PlozzigenNativePictureAnalyzer.swift",
         "Sources/AppShell/PlaybackEngineComposition.swift",
-        "Sources/AppShelliOS/PlozziOSPlaybackEngineComposition.swift"
+        "Sources/AppShelliOS/PlozziOSPlaybackEngineComposition.swift",
+        "Sources/FeaturePlayback/SubtitleStyleSettingsView.swift",
+        "Sources/FeaturePlayback/SubtitleStyleEditingContext.swift"
       ],
       "platforms": [
         "iPhone",
@@ -21150,7 +21226,7 @@
       ],
       "navigation": "On iPhone/iPad, open Subtitles > Advanced… > Appearance > Style, or customize captions from Settings.",
       "experience": "Edit caption text, shadow/outline, background, dual-track style and subtitle file formatting.",
-      "conditions": "iPhone/iPad text styling and conditional image-caption placement; dual-track settings require eligible video playback and are absent for Live TV. Show second subtitle controls only the Settings preview; actual tracks are chosen during playback. Matching device style replaces the custom look after confirmation; appearance edits leave matching, but changing only Auto-Move Away from Controls preserves it. Font weights depend on the chosen font; system font names are dynamic. Position selects Bottom of screen or Bottom of video; Vertical offset measures upward from that reference; Extra Line Position's Above/Center/Below choices govern wrapped-line growth, not second-track placement. Default-on Auto-Move Away from Controls follows those rows and temporarily lifts colliding Plozz-rendered captions; disabling permits overlap. Bottom of video follows the detected active picture when available and otherwise the video frame. Text offset spans -5% to 100% in 0.5% steps; clamping keeps the block visible within 0-100%, while negative positions can crop it. Subtitles > Advanced… > Appearance links to Position for an image primary, not Style. That editor shows Vertical offset only with Bottom of video, followed by Auto-Move Away from Controls; it moves eligible lower dialogue while preserving image size and fixed artwork, not restyling images or enabling dual subtitles. SubtitleOverlayView uses measured control frames only while avoidance is enabled. Actual primary/secondary text styling and timing remain track/path-dependent.",
+      "conditions": "iPhone/iPad text styling and conditional image-caption placement; dual-track settings require eligible video playback and are absent for Live TV. Show second subtitle controls only the Settings preview; actual tracks are chosen during playback. Matching device style replaces the custom look after confirmation; appearance edits leave matching, but changes only to Auto-Move Away from Controls or Override ASS/SSA styling preserve it. Font weights depend on the chosen font; system font names are dynamic. Position selects Bottom of screen or Bottom of video; Vertical offset measures upward from that reference; Extra Line Position's Above/Center/Below choices govern wrapped-line growth, not second-track placement. Default-on Auto-Move Away from Controls follows those rows and temporarily lifts colliding Plozz-rendered captions; disabling permits overlap. Bottom of video follows the detected active picture when available and otherwise the video frame. Text offset spans -5% to 100% in 0.5% steps; clamping keeps the block visible within 0-100%, while negative positions can crop it. Subtitles > Advanced… > Appearance links to Position for an image primary, not Style. That editor shows Vertical offset only with Bottom of video, followed by Auto-Move Away from Controls; it moves eligible lower dialogue while preserving image size and fixed artwork, not restyling images or enabling dual subtitles. SubtitleOverlayView uses measured control frames only while avoidance is enabled. SubtitleStyleSettingsView passes showsASSOverride only for the ordinary video Settings editor; the in-player context and separate Live TV Settings style leave it false. Default-off Override ASS/SSA styling follows Use Bold and Italic, replaces authored signs/karaoke with caption text on supported Plozz rendering, and is preserved by Reset to App Default. Actual primary/secondary text styling and timing remain track/path-dependent.",
       "controls": [
         {
           "text": "Match Device Subtitle Style",
@@ -21278,6 +21354,10 @@
         },
         {
           "text": "Use Bold and Italic",
+          "source": "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift"
+        },
+        {
+          "text": "Override ASS/SSA styling",
           "source": "Sources/FeaturePlayback/MobileSubtitleStyleEditor.swift"
         },
         {
@@ -21514,7 +21594,7 @@
       ],
       "navigation": "Enable Playback Diagnostics Overlay in Help & Diagnostics, then play media.",
       "experience": "Read transfer rate, buffers, seekable range and available route/engine telemetry.",
-      "conditions": "Device-local diagnostic visibility. Mobile lays out Source, Video, Audio, optional Original File, Subtitles, optional Live, Playback and System sections; Apple TV groups them into three columns. Missing measurements omit their rows. Transcoding distinguishes current stream facts from the original file. Plozzigen uses AVPlayer time/window labels; native uses Position/Seekable. Live fields need live-stream telemetry; cache fields need session-cache measurements. Encoded bitrate, network throughput, cache capacity and physical audio output are different measurements.",
+      "conditions": "Device-local diagnostic visibility. Mobile lays out Source, Video, Audio, optional Original File, Subtitles, optional Live, Playback, optional Engine and System sections; Apple TV groups them into three columns. Missing measurements omit their rows. Transcoding distinguishes current stream facts from the original file. Plozzigen uses AVPlayer time/window labels; native uses Position/Seekable. Live fields need live-stream telemetry; cache fields need session-cache measurements. Engine statistics supply Decoder, Bridge bitrate and Audio delivery when available. TV combines recent/average bitrate and delivery rate/bytes when both measurements exist; other layouts use separate rows. Local delivery/transferred describes the app's delivery to AVPlayer rather than the source network. Engine appears only with source-byte or restart statistics; its mux and bridge values are internal transfer measurements, not output lip sync or physical speaker facts. Resident memory is distinct from the app's footprint. Encoded bitrate, network throughput, cache capacity and physical audio output are different measurements.",
       "controls": [
         {
           "text": "Gathering metrics…",
@@ -21585,6 +21665,10 @@
           "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
         },
         {
+          "text": "Decoder",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
           "text": "CURRENT AUDIO",
           "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
         },
@@ -21598,6 +21682,14 @@
         },
         {
           "text": "Sample Rate",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Bridge bitrate",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Audio delivery",
           "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
         },
         {
@@ -21701,6 +21793,18 @@
           "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
         },
         {
+          "text": "Recent / avg",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Recent bitrate",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Average bitrate",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
           "text": "Buffer",
           "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
         },
@@ -21757,11 +21861,63 @@
           "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
         },
         {
+          "text": "Local delivery",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Source delivery",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Source read rate",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Local transferred",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Transferred",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "ENGINE",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Read / muxed",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Source read",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Local server",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Restarts",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Bridge buffer",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Mux A/V gap",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
           "text": "SYSTEM",
           "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
         },
         {
           "text": "Device",
+          "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
+        },
+        {
+          "text": "Resident memory",
           "source": "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift"
         },
         {
@@ -23006,7 +23162,7 @@
         "Sources/FeaturePlayback/SubtitleStyleSettingsView.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Reusable SubtitlePreviewControls.swift is wired into Sources/FeaturePlayback/SubtitleStyleSettingsView.swift, Sources/FeaturePlayback/SubtitleStyleSettingsView.swift through the cited construction paths. Visible controls are inventoried on those parents, not a separate destination."
+      "omitReason": "Apple TV SubtitleStyleSettingsView embeds these sample controls. Its parent record inventories Preview/Full screen, then Animate background, Preview file formatting and HDR preview revealed while the preview controls have focus. The full-screen sample has Back. These are preview actions, not a separate saved style or a playback-track selector."
     },
     "Sources/FeaturePlayback/SubtitleStylePanel.swift": {
       "sources": [
@@ -23028,14 +23184,16 @@
         "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
         "Sources/EnginePlozzigen/PlozzigenNativePictureAnalyzer.swift",
         "Sources/AppShell/PlaybackEngineComposition.swift",
-        "Sources/AppShelliOS/PlozziOSPlaybackEngineComposition.swift"
+        "Sources/AppShelliOS/PlozziOSPlaybackEngineComposition.swift",
+        "Sources/FeaturePlayback/SubtitleStyleSettingsView.swift",
+        "Sources/FeaturePlayback/SubtitleStyleEditingContext.swift"
       ],
       "platforms": [
         "Apple TV"
       ],
       "navigation": "In Apple TV video controls, open Subtitles > Style; also used by the Settings caption preview.",
       "experience": "Adjust font, placement, colors, edges, backgrounds and supported second-track style, or override file formatting.",
-      "conditions": "Apple TV style panels. Image captions keep their font/colors and offer placement only; dual subtitles are excluded for Live TV. Show second subtitle controls only the Settings preview; actual tracks are chosen during playback. Matching system style needs confirmation; appearance edits leave matching, but changing only Auto-Move Away from Controls preserves it. HDR brightness appears only when relevant. Available font weights depend on the selected font. Position selects Bottom of screen or Bottom of video; Vertical offset measures upward from that reference; Extra Line Position's Above/Center/Below choices govern wrapped-line growth, not second-track placement. Default-on Auto-Move Away from Controls follows those rows and temporarily lifts colliding Plozz-rendered captions; disabling permits overlap. Clamping applies within 0-100%; negative positions can crop text. System font choices are dynamic. Bottom of video follows the detected active picture when available and otherwise the video frame. Text offset spans -5% to 100% in 0.5% steps. Image-primary Style shows Position, Vertical offset only with Bottom of video, then Auto-Move Away from Controls; it moves eligible lower dialogue while preserving image size and fixed artwork, not restyling images or enabling dual subtitles. SubtitleOverlayView uses measured control frames only while avoidance is enabled. Actual primary/secondary text styling and timing remain track/path-dependent.",
+      "conditions": "Apple TV style panels. Image captions keep their font/colors and offer placement only; dual subtitles are excluded for Live TV. Show second subtitle controls only the Settings preview; actual tracks are chosen during playback. Matching system style needs confirmation; appearance edits leave matching, but changes only to Auto-Move Away from Controls or Override ASS/SSA styling preserve it. HDR brightness appears only when relevant. Available font weights depend on the selected font. Position selects Bottom of screen or Bottom of video; Vertical offset measures upward from that reference; Extra Line Position's Above/Center/Below choices govern wrapped-line growth, not second-track placement. Default-on Auto-Move Away from Controls follows those rows and temporarily lifts colliding Plozz-rendered captions; disabling permits overlap. Clamping applies within 0-100%; negative positions can crop text. System font choices are dynamic. Bottom of video follows the detected active picture when available and otherwise the video frame. Text offset spans -5% to 100% in 0.5% steps. Image-primary Style shows Position, Vertical offset only with Bottom of video, then Auto-Move Away from Controls; it moves eligible lower dialogue while preserving image size and fixed artwork, not restyling images or enabling dual subtitles. SubtitleOverlayView uses measured control frames only while avoidance is enabled. SubtitleStyleSettingsView passes showsASSOverride only for the ordinary video Settings editor; live playback and the separate Live TV Settings style leave it false. Default-off Override ASS/SSA styling follows Use Bold and Italic, replaces authored signs/karaoke with caption text on supported Plozz rendering, and is preserved by Reset to App Default. Actual primary/secondary text styling and timing remain track/path-dependent.",
       "controls": [
         {
           "text": "Match Apple TV Subtitle Style",
@@ -23151,6 +23309,10 @@
         },
         {
           "text": "Use Bold and Italic",
+          "source": "Sources/FeaturePlayback/SubtitleStylePanel.swift"
+        },
+        {
+          "text": "Override ASS/SSA styling",
           "source": "Sources/FeaturePlayback/SubtitleStylePanel.swift"
         },
         {
@@ -23393,6 +23555,7 @@
     "Sources/FeaturePlayback/SubtitleStyleSettingsView.swift": {
       "sources": [
         "Sources/FeaturePlayback/SubtitleStyleSettingsView.swift",
+        "Sources/FeaturePlayback/SubtitleStyleEditingContext.swift",
         "Sources/CoreUI/AmbientGradientBackground.swift",
         "Sources/CoreUI/SettingsSurfaces.swift",
         "Sources/CoreUI/ArtworkEnvironment.swift",
@@ -23420,7 +23583,7 @@
       ],
       "navigation": "Open Settings > Subtitles > Customize subtitle style, or the separate Live TV caption style.",
       "experience": "Preview captions while adjusting their appearance; use supported preview controls and restore defaults deliberately.",
-      "conditions": "All platforms. Live TV offers no dual-subtitle preview. System-caption matching and Plozz-only placement/dual choices remain distinct. The embedded Preview options menu, Preview file formatting, HDR preview and Pause background/Animate background button are iPhone/iPad-only sample controls. Apple TV uses the separately wired Preview/Full screen controls. Preparing HDR preview is a loading state, not an action.",
+      "conditions": "All platforms. Live TV offers no dual-subtitle preview or ASS/SSA override. The ordinary video Settings context enables the default-off Override ASS/SSA styling control in its child editor; in-player editing does not. System-caption matching and Plozz-only placement/dual choices remain distinct. Apple TV Preview/Full screen opens a full-screen sample with Back; focusing the preview controls reveals Animate background, Preview file formatting and HDR preview beneath that action. Mobile uses the embedded Preview options menu for Preview file formatting and HDR preview, plus a separate Pause background/Animate background button. These options affect samples, not the reader's video. Changing the ASS/SSA override reveals the formatting sample automatically; changing HDR Brightness enables HDR preview. Preparing HDR preview is a loading state, not an action. A failed HDR sample exposes its failure and instructs turning HDR preview off/on to retry.",
       "controls": [
         {
           "text": "Customize subtitle style",
@@ -23440,6 +23603,18 @@
         },
         {
           "text": "Full screen",
+          "source": "Sources/FeaturePlayback/SubtitlePreviewControls.swift"
+        },
+        {
+          "text": "Animate background",
+          "source": "Sources/FeaturePlayback/SubtitlePreviewControls.swift"
+        },
+        {
+          "text": "Preview file formatting",
+          "source": "Sources/FeaturePlayback/SubtitlePreviewControls.swift"
+        },
+        {
+          "text": "HDR preview",
           "source": "Sources/FeaturePlayback/SubtitlePreviewControls.swift"
         },
         {
@@ -24746,6 +24921,10 @@
         },
         {
           "text": "Filter",
+          "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
+        },
+        {
+          "text": "All",
           "source": "Sources/FeatureSettings/CollectionSectionSettingsView.swift"
         },
         {
@@ -27586,6 +27765,8 @@
     "Sources/FeatureSettings/PreferenceDetailViews.swift": {
       "sources": [
         "Sources/FeatureSettings/PreferenceDetailViews.swift",
+        "Sources/FeaturePlayback/ControlsAutoHidePolicy.swift",
+        "Sources/FeaturePlayback/CustomPlayerContainer.swift",
         "Sources/CoreModels/SubtitlePolicy.swift",
         "Sources/FeatureSettings/LosslessAudioControl.swift",
         "Sources/CoreModels/SubtitlePrimitives.swift",
@@ -27618,7 +27799,7 @@
       ],
       "navigation": "Choose Playback, Subtitles, Appearance, Screens & Navigation or Language in Apple TV Settings. The control inventory walks those workspaces in that order, keeping nested picker choices beside their parent and alternative branches together. Appearance's Circadian Mode opens the separately inventoried NightShiftDetailView pane; Home, Libraries, artwork customization and other child screens retain their own records. Row-builder titles that are not rendered by the active workspace are not extra visible headings.",
       "experience": "Navigate profile settings workspaces in visible order. Playback begins with Audio, Autoplay & Up Next, then Player tabs before version selection and buffers. Player tabs lists Chapters, Cast, Episodes, Playlist and Continue Watching, default on per profile; usable content still gates tabs and Info is always retained. Audio places Identify songs after Prefer lossless audio; default-on Shazam recognition needs internet and supported playback and does not use microphone capture. Version selection offers Choose on first play while unset, then Ask every time, Choose automatically and Use first from server in enum order; its information accessory always opens How automatic selection works on Apple TV and the alert closes with Done. In Customize labels, Only show descriptions on focus follows Episodes only on Apple TV's Movie & show details page; it starts off, is disabled when episode labels are off, and changes synopsis visibility without changing spoiler policy.",
-      "conditions": "Apple TV workspace order: Playback has Audio, Autoplay & Up Next, Default zoom, Player tabs, Version selection, Remember series version choices, Video upscaling, Video buffer, Live TV buffer, Skip intros, credits & more, Seeking, Fade on display changes, Discs, Advanced. Audio defaults, Autoplay and Skip Intervals are internal row-builder titles, not separate headings in this workspace. Separate audio/subtitle rules replace the base picker with Movies, TV Shows, Anime and Everything else; language names come from the language catalogue. Time before the end needs Show Up Next card. Subtitle order is Show subtitles, Subtitle style, Live TV subtitle style, Subtitle language, SDH subtitles, Downloading subtitles, Remember subtitles per series. Customize Live TV subtitles requires a separate style. Downloading subtitles appears for supported server profiles; unsupported profiles see its prerequisite only through a matching search. Skip-marker Customize requires skipping enabled; category switches gate marker-specific rules, where Use default and Off appear. Appearance has Theme, Cards, Artwork, Circadian Mode; Screens & Navigation has App navigation, All screens, Home, Libraries, Movie & show details, Music player. Theme uses AppTheme.pickerOrder: Black, Dark, Light, System. Music player uses Match App Theme, Artwork, Black, Dark, Light, followed by Show album, quality & lyrics source. Match follows app colors and Gradient Backgrounds; Artwork forces cover colors. Overrides affect the full player, not browsing pages. Provider management shortcuts are hidden without permission; engine/platform conditions gate playback and subtitle options. Cards contains Labels, Watch indicators, Focus, Style, Display Size; Focus choices are System, Highlight, Outline. Presets replace label overrides; the compact Custom readout is iOS-only. Customize labels from Cards offers all nine Page choices; from Movie & show details it contains Episodes, Related titles and Extras without a Page picker. Home/Recommended use Default with On/Off/Mixed, followed by Overrides; Continue Watching and Home's Libraries use Use default/On/Off. Other pages use On/Off only. Apple TV cycles these row choices on selection; mobile presents a picker. The color picker is hidden with Hidden watch indicators; Episode count style appears only with episode counts enabled. Trailers & music is the shared nested destination, reached from Movie & show details or an enabled Home hero. Nested controls are audited here and on HeroSettingsControls in UI order: Trailers policy (Off, Server only, Server + YouTube), Home autoplay with its conditional Start muted, then Details with Detail background (Off, Trailer, Theme music), its separate conditional Start muted, or Theme music volume and preview controls. Off disables trailers/autoplay but not music or other extras; YouTube is manual/external only. The settings are profile-specific and the Home/detail choices are independent. Playback exposes Discs before Advanced. Disc playback defaults to Play video and is a profile preference; Open disc menu affects attemptable network-share BDMV folders only. The helper warns that only HDMV menus are supported and menu videos do not update watch progress. Unsupported menu metadata selects video instead; the DEBUG-only BD-J switch is not production support. Default zoom is profile-scoped, with independent phone/tablet/television values initially Normal. Custom reveals Zoom at 50%-200%; TV uses an accelerating stepper and mobile a slider. Explicit movie/series choices override the default; unidentified disc timelines use Normal, while a new live channel restores the platform default. Video upscaling is profile-scoped and defaults to Automatic, then resolves Animation from animation/anime metadata or Standard otherwise. Off, Automatic, Standard and Animation are in that order. Hardware, SDR, source dimensions, display size and engine eligibility determine actual enhancement; the saved preference applies to new playback, including Live TV. Session-only changes belong to the player, not these defaults.",
+      "conditions": "Apple TV workspace order: Playback has Audio, Autoplay & Up Next, Default zoom, Player tabs, Version selection, Remember series version choices, Video upscaling, Video buffer, Live TV buffer, Skip intros, credits & more, Seeking, Auto-hide controls, Fade on display changes, Discs, Advanced. Auto-hide controls is profile-scoped and defaults to While playing, followed by While playing or paused and Never. Shared movie/episode controls stay visible during scrubbing or open panels; VoiceOver and Switch Control prevent automatic hiding. This does not configure the separate music player. Audio defaults, Autoplay and Skip Intervals are internal row-builder titles, not separate headings in this workspace. Separate audio/subtitle rules replace the base picker with Movies, TV Shows, Anime and Everything else; language names come from the language catalogue. Time before the end needs Show Up Next card. Subtitle order is Show subtitles, Subtitle style, Live TV subtitle style, Subtitle language, SDH subtitles, Downloading subtitles, Remember subtitles per series. Customize Live TV subtitles requires a separate style. Downloading subtitles appears for supported server profiles; unsupported profiles see its prerequisite only through a matching search. Skip-marker Customize requires skipping enabled; category switches gate marker-specific rules, where Use default and Off appear. Appearance has Theme, Cards, Artwork, Circadian Mode; Screens & Navigation has App navigation, All screens, Home, Libraries, Movie & show details, Music player. Theme uses AppTheme.pickerOrder: Black, Dark, Light, System. Music player uses Match App Theme, Artwork, Black, Dark, Light, followed by Show album, quality & lyrics source. Match follows app colors and Gradient Backgrounds; Artwork forces cover colors. Overrides affect the full player, not browsing pages. Provider management shortcuts are hidden without permission; engine/platform conditions gate playback and subtitle options. Cards contains Labels, Watch indicators, Focus, Style, Display Size; Focus choices are System, Highlight, Outline. Presets replace label overrides; the compact Custom readout is iOS-only. Customize labels from Cards offers all nine Page choices; from Movie & show details it contains Episodes, Related titles and Extras without a Page picker. Home/Recommended use Default with On/Off/Mixed, followed by Overrides; Continue Watching and Home's Libraries use Use default/On/Off. Other pages use On/Off only. Apple TV cycles these row choices on selection; mobile presents a picker. The color picker is hidden with Hidden watch indicators; Episode count style appears only with episode counts enabled. Trailers & music is the shared nested destination, reached from Movie & show details or an enabled Home hero. Nested controls are audited here and on HeroSettingsControls in UI order: Trailers policy (Off, Server only, Server + YouTube), Home autoplay with its conditional Start muted, then Details with Detail background (Off, Trailer, Theme music), its separate conditional Start muted, or Theme music volume and preview controls. Off disables trailers/autoplay but not music or other extras; YouTube is manual/external only. The settings are profile-specific and the Home/detail choices are independent. Playback exposes Discs before Advanced. Disc playback defaults to Play video and is a profile preference; Open disc menu affects attemptable network-share BDMV folders only. The helper warns that only HDMV menus are supported and menu videos do not update watch progress. Unsupported menu metadata selects video instead; the DEBUG-only BD-J switch is not production support. Default zoom is profile-scoped, with independent phone/tablet/television values initially Normal. Custom reveals Zoom at 50%-200%; TV uses an accelerating stepper and mobile a slider. Explicit movie/series choices override the default; unidentified disc timelines use Normal, while a new live channel restores the platform default. Video upscaling is profile-scoped and defaults to Automatic, then resolves Animation from animation/anime metadata or Standard otherwise. Off, Automatic, Standard and Animation are in that order. Hardware, SDR, source dimensions, display size and engine eligibility determine actual enhancement; the saved preference applies to new playback, including Live TV. Session-only changes belong to the player, not these defaults.",
       "controls": [
         {
           "text": "Playback",
@@ -27823,6 +28004,22 @@
         {
           "text": "Seek without pausing",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Auto-hide controls",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "While playing",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
+        },
+        {
+          "text": "While playing or paused",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
+        },
+        {
+          "text": "Never",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
         },
         {
           "text": "Fade on display changes",
@@ -28190,6 +28387,10 @@
         }
       ],
       "documents": [
+        {
+          "slug": "playback",
+          "anchor": "keep-controls-visible"
+        },
         {
           "slug": "playback",
           "anchor": "switch-to-another-continue-watching-title"
@@ -30153,6 +30354,14 @@
           "source": "Sources/FeatureHomeCore/UpcomingView.swift"
         },
         {
+          "text": "Tomorrow",
+          "source": "Sources/FeatureHomeCore/UpcomingView.swift"
+        },
+        {
+          "text": "Yesterday",
+          "source": "Sources/FeatureHomeCore/UpcomingView.swift"
+        },
+        {
           "text": "Hide title",
           "source": "Sources/FeatureHomeCore/UpcomingView.swift"
         },
@@ -30438,7 +30647,7 @@
       ],
       "navigation": "Open Add account from Settings > Seerr, or the optional Seerr profile-setup step; choose Set up manually to edit server/method.",
       "experience": "Select a discovered or trusted manually entered server, explicitly choose an available authorized sign-in method, and review identity before saving where confirmation is required. Errors remain inline.",
-      "conditions": "Existing authorized Plex/Jellyfin account reuse saves directly; several eligible accounts first show Choose existing account. Older Seerr may require Jellyfin password; Emby reuse does not exchange an existing session. Server capabilities determine offered methods. Plex uses browser/open action on mobile or QR/wait/cancel on Apple TV. Password, explicit Plex and API-key flows require Use this account. API keys grant admin rights. Enforced Kids restrictions reject administrator identities. Editing the server clears stale authentication; discovery itself does not sign in.",
+      "conditions": "Existing authorized Plex/Jellyfin account reuse saves directly; several eligible accounts first show Choose existing account. Older Seerr may require Jellyfin password; Emby reuse does not exchange an existing session. Server capabilities determine offered methods. Plex uses browser/open action on mobile or QR/wait/cancel on Apple TV. With an eligible saved account, the alternative explicit Plex flow says Use another Plex account. Local and media-password modes use Seerr account or the server-dependent Jellyfin account/Emby account heading. When methods are not yet known and the form is in a manual mode, Use an account returns to options and checks a valid server address. Password, explicit Plex and API-key flows require Use this account. API keys grant admin rights. Enforced Kids restrictions reject administrator identities. Editing the server clears stale authentication; discovery itself does not sign in.",
       "controls": [
         {
           "text": "Seerr",
@@ -30485,6 +30694,10 @@
           "source": "Sources/FeatureSettings/SeerSignInForm.swift"
         },
         {
+          "text": "Use another Plex account",
+          "source": "Sources/FeatureSettings/SeerSignInForm.swift"
+        },
+        {
           "text": "Sign in with Jellyfin",
           "source": "Sources/FeatureSettings/SeerSignInForm.swift"
         },
@@ -30498,6 +30711,18 @@
         },
         {
           "text": "Seerr account",
+          "source": "Sources/FeatureSettings/SeerSignInForm.swift"
+        },
+        {
+          "text": "Jellyfin account",
+          "source": "Sources/FeatureSettings/SeerSignInForm.swift"
+        },
+        {
+          "text": "Emby account",
+          "source": "Sources/FeatureSettings/SeerSignInForm.swift"
+        },
+        {
+          "text": "Use an account",
           "source": "Sources/FeatureSettings/SeerSignInForm.swift"
         },
         {

@@ -50,9 +50,9 @@ Names never change media or access. Home-row names can [sync](/profiles-and-sync
 
 Continue Watching, including merged Next Up, does not remove titles because of their age or the row's size. Your sources' history, watched status, dismissals, and server access still matter; [shares have a storage limit](/network-shares/#keep-your-place). Disabling library browsing does not hide account-wide history.
 
-Separate Next Up rows preview up to 20. [Open their larger grid](/browse-home-rows/) when available to see more.
+Separate Next Up rows preview up to 20 titles; [open the larger grid](/browse-home-rows/) if offered.
 
-A brief play can save progress without adding a card. Videos need one minute, or 5% for videos under 20 minutes with a five-second minimum. Trailers stay out.
+Brief plays can save progress without adding a card. Watch one minute, or 5% of videos under 20 minutes with a five-second minimum. Trailers stay out.
 
 Under **Rows > Continue Watching**, turn off **Include Next Up** for separate rows; it defaults on. Removing Continue Watching also separates Next Up; **Continue Watching settings** remains available.
 
@@ -85,7 +85,9 @@ Navigation stays local to this profile and device.
 
 Apple TV sidebars always retain **Settings**; if hidden in Top Bar, use the profile picker.
 
-On mobile, Home, Upcoming, Downloads, and Search normally start shown. Home, Search, Watchlist, or Upcoming can be absent without relevant content. Libraries and **All Libraries** start **Hidden**: hold one and choose **Show**. Seerr can reveal Discover.
+On mobile, Home, Upcoming, Downloads, and Search start shown when relevant content is available. Libraries and **All Libraries** start **Hidden**: hold one and choose **Show**. Seerr can reveal Discover.
+
+If mobile **Settings** is missing, use your profile avatar on **Home** or a library.
 
 Compact native navigation puts extra visible shortcuts under **More**, not hidden ones. On iOS/iPadOS 26 or later, setting **Appearance > Liquid Glass** to **Off** can instead show an opaque bottom strip: scroll it sideways for extra shortcuts. The system's Reduce Transparency setting keeps native navigation.
 
