@@ -37,7 +37,7 @@ For NFO sidecars and local artwork, see [Metadata and ratings](/metadata-and-rat
 
 ## Keep your place
 
-Plozz saves share progress and watched status for this profile on this device. They survive reopening the app, but iCloud Sync does not copy this history to another device.
+Plozz saves your progress and watched status for this profile on this device. They survive reopening, but iCloud Sync does not copy this history. You can separately [bring supported tracker history to shares](/trackers/#bring-tracker-history-to-network-shares) on each device.
 
 For each share, Plozz keeps at most 2,000 recent history entries per profile, sometimes fewer to fit its storage limit. As you watch more titles, older resume positions and watched marks can be removed.
 

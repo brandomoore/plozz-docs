@@ -1,6 +1,6 @@
 # Player controls
 
-Resume titles, choose editions, and skip intros.
+Resume a video, choose an edition, or skip intros.
 
 ## Reach the controls
 
@@ -8,7 +8,7 @@ On Apple TV, press up from the timeline for available **Audio**, **Subtitles**, 
 
 On iPhone/iPad, tap the video. Portrait uses the ellipsis **Playback options** menu. Landscape separates Audio, Subtitles, and speed, with other options in the ellipsis **Playback settings** menu.
 
-See [device controls](/platform-controls/) or [Blu-ray menus](/disc-playback/).
+See [device controls](/platform-controls/) or [disc menus](/disc-playback/).
 
 ## Keep controls visible
 
@@ -29,7 +29,7 @@ Press the center button to seek, or play/pause to seek and resume. Back cancels.
 - On Apple TV, close menus. With the timeline visible, lightly tap the remote without clicking for clock times. Another tap hides controls. If hidden, a light tap reveals them first.
 - On iPhone/iPad, tap either time beside the timeline. VoiceOver calls these **Elapsed time** and **Remaining time**. Tap again to switch back.
 
-The estimate uses the remaining video and playback speed; it needs a known duration. Revealing hidden controls returns to elapsed and remaining times.
+The estimate needs a known duration and accounts for playback speed. Revealing hidden controls returns to elapsed and remaining times.
 
 ## Choose audio or a version
 
@@ -45,13 +45,13 @@ The first multi-version video asks your preference. Change **Settings > Playback
 
 **How automatic selection works** explains how files suit your device, not current connection speed.
 
-**Remember series version choices** (Apple TV: **Remember per series**) reuses your version type for later episodes in automatic mode, or preselects it when asked. Turn it off to stop reusing it. Automatic mode chooses an alternative if that type is missing.
+**Remember series version choices** reuses your version type for later episodes in automatic mode, or preselects it when asked. Turn it off to stop reusing it. Automatic mode chooses an alternative if that type is missing.
 
 ## Resume or start over
 
 Enable **Settings > Playback > Ask to resume or start over** to choose before resuming. **Resume** shows time remaining; **Start Over** shows full runtime, when known.
 
-**Rewind on resume** (mobile: **Resume rewind**) defaults to five seconds, adjustable from zero to 60.
+**Rewind on resume** starts five seconds before your saved position by default. Choose zero to resume exactly, or up to 60 seconds for more context.
 
 ## Autoplay and skipping
 
@@ -71,9 +71,9 @@ Open **Chapters** below the timeline and choose a chapter; paused playback stays
 
 Open **Continue Watching** below the timeline to resume another title. On Apple TV, press down; on iPhone/iPad, scroll the tabs if needed.
 
-Choose a card to save your position and resume that title after any access or version prompts.
+Choose a card to save your position and resume that title after access or version prompts.
 
-It uses Home's loaded titles, excluding this video and other episodes of its show from that source. It hides when none remain.
+It uses Home's loaded titles, excluding this video and its show's episodes from that source. It hides when none remain.
 
 Under **Settings > Playback > Player tabs**, choose which of **Chapters**, **Cast**, **Episodes**, **Playlist**, and **Continue Watching** to show. A tab appears only when it has content; **Info** remains available.
 

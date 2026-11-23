@@ -8,7 +8,7 @@ Open **Audio** in the player controls. In portrait on iPhone/iPad, use the ellip
 
 Compare the language, format, and any original track name to distinguish versions in the same language. Look for **Commentary** or **Audio Description** when the source identifies commentary or narration of visual content. Format and channel labels describe the track, not your speaker output.
 
-Set **Preferred audio language** in **Settings > Playback > Audio** on Apple TV, or Playback's **Tracks** section on iPhone/iPad. Choose a language, or enable **Set separately for movies, TV shows & anime** to use different preferences.
+In **Settings > Playback**, find **Audio**, then set **Preferred audio language**. Choose **Original language**, **Device language**, or a particular language. Enable **Set separately for movies, TV shows & anime** if you prefer different languages for each.
 
 Plozz remembers a movie's manually chosen audio language. **Remember audio language per series** does the same for shows. Matching titles can reuse the language across servers, not an exact commentary track or mix.
 

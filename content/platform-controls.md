@@ -4,11 +4,11 @@ Control playback and watch on another screen.
 
 ## Apple TV
 
-Reveal controls with the remote. Change left/right jumps with **Backward** and **Forward** under **Settings > Playback > Seeking**.
+Reveal controls with the remote. Change left/right jumps with **Skip backward** and **Skip forward** under **Settings > Playback > Seeking**.
 
 **Seek without pausing** determines whether a playing video responds to scrubbing. When off, pause first, scrub to the position, then press Play. **Prevent Accidental Exit**, under Screens & Navigation's navigation settings, changes app-exit behavior rather than playback quality.
 
-**Fade on display changes** covers dynamic-range and frame-rate transitions, not TV matching settings. If matching is off on Apple TV, disabling fades can avoid needless delays.
+Under **Settings > Playback > Video**, **Fade when switching frame rates** briefly hides the picture during transitions. If frame-rate matching is off in Apple TV Settings, disabling this switch can avoid needless fades.
 
 Apple TV users can [automatically open their remembered Plozz profile](/apple-tv-profiles/). With automatic sign-in off, [returning to browsing can require profile selection again](/apple-tv-profiles/#when-you-return-to-browsing).
 

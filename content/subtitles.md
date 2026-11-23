@@ -62,7 +62,7 @@ Enable **Set separately for movies, TV shows & anime** to give each its own rule
 
 Forced tracks cover selected dialogue/signs; SDH includes sound descriptions. **Prefer SDH** allows regular fallback. **Only SDH** leaves automatic subtitles off when unavailable and excludes non-SDH search/download results.
 
-To stop reusing series choices, on Apple TV open **Settings > Subtitles > Remember subtitles per series** and turn off **Remember per series**. On iPhone/iPad, open **Settings > Playback**, then turn off **Remember subtitles per series** under **Tracks**.
+To stop reusing series choices, turn off **Remember subtitles per series** in **Settings > Subtitles**. On iPhone/iPad, it is under **Behavior**.
 
 For mistimed text, use the **Subtitle Sync** clock button on Apple TV or **Subtitles > Advanced… > Subtitle Delay** on mobile. Increase delay for early captions; decrease it for late ones. On Apple TV, **Reset** returns to zero. Some embedded tracks cannot shift and have no timing control.
 

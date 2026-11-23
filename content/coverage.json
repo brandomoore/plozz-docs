@@ -301,16 +301,27 @@
         {
           "slug": "profiles-and-sync",
           "anchor": "keep-watch-history-separate"
+        },
+        {
+          "slug": "trackers",
+          "anchor": "bring-tracker-history-to-network-shares"
+        },
+        {
+          "slug": "network-shares",
+          "anchor": "keep-your-place"
         }
       ],
       "sources": [
         "Sources/FeatureSettings/IntegrationsDetailView.swift",
         "Sources/CoreModels/PlaybackSettings.swift",
-        "Sources/AppShelliOS/PlozziOSSettingsView.swift",
         "Sources/AppRuntime/WatchMutationFactory.swift",
-        "Sources/AppRuntime/WatchMutationApplier.swift"
+        "Sources/AppRuntime/WatchMutationApplier.swift",
+        "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift",
+        "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift",
+        "Sources/CoreModels/TrackerHistorySyncController.swift",
+        "Sources/AppRuntime/AccountsProvidersModel.swift"
       ],
-      "answer": "Sync across all my servers in Trackers (mobile also exposes Sync watch state across servers in Playback) defaults on and propagates watched-state/resume updates to matching accessible copies. Apple TV enables its control when multiple servers exist. Turning it off keeps writes scoped to the originating server. This is distinct from CloudKit configuration/profile sync and from scrobbling to third-party trackers; server identities and permissions still govern delivery."
+      "answer": "Settings > Trackers > Sync across servers defaults on and propagates watched-state/resume updates to matching accessible copies. Apple TV places it under Watch status and disables it below two servers; mobile places it first on Trackers, not Playback. Turning it off keeps changes on the originating source. This is separate from iCloud configuration/profile sync, outgoing tracker reporting and optional experimental 2-way sync: incoming tracker history can update only explicitly selected media shares in Plozz, never Plex/Emby/Silo/Jellyfin history. Tracker activation and incoming-sync permission are device-local; source identities and authorization still govern delivery."
     },
     "version-selection": {
       "documents": [
@@ -1452,6 +1463,10 @@
         {
           "slug": "profiles-and-sync",
           "anchor": "restore-an-existing-setup"
+        },
+        {
+          "slug": "trackers",
+          "anchor": "bring-tracker-history-to-network-shares"
         }
       ],
       "sources": [
@@ -1474,9 +1489,9 @@
         "Sources/FeatureSettings/SyncDataBreakdown.swift",
         "Sources/AppRuntime/TrackerTokenSyncBridge.swift",
         "Sources/CoreNetworking/LocalMediaWatchStore.swift",
-        "Sources/FeatureSyncCloud/CloudSyncStatus.swift"
+        "Sources/CoreModels/TrackerHistorySyncController.swift"
       ],
-      "summary": "Distinguish iCloud configuration, encrypted server/share and tracker sign-ins, provider-limited nearby transfer and server authorization. First-run consent gates automatic sync; Not now leaves cloud data untouched. Restoration exposes progress, Retry and Set up manually; manual setup pauses restoration until setup completes while sync stays enabled. Both shells restore supported credentials through ProviderCredentialSync. Silo enrolls a separate session only when its server supports bound protocol-2 enrollment and the saved Silo profile has no PIN; otherwise sign-in and approval remain required. Apple TV fetches enabled cloud sync on foreground rather than relying on background delivery. Explain network/permission/code-verification requirements and separate cross-server history. Default-on cross-server history mirrors eligible normal-title changes only to matching accessible copies; extras/trailers remain origin-only and do not emit tracker history. Queued failures retry with the captured original profile/server identities authorized; local card changes do not prove every server accepted an update. Share progress and Plex-extra fallback records persist per profile/account/viewer on the current device, not through iCloud configuration sync. Watchlist filters and sort order are transferable profile preferences, separately from membership; the allowlisted WatchlistBrowsePreferencesStore key travels with profile snapshots. Display Size, navigation style and main shortcut arrangement stay local per profile, as does Apple TV accidental-exit prevention, rather than syncing or transferring; library-tab order does transfer. Downloads/startup/Video buffer/Live TV buffer/Top Shelf remain local too. Prefer lossless audio stays local across Plozz profiles and is excluded from transfer because it depends on connected equipment. Diagnostics consent is neither synced nor transferred and is not profile-owned. External-player selection is device-wide and local; returned progress stays with the authorized original viewer/server. Live TV source copies sync encrypted per profile; account-imported M3U files and Kids approvals stay local, schedules need snapshots, and legacy source import differs from account import. Refresh Breakdown shows encoded local payload/count snapshots, not iCloud storage: include pending uploads/catalogue schedules; exclude pending deletions/downloaded IPTV guides and separate Keychain/Trakt records. On all three platforms iCloud Sync > Troubleshooting offers Reload From iCloud and destructive Reset Sync; distinguish downloading shared settings from replacing them with this device's copy. Retain erase/re-upload prevention and mobile Keychain erasure. Transferable presentation preferences grant neither access nor unsupported modes. Seerr cookie sessions are not copied. Supported profile-bound API keys use approved secret transfer or the mobile Keychain path, preserve configured local connections and require capable receiving apps."
+      "summary": "Distinguish iCloud configuration, encrypted server/share and tracker sign-ins, provider-limited nearby transfer and server authorization. First-run consent gates automatic sync; Not now leaves cloud data untouched. Restoration exposes progress, Retry and Set up manually; manual setup pauses restoration until setup completes while sync stays enabled. Both shells restore supported credentials through ProviderCredentialSync. Silo enrolls a separate session only when its server supports bound protocol-2 enrollment and the saved Silo profile has no PIN; otherwise sign-in and approval remain required. Apple TV fetches enabled cloud sync on foreground rather than relying on background delivery. Explain network/permission/code-verification requirements and separate cross-server history. Default-on cross-server history mirrors eligible normal-title changes only to matching accessible copies; extras/trailers remain origin-only and do not emit tracker history. Queued failures retry with the captured original profile/server identities authorized; local card changes do not prove every server accepted an update. Share progress and Plex-extra fallback records persist per profile/account/viewer on the current device, not through iCloud configuration sync. Watchlist filters and sort order are transferable profile preferences, separately from membership; the allowlisted WatchlistBrowsePreferencesStore key travels with profile snapshots. Display Size, navigation style and main shortcut arrangement stay local per profile, as does Apple TV accidental-exit prevention, rather than syncing or transferring; library-tab order does transfer. Downloads/startup/Video buffer/Live TV buffer/Top Shelf remain local too. Prefer lossless audio stays local across Plozz profiles and is excluded from transfer because it depends on connected equipment. Diagnostics consent is neither synced nor transferred and is not profile-owned. External-player selection is device-wide and local; returned progress stays with the authorized original viewer/server. Live TV source copies sync encrypted per profile; account-imported M3U files and Kids approvals stay local, schedules need snapshots, and legacy source import differs from account import. Refresh Breakdown shows encoded local payload/count snapshots, not iCloud storage: include pending uploads/catalogue schedules; exclude pending deletions/downloaded IPTV guides and separate Keychain/Trakt records. On all three platforms iCloud Sync > Troubleshooting offers Reload From iCloud and destructive Reset Sync; distinguish downloading shared settings from replacing them with this device's copy. Retain erase/re-upload prevention and mobile Keychain erasure. Transferable presentation preferences grant neither access nor unsupported modes. Seerr cookie sessions are not copied. Supported profile-bound API keys use approved secret transfer or the mobile Keychain path, preserve configured local connections and require capable receiving apps. Trackers > Sync across servers is now the sole visible cross-server control location on both platforms. Tracker activation and explicit incoming share-history permissions are device-local, distinct from synced tracker credentials; optional 2-way sync does not turn local share history into an iCloud data type."
     },
     "tracking": {
       "documents": [
@@ -1494,31 +1509,43 @@
         {
           "slug": "music",
           "anchor": "lyrics-and-listening-history"
+        },
+        {
+          "slug": "trackers",
+          "anchor": "connect-publicmetadb"
+        },
+        {
+          "slug": "trackers",
+          "anchor": "pause-reporting-without-disconnecting"
+        },
+        {
+          "slug": "trackers",
+          "anchor": "bring-tracker-history-to-network-shares"
         }
       ],
       "sources": [
         "Sources/FeatureSettings/IntegrationsDetailView.swift",
         "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift",
-        "Sources/TraktService/TraktScrobbler.swift",
-        "Sources/TraktService/TraktClient.swift",
-        "Sources/AppRuntime/WatchMutationFactory.swift",
-        "Sources/AppRuntime/WatchMutationApplier.swift",
+        "Sources/FeatureSettings/TrackerActivationRow.swift",
+        "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift",
+        "Sources/CoreModels/TrackerActivation.swift",
+        "Sources/CoreModels/TrackerHistorySyncController.swift",
+        "Sources/CoreModels/TrackerHistoryImport.swift",
+        "Sources/AppRuntime/AccountsProvidersModel.swift",
         "Sources/AppShell/AppState.swift",
         "Sources/AppShelliOS/PlozziOSAppModel.swift",
-        "Sources/TraktService/TraktWatchlistDestination.swift",
-        "Sources/SimklService/SimklScrobbler.swift",
-        "Sources/AniListService/AniListScrobbler.swift",
-        "Sources/MALService/MALScrobbler.swift",
-        "Sources/LastFmService/LastFmScrobbler.swift",
-        "Sources/WetrakrService/WetrakrConfig.swift",
-        "Sources/CoreModels/RuntimeFeatureFlags.swift",
+        "Sources/PublicMetaDBService/PublicMetaDBService.swift",
+        "Sources/PublicMetaDBService/PublicMetaDBPlaybackReporter.swift",
+        "Sources/PublicMetaDBService/PublicMetaDBHistorySnapshot.swift",
+        "Sources/TraktService/TraktService.swift",
+        "Sources/SimklService/SimklService.swift",
         "Sources/WetrakrService/WetrakrService.swift",
-        "Sources/WetrakrService/WetrakrScrobbler.swift",
-        "Sources/WetrakrService/WetrakrWatchlistDestination.swift",
-        "Sources/AppShell/RealtimePlaybackScrobbler.swift",
-        "Sources/AppShelliOS/PlozziOSTrackerScrobbler.swift"
+        "Sources/AniListService/AniListService.swift",
+        "Sources/MALService/MALService.swift",
+        "Sources/LastFmService/LastFmScrobbler.swift",
+        "Sources/CoreModels/SettingsSearchAdditionalEntries.swift"
       ],
-      "summary": "Connect profile-owned video/anime/music trackers and check media/account/build eligibility. Distinguish outbound playback-to-history scrobbling from readable/writable Watchlists: Plozz does not import a tracker's complete watch history into media servers. Supported external returns can deliver unfinished Trakt pause progress through the durable watch outbox; finished returns keep normal history reporting. Mark as Unwatched does not delete Trakt history. WeTrakr is enabled by the production flag but still requires configured client credentials; its settings, both playback fan-outs and planning-list destination are wired. Document its authorization, Watchlist behavior, Retry/profile-wide Reconnect and failed-revocation recovery without promising the row in an unconfigured build."
+      "summary": "Connect profile-owned eligible video/anime/music accounts, including PublicMetaDB browser pairing/manual key on TV and secure mobile key entry. Use <service> pauses device-local reporting without disconnecting or removing connected Watchlist destinations. Video reporting admissions fence stale queued activity across pauses. Saved incoming-history permission is retained while reporting is paused and can resume afterward; it is not revoked by hiding its controls. Optional experimental 2-way sync brings existing and new supported history into explicitly selected media shares only; managed-server history is not an incoming destination. Explain foreground/Offline Mode conditions, watched-only anime scope, matching/runtime limits, conflict preservation, deferred playback, Sync now, visible failures and unconfirmed-write holds. Key replacement/disconnect can affect the profile's synced devices without revoking a remote PublicMetaDB key. Generic reviewed imports/exports, Last.fm history browsing and PublicMetaDB account-management tools lack production entry points; do not infer availability from backend readers or account-tool views. Existing outgoing external-return Trakt and Watchlist behavior remain separate, with module and task-specific evidence."
     },
     "requests": {
       "documents": [
@@ -1785,12 +1812,19 @@
     "AniListService": {
       "areas": [
         "tracking",
-        "library"
+        "library",
+        "sync"
       ],
       "sources": [
         "Sources/AniListService/AniListScrobbler.swift",
-        "Sources/AniListService/AniListWatchlistDestination.swift"
-      ]
+        "Sources/AniListService/AniListWatchlistDestination.swift",
+        "Sources/AniListService/AniListService.swift",
+        "Sources/AniListService/AniListHistoryReader.swift",
+        "Sources/CoreModels/TrackerActivation.swift",
+        "Sources/CoreModels/TrackerHistorySyncController.swift",
+        "Sources/AppRuntime/AccountsProvidersModel.swift"
+      ],
+      "summary": "Connected-account activation pauses reporting locally without removing Watchlist destinations. Optional 2-way sync can bring watched-only anime history into explicitly selected media shares, not managed servers. Aggregate show episode counts do not identify individual watched episodes. Reviewed bulk import/export views have no production entry point."
     },
     "FeatureAuth": {
       "areas": [
@@ -2030,7 +2064,7 @@
         "Sources/FeatureSettings/DefaultVideoZoomControl.swift",
         "Sources/FeatureSettings/VideoUpscalingControl.swift"
       ],
-      "summary": "Group by task and platform/provider applicability, not by toggle. Preserve Home Rows/Add row, separate watched-content Filtering, current Home/Libraries/Movie & show details paths and TV navigation layouts/shortcut recovery. Add row > Custom row is a multi-source editor, not a collection-only shortcut. Its Content picker selects collections, video playlists, enabled video libraries, Home feeds and recommendations; the focused guide explains saved queries, non-playing previews, provider/user restrictions, unavailable-source recovery, TV autosave and explicit mobile/new-row saves. Landscape custom rows alone expose Logo On/Off after Layout, default Off. Keep shared Card labels, independent Logo/Text sizing, spoilers and classification controls distinct from restrictions. Collection-cover shapes have independent library/Recommended/Home scopes and do not style titles within collections. Detail music works in both shells; audio explains volume, preview/generated fallback and mobile session mute. Prefer lossless audio retains its output-compatibility section, default, device scope, new-load timing and hardware limits. Profiles covers TV/mobile server users and adding shared sign-ins without creating users. Skipping, independent buffers, saved-sign-in recovery and sync-data sizes stay in their tasks. Feedback explains Share Diagnostics, Enable Sharing without submission, Message (required), Send to Developer and Submitted's SDK-handoff limit, plus privacy and TV Home stutter measurements. Reload/reset are reachable in both sync troubleshooting UIs. External-player choice keeps device scope, eligibility, token sharing and returned progress in its focused guide. Developer Mode and Reset to First Run are deliberately hidden diagnostic/setup-retest surfaces gated by DeveloperModeModel, not routine recovery; omit their unlock/reset steps. Home hero and Movie & show details share Trailers & music: source policy, independent Home autoplay/detail background, conditional mute controls and theme-volume preview. Shared Default zoom and Video upscaling controls are embedded in both Playback settings parents. Guide preferences adds foreground-only saved-IPTV refresh cadence; all shared labels and conditional controls are inventoried on the parents."
+      "summary": "Group by task and platform/provider applicability, not by toggle. Preserve Home Rows/Add row, separate watched-content Filtering, current Home/Libraries/Movie & show details paths and TV navigation layouts/shortcut recovery. Add row > Custom row is a multi-source editor, not a collection-only shortcut. Its Content picker selects collections, video playlists, enabled video libraries, Home feeds and recommendations; the focused guide explains saved queries, non-playing previews, provider/user restrictions, unavailable-source recovery, TV autosave and explicit mobile/new-row saves. Landscape custom rows alone expose Logo On/Off after Layout, default Off. Keep shared Card labels, independent Logo/Text sizing, spoilers and classification controls distinct from restrictions. Collection-cover shapes have independent library/Recommended/Home scopes and do not style titles within collections. Detail music works in both shells; audio explains volume, preview/generated fallback and mobile session mute. Prefer lossless audio retains its output-compatibility section, default, device scope, new-load timing and hardware limits. Profiles covers TV/mobile server users and adding shared sign-ins without creating users. Skipping, independent buffers, saved-sign-in recovery and sync-data sizes stay in their tasks. Feedback explains Share Diagnostics, Enable Sharing without submission, Message (required), Send to Developer and Submitted's SDK-handoff limit, plus privacy and TV Home stutter measurements. Reload/reset are reachable in both sync troubleshooting UIs. External-player choice keeps device scope, eligibility, token sharing and returned progress in its focused guide. Developer Mode and Reset to First Run are deliberately hidden diagnostic/setup-retest surfaces gated by DeveloperModeModel, not routine recovery; omit their unlock/reset steps. Home hero and Movie & show details share Trailers & music: source policy, independent Home autoplay/detail background, conditional mute controls and theme-volume preview. Shared Default player zoom and Video upscaling controls are embedded in both Playback settings parents. Guide preferences adds foreground-only saved-IPTV refresh cadence; all shared labels and conditional controls are inventoried on the parents."
     },
     "FeatureShareOnboarding": {
       "areas": [
@@ -2119,18 +2153,30 @@
       ],
       "sources": [
         "Sources/LastFmService/LastFmScrobbler.swift",
-        "Sources/LastFmService/LastFmAuthService.swift"
-      ]
+        "Sources/LastFmService/LastFmAuthService.swift",
+        "Sources/LastFmService/LastFmService.swift",
+        "Sources/CoreModels/TrackerActivation.swift",
+        "Sources/FeatureSettings/IntegrationsDetailView.swift",
+        "Sources/FeatureSettings/LastFmListeningHistoryView.swift"
+      ],
+      "summary": "Apple TV music reporting and the connected Use Last.fm pause switch are reachable. Listening-history read support has no production browser entry point, and Last.fm is not a movie/episode history-sync source. Mobile Music does not send its scrobbles."
     },
     "MALService": {
       "areas": [
         "tracking",
-        "library"
+        "library",
+        "sync"
       ],
       "sources": [
         "Sources/MALService/MALScrobbler.swift",
-        "Sources/MALService/MALWatchlistDestination.swift"
-      ]
+        "Sources/MALService/MALWatchlistDestination.swift",
+        "Sources/MALService/MALService.swift",
+        "Sources/MALService/MALHistoryReader.swift",
+        "Sources/CoreModels/TrackerActivation.swift",
+        "Sources/CoreModels/TrackerHistorySyncController.swift",
+        "Sources/AppRuntime/AccountsProvidersModel.swift"
+      ],
+      "summary": "Connected-account activation pauses reporting locally without removing Watchlist destinations. Optional 2-way sync can bring watched-only anime history into explicitly selected media shares, not managed servers. Aggregate show episode counts do not identify individual watched episodes. Reviewed bulk import/export views have no production entry point."
     },
     "MediaDownloads": {
       "areas": [
@@ -2413,12 +2459,19 @@
     "SimklService": {
       "areas": [
         "tracking",
-        "library"
+        "library",
+        "sync"
       ],
       "sources": [
         "Sources/SimklService/SimklScrobbler.swift",
-        "Sources/SimklService/SimklWatchlistDestination.swift"
-      ]
+        "Sources/SimklService/SimklWatchlistDestination.swift",
+        "Sources/SimklService/SimklService.swift",
+        "Sources/SimklService/SimklHistoryRecords.swift",
+        "Sources/CoreModels/TrackerActivation.swift",
+        "Sources/CoreModels/TrackerHistorySyncController.swift",
+        "Sources/AppRuntime/AccountsProvidersModel.swift"
+      ],
+      "summary": "Connected-account activation pauses reporting locally without removing Watchlist destinations. The reachable 2-way sync control can bring supported watched history and compatible resume positions into explicitly selected media shares only. Reviewed bulk import/export views have no production entry point."
     },
     "TopShelfKit": {
       "areas": [
@@ -2451,14 +2504,20 @@
         "Sources/TraktService/TraktAuthService.swift",
         "Sources/AppRuntime/WatchMutationFactory.swift",
         "Sources/AppRuntime/WatchMutationApplier.swift",
-        "Sources/AppRuntime/ExternalPlaybackRuntime.swift"
+        "Sources/AppRuntime/ExternalPlaybackRuntime.swift",
+        "Sources/TraktService/TraktService.swift",
+        "Sources/TraktService/TraktClient.swift",
+        "Sources/CoreModels/TrackerActivation.swift",
+        "Sources/CoreModels/TrackerHistorySyncController.swift",
+        "Sources/AppRuntime/AccountsProvidersModel.swift"
       ],
-      "summary": "Separate Watchlist sync, completed watches and partial pause progress returned by supported external players. Mark as Unwatched does not delete Trakt history. Shared sign-in recovery belongs in trackers; receipt/debug response plumbing needs no separate user procedure."
+      "summary": "Separate Watchlist sync, completed watches and partial pause progress returned by supported external players. Mark as Unwatched does not delete Trakt history. Shared sign-in recovery belongs in trackers; receipt/debug response plumbing needs no separate user procedure. Connected-account activation pauses reporting locally without removing Watchlist destinations. The reachable 2-way sync control can bring supported watched history and compatible resume positions into explicitly selected media shares only. Reviewed bulk import/export views have no production entry point."
     },
     "WetrakrService": {
       "areas": [
         "tracking",
-        "library"
+        "library",
+        "sync"
       ],
       "sources": [
         "Sources/WetrakrService/WetrakrConfig.swift",
@@ -2471,9 +2530,13 @@
         "Sources/AppShell/RealtimePlaybackScrobbler.swift",
         "Sources/AppShelliOS/PlozziOSTrackerScrobbler.swift",
         "Sources/CoreUI/WetrakrWatchlistLink.swift",
-        "Sources/CoreUI/DetailInformationSections.swift"
+        "Sources/CoreUI/DetailInformationSections.swift",
+        "Sources/WetrakrService/WetrakrHistoryReader.swift",
+        "Sources/CoreModels/TrackerActivation.swift",
+        "Sources/CoreModels/TrackerHistorySyncController.swift",
+        "Sources/AppRuntime/AccountsProvidersModel.swift"
       ],
-      "summary": "Production-enabled but configuration-gated video tracking and planning-list read/write integration is reachable on both platforms. Cover authorization and connection recovery in trackers and list propagation in library. View on WeTrakr, when present for imported entries, is an external link/TV QR handoff rather than media playback; this self-explanatory link needs no standalone guide."
+      "summary": "Production-enabled but configuration-gated video tracking and planning-list read/write integration is reachable on both platforms. Cover authorization and connection recovery in trackers and list propagation in library. View on WeTrakr, when present for imported entries, is an external link/TV QR handoff rather than media playback; this self-explanatory link needs no standalone guide. Connected-account activation pauses reporting locally without removing Watchlist destinations. The reachable 2-way sync control can bring supported watched history and compatible resume positions into explicitly selected media shares only. Reviewed bulk import/export views have no production entry point."
     },
     "ProviderSubsonic": {
       "areas": [
@@ -2493,6 +2556,24 @@
         "Sources/AppRuntime/ProviderCredentialSync.swift"
       ],
       "summary": "Beta-only Navidrome (Subsonic) provider selection on Apple TV and iPhone/iPad leads to explicit HTTP/HTTPS address, username and Password/API Key sign-in. Music-only browsing includes albums, artists, tracks, playlists and genres, server favorites and duration-qualified listening reports independent of Last.fm. API-key compatibility and username validation are enforced by the provider. No video, downloads, server discovery or alternate-address management is exposed. Source credentials can restore through the shared encrypted cloud credential channel without granting new access."
+    },
+    "PublicMetaDBService": {
+      "areas": [
+        "tracking",
+        "sync"
+      ],
+      "sources": [
+        "Sources/PublicMetaDBService/PublicMetaDBService.swift",
+        "Sources/PublicMetaDBService/PublicMetaDBBrowserPairing.swift",
+        "Sources/PublicMetaDBService/PublicMetaDBPlaybackReporter.swift",
+        "Sources/PublicMetaDBService/PublicMetaDBHistorySnapshot.swift",
+        "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift",
+        "Sources/FeatureSettings/PublicMetaDBAccountView.swift",
+        "Sources/AppRuntime/AccountsProvidersModel.swift",
+        "Sources/AppShell/AppState.swift",
+        "Sources/AppShelliOS/PlozziOSAppModel.swift"
+      ],
+      "summary": "Production UI exposes profile-scoped connection via TV browser pairing/manual key or mobile key entry, local playback activation, failure status and optional incoming media-share history. Synced key replacement/disconnect does not revoke the remote key or erase history. Verified movie/episode reporting and watched/resume reads are wired in both shells. Public construction disables accountToolsEnabled: remote list/rating/mapping/history-management/export tools and the PublicMetaDB Watchlist destination are not current reader workflows."
     }
   },
   "settingsCategories": {
@@ -2604,7 +2685,7 @@
         "Sources/CoreModels/VideoZoomPreference.swift",
         "Sources/CoreModels/VideoUpscaling.swift"
       ],
-      "summary": "Cover version mode/series memory, autoplay/skips, quality, audio, background listening, orientation/gestures and history with platform/provider gates. Ask to resume or start over is independent of resume rewind/version selection. Player tabs follows autoplay on both platforms, ordering default-on Chapters, Cast, Episodes, Playlist and Continue Watching; content still gates cards and Info cannot be hidden. Audio includes default-on Identify songs using Shazam and decoded playback audio, not the microphone. Every Info match card opens service choices; Apple Music alone needs a supplied song URL. Internet, active supported playback and route checks apply; Offline Mode prevents recognition. Skip settings distinguish enablement, categories, button/delay and per-marker Off; community requests are separate. Series audio memory requires its switch and stores language, not commentary/mix; manually selected movie audio language is remembered without that switch. Per-profile movie/series zoom memory is also independent of the track-memory switches. Default-on Prefer lossless audio is shared on this device, not synced/transferred; disabling requests compressed surround-compatible AetherEngine output for newly loaded video/live streams, not a guaranteed hardware format or native/external setting. Video buffer and separate Live TV buffer affect new loads, not downloads. Version selection offers ask, automatic and server order; automatic uses remembered type or device ranking, while server order ignores memory. Its information action explains ranking without another mode. Advanced > External player is device-wide; the reference explains compatible original/converted streams, expanded provider/share routes, actual mobile background-grant requirements, token/password sharing, fallback and authorized progress returns. Discs precedes Advanced; the profile defaults to Play video, with Open disc menu for attemptable share folders and one-time held-play alternatives. HDMV-only compatibility and suppressed menu/video-list history remain in the disc guide. Default zoom adds independent phone/tablet/television profile defaults, initially Normal, with Custom revealing Zoom. Video upscaling stores Off/Automatic/Standard/Animation, initially Automatic, for new playback; actual SDR enhancement remains hardware/display/engine constrained, and the player session override does not rewrite it."
+      "summary": "Cover version mode/series memory, autoplay/skips, quality, audio, background listening, orientation/gestures and history with platform/provider gates. Ask to resume or start over is independent of resume rewind/version selection. Player tabs opens from the Player section on both platforms, ordering default-on Chapters, Cast, Episodes, Playlist and Continue Watching; content still gates cards and Info cannot be hidden. Audio includes default-on Identify songs using Shazam and decoded playback audio, not the microphone. Every Info match card opens service choices; Apple Music alone needs a supplied song URL. Internet, active supported playback and route checks apply; Offline Mode prevents recognition. Skip settings distinguish enablement, categories, button/delay and per-marker Off; community requests are separate. Series audio memory requires its switch and stores language, not commentary/mix; manually selected movie audio language is remembered without that switch. Per-profile movie/series zoom memory is also independent of the track-memory switches. Default-on Prefer lossless audio is shared on this device, not synced/transferred; disabling requests compressed surround-compatible AetherEngine output for newly loaded video/live streams, not a guaranteed hardware format or native/external setting. Video buffer and separate Live TV buffer affect new loads, not downloads. Version selection offers ask, automatic and server order; automatic uses remembered type or device ranking, while server order ignores memory. Its information action explains ranking without another mode. Advanced > External player is device-wide; the reference explains compatible original/converted streams, expanded provider/share routes, actual mobile background-grant requirements, token/password sharing, fallback and authorized progress returns. Discs precedes Advanced; the profile defaults to Play video, with Open disc menu for attemptable share folders and one-time held-play alternatives. HDMV-only compatibility and suppressed menu/video-list history remain in the disc guide. Default player zoom adds independent phone/tablet/television profile defaults, initially Normal, with Custom revealing Zoom. Video upscaling stores Off/Automatic/Standard/Animation, initially Automatic, for new playback; actual SDR enhancement remains hardware/display/engine constrained, and the player session override does not rewrite it."
     },
     "screensNavigation": {
       "areas": [
@@ -2678,9 +2759,15 @@
         "Sources/FeatureSettings/IntegrationsDetailView.swift",
         "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift",
         "Sources/WetrakrService/WetrakrService.swift",
-        "Sources/CoreModels/RuntimeFeatureFlags.swift"
+        "Sources/CoreModels/RuntimeFeatureFlags.swift",
+        "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift",
+        "Sources/FeatureSettings/TrackerActivationRow.swift",
+        "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift",
+        "Sources/CoreModels/TrackerActivation.swift",
+        "Sources/CoreModels/TrackerHistorySyncController.swift",
+        "Sources/AppRuntime/AccountsProvidersModel.swift"
       ],
-      "summary": "Use the trackers task for profile sign-ins, media eligibility, list/history behavior, configured WeTrakr availability, Retry/Reconnect and failed revocation recovery; retain Apple TV-only Last.fm and separate cross-server history/iCloud sync."
+      "summary": "Guide connection and recovery, per-service pause without disconnect, PublicMetaDB TV pairing/mobile key entry, and optional experimental existing/new tracker history into selected media shares. Keep Last.fm Apple TV-only, WeTrakr configuration-gated, managed-server history outbound-only and iCloud separate. Record unwired account-management/import/export tools as omissions, not reader procedures."
     },
     "downloads": {
       "areas": [
@@ -3252,7 +3339,7 @@
         "iPhone",
         "iPad"
       ],
-      "navigation": "Settings > Playback > Player tabs on Apple TV; the Player tabs group follows Playback and precedes Tracks on iPhone/iPad.",
+      "navigation": "Open Settings > Playback, then find Player > Player tabs on Apple TV, iPhone or iPad. Player tabs opens the shared nested destination.",
       "experience": "Choose whether Chapters, Cast, Episodes, Playlist and Continue Watching appear in the video player. Each toggle changes player presentation, not media availability.",
       "conditions": "Both settings shells embed the shared group. Tabs still require relevant content and the applicable playback context; enabling a tab does not manufacture chapters, cast or a playlist.",
       "controls": [
@@ -5000,19 +5087,11 @@
         "Apple TV"
       ],
       "navigation": "On the configured Apple TV, open Settings > iCloud Sync > Set Up Another Device.",
-      "experience": "Choose a nearby receiving device, enter its short code, or show the source invitation QR for a new iPhone/iPad to scan.",
+      "experience": "Choose a nearby receiving device, or enter its short code in Code under Enter a code and choose Set Up. Alternatively, show the source invitation QR for a new iPhone/iPad to scan.",
       "conditions": "Apple TV sender only, on the same local network. Device names and codes are dynamic. An expired source QR offers New QR Code; authorization/comparison follows selection where required.",
       "controls": [
         {
           "text": "Set up another device",
-          "source": "Sources/AppShell/SyncSetupSenderPicker.swift"
-        },
-        {
-          "text": "Nearby devices",
-          "source": "Sources/AppShell/SyncSetupSenderPicker.swift"
-        },
-        {
-          "text": "Cancel",
           "source": "Sources/AppShell/SyncSetupSenderPicker.swift"
         },
         {
@@ -5032,6 +5111,10 @@
           "source": "Sources/AppShell/SyncSetupSenderPicker.swift"
         },
         {
+          "text": "Nearby devices",
+          "source": "Sources/AppShell/SyncSetupSenderPicker.swift"
+        },
+        {
           "text": "Looking for devices…",
           "source": "Sources/AppShell/SyncSetupSenderPicker.swift"
         },
@@ -5045,6 +5128,10 @@
         },
         {
           "text": "Set Up",
+          "source": "Sources/AppShell/SyncSetupSenderPicker.swift"
+        },
+        {
+          "text": "Cancel",
           "source": "Sources/AppShell/SyncSetupSenderPicker.swift"
         }
       ],
@@ -5690,7 +5777,8 @@
         "Sources/CoreUI/SettingsSectionSurface.swift",
         "Sources/CoreUI/TextTierStyle.swift",
         "Sources/FeatureSettings/DiagnosticsSendButton.swift",
-        "Sources/CoreUI/SettingsCopy.swift"
+        "Sources/CoreUI/SettingsCopy.swift",
+        "Sources/FeatureSettings/SendDiagnosticsCard.swift"
       ],
       "platforms": [
         "iPhone",
@@ -5734,7 +5822,7 @@
         },
         {
           "text": "Send Diagnostics",
-          "source": "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift"
+          "source": "Sources/FeatureSettings/SendDiagnosticsCard.swift"
         },
         {
           "text": "Turn on Share Diagnostics to send a report.",
@@ -9355,7 +9443,6 @@
         "Sources/CoreUI/PosterCardView.swift",
         "Sources/CoreUI/FallbackAsyncImage.swift",
         "Sources/FeatureProfiles/ProfileAvatarView.swift",
-        "Sources/AppShelliOS/PlozziOSProfileEditing.swift",
         "Sources/CoreUI/BorderlessCardStyle.swift",
         "Sources/CoreUI/CardFocusHighlight.swift",
         "Sources/CoreUI/ConcentricMediaCardSurface.swift",
@@ -9711,15 +9798,20 @@
         "Sources/CoreModels/PlaybackSettings.swift",
         "Sources/FeaturePlayback/PlayerViewModel.swift",
         "Sources/FeaturePlayback/LiveChannelPlayerView.swift",
-        "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
+        "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
+        "Sources/FeatureSettings/SkipMarkerSettingsControl.swift",
+        "Sources/CoreUI/PlaybackVersionPreferencePicker.swift",
+        "Sources/CoreModels/PlaybackVersionSelectionMode.swift",
+        "Sources/CoreUI/AutomaticVersionInfoButton.swift",
+        "Sources/CoreModels/DiscPlayback.swift"
       ],
       "platforms": [
         "iPhone",
         "iPad"
       ],
-      "navigation": "Open Settings from iPhone/iPad navigation. The control inventory walks the root first, then Playback, Subtitles, Live TV/Libraries, Appearance, Screens & Navigation, Language, Profiles and account details. Within each destination it follows visible order, placing nested picker choices and conditional branches beside their parent. Playback starts with the separately inventoried PlozziOSStreamingQuality controls before the buffers. Other child pages retain their own screen records. A busy share's scan status appears above the profile header; guide-preparation notices can overlay the root or a destination. Search can open child settings directly, subject to their normal authorization.",
-      "experience": "Change playback, captions, Live TV, libraries, presentation, trackers, language, and authorized household services. Playback places Player tabs after its Playback group and before Tracks: Chapters, Cast, Episodes, Playlist and Continue Watching are independent per-profile toggles, default on. Tabs still need corresponding content and Info remains available. Audio places Identify songs after Prefer lossless audio; recognition defaults on, needs internet and supported playback, and uses Shazam with playback audio rather than the microphone. Version selection offers Choose on first play while unset, then Ask every time, Choose automatically and Use first from server in enum order; its How automatic selection works button appears only with automatic mode selected and closes with Done. Focus-only episode descriptions are Apple TV-only and absent here.",
-      "conditions": "iPhone/iPad compact and regular-width layouts. Category order is Playback, Subtitles, Live TV, Libraries, Downloads, Appearance, Screens & Navigation, Trackers, Seerr, Language. Downloads requires the mobile offline feature; Downloads and Seerr are hidden in Kids profiles. Player orientation appears only on iPhone, in enum order: Follow device orientation, Portrait, Landscape auto, Landscape left, Landscape right. Runtime enforcement requires a full-screen compact-phone window. Follow device orientation respects system rotation lock; Landscape auto leases motion updates only for the active eligible player and can follow sideways direction despite rotation lock. Fixed landscape choices refer to the top of the phone; iPad uses system rotation with no picker. Manage Plozz is absent for Kids. Only Kids profiles with a household Parental PIN replace the ordinary Libraries category with Name & Avatar and move Libraries/Manage Profile into Parental Controls, where they require unlock. Without that PIN, Kids retains ordinary Libraries and Manage Profile. Edit/Done reflects SwiftUI list-editing state on Rating sources & order; profile management instead uses the app's Edit Profiles/Done Editing. Internal developer actions require deliberate version-based activation and are not reader setup steps. Appearance starts with Theme: CompactThemePicker uses AppTheme.pickerOrder (Black, Dark, Light, System), then Gradient Backgrounds and Liquid Glass (System, On, Off). Only builds with the beta mobile music runtime expose Music player next in that group. Its nested picker uses Match App Theme, Artwork, Black, Dark, Light; Match follows the app palette and gradients, while overrides affect the full player only. Mobile has no Show album, quality & lyrics source switch. Cards, Artwork and Circadian Mode follow the Theme group. Cards contains Labels, Watch indicators, Style, Display Size; Focus is Apple TV-only. Label presets replace overrides; Custom is a readout in the compact picker when no preset matches. Customize labels from Cards offers all nine Page choices; from Movie & show details it contains Episodes, Related titles and Extras without a Page picker. Home/Recommended use Default with On/Off/Mixed, followed by Overrides; Continue Watching and Home's Libraries use Use default/On/Off. Other pages use On/Off only. The color picker is hidden with Hidden watch indicators; Episode count style appears only with episode counts enabled. Circadian Mode has a master switch followed by Schedule (Auto, Manual, Always On). With the switch off, Schedule is disabled and the other controls are hidden. Auto reveals Location; Manual reveals Turns on/Turns off in device-local time. Region names and clock values are data, not fixed captions. Picture then shows Warmth, Dimness and Fade; Fade is hidden for Always On. Preview has Preview at Full Strength, Preview a Day and a conditional Simulated time readout. Turning the mode off or leaving stops preview. Separate audio/subtitle rules replace the base picker with Movies, TV Shows, Anime and Everything else; language names are supplied by the language catalogue. Up Next lead time needs Show Up Next card; Customize Live TV subtitles needs a separate Live TV style. Subtitle download settings remain visible, but downloads still need a supported server. Skip-marker Customize requires skipping enabled; its content-category switches gate each marker's overrides, and Use default/Off are per-marker choices. Settings search is available from the root; selecting a result briefly highlights the control and still checks parental authorization. It never enables a prerequisite automatically. After explicit IPTV setup/refresh, a shared guide notice can remain across navigation while the account is authorized. It is hidden behind another transient message. Dismiss hides only the notice; terminal notices also auto-dismiss after five seconds. Percentages describe the current stage, not total work. Profile/account authorization changes cancel and remove scoped work; this does not promise OS background execution. Trailers & music is the shared nested destination, reached from Movie & show details or an enabled Home hero. Nested controls are audited here and on HeroSettingsControls in UI order: Trailers policy (Off, Server only, Server + YouTube), Home autoplay with its conditional Start muted, then Details with Detail background (Off, Trailer, Theme music), its separate conditional Start muted, or Theme music volume and preview controls. Off disables trailers/autoplay but not music or other extras; YouTube is manual/external only. The settings are profile-specific and the Home/detail choices are independent. Playback exposes Discs before Advanced. Disc playback defaults to Play video and is a profile preference; Open disc menu affects attemptable network-share BDMV folders only. The helper warns that only HDMV menus are supported and menu videos do not update watch progress. Unsupported menu metadata selects video instead; the DEBUG-only BD-J switch is not production support. Default zoom is profile-scoped, with independent phone/tablet/television values initially Normal. Custom reveals Zoom at 50%-200%; TV uses an accelerating stepper and mobile a slider. Explicit movie/series choices override the default; unidentified disc timelines use Normal, while a new live channel restores the platform default. Video upscaling is profile-scoped and defaults to Automatic, then resolves Animation from animation/anime metadata or Standard otherwise. Off, Automatic, Standard and Animation are in that order. Hardware, SDR, source dimensions, display size and engine eligibility determine actual enhancement; the saved preference applies to new playback, including Live TV. Session-only changes belong to the player, not these defaults. The mobile Playback order starts Streaming quality, Video upscaling, Video buffer, Live TV buffer, Default zoom, Auto-hide controls, then iPhone-only Player orientation and skipping controls. Auto-hide controls is profile-scoped and defaults to While playing, followed by While playing or paused and Never. VoiceOver and Switch Control prevent automatic hiding in the movie/episode overlay. This does not configure the separate music player.",
+      "navigation": "Open Settings from iPhone/iPad navigation. The control inventory walks the root first, then Playback, Subtitles, Live TV/Libraries, Appearance, Screens & Navigation, Language, Profiles and account details. Within each destination it follows visible order, placing nested picker choices and conditional branches beside their parent. Playback uses the shared form sections; Streaming quality follows Resuming playback, while buffers are later in Video. Other child pages retain their own screen records. A busy share's scan status appears above the profile header; guide-preparation notices can overlay the root or a destination. Search can open child settings directly, subject to their normal authorization.",
+      "experience": "Change playback, captions, Live TV, libraries, presentation, trackers, language and authorized household services. Playback follows the shared form order, with mobile Streaming quality after Resuming playback. In Player, default zoom, phone-only orientation, automatic hiding and volume/brightness gestures precede the Player tabs link. That child destination offers independent default-on Chapters, Cast, Episodes, Playlist and Continue Watching switches; tabs still need corresponding content and Info remains available. Audio places Identify songs after Prefer lossless audio and Background Audio; recognition defaults on, needs internet and supported playback, and uses Shazam with playback audio rather than the microphone. Version selection offers Choose on first play while unset, then Ask every time, Choose automatically and Use first from server in enum order; its How automatic selection works action appears only with automatic mode selected and closes with Done. Focus-only episode descriptions are Apple TV-only and absent here.",
+      "conditions": "iPhone/iPad compact and regular-width layouts. Category order is Playback, Subtitles, Live TV, Libraries, Downloads, Appearance, Screens & Navigation, Trackers, Seerr, Language. Downloads requires the mobile offline feature; Downloads and Seerr are hidden in Kids profiles. Player orientation appears only on iPhone, in enum order: Follow device orientation, Portrait, Landscape auto, Landscape left, Landscape right. Runtime enforcement requires a full-screen compact-phone window. Follow device orientation respects system rotation lock; Landscape auto leases motion updates only for the active eligible player and can follow sideways direction despite rotation lock. Fixed landscape choices refer to the top of the phone; iPad uses system rotation with no picker. Manage Plozz is absent for Kids. Only Kids profiles with a household Parental PIN replace the ordinary Libraries category with Name & Avatar and move Libraries/Manage Profile into Parental Controls, where they require unlock. Without that PIN, Kids retains ordinary Libraries and Manage Profile. Edit/Done reflects SwiftUI list-editing state on Rating sources & order; profile management instead uses the app's Edit Profiles/Done Editing. Internal developer actions require deliberate version-based activation and are not reader setup steps. Appearance starts with Theme: CompactThemePicker uses AppTheme.pickerOrder (Black, Dark, Light, System), then Gradient Backgrounds and Liquid Glass (System, On, Off). Only builds with the beta mobile music runtime expose Music player next in that group. Its nested picker uses Match App Theme, Artwork, Black, Dark, Light; Match follows the app palette and gradients, while overrides affect the full player only. Mobile has no Show album, quality & lyrics source switch. Cards, Artwork and Circadian Mode follow the Theme group. Cards contains Labels, Watch indicators, Style, Display Size; Focus is Apple TV-only. Label presets replace overrides; Custom is a readout in the compact picker when no preset matches. Customize labels from Cards offers all nine Page choices; from Movie & show details it contains Episodes, Related titles and Extras without a Page picker. Home/Recommended use Default with On/Off/Mixed, followed by Overrides; Continue Watching and Home's Libraries use Use default/On/Off. Other pages use On/Off only. The color picker is hidden with Hidden watch indicators; Episode count style appears only with episode counts enabled. Circadian Mode has a master switch followed by Schedule (Auto, Manual, Always On). With the switch off, Schedule is disabled and the other controls are hidden. Auto reveals Location; Manual reveals Turns on/Turns off in device-local time. Region names and clock values are data, not fixed captions. Picture then shows Warmth, Dimness and Fade; Fade is hidden for Always On. Preview has Preview at Full Strength, Preview a Day and a conditional Simulated time readout. Turning the mode off or leaving stops preview. Separate audio/subtitle rules replace the base picker with Movies, TV Shows, Anime and Everything else; language names are supplied by the language catalogue. Time before the end needs Show Up Next card; Customize Live TV subtitles needs a separate Live TV style. Subtitle download settings remain visible, but downloads still need a supported server. Skip-marker Customize requires skipping enabled; its content-category switches gate each marker's overrides, and Use default/Off are per-marker choices. Settings search is available from the root; selecting a result briefly highlights the control and still checks parental authorization. It never enables a prerequisite automatically. After explicit IPTV setup/refresh, a shared guide notice can remain across navigation while the account is authorized. It is hidden behind another transient message. Dismiss hides only the notice; terminal notices also auto-dismiss after five seconds. Percentages describe the current stage, not total work. Profile/account authorization changes cancel and remove scoped work; this does not promise OS background execution. Trailers & music is the shared nested destination, reached from Movie & show details or an enabled Home hero. Nested controls are audited here and on HeroSettingsControls in UI order: Trailers policy (Off, Server only, Server + YouTube), Home autoplay with its conditional Start muted, then Details with Detail background (Off, Trailer, Theme music), its separate conditional Start muted, or Theme music volume and preview controls. Off disables trailers/autoplay but not music or other extras; YouTube is manual/external only. The settings are profile-specific and the Home/detail choices are independent. Playback exposes Discs before Advanced. Disc playback defaults to Play video and is a profile preference; Open disc menu affects attemptable network-share BDMV folders only. The helper warns that only HDMV menus are supported and menu videos do not update watch progress. Unsupported menu metadata selects video instead; the DEBUG-only BD-J switch is not production support. Default player zoom is profile-scoped, with independent phone/tablet/television values initially Normal. Custom reveals Zoom at 50%-200%; TV uses an accelerating stepper and mobile a slider. Explicit movie/series choices override the default; unidentified disc timelines use Normal, while a new live channel restores the platform default. Video upscaling is profile-scoped and defaults to Automatic, then resolves Animation from animation/anime metadata or Standard otherwise. Off, Automatic, Standard and Animation are in that order. Hardware, SDR, source dimensions, display size and engine eligibility determine actual enhancement; the saved preference applies to new playback, including Live TV. Session-only changes belong to the player, not these defaults. The mobile Playback section order is Autoplay & Up Next, Intros, credits & more, Resuming playback, Streaming quality, Seeking, Player, Audio, Video, Versions, Discs and Advanced. Subtitle memory is now in Subtitles > Behavior, after per-category Show subtitles rules and before Download subtitles automatically. Cross-server history moved out of Playback to the separately audited Trackers page. Auto-hide controls is profile-scoped and defaults to While playing, followed by While playing or paused and Never. VoiceOver and Switch Control prevent automatic hiding in the movie/episode overlay. This does not configure the separate music player.",
       "controls": [
         {
           "text": "Settings",
@@ -9914,39 +10006,75 @@
           "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
         },
         {
+          "text": "Autoplay & Up Next",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
+        },
+        {
+          "text": "Autoplay next episode",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Autoplay next playlist item",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Show Up Next card",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Time before the end",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Intros, credits & more",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
+        },
+        {
+          "text": "Skip intros, credits & more",
+          "source": "Sources/FeatureSettings/SkipMarkerSettingsControl.swift"
+        },
+        {
+          "text": "Customize",
+          "source": "Sources/FeatureSettings/SkipMarkerSettingsControl.swift"
+        },
+        {
+          "text": "Resuming playback",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
+        },
+        {
+          "text": "Ask to resume or start over",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Rewind on resume",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
           "text": "Streaming quality",
           "source": "Sources/AppShelliOS/PlozziOSStreamingQuality.swift"
         },
         {
-          "text": "Video upscaling",
-          "source": "Sources/FeatureSettings/VideoUpscalingControl.swift"
+          "text": "Seeking",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
         },
         {
-          "text": "Off",
-          "source": "Sources/CoreModels/VideoUpscaling.swift"
+          "text": "Skip backward",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
         {
-          "text": "Automatic",
-          "source": "Sources/CoreModels/VideoUpscaling.swift"
+          "text": "Skip forward",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
         {
-          "text": "Standard",
-          "source": "Sources/CoreModels/VideoUpscaling.swift"
+          "text": "Seek without pausing",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
         {
-          "text": "Animation",
-          "source": "Sources/CoreModels/VideoUpscaling.swift"
+          "text": "Player",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
         },
         {
-          "text": "Video buffer",
-          "source": "Sources/FeatureSettings/PlaybackReadAheadControl.swift"
-        },
-        {
-          "text": "Live TV buffer",
-          "source": "Sources/FeatureSettings/PlaybackReadAheadControl.swift"
-        },
-        {
-          "text": "Default zoom",
+          "text": "Default player zoom",
           "source": "Sources/FeatureSettings/DefaultVideoZoomControl.swift"
         },
         {
@@ -9974,22 +10102,6 @@
           "source": "Sources/FeatureSettings/DefaultVideoZoomControl.swift"
         },
         {
-          "text": "Auto-hide controls",
-          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
-        },
-        {
-          "text": "While playing",
-          "source": "Sources/CoreModels/PlaybackSettings.swift"
-        },
-        {
-          "text": "While playing or paused",
-          "source": "Sources/CoreModels/PlaybackSettings.swift"
-        },
-        {
-          "text": "Never",
-          "source": "Sources/CoreModels/PlaybackSettings.swift"
-        },
-        {
           "text": "Player orientation",
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
@@ -10014,88 +10126,32 @@
           "source": "Sources/CoreModels/PlaybackOrientation.swift"
         },
         {
-          "text": "Movies",
-          "source": "Sources/CoreModels/SubtitlePolicy.swift"
-        },
-        {
-          "text": "TV Shows",
-          "source": "Sources/CoreModels/SubtitlePolicy.swift"
-        },
-        {
-          "text": "Anime",
-          "source": "Sources/CoreModels/SubtitlePolicy.swift"
-        },
-        {
-          "text": "Movies",
-          "source": "Sources/CoreModels/SubtitlePolicy.swift"
-        },
-        {
-          "text": "TV Shows",
-          "source": "Sources/CoreModels/SubtitlePolicy.swift"
-        },
-        {
-          "text": "Anime",
-          "source": "Sources/CoreModels/SubtitlePolicy.swift"
-        },
-        {
-          "text": "Skipping",
+          "text": "Auto-hide controls",
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
         {
-          "text": "Skip backward",
-          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+          "text": "While playing",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
         },
         {
-          "text": "Skip forward",
-          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+          "text": "While playing or paused",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
         },
         {
-          "text": "Resume rewind",
-          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
-        },
-        {
-          "text": "Ask to resume or start over",
-          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
-        },
-        {
-          "text": "Remember series version choices",
-          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
-        },
-        {
-          "text": "Background Audio",
-          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+          "text": "Never",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
         },
         {
           "text": "Volume and brightness gestures",
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
         {
-          "text": "Seek without pausing",
+          "text": "Player tabs",
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
         {
-          "text": "Autoplay next episode",
-          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
-        },
-        {
-          "text": "Autoplay next playlist item",
-          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
-        },
-        {
-          "text": "Show Up Next card",
-          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
-        },
-        {
-          "text": "Up Next lead time",
-          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
-        },
-        {
-          "text": "Sync watch state across servers",
-          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
-        },
-        {
-          "text": "Tracks",
-          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+          "text": "Audio",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
         },
         {
           "text": "Preferred audio language",
@@ -10134,28 +10190,100 @@
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
         {
-          "text": "Remember subtitles per series",
-          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
-        },
-        {
-          "text": "Audio",
-          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
-        },
-        {
           "text": "Prefer lossless audio",
           "source": "Sources/FeatureSettings/LosslessAudioControl.swift"
+        },
+        {
+          "text": "Background Audio",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
         {
           "text": "Identify songs",
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
         {
-          "text": "Discs",
+          "text": "Video",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
+        },
+        {
+          "text": "Video upscaling",
+          "source": "Sources/FeatureSettings/VideoUpscalingControl.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/CoreModels/VideoUpscaling.swift"
+        },
+        {
+          "text": "Automatic",
+          "source": "Sources/CoreModels/VideoUpscaling.swift"
+        },
+        {
+          "text": "Standard",
+          "source": "Sources/CoreModels/VideoUpscaling.swift"
+        },
+        {
+          "text": "Animation",
+          "source": "Sources/CoreModels/VideoUpscaling.swift"
+        },
+        {
+          "text": "Video buffer",
+          "source": "Sources/FeatureSettings/PlaybackReadAheadControl.swift"
+        },
+        {
+          "text": "Live TV buffer",
+          "source": "Sources/FeatureSettings/PlaybackReadAheadControl.swift"
+        },
+        {
+          "text": "Versions",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
+        },
+        {
+          "text": "Version selection",
+          "source": "Sources/CoreUI/PlaybackVersionPreferencePicker.swift"
+        },
+        {
+          "text": "Choose on first play",
+          "source": "Sources/CoreUI/PlaybackVersionPreferencePicker.swift"
+        },
+        {
+          "text": "Ask every time",
+          "source": "Sources/CoreModels/PlaybackVersionSelectionMode.swift"
+        },
+        {
+          "text": "Choose automatically",
+          "source": "Sources/CoreModels/PlaybackVersionSelectionMode.swift"
+        },
+        {
+          "text": "Use first from server",
+          "source": "Sources/CoreModels/PlaybackVersionSelectionMode.swift"
+        },
+        {
+          "text": "How automatic selection works",
+          "source": "Sources/CoreUI/AutomaticVersionInfoButton.swift"
+        },
+        {
+          "text": "Done",
+          "source": "Sources/CoreUI/AutomaticVersionInfoButton.swift"
+        },
+        {
+          "text": "Remember series version choices",
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Discs",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
         },
         {
           "text": "Disc playback",
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Play video",
+          "source": "Sources/CoreModels/DiscPlayback.swift"
+        },
+        {
+          "text": "Open disc menu",
+          "source": "Sources/CoreModels/DiscPlayback.swift"
         },
         {
           "text": "Advanced",
@@ -10224,6 +10352,10 @@
         {
           "text": "Everything else",
           "source": "Sources/CoreModels/SubtitlePolicy.swift"
+        },
+        {
+          "text": "Remember subtitles per series",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
         {
           "text": "Download subtitles automatically",
@@ -11346,16 +11478,72 @@
         "Sources/CoreUI/SettingsRowFocusStyle.swift",
         "Sources/CoreUI/SettingsSwitchToggle.swift",
         "Sources/CoreUI/SettingsSectionSurface.swift",
-        "Sources/CoreUI/TextTierStyle.swift"
+        "Sources/CoreUI/TextTierStyle.swift",
+        "Sources/CoreModels/SettingsSearch.swift",
+        "Sources/CoreModels/SettingsSearchAdditionalEntries.swift",
+        "Sources/FeatureSettings/TrackerActivationRow.swift",
+        "Sources/CoreModels/TrackerActivation.swift",
+        "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift",
+        "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift",
+        "Sources/CoreUI/TrackerConnectedStatus.swift",
+        "Sources/AppRuntime/AccountsProvidersModel.swift"
       ],
       "platforms": [
         "iPhone",
         "iPad"
       ],
-      "navigation": "Open mobile Settings > Trackers, then choose a supported tracker.",
-      "experience": "Authorize the service in a browser, inspect the linked identity, or disconnect it.",
-      "conditions": "iPhone/iPad. Each tracker has its own authorization/configuration and compatible content. Last.fm connection UI is Apple TV-only.",
+      "navigation": "Open Settings > Trackers on iPhone/iPad. Sync across servers is first, followed by Trakt, Simkl, configured WeTrakr, AniList, MyAnimeList and PublicMetaDB; choose an account page.",
+      "experience": "Connect or recover the chosen account, inspect its connected identity, pause reporting without disconnecting, or explicitly bring supported tracker history into selected media shares. The account page puts activation and conditional Watch history before Account credentials.",
+      "conditions": "iPhone/iPad. Sync across servers is not disabled by a two-server count here. WeTrakr is filtered unless configured. Last.fm has no mobile account page. Connected accounts construct TrackerAccountSettingsRows; PublicMetaDB constructs its own shared tracking rows, audited separately. Dynamic Use <service> labels resolve from SettingsSearchPage names and the fixed search captions. Share-history rows require tracker activation and eligible media shares/categories or a previous permission needing removal. The production app builds profile/account-fenced sessions in AccountsProvidersModel; Offline Mode blocks online checks. Pausing reporting does not stop connected Watchlist destinations. Reconnecting Trakt/WeTrakr can replace this profile's connection on synced devices; playback permissions remain local.",
       "controls": [
+        {
+          "text": "Sync across servers",
+          "source": "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift"
+        },
+        {
+          "text": "Trakt",
+          "source": "Sources/CoreModels/SettingsSearch.swift"
+        },
+        {
+          "text": "Simkl",
+          "source": "Sources/CoreModels/SettingsSearch.swift"
+        },
+        {
+          "text": "WeTrakr",
+          "source": "Sources/CoreModels/SettingsSearch.swift"
+        },
+        {
+          "text": "AniList",
+          "source": "Sources/CoreModels/SettingsSearch.swift"
+        },
+        {
+          "text": "MyAnimeList",
+          "source": "Sources/CoreModels/SettingsSearch.swift"
+        },
+        {
+          "text": "PublicMetaDB",
+          "source": "Sources/CoreModels/SettingsSearch.swift"
+        },
+        {
+          "text": "Use Trakt",
+          "source": "Sources/CoreModels/SettingsSearchAdditionalEntries.swift"
+        },
+        {
+          "text": "Use Simkl",
+          "source": "Sources/CoreModels/SettingsSearchAdditionalEntries.swift"
+        },
+        {
+          "text": "Use WeTrakr",
+          "source": "Sources/CoreModels/SettingsSearchAdditionalEntries.swift"
+        },
+        {
+          "text": "Use AniList",
+          "source": "Sources/CoreModels/SettingsSearchAdditionalEntries.swift"
+        },
+        {
+          "text": "Use MyAnimeList",
+          "source": "Sources/CoreModels/SettingsSearchAdditionalEntries.swift"
+        },
         {
           "text": "Trackers",
           "source": "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift"
@@ -11451,12 +11639,32 @@
         {
           "text": "Unavailable in this build",
           "source": "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift"
+        },
+        {
+          "text": "Account",
+          "source": "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift"
+        },
+        {
+          "text": "Connected",
+          "source": "Sources/CoreUI/TrackerConnectedStatus.swift"
         }
       ],
       "documents": [
         {
           "slug": "trackers",
           "anchor": "connect-the-correct-account"
+        },
+        {
+          "slug": "trackers",
+          "anchor": "pause-reporting-without-disconnecting"
+        },
+        {
+          "slug": "trackers",
+          "anchor": "bring-tracker-history-to-network-shares"
+        },
+        {
+          "slug": "trackers",
+          "anchor": "connect-publicmetadb"
         }
       ]
     },
@@ -20303,7 +20511,7 @@
         "Sources/FeatureMusic/AudioPlaybackController.swift",
         "Sources/AppShelliOS/PlozziOSAppModel.swift",
         "Sources/CoreModels/CrashReportingSettings.swift",
-        "Sources/CoreModels/ThemeSettings.swift",
+        "Sources/ProviderSubsonic/SubsonicProvider.swift",
         "Sources/ProviderPlex/PlexMusicProvider.swift",
         "Sources/ProviderJellyfin/JellyfinMusicProvider.swift",
         "App/PlozziOS/Info.plist",
@@ -20317,7 +20525,7 @@
       ],
       "navigation": "Start a song in beta-only Music to expand the player, or tap the compact player near the bottom of the mobile shell. Pull down to collapse it.",
       "experience": "Seek, change tracks, play/pause, select an audio output, open lyrics or the queue, rate or favorite supported tracks and navigate to their album/artist. Stop Playing ends the session and removes the compact player; Clear Up Next leaves the current song playing.",
-      "conditions": "Mobile TestFlight/development builds with an authorized online music session only. A compact player remains while browsing and can control background/locked-device audio through the shared Now Playing session; video's Background Audio switch is independent. Large iPad layouts place Shuffle/Repeat beside transport controls, while phone layouts put mode pills above Queue. Plex exposes half-star ratings up to five; Jellyfin/Emby expose favorites for the selected server user, and unsupported feedback is omitted. Failed writes show the adapter error and roll back. Album/artist actions need provider identifiers and retain their originating account. Lyrics uses synchronized shared-engine results; closing the mobile panel does not change the default-on LRCLIB lookup preference. Tapping timed lines seeks; after controls fade, the first touch restores them. The real AVRoutePickerView owns output choices and device names, not an invented constant route caption. Reduce Motion and reduced-transparency fallbacks remain active.",
+      "conditions": "Mobile TestFlight/development builds with an authorized online music session only. A compact player remains while browsing and can control background/locked-device audio through the shared Now Playing session; video's Background Audio switch is independent. Large iPad layouts place Shuffle/Repeat beside transport controls, while phone layouts put mode pills above Queue. Plex exposes half-star ratings up to five; Jellyfin/Emby and Navidrome/Subsonic expose favorites for the selected server user, and unsupported feedback is omitted. Failed writes show the adapter error and roll back. Album/artist actions need provider identifiers and retain their originating account. Lyrics uses synchronized shared-engine results; closing the mobile panel does not change the default-on LRCLIB lookup preference. Tapping timed lines seeks; after controls fade, the first touch restores them. The real AVRoutePickerView owns output choices and device names, not an invented constant route caption. Reduce Motion and reduced-transparency fallbacks remain active.",
       "controls": [
         {
           "text": "Now Playing",
@@ -26397,21 +26605,85 @@
         "Sources/CoreUI/SettingsControlRows.swift",
         "Sources/CoreUI/SettingsPageNavigation.swift",
         "Sources/CoreUI/SettingsRowFocusStyle.swift",
-        "Sources/CoreUI/SettingsSwitchToggle.swift"
+        "Sources/CoreUI/SettingsSwitchToggle.swift",
+        "Sources/CoreModels/SettingsSearch.swift",
+        "Sources/CoreModels/SettingsSearchAdditionalEntries.swift",
+        "Sources/FeatureSettings/TrackerActivationRow.swift",
+        "Sources/CoreModels/TrackerActivation.swift",
+        "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift",
+        "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift",
+        "Sources/CoreUI/TrackerConnectedStatus.swift",
+        "Sources/AppRuntime/AccountsProvidersModel.swift"
       ],
       "platforms": [
         "Apple TV"
       ],
       "navigation": "Open Trackers from the active profile Settings.",
-      "experience": "Connect eligible video trackers or Last.fm and choose supported watch-state propagation.",
-      "conditions": "Apple TV tracker settings. Services have independent identities, title/track matching and app configuration. Sync across all my servers requires at least two servers and affects eligible matching-copy history, not iCloud settings. Extra/trailer updates remain origin-only and omit tracker history. Pending delivery retries only with the captured original profile/server-user identities authorized; connectivity alone does not prove a server accepted the update. Last.fm music scrobbling requires sufficient listening time; it does not store video progress.",
+      "experience": "Choose Trakt, Simkl, configured WeTrakr, AniList, MyAnimeList, Last.fm or PublicMetaDB in that order, followed by Watch status. Connect the correct account, pause reporting without deleting its credential, or grant optional tracker-to-media-share history sync. Inline PublicMetaDB connection and share-sync controls have their own audited child records.",
+      "conditions": "Apple TV. A connected account shows its Use <service> switch before eligible Watch history controls and Account status. Switch labels are dynamically composed from SettingsSearchPage.trackerAccount names; SettingsSearchAdditionalEntries supplies the exact full English captions. WeTrakr needs configured credentials. Last.fm is music-only here and has activation but no incoming-history link or history-browser entry point. PublicMetaDB is supplied by the production shell. Sync across servers is under Watch status and disabled below two servers. Tracker pause is local to this profile/account/device and does not remove connected Watchlist destinations. Optional 2-way sync appears only with eligible media shares/categories or an existing permission to manage; managed-server history is not an incoming destination. Account actions retain profile-wide synced-connection effects. Errors and authorization still gate delivery; a local state change is not proof every server accepted it.",
       "controls": [
+        {
+          "text": "Trackers",
+          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        },
+        {
+          "text": "Trakt",
+          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        },
+        {
+          "text": "Simkl",
+          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        },
+        {
+          "text": "WeTrakr",
+          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        },
+        {
+          "text": "AniList",
+          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        },
+        {
+          "text": "MyAnimeList",
+          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        },
+        {
+          "text": "Use Trakt",
+          "source": "Sources/CoreModels/SettingsSearchAdditionalEntries.swift"
+        },
+        {
+          "text": "Use Simkl",
+          "source": "Sources/CoreModels/SettingsSearchAdditionalEntries.swift"
+        },
+        {
+          "text": "Use WeTrakr",
+          "source": "Sources/CoreModels/SettingsSearchAdditionalEntries.swift"
+        },
+        {
+          "text": "Use AniList",
+          "source": "Sources/CoreModels/SettingsSearchAdditionalEntries.swift"
+        },
+        {
+          "text": "Use MyAnimeList",
+          "source": "Sources/CoreModels/SettingsSearchAdditionalEntries.swift"
+        },
         {
           "text": "Last.fm",
           "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
         },
         {
-          "text": "Trackers",
+          "text": "Use Last.fm",
+          "source": "Sources/CoreModels/SettingsSearchAdditionalEntries.swift"
+        },
+        {
+          "text": "PublicMetaDB",
+          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        },
+        {
+          "text": "Watch status",
+          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        },
+        {
+          "text": "Sync across servers",
           "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
         },
         {
@@ -26436,10 +26708,6 @@
         },
         {
           "text": "Retry",
-          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
-        },
-        {
-          "text": "Sync across all my servers",
           "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
         },
         {
@@ -26487,10 +26755,6 @@
           "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
         },
         {
-          "text": "Scan to connect Last.fm",
-          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
-        },
-        {
           "text": "Waiting for approval…",
           "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
         },
@@ -26505,6 +26769,18 @@
         {
           "text": "Back",
           "source": "Sources/CoreUI/SettingsPageHeader.swift"
+        },
+        {
+          "text": "Account",
+          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        },
+        {
+          "text": "Scan with your phone and approve access.",
+          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        },
+        {
+          "text": "Connected",
+          "source": "Sources/CoreUI/TrackerConnectedStatus.swift"
         }
       ],
       "documents": [
@@ -26519,6 +26795,18 @@
         {
           "slug": "profiles-and-sync",
           "anchor": "keep-watch-history-separate"
+        },
+        {
+          "slug": "trackers",
+          "anchor": "pause-reporting-without-disconnecting"
+        },
+        {
+          "slug": "trackers",
+          "anchor": "bring-tracker-history-to-network-shares"
+        },
+        {
+          "slug": "trackers",
+          "anchor": "connect-publicmetadb"
         }
       ]
     },
@@ -26538,7 +26826,6 @@
         "Sources/CoreUI/HomeLayoutSwatch.swift",
         "Sources/CoreUI/HorizontalEdgeFadeMask.swift",
         "Sources/FeatureSettings/ViewCustomizationControls.swift",
-        "Sources/FeatureSettings/CardCaptionCustomizationContent.swift",
         "Sources/FeatureSettings/CardAppearanceControls.swift",
         "Sources/CoreUI/InlineErrorMessage.swift",
         "Sources/CoreUI/LabeledSettingRow.swift",
@@ -27638,7 +27925,7 @@
         "iPhone",
         "iPad"
       ],
-      "navigation": "Open Settings > Playback. Video buffer and Live TV buffer appear together, in that order, on both platforms.",
+      "navigation": "Open Settings > Playback > Video. Video buffer and Live TV buffer appear together, in that order, on all three platforms.",
       "experience": "Choose temporary video buffering or live buffering independently. The inline explanations describe storage use and the tradeoff between interruptions, live delay and channel changes.",
       "conditions": "Both platforms wire these controls. Values are device-local across profiles. Video buffer does not apply to Apple’s native player; larger buffers do not guarantee a duration.",
       "controls": [
@@ -27792,37 +28079,149 @@
         "Sources/CoreModels/VideoUpscaling.swift",
         "Sources/FeaturePlayback/PlayerViewModel.swift",
         "Sources/FeaturePlayback/LiveChannelPlayerView.swift",
-        "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift"
+        "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
+        "Sources/FeatureSettings/SkipMarkerSettingsControl.swift",
+        "Sources/CoreModels/PlaybackVersionSelectionMode.swift",
+        "Sources/CoreUI/AutomaticVersionInfoButton.swift",
+        "Sources/CoreModels/DiscPlayback.swift"
       ],
       "platforms": [
         "Apple TV"
       ],
       "navigation": "Choose Playback, Subtitles, Appearance, Screens & Navigation or Language in Apple TV Settings. The control inventory walks those workspaces in that order, keeping nested picker choices beside their parent and alternative branches together. Appearance's Circadian Mode opens the separately inventoried NightShiftDetailView pane; Home, Libraries, artwork customization and other child screens retain their own records. Row-builder titles that are not rendered by the active workspace are not extra visible headings.",
-      "experience": "Navigate profile settings workspaces in visible order. Playback begins with Audio, Autoplay & Up Next, then Player tabs before version selection and buffers. Player tabs lists Chapters, Cast, Episodes, Playlist and Continue Watching, default on per profile; usable content still gates tabs and Info is always retained. Audio places Identify songs after Prefer lossless audio; default-on Shazam recognition needs internet and supported playback and does not use microphone capture. Version selection offers Choose on first play while unset, then Ask every time, Choose automatically and Use first from server in enum order; its information accessory always opens How automatic selection works on Apple TV and the alert closes with Done. In Customize labels, Only show descriptions on focus follows Episodes only on Apple TV's Movie & show details page; it starts off, is disabled when episode labels are off, and changes synopsis visibility without changing spoiler policy.",
-      "conditions": "Apple TV workspace order: Playback has Audio, Autoplay & Up Next, Default zoom, Player tabs, Version selection, Remember series version choices, Video upscaling, Video buffer, Live TV buffer, Skip intros, credits & more, Seeking, Auto-hide controls, Fade on display changes, Discs, Advanced. Auto-hide controls is profile-scoped and defaults to While playing, followed by While playing or paused and Never. Shared movie/episode controls stay visible during scrubbing or open panels; VoiceOver and Switch Control prevent automatic hiding. This does not configure the separate music player. Audio defaults, Autoplay and Skip Intervals are internal row-builder titles, not separate headings in this workspace. Separate audio/subtitle rules replace the base picker with Movies, TV Shows, Anime and Everything else; language names come from the language catalogue. Time before the end needs Show Up Next card. Subtitle order is Show subtitles, Subtitle style, Live TV subtitle style, Subtitle language, SDH subtitles, Downloading subtitles, Remember subtitles per series. Customize Live TV subtitles requires a separate style. Downloading subtitles appears for supported server profiles; unsupported profiles see its prerequisite only through a matching search. Skip-marker Customize requires skipping enabled; category switches gate marker-specific rules, where Use default and Off appear. Appearance has Theme, Cards, Artwork, Circadian Mode; Screens & Navigation has App navigation, All screens, Home, Libraries, Movie & show details, Music player. Theme uses AppTheme.pickerOrder: Black, Dark, Light, System. Music player uses Match App Theme, Artwork, Black, Dark, Light, followed by Show album, quality & lyrics source. Match follows app colors and Gradient Backgrounds; Artwork forces cover colors. Overrides affect the full player, not browsing pages. Provider management shortcuts are hidden without permission; engine/platform conditions gate playback and subtitle options. Cards contains Labels, Watch indicators, Focus, Style, Display Size; Focus choices are System, Highlight, Outline. Presets replace label overrides; the compact Custom readout is iOS-only. Customize labels from Cards offers all nine Page choices; from Movie & show details it contains Episodes, Related titles and Extras without a Page picker. Home/Recommended use Default with On/Off/Mixed, followed by Overrides; Continue Watching and Home's Libraries use Use default/On/Off. Other pages use On/Off only. Apple TV cycles these row choices on selection; mobile presents a picker. The color picker is hidden with Hidden watch indicators; Episode count style appears only with episode counts enabled. Trailers & music is the shared nested destination, reached from Movie & show details or an enabled Home hero. Nested controls are audited here and on HeroSettingsControls in UI order: Trailers policy (Off, Server only, Server + YouTube), Home autoplay with its conditional Start muted, then Details with Detail background (Off, Trailer, Theme music), its separate conditional Start muted, or Theme music volume and preview controls. Off disables trailers/autoplay but not music or other extras; YouTube is manual/external only. The settings are profile-specific and the Home/detail choices are independent. Playback exposes Discs before Advanced. Disc playback defaults to Play video and is a profile preference; Open disc menu affects attemptable network-share BDMV folders only. The helper warns that only HDMV menus are supported and menu videos do not update watch progress. Unsupported menu metadata selects video instead; the DEBUG-only BD-J switch is not production support. Default zoom is profile-scoped, with independent phone/tablet/television values initially Normal. Custom reveals Zoom at 50%-200%; TV uses an accelerating stepper and mobile a slider. Explicit movie/series choices override the default; unidentified disc timelines use Normal, while a new live channel restores the platform default. Video upscaling is profile-scoped and defaults to Automatic, then resolves Animation from animation/anime metadata or Standard otherwise. Off, Automatic, Standard and Animation are in that order. Hardware, SDR, source dimensions, display size and engine eligibility determine actual enhancement; the saved preference applies to new playback, including Live TV. Session-only changes belong to the player, not these defaults.",
+      "experience": "Navigate profile settings workspaces in visible order. Playback follows the shared form order: Autoplay & Up Next, Intros, credits & more, Resuming playback, Seeking, Player, Audio, Video, Versions, Discs and Advanced. Player tabs is in Player. Player tabs lists Chapters, Cast, Episodes, Playlist and Continue Watching, default on per profile; usable content still gates tabs and Info is always retained. Audio places Identify songs after Prefer lossless audio; default-on Shazam recognition needs internet and supported playback and does not use microphone capture. Version selection offers Choose on first play while unset, then Ask every time, Choose automatically and Use first from server in enum order; its information accessory always opens How automatic selection works on Apple TV and the alert closes with Done. In Customize labels, Only show descriptions on focus follows Episodes only on Apple TV's Movie & show details page; it starts off, is disabled when episode labels are off, and changes synopsis visibility without changing spoiler policy.",
+      "conditions": "Apple TV uses PlaybackFormSection order and omits the mobile-only Streaming quality section. Resuming playback contains Ask to resume or start over then Rewind on resume. Seeking contains Skip backward, Skip forward then Seek without pausing. Player contains Default player zoom, Auto-hide controls then Player tabs. Audio contains preferred language and separate category rules, series language memory, Prefer lossless audio and Identify songs. Video contains upscaling, Video buffer, Live TV buffer and display fades; Versions follows it. Auto-hide controls is profile-scoped and defaults to While playing, followed by While playing or paused and Never. Shared movie/episode controls stay visible during scrubbing or open panels; VoiceOver and Switch Control prevent automatic hiding. This does not configure the separate music player. Audio defaults, Autoplay and Skip Intervals are internal row-builder titles, not separate headings in this workspace. Separate audio/subtitle rules replace the base picker with Movies, TV Shows, Anime and Everything else; language names come from the language catalogue. Time before the end needs Show Up Next card. Subtitle order is Show subtitles, Subtitle style, Live TV subtitle style, Subtitle language, SDH subtitles, Downloading subtitles, Remember subtitles per series. Customize Live TV subtitles requires a separate style. Downloading subtitles appears for supported server profiles; unsupported profiles see its prerequisite only through a matching search. Skip-marker Customize requires skipping enabled; category switches gate marker-specific rules, where Use default and Off appear. Appearance has Theme, Cards, Artwork, Circadian Mode; Screens & Navigation has App navigation, All screens, Home, Libraries, Movie & show details, Music player. Theme uses AppTheme.pickerOrder: Black, Dark, Light, System. Music player uses Match App Theme, Artwork, Black, Dark, Light, followed by Show album, quality & lyrics source. Match follows app colors and Gradient Backgrounds; Artwork forces cover colors. Overrides affect the full player, not browsing pages. Provider management shortcuts are hidden without permission; engine/platform conditions gate playback and subtitle options. Cards contains Labels, Watch indicators, Focus, Style, Display Size; Focus choices are System, Highlight, Outline. Presets replace label overrides; the compact Custom readout is iOS-only. Customize labels from Cards offers all nine Page choices; from Movie & show details it contains Episodes, Related titles and Extras without a Page picker. Home/Recommended use Default with On/Off/Mixed, followed by Overrides; Continue Watching and Home's Libraries use Use default/On/Off. Other pages use On/Off only. Apple TV cycles these row choices on selection; mobile presents a picker. The color picker is hidden with Hidden watch indicators; Episode count style appears only with episode counts enabled. Trailers & music is the shared nested destination, reached from Movie & show details or an enabled Home hero. Nested controls are audited here and on HeroSettingsControls in UI order: Trailers policy (Off, Server only, Server + YouTube), Home autoplay with its conditional Start muted, then Details with Detail background (Off, Trailer, Theme music), its separate conditional Start muted, or Theme music volume and preview controls. Off disables trailers/autoplay but not music or other extras; YouTube is manual/external only. The settings are profile-specific and the Home/detail choices are independent. Playback exposes Discs before Advanced. Disc playback defaults to Play video and is a profile preference; Open disc menu affects attemptable network-share BDMV folders only. The helper warns that only HDMV menus are supported and menu videos do not update watch progress. Unsupported menu metadata selects video instead; the DEBUG-only BD-J switch is not production support. Default player zoom is profile-scoped, with independent phone/tablet/television values initially Normal. Custom reveals Zoom at 50%-200%; TV uses an accelerating stepper and mobile a slider. Explicit movie/series choices override the default; unidentified disc timelines use Normal, while a new live channel restores the platform default. Video upscaling is profile-scoped and defaults to Automatic, then resolves Animation from animation/anime metadata or Standard otherwise. Off, Automatic, Standard and Animation are in that order. Hardware, SDR, source dimensions, display size and engine eligibility determine actual enhancement; the saved preference applies to new playback, including Live TV. Session-only changes belong to the player, not these defaults. Remember series version choices is the switch in Versions; subtitle memory is a different Remember subtitles per series switch in Subtitles, not a nested Remember per series control. The in-scope frame-rate transition switch is Fade when switching frame rates. No source-only audit implies a running-app inspection.",
       "controls": [
         {
           "text": "Playback",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
-          "text": "Audio",
+          "text": "Autoplay & Up Next",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
+        },
+        {
+          "text": "Autoplay next episode",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Autoplay next playlist item",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Show Up Next card",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Time before the end",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Intros, credits & more",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
+        },
+        {
+          "text": "Skip intros, credits & more",
+          "source": "Sources/FeatureSettings/SkipMarkerSettingsControl.swift"
+        },
+        {
+          "text": "Customize",
+          "source": "Sources/FeatureSettings/SkipMarkerSettingsControl.swift"
+        },
+        {
+          "text": "Resuming playback",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
+        },
+        {
+          "text": "Ask to resume or start over",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Rewind on resume",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Seeking",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
+        },
+        {
+          "text": "Skip backward",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Skip forward",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Seek without pausing",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Player",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
+        },
+        {
+          "text": "Default player zoom",
+          "source": "Sources/FeatureSettings/DefaultVideoZoomControl.swift"
+        },
+        {
+          "text": "Auto-crop black bars",
+          "source": "Sources/CoreModels/VideoZoomPreference.swift"
+        },
+        {
+          "text": "Normal",
+          "source": "Sources/CoreModels/VideoZoomPreference.swift"
+        },
+        {
+          "text": "Crop",
+          "source": "Sources/CoreModels/VideoZoomPreference.swift"
+        },
+        {
+          "text": "Stretch",
+          "source": "Sources/CoreModels/VideoZoomPreference.swift"
+        },
+        {
+          "text": "Custom",
+          "source": "Sources/CoreModels/VideoZoomPreference.swift"
+        },
+        {
+          "text": "Zoom",
+          "source": "Sources/FeatureSettings/DefaultVideoZoomControl.swift"
+        },
+        {
+          "text": "Auto-hide controls",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "While playing",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
+        },
+        {
+          "text": "While playing or paused",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
+        },
+        {
+          "text": "Never",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
+        },
+        {
+          "text": "Player tabs",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Audio",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
         },
         {
           "text": "Preferred audio language",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
-          "text": "Audio language",
+          "text": "Original language",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
-          "text": "Original",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
-          "text": "Device",
+          "text": "Device language",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
@@ -27858,72 +28257,8 @@
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
-          "text": "Autoplay & Up Next",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
-          "text": "Autoplay next episode",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
-          "text": "Autoplay next playlist item",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
-          "text": "Show Up Next card",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
-          "text": "Time before the end",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
-          "text": "Default zoom",
-          "source": "Sources/FeatureSettings/DefaultVideoZoomControl.swift"
-        },
-        {
-          "text": "Auto-crop black bars",
-          "source": "Sources/CoreModels/VideoZoomPreference.swift"
-        },
-        {
-          "text": "Normal",
-          "source": "Sources/CoreModels/VideoZoomPreference.swift"
-        },
-        {
-          "text": "Crop",
-          "source": "Sources/CoreModels/VideoZoomPreference.swift"
-        },
-        {
-          "text": "Stretch",
-          "source": "Sources/CoreModels/VideoZoomPreference.swift"
-        },
-        {
-          "text": "Custom",
-          "source": "Sources/CoreModels/VideoZoomPreference.swift"
-        },
-        {
-          "text": "Zoom",
-          "source": "Sources/FeatureSettings/DefaultVideoZoomControl.swift"
-        },
-        {
-          "text": "Player tabs",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
-          "text": "Version selection",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
-          "text": "Choose on first play",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
-          "text": "Remember series version choices",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
-          "text": "Remember per series",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+          "text": "Video",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
         },
         {
           "text": "Video upscaling",
@@ -27954,79 +28289,43 @@
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
-          "text": "Skip intros, credits & more",
+          "text": "Fade when switching frame rates",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
-          "text": "Movies",
-          "source": "Sources/CoreModels/SubtitlePolicy.swift"
-        },
-        {
-          "text": "TV Shows",
-          "source": "Sources/CoreModels/SubtitlePolicy.swift"
-        },
-        {
-          "text": "Anime",
-          "source": "Sources/CoreModels/SubtitlePolicy.swift"
-        },
-        {
-          "text": "Movies",
-          "source": "Sources/CoreModels/SubtitlePolicy.swift"
-        },
-        {
-          "text": "TV Shows",
-          "source": "Sources/CoreModels/SubtitlePolicy.swift"
-        },
-        {
-          "text": "Anime",
-          "source": "Sources/CoreModels/SubtitlePolicy.swift"
-        },
-        {
-          "text": "Seeking",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
-          "text": "Backward",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
-          "text": "Forward",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
-          "text": "Ask to resume or start over",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
-          "text": "Rewind on resume",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
-          "text": "Seek without pausing",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
-          "text": "Auto-hide controls",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
-          "text": "While playing",
+          "text": "Versions",
           "source": "Sources/CoreModels/PlaybackSettings.swift"
         },
         {
-          "text": "While playing or paused",
-          "source": "Sources/CoreModels/PlaybackSettings.swift"
-        },
-        {
-          "text": "Never",
-          "source": "Sources/CoreModels/PlaybackSettings.swift"
-        },
-        {
-          "text": "Fade on display changes",
+          "text": "Version selection",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
-          "text": "Frame rate",
+          "text": "Choose on first play",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Ask every time",
+          "source": "Sources/CoreModels/PlaybackVersionSelectionMode.swift"
+        },
+        {
+          "text": "Choose automatically",
+          "source": "Sources/CoreModels/PlaybackVersionSelectionMode.swift"
+        },
+        {
+          "text": "Use first from server",
+          "source": "Sources/CoreModels/PlaybackVersionSelectionMode.swift"
+        },
+        {
+          "text": "How automatic selection works",
+          "source": "Sources/CoreUI/AutomaticVersionInfoButton.swift"
+        },
+        {
+          "text": "Done",
+          "source": "Sources/CoreUI/AutomaticVersionInfoButton.swift"
+        },
+        {
+          "text": "Remember series version choices",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
@@ -28036,6 +28335,14 @@
         {
           "text": "Disc playback",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Play video",
+          "source": "Sources/CoreModels/DiscPlayback.swift"
+        },
+        {
+          "text": "Open disc menu",
+          "source": "Sources/CoreModels/DiscPlayback.swift"
         },
         {
           "text": "Advanced",
@@ -28163,10 +28470,6 @@
         },
         {
           "text": "Remember subtitles per series",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
-          "text": "Remember per series",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
@@ -29371,10 +29674,12 @@
         "Sources/FeatureSettings/SettingsSplitLayout.swift",
         "Sources/AppShelliOS/PlozziOSSettingsView.swift",
         "Sources/FeatureSettings/ExternalPlayerSettingsView.swift",
-        "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        "Sources/FeatureSettings/IntegrationsDetailView.swift",
+        "Sources/FeatureSettings/PreferenceDetailViews.swift",
+        "Sources/FeatureSettings/SettingsWorkspace.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "Shared SettingsSplitLayout.swift implementation constructed by Sources/AppShelliOS/PlozziOSSettingsView.swift, Sources/FeatureSettings/ExternalPlayerSettingsView.swift, Sources/FeatureSettings/IntegrationsDetailView.swift. It is not a separate destination; visible controls are accounted for in these parent surfaces and their named nested-screen audits. Other repeated uses do not create an additional reader workflow."
+      "omitReason": "Shared row/layout model used by the settings destinations, not a separate screen. Labels and controls belong to the parent audits. SettingsSplitRow.detail renders only its supplied control closure, not its title. The production Apple TV workspace's PreferenceDetailViews.videoGroup invokes displayFadeGroup.detail(), so Fade on display changes is not a visible heading or navigation segment; the frame-rate toggle appears directly in Video. The same distinction applies to row-builder titles such as Audio defaults."
     },
     "Sources/FeatureSettings/SettingsView.swift": {
       "sources": [
@@ -30826,7 +31131,7 @@
         "Sources/FeaturePlayback/LiveChannelPlayerView.swift"
       ],
       "omitKind": "shared-component",
-      "omitReason": "DefaultVideoZoomControl is embedded in Playback on Apple TV by PreferenceDetailViews and on iPhone/iPad by PlozziOSSettingsView; both parent records inventory Default zoom, its Auto-crop black bars/Normal/Crop/Stretch/Custom options and conditional Zoom adjustment. It is not a separate destination. The profile stores independent device-type defaults; remembered movie/series choices take precedence, live channel changes restore the platform default, and unidentified disc timelines use Normal."
+      "omitReason": "DefaultVideoZoomControl is embedded in Playback on Apple TV by PreferenceDetailViews and on iPhone/iPad by PlozziOSSettingsView; both parent records inventory Default player zoom, its Auto-crop black bars/Normal/Crop/Stretch/Custom options and conditional Zoom adjustment. It is not a separate destination. The profile stores independent device-type defaults; remembered movie/series choices take precedence, live channel changes restore the platform default, and unidentified disc timelines use Normal."
     },
     "Sources/FeatureSettings/VideoUpscalingControl.swift": {
       "sources": [
@@ -30854,6 +31159,521 @@
       ],
       "omitKind": "implementation",
       "omitReason": "A scene-phase and authorization-scoped modifier mounted by both app shells, with no visible controls or destination. LiveTVSettingsView inventories the controlling Refresh while open picker. The foreground worker waits after activation and refreshes only existing saved IPTV account lineups/guides for authorized profiles with Live TV available; it cancels when inactive or authorization changes. It neither downloads a first-use guide nor schedules OS background execution."
+    },
+    "Sources/CoreUI/TrackerConnectedStatus.swift": {
+      "sources": [
+        "Sources/CoreUI/TrackerConnectedStatus.swift",
+        "Sources/FeatureSettings/IntegrationsDetailView.swift",
+        "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift",
+        "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Shared account status is constructed by TV IntegrationsDetailView, mobile tracker credential pages and PublicMetaDBConnectionStatus in PublicMetaDBSettingsContent. Those parent inventories record Connected; Connected as <username> includes the actual dynamic service identity, not a constant caption. The status has no action or separate navigation destination."
+    },
+    "Sources/FeatureSettings/TrackerActivationRow.swift": {
+      "sources": [
+        "Sources/FeatureSettings/TrackerActivationRow.swift",
+        "Sources/FeatureSettings/IntegrationsDetailView.swift",
+        "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift",
+        "Sources/FeatureSettings/PublicMetaDBAccountView.swift",
+        "Sources/CoreModels/SettingsSearch.swift",
+        "Sources/CoreModels/SettingsSearchAdditionalEntries.swift",
+        "Sources/CoreModels/TrackerActivation.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Shared activation is embedded in the connected tracker parents and PublicMetaDBTrackingRows. The parent records inventory Use Trakt, Use Simkl, Use WeTrakr, Use AniList, Use MyAnimeList, TV-only Use Last.fm and Use PublicMetaDB from their true dynamic service names and fixed search captions. Turning off pauses this device/profile/account without disconnecting; failures show an alert. No separate destination is created."
+    },
+    "Sources/FeatureSettings/PublicMetaDBAccountView.swift": {
+      "sources": [
+        "Sources/FeatureSettings/PublicMetaDBAccountView.swift",
+        "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift",
+        "Sources/FeatureSettings/TrackerActivationRow.swift",
+        "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift",
+        "Sources/FeatureSettings/PublicMetaDBPlaybackFailure.swift",
+        "Sources/FeatureSettings/TrackerHistoryImportView.swift",
+        "Sources/PublicMetaDBService/PublicMetaDBService.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "This mixed helper file is not an account-tools destination. PublicMetaDBSettingsContent constructs its reachable PublicMetaDBTrackingRows: activation, conditional reporting-failure text, then enabled share-sync rows, all audited in those parents. TrackerHistoryImportFailure also reuses PublicMetaDBFailureMessage for reachable sync errors. The paged arbitrary-record/catalogue helpers are used only by deferred account tools: production PublicMetaDBService disables accountToolsEnabled and supplies no management entry point."
+    },
+    "Sources/FeatureSettings/PublicMetaDBPlaybackFailure.swift": {
+      "sources": [
+        "Sources/FeatureSettings/PublicMetaDBPlaybackFailure.swift",
+        "Sources/FeatureSettings/PublicMetaDBAccountView.swift",
+        "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift",
+        "Sources/PublicMetaDBService/PublicMetaDBPlaybackReporter.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "Read-only failure text is embedded after the activation switch by PublicMetaDBTrackingRows on the connected account page. PublicMetaDBSettingsContent inventories its exact status messages and the guide explains matching, account recovery and avoiding blind repeats of unconfirmed delivery. The text is not a retry button or a separate screen."
+    },
+    "Sources/FeatureSettings/TrackerHistoryImportView.swift": {
+      "sources": [
+        "Sources/FeatureSettings/TrackerHistoryImportView.swift",
+        "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift",
+        "Sources/FeatureSettings/TrackerHistoryReviewResults.swift",
+        "Sources/FeatureSettings/IntegrationsDetailView.swift",
+        "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift",
+        "Sources/CoreModels/TrackerHistoryImportSession.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "The public reviewed comparison/import screen has no production constructor or link in either tracker parent; connected accounts instead construct inline TrackerHistorySyncLink with an enrollment session. This file remains partly reachable because TrackerHistoryImportFailure supplies the inline sync error messages audited on TrackerHistorySyncSettingsView. Do not document Compare again, conflict overrides or Apply selected changes as current account actions."
+    },
+    "Sources/FeatureSettings/TrackerHistoryReviewResults.swift": {
+      "sources": [
+        "Sources/FeatureSettings/TrackerHistoryReviewResults.swift",
+        "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift",
+        "Sources/FeatureSettings/TrackerHistoryImportView.swift",
+        "Sources/FeatureSettings/TrackerHistoryExportView.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "The live share chooser reuses Destination.historyDisplayName from this file to disambiguate equal share names with their actual server-user identity. Its focus helper and comparison/filter/paging/export-source controls belong to reviewed import/export screens without a production entry point. Dynamic names are described in the share-sync parent, not treated as constant labels; there is no independent comparison destination to guide users toward."
+    },
+    "Sources/FeatureSettings/LastFmListeningHistoryView.swift": {
+      "sources": [
+        "Sources/FeatureSettings/LastFmListeningHistoryView.swift",
+        "Sources/FeatureSettings/IntegrationsDetailView.swift",
+        "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift",
+        "Sources/LastFmService/LastFmListeningHistory.swift"
+      ],
+      "omitKind": "unreachable",
+      "omitReason": "Listening-history paging is defined, but no production caller constructs LastFmListeningHistoryView. Apple TV Last.fm exposes connection, activation and disconnect only; mobile excludes Last.fm account pages. Outgoing listening scrobbles remain documented in music; a service reader does not establish a reachable history browser."
+    },
+    "Sources/FeatureSettings/TrackerHistoryExportView.swift": {
+      "sources": [
+        "Sources/FeatureSettings/TrackerHistoryExportView.swift",
+        "Sources/FeatureSettings/IntegrationsDetailView.swift",
+        "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift",
+        "Sources/AppRuntime/AccountsProvidersModel.swift",
+        "Sources/CoreModels/TrackerHistoryExportSession.swift"
+      ],
+      "omitKind": "unreachable",
+      "omitReason": "Service-specific Trakt/Simkl/WeTrakr/AniList/MyAnimeList export wrappers construct the shared reviewed export view only within this file. Neither production tracker parent calls those wrappers or offers an export link. Runtime export factories and backend support are not a reader entry point; ordinary outgoing scrobbling and optional incoming share sync remain documented instead."
+    },
+    "Sources/FeatureSettings/PublicMetaDBAnimeMappingsView.swift": {
+      "sources": [
+        "Sources/FeatureSettings/PublicMetaDBAnimeMappingsView.swift",
+        "Sources/PublicMetaDBService/PublicMetaDBService.swift",
+        "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift",
+        "Sources/FeatureSettings/PublicMetaDBContentView.swift",
+        "Sources/FeatureSettings/IntegrationsDetailView.swift",
+        "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift"
+      ],
+      "omitKind": "unreachable",
+      "omitReason": "Publishing, replacing and deleting logical anime-season mapping chunks is defined for deferred account tools, not exposed by the production account page. PublicMetaDBService's public initializer fixes accountToolsEnabled to false; arbitrary-record clients, content presentation and management mutations are gated. The frozen app has no caller installing publicMetaDBContentPresentation or opening these tools. Reachable PublicMetaDBSettingsContent offers connection, playback activation and optional media-share history sync only."
+    },
+    "Sources/FeatureSettings/PublicMetaDBBulkHistoryView.swift": {
+      "sources": [
+        "Sources/FeatureSettings/PublicMetaDBBulkHistoryView.swift",
+        "Sources/PublicMetaDBService/PublicMetaDBService.swift",
+        "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift",
+        "Sources/FeatureSettings/PublicMetaDBContentView.swift",
+        "Sources/FeatureSettings/IntegrationsDetailView.swift",
+        "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift"
+      ],
+      "omitKind": "unreachable",
+      "omitReason": "Selecting and deleting multiple remote watched plays is defined for deferred account tools, not exposed by the production account page. PublicMetaDBService's public initializer fixes accountToolsEnabled to false; arbitrary-record clients, content presentation and management mutations are gated. The frozen app has no caller installing publicMetaDBContentPresentation or opening these tools. Reachable PublicMetaDBSettingsContent offers connection, playback activation and optional media-share history sync only."
+    },
+    "Sources/FeatureSettings/PublicMetaDBContentView.swift": {
+      "sources": [
+        "Sources/FeatureSettings/PublicMetaDBContentView.swift",
+        "Sources/PublicMetaDBService/PublicMetaDBService.swift",
+        "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift",
+        "Sources/FeatureSettings/IntegrationsDetailView.swift",
+        "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift"
+      ],
+      "omitKind": "unreachable",
+      "omitReason": "Title activity, community contributions and external-ID navigation is defined for deferred account tools, not exposed by the production account page. PublicMetaDBService's public initializer fixes accountToolsEnabled to false; arbitrary-record clients, content presentation and management mutations are gated. The frozen app has no caller installing publicMetaDBContentPresentation or opening these tools. Reachable PublicMetaDBSettingsContent offers connection, playback activation and optional media-share history sync only."
+    },
+    "Sources/FeatureSettings/PublicMetaDBContributionView.swift": {
+      "sources": [
+        "Sources/FeatureSettings/PublicMetaDBContributionView.swift",
+        "Sources/PublicMetaDBService/PublicMetaDBService.swift",
+        "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift",
+        "Sources/FeatureSettings/PublicMetaDBContentView.swift",
+        "Sources/FeatureSettings/IntegrationsDetailView.swift",
+        "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift"
+      ],
+      "omitKind": "unreachable",
+      "omitReason": "Submitting/deleting ratings and contributions or voting on them is defined for deferred account tools, not exposed by the production account page. PublicMetaDBService's public initializer fixes accountToolsEnabled to false; arbitrary-record clients, content presentation and management mutations are gated. The frozen app has no caller installing publicMetaDBContentPresentation or opening these tools. Reachable PublicMetaDBSettingsContent offers connection, playback activation and optional media-share history sync only."
+    },
+    "Sources/FeatureSettings/PublicMetaDBHistoryExportView.swift": {
+      "sources": [
+        "Sources/FeatureSettings/PublicMetaDBHistoryExportView.swift",
+        "Sources/PublicMetaDBService/PublicMetaDBService.swift",
+        "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift",
+        "Sources/FeatureSettings/PublicMetaDBContentView.swift",
+        "Sources/FeatureSettings/IntegrationsDetailView.swift",
+        "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift"
+      ],
+      "omitKind": "unreachable",
+      "omitReason": "Reviewed bulk library-history export to PublicMetaDB is defined for deferred account tools, not exposed by the production account page. PublicMetaDBService's public initializer fixes accountToolsEnabled to false; arbitrary-record clients, content presentation and management mutations are gated. The frozen app has no caller installing publicMetaDBContentPresentation or opening these tools. Reachable PublicMetaDBSettingsContent offers connection, playback activation and optional media-share history sync only."
+    },
+    "Sources/FeatureSettings/PublicMetaDBHistoryManagementView.swift": {
+      "sources": [
+        "Sources/FeatureSettings/PublicMetaDBHistoryManagementView.swift",
+        "Sources/PublicMetaDBService/PublicMetaDBService.swift",
+        "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift",
+        "Sources/FeatureSettings/PublicMetaDBContentView.swift",
+        "Sources/FeatureSettings/IntegrationsDetailView.swift",
+        "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift"
+      ],
+      "omitKind": "unreachable",
+      "omitReason": "Adding plays, changing watched dates, clearing resumes and dropping shows is defined for deferred account tools, not exposed by the production account page. PublicMetaDBService's public initializer fixes accountToolsEnabled to false; arbitrary-record clients, content presentation and management mutations are gated. The frozen app has no caller installing publicMetaDBContentPresentation or opening these tools. Reachable PublicMetaDBSettingsContent offers connection, playback activation and optional media-share history sync only."
+    },
+    "Sources/FeatureSettings/PublicMetaDBListManagementView.swift": {
+      "sources": [
+        "Sources/FeatureSettings/PublicMetaDBListManagementView.swift",
+        "Sources/PublicMetaDBService/PublicMetaDBService.swift",
+        "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift",
+        "Sources/FeatureSettings/PublicMetaDBContentView.swift",
+        "Sources/FeatureSettings/IntegrationsDetailView.swift",
+        "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift"
+      ],
+      "omitKind": "unreachable",
+      "omitReason": "Creating/deleting lists, opening public lists and editing list membership is defined for deferred account tools, not exposed by the production account page. PublicMetaDBService's public initializer fixes accountToolsEnabled to false; arbitrary-record clients, content presentation and management mutations are gated. The frozen app has no caller installing publicMetaDBContentPresentation or opening these tools. Reachable PublicMetaDBSettingsContent offers connection, playback activation and optional media-share history sync only."
+    },
+    "Sources/FeatureSettings/PublicMetaDBMappingView.swift": {
+      "sources": [
+        "Sources/FeatureSettings/PublicMetaDBMappingView.swift",
+        "Sources/PublicMetaDBService/PublicMetaDBService.swift",
+        "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift",
+        "Sources/FeatureSettings/PublicMetaDBContentView.swift",
+        "Sources/FeatureSettings/IntegrationsDetailView.swift",
+        "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift"
+      ],
+      "omitKind": "unreachable",
+      "omitReason": "Looking up and publishing external-ID mappings is defined for deferred account tools, not exposed by the production account page. PublicMetaDBService's public initializer fixes accountToolsEnabled to false; arbitrary-record clients, content presentation and management mutations are gated. The frozen app has no caller installing publicMetaDBContentPresentation or opening these tools. Reachable PublicMetaDBSettingsContent offers connection, playback activation and optional media-share history sync only."
+    },
+    "Sources/FeatureSettings/PublicMetaDBSeasonRatingsView.swift": {
+      "sources": [
+        "Sources/FeatureSettings/PublicMetaDBSeasonRatingsView.swift",
+        "Sources/PublicMetaDBService/PublicMetaDBService.swift",
+        "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift",
+        "Sources/FeatureSettings/PublicMetaDBContentView.swift",
+        "Sources/FeatureSettings/IntegrationsDetailView.swift",
+        "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift"
+      ],
+      "omitKind": "unreachable",
+      "omitReason": "Browsing or batch-editing per-episode season ratings is defined for deferred account tools, not exposed by the production account page. PublicMetaDBService's public initializer fixes accountToolsEnabled to false; arbitrary-record clients, content presentation and management mutations are gated. The frozen app has no caller installing publicMetaDBContentPresentation or opening these tools. Reachable PublicMetaDBSettingsContent offers connection, playback activation and optional media-share history sync only."
+    },
+    "Sources/FeatureSettings/PublicMetaDBWatchlistSettingsView.swift": {
+      "sources": [
+        "Sources/FeatureSettings/PublicMetaDBWatchlistSettingsView.swift",
+        "Sources/PublicMetaDBService/PublicMetaDBService.swift",
+        "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift",
+        "Sources/FeatureSettings/PublicMetaDBContentView.swift",
+        "Sources/FeatureSettings/IntegrationsDetailView.swift",
+        "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift"
+      ],
+      "omitKind": "unreachable",
+      "omitReason": "Choosing and consenting to a PublicMetaDB Watchlist list destination is defined for deferred account tools, not exposed by the production account page. PublicMetaDBService's public initializer fixes accountToolsEnabled to false; arbitrary-record clients, content presentation and management mutations are gated. The frozen app has no caller installing publicMetaDBContentPresentation or opening these tools. Reachable PublicMetaDBSettingsContent offers connection, playback activation and optional media-share history sync only."
+    },
+    "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift": {
+      "sources": [
+        "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift",
+        "Sources/FeatureSettings/PublicMetaDBAccountView.swift",
+        "Sources/FeatureSettings/PublicMetaDBPlaybackFailure.swift",
+        "Sources/FeatureSettings/TrackerActivationRow.swift",
+        "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift",
+        "Sources/CoreModels/SettingsSearch.swift",
+        "Sources/CoreModels/SettingsSearchAdditionalEntries.swift",
+        "Sources/CoreUI/TrackerConnectedStatus.swift",
+        "Sources/FeatureSettings/IntegrationsDetailView.swift",
+        "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift",
+        "Sources/PublicMetaDBService/PublicMetaDBService.swift",
+        "Sources/PublicMetaDBService/PublicMetaDBBrowserPairing.swift",
+        "Sources/PublicMetaDBService/PublicMetaDBPlaybackReporter.swift",
+        "Sources/PublicMetaDBService/PublicMetaDBHistorySnapshot.swift",
+        "Sources/AppRuntime/AccountsProvidersModel.swift"
+      ],
+      "platforms": [
+        "Apple TV",
+        "iPhone",
+        "iPad"
+      ],
+      "navigation": "Open Settings > Trackers > PublicMetaDB. The connected page places Use PublicMetaDB, any reporting issue and eligible Watch history controls above Account. Connect PublicMetaDB starts browser pairing on Apple TV or secure key entry on iPhone/iPad.",
+      "experience": "Connect the chosen profile to PublicMetaDB, verify Connected, pause playback reporting, recover a saved key, or explicitly replace/disconnect it. Apple TV pairing shows a QR/website and dynamic pairing code, with manual key entry as an alternative. Read failures without assuming a report succeeded or repeating an uncertain watch.",
+      "conditions": "Both production shells provide the tracking service and fenced media-share history session. The key field is secure; values/codes are private dynamic data. Enter API key manually is Apple TV-only; mobile starts with API key and Connect. Replace API key requires confirmation, replaces this profile's key on synced devices and does not revoke the old key remotely. Disconnect also requires confirmation, removes the synced key and preserves history. Connected tracking requires verified title/episode identity and local playback activation; paused status refresh does not re-enable consent. Sync choices are local and optional. Account-tools clients remain gated off: no list/rating/history-management or community-contribution destinations are reachable.",
+      "controls": [
+        {
+          "text": "PublicMetaDB",
+          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        },
+        {
+          "text": "PublicMetaDB",
+          "source": "Sources/CoreModels/SettingsSearch.swift"
+        },
+        {
+          "text": "Use PublicMetaDB",
+          "source": "Sources/CoreModels/SettingsSearchAdditionalEntries.swift"
+        },
+        {
+          "text": "Playback wasn't sent because the account changed.",
+          "source": "Sources/FeatureSettings/PublicMetaDBPlaybackFailure.swift"
+        },
+        {
+          "text": "Plozz couldn't match the title or episode.",
+          "source": "Sources/FeatureSettings/PublicMetaDBPlaybackFailure.swift"
+        },
+        {
+          "text": "PublicMetaDB denied access. This playback report won't be retried.",
+          "source": "Sources/FeatureSettings/PublicMetaDBPlaybackFailure.swift"
+        },
+        {
+          "text": "Not sent: PublicMetaDB has newer progress or a possible matching play.",
+          "source": "Sources/FeatureSettings/PublicMetaDBPlaybackFailure.swift"
+        },
+        {
+          "text": "Check your PublicMetaDB history. Delivery wasn't confirmed and won't be retried.",
+          "source": "Sources/FeatureSettings/PublicMetaDBPlaybackFailure.swift"
+        },
+        {
+          "text": "Playback couldn't be sent. Plozz will try again.",
+          "source": "Sources/FeatureSettings/PublicMetaDBPlaybackFailure.swift"
+        },
+        {
+          "text": "Account",
+          "source": "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
+        },
+        {
+          "text": "Not connected",
+          "source": "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
+        },
+        {
+          "text": "Connect PublicMetaDB",
+          "source": "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
+        },
+        {
+          "text": "Pairing code",
+          "source": "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
+        },
+        {
+          "text": "Enter API key manually",
+          "source": "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
+        },
+        {
+          "text": "API key",
+          "source": "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
+        },
+        {
+          "text": "Connect",
+          "source": "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
+        },
+        {
+          "text": "Cancel",
+          "source": "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
+        },
+        {
+          "text": "Try again",
+          "source": "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
+        },
+        {
+          "text": "Connected",
+          "source": "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
+        },
+        {
+          "text": "Replace API key",
+          "source": "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
+        },
+        {
+          "text": "Replace this profile's PublicMetaDB API key?",
+          "source": "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
+        },
+        {
+          "text": "Retry saved connection",
+          "source": "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
+        },
+        {
+          "text": "Disconnect",
+          "source": "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
+        },
+        {
+          "text": "Disconnect PublicMetaDB?",
+          "source": "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
+        },
+        {
+          "text": "OK",
+          "source": "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
+        }
+      ],
+      "documents": [
+        {
+          "slug": "trackers",
+          "anchor": "connect-publicmetadb"
+        },
+        {
+          "slug": "trackers",
+          "anchor": "pause-reporting-without-disconnecting"
+        },
+        {
+          "slug": "trackers",
+          "anchor": "bring-tracker-history-to-network-shares"
+        }
+      ]
+    },
+    "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift": {
+      "sources": [
+        "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift",
+        "Sources/FeatureSettings/TrackerActivationRow.swift",
+        "Sources/FeatureSettings/TrackerHistoryImportView.swift",
+        "Sources/FeatureSettings/TrackerHistoryReviewResults.swift",
+        "Sources/FeatureSettings/PublicMetaDBAccountView.swift",
+        "Sources/FeatureSettings/IntegrationsDetailView.swift",
+        "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift",
+        "Sources/AppRuntime/AccountsProvidersModel.swift",
+        "Sources/CoreModels/TrackerHistorySyncController.swift",
+        "Sources/CoreModels/TrackerHistoryImportSession.swift",
+        "Sources/CoreModels/TrackerHistoryImport.swift",
+        "Sources/CoreModels/WatchMutationAuthorization.swift",
+        "Sources/ProviderShare/ShareWatchStateService.swift",
+        "Sources/CoreNetworking/LocalMediaWatchStore.swift",
+        "Sources/AppShell/AppState.swift",
+        "Sources/AppShelliOS/PlozziOSAppModel.swift"
+      ],
+      "platforms": [
+        "Apple TV",
+        "iPhone",
+        "iPad"
+      ],
+      "navigation": "Settings > Trackers > a connected enabled video/anime tracker or PublicMetaDB > Watch history. 2-way sync is inline. Enabling with multiple shares opens Libraries to sync; one share starts without a chooser. Libraries expands the current selection after enabling.",
+      "experience": "Explicitly bring existing and new compatible tracker watched/resume history back to selected network shares in this profile. Choose shares, start, read progress and expand the last-sync summary for per-library outcomes. Use Sync now for later or interrupted checks, or stop without undoing previously applied history.",
+      "conditions": "Experimental. Available only for enabled trackers with eligible media-share accounts and supported history categories, or an enabled previous permission needing removal. The production runtime grants only mediaShare scope; Plex/Emby/Silo/Jellyfin are never incoming targets. Shares are named dynamically and disambiguated by server user; transport marks do not change destination scope. TV puts Start sync/Cancel above the chooser and mobile uses toolbar actions. At least one share must be selected; deselecting the last active share disables sync. Watched and compatible resumes are selected from supported categories; AniList/MyAnimeList expose watched only and aggregate counts do not identify episodes. Existing history is included at initial enrollment. Index/history must be complete; conflicts, missing/ambiguous matches, incompatible runtime and destructive clearing are not automatically overwritten. Playing titles defer, unconfirmed deliveries are held rather than blindly repeated, and rate-limit/read/save failures stay visible. Activation changes fence current work; a still-matching saved permission can resume when reporting is re-enabled. Profile/account/source changes can make the saved permission obsolete. Foreground checks require the authorized active profile; mobile excludes Offline Mode. No entitlement or background mode promises a background history import.",
+      "controls": [
+        {
+          "text": "Watch history",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "2-way sync",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Experimental",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Libraries to sync",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Start sync",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Cancel",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Select all",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Deselect all",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Libraries",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Library",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Remove previous permission",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Last sync: no updates applied",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Last sync: 1 update applied",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Expanded",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Collapsed",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Updates applied",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Already matched",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Skipped — no exact library match",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Skipped — multiple library matches",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Kept existing watch history",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Skipped — tracker records disagree",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Skipped — unsupported history",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Skipped resume — different or unknown duration",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Kept existing watched status or progress",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Update not verified",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Skipped — previous update not verified",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Deferred during playback",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Not checked in that sync",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Sync now",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        }
+      ],
+      "documents": [
+        {
+          "slug": "trackers",
+          "anchor": "bring-tracker-history-to-network-shares"
+        },
+        {
+          "slug": "trackers",
+          "anchor": "pause-reporting-without-disconnecting"
+        },
+        {
+          "slug": "network-shares",
+          "anchor": "keep-your-place"
+        },
+        {
+          "slug": "profiles-and-sync",
+          "anchor": "keep-watch-history-separate"
+        }
+      ]
     }
   }
 }

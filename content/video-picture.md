@@ -17,7 +17,7 @@ On iPhone/iPad, Auto-crop initially reaches the screen edges, where a cutout can
 
 ## Set a starting choice
 
-Open **Settings > Playback > Default zoom**. iPhone, iPad, and Apple TV have separate defaults, initially **Normal**. Choose **Auto-crop black bars** if you want automatic border reduction; it is optional. **Custom** reveals **Zoom**.
+In **Settings > Playback**, find **Player > Default player zoom**. iPhone, iPad, and Apple TV have separate defaults, initially **Normal**. Choose **Auto-crop black bars** for automatic border reduction. **Custom** reveals **Zoom**.
 
 Your default applies to new video playback, including Live TV. Without Auto-crop detection, the picture fits normally. Disc menus keep Normal.
 

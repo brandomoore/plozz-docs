@@ -293,7 +293,7 @@
       "Sources/CoreModels/ExternalMediaLink.swift",
       "Sources/CoreModels/HeroCTA.swift",
       "Sources/CoreUI/ExternalMediaOpening.swift",
-      "Sources/AppShelliOS/PlozziOSItemDetailView.swift",
+      "Sources/CoreModels/TrackerHistorySyncController.swift",
       "Sources/MediaTransportHTTP/WebDAVClient.swift",
       "Sources/FeatureHome/DetailHeroView.swift",
       "Sources/CoreUI/PlaybackSourceMenu.swift"
@@ -2205,10 +2205,6 @@
           "source": "Sources/FeaturePlayback/PlayerControls.swift"
         },
         {
-          "text": "Audio",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
           "text": "Subtitles",
           "source": "Sources/FeaturePlayback/PlayerControls.swift"
         },
@@ -2257,15 +2253,7 @@
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
         {
-          "text": "Resume rewind",
-          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
-        },
-        {
           "text": "Version selection",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
-          "text": "Remember per series",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
@@ -2580,11 +2568,7 @@
         },
         {
           "text": "Discs",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
-          "text": "Discs",
-          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
         },
         {
           "text": "Disc playback",
@@ -2629,6 +2613,10 @@
         {
           "text": "Try another region",
           "source": "Sources/FeaturePlayback/DiscMenuPlayerContent.swift"
+        },
+        {
+          "text": "Discs",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         }
       ],
       "emphasis": []
@@ -2901,7 +2889,7 @@
       "Sources/FeaturePlayback/PlayerMoreMenu.swift",
       "Sources/FeaturePlayback/PlayerOptionsMenuButton.swift",
       "Sources/FeaturePlayback/PlayerVideoZoom.swift",
-      "Sources/FeaturePlayback/PlayerZoomSettings.swift",
+      "Sources/CoreModels/PlaybackSettings.swift",
       "Sources/FeaturePlayback/PlayerViewModel.swift",
       "Sources/FeaturePlayback/SeriesTrackMemory.swift",
       "Sources/FeaturePlayback/LiveChannelPlayerView.swift",
@@ -2976,7 +2964,7 @@
           "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
         },
         {
-          "text": "Default zoom",
+          "text": "Default player zoom",
           "source": "Sources/FeatureSettings/DefaultVideoZoomControl.swift"
         },
         {
@@ -3018,6 +3006,10 @@
         {
           "text": "OK",
           "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
+          "text": "Player",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
         }
       ],
       "emphasis": []
@@ -3049,7 +3041,7 @@
       "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift",
       "Sources/FeaturePlayback/PlayerAudioSyncAdjustment.swift",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
-      "Sources/FeaturePlayback/SeriesTrackMemory.swift",
+      "Sources/CoreModels/PlaybackSettings.swift",
       "Sources/FeaturePlayback/TrackMenuBuilder.swift",
       "Sources/CoreModels/TrackLabeling.swift"
     ],
@@ -3093,16 +3085,8 @@
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
-          "text": "Audio",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
           "text": "Remember audio language per series",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
-          "text": "Tracks",
-          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
         {
           "text": "Background Audio",
@@ -3219,6 +3203,18 @@
         {
           "text": "Reset",
           "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
+          "text": "Audio",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
+        },
+        {
+          "text": "Original language",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Device language",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         }
       ],
       "emphasis": []
@@ -3438,10 +3434,6 @@
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
-          "text": "Remember per series",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
           "text": "Remember subtitles per series",
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
@@ -3462,10 +3454,6 @@
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
         {
-          "text": "Tracks",
-          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
-        },
-        {
           "text": "Prefer SDH",
           "source": "Sources/CoreModels/SubtitleSearchPreference.swift"
         },
@@ -3482,8 +3470,8 @@
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
         {
-          "text": "Playback",
-          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+          "text": "Behavior",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         }
       ],
       "emphasis": []
@@ -3509,8 +3497,8 @@
       "Sources/FeatureSettings/IntegrationsDetailView.swift",
       "Sources/ProviderSubsonic/SubsonicProvider.swift",
       "Sources/CoreModels/ThemeSettings.swift",
-      "Sources/ProviderSubsonic/SubsonicListeningSession.swift",
-      "Sources/AppShelliOS/PlozziOSAppModel.swift",
+      "Sources/CoreModels/SettingsSearchAdditionalEntries.swift",
+      "Sources/LastFmService/LastFmScrobbler.swift",
       "Sources/FeatureMusic/iOS/MusicPlayerAdapter.swift",
       "Sources/AppShelliOS/PlozziOSRootView.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
@@ -3727,6 +3715,10 @@
         {
           "text": "Show album, quality & lyrics source",
           "source": "Sources/FeatureSettings/CompactMusicStylePicker.swift"
+        },
+        {
+          "text": "Use Last.fm",
+          "source": "Sources/CoreModels/SettingsSearchAdditionalEntries.swift"
         }
       ],
       "emphasis": [
@@ -5719,11 +5711,11 @@
       "Sources/FeatureSettings/SettingsView.swift",
       "Sources/FeatureSettings/IntegrationsDetailView.swift",
       "Sources/FeatureSettings/SyncDataBreakdown.swift",
-      "Sources/FeatureSyncSetup/SyncSetupService.swift",
+      "Sources/AppShell/SyncSetupSenderPicker.swift",
       "Sources/CoreUI/SignInSyncPermission.swift",
       "Sources/AppRuntime/ProviderCredentialSync.swift",
       "Sources/FeatureSyncCloud/CloudConfigSyncService.swift",
-      "Sources/ProviderSilo/SiloDeviceEnrollment.swift",
+      "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift",
       "Sources/CoreModels/ProfileSettingsSnapshot.swift",
       "Sources/FeatureSettings/SyncEraseDataView.swift",
       "Sources/AppShelliOS/PlozziOSOfflineModeView.swift",
@@ -5754,10 +5746,6 @@
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
         {
-          "text": "Sync watch state across servers",
-          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
-        },
-        {
           "text": "Sync With iCloud",
           "source": "Sources/FeatureSettings/SettingsView.swift"
         },
@@ -5784,6 +5772,18 @@
         {
           "text": "Enter Code",
           "source": "Sources/AppShelliOS/PlozziOSSyncSetupSettingsView.swift"
+        },
+        {
+          "text": "Enter a code",
+          "source": "Sources/AppShell/SyncSetupSenderPicker.swift"
+        },
+        {
+          "text": "Code",
+          "source": "Sources/AppShell/SyncSetupSenderPicker.swift"
+        },
+        {
+          "text": "Set Up",
+          "source": "Sources/AppShell/SyncSetupSenderPicker.swift"
         },
         {
           "text": "Scan QR Code",
@@ -5834,16 +5834,8 @@
           "source": "Sources/FeatureSettings/SettingsView.swift"
         },
         {
-          "text": "Sync across all my servers",
-          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
-        },
-        {
           "text": "Trackers",
           "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
-        },
-        {
-          "text": "Playback",
-          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
         {
           "text": "Sync Data on This Device",
@@ -5896,6 +5888,18 @@
         {
           "text": "Save to iCloud",
           "source": "Sources/CoreUI/SignInSyncPermission.swift"
+        },
+        {
+          "text": "Sync across servers",
+          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        },
+        {
+          "text": "Sync across servers",
+          "source": "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift"
+        },
+        {
+          "text": "Watch status",
+          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
         }
       ],
       "emphasis": []
@@ -5905,39 +5909,39 @@
     "slug": "trackers",
     "title": "Tracking integrations",
     "seoTitle": "Connect Trakt, WeTrakr, and other trackers to Plozz",
-    "description": "Connect profile-owned video, anime, or music trackers, sync Watchlists, and recover service connections without unnecessary reconnects.",
+    "description": "Connect tracking accounts, pause reporting, and bring supported watch history to network shares. Keep tracker, server, and iCloud sync separate.",
     "section": "Accounts & sync",
-    "kind": "guide",
+    "kind": "reference",
     "file": "trackers.md",
     "sources": [
       "Sources/FeatureSettings/IntegrationsDetailView.swift",
       "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-      "Sources/CoreUI/ProfileSettingsCategory.swift",
-      "Sources/AppShelliOS/TrackerBrowserAuthorization.swift",
-      "Sources/AppShell/RealtimePlaybackScrobbler.swift",
-      "Sources/AppShelliOS/PlozziOSTrackerScrobbler.swift",
-      "Sources/TraktService/TraktScrobbler.swift",
-      "Sources/TraktService/TraktClient.swift",
-      "Sources/AppRuntime/WatchMutationFactory.swift",
-      "Sources/AppRuntime/WatchMutationApplier.swift",
-      "Sources/TraktService/TraktWatchlistDestination.swift",
-      "Sources/SimklService/SimklScrobbler.swift",
+      "Sources/CoreModels/SettingsSearch.swift",
+      "Sources/CoreModels/SettingsSearchAdditionalEntries.swift",
+      "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift",
+      "Sources/CoreUI/TrackerConnectedStatus.swift",
+      "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift",
+      "Sources/CoreModels/TrackerActivation.swift",
+      "Sources/PublicMetaDBService/PublicMetaDBService.swift",
+      "Sources/PublicMetaDBService/PublicMetaDBPlaybackReporter.swift",
+      "Sources/CoreModels/TrackerHistorySyncController.swift",
+      "Sources/CoreModels/TrackerHistoryImport.swift",
       "Sources/AniListService/AniListScrobbler.swift",
       "Sources/MALService/MALScrobbler.swift",
-      "Sources/LastFmService/LastFmScrobbler.swift",
-      "Sources/WetrakrService/WetrakrConfig.swift",
-      "Sources/WetrakrService/WetrakrScrobbler.swift",
-      "Sources/WetrakrService/WetrakrService.swift",
-      "Sources/WetrakrService/WetrakrWatchlistDestination.swift"
+      "Sources/AppRuntime/AccountsProvidersModel.swift",
+      "Sources/AppShelliOS/PlozziOSAppModel+UniversalWatchlist.swift",
+      "Sources/AppShelliOS/PlozziOSOfflineModeView.swift",
+      "Sources/TraktService/TraktScrobbler.swift",
+      "Sources/FeatureSettings/TrackerActivationRow.swift"
     ],
     "watch": [
-      "Sources/AppShelliOS/PlozziOSTracker",
-      "Sources/CoreModels/RuntimeFeatureFlags.swift",
-      "Sources/TraktService/",
-      "Sources/AppRuntime/WatchMutation",
-      "Sources/WetrakrService/",
-      "Sources/AppShell/RealtimePlaybackScrobbler.swift"
+      "Sources/FeatureSettings/Tracker",
+      "Sources/FeatureSettings/PublicMetaDB",
+      "Sources/PublicMetaDBService/",
+      "Sources/CoreModels/Tracker",
+      "Sources/AppRuntime/AccountsProvidersModel.swift",
+      "Sources/AppShelliOS/PlozziOSTracker"
     ],
     "platforms": [
       "Apple TV",
@@ -5959,10 +5963,6 @@
           "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
         },
         {
-          "text": "Sync across all my servers",
-          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
-        },
-        {
           "text": "Connect Trakt",
           "source": "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift"
         },
@@ -5972,7 +5972,103 @@
         },
         {
           "text": "Trackers",
-          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+          "source": "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift"
+        },
+        {
+          "text": "PublicMetaDB",
+          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        },
+        {
+          "text": "Connect PublicMetaDB",
+          "source": "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
+        },
+        {
+          "text": "Enter API key manually",
+          "source": "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
+        },
+        {
+          "text": "API key",
+          "source": "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
+        },
+        {
+          "text": "Connect",
+          "source": "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
+        },
+        {
+          "text": "Retry saved connection",
+          "source": "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
+        },
+        {
+          "text": "Replace API key",
+          "source": "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
+        },
+        {
+          "text": "Disconnect",
+          "source": "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
+        },
+        {
+          "text": "Connected",
+          "source": "Sources/CoreUI/TrackerConnectedStatus.swift"
+        },
+        {
+          "text": "Use Trakt",
+          "source": "Sources/CoreModels/SettingsSearchAdditionalEntries.swift"
+        },
+        {
+          "text": "Use Last.fm",
+          "source": "Sources/CoreModels/SettingsSearchAdditionalEntries.swift"
+        },
+        {
+          "text": "Use PublicMetaDB",
+          "source": "Sources/CoreModels/SettingsSearchAdditionalEntries.swift"
+        },
+        {
+          "text": "2-way sync",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Watch history",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Libraries to sync",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Start sync",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Sync now",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Libraries",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Remove previous permission",
+          "source": "Sources/FeatureSettings/TrackerHistorySyncSettingsView.swift"
+        },
+        {
+          "text": "Offline Mode",
+          "source": "Sources/AppShelliOS/PlozziOSOfflineModeView.swift"
+        },
+        {
+          "text": "Sync across servers",
+          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        },
+        {
+          "text": "Unavailable in this build",
+          "source": "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift"
+        },
+        {
+          "text": "PublicMetaDB",
+          "source": "Sources/CoreModels/SettingsSearch.swift"
+        },
+        {
+          "text": "Sync across servers",
+          "source": "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift"
         }
       ],
       "emphasis": [
@@ -6192,7 +6288,7 @@
       "Sources/CoreUI/SettingsCopy.swift",
       "Sources/CoreModels/VideoZoomPreference.swift",
       "Sources/FeaturePlayback/PlayerTouchGestureSurface.swift",
-      "Sources/FeaturePlayback/PlayerVideoZoom.swift"
+      "Sources/CoreModels/PlaybackSettings.swift"
     ],
     "watch": [
       "Sources/AppShelliOS/PlozziOSPlayer",
@@ -6211,14 +6307,14 @@
       "references": [
         {
           "text": "Seeking",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
+        },
+        {
+          "text": "Skip backward",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
-          "text": "Backward",
-          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
-        },
-        {
-          "text": "Forward",
+          "text": "Skip forward",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
@@ -6230,7 +6326,11 @@
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
-          "text": "Fade on display changes",
+          "text": "Video",
+          "source": "Sources/CoreModels/PlaybackSettings.swift"
+        },
+        {
+          "text": "Fade when switching frame rates",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
@@ -6460,7 +6560,7 @@
         },
         {
           "text": "Send Diagnostics",
-          "source": "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift"
+          "source": "Sources/FeatureSettings/SendDiagnosticsCard.swift"
         },
         {
           "text": "Home Performance Overlay",

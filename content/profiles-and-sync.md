@@ -1,10 +1,10 @@
 # Profiles and sync
 
-Bring profiles, preferences, and supported sign-ins to another device. Servers store progress separately.
+Bring profiles, preferences, and supported sign-ins to another device.
 
 ## Use the right profile
 
-Use the **Settings** header to switch; **Settings > Profiles** manages [profiles and authorization](/profiles-and-locks/).
+Switch profiles in **Settings**; manage [profiles and authorization](/profiles-and-locks/) under **Settings > Profiles**.
 
 ## Sync settings
 
@@ -15,7 +15,7 @@ iCloud Sync carries profiles, preferences, server details, watchlist state, supp
 
 Sign-ins use encrypted iCloud storage. You still need access to each server.
 
-A compatible Silo server can approve this device automatically for a PIN-free Silo profile. Otherwise, sign in and obtain approval; saved PIN authorization is not copied.
+Compatible Silo servers can automatically approve this device for a PIN-free profile. Otherwise, sign in and obtain approval; saved PIN authorization is not copied.
 
 [Library arrangements](/customize-libraries/) and [Watchlist browse choices](/watchlist/#filter-and-sort-the-page) follow your profile. Open Plozz on Apple TV to receive changes. Turning sync off keeps cloud data.
 
@@ -56,25 +56,25 @@ Use the same local network and allow Local Network access. The receiver offers *
 
 On the configured device, open **Settings > iCloud Sync**. On Apple TV, also choose **Set Up Another Device**.
 
-Select the receiver, use **Enter Code**, or **Scan QR Code** on mobile; scanning needs Camera permission. A configured Apple TV can show a code for a new iPhone/iPad.
+Select the receiver. Or on Apple TV, enter its **Code** under **Enter a code**, then choose **Set Up**. Mobile offers **Enter Code** or **Scan QR Code**; scanning needs Camera permission. A configured Apple TV can show a setup QR code for a new iPhone/iPad.
 
-Approve only matching verification codes; same-iCloud pairing can verify without comparison. Only supported sign-ins transfer. Silo needs separate approval. Seerr account sessions stay local; supported API-key connections can transfer for their profiles without replacing existing connections. Older apps can need manual Seerr setup. Check **Needs sign-in** afterward.
+Approve only matching verification codes; same-iCloud pairing can verify without comparison. Silo needs separate approval. Seerr account sessions stay local; supported API-key connections can transfer for their profiles without replacing existing connections. Older apps can need manual Seerr setup. Check **Needs sign-in** afterward.
 
 ## Keep watch history separate
 
 Servers store progress for the server user, not the Plozz profile name.
 
-Apple TV offers **Settings > Trackers > Sync across all my servers** with multiple servers. On iPhone/iPad, use **Settings > Playback > Sync watch state across servers**. It defaults on: watching, resuming, marking watched/unwatched, or removing from Continue Watching updates matching accessible copies. Turn it off before changes you want kept on one server.
+Open **Settings > Trackers** and find **Sync across servers**. On Apple TV, it is under **Watch status** and needs multiple servers. It defaults on: watching, resuming, marking watched/unwatched, or removing from Continue Watching updates matching accessible copies. Turn it off before changes you want kept on one server.
 
-Updates wait while offline or a source is unreachable. On iPhone/iPad, turn **Offline Mode** off. Reconnect using the original authorized profile and server user to retry. A changed card is not confirmation from every server.
+Updates wait while offline or a source is unreachable. Turn **Offline Mode** off on mobile and reconnect with the original profile and server user to retry. A changed card isn't confirmation from every server.
 
-[Share history](/network-shares/#keep-your-place) and Plex's saved fallback progress for extras stay local. [Tracker scrobbling](/trackers/) sends activity to external accounts, separately from configuration sync.
+[Share history](/network-shares/#keep-your-place) and Plex's fallback progress for extras stay local. [Tracker reporting and optional share-history sync](/trackers/#bring-tracker-history-to-network-shares) are separate from iCloud; enable them on each device.
 
 ## Understand sync data sizes
 
 Under **Settings > iCloud Sync > Troubleshooting**, **Sync Data on This Device** shows prepared data; **Refresh Breakdown** updates it.
 
-Counts include pending uploads, not deletions. Sizes don't show iCloud storage usage or downloads. Plozz Channels includes its catalogue; downloaded guides, iCloud Keychain logins, and separate Trakt sign-ins are excluded.
+Counts include pending uploads, not deletions. Sizes aren't iCloud storage usage. Plozz Channels includes its catalogue; downloads, guides, iCloud Keychain logins, and separate Trakt sign-ins are excluded.
 
 ## Recover sync without erasing your setup
 

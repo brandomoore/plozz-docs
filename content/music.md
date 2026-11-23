@@ -52,7 +52,7 @@ Use the speech-bubble button on Apple TV or **Lyrics** on mobile for words that 
 
 Plozz checks your server and can use **LRCLIB**, sending track title, artist, album, and duration, not audio files. Lyrics start enabled. On Apple TV, turn lyrics off to stop future LRCLIB lookups for all profiles on this device; if the button is dimmed, first switch to a song with lyrics. Closing the mobile panel only hides it; it does not disable lookups.
 
-For Apple TV listening, connect **Last.fm** under **Settings > Trackers**. Now Playing information can be sent when a song starts or resumes. To count in your listening history, a track must be longer than 30 seconds and reach halfway or four minutes, whichever is shorter; Plozz submits the scrobble when that track stops. Mobile Music does not send Last.fm scrobbles.
+For Apple TV listening, connect **Last.fm** under **Settings > Trackers**. Turn off **Use Last.fm** to pause reporting without disconnecting. Now Playing information can be sent when a song starts or resumes. A track over 30 seconds counts after halfway or four minutes of listening, whichever is shorter; Plozz submits it when the track stops. Mobile Music does not send Last.fm scrobbles.
 
 Navidrome/Subsonic also receives listening activity directly. It counts a play when a track longer than 30 seconds stops after at least half the song or four minutes of actual listening, whichever is shorter. This is separate from connecting [Last.fm](/trackers/).
 
