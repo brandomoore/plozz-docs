@@ -4,13 +4,13 @@ Control playback and watch on another screen.
 
 ## Apple TV
 
-Reveal controls with the remote. Change left/right jumps with **Skip backward** and **Skip forward** under **Settings > Playback > Seeking**.
+Change left/right jumps with **Skip backward** and **Skip forward** under **Settings > Playback > Seeking**.
 
 **Seek without pausing** determines whether a playing video responds to scrubbing. When off, pause first, scrub to the position, then press Play. **Prevent Accidental Exit**, under Screens & Navigation's navigation settings, changes app-exit behavior rather than playback quality.
 
 Under **Settings > Playback > Video**, **Fade when switching frame rates** briefly hides the picture during transitions. If frame-rate matching is off in Apple TV Settings, disabling this switch can avoid needless fades.
 
-Apple TV users can [automatically open their remembered Plozz profile](/apple-tv-profiles/). With automatic sign-in off, [returning to browsing can require profile selection again](/apple-tv-profiles/#when-you-return-to-browsing).
+Set up [automatic profile sign-in](/apple-tv-profiles/), or check [when returning to browsing asks you to choose again](/apple-tv-profiles/#when-you-return-to-browsing).
 
 ## Live TV remote controls and rewind
 
@@ -22,17 +22,17 @@ For a channel with a usable rewind window, reveal controls and use the timeline 
 
 ## Launch from Apple TV Top Shelf
 
-1. Put Plozz in the Apple TV Home Screen's top row.
+1. Put Plozz in the Apple TV Home Screen's top row. Under each Apple TV user, open Plozz, select their profile, and let **Home** load.
 2. From a non-Kids Plozz profile, open **Settings > Manage Plozz > Top Shelf**. **Show Top Shelf** is on by default.
 3. Choose **Posters** or **Full Screen**, then set separate **Continue Watching** and **Recently Added** counts: four each by default, adjustable from one to 20.
 
 Posters is the default; select one to start watching. With Full Screen, swipe up to expand the shelf. Continue Watching appears before Recently Added, without repeated titles from the same source. Use the first button to start watching or the second to view details. Format badges describe the file, not your TV's output.
 
-These preferences are shared on this Apple TV and do not sync. Turning Show Top Shelf off clears its media without forgetting your layout or counts.
+These settings apply to all Plozz profiles for this Apple TV user and do not sync. Turning off Show Top Shelf clears the shelf but keeps your layout and counts.
 
-Top Shelf shows saved Home titles, sometimes fewer than you chose. Its counts do not limit Continue Watching in Plozz. Complete any profile/PIN prompt. If **Unable to Open Title** appears, check the original connection.
+The shelf uses that user's last-loaded Home titles; without them it is empty. Counts do not guarantee that many titles or limit Continue Watching inside Plozz. Complete any profile/PIN prompt. For **Unable to Open Title**, check the original connection.
 
-Artwork follows [Appearance > Artwork](/appearance/); full-screen episode text and ratings respect [spoiler settings](/spoiler-protection/).
+Artwork follows [Appearance > Artwork](/artwork/); full-screen episode text and ratings respect [spoiler settings](/spoiler-protection/).
 
 ## iPhone and iPad
 

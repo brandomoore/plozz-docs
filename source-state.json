@@ -2,11 +2,11 @@
   "schemaVersion": 2,
   "repository": "brandomoore/Plozz",
   "ref": "main",
-  "commit": "0cf47edb7c6aef64c249b7fbd87be75319f062ba",
-  "verifiedAt": "2026-11-23T20:44:32.023Z",
+  "commit": "d5c372bf03a0e944e878bf21aa3f6130b08f8161",
+  "verifiedAt": "2026-11-24T19:54:13.575Z",
   "baselineReviewedAt": "2026-11-23T20:44:32.023Z",
-  "contentHash": "74adb275ed6595aedaa29920dfb3dca86b193b2579a67315fc6d7be2756d627a",
-  "coverageHash": "6e9148ce19fb21fe5a09873bb9bf154b56532148a75ae2038385f647d209d622",
+  "contentHash": "742516af1ae4892bf77c042ddf6728099cf1566d1a3c3d774d69f334b91f7916",
+  "coverageHash": "9305b5aa904213881c940e071cf47181440aac2d98cd31fe47ca81a9da14bd16",
   "policyHash": "631003a8d521614349b788fd1b01f6a353249de57ceef9fc6a87d57c743197cd",
   "sourceFiles": {
     "Sources/CoreModels/ProviderKind.swift": "9bed944f1b312f011a8b8ebbc9f6ae0d5858dba4",
@@ -60,7 +60,7 @@
     "Sources/CoreUI/ExternalMediaOpening.swift": "e86f94f6773b953b94b94946c8f6563d25fc22c1",
     "Sources/CoreModels/TrackerHistorySyncController.swift": "d8145e9956f9e0bd93c4552c344dc9abe3bedbd8",
     "Sources/MediaTransportHTTP/WebDAVClient.swift": "6f9b6e20a060e8d72cc1d0bec5271d358565078e",
-    "Sources/FeatureHome/DetailHeroView.swift": "479f559344cb157d82efe0ffd2764a2f5e79013b",
+    "Sources/FeatureHome/DetailHeroView.swift": "0317ea68f0d814bd251a14c50d183f3855192d9f",
     "Sources/CoreUI/PlaybackSourceMenu.swift": "dbedd09c1d2b4752e486151daf449751138f2d2f",
     "Sources/FeatureSearchCore/SearchSection.swift": "637fbb5b3cec0e53147e62fa03da93d1c614681e",
     "Sources/CoreModels/LibraryPresentationSettings.swift": "94e978d87a3b8da1100a66da40e7074bc7f5cff9",
@@ -70,7 +70,7 @@
     "Sources/FeatureHome/ExtrasRowView.swift": "447dcdc1013a0c7c97dd996baf660a419dfa404c",
     "Sources/CoreModels/MediaItem+Trailer.swift": "d9dd8608f59db67b75ec8009afc7aaea4eca6334",
     "Sources/FeatureHomeCore/ContentRefresh/ContentRefreshModels.swift": "baa3ac542594180fc9f774b88112cc4426017ad8",
-    "Sources/AppShelliOS/PlozziOSItemDetailView.swift": "df25d00cbbf9e3276965c905637118e8f29797ef",
+    "Sources/AppShelliOS/PlozziOSItemDetailView.swift": "6b447342b3095f5b97b4758fa3348f89ae54f9b5",
     "Sources/CoreUI/DetailInformationSections.swift": "6a2a56fcb287ecd261261b482a5886b15af97d33",
     "Sources/CoreUI/DetailMoreContent.swift": "dd3fbb787ede79ff30d158e2601acb9ce24e458c",
     "Sources/AppShelliOS/PlozziOSSearchView.swift": "44b17b3452a734166d6b4e4396a8b517ad5e71c4",
@@ -91,7 +91,7 @@
     "Sources/FeaturePlayback/BorrowedTrailerPlayer.swift": "f2c0f982305302101625b6b257394e010c1b86be",
     "Sources/FeatureHome/HomeHeroView.swift": "82c748f198ab183440111004c9f29bfc46705ef4",
     "Sources/FeaturePlayback/CustomPlayerContainer.swift": "802b83c7d85f0813cf273462db2a0a6b3de02673",
-    "Sources/AppShell/HomeTab.swift": "6e54e3324d702a33f19d24038c6b57fd870ff88e",
+    "Sources/AppShell/HomeTab.swift": "b35b7b69e7b26af88c221446cfd360c861652b7e",
     "Sources/AppShelliOS/PlozziOSDiscoverView.swift": "a6f53e1e1d0e5ab57a74b86eb68acd0b8e87f009",
     "Sources/FeatureHomeCore/DiscoverBrowseView.swift": "b505178643950612bf4cb6312145b02c3f177c1e",
     "Sources/FeatureHomeCore/DiscoverBrowseModel.swift": "fc0e2accc70804895604249528688a00dacee316",
@@ -115,7 +115,7 @@
     "Sources/AppRuntime/UpcomingFeedLoader.swift": "a285d8068b2880eb4e44b9740b770539ed20eb43",
     "Sources/MetadataKit/SeriesScheduleResolver.swift": "16cf3caa33ff8bdcf49f5ff13075185ade87fae1",
     "Sources/MetadataKit/ExternalTitleMetadataResolver.swift": "cf02dc7036b82ba23c05ceba7a3e28e71fa6f8d5",
-    "Sources/AppShelliOS/PlozziOSAppModel.swift": "77144c764ddd31a2323c5d6fda2fe3be4443f488",
+    "Sources/AppShelliOS/PlozziOSAppModel.swift": "0287a7268de0babda04b1877e5232e857e898410",
     "Sources/CoreUI/MediaRowBrowseCard.swift": "cf4992bf8b5333da87126b58ef51ccabc333eacd",
     "Sources/AppShelliOS/PlozziOSOfflineModeView.swift": "2c98e63fa6da4103c9e9a481f4349c5c06ac7f2c",
     "Sources/FeatureHome/HomeView.swift": "c9ccbc62c43b8625a7a9bf534ace07e9ecddcfe7",
@@ -146,17 +146,17 @@
     "Sources/CoreModels/HomeContentQuery.swift": "1e0550f5e0fb90a55cdaa874feb337e62f8dac6f",
     "Sources/CoreModels/HomeContentPager.swift": "347ece4381a5eeb1e744a59ca0976bcee32363fc",
     "Sources/FeatureHome/WatchlistBrowseView.swift": "b40c049f955ee81827bdec009cc5214913fc090c",
-    "Sources/CoreUI/PosterCardView.swift": "10dbe121ef5786abb1b506b72a2e4df5727d38fb",
+    "Sources/CoreUI/PosterCardView.swift": "0cb09782faa60093911a4dee9c88a3861681cfa5",
     "Sources/CoreUI/WatchlistBrowseControls.swift": "04f7e3aef7d5443c87a4ce4b010e95b7cd7e8f33",
     "Sources/AppShell/ProfileServerIdentityPromptView.swift": "466358d0c3d28996e6ccb429ea6e4f0a31d3499c",
     "Sources/FeatureWatchlistCore/WatchlistModel.swift": "3e22b8ca3bda374b7b033a9354cc606adbb06fcd",
     "Sources/AppRuntime/UniversalWatchlistRuntime.swift": "92a0d46a7c45027541259d2f6b67fa98b5125ce3",
-    "Sources/CoreModels/MediaItemActionCatalog.swift": "1ac7bee15f3c44e97793d3edbec92e2463d05ad6",
+    "Sources/FeatureWatchlistCore/WatchlistPresentationResolver.swift": "576b3b6c6ce3605fa26e96ccb40dd89272223f05",
     "Sources/FeatureHomeCore/WatchlistBrowseModel.swift": "50902dc6a510f5fe4c44236c4bab4240ba2a0545",
     "Sources/FeatureHomeCore/HomeViewModel.swift": "61a8c63c936bed29f9c440093e8b50c70c6ae9d2",
     "Sources/AppRuntime/MediaItemActionCoordinator.swift": "2943a1f943a2a4a9672729e50d3f028ed759a641",
-    "Sources/FeatureWatchlistCore/WatchlistUnion.swift": "5e9303ad822fec83979525b5e5673c9a826dfdd9",
-    "Sources/AppShelliOS/PlozziOSHeroViews.swift": "e114cdb5bd1e7fbd9473820527b3b3b7009bda55",
+    "Sources/FeatureWatchlistCore/WatchlistUnion.swift": "bee5bd5cff1adc88ba1e83f019ce18c1f1e43ad4",
+    "Sources/AppShelliOS/PlozziOSHeroViews.swift": "05a8bae6984aeff61a2b9fca0156a9338deef47e",
     "Sources/FeatureSettings/LibraryPresentationSettingsView.swift": "963639f5737eacb42192350f99ecead74f4d570e",
     "Sources/CoreModels/CollectionCoverLayout.swift": "f0025fa11af1aa47137fcca313d9e796ec1bca60",
     "Sources/CoreUI/CollectionCoverLayoutPicker.swift": "1456a030be4c80a04ba68135659dac84aa4957ea",
@@ -203,7 +203,7 @@
     "Sources/FeaturePlayback/PlayerSongCard.swift": "b003f605e3d0e273946208cbf5b9a4f1fdc24fd6",
     "Sources/CoreModels/PlaybackSettings.swift": "6c06f2f7f6725cd6e19c40d8fbd5c1bb5e65d0b4",
     "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift": "c6a1bf8b6ccb922f6a3e015b4cc673bdf15bfbc0",
-    "Sources/FeaturePlayback/InfoPanelView.swift": "c815fa4218fc873a5778e9e6e7a5a934b130cae6",
+    "Sources/FeaturePlayback/InfoPanelView.swift": "c8aebddc566f18e9f8bdedc4bf18b358355c1996",
     "Sources/FeaturePlayback/SongRecognition.swift": "af37eeb997cc52a313f0be16e126a4e05000c347",
     "Sources/FeaturePlayback/SongRecognitionController.swift": "21834251e0477d6e0dbf89e88629fb46767c7592",
     "Sources/EnginePlozzigen/PlozzigenVideoEngine.swift": "a031c7ddad727054d315af53355e6b9ca9536f28",
@@ -314,7 +314,7 @@
     "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift": "03ab9fb988f107d6820e2994215b6a05ed16f4aa",
     "Sources/AppShelliOS/PlozziOSDownloadSelectionSheet.swift": "a688ab2c3cf0589cdde0dff29b7cf0652ace761c",
     "Sources/CoreModels/SeriesDownloadPresentation.swift": "cf2dedeb63420329a7457273ce67abef6cbd1817",
-    "Sources/AppShelliOS/PlozziOSDownloadsModel.swift": "0686279470f90050b503f18b62571861367f31d8",
+    "Sources/AppShelliOS/PlozziOSDownloadsModel.swift": "f18be26440efcea95f0846b8f8ffbe43f86010de",
     "Sources/AppShelliOS/PlozziOSOfflineSubtitles.swift": "7db31e23e3f0bfe1af0104b66a8f52b2363f68c8",
     "Sources/AppShelliOS/PlozziOSDownloadedShowView.swift": "da2416938831aca45f22db0a30a5ee66f74b6008",
     "Sources/MediaDownloads/README.md": "767f915c9fd40d506c2042a7f3ba5fdbf608f816",
@@ -334,12 +334,18 @@
     "Sources/MetadataKit/WikipediaLocalizedText.swift": "e232b581e037eee92174f3a73cf5c6037ec75b90",
     "Sources/MetadataKit/DetailMetadataResolver.swift": "066f9c0621899b52d19075208057f57cb98719fa",
     "Sources/CoreUI/AppLanguageScope.swift": "18ed8145a2a88d50201fc75fe7f45692359eda61",
+    "Sources/CoreUI/ArtworkEnvironment.swift": "e46b0da20e9c829ed161b2073aec464326710846",
+    "Sources/CoreUI/ArtworkFirstPaintResolver.swift": "d869bc528a45e02141856b4df1342844e07cea22",
+    "Sources/MetadataKit/ArtworkRouter.swift": "cd4e2dcc75a04efdc5bab46c5bec9cd18d9fc55b",
+    "Sources/MetadataKit/TMDbMetadataProvider.swift": "99c35a9eaefd1bef813f201f6161ced343575865",
+    "Sources/MetadataKit/TVDBClient.swift": "7ed41d2a75b96dbc227be05bf596045a30402cca",
+    "Sources/AppShelliOS/PlozziOSDownloadArtwork.swift": "5aaae87d501a000fc26069803ce820de8270dc41",
     "Sources/CoreModels/SpoilerSettings.swift": "c354388707da224e1f6a73d4e7241428e304ffff",
     "Sources/CoreUI/ContinueWatchingArtworkSwatch.swift": "80990a2e694bbd00f010a64353fda93d1d199af9",
     "Sources/CoreUI/ContinueWatchingPresentation.swift": "88a0f730763bc04fa28e543724790ddb45a48320",
     "Sources/FeatureSettings/CustomizeHomeDetailView.swift": "d5c01b7cb25ef20a83cc195eea02ee9557ec7f31",
     "Sources/FeatureSettings/ContinueWatchingArtworkPicker.swift": "004439a4ba439bf1bf60c0ab590ce4c28f412030",
-    "Sources/CoreUI/ContinueWatchingArtworkSource.swift": "5999a5d97aaf9852418ecf9b0014076362f573c7",
+    "Sources/CoreUI/ContinueWatchingArtworkSource.swift": "7cb0886c54c448f4a23f3faade625bf925ef9007",
     "Sources/CoreUI/SpoilerRevealBox.swift": "d26b1fdc314d801c5a7764b59180f25da2beb768",
     "Sources/FeaturePlayback/PlayerChapterPanel.swift": "3f9fa060551d66302d0499408dfd135f9b303de4",
     "Sources/FeatureSettings/NightShiftDetailView.swift": "2aa3fd438c893afb77f6a414be479bd58a592a33",
@@ -427,9 +433,9 @@
     "Sources/FeatureSettings/TopShelfSettingsView.swift": "bc94722e8f182582b10d69ef478bb5ef9b588521",
     "Sources/FeatureSettings/TopShelfStylePicker.swift": "f1e1773b94df7227d3eb994aa4c45090b835563d",
     "Sources/CoreModels/PlaybackOrientation.swift": "0123f8df41354c9a13c944cd6cb9b10e71446a4f",
-    "Sources/AppShelliOS/PlozziOSLivePresentationControls.swift": "4d6a0c3bca3bb4ef55c7baffc67273b6ca29dbf6",
     "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift": "5b0cd47b92877f2d057127cf8b89ceb97e04fcb2",
     "Sources/FeaturePlayback/PlaybackDiagnosticsOverlay.swift": "8a292cef9344e60c2582740ebef27f1b1d967bbb",
+    "TopShelf/TopShelf.entitlements": "6a1e815ad187579104989c6bb9d38c46b4920b18",
     "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift": "10c4116780d447be82d9bef1bc5814e4f54b3478",
     "Sources/FeatureSettings/DiagnosticsSendButton.swift": "6a34091cb88970fa56d8f4b3541f0089aeaf518a",
     "Sources/FeatureSettings/ReleaseNotesViews.swift": "37b3db7120113b080947842af355c859c83263c2",
@@ -505,7 +511,7 @@
     "Sources/WetrakrService/WetrakrService.swift": "38f6fee1496cbc4e2bfa32022ff3d7857e255d1b",
     "Sources/AniListService/AniListService.swift": "79c2fc4f3e7d6d29acb5fa5954a9c2f583421f21",
     "Sources/MALService/MALService.swift": "70931889ece2e4621db7451cd5c6eb954237614a",
-    "Sources/MetadataKit/MetadataEnrichmentPipeline.swift": "3063c13fc0d80872027c7b475d359f31a0a9ef04",
+    "Sources/MetadataKit/MetadataEnrichmentPipeline.swift": "a5f4ce75772d81c7da6668318e67c2882c403598",
     "Sources/CoreUI/FamilyGuidanceViews.swift": "ae9bf172af13b6d927c572ef6479d35234facd1b",
     "Sources/ProviderPlex/PlexCommonSenseMedia.swift": "1015db73a1656b87c880ca49e29bf5862cd2b7c9",
     "Sources/TopShelfKit/TopShelfPublisher.swift": "bf8173a9c30a8c754bd90e6f0e17d637d86350fb",
@@ -517,8 +523,9 @@
     "Sources/AppShelliOS/PlozziOSPlayerOrientation.swift": "0f830ce521964e1afc5bda7a4a97ab260c5ba0cb",
     "Sources/AppShelliOS/PlozziOSLandscapeMotion.swift": "0d5b7fa18bae79eb81277903558304bc5ffd66a2",
     "Sources/AppShelliOS/PlozziOSPictureInPictureController.swift": "555c6ab9af576d94fdf12cad32b086193ea47572",
+    "Sources/AppShelliOS/PlozziOSLivePresentationControls.swift": "4d6a0c3bca3bb4ef55c7baffc67273b6ca29dbf6",
     "Sources/CoreModels/TopShelfSettings.swift": "bb724d6618240b28afdfeed935c29f48a7bbdc70",
-    "TopShelf/ContentProvider.swift": "1c0607646a82376b7259c0a7bfee4cc04c64727f",
+    "TopShelf/ContentProvider.swift": "4842719ba0c806e249faf47b179bd2371f41662e",
     "Sources/AniListService/AniListWatchlistDestination.swift": "75a92d2d1c8e56c50867b347f71f545f511073db",
     "Sources/AniListService/AniListHistoryReader.swift": "a3785e73be03820f5f0ecabbbe1af954801b8623",
     "Sources/FeatureAuth/PlexAccountRecoveryView.swift": "19737eea732177082090d9727d9a37af8b9080dc",
@@ -571,18 +578,19 @@
     "Sources/MediaTransportWebDAV/WebDAVByteSource.swift": "2e7dc6a15fedd39ecea1e0c46b1f27808a5fef85",
     "Sources/MediaTransportWebDAV/WebDAVTransportError.swift": "8d19f3d7b2c57c0d5c257adb20766bfa587e0073",
     "Sources/MetadataKit/HeroDiscoveryService.swift": "59e6bc3e35bfbc47c87dc4eb00ba9513fd233ee1",
-    "Sources/MetadataKit/TMDbMetadataProvider.swift": "120f1b9d529d261b4daf25eaec34e84456a8c6f8",
     "Sources/MetadataKit/ScheduleEnrichment.swift": "cef3b2deb7d87c8d5524c349078e12e6c06bfbfc",
+    "Sources/MetadataKit/TVDBArtworkProvider.swift": "751bc7208bdb5afe990d1630ee2d28995e5defe5",
     "Sources/ProviderIPTV/IPTVCatalog.swift": "91a148b6442df9abfbe7ca61d3063cde22dce23f",
     "Sources/FeatureAuthCore/IPTVAuthViewModel.swift": "6a816488a0e10ed326feed2f5733864169ca0255",
     "Sources/CoreModels/IPTVCredential.swift": "11a4e58e7c516983b34ade263cfcf021f92ea9fd",
     "Sources/FeatureHomeCore/HeroMetadataEnricher.swift": "db85b38eca3bde46339ffde0e4c3b3d5f0a7a3f0",
     "Sources/ProviderPlex/PlexProvider.swift": "d40bde8b42b0dc76727770b177c4546275364ea8",
-    "Sources/ProviderPlex/PlexClient.swift": "3ea4f546f78c07a2e466decc83197103c461251d",
+    "Sources/ProviderPlex/PlexClient.swift": "140f138ac7a96a5b1ce510b1f1e08b48d2da5308",
     "Sources/ProviderPlex/PlexExtraWatchState.swift": "4104abecfeaa6a107858e7dfc69010eebee2bb43",
     "Sources/ProviderShare/ShareLocalMetadataAssociationPolicy.swift": "254e3b5ab15584f07d621274927620ee50128f45",
     "Sources/ProviderShare/ShareCatalogReadProjection.swift": "8cd6155790fc7f0be1edfae6188dc415b864977d",
     "Sources/ProviderShare/ShareMediaParser.swift": "5019fb8cc25ec09a667cbeb552ce6e93e6aba9f6",
+    "Sources/CoreModels/MediaItemActionCatalog.swift": "1ac7bee15f3c44e97793d3edbec92e2463d05ad6",
     "Sources/ProviderSilo/SiloAuthentication.swift": "b62a60c35bc484eba645c2b9ed91ad83a99cd5d5",
     "Sources/ProviderSilo/SiloClient.swift": "5a7dde1bcd827b5424a068abe926c0cd9c1bef4c",
     "Sources/AppRuntime/LiveTVLibraryRuntime.swift": "a4f7d2d90452f4d9d80d8dfb252bedd5379289b6",
@@ -594,6 +602,7 @@
     "Sources/TopShelfKit/TopShelfContentBuilder.swift": "1ce8fffb2f9acfc9ab60ddecdcbc902dfe96c1c0",
     "Sources/TopShelfKit/TopShelfMetadata.swift": "be698fa6917d6e9dbe0d97077ad66badaab67123",
     "Sources/TopShelfKit/TopShelfItemResolver.swift": "83ce6c49e59a1b0ea76e674e3e21c783ceb36f85",
+    "Sources/TopShelfKit/TopShelfStore.swift": "748ceb5a4d72ab14dddcc1c378b6e7c0178e0d13",
     "Sources/TraktService/TraktWatchlistDestination.swift": "e34875fcbb2ce28f9dacc1c821a4bdd46b87634d",
     "Sources/TraktService/TraktAuthService.swift": "46b55348f2da7959a86c8babf207f74f732f5423",
     "Sources/TraktService/TraktClient.swift": "8e3dd95a75ed872c25448b5bd59132382b8b8855",
@@ -618,7 +627,6 @@
     "Sources/FeaturePlayback/SubtitleControlsFrame.swift": "434e248f2cdb978f10841bb9cb2175f8da262d50",
     "Sources/FeatureHomeCore/AggregatedLibraryProvider.swift": "68225617b13be2c4a168999de39744aa0875eff9",
     "Sources/CoreModels/ContinueWatchingPolicy.swift": "2b8120f58dc62bb52ee704d1d9cd348d236fbc73",
-    "TopShelf/TopShelf.entitlements": "36580d9ac969c43adc1197a87180ca2d9b5c68ba",
     "TopShelf/Info.plist": "191940f16714e9a54e79e28705143f1dbcdf6c73",
     "Sources/CoreModels/LibraryChannelModels.swift": "b38043a4cc33590cd35484dd9942a121edf8fa1e",
     "Sources/FeaturePlayback/LibraryChannelPlaybackSession.swift": "5f07a21ff87da82177ed60d5b28fd144abbe759b",
@@ -673,7 +681,6 @@
     "Sources/CoreUI/TextTierStyle.swift": "29c36baaea448ef77437108d6d9a10b6664d417b",
     "Sources/AppShell/AddShareView.swift": "12d0df2385b7744b745cc84639cd91d3fd0f517b",
     "Sources/AppShell/AddWebDAVShareView.swift": "0ea7ab4e24c5f77f7fe83ed244e7fc6330288861",
-    "Sources/CoreUI/ArtworkEnvironment.swift": "87a13dee15b666818b1f44e3c8fb613caec09873",
     "Sources/CoreUI/FallbackAsyncImage.swift": "a7fff8afe0b46d948a83156b2a2dacc083d3136b",
     "Sources/CoreUI/NativeActionButton.swift": "a25452c08b35b98cc01f4e9368a3b7ef23b7df9a",
     "Sources/AppShell/NavigationRailShell.swift": "b8d0621adaecffa552697cd3b92e4e377397847b",
@@ -834,16 +841,16 @@
     "Sources/CoreUI/FadingScrollView.swift": "854bc188617a073f0248a69d39f5a8e1d406a536",
     "Sources/CoreUI/NativeTVMediaControls.swift": "f198972757f43878caa0cd2b80259d0ba6f72185",
     "Sources/CoreUI/SystemCardFocus.swift": "8fb049100e79d9c40477dc1e79633d5c671681f7",
-    "Sources/CoreUI/FeaturedCardArtwork.swift": "4d38230b1cf6ee3612e9fb53f92a1ae150346ef2",
+    "Sources/CoreUI/FeaturedCardArtwork.swift": "3d30e044382ef2eebd4eca73b26e7a8aa3802fb9",
     "Sources/CoreUI/FirstUseChoiceView.swift": "5dd4934b27c0033774e55857ebeb8360b97e2a24",
     "Sources/CoreUI/HeroActionRow.swift": "3702f1f5ac24303daa424bcfaf8dd2de88438e88",
     "Sources/CoreUI/HeroArtworkDisplayState.swift": "dcafe36235f4101b648b0eae65454cb2956b164a",
-    "Sources/FeatureHome/FocusHeroHomeView.swift": "ce4e02755104b0e9a02f8e3ec52cb5a3ab4d506c",
-    "Sources/CoreUI/HeroBackdropLayer.swift": "858e997438001e2465251698ab017a8e7f0aee69",
+    "Sources/FeatureHome/FocusHeroHomeView.swift": "4c1ad0c7e77bb0a60b4b80dde1edb8d5c3934a6f",
+    "Sources/CoreUI/HeroBackdropLayer.swift": "d4eda534a1585f2bfc1f2284571ab72a170a2844",
     "Sources/CoreUI/HeroLegibilityScrim.swift": "b0ace4326fc069b912b717e7944b0a979435be9d",
     "Sources/CoreUI/HeroLegibilityTexture.swift": "84a45dc76a02898c7bc6b70a68c4d9f9a573b2d8",
     "Sources/HeroUI/HomeHeroBackdrop.swift": "7d625b2c1dae0c6b735bad646eeda24e2caa14dd",
-    "Sources/CoreUI/HeroLogoArtwork.swift": "1318650c8f67c07f87e888dbe726b5803424aac9",
+    "Sources/CoreUI/HeroLogoArtwork.swift": "be6afc236beda79570afcf6865e764d8078b33a1",
     "Sources/CoreUI/HeroLogoSizePreview.swift": "a69006cff5f476719005af3314fb7726b726efc9",
     "Sources/CoreUI/HomeLayoutSwatch.swift": "1676224000c89fbf24c1ed171c783a9c1687ddbc",
     "Sources/CoreUI/HomeSectionStatusRow.swift": "3168dbd6c6c7013e0ef362a00773f8c3fa2b0801",
@@ -1069,8 +1076,8 @@
   },
   "pages": {
     "getting-started": {
-      "contentHash": "5a004d587fa6eecf24ff8dcf1ae40d6eef58f8395392faebe477c73fb0b94802",
-      "updatedAt": "2026-11-23T20:44:32.023Z"
+      "contentHash": "aeed2037af1f5f232a7d1307444fc02f4bd29f3a92bf27f60a759a7ddf3d93c7",
+      "updatedAt": "2026-11-24T19:54:13.575Z"
     },
     "servers": {
       "contentHash": "2bc1ac4500caf066428a096a601893bba5d26af8259761f0a335f668a42a0e26",
@@ -1105,8 +1112,8 @@
       "updatedAt": "2026-11-13T16:54:28.421Z"
     },
     "watchlist": {
-      "contentHash": "272a57cd3ea891110808c5aed0ce743cf317e99326ad22502a8201d994a03587",
-      "updatedAt": "2026-11-13T16:54:28.421Z"
+      "contentHash": "12a6e9fac825cb417b235e45c41f367d42c1266858678e745076188267d809a6",
+      "updatedAt": "2026-11-24T19:54:13.575Z"
     },
     "customize-libraries": {
       "contentHash": "accf4d74d275e881a860762d4e059569946cbfef217ba9ad302c3f4c7bf01b33",
@@ -1169,8 +1176,12 @@
       "updatedAt": "2026-11-16T19:05:46.736Z"
     },
     "appearance": {
-      "contentHash": "0493e7f13a82c36b07f2b2d3a8bf89d7300076d93fc65b82ea7245268d3d9ef2",
-      "updatedAt": "2026-11-16T19:05:46.736Z"
+      "contentHash": "4aed3e6879d0eee545740a225a1d2b566c4d4bee3d2544acb3b0d9e712fa9fc5",
+      "updatedAt": "2026-11-24T19:54:13.575Z"
+    },
+    "artwork": {
+      "contentHash": "be88b2133f19c2f8352eda979bf15dd6e0bacb4f708dc6f0cbf4aac2901da07b",
+      "updatedAt": "2026-11-24T19:54:13.575Z"
     },
     "spoiler-protection": {
       "contentHash": "df269a3181136fd815aae76232e1c0432ab81d58e5a6a2b7e3748e65c1aadbd2",
@@ -1181,8 +1192,8 @@
       "updatedAt": "2026-11-07T15:39:42.803Z"
     },
     "metadata-and-ratings": {
-      "contentHash": "05604ded55b4973eed89f1d170f14d82c60219a8ddb31a550dd6f83c4203da68",
-      "updatedAt": "2026-11-08T15:40:24.708Z"
+      "contentHash": "98be6fe16dd0e7010a2e37a1f7285614594dc0cebe967f1bf61e7958ab9ab59f",
+      "updatedAt": "2026-11-24T19:54:13.575Z"
     },
     "apple-tv-profiles": {
       "contentHash": "901bfe91534391442576f188e3dce304e4195ff22cbf630d7376cfe59796bffe",
@@ -1201,16 +1212,16 @@
       "updatedAt": "2026-11-23T20:44:32.023Z"
     },
     "trackers": {
-      "contentHash": "c076104251d10557dd34f15544048c61d2c17da1933386e3e0582e24650f0e15",
-      "updatedAt": "2026-11-23T20:44:32.023Z"
+      "contentHash": "7b0b64b974d9b13e064915b5135da6d8f2751406f8e4a4509eb5be6cafd7e4f2",
+      "updatedAt": "2026-11-24T19:54:13.575Z"
     },
     "media-requests": {
       "contentHash": "b7a061b0cbf03d3095fe5285452322adf771c3cef08c2e45d4951a1e4d2866d1",
       "updatedAt": "2026-11-16T19:05:46.736Z"
     },
     "platform-controls": {
-      "contentHash": "9c7a8ffc2136255b98de5c502c7b46d0607133033e82fcdca674ed06e550ffdc",
-      "updatedAt": "2026-11-23T20:44:32.023Z"
+      "contentHash": "582a79f02fc3e779227b2471d03103f22a0c6bf3a72a05bb74705d697e08902e",
+      "updatedAt": "2026-11-24T19:54:13.575Z"
     },
     "feedback-and-bugs": {
       "contentHash": "c6353c0195c184382f0da3e15a0d89656b8b06cb58d73a9dbe37a50aac5dee61",
@@ -1222,7 +1233,7 @@
     }
   },
   "discovery": {
-    "snapshotHash": "47b8797fbdc61b9384de83ba52f5c82117ee8eaa170663302847ed090b676bd5",
+    "snapshotHash": "2da299778a08916b2865fc2ec7be4083305bdeca93a61e752273e00bea6acd18",
     "structureHash": "9d6aa3551337b75b832b6568f27f2642c5c0f2d89fd30f247254ebc3fd02152b",
     "fileCount": 2227,
     "modules": [
@@ -5697,7 +5708,9 @@
         "owner",
         "|"
       ],
-      "Sources/CoreModels/MediaItemActionCatalog.swift": [],
+      "Sources/FeatureWatchlistCore/WatchlistPresentationResolver.swift": [
+        "watchlist.wetrakr"
+      ],
       "Sources/FeatureHomeCore/WatchlistBrowseModel.swift": [],
       "Sources/FeatureHomeCore/HomeViewModel.swift": [
         "\u0001",
@@ -10447,6 +10460,105 @@
         "tmdb:person:"
       ],
       "Sources/CoreUI/AppLanguageScope.swift": [],
+      "Sources/CoreUI/ArtworkEnvironment.swift": [
+        "_"
+      ],
+      "Sources/CoreUI/ArtworkFirstPaintResolver.swift": [
+        "none"
+      ],
+      "Sources/MetadataKit/ArtworkRouter.swift": [
+        " , ",
+        ",",
+        "|portrait-hero-v1"
+      ],
+      "Sources/MetadataKit/TMDbMetadataProvider.swift": [
+        ".png",
+        ".svg",
+        "/",
+        "/credits",
+        "Actor",
+        "Authorization",
+        "Composer",
+        "Director",
+        "Executive Producer",
+        "Imdb",
+        "Original Music Composer",
+        "Producer",
+        "Screenplay",
+        "Series",
+        "SeriesTmdb",
+        "Story",
+        "TMDB cast enrichment failed; retaining available server credits.",
+        "Teaser",
+        "Teleplay",
+        "Tmdb",
+        "Trailer",
+        "Tvdb",
+        "Unsupported crew field",
+        "Writer",
+        "YouTube",
+        "en",
+        "en_US_POSIX",
+        "first_air_date_year",
+        "https://api.themoviedb.org",
+        "https://image.tmdb.org/t/p",
+        "imdb_id",
+        "language",
+        "movie",
+        "mul",
+        "original",
+        "recommendations",
+        "similar",
+        "tmdb",
+        "tv",
+        "tvdb_id",
+        "und",
+        "w500",
+        "xx",
+        "year",
+        "yyyy-MM-dd",
+        "zxx"
+      ],
+      "Sources/MetadataKit/TVDBClient.swift": [
+        "&=?+",
+        "(",
+        ")",
+        "******",
+        "/",
+        "Authorization",
+        "Content-Type",
+        "POST",
+        "TheTVDB returned text in a different language; trying another source.",
+        "TheTVDB translation lookup failed; retaining available metadata.",
+        "abridged",
+        "apikey",
+        "application/json",
+        "compilation",
+        "condensed",
+        "en",
+        "eng",
+        "fandub",
+        "gagdub",
+        "http",
+        "https://artworks.thetvdb.com",
+        "imdb",
+        "login",
+        "movie",
+        "movies",
+        "parody",
+        "reaction",
+        "recap",
+        "series",
+        "themoviedb",
+        "tmdb"
+      ],
+      "Sources/AppShelliOS/PlozziOSDownloadArtwork.swift": [
+        ".",
+        "..",
+        "A pinned download artwork filename is invalid",
+        "An unattached download artwork file could not be removed",
+        "Download artwork storage could not be resolved"
+      ],
       "Sources/CoreModels/SpoilerSettings.swift": [
         "Blur Thumbnail",
         "Episode",
@@ -12373,18 +12485,6 @@
         "Playback orientation preference. Stay sideways and automatically follow the landscape direction, even with system rotation lock enabled.",
         "Portrait"
       ],
-      "Sources/AppShelliOS/PlozziOSLivePresentationControls.swift": [
-        "Active",
-        "AirPlay",
-        "Connected",
-        "Inactive",
-        "Not connected",
-        "Picture in Picture",
-        "Starting",
-        "live-channel-airplay",
-        "live-channel-pip",
-        "pip.enter"
-      ],
       "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift": [
         ", ",
         "Diagnostics",
@@ -13807,6 +13907,18 @@
         "Plozz.player-orientation"
       ],
       "Sources/AppShelliOS/PlozziOSPictureInPictureController.swift": [],
+      "Sources/AppShelliOS/PlozziOSLivePresentationControls.swift": [
+        "Active",
+        "AirPlay",
+        "Connected",
+        "Inactive",
+        "Not connected",
+        "Picture in Picture",
+        "Starting",
+        "live-channel-airplay",
+        "live-channel-pip",
+        "pip.enter"
+      ],
       "Sources/CoreModels/TopShelfSettings.swift": [
         "Top Shelf item count was outside the supported range; clamping.",
         "Unable to restore device Top Shelf settings; using defaults.",
@@ -14369,57 +14481,12 @@
         "Featured discovery admission is full; keeping cached source results",
         "Featured discovery reached its response deadline; keeping completed sources"
       ],
-      "Sources/MetadataKit/TMDbMetadataProvider.swift": [
-        ".png",
-        ".svg",
-        "/",
-        "/credits",
-        "Actor",
-        "Authorization",
-        "Composer",
-        "Director",
-        "Executive Producer",
-        "Imdb",
-        "Original Music Composer",
-        "Producer",
-        "Screenplay",
-        "Series",
-        "SeriesTmdb",
-        "Story",
-        "TMDB cast enrichment failed; retaining available server credits.",
-        "Teaser",
-        "Teleplay",
-        "Tmdb",
-        "Trailer",
-        "Tvdb",
-        "Unsupported crew field",
-        "Writer",
-        "YouTube",
-        "en",
-        "en_US_POSIX",
-        "first_air_date_year",
-        "https://api.themoviedb.org",
-        "https://image.tmdb.org/t/p",
-        "imdb_id",
-        "language",
-        "movie",
-        "mul",
-        "original",
-        "recommendations",
-        "similar",
-        "tmdb",
-        "tv",
-        "tvdb_id",
-        "und",
-        "w500",
-        "xx",
-        "year",
-        "yyyy-MM-dd",
-        "zxx"
-      ],
       "Sources/MetadataKit/ScheduleEnrichment.swift": [
         "en_US_POSIX",
         "yyyy-MM-dd"
+      ],
+      "Sources/MetadataKit/TVDBArtworkProvider.swift": [
+        "tvdb"
       ],
       "Sources/ProviderIPTV/IPTVCatalog.swift": [
         "0",
@@ -15090,6 +15157,7 @@
         "x265",
         "xvid"
       ],
+      "Sources/CoreModels/MediaItemActionCatalog.swift": [],
       "Sources/ProviderSilo/SiloAuthentication.swift": [
         ".",
         "..",
@@ -15260,6 +15328,22 @@
         "eia_708"
       ],
       "Sources/TopShelfKit/TopShelfItemResolver.swift": [],
+      "Sources/TopShelfKit/TopShelfStore.swift": [
+        "/",
+        "Caches",
+        "Library",
+        "Unable to save the Top Shelf snapshot; App Group storage is unavailable.",
+        "Unable to save the Top Shelf snapshot; keeping the previous shelf.",
+        "account",
+        "action",
+        "com.plozz.app",
+        "group.com.thatcube.Plozz",
+        "item",
+        "plozz",
+        "top-shelf",
+        "topshelf-art",
+        "topshelf-snapshot.json"
+      ],
       "Sources/TraktService/TraktWatchlistDestination.swift": [
         "#",
         "disconnected",
@@ -16128,9 +16212,6 @@
         "hourglass",
         "https://nas.local/dav",
         "lock.open"
-      ],
-      "Sources/CoreUI/ArtworkEnvironment.swift": [
-        "_"
       ],
       "Sources/CoreUI/FallbackAsyncImage.swift": [
         "default",

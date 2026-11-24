@@ -8,7 +8,7 @@ For regional dates and watch offers, see [Release & Availability](/media-request
 
 Open **Settings > Metadata Providers**, or follow **Metadata Providers (TMDB, TheTVDB…)** from Artwork settings.
 
-These choices are **shared by all profiles**, unlike [artwork preferences](/appearance/).
+These choices are **shared by all profiles**, unlike [artwork preferences](/artwork/).
 
 - **Recommended**: lets Plozz choose sources for each kind of information.
 - **Custom**: reorder sources; move one below **Disabled** to disable it.

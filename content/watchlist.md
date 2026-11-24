@@ -9,13 +9,13 @@ Watchlist brings saved movies and shows together for the active **Plozz profile*
 3. Open **Watchlist** from navigation. On mobile, check **More** in compact native navigation, or scroll the opaque bottom strip sideways. If hidden, [show its shortcut](/home-and-navigation/#arrange-shortcuts-and-details).
 4. Choose **Remove from Watchlist** to undo a save.
 
-On a show's details, the Watchlist action saves the show, not the highlighted episode.
+On a show's details, Watchlist saves the show, not the highlighted episode.
 
 **Removing…** marks a pending removal. A local confirmation does not prove every connected service has accepted the change; unavailable services can need another attempt.
 
 ## Filter and sort the page
 
-You can also reach this page from an eligible [Home row shortcut](/browse-home-rows/#open-a-larger-grid).
+Home's [Watchlist shortcut](/browse-home-rows/#open-a-larger-grid) opens the same page.
 
 Use the controls above the Watchlist grid. Apple TV shows filtering first; iPhone/iPad show sorting first.
 
@@ -25,6 +25,10 @@ Use the controls above the Watchlist grid. Apple TV shows filtering first; iPhon
 Choosing Name starts A-Z; choosing either date starts newest first. Date Added uses Watchlist save dates, not library-import dates. Entries without a usable save date follow dated entries.
 
 These browse choices belong to this profile and can [sync or transfer](/profiles-and-sync/). They arrange the Watchlist page, not its Home row.
+
+## A saved title looks different
+
+When Plozz finds an accessible library copy, its title and artwork can replace the discovery version without removing your save. [Artwork preferences](/artwork/#change-one-part-of-the-app) can still favor online images. A changed poster alone does not mean a different video.
 
 ## Understand connected lists
 

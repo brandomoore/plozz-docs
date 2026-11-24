@@ -54,7 +54,7 @@ Use **Retry saved connection** after a connection failure. **Replace API key** c
 
 ## Pause reporting without disconnecting
 
-Open a connected service and turn off its switch, such as **Use Trakt**, **Use Last.fm**, or **Use PublicMetaDB**. This pauses reporting for this profile on this device and hides share-history sync controls. Turn it on to resume reporting. This does not erase history already sent.
+Open a connected service and turn off its switch, such as **Use Trakt**, **Use Last.fm**, or **Use PublicMetaDB**. This pauses reporting for this profile on this device and hides share-history sync controls. If saving fails, retry before assuming reporting stopped. Turn it on to resume reporting. This does not erase history already sent.
 
 Connected Watchlist lists still sync. Previously enabled share sync can resume when you turn reporting back on; turn off **2-way sync** first to stop that. **Disconnect** stops using the account.
 

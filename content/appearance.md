@@ -30,15 +30,9 @@ With **Show unwatched episode count** on, choose **Episode count style**. **Show
 
 ## Choose artwork
 
-In **Artwork**, presets replace your custom choices:
+Open **Artwork** to keep your library's pictures or prefer online alternatives. A preset replaces this profile's individual choices without editing server images.
 
-- **Recommended**: Plozz chooses artwork for each area.
-- **Prefer my library's artwork**: use library images first, with online fallback when missing.
-- **Prefer artwork from metadata providers**: online images first, with library fallback. Extra lookups can slow browsing.
-
-Choose **Customize by view**, then **Library** or **Metadata providers** for each area. **Title detail pages** also offers **Mixed**: online backgrounds and logos with library posters for related titles. Home's Watchlist row and page are separate. Existing downloads keep their images.
-
-[Metadata Providers](/metadata-and-ratings/) settings are shared; artwork choices are per-profile.
+Follow [Choose posters and artwork](/artwork/) for presets, per-screen choices, poster language, and missing download images. Artwork choices belong to your profile; [Metadata Providers settings](/metadata-and-ratings/) are shared.
 
 For the full-screen music player's separate colors and platform-specific settings path, see [Change the player's look](/music/#change-the-player-s-look).
 

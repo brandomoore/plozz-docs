@@ -1460,7 +1460,7 @@
       "Sources/FeatureWatchlistCore/WatchlistModel.swift",
       "Sources/AppRuntime/UniversalWatchlistRuntime.swift",
       "Sources/AppShelliOS/PlozziOSOfflineModeView.swift",
-      "Sources/CoreModels/MediaItemActionCatalog.swift",
+      "Sources/FeatureWatchlistCore/WatchlistPresentationResolver.swift",
       "Sources/FeatureHomeCore/WatchlistBrowseModel.swift",
       "Sources/FeatureHomeCore/HomeViewModel.swift",
       "Sources/AppShell/HomeTab.swift",
@@ -4830,14 +4830,6 @@
           "source": "Sources/CoreModels/CardCaptionSettings.swift"
         },
         {
-          "text": "Mixed",
-          "source": "Sources/CoreModels/ArtworkSettings.swift"
-        },
-        {
-          "text": "Title detail pages",
-          "source": "Sources/CoreModels/ArtworkSettings.swift"
-        },
-        {
           "text": "On",
           "source": "Sources/CoreModels/CardCaptionSettings.swift"
         },
@@ -4910,30 +4902,6 @@
           "source": "Sources/FeatureSettings/HomeRowsSettingsView.swift"
         },
         {
-          "text": "Recommended",
-          "source": "Sources/CoreModels/ArtworkSettings.swift"
-        },
-        {
-          "text": "Customize by view",
-          "source": "Sources/FeatureSettings/ViewCustomizationControls.swift"
-        },
-        {
-          "text": "Library",
-          "source": "Sources/CoreModels/ArtworkSettings.swift"
-        },
-        {
-          "text": "Metadata providers",
-          "source": "Sources/CoreModels/ArtworkSettings.swift"
-        },
-        {
-          "text": "Prefer my library's artwork",
-          "source": "Sources/CoreModels/ArtworkSettings.swift"
-        },
-        {
-          "text": "Prefer artwork from metadata providers",
-          "source": "Sources/CoreModels/ArtworkSettings.swift"
-        },
-        {
           "text": "System",
           "source": "Sources/CoreModels/AppLanguage.swift"
         },
@@ -4956,6 +4924,165 @@
         {
           "text": "Showcase",
           "source": "Sources/FeatureSettings/HomeRowStylePicker.swift"
+        }
+      ],
+      "emphasis": []
+    }
+  },
+  {
+    "slug": "artwork",
+    "title": "Choose posters and artwork",
+    "seoTitle": "Choose Plozz artwork sources, poster language, and per-screen images",
+    "description": "Keep library artwork or prefer online images, customize individual screens, choose poster language, and recover missing download pictures without deleting videos.",
+    "section": "Personalize",
+    "kind": "guide",
+    "file": "artwork.md",
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "sources": [
+      "Sources/FeatureSettings/PreferenceDetailViews.swift",
+      "Sources/CoreUI/ProfileSettingsCategory.swift",
+      "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+      "Sources/FeatureSettings/ArtworkSettingsControls.swift",
+      "Sources/FeatureSettings/ViewCustomizationControls.swift",
+      "Sources/CoreModels/ArtworkSettings.swift",
+      "Sources/CoreModels/AppLanguage.swift",
+      "Sources/CoreUI/AppLanguageScope.swift",
+      "Sources/CoreUI/ArtworkEnvironment.swift",
+      "Sources/CoreUI/ArtworkFirstPaintResolver.swift",
+      "Sources/MetadataKit/ArtworkRouter.swift",
+      "Sources/MetadataKit/TMDbMetadataProvider.swift",
+      "Sources/MetadataKit/TVDBClient.swift",
+      "Sources/AppShelliOS/PlozziOSDownloadArtwork.swift",
+      "Sources/AppShelliOS/PlozziOSDownloadsModel.swift",
+      "Sources/AppShelliOS/PlozziOSOfflineModeView.swift",
+      "Sources/AppShelliOS/PlozziOSDownloadsView.swift",
+      "Sources/AppShelliOS/PlozziOSAppModel.swift"
+    ],
+    "watch": [
+      "Sources/CoreModels/ArtworkSettings.swift",
+      "Sources/FeatureSettings/ArtworkSettingsControls.swift",
+      "Sources/CoreUI/Artwork",
+      "Sources/MetadataKit/ArtworkRouter.swift",
+      "Sources/MetadataKit/TMDbMetadataProvider.swift",
+      "Sources/MetadataKit/TVDB"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Appearance",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        },
+        {
+          "text": "Artwork",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Recommended",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Prefer my library's artwork",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Prefer artwork from metadata providers",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Customize by view",
+          "source": "Sources/FeatureSettings/ViewCustomizationControls.swift"
+        },
+        {
+          "text": "Artwork by view",
+          "source": "Sources/FeatureSettings/ArtworkSettingsControls.swift"
+        },
+        {
+          "text": "Library",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Metadata providers",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Title detail pages",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Mixed",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Home",
+          "source": "Sources/FeatureSettings/ArtworkSettingsControls.swift"
+        },
+        {
+          "text": "Showcase / hero",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Other Home rows",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Libraries",
+          "source": "Sources/FeatureSettings/ArtworkSettingsControls.swift"
+        },
+        {
+          "text": "Browse",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Collections",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Playlists",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Across the app",
+          "source": "Sources/FeatureSettings/ArtworkSettingsControls.swift"
+        },
+        {
+          "text": "Watchlist page",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Episode browser",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Video player artwork",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Top Shelf",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Downloads",
+          "source": "Sources/CoreModels/ArtworkSettings.swift"
+        },
+        {
+          "text": "Language",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        },
+        {
+          "text": "Offline Mode",
+          "source": "Sources/AppShelliOS/PlozziOSOfflineModeView.swift"
+        },
+        {
+          "text": "Downloaded",
+          "source": "Sources/AppShelliOS/PlozziOSDownloadsView.swift"
         }
       ],
       "emphasis": []
@@ -6279,7 +6406,7 @@
       "Sources/AppShell/HomeTab.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/CoreModels/PlaybackOrientation.swift",
-      "Sources/AppShelliOS/PlozziOSLivePresentationControls.swift",
+      "Sources/AppShell/MainTabView.swift",
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
       "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
       "Sources/FeaturePlayback/InfoPanelView.swift",
@@ -6287,7 +6414,7 @@
       "Sources/CoreUI/ProfileSettingsCategory.swift",
       "Sources/CoreUI/SettingsCopy.swift",
       "Sources/CoreModels/VideoZoomPreference.swift",
-      "Sources/FeaturePlayback/PlayerTouchGestureSurface.swift",
+      "TopShelf/TopShelf.entitlements",
       "Sources/CoreModels/PlaybackSettings.swift"
     ],
     "watch": [
@@ -6296,7 +6423,7 @@
       "Sources/FeaturePlayback/Player",
       "Sources/FeaturePlayback/LiveChannel",
       "Sources/TopShelfKit/",
-      "Sources/FeatureSettings/TopShelf"
+      "TopShelf/"
     ],
     "platforms": [
       "Apple TV",
@@ -6382,6 +6509,10 @@
           "source": "Sources/AppShell/HomeTab.swift"
         },
         {
+          "text": "Home",
+          "source": "Sources/AppShell/MainTabView.swift"
+        },
+        {
           "text": "Volume and brightness gestures",
           "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
         },
@@ -6415,15 +6546,7 @@
         },
         {
           "text": "AirPlay",
-          "source": "Sources/AppShelliOS/PlozziOSLivePresentationControls.swift"
-        },
-        {
-          "text": "AirPlay",
           "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
-        },
-        {
-          "text": "Picture in Picture",
-          "source": "Sources/AppShelliOS/PlozziOSLivePresentationControls.swift"
         },
         {
           "text": "Picture in Picture",

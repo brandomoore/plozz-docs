@@ -161,6 +161,7 @@
         "TopShelf/ContentProvider.swift",
         "Sources/TopShelfKit/TopShelfPublisher.swift",
         "Sources/TopShelfKit/TopShelfContentBuilder.swift",
+        "Sources/TopShelfKit/TopShelfStore.swift",
         "Sources/TopShelfKit/TopShelfMetadata.swift",
         "Sources/TopShelfKit/TopShelfItemResolver.swift",
         "Sources/CoreModels/TopShelfSettings.swift",
@@ -175,7 +176,7 @@
         "TopShelf/TopShelf.entitlements",
         "TopShelf/Info.plist"
       ],
-      "answer": "Put Plozz in Apple TV's top Home Screen row. From an non-Kids profile, Settings > Manage Plozz > Top Shelf offers default-on Show Top Shelf, Posters (default) or Full Screen and independent 1-20 Continue Watching/Recently Added counts, defaulting to four each. Full Screen expands with tvOS swipe-up; the first carousel action requests playback and the second opens details without autoplay. These actions have OS-owned captions, not verified app labels. Poster selection requests playback. Preferences stay device-local across Plozz profiles; disabling clears media but retains choices. A saved, access-scoped Home snapshot is not live browsing; short feeds are not padded, same-source repeats deduplicate in Full Screen, and authorization/source failures remain visible. Artwork and full-screen spoilers respect profile policy."
+      "answer": "Put Plozz in Apple TV's top Home Screen row, then open Plozz, select a profile and load Home under each Apple TV system user. The canonical app and extension run as the current system user; the extension reads that user's app-group cache rather than fetching another user's Home or querying providers. Without a saved snapshot, the shelf has no media. From a non-Kids Plozz profile, Settings > Manage Plozz > Top Shelf offers default-on Show Top Shelf, Posters (default) or Full Screen and independent 1-20 Continue Watching/Recently Added counts, defaulting to four each. Full Screen expands with tvOS swipe-up; the first carousel action requests playback and the second opens details without autoplay. These actions have OS-owned captions, not verified app labels. Poster selection requests playback. Preferences stay device-local and shared among Plozz profiles, not an assurance of a shared snapshot between Apple TV system users; disabling clears media but retains choices. The saved Home snapshot is not live browsing; short feeds are not padded, same-source repeats deduplicate in Full Screen, and authorization/source failures remain visible. Artwork and full-screen spoilers respect profile policy."
     },
     "community-skip-markers": {
       "documents": [
@@ -520,9 +521,12 @@
         "Sources/CoreModels/TopShelfSettings.swift",
         "Sources/FeatureSettings/TopShelfSettingsView.swift",
         "Sources/AppShell/MainTabView.swift",
-        "Sources/AppShell/HomeTab.swift"
+        "Sources/AppShell/HomeTab.swift",
+        "Sources/TopShelfKit/TopShelfStore.swift",
+        "App/Resources/Plozz.entitlements",
+        "TopShelf/TopShelf.entitlements"
       ],
-      "summary": "The extension renders the shared saved snapshot as native poster sections or a details carousel. Full Screen has distinct playback and details actions with OS-owned captions; both resolve only within admitted active accounts. The adult settings entry controls default-on visibility, style and per-feed counts on this device without broadening source permissions."
+      "summary": "The current-system-user extension renders the Home snapshot saved in that user's app-group cache, without provider/network calls or reading another Apple TV user's history. Each system user must open Plozz and load Home before their shelf has media. Full Screen has distinct playback and details actions with OS-owned captions; both resolve only within admitted active accounts. The adult settings entry controls default-on visibility, style and per-feed counts locally across Plozz profiles without broadening source permissions."
     },
     "TopShelf/Info.plist": {
       "areas": [
@@ -545,8 +549,13 @@
       ],
       "sources": [
         "TopShelf/TopShelf.entitlements",
-        "Sources/TopShelfKit/TopShelfPublisher.swift"
-      ]
+        "App/Resources/Plozz.entitlements",
+        "TopShelf/ContentProvider.swift",
+        "Sources/TopShelfKit/TopShelfPublisher.swift",
+        "Sources/TopShelfKit/TopShelfStore.swift",
+        "Sources/AppShell/HomeTab.swift"
+      ],
+      "summary": "The canonical extension declares runs-as-current-user and the same app group used by the app's Home publisher. Its stored snapshot follows the Apple TV system user; shared app sign-ins/profile storage do not make a different system user's shelf a live data source. No additional permission prompt or extension sign-in procedure is exposed."
     }
   },
   "areas": {
@@ -844,6 +853,18 @@
           "slug": "appearance"
         },
         {
+          "slug": "artwork",
+          "anchor": "choose-the-main-source"
+        },
+        {
+          "slug": "artwork",
+          "anchor": "change-one-part-of-the-app"
+        },
+        {
+          "slug": "artwork",
+          "anchor": "posters-in-another-language"
+        },
+        {
           "slug": "appearance",
           "anchor": "choose-colors-and-transparency"
         },
@@ -890,7 +911,7 @@
         "Sources/AppShelliOS/PlozziOSSettingsView.swift",
         "Sources/CoreModels/ProfileSettingsSnapshot.swift"
       ],
-      "summary": "Keep themes, density, focus, artwork and language distinctions in one guide. Artwork > Customize by view offers per-area Library/Metadata providers choices, plus Mixed for title details; selecting another preset replaces overrides. Apple TV's contextual help illustrations are reachable and informational, not an omitted destination. Customize labels selects Page; Home/Recommended have page Default plus row Overrides. Mixed hides captions on series artwork and in TV Showcase. Continue Watching's Use default inherits its context; On/Off applies to both Home and Recommended. Home Libraries has its own override; contextual editors share the same preference store and collection/playlist members use Browse. On Apple TV only, Page > Movie & show details offers Only show descriptions on focus after Episodes; it defaults off, needs episode labels on and collapses unfocused episode synopses without relaxing spoiler policy. Watch indicators distinguish unstarted flags, completed checks and Hidden, separately from episode counts, count style and Show progress bars. Hiding marks/bars neither changes history nor clears resume; these profile-owned settings are transfer-allowlisted. Retain Liquid Glass, independent header sizes, profile artwork versus shared metadata sources, saved download artwork, and interface language versus media language/device region. Interface language also requests localized external metadata/biographies where supported, with original/English fallback; server/NFO text is unchanged. The non-English Language feedback action is a separate GitHub translation report, not mobile Help & Diagnostics email."
+      "summary": "Keep theme/cards/language orientation in Appearance, with a focused artwork guide for source selection, per-view scope, localized posters and missing download pictures. Artwork > Customize by view offers per-area Library/Metadata providers choices, plus Mixed for title details; selecting another preset replaces overrides. Apple TV's contextual help illustrations are reachable and informational, not an omitted destination. Customize labels selects Page; Home/Recommended have page Default plus row Overrides. Mixed hides captions on series artwork and in TV Showcase. Continue Watching's Use default inherits its context; On/Off applies to both Home and Recommended. Home Libraries has its own override; contextual editors share the same preference store and collection/playlist members use Browse. On Apple TV only, Page > Movie & show details offers Only show descriptions on focus after Episodes; it defaults off, needs episode labels on and collapses unfocused episode synopses without relaxing spoiler policy. Watch indicators distinguish unstarted flags, completed checks and Hidden, separately from episode counts, count style and Show progress bars. Hiding marks/bars neither changes history nor clears resume; these profile-owned settings are transfer-allowlisted. Retain Liquid Glass, independent header sizes, profile artwork versus shared metadata sources, saved download artwork, and interface language versus media language/device region. Interface language also requests localized external metadata/biographies where supported, with original/English fallback; server/NFO text is unchanged. Provider-specific poster locale/fallback evidence is recorded in MetadataKit and Language; download repair is recorded on the Downloads screen. The non-English Language feedback action is a separate GitHub translation report, not mobile Help & Diagnostics email."
     },
     "spoilers": {
       "documents": [
@@ -1330,6 +1351,10 @@
         {
           "slug": "downloads",
           "anchor": "update-offline-subtitles"
+        },
+        {
+          "slug": "artwork",
+          "anchor": "missing-download-images"
         }
       ],
       "sources": [
@@ -2130,6 +2155,7 @@
         "Sources/FeatureWatchlistCore/WatchlistModel.swift",
         "Sources/FeatureWatchlistCore/WatchlistReconciler.swift",
         "Sources/FeatureWatchlistCore/WatchlistUnion.swift",
+        "Sources/FeatureWatchlistCore/WatchlistPresentationResolver.swift",
         "Sources/AppRuntime/UniversalWatchlistRuntime.swift",
         "Sources/CoreModels/ProfileServerIdentityPrompts.swift",
         "Sources/AppShell/ProfileServerIdentityPromptView.swift",
@@ -2144,7 +2170,7 @@
         "Sources/ProviderPlex/PlexWatchlistDestination.swift",
         "Sources/ProviderSilo/SiloWatchlistDestination.swift"
       ],
-      "summary": "The focused Watchlist guide covers saving, removal, navigation, filtering and sorting on Apple TV/iPhone/iPad. Shared UI exposes All/Movies/TV Shows, Clear Filters, Date Added/Release Date/Name and Order. Save dates are distinct from library import; undated entries follow dated entries. The profile-scoped browse model and transfer allowlist preserve those choices, independently of Home row order. Document explicit saves plus enabled-destination contributions, minus explicit removals. Jellyfin/Emby contribute Favorites; Plex and Silo contribute Watchlists. Disabling a server retracts native contributions without erasing explicit saves. Plex user selection determines native identity; decline excludes that list without disabling browsing/playback, and disabling/re-enabling clears the decline for another choice. Confirmed native-list removals after acknowledged additions can propagate; genuine re-adds can supersede removal. Failed reads/deliveries are not confirmed deletions and are retried. Pending Removing and optimistic local confirmation are not proof that every remote destination accepted the change. Native timestamps, release-date payloads and ownership enrichment support this workflow, not another settings page."
+      "summary": "The focused Watchlist guide covers saving, removal, navigation, filtering and sorting on Apple TV/iPhone/iPad. Shared UI exposes All/Movies/TV Shows, Clear Filters, Date Added/Release Date/Name and Order. Save dates are distinct from library import; undated entries follow dated entries. Verified accessible library ownership can supply native title/artwork during union or later presentation resolution while preserving the explicit save identity/date; artwork policy still chooses the displayed image. This has a reader-facing explanation, not a new control. The profile-scoped browse model and transfer allowlist preserve browse choices, independently of Home row order. Document explicit saves plus enabled-destination contributions, minus explicit removals. Jellyfin/Emby contribute Favorites; Plex and Silo contribute Watchlists. Disabling a server retracts native contributions without erasing explicit saves. Plex user selection determines native identity; decline excludes that list without disabling browsing/playback, and disabling/re-enabling clears the decline for another choice. Confirmed native-list removals after acknowledged additions can propagate; genuine re-adds can supersede removal. Failed reads/deliveries are not confirmed deletions and are retried. Pending Removing and optimistic local confirmation are not proof that every remote destination accepted the change. Native timestamps, release-date payloads and ownership enrichment support this workflow, not another settings page."
     },
     "LastFmService": {
       "areas": [
@@ -2290,6 +2316,7 @@
       "areas": [
         "library",
         "metadata",
+        "appearance",
         "home-navigation",
         "playback",
         "music",
@@ -2311,9 +2338,13 @@
         "Sources/MetadataKit/SeriesScheduleResolver.swift",
         "Sources/MetadataKit/ScheduleEnrichment.swift",
         "Sources/AppRuntime/UpcomingFeedLoader.swift",
-        "Sources/FeatureHomeCore/UpcomingView.swift"
+        "Sources/FeatureHomeCore/UpcomingView.swift",
+        "Sources/MetadataKit/TVDBArtworkProvider.swift",
+        "Sources/MetadataKit/TVDBClient.swift",
+        "Sources/MetadataKit/ArtworkRouter.swift",
+        "Sources/CoreUI/ArtworkEnvironment.swift"
       ],
-      "summary": "Keep provider ordering/cache controls in metadata, lyric availability and LRCLIB title/artist/duration sharing in music, and community skips in playback. The music area traces the device-wide toggle into the lyric resolver's online-query gate. Home explains selecting public Discovery catalogues independently of Seerr requests, with Kids restrictions and no implied playable ownership. This is recommendation discovery, not the FeatureDiscovery module's LAN server search. Marker requests include applicable title/episode metadata and runtime, not video uploads; server markers and third-party coverage remain distinct. Regional release/watch-offer information on external/discovery details is independent of Seerr. Upcoming also consumes episode schedules through SeriesScheduleResolver and regional digital movie-release events through ExternalTitleMetadataResolver; watched/in-progress shows, saved movies and authorized personal requests supply interests. The calendar guide explains missing matching/dates, retained dates during source failure and why dates grant neither playback nor subscription access. TMDB's authorized videos API can supply trailer links after server-owned files and server metadata are considered; it does not verify YouTube availability. Explain the reachable external handoff in library, not a nonexistent streaming-trailer provider or scraping workflow."
+      "summary": "Keep provider ordering/cache controls in metadata, lyric availability and LRCLIB title/artist/duration sharing in music, and community skips in playback. The artwork guide explains that interface language requests localized TMDB/TheTVDB posters, not translated library images; provider ranking falls back when language-specific artwork is absent. ArtworkEnvironment carries locale/source policy and ArtworkRouter keys poster caches by the applicable provider language. TVDB preserves regional/script locale variants. The music area traces the device-wide toggle into the lyric resolver's online-query gate. Home explains selecting public Discovery catalogues independently of Seerr requests, with Kids restrictions and no implied playable ownership. This is recommendation discovery, not the FeatureDiscovery module's LAN server search. Marker requests include applicable title/episode metadata and runtime, not video uploads; server markers and third-party coverage remain distinct. Regional release/watch-offer information on external/discovery details is independent of Seerr. Upcoming also consumes episode schedules through SeriesScheduleResolver and regional digital movie-release events through ExternalTitleMetadataResolver; watched/in-progress shows, saved movies and authorized personal requests supply interests. The calendar guide explains missing matching/dates, retained dates during source failure and why dates grant neither playback nor subscription access. TMDB's authorized videos API can supply trailer links after server-owned files and server metadata are considered; it does not verify YouTube availability. Explain the reachable external handoff in library, not a nonexistent streaming-trailer provider or scraping workflow."
     },
     "ProviderIPTV": {
       "areas": [
@@ -2488,9 +2519,13 @@
         "Sources/FeatureSettings/TopShelfStylePicker.swift",
         "Sources/CoreModels/TopShelfSettings.swift",
         "Sources/AppShell/MainTabView.swift",
-        "Sources/AppShell/HomeTab.swift"
+        "Sources/AppShell/HomeTab.swift",
+        "Sources/TopShelfKit/TopShelfStore.swift",
+        "TopShelf/ContentProvider.swift",
+        "TopShelf/TopShelf.entitlements",
+        "App/Resources/Plozz.entitlements"
       ],
-      "summary": "Document Apple TV placement, local shared visibility/layout/count preferences, same-copy deduplication, playback versus details actions and current access checks. The carousel buttons have OS-owned captions, not verified app labels. Full-screen metadata uses known source facts, series artwork and spoiler policy, never a guarantee of output or a live server browser. Poster/backdrop composition is infrastructure, not another reader control."
+      "summary": "Document Apple TV placement and loading Home under each system user before that user's current-user extension has saved media. Local visibility/layout/count preferences are shared among Plozz profiles, not an assurance of shared shelf contents across system users. Retain same-copy deduplication, playback versus details actions and current access checks. The carousel buttons have OS-owned captions, not verified app labels. Full-screen metadata uses known source facts, series artwork and spoiler policy, never a guarantee of output or a live server browser. Poster/backdrop composition is infrastructure, not another reader control."
     },
     "TraktService": {
       "areas": [
@@ -2588,9 +2623,11 @@
         "Sources/AppShelliOS/PlozziOSSettingsView.swift",
         "Sources/FeatureSettings/CardAppearanceControls.swift",
         "Sources/FeatureSettings/CardCaptionCustomizationContent.swift",
-        "Sources/CoreModels/WatchStatusIndicatorSettingsStore.swift"
+        "Sources/CoreModels/WatchStatusIndicatorSettingsStore.swift",
+        "Sources/FeatureSettings/ArtworkSettingsControls.swift",
+        "Sources/CoreModels/ArtworkSettings.swift"
       ],
-      "summary": "Keep theme/cards/artwork together and Circadian scheduling in its focused task. Labels presets replace custom page defaults/row overrides; contextual editors share those preferences. Watch marks, episode counts and progress bars have independent controls without changing history. Spoiler Protection remains in Screens & Navigation > All screens, not Appearance."
+      "summary": "Keep theme/cards orientation in Appearance, with linked focused artwork and Circadian tasks. The artwork guide follows preset selection and Home, Libraries, Across the app in UI order, explains source tradeoffs and platform-specific rows, and links safe download image recovery. Labels presets replace custom page defaults/row overrides; contextual editors share those preferences. Watch marks, episode counts and progress bars have independent controls without changing history. Spoiler Protection remains in Screens & Navigation > All screens, not Appearance."
     },
     "language": {
       "areas": [
@@ -2601,9 +2638,12 @@
         "Sources/FeatureSettings/AppLanguagePicker.swift",
         "Sources/CoreModels/AppLanguage.swift",
         "Sources/CoreUI/AppLanguageScope.swift",
-        "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        "Sources/AppShelliOS/PlozziOSSettingsView.swift",
+        "Sources/CoreUI/ArtworkEnvironment.swift",
+        "Sources/MetadataKit/TMDbMetadataProvider.swift",
+        "Sources/MetadataKit/TVDBClient.swift"
       ],
-      "summary": "Use the appearance guide to explain System language selection and distinguish interface language from audio, subtitles, server-supplied metadata and device-region date/number formatting rather than a separate picker guide. System-drawn player controls and permission prompts keep the device language."
+      "summary": "Use the appearance guide to explain System language selection and distinguish interface language from audio, subtitles, server-supplied metadata and device-region date/number formatting rather than a separate picker guide. The artwork guide explains localized online posters, language-neutral/provider fallback and unchanged library images; valid saved download images are not replaced by a language change. System-drawn player controls and permission prompts keep the device language."
     },
     "libraries": {
       "areas": [
@@ -5550,6 +5590,10 @@
           "source": "Sources/AppShelliOS/AddServerView.swift"
         },
         {
+          "text": "Could not open the browser. Enter the code at plex.tv/link on another device.",
+          "source": "Sources/AppShelliOS/AddServerView.swift"
+        },
+        {
           "text": "Or enter a code at",
           "source": "Sources/AppShelliOS/AddServerView.swift"
         },
@@ -5663,6 +5707,10 @@
         },
         {
           "text": "Download 480p • 1.5 Mbps",
+          "source": "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift"
+        },
+        {
+          "text": "Remove this download from this device?",
           "source": "Sources/AppShelliOS/PlozziOSDetailDownloadButton.swift"
         },
         {
@@ -6067,14 +6115,14 @@
         "Sources/AppShelliOS/PlozziOSProfileEditing.swift",
         "Sources/CoreUI/ConcentricMediaCardSurface.swift",
         "Sources/CoreUI/LiquidGlassCardStyle.swift",
-        "Sources/CoreUI/NativeGradientCardSurface.swift"
+        "Sources/AppShelliOS/PlozziOSDownloadArtwork.swift"
       ],
       "platforms": [
         "iPhone",
         "iPad"
       ],
       "navigation": "Open Downloads from mobile navigation, then Download Settings for transfer preferences.",
-      "experience": "Monitor downloads, pause/resume/remove items or batches, and configure storage, network, speed, quality, and notifications.",
+      "experience": "Monitor downloads, pause/resume/remove items or batches, and configure storage, network, speed, quality, and notifications. Missing or invalid saved images are repaired separately from video while the app is active, Offline Mode is off, the owning profile/server user is authorized and download network policy permits it. Valid saved images survive artwork/language changes; a missing poster alone is not a failed video.",
       "conditions": "iPhone/iPad only. Transfer settings follow the profile; Offline Mode is shared on this device. Download Settings order is feature-gated Offline Mode, Network, Speed, Quality, Notifications, In Progress, Storage. Custom speed reveals a numeric Mbps stepper (1–1000) before the cap-only In Background picker. Quality shows dynamic custom height and reduced-quality resolution/bitrate steppers after Ask Each Time; interpolated captions are data, not constant labels. Resolution permits 144–2160 in 120-pixel steps and video bitrate 0.5–100 Mbps in 0.5-Mbps steps; these fit the existing guide section without a numeric reference. In Progress requires active work. Offline Mode pauses transfers and exposes authorized completed usable copies; an explicit version needs its own saved copy. Turn it off to resume online work. Conversion/track limits, network, notification permission and transfer state gate controls. Original keeps embedded tracks; new reduced Plex/Emby/Silo copies retain all reported audio with possible format changes. Emby preparation needs temporary storage; Jellyfin reduced copies may retain one track. Saved older preparations keep their track flags on retry, including Emby preparations that still need uncapped delivery. All-audio Emby transfers support speed caps. Old inclusion toggles are absent. Completed copies allow Update Subtitles/Retry Subtitles unless preparation excluded text; refresh needs the foreground authorized owner and network/rate policy, preserves video and good prior sidecars. Top-level show menus retain Pause Show/Resume Show; opening a show leads to separately inventoried native Edit/Done episode selection. The iOS/iPadOS 26 footer explains Live Activities: cancellation pauses work and retains partial files, unlike Cancel Active Downloads. Finishing is not completion or a Downloads-list label.",
       "controls": [
         {
@@ -6322,6 +6370,10 @@
         {
           "slug": "downloads",
           "anchor": "update-offline-subtitles"
+        },
+        {
+          "slug": "artwork",
+          "anchor": "missing-download-images"
         }
       ]
     },
@@ -11547,6 +11599,10 @@
         {
           "text": "Trackers",
           "source": "Sources/AppShelliOS/PlozziOSTrackerSettingsView.swift"
+        },
+        {
+          "text": "Couldn’t change the tracker setting. Try again.",
+          "source": "Sources/FeatureSettings/TrackerActivationRow.swift"
         },
         {
           "text": "Reconnect Trakt for this profile?",
@@ -17002,14 +17058,14 @@
         "Sources/CoreUI/ConcentricMediaCardSurface.swift",
         "Sources/CoreUI/DetailNavigationTransition.swift",
         "Sources/CoreUI/EpisodeWatchStatePill.swift",
-        "Sources/CoreUI/ExtendedArtworkFill.swift",
-        "Sources/CoreUI/HeroLogoArtwork.swift"
+        "Sources/FeatureWatchlistCore/WatchlistUnion.swift",
+        "Sources/FeatureWatchlistCore/WatchlistPresentationResolver.swift"
       ],
       "platforms": [
         "Apple TV"
       ],
       "navigation": "Open Watchlist in Apple TV navigation.",
-      "experience": "Review saved titles, filter/sort them, open details, or remove a save.",
+      "experience": "Review saved titles, filter/sort them, open details, or remove a save. A verified accessible library copy can replace a discovery title's display name/artwork without removing its explicit save; the profile's artwork preference can still select online pictures.",
       "conditions": "Apple TV and the active Plozz profile. Destinations need an authorized server/tracker identity; a saved title outside accessible libraries may not play. Filtering precedes sorting on Apple TV. Only Date Added, Release Date and Name are offered; selecting a field resets its direction to descending for dates or ascending for Name. Clear Filters appears with an active movie/show filter, including a filtered-empty result. Shared card menus use the root action handler and a navigation router: actions vary by item kind, provider permissions, watchlist membership and resume position. Unaired placeholders have no actions; external discovery titles have no provider watch-state, refresh or download actions. These standalone card lists supply no ordered siblings, so they do not offer Mark Watched Up to Here. This record inventories the movie/show Watchlist cards; episode menus on separately registered detail destinations are inventoried there. The shared card context menu does not include View on WeTrakr on Apple TV; its QR link belongs to the separately inventoried title-information destination.",
       "controls": [
         {
@@ -17089,6 +17145,10 @@
         {
           "slug": "watchlist",
           "anchor": "filter-and-sort-the-page"
+        },
+        {
+          "slug": "watchlist",
+          "anchor": "a-saved-title-looks-different"
         }
       ]
     },
@@ -24719,6 +24779,14 @@
         {
           "slug": "appearance",
           "anchor": "choose-artwork"
+        },
+        {
+          "slug": "artwork",
+          "anchor": "choose-the-main-source"
+        },
+        {
+          "slug": "artwork",
+          "anchor": "change-one-part-of-the-app"
         }
       ]
     },
@@ -26675,6 +26743,10 @@
           "source": "Sources/CoreModels/SettingsSearchAdditionalEntries.swift"
         },
         {
+          "text": "Couldn’t change the tracker setting. Try again.",
+          "source": "Sources/FeatureSettings/TrackerActivationRow.swift"
+        },
+        {
           "text": "PublicMetaDB",
           "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
         },
@@ -26776,6 +26848,10 @@
         },
         {
           "text": "Scan with your phone and approve access.",
+          "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
+        },
+        {
+          "text": "QR code",
           "source": "Sources/FeatureSettings/IntegrationsDetailView.swift"
         },
         {
@@ -28214,6 +28290,10 @@
         },
         {
           "text": "Preferred audio language",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Audio language",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
@@ -30241,14 +30321,20 @@
         "Sources/CoreUI/SettingsSurfaces.swift",
         "Sources/CoreUI/SettingsSwitchToggle.swift",
         "Sources/CoreUI/TextTierStyle.swift",
-        "Sources/CoreUI/ThemeOptionCard.swift"
+        "Sources/CoreUI/ThemeOptionCard.swift",
+        "Sources/CoreModels/TopShelfSettings.swift",
+        "Sources/AppShell/HomeTab.swift",
+        "Sources/TopShelfKit/TopShelfStore.swift",
+        "TopShelf/ContentProvider.swift",
+        "TopShelf/TopShelf.entitlements",
+        "App/Resources/Plozz.entitlements"
       ],
       "platforms": [
         "Apple TV"
       ],
       "navigation": "From a non-Kids Apple TV profile, open Settings > Manage Plozz > Top Shelf.",
       "experience": "Enable the shelf, choose poster/full-screen layout and set independent feed counts.",
-      "conditions": "Apple TV only, shared on this Apple TV and not synced. Layout/count controls appear when Show Top Shelf is enabled; the extension uses the last published Home snapshot.",
+      "conditions": "Apple TV only; preferences are device-local and shared among Plozz profiles, not synced. Layout/count controls appear when Show Top Shelf is enabled. Both canonical app and extension run as the current Apple TV system user; the extension reads the app-group snapshot that Home last published under that user and does not sign in or query providers. Each system user needs to select a profile and load Home before their shelf has media. Shared profile/sign-in storage does not supply another system user's snapshot. Launch actions retain profile/PIN and source authorization checks.",
       "controls": [
         {
           "text": "Top Shelf",
@@ -31408,6 +31494,10 @@
           "source": "Sources/CoreModels/SettingsSearchAdditionalEntries.swift"
         },
         {
+          "text": "Couldn’t change the tracker setting. Try again.",
+          "source": "Sources/FeatureSettings/TrackerActivationRow.swift"
+        },
+        {
           "text": "Playback wasn't sent because the account changed.",
           "source": "Sources/FeatureSettings/PublicMetaDBPlaybackFailure.swift"
         },
@@ -31489,6 +31579,10 @@
         },
         {
           "text": "Disconnect PublicMetaDB?",
+          "source": "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
+        },
+        {
+          "text": "PublicMetaDB",
           "source": "Sources/FeatureSettings/PublicMetaDBSettingsContent.swift"
         },
         {
