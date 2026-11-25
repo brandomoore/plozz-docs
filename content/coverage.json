@@ -877,6 +877,10 @@
           "anchor": "read-watch-indicators"
         },
         {
+          "slug": "appearance",
+          "anchor": "change-card-focus-frames-and-size"
+        },
+        {
           "slug": "customize-libraries",
           "anchor": "adjust-the-apple-tv-library-header"
         },
@@ -906,8 +910,8 @@
         "Sources/FeatureSettings/LibraryPresentationSettingsView.swift",
         "Sources/CoreModels/WatchStatusIndicatorSettingsStore.swift",
         "Sources/CoreUI/MediaCardPlaybackIndicators.swift",
-        "Sources/CoreModels/LibraryPresentationSettings.swift",
-        "Sources/CoreUI/EpisodeColumnCard.swift",
+        "Sources/CoreModels/CardStyle.swift",
+        "Sources/CoreModels/CardFocusStyle.swift",
         "Sources/AppShelliOS/PlozziOSSettingsView.swift",
         "Sources/CoreModels/ProfileSettingsSnapshot.swift"
       ],
@@ -943,7 +947,7 @@
         "Sources/CoreUI/MediaRowView.swift",
         "Sources/FeaturePlayback/PlayerChapterPanel.swift"
       ],
-      "summary": "Spoiler Protection remains in Screens & Navigation > All screens, with platform labels, blur/placeholder, in-progress image/text differences, chapter masking and independently hidden/revealable review scores. Home > Rows > Continue Watching owns Artwork + logo/Thumbnail/Poster, Playback details and Labels; only Thumbnail uses episode stills. Labels now uses Use default for contextual inheritance, with On/Off shared across Home/Recommended. Progress only removes playback text but bars still respect the profile's independent Show progress bars preference. Hidden rows retain settings and Add row recovery. Card selection defaults to Play or can open details; TV Play/Pause remains direct. Presentation changes neither watched state nor membership."
+      "summary": "Spoiler Protection remains in Screens & Navigation > All screens, with platform labels, blur/placeholder, in-progress image/text differences, chapter masking and independently hidden/revealable review scores. Home > Rows > Continue Watching owns Artwork + logo/Thumbnail/Poster, Playback details and Labels; only Thumbnail uses episode stills. Labels uses Use default for contextual inheritance, with On/Off shared across Home/Recommended. Progress only removes playback text but bars still respect the profile's independent Show progress bars preference. Hidden rows retain settings and Add row recovery. Center button action on Apple TV and Tap action on iPhone/iPad default to Open detail page when no choice is saved; saved Play or Open detail page choices remain intact. Play starts the title, and TV Play/Pause always remains direct. Presentation changes neither watched state nor membership."
     },
     "circadian": {
       "documents": [
@@ -2836,6 +2840,15 @@
     }
   },
   "screens": {
+    "Sources/AppShelliOS/PlozziOSProfileAvatarFlight.swift": {
+      "sources": [
+        "Sources/AppShelliOS/PlozziOSProfileAvatarFlight.swift",
+        "Sources/AppShelliOS/PlozziOSProfilePickerView.swift",
+        "Sources/AppShelliOS/PlozziOSRootView.swift"
+      ],
+      "omitKind": "shared-component",
+      "omitReason": "The iPhone/iPad profile-picker parent uses this noninteractive avatar/name transition after selection, with a host supplied by RootView. It adds no screen, named control or authorization decision. The snapshot is hidden from accessibility, while the parent supplies the selected profile's accessible name and Loading status. Reduce Motion skips the flight; window resizing recenters it. Profile checks, cancellation, management controls and Offline Mode remain inventoried on PlozziOSProfilePickerView, not on this rendering helper."
+    },
     "Sources/CoreUI/PlozzPlaceholderRail.swift": {
       "sources": [
         "Sources/CoreUI/PlozzPlaceholderRail.swift",
@@ -8880,15 +8893,19 @@
         "Sources/CoreUI/NativeGradientCardSurface.swift",
         "Sources/CoreUI/PINProfilePresentation.swift",
         "Sources/FeatureProfiles/ProfileNameLabel.swift",
-        "Sources/CoreUI/ProfileLockCopy.swift"
+        "Sources/CoreUI/ProfileLockCopy.swift",
+        "Sources/AppShelliOS/PlozziOSProfileAvatarFlight.swift",
+        "Sources/AppShelliOS/PlozziOSRootView.swift",
+        "Sources/AppShelliOS/PlozziOSAppModel.swift",
+        "Sources/CoreModels/ProfileStore.swift"
       ],
       "platforms": [
         "iPhone",
         "iPad"
       ],
       "navigation": "Launch Plozz when profile selection is required or switch profiles from mobile navigation. Open More > Edit Profiles to enter management mode, then select the profile to edit; holding its tile also offers Edit Profile.",
-      "experience": "Choose an authorized profile, add a profile, or enter profile editing. Management requires an eligible non-Kids profile and any household authorization gate; More is disabled while verification is in flight.",
-      "conditions": "iPhone/iPad. Profile locks and Plex PINs are independent; Kids restrictions can seal household management. Outside editing and covered authorization, the ellipsis More menu offers Edit Profiles when management is allowed, then Offline Mode when the runtime flag permits it. Offline Mode stays usable before choosing a profile and is disabled during a transition. An unchanged Plex Home binding needs a device-local prior online sign-in; protected users still verify their PIN offline. A new binding or rejected credential does not gain access through the cached proof.",
+      "experience": "Select a profile to begin authorization, add a profile, or enter profile editing. A Plex-first check keeps the tiles visible and offers Cancel; a slow check adds Loading in the toolbar. Required parental, profile-lock and Plex PIN steps stay on the same covered selection flow. Cancel returns to the retained picker rather than revealing the selected profile's Home. After successful authorization the avatar/name can remain centered briefly while Home becomes ready; this presentation grants no extra access. Add/edit controls are withheld while household management is gated; More is disabled while verification is in flight.",
+      "conditions": "iPhone/iPad. Profile locks and Plex PINs are independent. Household management is gated for an enforced Kids profile or a pending parental-switch authorization; Kids mode without a household Parental PIN does not itself impose this gate. Outside editing and covered authorization, the ellipsis More menu offers Edit Profiles when management is allowed, then Offline Mode when the runtime flag permits it. Offline Mode stays usable before choosing a profile and is disabled during a transition. An unchanged Plex Home binding needs a device-local prior online sign-in; protected users still verify their PIN offline. A new binding or rejected credential does not gain access through the cached proof.",
       "controls": [
         {
           "text": "Who’s watching?",
@@ -8904,6 +8921,10 @@
         },
         {
           "text": "Cancel",
+          "source": "Sources/AppShelliOS/PlozziOSProfilePickerView.swift"
+        },
+        {
+          "text": "Loading",
           "source": "Sources/AppShelliOS/PlozziOSProfilePickerView.swift"
         },
         {
@@ -24803,6 +24824,7 @@
         "Sources/CoreModels/CardStyle.swift",
         "Sources/CoreModels/UIDensity.swift",
         "Sources/CoreModels/CardFocusStyle.swift",
+        "Sources/FeatureSettings/CompactCardFocusStylePicker.swift",
         "Sources/FeatureSettings/PreferenceDetailViews.swift",
         "Sources/AppShelliOS/PlozziOSSettingsView.swift"
       ],
@@ -24921,6 +24943,10 @@
         },
         {
           "text": "Episodes",
+          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
+        },
+        {
+          "text": "Only show descriptions on focus",
           "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
         },
         {
@@ -25066,10 +25092,6 @@
         {
           "text": "Huge",
           "source": "Sources/CoreModels/UIDensity.swift"
-        },
-        {
-          "text": "Only show descriptions on focus",
-          "source": "Sources/FeatureSettings/CardCaptionCustomizationContent.swift"
         }
       ],
       "documents": [
@@ -25080,6 +25102,10 @@
         {
           "slug": "appearance",
           "anchor": "read-watch-indicators"
+        },
+        {
+          "slug": "appearance",
+          "anchor": "change-card-focus-frames-and-size"
         }
       ]
     },
@@ -26209,7 +26235,7 @@
         "iPad"
       ],
       "navigation": "Open Settings > Screens & Navigation > Home, then Hero, Row style on Apple TV, or Rows and an editable row. Add row opens available rows or Custom row; custom content is edited in CollectionSectionSettingsView and HomeContentPickerView.",
-      "experience": "Enable or hide the featured hero, select its content, sizes, advancement, ratings and trailers; independently choose Showcase/Classic rows on Apple TV. Configure individual Home rows, Continue Watching presentation and actions, restore a dismissed empty message, or replace row arrangements with a preset. Row name changes the heading without changing source/access. Blank restores the default. TV commits on keyboard dismissal, including Back, and exposes Saved or Couldn't save/Retry; mobile commits with the Save changes checkmark. Names use profile Home visibility storage and the Watchlist shortcut shares its row name.",
+      "experience": "Enable or hide the featured hero, select its content, sizes, advancement, ratings and trailers; independently choose Showcase/Classic rows on Apple TV. Configure individual Home rows, Continue Watching presentation and actions, restore a dismissed empty message, or replace row arrangements with a preset. Match server adapts to source changes until manual arrangement changes select Custom; choosing Match server again resumes adaptation. Row name changes the heading without changing source/access. Blank restores the default. TV commits on keyboard dismissal, including Back, and exposes Saved or Couldn't save/Retry; mobile commits with the Save changes checkmark. Names use profile Home visibility storage and the Watchlist shortcut shares its row name. Continue Watching's Center button action on Apple TV or Tap action on iPhone/iPad uses Open detail page by default, preserving saved choices. Play is the alternative; TV Play/Pause starts playback regardless.",
       "conditions": "This file owns multiple nested Home pages. Hero appears on all platforms: TV On/Off and mobile Show hero gate the following sizes, Content sources (TV) or Hero content sources (mobile), item count, advancement, Ratings and Trailers & music links. Title-source order is Continue Watching, Recently Added, Watchlist, Random from Library, Collections, Discovery; enabled sources reveal their respective nested choices. Random libraries are enabled non-music Home libraries and the last selected library cannot be deselected. Kids profiles exclude Discovery. TV Row style selects Showcase/Classic independently of Hero; only Showcase exposes its own sizes and rating controls. Discovery row is available only in Showcase with Hero off and a non-Kids profile; its providers require the row enabled. Mobile always uses the carousel and has no Row style destination. Continue Watching appearance applies to Home and Recommended; Labels uses Use default/On/Off, never Mixed. Include Next Up precedes tap/center-button action. Collection covers require applicable rows. Show empty message appears after row-specific controls and before Remove from Home only for an already-dismissed row outside Showcase; it clears that profile visibility marker, not row membership. The hidden Continue Watching settings entry can open this editor without a Remove from Home action. Preset replacement requires confirmation and preserves server settings. Dynamic library, account, collection and row names come from the source, not constant control captions. Showcase logo/text sizes are independent, but Show ratings, age guidance and review-score count bind to the same hero settings as the featured carousel; the isShowcase argument only changes search anchors. Trailers & music is the shared nested destination, reached from Movie & show details or an enabled Home hero. Nested controls are audited here and on HeroSettingsControls in UI order: Trailers policy (Off, Server only, Server + YouTube), Home autoplay with its conditional Start muted, then Details with Detail background (Off, Trailer, Theme music), its separate conditional Start muted, or Theme music volume and preview controls. Off disables trailers/autoplay but not music or other extras; YouTube is manual/external only. The settings are profile-specific and the Home/detail choices are independent.",
       "controls": [
         {

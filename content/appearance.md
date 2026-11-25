@@ -26,7 +26,13 @@ Under **Cards > Watch indicators**, **Unwatched** marks unstarted titles with a 
 
 With **Show unwatched episode count** on, choose **Episode count style**. **Show progress bars** is separate; hiding bars preserves progress and history. These choices [sync with your profile](/profiles-and-sync/).
 
-**Display Size** changes card size, columns, and spacing, not video resolution.
+## Change card focus, frames, and size
+
+Still in **Cards**, Apple TV offers **Focus** to make remote selection easier to recognize. **System** uses Apple's native effect; **Highlight** makes the selected card grow and catch the light; **Outline** adds a glass edge. Try the previews to choose the clearest effect for you.
+
+Next, **Style** offers **Posters** for artwork alone or **Cards** for a frame. Both choices are also available on iPhone/iPad, without the Focus section.
+
+**Display Size** changes card size, columns, and spacing, not video resolution. Your videos and progress stay unchanged.
 
 ## Choose artwork
 

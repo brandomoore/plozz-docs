@@ -11,7 +11,7 @@ Spoiler controls hide episode information; they are not parental controls or a f
 
 Blur keeps the real thumbnail but obscures it. Placeholder Art uses series artwork instead of loading the episode image.
 
-Protection treats episode images and text differently:
+For episodes:
 
 - An episode you have not started has its thumbnail hidden.
 - An in-progress episode can show its thumbnail, but its title and overview stay hidden until watched.
@@ -38,12 +38,12 @@ Open **Settings > Screens & Navigation > Home > Rows > Continue Watching**:
 
 **Playback details** is separate: **Detailed** shows the play icon, progress, and playback information; **Progress only** omits playback text. Bars follow [Show progress bars](/appearance/#read-watch-indicators). **Labels** controls text below artwork: **Use default** follows Home/Recommended; **On** or **Off** overrides both. Hiding labels does not hide detailed playback information.
 
-All three choices show artwork. **Continue Watching settings** remains available under Rows when the row is absent; use **Add row** to restore it. These choices change how cards look, not your progress or which titles appear.
+**Continue Watching settings** remains available under Rows when the row is absent; use **Add row** to restore it. These choices change how cards look, not your progress or which titles appear.
 
 To remove an abandoned title from the row instead, use [Remove from Continue Watching](/library/).
 
 ## Choose what selecting a card does
 
-In the same Continue Watching editor, set **Center button action** on Apple TV, or **Tap action** on iPhone/iPad. **Play** is the default; **Open detail page** lets you inspect a Home title before starting it. This does not change artwork or history.
+In the same editor, set **Center button action** on Apple TV or **Tap action** on iPhone/iPad. **Open detail page** is the default; existing choices stay unchanged. Choose **Play** to start watching instead.
 
-On Apple TV, the remote's play/pause button still plays the focused item directly.
+On Apple TV, the remote's play/pause button always plays the focused item directly.

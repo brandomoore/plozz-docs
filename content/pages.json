@@ -4701,7 +4701,7 @@
     ],
     "title": "Appearance and language",
     "seoTitle": "Change Plozz themes, cards, artwork, and interface language",
-    "description": "Customize card labels, watch marks, episode counts and progress bars, resize headers, choose artwork, and keep app language separate from media languages.",
+    "description": "Choose readable card labels, Apple TV focus effects, frames, watch indicators, artwork, and interface language without changing your videos or progress.",
     "section": "Personalize",
     "kind": "reference",
     "file": "appearance.md",
@@ -4717,10 +4717,10 @@
       "Sources/CoreModels/AppLanguage.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
       "Sources/CoreUI/ProfileSettingsCategory.swift",
-      "Sources/FeatureSettings/ArtworkSettingsControls.swift",
+      "Sources/CoreModels/CardFocusStyle.swift",
       "Sources/FeatureSettings/AppLanguagePicker.swift",
       "Sources/CoreModels/ThemeSettings.swift",
-      "Sources/FeatureSettings/ViewCustomizationControls.swift",
+      "Sources/CoreModels/CardStyle.swift",
       "Sources/CoreModels/WatchStatusIndicatorSettingsStore.swift",
       "Sources/FeatureSettings/HomeRowStylePicker.swift",
       "Sources/MetadataKit/WikipediaLocalizedText.swift",
@@ -4729,7 +4729,7 @@
     ],
     "watch": [
       "Sources/FeatureSettings/Card",
-      "Sources/FeatureSettings/ArtworkSettingsControls.swift",
+      "Sources/CoreModels/Card",
       "Sources/CoreModels/ThemeSettings.swift",
       "Sources/CoreModels/WatchStatusIndicator",
       "Sources/CoreModels/AppLanguage.swift",
@@ -4792,6 +4792,34 @@
         {
           "text": "Watch indicators",
           "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
+          "text": "Focus",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
+          "text": "System",
+          "source": "Sources/CoreModels/CardFocusStyle.swift"
+        },
+        {
+          "text": "Highlight",
+          "source": "Sources/CoreModels/CardFocusStyle.swift"
+        },
+        {
+          "text": "Outline",
+          "source": "Sources/CoreModels/CardFocusStyle.swift"
+        },
+        {
+          "text": "Style",
+          "source": "Sources/FeatureSettings/CardAppearanceControls.swift"
+        },
+        {
+          "text": "Posters",
+          "source": "Sources/CoreModels/CardStyle.swift"
+        },
+        {
+          "text": "Cards",
+          "source": "Sources/CoreModels/CardStyle.swift"
         },
         {
           "text": "Show unwatched episode count",
@@ -5656,6 +5684,10 @@
         },
         {
           "text": "More",
+          "source": "Sources/AppShelliOS/PlozziOSProfilePickerView.swift"
+        },
+        {
+          "text": "Cancel",
           "source": "Sources/AppShelliOS/PlozziOSProfilePickerView.swift"
         },
         {

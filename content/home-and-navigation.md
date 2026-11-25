@@ -22,9 +22,9 @@ In **Home**, open **Row style**. **Showcase** fills the background with the focu
 
 Open **Settings > Screens & Navigation > Home > Rows**.
 
-Under **Preset**, choose **Match server** to follow server rows, or **Combined rows** to group libraries. Confirm to replace your Home arrangement, not server settings. Some rows stay separate. Plex supplies promoted rows, not another client's pinned libraries.
+Under **Preset**, choose **Match server** to follow available server rows, adapting as sources change, or **Combined rows** to group libraries. Some rows stay separate. Confirming replaces your Home arrangement, not server settings. Plex follows promoted rows, not another client's pins.
 
-Choose **Add row**, or open a row and choose **Remove from Home**. Choose **Edit**, move rows, then **Done**; holding a row also offers **Reorder**. Mixing combined, library, and server rows changes the preset to **Custom**.
+Choose **Add row**, or open a row for **Remove from Home**. Choose **Edit**, move rows, then **Done**; holding a row also offers **Reorder**. Manual arrangement changes select **Custom**, stopping automatic adaptation. Reselect Match server to resume it.
 
 Removing rows does not restrict access. Unavailable rows stay saved: open **Details**, check the source and server user, then **Retry**. **Section unavailable in the latest refresh** can mean an empty or changed server row.
 
@@ -36,7 +36,7 @@ In **Classic** or mobile Home, **No titles to show** means nothing matched your 
 
 ## Add a collection section
 
-To gather collections in one row, choose **Add row > Custom row**. Follow [Create a custom row](/custom-home-rows/) to choose content, layout, and saving options.
+Choose **Add row > Custom row**, then [select collections and a layout](/custom-home-rows/).
 
 ## Rename rows and shortcuts
 
@@ -44,7 +44,7 @@ Under **Home > Rows**, open a row and edit **Row name** (**Name** for custom row
 
 On Apple TV, closing the name keyboard saves, even with Back; for **Couldn't save**, choose **Retry**. On mobile, use the **Save changes** checkmark. Leave the name blank to restore its default.
 
-Names never change media or access. Home-row names can [sync](/profiles-and-sync/). Shortcut names stay local, except Watchlist uses its Home-row name.
+Home-row names can [sync](/profiles-and-sync/). Shortcut names stay local, except Watchlist uses its Home-row name.
 
 ## Keep older Continue Watching titles
 
