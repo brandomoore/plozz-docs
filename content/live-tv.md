@@ -67,18 +67,8 @@ On both platforms, **Preview after watching** keeps a channel behind the guide a
 
 ## Make channels from your libraries
 
-Open **TV Sources > Plozz channels**. Turn on **Auto-create channels from your libraries**, or choose **Create custom channel**. Both use accessible Plex, Jellyfin, Emby, or Silo libraries, not IPTV or network shares. Silo needs a compatible server offering original-file playback.
+Open **TV Sources > Plozz channels** to build a scheduled lineup from accessible Plex, Jellyfin, Emby, or Silo libraries. This does not use IPTV or network shares.
 
-Use **Retry Plozz channels** after an error, or **Refresh Plozz channels** to rebuild automatic channels. They are not editable.
+[Create channels from your library](/library-channels/) explains automatic lineups, custom ordering and rules, previewing schedules, and optional watch-history updates.
 
-1. Enter **Channel name** and set its **Order**. Enable **Movies**, **Episodes**, or both; movie-only ordering disables Episodes.
-2. Select **Source libraries**, then add title, genre, or rating rules, separating entries with semicolons. Empty fields allow all accessible matches. **Allowed ratings** matches exact server classifications, not an age ceiling. **Include unrated titles** starts on; turn it off to exclude titles without a rating.
-3. Choose **Preview schedule** and check the programs, then **Save channel**. Titles with missing or invalid durations are excluded.
-
-Changes wait until already-scheduled programs finish. Let the library catalogue [finish syncing](/profiles-and-sync/#sync-live-tv-deliberately) before expecting the same schedule on another device.
-
-Select a custom channel to edit, or hold for **Delete channel**; media files stay untouched.
-
-**Update watch history** defaults off for this profile on this device. Turn it on to mark programs watched after viewing 90%; it does not save resume positions. [Cross-server history](/profiles-and-sync/#keep-watch-history-separate) and eligible [connected trackers](/trackers/) can receive completions. Channels play original files.
-
-Live TV is experimental; see [controls and buffering](/platform-controls/#live-tv-remote-controls-and-rewind) or [Troubleshooting](/troubleshooting/).
+For channel controls, see [rewind and buffering](/platform-controls/#live-tv-remote-controls-and-rewind), [audio and **Volume Boost**](/audio/#make-a-quiet-video-louder), or [Troubleshooting](/troubleshooting/). Live TV is experimental.

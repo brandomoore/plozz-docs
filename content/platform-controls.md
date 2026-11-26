@@ -6,7 +6,9 @@ Control playback and watch on another screen.
 
 Change left/right jumps with **Skip backward** and **Skip forward** under **Settings > Playback > Seeking**.
 
-**Seek without pausing** determines whether a playing video responds to scrubbing. When off, pause first, scrub to the position, then press Play. **Prevent Accidental Exit**, under Screens & Navigation's navigation settings, changes app-exit behavior rather than playback quality.
+**Seek without pausing** determines whether a playing video responds to scrubbing. When off, pause first, scrub, then press Play.
+
+In **Settings > Screens & Navigation > App navigation**, **Prevent Accidental Exit** stops a short Back press from leaving Plozz while a navigation shortcut is focused. Hold Back or use the remote's Home button to leave. Details, menus, and player controls keep their own Back actions.
 
 Under **Settings > Playback > Video**, **Fade when switching frame rates** briefly hides the picture during transitions. If frame-rate matching is off in Apple TV Settings, disabling this switch can avoid needless fades.
 
@@ -24,13 +26,13 @@ For a channel with a usable rewind window, reveal controls and use the timeline 
 
 1. Put Plozz in the Apple TV Home Screen's top row. Under each Apple TV user, open Plozz, select their profile, and let **Home** load.
 2. From a non-Kids Plozz profile, open **Settings > Manage Plozz > Top Shelf**. **Show Top Shelf** is on by default.
-3. Choose **Posters** or **Full Screen**, then set separate **Continue Watching** and **Recently Added** counts: four each by default, adjustable from one to 20.
+3. Choose **Posters** (the default) or **Full Screen**, then set separate **Continue Watching** and **Recently Added** counts: four each by default, adjustable from one to 20.
 
-Posters is the default; select one to start watching. With Full Screen, swipe up to expand the shelf. Continue Watching appears before Recently Added, without repeated titles from the same source. Use the first button to start watching or the second to view details. Format badges describe the file, not your TV's output.
+Select a poster to start watching. With Full Screen, swipe up to expand. Continue Watching precedes Recently Added without same-source repeats. Use the first button to watch or the second for details. Format badges describe the file, not your TV's output.
 
-These settings apply to all Plozz profiles for this Apple TV user and do not sync. Turning off Show Top Shelf clears the shelf but keeps your layout and counts.
+These settings are shared by this Apple TV user's Plozz profiles, without sync. Turning off Show Top Shelf clears the shelf but keeps your layout and counts.
 
-The shelf uses that user's last-loaded Home titles; without them it is empty. Counts do not guarantee that many titles or limit Continue Watching inside Plozz. Complete any profile/PIN prompt. For **Unable to Open Title**, check the original connection.
+The shelf needs that user's saved Home titles. Counts don't limit Continue Watching inside Plozz or guarantee enough titles. Complete any profile/PIN prompt. For **Unable to Open Title**, check the original connection.
 
 Artwork follows [Appearance > Artwork](/artwork/); full-screen episode text and ratings respect [spoiler settings](/spoiler-protection/).
 
@@ -44,7 +46,7 @@ Turn off **Settings > Playback > Volume and brightness gestures** to disable ver
 
 On iPhone, **Settings > Playback > Player orientation** controls full-screen video and Live TV. **Follow device orientation** respects the system rotation lock. **Portrait** stays upright. **Landscape auto** stays sideways, using device motion to choose the direction even with rotation lock on. **Landscape left**/**Landscape right** fixes the phone's top to that side. iPad follows system rotation. If rotation fails, use a full-screen window; if motion sensing is unavailable, choose a fixed landscape option.
 
-[Zoom modes](/playback/#speed-picture-and-other-navigation) change presentation, not quality. [Background Audio](/audio/#keep-audio-playing-on-iphone-or-ipad) controls listening while locked or outside Plozz.
+[Background Audio](/audio/#keep-audio-playing-on-iphone-or-ipad) controls listening while locked or outside Plozz.
 
 ## AirPlay and Picture in Picture
 
@@ -66,8 +68,8 @@ During conversion, video/audio facts describe the current stream; original-file 
 
 **Network throughput** measures transfer speed, not encoded bitrate. **Buffer** reports media ahead; player/engine buffers can differ. **Seekable** is the seeking range, not a completed download. **Playback cache**, when shown, reports temporary use/budget, not saved videos.
 
-With AetherEngine, **AVPlayer time** and **AVPlayer window** describe its internal system player; the window need not span the full source timeline. Missing values mean no measurement was supplied. Live sessions can also report **Behind live** and **Rewind window**; neither promises a recording.
+With AetherEngine, **AVPlayer time** and **AVPlayer window** describe the system player it uses; that window need not cover the whole video. Missing values mean no measurement. Live **Behind live** and **Rewind window** values do not promise a recording.
 
 ## Open another player app
 
-Follow [Use another video player](/external-players/) for defaults, one-time choices, and privacy/progress limits. This sends a video link, not AirPlay.
+Use [another video player](/external-players/) for defaults, one-time choices, and privacy/progress limits. This sends a link, not AirPlay.

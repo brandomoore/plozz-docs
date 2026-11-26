@@ -1,6 +1,6 @@
 # Audio tracks and output
 
-Choose your language, improve dialogue, match your equipment, or [identify a song](/playback/#identify-a-song-in-a-movie-or-show).
+Choose the right language, make a quiet video easier to hear, or improve dialogue. You can also [identify a song while watching](/identify-songs/).
 
 ## Select a language or track
 
@@ -14,6 +14,20 @@ Plozz remembers a movie's manually chosen audio language. **Remember audio langu
 
 Remembered choices override your general preference. Choose again in **Audio**, or try [another version](/playback/) for missing tracks.
 
+## Make a quiet video louder
+
+Use **Volume Boost** when a movie or channel is still too quiet at a comfortable device volume. It raises the whole mix, not just speech.
+
+1. Reveal controls and open **Audio**. In portrait on iPhone/iPad, open **Playback options > Audio** first.
+2. On Apple TV, focus **Volume Boost** and press left/right to adjust it. On iPhone/iPad, open **Volume Boost** and choose a percentage.
+3. Start with 25% and increase gradually. Choose **Off** to compare or remove the boost.
+
+The choices add 25%-300% boost to the audio signal; they are not your device's volume percentage or a promise of perceived loudness. Changing boost can briefly interrupt playback as it restarts around your position.
+
+It appears for supported AetherEngine streams that can seek and restart around your position. Apple's native player, wireless AirPlay, Music, and Multiview do not offer it. When Plozz repackages video for playback, any E-AC-3 audio track prevents boosting, even if you select another track.
+
+Boost starts off for a new video or channel and resets when its stream reopens. It is not a saved profile preference.
+
 ## Choose output compatibility
 
 In **Settings > Playback**, find **Prefer lossless audio** under **Audio**. It defaults on. Turn it off to request compressed surround-compatible output, particularly with regular HDMI ARC.
@@ -24,7 +38,7 @@ It is shared by this device's Plozz profiles, not synced or transferred.
 
 ## Improve dialogue on Apple TV
 
-The player's **Audio** menu offers **Reduce Loud Sounds** and **Enhance Dialogue** for video/Live TV when tvOS reports output support. Dialogue choices can be **Enhance More**, **Enhance**, and **Off**, or a toggle.
+The player's **Audio** menu offers **Enhance Dialogue** and **Reduce Loud Sounds** for video/Live TV when tvOS reports output support. Dialogue choices can be **Enhance More**, **Enhance**, and **Off**, or a toggle.
 
 > [!IMPORTANT]
 > These change Apple TV-wide settings, not this profile. Audible effects depend on content and playback route; availability does not guarantee processing.
@@ -41,7 +55,7 @@ If speech does not match lip movements, adjust audio timing during supported Aet
 
 Choose **Reset** to undo your adjustment. Movies and episodes allow up to ten seconds either way; supported Live TV allows two. Changes can briefly skip or repeat audio, seek, or reload playback. The offset resets with a new stream.
 
-The control is absent in Apple's native player, AirPlay's remote playback path, and streams that cannot seek or adjust audio timing. Live TV needs a usable rewind window. If the control is unavailable, try another audio track or output device. [Subtitle delay](/subtitles/#set-automatic-choices) changes captions only.
+The control is absent in Apple's native player, AirPlay's remote playback path, and streams that cannot adjust audio timing. Live TV needs a usable rewind window. If it is unavailable, try another audio track or output device. [Subtitle delay](/subtitles/#set-automatic-choices) changes captions only.
 
 ## Keep audio playing on iPhone or iPad
 

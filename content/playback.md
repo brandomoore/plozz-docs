@@ -1,6 +1,6 @@
 # Player controls
 
-Resume a video, choose an edition, or skip intros.
+Choose an edition, resume a video, or adjust playback.
 
 ## Reach the controls
 
@@ -33,11 +33,13 @@ The estimate needs a known duration and accounts for playback speed. Revealing h
 
 ## Choose audio or a version
 
-Open **Audio** for tracks. For files/editions, choose **More > Version** on Apple TV, or **Version** in **Playback options**/**Playback settings** on iPhone/iPad.
+Open **Audio** for tracks or supported [**Volume Boost**](/audio/#make-a-quiet-video-louder).
 
-Changing versions keeps your server account and position; different cuts may not line up.
+In **Choose a version**, compare files and select an edition to play. The first multi-version video asks how future choices should work.
 
-The first multi-version video asks your preference. Change **Settings > Playback > Version selection**:
+During playback, use **More > Version** on Apple TV, or **Version** in mobile **Playback options**/**Playback settings**. Your position is retained, but different cuts may not line up.
+
+Change **Settings > Playback > Version selection**:
 
 - **Ask every time**: choose before multi-version videos, including autoplay.
 - **Choose automatically**: use a remembered or device-recommended version without the picker.
@@ -65,17 +67,17 @@ With skipping enabled, **Use community markers** (default on) checks IntroDB/The
 
 ## Jump to a chapter
 
-Open **Chapters** below the timeline and choose a chapter; paused playback stays paused. Mobile tabs scroll horizontally. Chapters need server or file support; some videos lack them or their images. Intro and credits markers are separate.
+Open **Chapters** below the timeline and choose one; paused playback stays paused. Mobile tabs scroll horizontally. Chapters need source support; images are optional. Intro and credits markers are separate.
 
 ## Switch to another Continue Watching title
 
 Open **Continue Watching** below the timeline to resume another title. On Apple TV, press down; on iPhone/iPad, scroll the tabs if needed.
 
-Choose a card to save your position and resume that title after access or version prompts.
+Choose a card to save your place and resume that title after any prompts.
 
-It uses Home's loaded titles, excluding this video and its show's episodes from that source. It hides when none remain.
+It uses Home's loaded titles, excluding this video and its show's episodes from that source, and hides when none remain.
 
-Under **Settings > Playback > Player tabs**, choose which of **Chapters**, **Cast**, **Episodes**, **Playlist**, and **Continue Watching** to show. A tab appears only when it has content; **Info** remains available.
+Under **Settings > Playback > Player tabs**, choose which of **Chapters**, **Cast**, **Episodes**, **Playlist**, and **Continue Watching** to show. Tabs also need content; **Info** remains available.
 
 ## Identify a song in a movie or show
 
@@ -83,7 +85,7 @@ In **Info**, select a recognized song card for **Open song**. [Song identificati
 
 ## Speed, picture, and other navigation
 
-Select the current-rate **Playback Speed** button; mobile portrait places it under **Playback options**. On Apple TV, adjust **Speed**. Mobile offers presets and **Custom…** for finer control. Choose 1x for normal speed.
+Select the current-rate **Playback Speed** button, under **Playback options** in mobile portrait. Adjust **Speed** on Apple TV, or use mobile presets and **Custom…**. Choose 1x for normal speed.
 
 For framing, open **More > Zoom Mode** on Apple TV, or **Zoom** in mobile **Playback options**/**Playback settings**. See [Video framing and upscaling](/video-picture/) for cropping and enhancement.
 
@@ -91,4 +93,4 @@ For framing, open **More > Zoom Mode** on Apple TV, or **Zoom** in mobile **Play
 
 In **Cast**, select a person for their biography and credits without leaving the video. **See more** opens their full page; a credit opens that title's details. Either ends playback. Listed credits may be outside your library.
 
-See [Streaming quality](/streaming-quality/), [Audio](/audio/), [Subtitles](/subtitles/), [AirPlay/Picture in Picture](/platform-controls/#airplay-and-picture-in-picture), or [external players](/external-players/).
+See [Streaming quality](/streaming-quality/), [Subtitles](/subtitles/), [AirPlay/Picture in Picture](/platform-controls/#airplay-and-picture-in-picture), or [external players](/external-players/).

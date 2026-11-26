@@ -2166,7 +2166,7 @@
       "Sources/MetadataKit/CommunitySkipMarkers.swift",
       "Sources/CoreUI/AutomaticVersionInfoButton.swift",
       "Sources/CoreModels/PlayerOptionalTab.swift",
-      "Sources/FeaturePlayback/PlayerTimelineClock.swift",
+      "Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift",
       "Sources/FeatureSettings/PlayerTabSettingsControls.swift",
       "Sources/FeaturePlayback/PlayerViewModel.swift",
       "Sources/FeaturePlayback/PlayerSongCard.swift",
@@ -2403,6 +2403,14 @@
         {
           "text": "Remaining time",
           "source": "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift"
+        },
+        {
+          "text": "Choose a version",
+          "source": "Sources/FeatureHomeCore/PlaybackVersionChoiceView.swift"
+        },
+        {
+          "text": "Volume Boost",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
         }
       ],
       "emphasis": []
@@ -3018,8 +3026,8 @@
   {
     "slug": "audio",
     "title": "Audio tracks and output",
-    "seoTitle": "Choose Plozz audio tracks, correct lip sync, and adjust output",
-    "description": "Choose audio languages, commentary or audio description, correct lip sync, adjust output and Apple TV dialogue, and use background audio on iPhone or iPad.",
+    "seoTitle": "Choose Plozz audio tracks, use Volume Boost, and correct lip sync",
+    "description": "Choose audio languages, boost quiet videos, correct lip sync, adjust Apple TV dialogue and output, or keep listening in the background on iPhone and iPad.",
     "section": "Playback",
     "kind": "reference",
     "file": "audio.md",
@@ -3043,7 +3051,7 @@
       "Sources/AppShelliOS/PlozziOSPlayerControlsOverlay.swift",
       "Sources/CoreModels/PlaybackSettings.swift",
       "Sources/FeaturePlayback/TrackMenuBuilder.swift",
-      "Sources/CoreModels/TrackLabeling.swift"
+      "Sources/FeaturePlayback/VideoEngine.swift"
     ],
     "watch": [
       "Sources/FeatureHomeCore/ThemeMusic",
@@ -3215,6 +3223,22 @@
         {
           "text": "Device language",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Volume Boost",
+          "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
+        },
+        {
+          "text": "Volume Boost",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/FeaturePlayback/PlayerOptionsPanel.swift"
+        },
+        {
+          "text": "Off",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
         }
       ],
       "emphasis": []
@@ -3749,7 +3773,7 @@
       "Sources/FeatureSettings/LiveTVSettingsView.swift",
       "Sources/FeatureLiveTV/LiveTVPreviewIntroductionView.swift",
       "Sources/FeatureLiveTV/LiveTVSourceAccessGate.swift",
-      "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift",
+      "Sources/FeaturePlayback/PlayerMoreMenu.swift",
       "Sources/FeatureLiveTV/LibraryChannelEditorView.swift",
       "Sources/CoreUI/ProfileSettingsCategory.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
@@ -3928,6 +3952,93 @@
           "source": "Sources/FeatureSettings/LiveTVSettingsView.swift"
         },
         {
+          "text": "Live TV",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        },
+        {
+          "text": "Settings",
+          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
+        },
+        {
+          "text": "Libraries",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
+        },
+        {
+          "text": "Add TV Source",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
+        },
+        {
+          "text": "Volume Boost",
+          "source": "Sources/FeaturePlayback/PlayerMoreMenu.swift"
+        }
+      ],
+      "emphasis": [
+        "four pictures"
+      ]
+    }
+  },
+  {
+    "slug": "library-channels",
+    "title": "Create channels from your library",
+    "seoTitle": "Create scheduled Plozz channels from your movies and shows",
+    "description": "Create automatic or custom library channels, choose episode order or shuffle, preview schedules, and decide whether channel viewing updates your watch history.",
+    "section": "Playback",
+    "kind": "guide",
+    "file": "library-channels.md",
+    "sources": [
+      "Sources/AppShell/MainTabView.swift",
+      "Sources/CoreUI/SettingsCopy.swift",
+      "Sources/CoreUI/ProfileLockCopy.swift",
+      "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift",
+      "Sources/FeatureLiveTV/LiveTVSourceAccessGate.swift",
+      "Sources/FeatureLiveTV/LiveTVSourcesView.swift",
+      "Sources/FeatureLiveTV/LibraryChannelEditorView.swift",
+      "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift",
+      "Sources/FeatureLiveTVCore/LibraryChannelService.swift",
+      "Sources/CoreModels/LibraryChannelModels.swift",
+      "Sources/CoreModels/LibraryChannelHistorySettings.swift",
+      "Sources/FeaturePlayback/LibraryChannelPlaybackSession.swift",
+      "Sources/AppRuntime/LiveTVLibraryRuntime+Playback.swift",
+      "Sources/CoreModels/LibraryChannelPortableState.swift",
+      "Sources/ProviderSilo/SiloLibraryChannels.swift",
+      "Sources/AppRuntime/WatchMutationFactory.swift"
+    ],
+    "watch": [
+      "Sources/FeatureLiveTV/LibraryChannel",
+      "Sources/FeatureLiveTV/LiveTV",
+      "Sources/FeatureLiveTVCore/LibraryChannel",
+      "Sources/CoreModels/LibraryChannel",
+      "Sources/FeaturePlayback/LibraryChannel",
+      "Sources/ProviderSilo/SiloLibraryChannels.swift"
+    ],
+    "platforms": [
+      "Apple TV",
+      "iPhone",
+      "iPad"
+    ],
+    "ui": {
+      "references": [
+        {
+          "text": "Live TV",
+          "source": "Sources/AppShell/MainTabView.swift"
+        },
+        {
+          "text": "More",
+          "source": "Sources/FeatureLiveTV/LiveTVPrototypeControls.swift"
+        },
+        {
+          "text": "Parental PIN",
+          "source": "Sources/CoreUI/ProfileLockCopy.swift"
+        },
+        {
+          "text": "TV Sources",
+          "source": "Sources/CoreUI/SettingsCopy.swift"
+        },
+        {
+          "text": "Plozz channels",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
           "text": "Auto-create channels from your libraries",
           "source": "Sources/FeatureLiveTV/LiveTVAutomaticChannelsState.swift"
         },
@@ -3948,7 +4059,67 @@
           "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
         },
         {
-          "text": "Delete channel",
+          "text": "Icon",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Order",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Shows in episode order",
+          "source": "Sources/CoreModels/LibraryChannelModels.swift"
+        },
+        {
+          "text": "Seeded shuffle",
+          "source": "Sources/CoreModels/LibraryChannelModels.swift"
+        },
+        {
+          "text": "Movies",
+          "source": "Sources/CoreModels/LibraryChannelModels.swift"
+        },
+        {
+          "text": "Movies",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Episodes",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Source libraries",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Rules",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Include movie or show titles",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Exclude movie or show titles",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Genres",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Allowed ratings",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Include unrated titles",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Scheduling timezone",
+          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
+        },
+        {
+          "text": "Schedule seed",
           "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
         },
         {
@@ -3964,49 +4135,11 @@
           "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
         },
         {
-          "text": "Order",
+          "text": "Delete channel",
           "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
-        },
-        {
-          "text": "Movies",
-          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
-        },
-        {
-          "text": "Episodes",
-          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
-        },
-        {
-          "text": "Source libraries",
-          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
-        },
-        {
-          "text": "Allowed ratings",
-          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
-        },
-        {
-          "text": "Include unrated titles",
-          "source": "Sources/FeatureLiveTV/LibraryChannelEditorView.swift"
-        },
-        {
-          "text": "Live TV",
-          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
-        },
-        {
-          "text": "Settings",
-          "source": "Sources/AppShelliOS/PlozziOSSettingsView.swift"
-        },
-        {
-          "text": "Libraries",
-          "source": "Sources/CoreUI/SettingsCopy.swift"
-        },
-        {
-          "text": "Add TV Source",
-          "source": "Sources/CoreUI/SettingsCopy.swift"
         }
       ],
-      "emphasis": [
-        "four pictures"
-      ]
+      "emphasis": []
     }
   },
   {
@@ -6446,13 +6579,13 @@
       "Sources/CoreUI/ProfileSettingsCategory.swift",
       "Sources/CoreUI/SettingsCopy.swift",
       "Sources/CoreModels/VideoZoomPreference.swift",
-      "TopShelf/TopShelf.entitlements",
+      "Sources/CoreUI/TVNavigationExitProtection.swift",
       "Sources/CoreModels/PlaybackSettings.swift"
     ],
     "watch": [
       "Sources/AppShelliOS/PlozziOSPlayer",
       "Sources/CoreModels/PlaybackOrientation.swift",
-      "Sources/FeaturePlayback/Player",
+      "Sources/CoreUI/TVNavigationExitProtection.swift",
       "Sources/FeaturePlayback/LiveChannel",
       "Sources/TopShelfKit/",
       "TopShelf/"
@@ -6478,6 +6611,14 @@
         },
         {
           "text": "Seek without pausing",
+          "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
+        },
+        {
+          "text": "Screens & Navigation",
+          "source": "Sources/CoreUI/ProfileSettingsCategory.swift"
+        },
+        {
+          "text": "App navigation",
           "source": "Sources/FeatureSettings/PreferenceDetailViews.swift"
         },
         {
@@ -6802,7 +6943,7 @@
       "Sources/CoreUI/PlayResumeButtonLabel.swift",
       "Sources/AppShelliOS/PlozziOSDiagnosticsSettingsView.swift",
       "Sources/AppShelliOS/PlozziOSSettingsView.swift",
-      "Sources/FeatureSettings/HelpDiagnosticsDetailView.swift",
+      "Sources/FeatureLiveTV/LiveTVCatalogStorageView.swift",
       "Sources/AppShelliOS/PlozziOSOfflineModeView.swift",
       "Sources/FeatureLiveTV/LiveTVServerSetupView.swift",
       "Sources/CoreModels/PlaybackDiagnosticReport.swift",
@@ -6816,7 +6957,7 @@
     ],
     "watch": [
       "Sources/CoreUI/Playback",
-      "Sources/CoreModels/LibraryLoadDiagnostic.swift",
+      "Sources/FeatureLiveTV/LiveTVCatalogStorageView.swift",
       "Sources/FeatureHomeCore/ItemDetailViewModel.swift",
       "Sources/FeatureHomeCore/HomeViewModel.swift",
       "Sources/FeatureHome/LibraryBrowseView.swift",
@@ -6940,6 +7081,14 @@
         {
           "text": "Guide only",
           "source": "Sources/FeatureLiveTV/LiveTVServerSetupView.swift"
+        },
+        {
+          "text": "Live TV storage unavailable",
+          "source": "Sources/FeatureLiveTV/LiveTVCatalogStorageView.swift"
+        },
+        {
+          "text": "Retry",
+          "source": "Sources/FeatureLiveTV/LiveTVCatalogStorageView.swift"
         }
       ],
       "emphasis": []
